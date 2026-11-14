@@ -286,7 +286,7 @@ function renderDownloads(report) {
   $('#download-grid').innerHTML = assets.map(asset => {
     const ready = asset.ok && asset.download_url;
     return `<article class="download-card">
-      <strong>Nuvio ${escapeHTML(asset.label || 'Download')}</strong>
+      <strong>Nuvio ${escapeHTML(asset.label || 'Download')} · ${escapeHTML(release.tag || release.name || '—')}</strong>
       <small>${escapeHTML(asset.name || t('ملف غير متاح'))} · ${formatBytes(asset.size_bytes)}</small>
       <small class="muted">${asset.uploaded_at
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
