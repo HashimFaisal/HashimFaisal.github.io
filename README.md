@@ -55,6 +55,13 @@ Here you can discover my Nuvio plugin projects, access their source repositories
 
 **Independent Nuvio plugin project**
 
+<div align="center">
+
+![CinemaBox Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhashimxc12%2FCinemaBox2%2Fmain%2Fmanifest.json&query=%24.version&label=VERSION&color=7C3AED&style=for-the-badge)
+![CinemaBox Updated](https://img.shields.io/github/last-commit/hashimxc12/CinemaBox2?label=LAST%20UPDATE&style=for-the-badge)
+
+</div>
+
 [↗ SOURCE CODE](https://github.com/hashimxc12/CinemaBox2) · [↗ MANIFEST](https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json)
 
 ---
@@ -64,6 +71,13 @@ Here you can discover my Nuvio plugin projects, access their source repositories
 <img src="assets/cinemana.svg" width="100%" alt="Cinemana" />
 
 **A separate plugin project for Nuvio**
+
+<div align="center">
+
+![Cinemana Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhashimxc12%2FCinemana_NuvioPlugin%2Fmain%2Fmanifest.json&query=%24.version&label=VERSION&color=0891B2&style=for-the-badge)
+![Cinemana Updated](https://img.shields.io/github/last-commit/hashimxc12/Cinemana_NuvioPlugin?label=LAST%20UPDATE&style=for-the-badge)
+
+</div>
 
 [↗ SOURCE CODE](https://github.com/hashimxc12/Cinemana_NuvioPlugin) · [↗ MANIFEST](https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json)
 
