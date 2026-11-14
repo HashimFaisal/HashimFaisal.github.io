@@ -52,7 +52,7 @@ Discover plugins · Explore addons · Get direct links
 <tr>
 <td width="50%" valign="top" align="center">
 
-<img src="https://cinema.albox.co/favicon.ico" width="84" alt="CinemaBox">
+<img src="assets/cinemabox.png" width="112" alt="CinemaBox">
 
 <h3>CINEMABOX</h3>
 
@@ -68,7 +68,7 @@ Discover plugins · Explore addons · Get direct links
 </td>
 <td width="50%" valign="top" align="center">
 
-<img src="assets/cinemana.png" width="84" alt="Cinemana">
+<img src="assets/cinemana.png" width="112" alt="Cinemana">
 
 <h3>CINEMANA</h3>
 
