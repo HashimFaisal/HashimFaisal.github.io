@@ -11,6 +11,9 @@ Discover plugins · Explore addons · Get direct links
 <img src="https://img.shields.io/badge/NUVIO-PLUGIN_HUB-8B5CF6?style=for-the-badge">
 <img src="https://img.shields.io/badge/ANDROID-SUPPORTED-3DDC84?style=for-the-badge&logo=android&logoColor=white">
 <img src="https://img.shields.io/badge/OPEN_SOURCE-GITHUB-FFFFFF?style=for-the-badge&logo=github&logoColor=black">
+<a href="https://github.com/hashimxc12/hashimxc12/actions/workflows/addon-health.yml">
+<img src="https://github.com/hashimxc12/hashimxc12/actions/workflows/addon-health.yml/badge.svg?branch=main" alt="Nuvio Hub Link Health">
+</a>
 
 </div>
 
