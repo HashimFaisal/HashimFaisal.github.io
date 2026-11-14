@@ -185,6 +185,13 @@ Discover plugins · Explore addons · Get direct links
 
 ---
 
+<!-- RELEASE_STATUS:START -->
+## RELEASE & SYSTEM STATUS
+
+سيتم عرض أحدث إصدار، تاريخ النشر، أحجام الملفات، روابط التنزيل المباشرة، ونتائج الفحص التلقائي هنا بعد تشغيل GitHub Actions.
+
+<!-- RELEASE_STATUS:END -->
+
 ## 📥 INSTALLATION GUIDE
 
 **English**

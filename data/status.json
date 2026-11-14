@@ -1,0 +1,137 @@
+{
+  "checked_at": "2026-11-14T05:03:54.012506+00:00",
+  "ok": true,
+  "passed": 10,
+  "total": 10,
+  "release": {
+    "tag": "0.6.12-beta",
+    "name": "0.6.12-beta",
+    "published_at": "2026-11-12T00:37:11Z",
+    "html_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/0.6.12-beta",
+    "assets": [
+      {
+        "label": "ARM64",
+        "name": "androidApp-full-arm64-v8a-release.apk",
+        "size_bytes": 47213791,
+        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-arm64-v8a-release.apk",
+        "ok": true
+      },
+      {
+        "label": "ARMv7",
+        "name": "androidApp-full-armeabi-v7a-release.apk",
+        "size_bytes": 45564341,
+        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-armeabi-v7a-release.apk",
+        "ok": true
+      },
+      {
+        "label": "x86",
+        "name": "androidApp-full-x86-release.apk",
+        "size_bytes": 47631145,
+        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-x86-release.apk",
+        "ok": true
+      },
+      {
+        "label": "x86_64",
+        "name": "androidApp-full-x86_64-release.apk",
+        "size_bytes": 48604032,
+        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-x86_64-release.apk",
+        "ok": true
+      },
+      {
+        "label": "iOS IPA",
+        "name": "nuvio-0.6.12-full-release.ipa",
+        "size_bytes": 69852349,
+        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/nuvio-0.6.12-full-release.ipa",
+        "ok": true
+      }
+    ]
+  },
+  "release_error": null,
+  "checks": [
+    {
+      "name": "ALL-IN-ONE",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "1.0.0",
+      "manifest_id": "not specified",
+      "url": "https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/refs/heads/main/manifest.json"
+    },
+    {
+      "name": "CinemaBox",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "1.1.0",
+      "manifest_id": "cinemabox",
+      "url": "https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json"
+    },
+    {
+      "name": "Cinemana",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "0.3.1",
+      "manifest_id": "cinemana",
+      "url": "https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json"
+    },
+    {
+      "name": "OpenSubtitles",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "1.0.0",
+      "manifest_id": "org.stremio.opensubtitlesv3",
+      "url": "https://opensubtitles-v3.strem.io/manifest.json"
+    },
+    {
+      "name": "Rodrigo's Catalog",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "1.20261109.0901",
+      "manifest_id": "com.digok.nuvio.catalog",
+      "url": "https://digok.github.io/nuvio-catalog/manifest.json"
+    },
+    {
+      "name": "ARM64",
+      "type": "download",
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": 47213791,
+      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-arm64-v8a-release.apk"
+    },
+    {
+      "name": "ARMv7",
+      "type": "download",
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": 45564341,
+      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-armeabi-v7a-release.apk"
+    },
+    {
+      "name": "x86",
+      "type": "download",
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": 47631145,
+      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-x86-release.apk"
+    },
+    {
+      "name": "x86_64",
+      "type": "download",
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": 48604032,
+      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-x86_64-release.apk"
+    },
+    {
+      "name": "iOS IPA",
+      "type": "download",
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": 69852349,
+      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/nuvio-0.6.12-full-release.ipa"
+    }
+  ]
+}
