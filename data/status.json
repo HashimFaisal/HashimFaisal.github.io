@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-14T07:02:44.006314+00:00",
+  "checked_at": "2026-11-14T07:10:19.664150+00:00",
   "ok": true,
   "passed": 12,
   "total": 12,
@@ -13,6 +13,7 @@
         "label": "ARM64",
         "name": "androidApp-full-arm64-v8a-release.apk",
         "size_bytes": 47213791,
+        "uploaded_at": "2026-11-12T00:01:58Z",
         "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-arm64-v8a-release.apk",
         "ok": true
       },
@@ -20,6 +21,7 @@
         "label": "ARMv7",
         "name": "androidApp-full-armeabi-v7a-release.apk",
         "size_bytes": 45564341,
+        "uploaded_at": "2026-11-12T00:01:58Z",
         "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-armeabi-v7a-release.apk",
         "ok": true
       },
@@ -27,6 +29,7 @@
         "label": "x86",
         "name": "androidApp-full-x86-release.apk",
         "size_bytes": 47631145,
+        "uploaded_at": "2026-11-12T00:01:58Z",
         "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-x86-release.apk",
         "ok": true
       },
@@ -34,6 +37,7 @@
         "label": "x86_64",
         "name": "androidApp-full-x86_64-release.apk",
         "size_bytes": 48604032,
+        "uploaded_at": "2026-11-12T00:01:58Z",
         "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-x86_64-release.apk",
         "ok": true
       },
@@ -41,6 +45,7 @@
         "label": "iOS IPA",
         "name": "nuvio-0.6.12-full-release.ipa",
         "size_bytes": 69852349,
+        "uploaded_at": "2026-11-12T00:01:58Z",
         "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/nuvio-0.6.12-full-release.ipa",
         "ok": true
       }
