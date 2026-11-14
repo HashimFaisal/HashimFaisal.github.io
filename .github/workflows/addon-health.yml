@@ -2,7 +2,7 @@ name: Nuvio Control Center - Health
 
 on:
   schedule:
-    - cron: "17 3 * * *"
+    - cron: "*/15 * * * *"
   workflow_dispatch:
   push:
     branches:
