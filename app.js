@@ -43,7 +43,7 @@ const translations = {
   'إضافة All-in-One لمشروع Nuvio من المستودع الأصلي.': 'The All-in-One add-on for Nuvio from its original repository.',
   'إضافة للبحث عن الترجمات وعرضها.': 'An add-on for searching and displaying subtitles.',
   "كتالوج لاكتشاف العناوين وبيانات الأفلام والمسلسلات، وليس مشغّل فيديو.": "A catalog for discovering titles and movie/series metadata, not a video player.",
-  'المصدر الرسمي لبيانات الأفلام والمسلسلات في Stremio. توافقه مع Nuvio يحتاج اختباراً.': 'The official source of movie and series metadata for Stremio. Nuvio compatibility still needs testing.',
+  'مصدر بيانات الأفلام والمسلسلات. توافقه مع Nuvio يحتاج اختباراً.': 'A source for movie and series metadata. Compatibility with Nuvio still needs testing.',
   'إضافة قنوات YouTube إلى Stremio. توافقها مع Nuvio يحتاج اختباراً.': 'Adds YouTube channels to Stremio. Nuvio compatibility still needs testing.',
   'ما لقينا إضافات تطابق بحثك.': 'No add-ons match your search.',
   'سجل التغييرات': 'Changelog',
@@ -145,6 +145,14 @@ function applyLanguage() {
     toggle.setAttribute('aria-label', currentLang === 'ar' ? 'Switch to English' : 'التبديل إلى العربية');
   }
 
+  const nav = $('nav');
+  if (nav) {
+    nav.setAttribute(
+      'aria-label',
+      currentLang === 'ar' ? 'التنقل الرئيسي' : 'Main navigation'
+    );
+  }
+
   filterCards();
   updateLastChecked();
 
@@ -207,7 +215,11 @@ $('#search').addEventListener('input', filterCards);
 $$('.filter').forEach(button => {
   button.addEventListener('click', () => {
     activeFilter = button.dataset.filter;
-    $$('.filter').forEach(item => item.classList.toggle('active', item === button));
+    $$('.filter').forEach(item => {
+      const active = item === button;
+      item.classList.toggle('active', active);
+      item.setAttribute('aria-pressed', String(active));
+    });
     filterCards();
   });
 });

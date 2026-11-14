@@ -64,7 +64,7 @@
     </section>
 
     <section class="stats-grid" id="status">
-      <article class="stat-card"><span>حالة الفحص</span><strong id="health-state">جارٍ التحميل</strong><small id="health-detail">نقرأ آخر تقرير</small></article>
+      <article class="stat-card"><span>حالة الفحص</span><strong id="health-state" aria-live="polite" aria-atomic="true">جارٍ التحميل</strong><small id="health-detail">نقرأ آخر تقرير</small></article>
       <article class="stat-card"><span>الإضافات المفحوصة</span><strong id="addon-count">—</strong><small>Manifest endpoints</small></article>
       <article class="stat-card"><span>أحدث إصدار</span><strong id="release-version">—</strong><small id="release-date">Nuvio Mobile</small></article>
       <article class="stat-card"><span>ملفات التنزيل</span><strong id="download-count">—</strong><small>APK & IPA assets</small></article>
@@ -78,15 +78,15 @@
     <section class="section" id="plugins">
       <div class="section-heading">
         <div><div class="eyebrow">01 / PLUGIN LIBRARY</div><h2>مكتبة الإضافات</h2><p>روابط Manifest واضحة، مع نسخ مباشر من نفس الصفحة.</p></div>
-        <span class="section-count" id="visible-count">07 RESOURCES</span>
+        <span class="section-count" id="visible-count">06 RESOURCES</span>
       </div>
 
       <div class="toolbar">
         <label class="search-box"><span>⌕</span><input id="search" type="search" placeholder="ابحث عن إضافة..." autocomplete="off"></label>
         <div class="filters" id="filters">
-          <button class="filter active" data-filter="all">الكل</button>
-          <button class="filter" data-filter="nuvio">Nuvio Plugins</button>
-          <button class="filter" data-filter="stremio">Add-ons</button>
+          <button class="filter active" data-filter="all" aria-pressed="true">الكل</button>
+          <button class="filter" data-filter="nuvio" aria-pressed="false">Nuvio Plugins</button>
+          <button class="filter" data-filter="stremio" aria-pressed="false">Add-ons</button>
         </div>
       </div>
 
@@ -162,7 +162,7 @@
     <section class="section" id="changelog">
       <div class="section-heading">
         <div>
-          <span class="eyebrow">AUTOMATED HISTORY</span>
+          <span class="eyebrow">02 / AUTOMATED HISTORY</span>
           <h2>سجل التغييرات</h2>
           <p class="muted">تحديثات المصادر وحالات الفحص وإصدارات Nuvio.</p>
         </div>
