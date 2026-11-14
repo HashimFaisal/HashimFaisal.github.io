@@ -114,8 +114,8 @@ function applyLanguage() {
   document.documentElement.lang = currentLang;
   document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
   document.title = currentLang === 'ar'
-    ? 'HashimXC12 — Nuvio Control Center'
-    : 'HashimXC12 — Nuvio Control Center';
+    ? 'Hashim Faisal — Nuvio Control Center'
+    : 'Hashim Faisal — Nuvio Control Center';
 
   translateStaticText();
 

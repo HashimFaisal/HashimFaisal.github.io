@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/hero.svg" width="100%" alt="HASHIMXC12 Nuvio Hub">
+<img src="assets/hero.svg" width="100%" alt="HASHIM FAISAL Nuvio Hub">
 
 # NUVIO ECOSYSTEM
 
@@ -229,7 +229,7 @@ Each Nuvio plugin repository may include:
 
 <div align="center">
 
-### HASHIMXC12
+### HASHIM FAISAL
 
 Independent Developer · Nuvio Ecosystem
 
@@ -309,7 +309,7 @@ Independent Developer · Nuvio Ecosystem
 
 Independent community projects. Not officially affiliated with Nuvio or its developers.
 
-<sub>HASHIMXC12 · 2026</sub>
+<sub>HASHIM FAISAL · 2026</sub>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=0:7C3AED,50:312E81,100:111827&height=110&section=footer" width="100%" alt="Footer">
 
