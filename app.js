@@ -59,6 +59,8 @@ const translations = {
   'جارٍ تحميل روابط التنزيل...': 'Loading download links...',
   'تحديث': 'Update',
   'نسخ الرابط': 'Copy Link',
+  'مشاركة': 'Share',
+  'تم نسخ رابط المشاركة': 'Share link copied',
   'فتح Manifest ↗': 'Open Manifest ↗',
   'جارٍ التحقق': 'Checking',
   'إضافة مستقلة لمشاريع Nuvio.': 'An independent add-on for Nuvio projects.',
@@ -278,6 +280,77 @@ $$('.copy-btn').forEach(button => {
     }
   });
 });
+
+
+function buildNuvioAddonDeepLink(manifestUrl) {
+  try {
+    const url = new URL(manifestUrl);
+    if (url.protocol !== 'https:') return null;
+    return `nuvio://${url.host}${url.pathname}${url.search}${url.hash}`;
+  } catch {
+    return null;
+  }
+}
+
+function installShareButtons() {
+  $$('.plugin-card').forEach(card => {
+    if (card.querySelector('.share-btn')) return;
+
+    const name = card.querySelector('h3')?.textContent.trim() || 'Nuvio Add-on';
+    const manifestUrl = card.querySelector('.manifest-url')?.textContent.trim();
+    const deepLink = buildNuvioAddonDeepLink(manifestUrl);
+    const actions = card.querySelector('.card-actions');
+
+    if (!deepLink || !actions) return;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'copy-btn share-btn';
+    button.textContent = t('مشاركة');
+    button.setAttribute('aria-label', `${t('مشاركة')} ${name}`);
+
+    button.addEventListener('click', async () => {
+      const shareText = `${name}\n${deepLink}`;
+
+      if (navigator.share) {
+        try {
+          await navigator.share({
+            title: name,
+            text: shareText,
+            url: deepLink
+          });
+          return;
+        } catch (error) {
+          if (error.name === 'AbortError') return;
+          console.warn('Native sharing unavailable:', error);
+        }
+      }
+
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(shareText);
+          toast(t('تم نسخ رابط المشاركة'));
+          return;
+        }
+      } catch (error) {
+        console.warn('Share link copy failed:', error);
+      }
+
+      const field = document.createElement('textarea');
+      field.value = shareText;
+      field.style.position = 'fixed';
+      field.style.opacity = '0';
+      document.body.appendChild(field);
+      field.select();
+
+      const copied = document.execCommand('copy');
+      field.remove();
+      toast(copied ? t('تم نسخ رابط المشاركة') : t('تعذر النسخ من هذا المتصفح'));
+    });
+
+    actions.appendChild(button);
+  });
+}
 
 function filterCards() {
   const term = $('#search').value.trim().toLowerCase();
@@ -525,5 +598,6 @@ async function loadChangelog() {
 $('#year').textContent = new Date().getFullYear();
 
 applyLanguage();
+installShareButtons();
 loadStatus();
 loadChangelog();
