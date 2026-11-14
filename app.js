@@ -137,6 +137,10 @@ function applyLanguage() {
     search.placeholder = currentLang === 'ar'
       ? 'ابحث عن إضافة...'
       : 'Search add-ons...';
+    search.setAttribute(
+      'aria-label',
+      currentLang === 'ar' ? 'ابحث عن إضافة' : 'Search add-ons'
+    );
   }
 
   const toggle = $('#language-toggle');
