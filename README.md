@@ -17,10 +17,11 @@ Independent plugin projects for the Nuvio ecosystem.
 <div align="center">
 
 <a href="#featured-projects"><img src="https://img.shields.io/badge/01-PROJECTS-7C3AED?style=for-the-badge" /></a>
-<a href="#developer-resources"><img src="https://img.shields.io/badge/02-RESOURCES-0891B2?style=for-the-badge" /></a>
-<a href="#how-to-install"><img src="https://img.shields.io/badge/03-INSTALL-0D9488?style=for-the-badge" /></a>
-<a href="#developer-statistics"><img src="https://img.shields.io/badge/04-STATS-6366F1?style=for-the-badge" /></a>
-<a href="#community-space"><img src="https://img.shields.io/badge/05-COMMUNITY-9333EA?style=for-the-badge" /></a>
+<a href="#nuvio-android-downloads"><img src="https://img.shields.io/badge/02-ANDROID_DOWNLOADS-3DDC84?style=for-the-badge&logo=android" /></a>
+<a href="#developer-resources"><img src="https://img.shields.io/badge/03-RESOURCES-0891B2?style=for-the-badge" /></a>
+<a href="#how-to-install"><img src="https://img.shields.io/badge/04-INSTALL-0D9488?style=for-the-badge" /></a>
+<a href="#developer-statistics"><img src="https://img.shields.io/badge/05-STATS-6366F1?style=for-the-badge" /></a>
+<a href="#community-space"><img src="https://img.shields.io/badge/06-COMMUNITY-9333EA?style=for-the-badge" /></a>
 
 </div>
 
@@ -87,6 +88,36 @@ Official Nuvio resources for developers and plugin creators.
 | [Nuvio Mobile](https://github.com/NuvioMedia/NuvioMobile) | Official Nuvio application source |
 | [Nuvio Plugins](https://github.com/NuvioCommunity/plugins) | Official plugin directory |
 | [Nuvio Website](https://nuvio.tv) | Official website |
+
+---
+
+<a id="nuvio-android-downloads"></a>
+## 📥 NUVIO ANDROID — LATEST DOWNLOADS
+
+<div align="center">
+
+**Download the latest Nuvio Android release directly from GitHub.**
+
+<sub>Choose the version that matches your device processor.</sub>
+
+</div>
+
+| Android Architecture | Download |
+|---|---|
+| **ARM64 (64-bit)** | [⬇️ DOWNLOAD APK](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-arm64-v8a-release.apk) |
+| **ARMv7 (32-bit)** | [⬇️ DOWNLOAD APK](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-armeabi-v7a-release.apk) |
+| **x86 (32-bit)** | [⬇️ DOWNLOAD APK](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-x86-release.apk) |
+| **x86_64 (64-bit)** | [⬇️ DOWNLOAD APK](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-x86_64-release.apk) |
+
+<div align="center">
+
+<a href="https://github.com/NuvioMedia/NuvioMobile/releases/latest">
+<img src="https://img.shields.io/badge/VIEW-LATEST_RELEASE-7C3AED?style=for-the-badge&logo=github" />
+</a>
+
+<sub>Direct links automatically target the latest release, provided the APK asset names remain unchanged.</sub>
+
+</div>
 
 ---
 
