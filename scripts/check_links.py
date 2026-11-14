@@ -15,7 +15,6 @@ MANIFESTS = {
     "OpenSubtitles": "https://opensubtitles-v3.strem.io/manifest.json",
     "Rodrigo's Catalog": "https://digok.github.io/nuvio-catalog/manifest.json",
     "Cinemeta": "https://v3-cinemeta.strem.io/manifest.json",
-    "YouTube Channels": "https://v3-channels.strem.io/manifest.json",
 }
 
 APK_ASSETS = {
