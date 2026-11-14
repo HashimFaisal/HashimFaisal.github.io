@@ -854,3 +854,188 @@ html[dir="ltr"] .topbar, html[dir="ltr"] .topbar nav { direction: ltr; }
     animation-iteration-count: 1 !important;
   }
 }
+
+/* =========================================
+   NUVIO CINEMATIC MOTION LAYER
+   Safe visual enhancement - no JS changes
+========================================= */
+
+.hero-copy {
+  animation: nuvio-hero-enter .9s cubic-bezier(.2,.7,.2,1) both;
+}
+
+.hero-visual {
+  animation: nuvio-visual-enter 1.15s cubic-bezier(.2,.7,.2,1) both;
+}
+
+.visual-aura {
+  animation: nuvio-aura-pulse 6s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+.orbit-one {
+  animation: nuvio-orbit-one 24s linear infinite;
+  will-change: transform;
+}
+
+.orbit-two {
+  animation: nuvio-orbit-two 32s linear infinite;
+  will-change: transform;
+}
+
+.orbit-three {
+  animation: nuvio-orbit-three 19s linear infinite;
+  will-change: transform;
+}
+
+.visual-object {
+  animation: nuvio-object-float 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.object-core {
+  animation: nuvio-core-glow 5s ease-in-out infinite;
+}
+
+.object-glass {
+  animation: nuvio-glass-shimmer 7s ease-in-out infinite;
+}
+
+.object-highlight {
+  animation: nuvio-highlight 5s ease-in-out infinite;
+}
+
+.ambient-one {
+  animation: nuvio-ambient-one 18s ease-in-out infinite alternate;
+}
+
+.ambient-two {
+  animation: nuvio-ambient-two 22s ease-in-out infinite alternate;
+}
+
+@keyframes nuvio-hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes nuvio-visual-enter {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes nuvio-orbit-one {
+  from { transform: rotateX(68deg) rotateZ(-24deg); }
+  to { transform: rotateX(68deg) rotateZ(336deg); }
+}
+
+@keyframes nuvio-orbit-two {
+  from { transform: rotateY(68deg) rotateZ(28deg); }
+  to { transform: rotateY(68deg) rotateZ(-332deg); }
+}
+
+@keyframes nuvio-orbit-three {
+  from { transform: rotateX(72deg) rotateZ(58deg); }
+  to { transform: rotateX(72deg) rotateZ(418deg); }
+}
+
+@keyframes nuvio-object-float {
+  0%, 100% {
+    transform: rotateX(-10deg) rotateY(-22deg) rotateZ(-8deg) translateY(0);
+  }
+  50% {
+    transform: rotateX(-7deg) rotateY(-17deg) rotateZ(-5deg) translateY(-11px);
+  }
+}
+
+@keyframes nuvio-aura-pulse {
+  0%, 100% {
+    opacity: .65;
+    transform: scale(.94);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.09);
+  }
+}
+
+@keyframes nuvio-core-glow {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.16);
+  }
+}
+
+@keyframes nuvio-glass-shimmer {
+  0%, 100% {
+    box-shadow:
+      inset 3px 2px 12px rgba(255,255,255,.16),
+      12px 15px 28px rgba(0,0,0,.18);
+  }
+  50% {
+    box-shadow:
+      inset 5px 3px 20px rgba(255,255,255,.3),
+      12px 15px 35px rgba(135,112,210,.18);
+  }
+}
+
+@keyframes nuvio-highlight {
+  0%, 100% { opacity: .55; }
+  50% { opacity: .95; }
+}
+
+@keyframes nuvio-ambient-one {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(-35px, 45px, 0); }
+}
+
+@keyframes nuvio-ambient-two {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(40px, -35px, 0); }
+}
+
+/* Accessibility and mobile performance */
+@media (max-width: 600px) {
+  .visual-aura {
+    filter: blur(16px);
+  }
+
+  .visual-object {
+    animation-duration: 7s;
+  }
+
+  .orbit-one,
+  .orbit-two,
+  .orbit-three {
+    animation-duration: 36s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-copy,
+  .hero-visual,
+  .visual-aura,
+  .orbit-one,
+  .orbit-two,
+  .orbit-three,
+  .visual-object,
+  .object-core,
+  .object-glass,
+  .object-highlight,
+  .ambient-one,
+  .ambient-two {
+    animation: none !important;
+    transform: none;
+  }
+}
