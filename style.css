@@ -1031,3 +1031,20 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
     transition-duration: .01ms !important;
   }
 }
+
+/* Nuvio — slow signature logo rotation */
+.brand img {
+  transform-origin: 50% 50%;
+  animation: nuvio-logo-slow-spin 28s linear infinite;
+}
+
+@keyframes nuvio-logo-slow-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .brand img {
+    animation: none;
+  }
+}
