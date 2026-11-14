@@ -11,8 +11,8 @@ Discover plugins · Explore addons · Get direct links
 <img src="https://img.shields.io/badge/NUVIO-PLUGIN_HUB-8B5CF6?style=for-the-badge">
 <img src="https://img.shields.io/badge/ANDROID-SUPPORTED-3DDC84?style=for-the-badge&logo=android&logoColor=white">
 <img src="https://img.shields.io/badge/OPEN_SOURCE-GITHUB-FFFFFF?style=for-the-badge&logo=github&logoColor=black">
-<a href="https://github.com/hashimxc12/hashimxc12/actions/workflows/addon-health.yml">
-<img src="https://github.com/hashimxc12/hashimxc12/actions/workflows/addon-health.yml/badge.svg?branch=main" alt="Nuvio Hub Link Health">
+<a href="https://github.com/HashimFaisal/HashimFaisal.github.io/actions/workflows/addon-health.yml">
+<img src="https://github.com/HashimFaisal/HashimFaisal.github.io/actions/workflows/addon-health.yml/badge.svg?branch=main" alt="Nuvio Hub Link Health">
 </a>
 
 </div>
@@ -46,7 +46,7 @@ Discover plugins · Explore addons · Get direct links
 
 <sub>01 / NUVIO COMMUNITY PROJECTS</sub>
 
-إضافات مستقلة للأفلام والمسلسلات.
+مشاريع مجتمعية مستقلة للأفلام والمسلسلات، وليست إضافات رسمية تابعة لمطوري Nuvio.
 
 <table>
 <tr>
@@ -92,7 +92,7 @@ Discover plugins · Explore addons · Get direct links
 
 <sub>02 / SUBTITLES · METADATA · DISCOVERY</sub>
 
-إضافات متوافقة مع نظام Stremio Addons المدعوم في Nuvio.
+إضافات خارجية تستخدم معيار Stremio Addons الذي يدعمه Nuvio. قد يختلف التوافق وتوفر الوظائف حسب الإضافة وإصدار التطبيق.
 
 <table>
 <tr>
@@ -155,9 +155,9 @@ Discover plugins · Explore addons · Get direct links
 
 | RESOURCE | DESCRIPTION |
 |---|---|
-| <a href="https://github.com/NuvioMedia/NuvioMobile">Nuvio Mobile</a> | Official Android application |
-| <a href="https://github.com/NuvioCommunity/plugins">Nuvio Plugins</a> | Community plugin directory |
-| <a href="https://nuvio.tv">Nuvio Website</a> | Official website |
+| <a href="https://github.com/NuvioMedia/NuvioMobile">Nuvio Mobile</a> | Official Nuvio Android application and releases |
+| <a href="https://github.com/NuvioCommunity/plugins">Nuvio Plugins</a> | Community-maintained plugin directory |
+| <a href="https://nuvio.tv">Nuvio Website</a> | Official Nuvio website |
 
 ---
 
@@ -271,19 +271,19 @@ Independent Developer · Nuvio Ecosystem
 
 شارك اقتراحاتك، أبلغ عن المشاكل، وناقش تطوير الإضافات.
 
-[<img src="https://img.shields.io/badge/OPEN_COMMUNITY_DISCUSSIONS-7C3AED?style=for-the-badge&logo=github" alt="Community Discussions">](https://github.com/hashimxc12/hashimxc12/discussions)
+[<img src="https://img.shields.io/badge/OPEN_COMMUNITY_DISCUSSIONS-7C3AED?style=for-the-badge&logo=github" alt="Community Discussions">](https://github.com/HashimFaisal/HashimFaisal.github.io/discussions)
 
 **COMMUNITY CHANNELS**
 
-[GENERAL](https://github.com/hashimxc12/hashimxc12/discussions/categories/general) · [IDEAS](https://github.com/hashimxc12/hashimxc12/discussions/categories/ideas) · [Q&A](https://github.com/hashimxc12/hashimxc12/discussions/categories/q-a)
+[GENERAL](https://github.com/HashimFaisal/HashimFaisal.github.io/discussions/categories/general) · [IDEAS](https://github.com/HashimFaisal/HashimFaisal.github.io/discussions/categories/ideas) · [Q&A](https://github.com/HashimFaisal/HashimFaisal.github.io/discussions/categories/q-a)
 
-[POLLS](https://github.com/hashimxc12/hashimxc12/discussions/categories/polls) · [SHOW & TELL](https://github.com/hashimxc12/hashimxc12/discussions/categories/show-and-tell) · [ANNOUNCEMENTS](https://github.com/hashimxc12/hashimxc12/discussions/categories/announcements)
+[POLLS](https://github.com/HashimFaisal/HashimFaisal.github.io/discussions/categories/polls) · [SHOW & TELL](https://github.com/HashimFaisal/HashimFaisal.github.io/discussions/categories/show-and-tell) · [ANNOUNCEMENTS](https://github.com/HashimFaisal/HashimFaisal.github.io/discussions/categories/announcements)
 
 ---
 
 ### 🗨️ COMMUNITY MESSAGES
 
-[WRITE A MESSAGE ↗](https://github.com/hashimxc12/hashimxc12/discussions/1)
+[WRITE A MESSAGE ↗](https://github.com/HashimFaisal/HashimFaisal.github.io/discussions/1)
 
 <!-- GITCOMMENT:START -->
 
@@ -295,7 +295,7 @@ Independent Developer · Nuvio Ecosystem
 
 <sub>Messages appear here after approval by the repository owner.</sub>
 
-<a href="https://github.com/hashimxc12/hashimxc12/discussions">
+<a href="https://github.com/HashimFaisal/HashimFaisal.github.io/discussions">
 <img src="https://img.shields.io/badge/VIEW-COMMUNITY_ACTIVITY-9333EA?style=for-the-badge" alt="Community Activity">
 </a>
 
