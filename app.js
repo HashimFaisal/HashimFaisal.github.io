@@ -338,8 +338,8 @@ async function loadChangelog() {
       <article class="changelog-entry">
         <span class="changelog-dot"></span>
         <div class="changelog-content">
-          <strong>${escapeHTML(entry.title || t('تحديث'))}</strong>
-          <p>${escapeHTML(entry.detail || '')}</p>
+          <strong>${escapeHTML(t(entry.title || 'تحديث'))}</strong>
+          <p>${escapeHTML(t(entry.detail || ''))}</p>
           <small>${escapeHTML(formatDate(entry.date))}</small>
         </div>
       </article>
