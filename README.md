@@ -47,62 +47,36 @@ Discover plugins · Explore addons · Get direct links
 
 <table>
 <tr>
-<td width="50%" valign="top">
-
-<div align="center">
+<td width="50%" valign="top" align="center">
 
 <img src="https://cinema.albox.co/favicon.ico" width="84" alt="CinemaBox">
 
 <h3>CINEMABOX</h3>
 
-<strong>Movies & TV Shows</strong>
+<strong>انسخ رابط JSON</strong>
 
-</div>
+<p><code>https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json</code></p>
 
-مصدر أفلام ومسلسلات يدعم العربية والإنجليزية.
+<strong>Movies &amp; TV Shows</strong>
+<p>مصدر أفلام ومسلسلات يدعم العربية والإنجليزية.</p>
 
-<strong>DIRECT JSON / MANIFEST</strong>
-
-`manifest.json`
-
-https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json
-
-<div align="center">
-
-<a href="https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json">OPEN JSON ↗</a>
-
-<a href="https://github.com/hashimxc12/CinemaBox2"> SOURCE CODE </a>
-
-</div>
+<a href="https://github.com/hashimxc12/CinemaBox2">SOURCE CODE ↗</a>
 
 </td>
-<td width="50%" valign="top">
-
-<div align="center">
+<td width="50%" valign="top" align="center">
 
 <img src="assets/cinemana.png" width="84" alt="Cinemana">
 
 <h3>CINEMANA</h3>
 
-<strong>Movies & TV Shows</strong>
+<strong>انسخ رابط JSON</strong>
 
-</div>
+<p><code>https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json</code></p>
 
-مصدر مستقل للأفلام والمسلسلات من Cinemana.
+<strong>Movies &amp; TV Shows</strong>
+<p>مصدر مستقل للأفلام والمسلسلات من Cinemana.</p>
 
-<strong>DIRECT JSON / MANIFEST</strong>
-
-`manifest.json`
-
-https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json
-
-<div align="center">
-
-<a href="https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json">OPEN JSON ↗</a>
-
-<a href="https://github.com/hashimxc12/Cinemana_NuvioPlugin"> SOURCE CODE </a>
-
-</div>
+<a href="https://github.com/hashimxc12/Cinemana_NuvioPlugin">SOURCE CODE ↗</a>
 
 </td>
 </tr>
@@ -119,56 +93,38 @@ https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.
 
 <table>
 <tr>
-<td width="50%" valign="top">
+<td width="50%" valign="top" align="center">
 
-<div align="center">
-
-<img src="https://www.opensubtitles.com/favicon.ico" width="68" alt="OpenSubtitles">
+<img src="https://www.opensubtitles.com/favicon.ico" width="84" alt="OpenSubtitles">
 
 <h3>OPENSUBTITLES</h3>
 
-<strong>Subtitle Addon</strong>
+<strong>رابط JSON — انسخه مباشرة</strong>
 
-</div>
+<p><code>https://opensubtitles-v3.strem.io/manifest.json</code></p>
 
-للبحث عن الترجمات وعرضها أثناء المشاهدة.
+<strong>SUBTITLE ADDON</strong>
 
-<strong>DIRECT JSON / MANIFEST</strong>
+<p>للبحث عن الترجمات وعرضها أثناء المشاهدة.</p>
 
-https://opensubtitles-v3.strem.io/manifest.json
-
-<div align="center">
-
-<a href="https://opensubtitles-v3.strem.io/manifest.json">OPEN JSON ↗</a>
-
-</div>
+<a href="https://www.opensubtitles.com/">SOURCE WEBSITE ↗</a>
 
 </td>
-<td width="50%" valign="top">
+<td width="50%" valign="top" align="center">
 
-<div align="center">
-
-<img src="https://github.com/Digok.png" width="68" alt="Catalog">
+<img src="https://github.com/Digok.png" width="84" alt="Rodrigo's Catalog">
 
 <h3>RODRIGO'S CATALOG</h3>
 
-<strong>IMDb · Movie & TV Metadata</strong>
+<strong>رابط JSON — انسخه مباشرة</strong>
 
-</div>
+<p><code>https://digok.github.io/nuvio-catalog/manifest.json</code></p>
 
-كتالوج لاكتشاف الأفلام والمسلسلات وعرض بياناتها وتقييماتها. لا يوفر تشغيل الفيديو.
+<strong>IMDb · MOVIE &amp; TV METADATA</strong>
 
-<strong>DIRECT JSON / MANIFEST</strong>
+<p>كتالوج لاكتشاف الأفلام والمسلسلات وعرض بياناتها وتقييماتها، ولا يوفر تشغيل الفيديو.</p>
 
-https://digok.github.io/nuvio-catalog/manifest.json
-
-<div align="center">
-
-<a href="https://digok.github.io/nuvio-catalog/manifest.json">OPEN JSON ↗</a>
-
-<a href="https://github.com/Digok/nuvio-catalog"> SOURCE CODE </a>
-
-</div>
+<a href="https://github.com/Digok/nuvio-catalog">SOURCE CODE ↗</a>
 
 </td>
 </tr>
