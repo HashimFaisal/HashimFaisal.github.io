@@ -450,7 +450,7 @@ async function loadChangelog() {
       return;
     }
 
-    container.innerHTML = entries.slice().reverse().map(entry => `
+    container.innerHTML = entries.map(entry => `
       <article class="changelog-entry">
         <span class="changelog-dot"></span>
         <div class="changelog-content">
