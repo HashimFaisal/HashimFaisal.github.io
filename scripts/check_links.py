@@ -10,8 +10,8 @@ API = f"https://api.github.com/repos/{REPO}/releases/latest"
 
 MANIFESTS = {
     "ALL-IN-ONE": "https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/refs/heads/main/manifest.json",
-    "CinemaBox": "https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json",
-    "Cinemana": "https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json",
+    "CinemaBox": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json",
+    "Cinemana": "https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json",
     "OpenSubtitles": "https://opensubtitles-v3.strem.io/manifest.json",
     "Rodrigo's Catalog": "https://digok.github.io/nuvio-catalog/manifest.json",
     "Cinemeta": "https://v3-cinemeta.strem.io/manifest.json",
