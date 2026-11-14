@@ -78,7 +78,12 @@ const translations = {
   'غير محدد': 'Unknown',
   'فشل الفحص': 'Check Failed',
   'غير متاح': 'Unavailable',
-  'تعذر تحميل تقرير الفحص': 'Could not load the health report'
+  'تعذر تحميل تقرير الفحص': 'Could not load the health report',
+  'إضافة مصدر جديد: YouTube Channels': 'New source added: YouTube Channels',
+  'إضافة مصدر جديد: Cinemeta': 'New source added: Cinemeta',
+  'بدء سجل التغييرات': 'Changelog initialized',
+  'تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.': 'The manifest was added to the list of sources monitored by the system.',
+  'تم تفعيل سجل التغييرات الآلي في لوحة التحكم.': 'The automated changelog was enabled in the control panel.'
 };
 
 const reverseTranslations = Object.fromEntries(
@@ -118,6 +123,11 @@ function applyLanguage() {
     : 'Hashim Faisal — Nuvio Control Center';
 
   translateStaticText();
+
+  const changelogList = $('#changelog-list');
+  if (changelogList && changelogList.children.length) {
+    loadChangelog();
+  }
 
   const search = $('#search');
   if (search) {
