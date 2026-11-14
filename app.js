@@ -55,11 +55,11 @@ const translations = {
   'ابحث عن إضافة...': 'Search add-ons...',
   'الكل': 'All',
   'إضافات Nuvio': 'Nuvio Plugins',
-  'إضافات Stremio': 'Nuvio Add-ons',
+  'إضافات Nuvio Add-ons': 'Nuvio Add-ons',
   'جارٍ تحميل روابط التنزيل...': 'Loading download links...',
   'تحديث': 'Update',
   'نسخ الرابط': 'Copy Link',
-  'مشاركة': 'Share',
+  'فتح في Nuvio': 'Open in Nuvio',
   'تم نسخ رابط المشاركة': 'Share link copied',
   'فتح Manifest ↗': 'Open Manifest ↗',
   'جارٍ التحقق': 'Checking',
@@ -69,7 +69,7 @@ const translations = {
   'إضافة للبحث عن الترجمات وعرضها.': 'An add-on for searching and displaying subtitles.',
   "كتالوج لاكتشاف العناوين وبيانات الأفلام والمسلسلات، وليس مشغّل فيديو.": "A catalog for discovering titles and movie/series metadata, not a video player.",
   'مصدر بيانات الأفلام والمسلسلات. توافقه مع Nuvio يحتاج اختباراً.': 'A source for movie and series metadata. Compatibility with Nuvio still needs testing.',
-  'إضافة قنوات YouTube إلى Stremio. توافقها مع Nuvio يحتاج اختباراً.': 'Adds YouTube channels to Stremio. Nuvio compatibility still needs testing.',
+  'إضافة قنوات YouTube إلى Nuvio. توافقها يحتاج اختباراً.': 'Adds YouTube channels to Nuvio. Compatibility still needs testing.',
   'ما لقينا إضافات تطابق بحثك.': 'No add-ons match your search.',
   'تحديثات المصادر وحالات الفحص وإصدارات Nuvio.': 'Source updates, check results, and Nuvio releases.',
   'جارٍ تحميل سجل التغييرات...': 'Loading changelog...',
@@ -306,46 +306,11 @@ function installShareButtons() {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'copy-btn share-btn';
-    button.textContent = t('مشاركة');
-    button.setAttribute('aria-label', `${t('مشاركة')} ${name}`);
+    button.textContent = t('فتح في Nuvio');
+    button.setAttribute('aria-label', `${t('فتح في Nuvio')} ${name}`);
 
-    button.addEventListener('click', async () => {
-      const shareText = `${name}\n${deepLink}`;
-
-      if (navigator.share) {
-        try {
-          await navigator.share({
-            title: name,
-            text: shareText,
-            url: deepLink
-          });
-          return;
-        } catch (error) {
-          if (error.name === 'AbortError') return;
-          console.warn('Native sharing unavailable:', error);
-        }
-      }
-
-      try {
-        if (navigator.clipboard?.writeText) {
-          await navigator.clipboard.writeText(shareText);
-          toast(t('تم نسخ رابط المشاركة'));
-          return;
-        }
-      } catch (error) {
-        console.warn('Share link copy failed:', error);
-      }
-
-      const field = document.createElement('textarea');
-      field.value = shareText;
-      field.style.position = 'fixed';
-      field.style.opacity = '0';
-      document.body.appendChild(field);
-      field.select();
-
-      const copied = document.execCommand('copy');
-      field.remove();
-      toast(copied ? t('تم نسخ رابط المشاركة') : t('تعذر النسخ من هذا المتصفح'));
+    button.addEventListener('click', () => {
+      window.location.href = deepLink;
     });
 
     actions.appendChild(button);
