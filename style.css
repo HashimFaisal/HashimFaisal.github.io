@@ -1653,3 +1653,114 @@ footer a:hover {
 }
 
 /* End Nuvio Premium Sections */
+
+
+/* Light Theme */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: #f5f6fb;
+  --bg-soft: #eef0f8;
+  --panel: #ffffff;
+  --panel-2: #f7f7fc;
+  --line: rgba(45, 38, 75, .12);
+  --line-strong: rgba(105, 78, 180, .25);
+  --text: #171525;
+  --muted: #686579;
+  --purple: #7657cf;
+  --purple-deep: #6545bd;
+  --silver: #38364a;
+  --cyan: #267f88;
+  --green: #16845d;
+  --red: #c33b50;
+}
+
+:root[data-theme="light"] html {
+  background: var(--bg);
+}
+
+:root[data-theme="light"] body {
+  background:
+    radial-gradient(ellipse at 50% -25%, rgba(130, 100, 210, .10), transparent 54%),
+    linear-gradient(180deg, #ffffff 0%, #f5f6fb 55%, #eef0f8 100%);
+}
+
+:root[data-theme="light"] body::before {
+  opacity: .08;
+  background-image:
+    linear-gradient(rgba(40, 35, 70, .08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(40, 35, 70, .08) 1px, transparent 1px);
+}
+
+:root[data-theme="light"] .topbar {
+  background: rgba(255, 255, 255, .88);
+  border-bottom-color: rgba(45, 38, 75, .12);
+}
+
+:root[data-theme="light"] .theme-toggle {
+  border-color: var(--line-strong);
+}
+
+/* ---------- Mobile Header Polish ---------- */
+@media (max-width: 640px) {
+  .topbar {
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+
+  .brand {
+    min-width: 0;
+    gap: 9px;
+    font-size: 14px;
+  }
+
+  .brand img {
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+  }
+
+  .topbar-actions {
+    flex-shrink: 0;
+    margin-inline-start: auto;
+    gap: 7px;
+  }
+
+  .language-toggle,
+  .theme-toggle {
+    min-height: 38px;
+    border-radius: 9px;
+  }
+
+  .language-toggle {
+    padding: 0 11px;
+    font-size: 12px;
+  }
+
+  .theme-toggle {
+    width: 40px;
+    padding: 0;
+    font-size: 16px;
+  }
+}
+
+
+/* Theme Transition */
+body,
+.topbar,
+.stat-card,
+.plugin-card,
+.changelog-item,
+.download-card,
+.resource-links a,
+.search-box,
+.filter,
+.modal-content,
+.toast {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}

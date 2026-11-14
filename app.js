@@ -9,6 +9,14 @@ try {
 } catch (error) {
   console.warn('Language preference unavailable:', error);
 }
+let currentTheme = 'dark';
+try {
+  const savedTheme = localStorage.getItem('hashimxc12-theme');
+  if (['dark', 'light'].includes(savedTheme)) currentTheme = savedTheme;
+} catch (error) {
+  console.warn('Theme preference unavailable:', error);
+}
+
 let latestReport = null;
 
 const translations = {
@@ -182,6 +190,34 @@ $('#language-toggle').addEventListener('click', () => {
   applyLanguage();
 });
 
+function applyTheme() {
+  document.documentElement.dataset.theme = currentTheme;
+
+  const toggle = $('#theme-toggle');
+  if (toggle) {
+    toggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+    toggle.setAttribute(
+      'aria-label',
+      currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+    );
+    toggle.title = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+  }
+}
+
+$('#theme-toggle').addEventListener('click', () => {
+  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+  try {
+    localStorage.setItem('hashimxc12-theme', currentTheme);
+  } catch (error) {
+    console.warn('Theme preference could not be saved:', error);
+  }
+
+  applyTheme();
+});
+
+applyTheme();
+
 function toast(message) {
   const node = $('#toast');
   node.textContent = message;
@@ -344,9 +380,11 @@ function renderManifestStatuses(report) {
     status.classList.toggle('bad', !healthy);
 
     const indicator = document.createElement('i');
+    const version = item.version || t('غير محدد');
+
     const label = healthy
-      ? `${t('متاح · الإصدار')} ${item.version || t('غير محدد')}`
-      : t('فشل الفحص');
+      ? `${t('متاح · الإصدار')} ${version}`
+      : `${t('فشل الفحص')} · ${t('الإصدار')} ${version}`;
 
     status.replaceChildren(indicator, document.createTextNode(label));
   });
