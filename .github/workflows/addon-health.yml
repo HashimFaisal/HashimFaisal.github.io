@@ -1,0 +1,45 @@
+name: Nuvio Hub Link Health
+
+on:
+  schedule:
+    - cron: "17 3 * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "scripts/check_links.py"
+      - ".github/workflows/addon-health.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: nuvio-hub-link-health
+  cancel-in-progress: false
+
+jobs:
+  check-links:
+    name: Check manifests and Android downloads
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Check all addon manifests and latest APK routes
+        run: python scripts/check_links.py
+
+      - name: Upload health report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuvio-hub-health-report
+          path: data/status.json
+          if-no-files-found: warn
+          retention-days: 30
