@@ -111,3 +111,8 @@ html[dir="ltr"] .manifest-url {
 [dir="ltr"] .topbar nav {
   direction: ltr;
 }
+
+/* Ensure category filters can hide plugin cards */
+.plugin-card[hidden] {
+  display: none !important;
+}
