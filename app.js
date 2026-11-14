@@ -4,6 +4,7 @@ const $$ = (selector) => [...document.querySelectorAll(selector)];
 let activeFilter = 'all';
 let currentLang = localStorage.getItem('hashimxc12-language') || 'ar';
 if (!['ar', 'en'].includes(currentLang)) currentLang = 'ar';
+let latestReport = null;
 
 const translations = {
   'الإضافات': 'Add-ons',
@@ -132,6 +133,7 @@ function applyLanguage() {
   }
 
   filterCards();
+  updateLastChecked();
 }
 
 $('#language-toggle').addEventListener('click', () => {
@@ -198,6 +200,18 @@ function formatBytes(bytes) {
   return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
 }
 
+function updateLastChecked() {
+  const node = $('#last-checked');
+  if (!node) return;
+
+  node.textContent = latestReport?.checked_at
+    ? new Intl.DateTimeFormat(currentLang === 'ar' ? 'ar-IQ' : 'en-US', {
+        dateStyle: 'short',
+        timeStyle: 'short'
+      }).format(new Date(latestReport.checked_at))
+    : '—';
+}
+
 function formatDate(value) {
   if (!value) return t('تاريخ النشر غير متاح');
   const locale = currentLang === 'ar' ? 'ar-IQ' : 'en-US';
@@ -256,12 +270,8 @@ async function loadStatus() {
     $('#healthy-count').textContent = manifests.filter(item => item.ok).length;
     $('#unhealthy-count').textContent = manifests.filter(item => !item.ok).length;
 
-    $('#last-checked').textContent = report.checked_at
-      ? new Intl.DateTimeFormat(currentLang === 'ar' ? 'ar-IQ' : 'en-US', {
-          dateStyle: 'short',
-          timeStyle: 'short'
-        }).format(new Date(report.checked_at))
-      : '—';
+    latestReport = report;
+    updateLastChecked();
 
     manifests.forEach(item => {
       const card = $$('.plugin-card').find(node =>
