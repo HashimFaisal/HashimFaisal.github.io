@@ -22,8 +22,10 @@
       <a href="#plugins">الإضافات</a>
       <a href="#downloads">التنزيلات</a>
       <a href="#status">حالة النظام</a>
+      <a href="#changelog">سجل التغييرات</a>
     </nav>
     <a class="github-link" href="https://github.com/hashimxc12" target="_blank" rel="noopener">GitHub ↗</a>
+    <button class="language-toggle" id="language-toggle" type="button" aria-label="Change language">English</button>
   </header>
 
   <main>
@@ -47,12 +49,17 @@
       <article class="stat-card"><span>الإضافات المفحوصة</span><strong id="addon-count">—</strong><small>Manifest endpoints</small></article>
       <article class="stat-card"><span>أحدث إصدار</span><strong id="release-version">—</strong><small id="release-date">Nuvio Mobile</small></article>
       <article class="stat-card"><span>ملفات التنزيل</span><strong id="download-count">—</strong><small>APK & IPA assets</small></article>
+
+      <article class="stat-card"><span>مصادر سليمة</span><strong id="healthy-count">—</strong><small>Manifest متاح</small></article>
+      <article class="stat-card"><span>مصادر متعطلة</span><strong id="unhealthy-count">—</strong><small>تحتاج مراجعة</small></article>
+      <article class="stat-card"><span>آخر فحص</span><strong id="last-checked">—</strong><small>وقت التحديث</small></article>
+
     </section>
 
     <section class="section" id="plugins">
       <div class="section-heading">
         <div><div class="eyebrow">01 / PLUGIN LIBRARY</div><h2>مكتبة الإضافات</h2><p>روابط Manifest واضحة، مع نسخ مباشر من نفس الصفحة.</p></div>
-        <span class="section-count" id="visible-count">05 RESOURCES</span>
+        <span class="section-count" id="visible-count">07 RESOURCES</span>
       </div>
 
       <div class="toolbar">
@@ -70,7 +77,7 @@
           <h3>CinemaBox</h3><p>إضافة مستقلة لمشاريع Nuvio.</p>
           <div class="manifest-label">MANIFEST URL</div>
           <code class="manifest-url">https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json</code>
-          <div class="card-actions"><button class="copy-btn" data-copy="https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json">نسخ الرابط</button><a href="https://github.com/hashimxc12/CinemaBox2" target="_blank" rel="noopener">المصدر ↗</a></div>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json">نسخ الرابط</button><a href="https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
           <div class="card-status" data-check="CinemaBox"><i></i> جارٍ التحقق</div>
         </article>
 
@@ -79,26 +86,8 @@
           <h3>Cinemana</h3><p>مشروع إضافة مستقل ضمن مكتبة Nuvio.</p>
           <div class="manifest-label">MANIFEST URL</div>
           <code class="manifest-url">https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json</code>
-          <div class="card-actions"><button class="copy-btn" data-copy="https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json">نسخ الرابط</button><a href="https://github.com/hashimxc12/Cinemana_NuvioPlugin" target="_blank" rel="noopener">المصدر ↗</a></div>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json">نسخ الرابط</button><a href="https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
           <div class="card-status" data-check="Cinemana"><i></i> جارٍ التحقق</div>
-        </article>
-
-        <article class="plugin-card">
-          <div class="plugin-top"><img src="https://www.opensubtitles.com/favicon.ico" alt="OpenSubtitles"><span class="type-tag external">STREMIO</span></div>
-          <h3>OpenSubtitles</h3><p>إضافة للبحث عن الترجمات وعرضها.</p>
-          <div class="manifest-label">MANIFEST URL</div>
-          <code class="manifest-url">https://opensubtitles-v3.strem.io/manifest.json</code>
-          <div class="card-actions"><button class="copy-btn" data-copy="https://opensubtitles-v3.strem.io/manifest.json">نسخ الرابط</button><a href="https://www.opensubtitles.com/" target="_blank" rel="noopener">المصدر ↗</a></div>
-          <div class="card-status" data-check="OpenSubtitles"><i></i> جارٍ التحقق</div>
-        </article>
-
-        <article class="plugin-card">
-          <div class="plugin-top"><img src="https://github.com/Digok.png" alt="Rodrigo Catalog"><span class="type-tag external">STREMIO</span></div>
-          <h3>Rodrigo's Catalog</h3><p>كتالوج لاكتشاف العناوين وبيانات الأفلام والمسلسلات، وليس مشغّل فيديو.</p>
-          <div class="manifest-label">MANIFEST URL</div>
-          <code class="manifest-url">https://digok.github.io/nuvio-catalog/manifest.json</code>
-          <div class="card-actions"><button class="copy-btn" data-copy="https://digok.github.io/nuvio-catalog/manifest.json">نسخ الرابط</button><a href="https://github.com/Digok/nuvio-catalog" target="_blank" rel="noopener">المصدر ↗</a></div>
-          <div class="card-status" data-check="Rodrigo's Catalog"><i></i> جارٍ التحقق</div>
         </article>
 
         <article class="plugin-card">
@@ -107,14 +96,73 @@
           <p>إضافة All-in-One لمشروع Nuvio من المستودع الأصلي.</p>
           <div class="manifest-label">MANIFEST URL</div>
           <code class="manifest-url">https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/refs/heads/main/manifest.json</code>
-          <div class="card-actions"><button class="copy-btn" data-copy="https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/refs/heads/main/manifest.json">نسخ الرابط</button><a href="https://github.com/NuvioPlugin/All-in-One-Nuvio" target="_blank" rel="noopener">المصدر ↗</a></div>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/refs/heads/main/manifest.json">نسخ الرابط</button><a href="https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/refs/heads/main/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
           <div class="card-status" data-check="ALL-IN-ONE"><i></i> جارٍ التحقق</div>
         </article>
+
+        <article class="plugin-card">
+          <div class="plugin-top"><img src="https://www.opensubtitles.com/favicon.ico" alt="OpenSubtitles"><span class="type-tag external">STREMIO</span></div>
+          <h3>OpenSubtitles</h3><p>إضافة للبحث عن الترجمات وعرضها.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://opensubtitles-v3.strem.io/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://opensubtitles-v3.strem.io/manifest.json">نسخ الرابط</button><a href="https://opensubtitles-v3.strem.io/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="OpenSubtitles"><i></i> جارٍ التحقق</div>
+        </article>
+
+        <article class="plugin-card">
+          <div class="plugin-top"><img src="https://github.com/Digok.png" alt="Rodrigo Catalog"><span class="type-tag external">STREMIO</span></div>
+          <h3>Rodrigo's Catalog</h3><p>كتالوج لاكتشاف العناوين وبيانات الأفلام والمسلسلات، وليس مشغّل فيديو.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://digok.github.io/nuvio-catalog/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://digok.github.io/nuvio-catalog/manifest.json">نسخ الرابط</button><a href="https://digok.github.io/nuvio-catalog/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="Rodrigo's Catalog"><i></i> جارٍ التحقق</div>
+        </article>
+
+
+        <article class="plugin-card">
+          <div class="plugin-top"><img src="assets/cinemeta.svg" alt="Cinemeta"><span class="type-tag external">STREMIO</span></div>
+          <h3>Cinemeta</h3>
+          <p>المصدر الرسمي لبيانات الأفلام والمسلسلات في Stremio. توافقه مع Nuvio يحتاج اختباراً.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://v3-cinemeta.strem.io/manifest.json</code>
+          <div class="card-actions">
+            <button class="copy-btn" data-copy="https://v3-cinemeta.strem.io/manifest.json">نسخ الرابط</button>
+            <a href="https://v3-cinemeta.strem.io/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a>
+          </div>
+          <div class="card-status" data-check="Cinemeta"><i></i> جارٍ التحقق</div>
+        </article>
+        <article class="plugin-card">
+          <div class="plugin-top"><img src="assets/youtube-channels.svg" alt="YouTube Channels"><span class="type-tag external">STREMIO</span></div>
+          <h3>YouTube Channels</h3>
+          <p>إضافة قنوات YouTube إلى Stremio. توافقها مع Nuvio يحتاج اختباراً.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://v3-channels.strem.io/manifest.json</code>
+          <div class="card-actions">
+            <button class="copy-btn" data-copy="https://v3-channels.strem.io/manifest.json">نسخ الرابط</button>
+            <a href="https://v3-channels.strem.io/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a>
+          </div>
+          <div class="card-status" data-check="YouTube Channels"><i></i> جارٍ التحقق</div>
+        </article>
+
 </div>
       <div class="empty-state" id="empty-state" hidden>ما لقينا إضافات تطابق بحثك.</div>
     </section>
 
 
+
+
+    <section class="section" id="changelog">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">AUTOMATED HISTORY</span>
+          <h2>سجل التغييرات</h2>
+          <p class="muted">تحديثات المصادر وحالات الفحص وإصدارات Nuvio.</p>
+        </div>
+      </div>
+      <div class="changelog-list" id="changelog-list">
+        <p class="muted">جارٍ تحميل سجل التغييرات...</p>
+      </div>
+    </section>
 
     <section class="section" id="downloads">
       <div class="section-heading">
@@ -138,5 +186,6 @@
   <footer><div class="brand footer-brand">HASHIM<span class="accent">XC12</span></div><span>Independent Nuvio Projects · <span id="year"></span></span><a href="https://github.com/hashimxc12" target="_blank" rel="noopener">GitHub ↗</a></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script src="app.js"></script>
+  <script src="language.js"></script>
 </body>
 </html>
