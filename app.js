@@ -48,6 +48,10 @@ const translations = {
   'روابط Manifest واضحة، مع نسخ مباشر من نفس الصفحة.': 'Clear manifest links with one-click copying.',
   'ابحث عن إضافة...': 'Search add-ons...',
   'الكل': 'All',
+  'إضافات Nuvio': 'Nuvio Plugins',
+  'إضافات Stremio': 'Stremio Add-ons',
+  'جارٍ تحميل روابط التنزيل...': 'Loading download links...',
+  'تحديث': 'Update',
   'نسخ الرابط': 'Copy Link',
   'فتح Manifest ↗': 'Open Manifest ↗',
   'جارٍ التحقق': 'Checking',
@@ -176,6 +180,8 @@ function applyLanguage() {
     renderManifestStatuses(latestReport);
     renderDownloads(latestReport);
   }
+
+  applyTheme();
 }
 
 $('#language-toggle').addEventListener('click', () => {
@@ -198,9 +204,13 @@ function applyTheme() {
     toggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
     toggle.setAttribute(
       'aria-label',
-      currentTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+      currentTheme === 'dark'
+        ? (currentLang === 'ar' ? 'تفعيل الوضع الفاتح' : 'Switch to light mode')
+        : (currentLang === 'ar' ? 'تفعيل الوضع الداكن' : 'Switch to dark mode')
     );
-    toggle.title = currentTheme === 'dark' ? 'Light Mode' : 'Dark Mode';
+    toggle.title = currentTheme === 'dark'
+      ? (currentLang === 'ar' ? 'الوضع الفاتح' : 'Light Mode')
+      : (currentLang === 'ar' ? 'الوضع الداكن' : 'Dark Mode');
   }
 }
 
