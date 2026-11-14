@@ -43,55 +43,108 @@ Here you can discover my Nuvio plugin projects, access their source repositories
 ---
 
 <a id="featured-projects"></a>
-## 🚀 PROJECT SHOWCASE
+## 🚀 NUVIO PLUGIN LIBRARY
 
 <div align="center">
 
-<sub>THREE PROJECTS · ONE DEVELOPER HUB</sub>
+<sub>DISCOVER · COPY · INSTALL</sub>
 
-### 🎬 CINEMABOX
-
-<img src="assets/cinemabox.svg" width="100%" alt="CinemaBox" />
-
-**Independent Nuvio plugin project**
-
-<div align="center">
-
-![CinemaBox Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhashimxc12%2FCinemaBox2%2Fmain%2Fmanifest.json&query=%24.version&label=VERSION&color=7C3AED&style=for-the-badge)
-![CinemaBox Updated](https://img.shields.io/github/last-commit/hashimxc12/CinemaBox2?label=LAST%20UPDATE&style=for-the-badge)
+إضافات Nuvio المستقلة، بروابط Manifest مباشرة.
 
 </div>
 
-[↗ SOURCE CODE](https://github.com/hashimxc12/CinemaBox2) · [↗ MANIFEST](https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json)
+### 🎬 CINEMABOX
+
+<div align="center">
+<img src="https://cinema.albox.co/favicon.ico" width="88" alt="CinemaBox" />
+</div>
+
+مصدر أفلام ومسلسلات، يدعم العربية والإنجليزية.
+
+<div align="center">
+
+[**↗ DIRECT PLUGIN MANIFEST**](https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json)
+
+[VIEW SOURCE CODE](https://github.com/hashimxc12/CinemaBox2)
+
+</div>
 
 ---
 
 ### 📺 CINEMANA
 
-<img src="assets/cinemana.svg" width="100%" alt="Cinemana" />
+<div align="center">
+<img src="assets/cinemana.svg" width="120" alt="Cinemana" />
+</div>
 
-**A separate plugin project for Nuvio**
+مصدر مستقل للأفلام والمسلسلات من Cinemana.
 
 <div align="center">
 
-![Cinemana Version](https://img.shields.io/badge/dynamic/json?url=https%3A%2F%2Fraw.githubusercontent.com%2Fhashimxc12%2FCinemana_NuvioPlugin%2Fmain%2Fmanifest.json&query=%24.version&label=VERSION&color=0891B2&style=for-the-badge)
-![Cinemana Updated](https://img.shields.io/github/last-commit/hashimxc12/Cinemana_NuvioPlugin?label=LAST%20UPDATE&style=for-the-badge)
+[**↗ DIRECT PLUGIN MANIFEST**](https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json)
+
+[VIEW SOURCE CODE](https://github.com/hashimxc12/Cinemana_NuvioPlugin)
 
 </div>
 
-[↗ SOURCE CODE](https://github.com/hashimxc12/Cinemana_NuvioPlugin) · [↗ MANIFEST](https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json)
+---
+
+<a id="external-addons"></a>
+## 🧩 STREMIO-COMPATIBLE ADDONS
+
+<div align="center">
+
+<sub>ADDONS · METADATA · SUBTITLES</sub>
+
+إضافات متوافقة مع نظام إضافات Stremio المدعوم في Nuvio.
+
+</div>
+
+### 💬 OPENSUBTITLES
+
+<div align="center">
+<img src="https://www.opensubtitles.com/favicon.ico" width="72" alt="OpenSubtitles" />
+</div>
+
+للبحث عن الترجمات وإظهارها أثناء المشاهدة.
+
+<div align="center">
+
+[**↗ DIRECT ADDON MANIFEST**](https://opensubtitles-v3.strem.io/manifest.json)
+
+</div>
+
+---
+
+### ⭐ RODRIGO'S CATALOG — IMDb
+
+<div align="center">
+
+<img src="https://github.com/Digok.png" width="72" alt="Catalog developer" />
+
+</div>
+
+كتالوج للأفلام والمسلسلات، يوفّر قوائم متنوعة وبيانات وتقييمات IMDb. هذه إضافة معلومات واكتشاف وليست مصدر تشغيل فيديو.
+
+<div align="center">
+
+[**↗ DIRECT ADDON MANIFEST**](https://digok.github.io/nuvio-catalog/manifest.json)
+
+[VIEW SOURCE CODE](https://github.com/Digok/nuvio-catalog)
+
+</div>
 
 ---
 
 ### ⚡ ALL-IN-ONE
 
+<div align="center">
+
 <img src="assets/all-in-one.svg" width="100%" alt="All-in-One" />
 
-**Unified project concept · Coming soon**
+**A unified Nuvio experience · Coming Soon**
 
 </div>
-
----
 
 ## 🧭 Developer Resources
 
