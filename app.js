@@ -2,8 +2,13 @@ const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 
 let activeFilter = 'all';
-let currentLang = localStorage.getItem('hashimxc12-language') || 'ar';
-if (!['ar', 'en'].includes(currentLang)) currentLang = 'ar';
+let currentLang = 'ar';
+try {
+  const savedLang = localStorage.getItem('hashimxc12-language');
+  if (['ar', 'en'].includes(savedLang)) currentLang = savedLang;
+} catch (error) {
+  console.warn('Language preference unavailable:', error);
+}
 let latestReport = null;
 
 const translations = {
@@ -46,7 +51,6 @@ const translations = {
   'مصدر بيانات الأفلام والمسلسلات. توافقه مع Nuvio يحتاج اختباراً.': 'A source for movie and series metadata. Compatibility with Nuvio still needs testing.',
   'إضافة قنوات YouTube إلى Stremio. توافقها مع Nuvio يحتاج اختباراً.': 'Adds YouTube channels to Stremio. Nuvio compatibility still needs testing.',
   'ما لقينا إضافات تطابق بحثك.': 'No add-ons match your search.',
-  'سجل التغييرات': 'Changelog',
   'تحديثات المصادر وحالات الفحص وإصدارات Nuvio.': 'Source updates, check results, and Nuvio releases.',
   'جارٍ تحميل سجل التغييرات...': 'Loading changelog...',
   'لا توجد تغييرات مسجلة حالياً.': 'No changes recorded yet.',
@@ -161,13 +165,20 @@ function applyLanguage() {
   updateLastChecked();
 
   if (latestReport) {
+    renderManifestStatuses(latestReport);
     renderDownloads(latestReport);
   }
 }
 
 $('#language-toggle').addEventListener('click', () => {
   currentLang = currentLang === 'ar' ? 'en' : 'ar';
-  localStorage.setItem('hashimxc12-language', currentLang);
+
+  try {
+    localStorage.setItem('hashimxc12-language', currentLang);
+  } catch (error) {
+    console.warn('Language preference could not be saved:', error);
+  }
+
   applyLanguage();
 });
 
@@ -182,17 +193,36 @@ function toast(message) {
 $$('.copy-btn').forEach(button => {
   button.addEventListener('click', async () => {
     const value = button.dataset.copy;
+
     try {
-      await navigator.clipboard.writeText(value);
-      toast(t('تم نسخ رابط Manifest بنجاح'));
-    } catch {
-      const field = document.createElement('textarea');
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+        toast(t('تم نسخ رابط Manifest بنجاح'));
+        return;
+      }
+    } catch (error) {
+      console.warn('Clipboard API failed; trying fallback:', error);
+    }
+
+    let field;
+
+    try {
+      field = document.createElement('textarea');
       field.value = value;
+      field.setAttribute('readonly', '');
+      field.style.position = 'fixed';
+      field.style.opacity = '0';
       document.body.appendChild(field);
       field.select();
+
       const copied = document.execCommand('copy');
-      field.remove();
       toast(copied ? t('تم نسخ الرابط') : t('تعذر النسخ من هذا المتصفح'));
+    } catch (error) {
+      console.error('Copy fallback failed:', error);
+      toast(t('تعذر النسخ من هذا المتصفح'));
+    } finally {
+      field?.remove();
+      button.focus();
     }
   });
 });
@@ -247,11 +277,17 @@ function updateLastChecked() {
 
 function formatDate(value) {
   if (!value) return t('تاريخ النشر غير متاح');
+
+  const date = new Date(value);
+  if (!Number.isFinite(date.getTime())) {
+    return t('تاريخ النشر غير متاح');
+  }
+
   const locale = currentLang === 'ar' ? 'ar-IQ' : 'en-US';
   return new Intl.DateTimeFormat(locale, {
     dateStyle: 'medium',
     timeStyle: 'short'
-  }).format(new Date(value));
+  }).format(date);
 }
 
 function formatRelativeDate(value) {
@@ -283,6 +319,39 @@ function formatRelativeDate(value) {
   }).format(Math.round(amount), unit);
 }
 
+function safeHttpsUrl(value) {
+  if (typeof value !== 'string' || !value.trim()) return null;
+
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+function renderManifestStatuses(report) {
+  const checks = Array.isArray(report?.checks) ? report.checks : [];
+  const manifests = checks.filter(item => item.type === 'manifest');
+
+  $$('.card-status[data-check]').forEach(status => {
+    const name = status.dataset.check;
+    const item = manifests.find(check => check.name === name);
+    if (!item) return;
+
+    const healthy = Boolean(item.ok);
+    status.classList.toggle('ok', healthy);
+    status.classList.toggle('bad', !healthy);
+
+    const indicator = document.createElement('i');
+    const label = healthy
+      ? `${t('متاح · الإصدار')} ${item.version || t('غير محدد')}`
+      : t('فشل الفحص');
+
+    status.replaceChildren(indicator, document.createTextNode(label));
+  });
+}
+
 function renderDownloads(report) {
   const release = report.release;
 
@@ -298,10 +367,12 @@ function renderDownloads(report) {
   $('#published-at').textContent = formatDate(release.published_at);
 
   const assets = release.assets || [];
-  $('#download-count').textContent = assets.filter(item => item.ok && item.download_url).length;
-
+  $('#download-count').textContent = assets.filter(item =>
+    item.ok && safeHttpsUrl(item.download_url)
+  ).length;
   $('#download-grid').innerHTML = assets.map(asset => {
-    const ready = asset.ok && asset.download_url;
+    const downloadUrl = safeHttpsUrl(asset.download_url);
+    const ready = Boolean(asset.ok && downloadUrl);
     return `<article class="download-card">
       <strong>Nuvio ${escapeHTML(asset.label || 'Download')}</strong>
       <small class="muted">${t('الإصدار')}: ${escapeHTML(release.tag || release.name || '—')}</small>
@@ -310,7 +381,7 @@ function renderDownloads(report) {
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
         : t('تاريخ الرفع غير متاح')}</small>
       ${ready
-        ? `<a href="${asset.download_url}" target="_blank" rel="noopener">${t('تنزيل مباشر ↗')}</a>`
+        ? `<a href="${escapeHTML(downloadUrl)}" target="_blank" rel="noopener noreferrer">${t('تنزيل مباشر ↗')}</a>`
         : `<span class="muted">${t('غير متاح حالياً')}</span>`}
     </article>`;
   }).join('');
@@ -339,23 +410,7 @@ async function loadStatus() {
     latestReport = report;
     updateLastChecked();
 
-    manifests.forEach(item => {
-      const card = $$('.plugin-card').find(node =>
-        node.dataset.name === item.name ||
-        node.querySelector('h3').textContent === item.name
-      );
-
-      const status = card?.querySelector('.card-status');
-      if (!status) return;
-
-      status.classList.toggle('ok', !!item.ok);
-      status.classList.toggle('bad', !item.ok);
-
-      status.innerHTML = item.ok
-        ? `<i></i>${t('متاح · الإصدار')} ${item.version || t('غير محدد')}`
-        : `<i></i>${t('فشل الفحص')}`;
-    });
-
+    renderManifestStatuses(report);
     renderDownloads(report);
   } catch (error) {
     $('#health-state').textContent = t('غير متاح');
@@ -376,7 +431,10 @@ function escapeHTML(value) {
   })[char]);
 }
 
+let changelogRequestId = 0;
+
 async function loadChangelog() {
+  const requestId = ++changelogRequestId;
   const container = $('#changelog-list');
 
   try {
@@ -384,6 +442,8 @@ async function loadChangelog() {
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const entries = await response.json();
+
+    if (requestId !== changelogRequestId) return;
 
     if (!Array.isArray(entries) || entries.length === 0) {
       container.innerHTML = `<p class="muted">${t('لا توجد تغييرات مسجلة حالياً.')}</p>`;
@@ -401,6 +461,8 @@ async function loadChangelog() {
       </article>
     `).join('');
   } catch (error) {
+    if (requestId !== changelogRequestId) return;
+
     container.innerHTML = `<p class="muted">${t('تعذر تحميل سجل التغييرات حالياً.')}</p>`;
     console.error('Changelog loading failed:', error);
   }
