@@ -1,84 +1,136 @@
 <div align="center">
 
-# HASHIMXC12
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:111827,50:312E81,100:7C3AED&height=230&section=header&text=HASHIMXC12&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=NUVIO%20PLUGIN%20DEVELOPER&descAlignY=60&descSize=17" width="100%" />
 
-### NUVIO PLUGIN DIRECTORY
+# NUVIO PLUGIN HUB
 
-**Independent Plugins • Android • Nuvio Ecosystem**
+### Discover • Connect • Install
 
-<img src="https://img.shields.io/badge/PLUGIN_COLLECTION-2-7C3AED?style=for-the-badge" />
+Independent plugin projects for the Nuvio ecosystem.
+
+<img src="https://img.shields.io/badge/PROJECTS-02-8B5CF6?style=for-the-badge" />
 <img src="https://img.shields.io/badge/PLATFORM-ANDROID-3DDC84?style=for-the-badge&logo=android&logoColor=white" />
-<img src="https://img.shields.io/badge/HOSTED_ON-GITHUB-181717?style=for-the-badge&logo=github" />
-
-Welcome to my plugin directory.
-
-مرحباً بك في دليل إضافات Nuvio الخاص بي.
+<img src="https://img.shields.io/badge/HOSTED-GITHUB-181717?style=for-the-badge&logo=github" />
 
 </div>
 
 ---
 
-## 📦 Available Plugins
+## ✦ About This Hub
 
-### 🎬 01 — CinemaBox
+Welcome to my developer hub.
 
-A community plugin project for CinemaBox content sources in Nuvio.
+Here you can discover my Nuvio plugin projects, access their source repositories, and copy their manifest URLs.
 
-إضافة CinemaBox لمصادر المحتوى ضمن تطبيق Nuvio.
+مرحباً بك في صفحة مشاريعي. هنا تجد إضافات Nuvio وروابط التثبيت والمصادر الرسمية للمطورين.
 
-| Resource | Link |
-|---|---|
-| Plugin Manifest | [Open Manifest](https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json) |
-| Source Repository | [CinemaBox2](https://github.com/hashimxc12/CinemaBox2) |
+---
 
-**COPY PLUGIN URL**
+## 🚀 My Plugins
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+<div align="center">
+
+### 🎬 CinemaBox
+
+<img src="https://img.shields.io/badge/PLUGIN-CINEMABOX-7C3AED?style=flat-square" />
+
+</div>
+
+A community plugin project for Nuvio.
+
+إضافة CinemaBox لمصادر المحتوى في Nuvio.
+
+**INSTALL MANIFEST**
 
 ```text
 https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json
 ```
 
----
+<div align="center">
 
-### 📺 02 — Cinemana
+<a href="https://github.com/hashimxc12/CinemaBox2">
+<img src="https://img.shields.io/badge/VIEW_SOURCE-181717?style=for-the-badge&logo=github" />
+</a>
 
-A community plugin project for Cinemana content sources in Nuvio.
+</div>
 
-إضافة Cinemana لمصادر المحتوى ضمن تطبيق Nuvio.
+</td>
+<td width="50%" valign="top">
 
-| Resource | Link |
-|---|---|
-| Plugin Manifest | [Open Manifest](https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json) |
-| Source Repository | [Cinemana_NuvioPlugin](https://github.com/hashimxc12/Cinemana_NuvioPlugin) |
+<div align="center">
 
-**COPY PLUGIN URL**
+### 📺 Cinemana
+
+<img src="https://img.shields.io/badge/PLUGIN-CINEMANA-06B6D4?style=flat-square" />
+
+</div>
+
+A community plugin project for Nuvio.
+
+إضافة Cinemana لمصادر المحتوى في Nuvio.
+
+**INSTALL MANIFEST**
 
 ```text
 https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json
 ```
 
+<div align="center">
+
+<a href="https://github.com/hashimxc12/Cinemana_NuvioPlugin">
+<img src="https://img.shields.io/badge/VIEW_SOURCE-181717?style=for-the-badge&logo=github" />
+</a>
+
+</div>
+
+</td>
+</tr>
+</table>
+
 ---
 
-## 🔗 Where Do These Links Connect?
+## 🧭 Developer Resources
 
-روابط Plugin Manifest أعلاه ترتبط مباشرة بملف `manifest.json` داخل مستودع كل إضافة على GitHub.
+Official Nuvio resources for developers and plugin creators.
 
-عند إضافة الرابط إلى Nuvio، يستخدم التطبيق ملف Manifest للتعرف على الإضافة وملف التنفيذ المرتبط بها.
-
-- **Manifest URL:** رابط التثبيت الذي تضيفه داخل Nuvio.
-- **Source Repository:** صفحة المشروع التي تحتوي ملفات الإضافة.
-- **index.js:** ملف تنفيذ الإضافة.
-- **manifest.json:** ملف تعريف الإضافة وإعداداتها.
+| Resource | Description |
+|---|---|
+| [Nuvio Mobile](https://github.com/NuvioMedia/NuvioMobile) | Official Nuvio application source |
+| [Nuvio Plugins](https://github.com/NuvioCommunity/plugins) | Official plugin directory |
+| [Nuvio Website](https://nuvio.tv) | Official website |
 
 ---
 
-## 📲 How to Add a Plugin to Nuvio
+## 📲 How to Install
 
-1. اختر الإضافة من القائمة أعلاه.
-2. انسخ رابط **COPY PLUGIN URL**.
+1. Choose a plugin above.
+2. Copy its Manifest URL.
+3. Open Nuvio.
+4. Navigate to **Settings → Content & Discovery → Plugins**.
+5. Select **Add Repository**.
+6. Paste the Manifest URL and install.
+
+**طريقة التثبيت بالعربي**
+
+1. اختر الإضافة المطلوبة.
+2. انسخ رابط Manifest.
 3. افتح تطبيق Nuvio.
-4. ادخل إلى قسم Plugins / Add-ons.
-5. اختر إضافة Plugin عبر URL إذا كان الخيار متاحاً في إصدارك.
-6. الصق الرابط وأكمل الإضافة.
+4. ادخل إلى الإعدادات ثم Content & Discovery ثم Plugins.
+5. اختر Add Repository.
+6. الصق الرابط وأكمل التثبيت.
+
+---
+
+## 🛠️ Plugin Structure
+
+Each project repository includes:
+
+- `manifest.json` — Plugin metadata and configuration.
+- `index.js` — Plugin implementation.
 
 ---
 
@@ -86,11 +138,13 @@ https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.
 
 <div align="center">
 
-**HASHIMXC12**
+### HASHIMXC12
 
-Plugin Development • Android • Nuvio
+**Independent Developer**
 
-[![GitHub Profile](https://img.shields.io/badge/Visit_GitHub_Profile-181717?style=for-the-badge&logo=github)](https://github.com/hashimxc12)
+<a href="https://github.com/hashimxc12">
+<img src="https://img.shields.io/badge/GITHUB_PROFILE-181717?style=for-the-badge&logo=github" />
+</a>
 
 </div>
 
@@ -98,6 +152,10 @@ Plugin Development • Android • Nuvio
 
 <div align="center">
 
-*Independent community projects. Not officially affiliated with Nuvio or the original content providers.*
+<sub>Built with passion for the Nuvio community.</sub>
+
+<sub>Independent community projects. Not officially affiliated with Nuvio or its developers.</sub>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:7C3AED,50:312E81,100:111827&height=100&section=footer" width="100%" />
 
 </div>
