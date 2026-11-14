@@ -287,9 +287,9 @@ Independent Developer · Nuvio Ecosystem
 
 <!-- GITCOMMENT:START -->
 
-<a href="https://github.com/hashimxc12/hashimxc12/discussions/1"><img src=".github/gitcomment/comments-dev.svg" alt="Community Messages" width="880"></a>
+<a href="https://github.com/HashimFaisal/HashimFaisal.github.io/discussions/1"><img src=".github/gitcomment/comments-dev.svg?v=607c279f16" alt="Community Messages" width="880"></a>
 
-<sub><a href="https://github.com/hashimxc12/hashimxc12/discussions/1">LEAVE A MESSAGE</a></sub>
+<sub><a href="https://github.com/HashimFaisal/HashimFaisal.github.io/discussions/1">leave a message</a></sub>
 
 <!-- GITCOMMENT:END -->
 
