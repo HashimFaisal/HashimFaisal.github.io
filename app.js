@@ -4,15 +4,21 @@ const $$ = (selector) => [...document.querySelectorAll(selector)];
 let activeFilter = 'all';
 let currentLang = 'ar';
 try {
-  const savedLang = localStorage.getItem('hashimxc12-language');
-  if (['ar', 'en'].includes(savedLang)) currentLang = savedLang;
+  const savedLang = localStorage.getItem('nuvio-language');
+  if (['ar', 'en'].includes(savedLang)) {
+    currentLang = savedLang;
+    localStorage.setItem('nuvio-language', savedLang);
+  }
 } catch (error) {
   console.warn('Language preference unavailable:', error);
 }
 let currentTheme = 'dark';
 try {
-  const savedTheme = localStorage.getItem('hashimxc12-theme');
-  if (['dark', 'light'].includes(savedTheme)) currentTheme = savedTheme;
+  const savedTheme = localStorage.getItem('nuvio-theme');
+  if (['dark', 'light'].includes(savedTheme)) {
+    currentTheme = savedTheme;
+    localStorage.setItem('nuvio-theme', savedTheme);
+  }
 } catch (error) {
   console.warn('Theme preference unavailable:', error);
 }
@@ -188,7 +194,7 @@ $('#language-toggle').addEventListener('click', () => {
   currentLang = currentLang === 'ar' ? 'en' : 'ar';
 
   try {
-    localStorage.setItem('hashimxc12-language', currentLang);
+    localStorage.setItem('nuvio-language', currentLang);
   } catch (error) {
     console.warn('Language preference could not be saved:', error);
   }
@@ -218,7 +224,7 @@ $('#theme-toggle').addEventListener('click', () => {
   currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
   try {
-    localStorage.setItem('hashimxc12-theme', currentTheme);
+    localStorage.setItem('nuvio-theme', currentTheme);
   } catch (error) {
     console.warn('Theme preference could not be saved:', error);
   }

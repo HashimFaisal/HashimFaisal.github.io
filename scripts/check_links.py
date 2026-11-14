@@ -163,7 +163,16 @@ def main():
                     "download_url": asset.get("browser_download_url"),
                     "ok": True,
                 }
-                results.append(check_download(label, asset))
+                download_check = check_download(label, asset)
+                entry["ok"] = download_check["ok"]
+                if not download_check["ok"]:
+                    entry["error"] = download_check.get(
+                        "error", "Download URL check failed"
+                    )
+                else:
+                    entry.pop("error", None)
+
+                results.append(download_check)
             else:
                 entry = {
                     "label": label,

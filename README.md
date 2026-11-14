@@ -58,12 +58,12 @@ Discover plugins · Explore addons · Get direct links
 
 <strong>انسخ رابط JSON</strong>
 
-<p><code>https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json</code></p>
+<p><code>https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json</code></p>
 
 <strong>Movies &amp; TV Shows</strong>
 <p>مصدر أفلام ومسلسلات يدعم العربية والإنجليزية.</p>
 
-<a href="https://github.com/hashimxc12/CinemaBox2">SOURCE CODE ↗</a>
+<a href="https://github.com/HashimFaisal/CinemaBox2">SOURCE CODE ↗</a>
 
 </td>
 <td width="50%" valign="top" align="center">
@@ -74,12 +74,12 @@ Discover plugins · Explore addons · Get direct links
 
 <strong>انسخ رابط JSON</strong>
 
-<p><code>https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json</code></p>
+<p><code>https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json</code></p>
 
 <strong>Movies &amp; TV Shows</strong>
 <p>مصدر مستقل للأفلام والمسلسلات من Cinemana.</p>
 
-<a href="https://github.com/hashimxc12/Cinemana_NuvioPlugin">SOURCE CODE ↗</a>
+<a href="https://github.com/HashimFaisal/Cinemana_NuvioPlugin">SOURCE CODE ↗</a>
 
 </td>
 </tr>
@@ -233,7 +233,7 @@ Each Nuvio plugin repository may include:
 
 Independent Developer · Nuvio Ecosystem
 
-[<img src="https://img.shields.io/badge/VISIT_GITHUB_PROFILE-181717?style=for-the-badge&logo=github" alt="GitHub Profile">](https://github.com/hashimxc12)
+[<img src="https://img.shields.io/badge/VISIT_GITHUB_PROFILE-181717?style=for-the-badge&logo=github" alt="GitHub Profile">](https://github.com/HashimFaisal)
 
 </div>
 
@@ -244,18 +244,18 @@ Independent Developer · Nuvio Ecosystem
 
 <div align="center">
 
-<img src="https://img.shields.io/github/followers/hashimxc12?style=for-the-badge&logo=github&label=FOLLOWERS">
-<img src="https://img.shields.io/github/stars/hashimxc12?affiliations=OWNER&style=for-the-badge&logo=github&label=TOTAL%20STARS">
+<img src="https://img.shields.io/github/followers/HashimFaisal?style=for-the-badge&logo=github&label=FOLLOWERS">
+<img src="https://img.shields.io/github/stars/HashimFaisal?affiliations=OWNER&style=for-the-badge&logo=github&label=TOTAL%20STARS">
 
 ### PROJECT PERFORMANCE
 
 | PROJECT | REPOSITORY | STARS |
 |---|---|---|
-| CinemaBox | [Repository ↗](https://github.com/hashimxc12/CinemaBox2) | ![Stars](https://img.shields.io/github/stars/hashimxc12/CinemaBox2?style=flat-square) |
-| Cinemana | [Repository ↗](https://github.com/hashimxc12/Cinemana_NuvioPlugin) | ![Stars](https://img.shields.io/github/stars/hashimxc12/Cinemana_NuvioPlugin?style=flat-square) |
+| CinemaBox | [Repository ↗](https://github.com/HashimFaisal/CinemaBox2) | ![Stars](https://img.shields.io/github/stars/HashimFaisal/CinemaBox2?style=flat-square) |
+| Cinemana | [Repository ↗](https://github.com/HashimFaisal/Cinemana_NuvioPlugin) | ![Stars](https://img.shields.io/github/stars/HashimFaisal/Cinemana_NuvioPlugin?style=flat-square) |
 
-<a href="https://github.com/hashimxc12">
-<img src="https://github-readme-stats.vercel.app/api?username=hashimxc12&show_icons=true&hide_border=true&theme=transparent" width="95%" alt="GitHub Statistics">
+<a href="https://github.com/HashimFaisal">
+<img src="https://github-readme-stats.vercel.app/api?username=HashimFaisal&show_icons=true&hide_border=true&theme=transparent" width="95%" alt="GitHub Statistics">
 </a>
 
 </div>

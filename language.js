@@ -72,7 +72,8 @@
 
   let lang = "ar";
   try {
-    lang = localStorage.getItem("hashimxc12-language") || "ar";
+    lang = localStorage.getItem("nuvio-language") || "ar";
+    localStorage.setItem("nuvio-language", lang);
   } catch (_) {}
 
   const originalText = new WeakMap();
@@ -117,7 +118,7 @@
     }
 
     try {
-      localStorage.setItem("hashimxc12-language", lang);
+      localStorage.setItem("nuvio-language", lang);
     } catch (_) {}
   }
 
