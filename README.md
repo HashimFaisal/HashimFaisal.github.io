@@ -17,8 +17,8 @@ Independent plugin projects for the Nuvio ecosystem.
 <div align="center">
 
 <a href="#featured-projects"><img src="https://img.shields.io/badge/01-PROJECTS-7C3AED?style=for-the-badge" /></a>
-<a href="#nuvio--latest-downloads"><img src="https://img.shields.io/badge/02-DOWNLOADS-0891B2?style=for-the-badge" /></a>
-<a href="#install-a-plugin"><img src="https://img.shields.io/badge/03-INSTALL-0D9488?style=for-the-badge" /></a>
+<a href="#developer-resources"><img src="https://img.shields.io/badge/02-RESOURCES-0891B2?style=for-the-badge" /></a>
+<a href="#how-to-install"><img src="https://img.shields.io/badge/03-INSTALL-0D9488?style=for-the-badge" /></a>
 <a href="#developer-statistics"><img src="https://img.shields.io/badge/04-STATS-6366F1?style=for-the-badge" /></a>
 <a href="#community-space"><img src="https://img.shields.io/badge/05-COMMUNITY-9333EA?style=for-the-badge" /></a>
 
@@ -135,27 +135,69 @@ Each project repository includes:
 
 ---
 
+<a id="developer-statistics"></a>
+## 📊 DEVELOPER STATISTICS
+
+<div align="center">
+
+<img src="https://img.shields.io/github/followers/hashimxc12?style=for-the-badge&logo=github&label=FOLLOWERS" />
+<img src="https://img.shields.io/github/stars/hashimxc12?affiliations=OWNER&style=for-the-badge&logo=github&label=TOTAL%20STARS" />
+
+### PROJECT PERFORMANCE
+
+| Project | Repository | Stars |
+|---|---|---|
+| 🎬 CinemaBox | [Open repository](https://github.com/hashimxc12/CinemaBox2) | ![Stars](https://img.shields.io/github/stars/hashimxc12/CinemaBox2?style=flat-square) |
+| 📺 Cinemana | [Open repository](https://github.com/hashimxc12/Cinemana_NuvioPlugin) | ![Stars](https://img.shields.io/github/stars/hashimxc12/Cinemana_NuvioPlugin?style=flat-square) |
+
+<a href="https://github.com/hashimxc12">
+<img src="https://github-readme-stats.vercel.app/api?username=hashimxc12&show_icons=true&hide_border=true&theme=transparent" width="95%" alt="GitHub statistics" />
+</a>
+
+</div>
+
+---
+
 <a id="community-space"></a>
 ## 💬 COMMUNITY SPACE
 
 <div align="center">
 
-**Your feedback helps these projects grow.**
+### YOUR VOICE BUILDS THIS COMMUNITY
 
-[✍️ JOIN THE DISCUSSION](https://github.com/hashimxc12/hashimxc12/discussions/1)
+Share feedback, suggest features, ask questions, and connect with other users.
+
+<a href="https://github.com/hashimxc12/hashimxc12/discussions">
+<img src="https://img.shields.io/badge/OPEN_COMMUNITY-DISCUSSIONS-7C3AED?style=for-the-badge&logo=github" />
+</a>
+
+### COMMUNITY CHANNELS
+
+[💬 GENERAL](https://github.com/hashimxc12/hashimxc12/discussions/categories/general) · [💡 IDEAS](https://github.com/hashimxc12/hashimxc12/discussions/categories/ideas) · [❓ Q&A](https://github.com/hashimxc12/hashimxc12/discussions/categories/q-a)
+
+[📊 POLLS](https://github.com/hashimxc12/hashimxc12/discussions/categories/polls) · [🚀 SHOW & TELL](https://github.com/hashimxc12/hashimxc12/discussions/categories/show-and-tell) · [📢 ANNOUNCEMENTS](https://github.com/hashimxc12/hashimxc12/discussions/categories/announcements)
+
+---
+
+### 🗨️ COMMUNITY MESSAGES
+
+[✍️ WRITE A MESSAGE](https://github.com/hashimxc12/hashimxc12/discussions/1)
 
 <!-- GITCOMMENT:START -->
 
-<a href="https://github.com/hashimxc12/hashimxc12/discussions/1"><img src=".github/gitcomment/comments-dev.svg?v=607c279f16" alt="Community Messages" width="880"></a>
+<a href="https://github.com/hashimxc12/hashimxc12/discussions/1"><img src=".github/gitcomment/comments-dev.svg" alt="Community Messages" width="880"></a>
 
-<sub><a href="https://github.com/hashimxc12/hashimxc12/discussions/1">leave a message</a></sub>
+<sub><a href="https://github.com/hashimxc12/hashimxc12/discussions/1">LEAVE A MESSAGE</a></sub>
 
 <!-- GITCOMMENT:END -->
 
-<sub>Comments appear here after approval.</sub>
+<sub>Messages appear here after approval by the repository owner.</sub>
+
+<a href="https://github.com/hashimxc12/hashimxc12/discussions">
+<img src="https://img.shields.io/badge/VIEW-COMMUNITY_ACTIVITY-9333EA?style=for-the-badge" />
+</a>
 
 </div>
-
 ---
 
 <div align="center">
