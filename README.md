@@ -1,285 +1,323 @@
 <div align="center">
 
-<img src="assets/hero.svg" width="100%" alt="HASHIMXC12 — Building the Nuvio Ecosystem" />
+<img src="assets/hero.svg" width="100%" alt="HASHIMXC12 Nuvio Hub">
 
-# NUVIO PLUGIN HUB
+# NUVIO ECOSYSTEM
 
-### Discover • Connect • Install
+**A curated collection of independent Nuvio projects.**
 
-Independent plugin projects for the Nuvio ecosystem.
+Discover plugins · Explore addons · Get direct links
 
-<img src="https://img.shields.io/badge/PROJECTS-02-8B5CF6?style=for-the-badge" />
-<img src="https://img.shields.io/badge/PLATFORM-ANDROID-3DDC84?style=for-the-badge&logo=android&logoColor=white" />
-<img src="https://img.shields.io/badge/HOSTED-GITHUB-181717?style=for-the-badge&logo=github" />
-
-</div>
-
-<div align="center">
-
-<a href="#featured-projects"><img src="https://img.shields.io/badge/01-PROJECTS-7C3AED?style=for-the-badge" /></a>
-<a href="#nuvio-android-downloads"><img src="https://img.shields.io/badge/02-ANDROID_DOWNLOADS-3DDC84?style=for-the-badge&logo=android" /></a>
-<a href="#developer-resources"><img src="https://img.shields.io/badge/03-RESOURCES-0891B2?style=for-the-badge" /></a>
-<a href="#how-to-install"><img src="https://img.shields.io/badge/04-INSTALL-0D9488?style=for-the-badge" /></a>
-<a href="#developer-statistics"><img src="https://img.shields.io/badge/05-STATS-6366F1?style=for-the-badge" /></a>
-<a href="#community-space"><img src="https://img.shields.io/badge/06-COMMUNITY-9333EA?style=for-the-badge" /></a>
-
-</div>
-
-<div align="center">
-<sub>EXPLORE THE HUB · CHOOSE A PROJECT · JOIN THE COMMUNITY</sub>
-</div>
-
-
----
-
-## ✦ About This Hub
-
-Welcome to my developer hub.
-
-Here you can discover my Nuvio plugin projects, access their source repositories, and copy their manifest URLs.
-
-مرحباً بك في صفحة مشاريعي. هنا تجد إضافات Nuvio وروابط التثبيت والمصادر الرسمية للمطورين.
-
----
-
-<a id="featured-projects"></a>
-## 🚀 NUVIO PLUGIN LIBRARY
-
-<div align="center">
-
-<sub>DISCOVER · COPY · INSTALL</sub>
-
-إضافات Nuvio المستقلة، بروابط Manifest مباشرة.
-
-</div>
-
-### 🎬 CINEMABOX
-
-<div align="center">
-<img src="https://cinema.albox.co/favicon.ico" width="88" alt="CinemaBox" />
-</div>
-
-مصدر أفلام ومسلسلات، يدعم العربية والإنجليزية.
-
-<div align="center">
-
-[**↗ DIRECT PLUGIN MANIFEST**](https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json)
-
-[VIEW SOURCE CODE](https://github.com/hashimxc12/CinemaBox2)
+<img src="https://img.shields.io/badge/NUVIO-PLUGIN_HUB-8B5CF6?style=for-the-badge">
+<img src="https://img.shields.io/badge/ANDROID-SUPPORTED-3DDC84?style=for-the-badge&logo=android&logoColor=white">
+<img src="https://img.shields.io/badge/OPEN_SOURCE-GITHUB-FFFFFF?style=for-the-badge&logo=github&logoColor=black">
 
 </div>
 
 ---
 
-### 📺 CINEMANA
+<div align="center">
+
+[**PROJECTS**](#plugin-library)　·　
+[**ADDONS**](#external-addons)　·　
+[**ANDROID APP**](#nuvio-android)　·　
+[**COMMUNITY**](#community)
+
+</div>
+
+---
+
+## ✦ THE HUB
+
+مساحة تجمع مشاريعي وإضافاتي المستقلة لنظام Nuvio، مع روابط JSON مباشرة وواضحة ومصادر المشاريع.
+
+- روابط Manifest ظاهرة بالكامل.
+- كل إضافة في قسم مستقل.
+- روابط المستودعات الأصلية متاحة.
+- روابط تنزيل Nuvio تتجه تلقائياً إلى أحدث إصدار.
+
+---
+
+<a id="plugin-library"></a>
+# 🚀 PLUGIN LIBRARY
+
+<sub>01 / NUVIO COMMUNITY PROJECTS</sub>
+
+إضافات مستقلة للأفلام والمسلسلات.
+
+<table>
+<tr>
+<td width="50%" valign="top">
 
 <div align="center">
-<img src="assets/cinemana.svg" width="120" alt="Cinemana" />
+
+<img src="https://cinema.albox.co/favicon.ico" width="84" alt="CinemaBox">
+
+<h3>CINEMABOX</h3>
+
+<strong>Movies & TV Shows</strong>
+
+</div>
+
+مصدر أفلام ومسلسلات يدعم العربية والإنجليزية.
+
+<strong>DIRECT JSON / MANIFEST</strong>
+
+`manifest.json`
+
+https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json
+
+<div align="center">
+
+<a href="https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json">OPEN JSON ↗</a>
+
+<a href="https://github.com/hashimxc12/CinemaBox2"> SOURCE CODE </a>
+
+</div>
+
+</td>
+<td width="50%" valign="top">
+
+<div align="center">
+
+<img src="assets/cinemana.png" width="84" alt="Cinemana">
+
+<h3>CINEMANA</h3>
+
+<strong>Movies & TV Shows</strong>
+
 </div>
 
 مصدر مستقل للأفلام والمسلسلات من Cinemana.
 
+<strong>DIRECT JSON / MANIFEST</strong>
+
+`manifest.json`
+
+https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json
+
 <div align="center">
 
-[**↗ DIRECT PLUGIN MANIFEST**](https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json)
+<a href="https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json">OPEN JSON ↗</a>
 
-[VIEW SOURCE CODE](https://github.com/hashimxc12/Cinemana_NuvioPlugin)
+<a href="https://github.com/hashimxc12/Cinemana_NuvioPlugin"> SOURCE CODE </a>
 
 </div>
+
+</td>
+</tr>
+</table>
 
 ---
 
 <a id="external-addons"></a>
-## 🧩 STREMIO-COMPATIBLE ADDONS
+## 🧩 EXTERNAL ADDONS
+
+<sub>02 / SUBTITLES · METADATA · DISCOVERY</sub>
+
+إضافات متوافقة مع نظام Stremio Addons المدعوم في Nuvio.
+
+<table>
+<tr>
+<td width="50%" valign="top">
 
 <div align="center">
 
-<sub>ADDONS · METADATA · SUBTITLES</sub>
+<img src="https://www.opensubtitles.com/favicon.ico" width="68" alt="OpenSubtitles">
 
-إضافات متوافقة مع نظام إضافات Stremio المدعوم في Nuvio.
+<h3>OPENSUBTITLES</h3>
+
+<strong>Subtitle Addon</strong>
 
 </div>
 
-### 💬 OPENSUBTITLES
+للبحث عن الترجمات وعرضها أثناء المشاهدة.
+
+<strong>DIRECT JSON / MANIFEST</strong>
+
+https://opensubtitles-v3.strem.io/manifest.json
 
 <div align="center">
-<img src="https://www.opensubtitles.com/favicon.ico" width="72" alt="OpenSubtitles" />
+
+<a href="https://opensubtitles-v3.strem.io/manifest.json">OPEN JSON ↗</a>
+
 </div>
 
-للبحث عن الترجمات وإظهارها أثناء المشاهدة.
+</td>
+<td width="50%" valign="top">
 
 <div align="center">
 
-[**↗ DIRECT ADDON MANIFEST**](https://opensubtitles-v3.strem.io/manifest.json)
+<img src="https://github.com/Digok.png" width="68" alt="Catalog">
+
+<h3>RODRIGO'S CATALOG</h3>
+
+<strong>IMDb · Movie & TV Metadata</strong>
+
+</div>
+
+كتالوج لاكتشاف الأفلام والمسلسلات وعرض بياناتها وتقييماتها. لا يوفر تشغيل الفيديو.
+
+<strong>DIRECT JSON / MANIFEST</strong>
+
+https://digok.github.io/nuvio-catalog/manifest.json
+
+<div align="center">
+
+<a href="https://digok.github.io/nuvio-catalog/manifest.json">OPEN JSON ↗</a>
+
+<a href="https://github.com/Digok/nuvio-catalog"> SOURCE CODE </a>
+
+</div>
+
+</td>
+</tr>
+</table>
+
+---
+
+## ⚡ ALL-IN-ONE
+
+<div align="center">
+
+<img src="assets/all-in-one.svg" width="100%" alt="All in One">
+
+<h3>ONE HUB. MULTIPLE EXPERIENCES.</h3>
+
+<strong>COMING SOON</strong>
+
+مشروع قيد التطوير لتجميع مجموعة من الوظائف في تجربة واحدة.
 
 </div>
 
 ---
 
-### ⭐ RODRIGO'S CATALOG — IMDb
+## 🧭 DEVELOPER RESOURCES
 
-<div align="center">
-
-<img src="https://github.com/Digok.png" width="72" alt="Catalog developer" />
-
-</div>
-
-كتالوج للأفلام والمسلسلات، يوفّر قوائم متنوعة وبيانات وتقييمات IMDb. هذه إضافة معلومات واكتشاف وليست مصدر تشغيل فيديو.
-
-<div align="center">
-
-[**↗ DIRECT ADDON MANIFEST**](https://digok.github.io/nuvio-catalog/manifest.json)
-
-[VIEW SOURCE CODE](https://github.com/Digok/nuvio-catalog)
-
-</div>
-
----
-
-### ⚡ ALL-IN-ONE
-
-<div align="center">
-
-<img src="assets/all-in-one.svg" width="100%" alt="All-in-One" />
-
-**A unified Nuvio experience · Coming Soon**
-
-</div>
-
-## 🧭 Developer Resources
-
-Official Nuvio resources for developers and plugin creators.
-
-| Resource | Description |
+| RESOURCE | DESCRIPTION |
 |---|---|
-| [Nuvio Mobile](https://github.com/NuvioMedia/NuvioMobile) | Official Nuvio application source |
-| [Nuvio Plugins](https://github.com/NuvioCommunity/plugins) | Official plugin directory |
-| [Nuvio Website](https://nuvio.tv) | Official website |
+| <a href="https://github.com/NuvioMedia/NuvioMobile">Nuvio Mobile</a> | Official Android application |
+| <a href="https://github.com/NuvioCommunity/plugins">Nuvio Plugins</a> | Community plugin directory |
+| <a href="https://nuvio.tv">Nuvio Website</a> | Official website |
 
 ---
 
-<a id="nuvio-android-downloads"></a>
-## 📥 NUVIO ANDROID — LATEST DOWNLOADS
+<a id="nuvio-android"></a>
+# 📱 NUVIO ANDROID
 
-<div align="center">
+<sub>03 / ALWAYS THE LATEST RELEASE</sub>
 
-**Download the latest Nuvio Android release directly from GitHub.**
+حمّل أحدث إصدار من تطبيق Nuvio مباشرة من GitHub.
 
-<sub>Choose the version that matches your device processor.</sub>
-
-</div>
-
-| Android Architecture | Download |
+| Architecture | Direct APK |
 |---|---|
-| **ARM64 (64-bit)** | [⬇️ DOWNLOAD APK](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-arm64-v8a-release.apk) |
-| **ARMv7 (32-bit)** | [⬇️ DOWNLOAD APK](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-armeabi-v7a-release.apk) |
-| **x86 (32-bit)** | [⬇️ DOWNLOAD APK](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-x86-release.apk) |
-| **x86_64 (64-bit)** | [⬇️ DOWNLOAD APK](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-x86_64-release.apk) |
+| **ARM64 · 64-bit** | [DOWNLOAD ↗](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-arm64-v8a-release.apk) |
+| **ARMv7 · 32-bit** | [DOWNLOAD ↗](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-armeabi-v7a-release.apk) |
+| **x86 · 32-bit** | [DOWNLOAD ↗](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-x86-release.apk) |
+| **x86_64 · 64-bit** | [DOWNLOAD ↗](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-x86_64-release.apk) |
 
 <div align="center">
 
-<a href="https://github.com/NuvioMedia/NuvioMobile/releases/latest">
-<img src="https://img.shields.io/badge/VIEW-LATEST_RELEASE-7C3AED?style=for-the-badge&logo=github" />
-</a>
+[<img src="https://img.shields.io/badge/VIEW_LATEST_RELEASE-7C3AED?style=for-the-badge&logo=github" alt="Latest Release">](https://github.com/NuvioMedia/NuvioMobile/releases/latest)
 
-<sub>Direct links automatically target the latest release, provided the APK asset names remain unchanged.</sub>
+<sub>Latest-release URLs update automatically when matching asset names are published.</sub>
 
 </div>
 
 ---
 
-## 📲 How to Install
+## 📥 INSTALLATION GUIDE
 
-1. Choose a plugin above.
-2. Copy its Manifest URL.
+**English**
+
+1. Choose an addon or plugin.
+2. Copy its complete Manifest URL.
 3. Open Nuvio.
-4. Navigate to **Settings → Content & Discovery → Plugins**.
-5. Select **Add Repository**.
-6. Paste the Manifest URL and install.
+4. Go to Settings → Content & Discovery → Plugins.
+5. Select Add Repository.
+6. Paste the URL and continue.
 
-**طريقة التثبيت بالعربي**
+**العربية**
 
 1. اختر الإضافة المطلوبة.
-2. انسخ رابط Manifest.
+2. انسخ رابط JSON الظاهر تحت شعارها.
 3. افتح تطبيق Nuvio.
-4. ادخل إلى الإعدادات ثم Content & Discovery ثم Plugins.
+4. انتقل إلى Settings ثم Content & Discovery ثم Plugins.
 5. اختر Add Repository.
 6. الصق الرابط وأكمل التثبيت.
 
 ---
 
-## 🛠️ Plugin Structure
+## 🛠️ PROJECT STRUCTURE
 
-Each project repository includes:
+Each Nuvio plugin repository may include:
 
-- `manifest.json` — Plugin metadata and configuration.
-- `index.js` — Plugin implementation.
+| FILE | PURPOSE |
+|---|---|
+| `manifest.json` | Plugin metadata and configuration |
+| `index.js` | Plugin implementation |
 
 ---
 
-## 👨‍💻 Developer
+## 👨‍💻 DEVELOPER
 
 <div align="center">
 
 ### HASHIMXC12
 
-**Independent Developer**
+Independent Developer · Nuvio Ecosystem
 
-<a href="https://github.com/hashimxc12">
-<img src="https://img.shields.io/badge/GITHUB_PROFILE-181717?style=for-the-badge&logo=github" />
-</a>
+[<img src="https://img.shields.io/badge/VISIT_GITHUB_PROFILE-181717?style=for-the-badge&logo=github" alt="GitHub Profile">](https://github.com/hashimxc12)
 
 </div>
 
 ---
 
 <a id="developer-statistics"></a>
-## 📊 DEVELOPER STATISTICS
+# 📊 DEVELOPER STATISTICS
 
 <div align="center">
 
-<img src="https://img.shields.io/github/followers/hashimxc12?style=for-the-badge&logo=github&label=FOLLOWERS" />
-<img src="https://img.shields.io/github/stars/hashimxc12?affiliations=OWNER&style=for-the-badge&logo=github&label=TOTAL%20STARS" />
+<img src="https://img.shields.io/github/followers/hashimxc12?style=for-the-badge&logo=github&label=FOLLOWERS">
+<img src="https://img.shields.io/github/stars/hashimxc12?affiliations=OWNER&style=for-the-badge&logo=github&label=TOTAL%20STARS">
 
 ### PROJECT PERFORMANCE
 
-| Project | Repository | Stars |
+| PROJECT | REPOSITORY | STARS |
 |---|---|---|
-| 🎬 CinemaBox | [Open repository](https://github.com/hashimxc12/CinemaBox2) | ![Stars](https://img.shields.io/github/stars/hashimxc12/CinemaBox2?style=flat-square) |
-| 📺 Cinemana | [Open repository](https://github.com/hashimxc12/Cinemana_NuvioPlugin) | ![Stars](https://img.shields.io/github/stars/hashimxc12/Cinemana_NuvioPlugin?style=flat-square) |
+| CinemaBox | [Repository ↗](https://github.com/hashimxc12/CinemaBox2) | ![Stars](https://img.shields.io/github/stars/hashimxc12/CinemaBox2?style=flat-square) |
+| Cinemana | [Repository ↗](https://github.com/hashimxc12/Cinemana_NuvioPlugin) | ![Stars](https://img.shields.io/github/stars/hashimxc12/Cinemana_NuvioPlugin?style=flat-square) |
 
 <a href="https://github.com/hashimxc12">
-<img src="https://github-readme-stats.vercel.app/api?username=hashimxc12&show_icons=true&hide_border=true&theme=transparent" width="95%" alt="GitHub statistics" />
+<img src="https://github-readme-stats.vercel.app/api?username=hashimxc12&show_icons=true&hide_border=true&theme=transparent" width="95%" alt="GitHub Statistics">
 </a>
 
 </div>
 
 ---
 
-<a id="community-space"></a>
-## 💬 COMMUNITY SPACE
+<a id="community"></a>
+# 💬 COMMUNITY
 
 <div align="center">
 
-### YOUR VOICE BUILDS THIS COMMUNITY
+### YOUR IDEAS SHAPE THE ECOSYSTEM
 
-Share feedback, suggest features, ask questions, and connect with other users.
+شارك اقتراحاتك، أبلغ عن المشاكل، وناقش تطوير الإضافات.
 
-<a href="https://github.com/hashimxc12/hashimxc12/discussions">
-<img src="https://img.shields.io/badge/OPEN_COMMUNITY-DISCUSSIONS-7C3AED?style=for-the-badge&logo=github" />
-</a>
+[<img src="https://img.shields.io/badge/OPEN_COMMUNITY_DISCUSSIONS-7C3AED?style=for-the-badge&logo=github" alt="Community Discussions">](https://github.com/hashimxc12/hashimxc12/discussions)
 
-### COMMUNITY CHANNELS
+**COMMUNITY CHANNELS**
 
-[💬 GENERAL](https://github.com/hashimxc12/hashimxc12/discussions/categories/general) · [💡 IDEAS](https://github.com/hashimxc12/hashimxc12/discussions/categories/ideas) · [❓ Q&A](https://github.com/hashimxc12/hashimxc12/discussions/categories/q-a)
+[GENERAL](https://github.com/hashimxc12/hashimxc12/discussions/categories/general) · [IDEAS](https://github.com/hashimxc12/hashimxc12/discussions/categories/ideas) · [Q&A](https://github.com/hashimxc12/hashimxc12/discussions/categories/q-a)
 
-[📊 POLLS](https://github.com/hashimxc12/hashimxc12/discussions/categories/polls) · [🚀 SHOW & TELL](https://github.com/hashimxc12/hashimxc12/discussions/categories/show-and-tell) · [📢 ANNOUNCEMENTS](https://github.com/hashimxc12/hashimxc12/discussions/categories/announcements)
+[POLLS](https://github.com/hashimxc12/hashimxc12/discussions/categories/polls) · [SHOW & TELL](https://github.com/hashimxc12/hashimxc12/discussions/categories/show-and-tell) · [ANNOUNCEMENTS](https://github.com/hashimxc12/hashimxc12/discussions/categories/announcements)
 
 ---
 
 ### 🗨️ COMMUNITY MESSAGES
 
-[✍️ WRITE A MESSAGE](https://github.com/hashimxc12/hashimxc12/discussions/1)
+[WRITE A MESSAGE ↗](https://github.com/hashimxc12/hashimxc12/discussions/1)
 
 <!-- GITCOMMENT:START -->
 
@@ -292,18 +330,21 @@ Share feedback, suggest features, ask questions, and connect with other users.
 <sub>Messages appear here after approval by the repository owner.</sub>
 
 <a href="https://github.com/hashimxc12/hashimxc12/discussions">
-<img src="https://img.shields.io/badge/VIEW-COMMUNITY_ACTIVITY-9333EA?style=for-the-badge" />
+<img src="https://img.shields.io/badge/VIEW-COMMUNITY_ACTIVITY-9333EA?style=for-the-badge" alt="Community Activity">
 </a>
 
 </div>
+
 ---
 
 <div align="center">
 
-<sub>Built with passion for the Nuvio community.</sub>
+**BUILT FOR THE NUVIO COMMUNITY**
 
-<sub>Independent community projects. Not officially affiliated with Nuvio or its developers.</sub>
+Independent community projects. Not officially affiliated with Nuvio or its developers.
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:7C3AED,50:312E81,100:111827&height=100&section=footer" width="100%" />
+<sub>HASHIMXC12 · 2026</sub>
+
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:7C3AED,50:312E81,100:111827&height=110&section=footer" width="100%" alt="Footer">
 
 </div>
