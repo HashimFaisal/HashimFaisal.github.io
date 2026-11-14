@@ -1764,3 +1764,175 @@ body,
     color 0.25s ease,
     box-shadow 0.25s ease;
 }
+
+/* Light Theme — Contrast and Card Fix */
+:root[data-theme="light"] body {
+  color: #202033;
+}
+
+:root[data-theme="light"] .hero h1,
+:root[data-theme="light"] .section-title,
+:root[data-theme="light"] .about h2 {
+  color: #201b35;
+}
+
+:root[data-theme="light"] .eyebrow {
+  color: #6545bd;
+  text-shadow: none;
+}
+
+:root[data-theme="light"] .stat-card,
+:root[data-theme="light"] .plugin-card,
+:root[data-theme="light"] .changelog-entry,
+:root[data-theme="light"] .download-card,
+:root[data-theme="light"] .resource-links a {
+  color: #242238;
+  background: linear-gradient(145deg, #ffffff, #f0eff8) !important;
+  border-color: rgba(85, 65, 145, .17);
+  box-shadow: 0 8px 24px rgba(40, 30, 80, .07);
+}
+
+:root[data-theme="light"] .stat-card > span,
+:root[data-theme="light"] .stat-card small,
+:root[data-theme="light"] .plugin-card > p,
+:root[data-theme="light"] .manifest-label,
+:root[data-theme="light"] .card-actions a,
+:root[data-theme="light"] .changelog-content p,
+:root[data-theme="light"] .changelog-content small,
+:root[data-theme="light"] .download-card small,
+:root[data-theme="light"] .resource-links a small,
+:root[data-theme="light"] footer {
+  color: #625e75 !important;
+}
+
+:root[data-theme="light"] .stat-card strong,
+:root[data-theme="light"] .plugin-card h3,
+:root[data-theme="light"] .changelog-content strong,
+:root[data-theme="light"] .download-card strong,
+:root[data-theme="light"] .resource-links a span {
+  color: #211c38 !important;
+  text-shadow: none;
+}
+
+:root[data-theme="light"] .manifest-url {
+  color: #245e69;
+  background: #f0f5f7;
+  border-color: #d4e2e5;
+}
+
+:root[data-theme="light"] .type-tag {
+  color: #6044a7;
+  background: #eee8fb;
+  border-color: #dcd0f5;
+}
+
+:root[data-theme="light"] .type-tag.external {
+  color: #176a72;
+  background: #e5f4f4;
+  border-color: #c9e6e6;
+}
+
+:root[data-theme="light"] .changelog-content small {
+  background: #f0eef7;
+  border-color: #e1dced;
+}
+
+:root[data-theme="light"] .release-banner {
+  color: #6044a7;
+  background: linear-gradient(115deg, #f0ebfc, #e8f3f5);
+  border-color: #ddd3f2;
+}
+
+:root[data-theme="light"] .release-banner strong,
+:root[data-theme="light"] .release-banner span,
+:root[data-theme="light"] .release-banner > span {
+  color: #30264e;
+  text-shadow: none;
+}
+
+:root[data-theme="light"] .search-box {
+  color: #211c38;
+  background: #ffffff;
+  border-color: #dcd7e9;
+}
+
+:root[data-theme="light"] .search-box input {
+  color: #211c38;
+}
+
+:root[data-theme="light"] .search-box input::placeholder {
+  color: #858096;
+}
+
+:root[data-theme="light"] .filter {
+  color: #554d6e;
+  background: #f0eef7;
+  border-color: #ded8eb;
+}
+
+:root[data-theme="light"] .filter.active {
+  color: #ffffff;
+  background: #6545bd;
+  border-color: #6545bd;
+}
+
+:root[data-theme="light"] .text-link {
+  color: #5540a0;
+}
+
+:root[data-theme="light"] .resource-links a::after {
+  color: #6545bd;
+}
+
+:root[data-theme="light"] footer {
+  background: linear-gradient(180deg, #f5f6fb, #e9eaf3);
+  border-top-color: #dedbea;
+}
+
+:root[data-theme="light"] .toast {
+  color: #ffffff;
+  background: #30264e;
+}
+
+/* Light Theme — Softer Background & Clear Nuvio Text */
+:root[data-theme="light"] body {
+  background:
+    radial-gradient(ellipse at 50% -25%, rgba(112, 83, 180, .07), transparent 54%),
+    linear-gradient(180deg, #eeedf5 0%, #e9e9f2 55%, #e5e6ef 100%);
+}
+
+:root[data-theme="light"] .hero h1,
+:root[data-theme="light"] .section-heading h2,
+:root[data-theme="light"] .about h2 {
+  color: #211b35;
+}
+
+:root[data-theme="light"] .hero h1 span {
+  background: linear-gradient(100deg, #50348f 4%, #6848b8 48%, #176d78 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+:root[data-theme="light"] .brand .accent {
+  color: #563b9d;
+}
+
+:root[data-theme="light"] .brand small {
+  color: #625d75;
+}
+
+:root[data-theme="light"] .stat-card,
+:root[data-theme="light"] .plugin-card,
+:root[data-theme="light"] .changelog-entry,
+:root[data-theme="light"] .download-card,
+:root[data-theme="light"] .resource-links a {
+  background: linear-gradient(145deg, #f8f7fc, #eeedf5) !important;
+  border-color: rgba(75, 57, 125, .17);
+}
+
+:root[data-theme="light"] .hero-copy > p,
+:root[data-theme="light"] .section-heading p {
+  color: #555168;
+}
+
