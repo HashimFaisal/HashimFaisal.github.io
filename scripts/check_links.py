@@ -285,14 +285,15 @@ def main():
     history.extend(events)
     history = history[-100:]
 
-    with open(history_path, "w", encoding="utf-8") as history_file:
-        json.dump(history, history_file, ensure_ascii=False, indent=2)
-        history_file.write("\n")
-
     os.makedirs("data", exist_ok=True)
+
     with open("data/status.json", "w", encoding="utf-8") as file:
         json.dump(report, file, ensure_ascii=False, indent=2)
         file.write("\n")
+
+    with open(history_path, "w", encoding="utf-8") as history_file:
+        json.dump(history, history_file, ensure_ascii=False, indent=2)
+        history_file.write("\n")
 
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:

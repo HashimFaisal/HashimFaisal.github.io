@@ -34,10 +34,11 @@ jobs:
           python-version: "3.x"
 
       - name: Run health checks
+        id: health
         run: python scripts/check_links.py
 
       - name: Update published health report
-        if: success()
+        if: always() && steps.health.outcome != 'skipped'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
