@@ -43,6 +43,7 @@ jobs:
           mkdir -p public/data public/assets
           cp index.html style.css app.js public/
           cp premium.css public/
+          cp premium-ui.css premium-ui.js public/
           cp language.js public/
           cp data/status.json public/data/
           if [ -f data/changelog.json ]; then cp data/changelog.json public/data/; fi
