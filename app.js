@@ -66,6 +66,7 @@ const translations = {
   'تعذر النسخ من هذا المتصفح': 'Could not copy in this browser',
   'الحجم غير متاح': 'Size unavailable',
   'تاريخ النشر غير متاح': 'Publication date unavailable',
+  'الإصدار': 'Version',
   'تاريخ الرفع': 'Uploaded',
   'تاريخ الرفع غير متاح': 'Upload date unavailable',
   'لا توجد بيانات إصدار': 'No release information',
@@ -286,7 +287,8 @@ function renderDownloads(report) {
   $('#download-grid').innerHTML = assets.map(asset => {
     const ready = asset.ok && asset.download_url;
     return `<article class="download-card">
-      <strong>Nuvio ${escapeHTML(asset.label || 'Download')} · ${escapeHTML(release.tag || release.name || '—')}</strong>
+      <strong>Nuvio ${escapeHTML(asset.label || 'Download')}</strong>
+      <small class="muted">${t('الإصدار')}: ${escapeHTML(release.tag || release.name || '—')}</small>
       <small>${escapeHTML(asset.name || t('ملف غير متاح'))} · ${formatBytes(asset.size_bytes)}</small>
       <small class="muted">${asset.uploaded_at
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
