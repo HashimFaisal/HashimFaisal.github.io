@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-14T07:27:16.230103+00:00",
+  "checked_at": "2026-11-14T08:29:33.380682+00:00",
   "ok": true,
-  "passed": 12,
-  "total": 12,
+  "passed": 11,
+  "total": 11,
   "release": {
     "tag": "0.6.12-beta",
     "name": "0.6.12-beta",
@@ -106,15 +106,6 @@
       "version": "3.0.14",
       "manifest_id": "com.linvo.cinemeta",
       "url": "https://v3-cinemeta.strem.io/manifest.json"
-    },
-    {
-      "name": "YouTube Channels",
-      "type": "manifest",
-      "ok": true,
-      "http_status": 200,
-      "version": "1.30.7",
-      "manifest_id": "com.linvo.stremiochannels",
-      "url": "https://v3-channels.strem.io/manifest.json"
     },
     {
       "name": "ARM64",
