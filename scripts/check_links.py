@@ -160,6 +160,7 @@ def main():
                     "label": label,
                     "name": filename,
                     "size_bytes": asset.get("size"),
+                    "uploaded_at": asset.get("created_at"),
                     "download_url": asset.get("browser_download_url"),
                     "ok": True,
                 }

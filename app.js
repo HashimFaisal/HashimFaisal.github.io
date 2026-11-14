@@ -66,6 +66,8 @@ const translations = {
   'تعذر النسخ من هذا المتصفح': 'Could not copy in this browser',
   'الحجم غير متاح': 'Size unavailable',
   'تاريخ النشر غير متاح': 'Publication date unavailable',
+  'تاريخ الرفع': 'Uploaded',
+  'تاريخ الرفع غير متاح': 'Upload date unavailable',
   'لا توجد بيانات إصدار': 'No release information',
   'تعذر جلب معلومات الإصدار الأخير.': 'Could not retrieve the latest release information.',
   'ملف غير متاح': 'File unavailable',
@@ -235,6 +237,35 @@ function formatDate(value) {
   }).format(new Date(value));
 }
 
+function formatRelativeDate(value) {
+  if (!value) return t('تاريخ الرفع غير متاح');
+
+  const timestamp = new Date(value).getTime();
+  if (!Number.isFinite(timestamp)) return t('تاريخ الرفع غير متاح');
+
+  const seconds = (timestamp - Date.now()) / 1000;
+  const abs = Math.abs(seconds);
+
+  let unit = 'second';
+  let amount = seconds;
+
+  if (abs >= 86400) {
+    unit = 'day';
+    amount = seconds / 86400;
+  } else if (abs >= 3600) {
+    unit = 'hour';
+    amount = seconds / 3600;
+  } else if (abs >= 60) {
+    unit = 'minute';
+    amount = seconds / 60;
+  }
+
+  const locale = currentLang === 'ar' ? 'ar-IQ' : 'en-US';
+  return new Intl.RelativeTimeFormat(locale, {
+    numeric: 'auto'
+  }).format(Math.round(amount), unit);
+}
+
 function renderDownloads(report) {
   const release = report.release;
 
@@ -256,7 +287,10 @@ function renderDownloads(report) {
     const ready = asset.ok && asset.download_url;
     return `<article class="download-card">
       <strong>Nuvio ${escapeHTML(asset.label || 'Download')}</strong>
-      <small>${asset.name || t('ملف غير متاح')} · ${formatBytes(asset.size_bytes)}</small>
+      <small>${escapeHTML(asset.name || t('ملف غير متاح'))} · ${formatBytes(asset.size_bytes)}</small>
+      <small class="muted">${asset.uploaded_at
+        ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
+        : t('تاريخ الرفع غير متاح')}</small>
       ${ready
         ? `<a href="${asset.download_url}" target="_blank" rel="noopener">${t('تنزيل مباشر ↗')}</a>`
         : `<span class="muted">${t('غير متاح حالياً')}</span>`}
