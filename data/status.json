@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-14T05:14:01.764512+00:00",
+  "checked_at": "2026-11-14T05:37:06.125663+00:00",
   "ok": true,
-  "passed": 10,
-  "total": 10,
+  "passed": 12,
+  "total": 12,
   "release": {
     "tag": "0.6.12-beta",
     "name": "0.6.12-beta",
@@ -92,6 +92,24 @@
       "version": "1.20261109.0901",
       "manifest_id": "com.digok.nuvio.catalog",
       "url": "https://digok.github.io/nuvio-catalog/manifest.json"
+    },
+    {
+      "name": "Cinemeta",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "3.0.14",
+      "manifest_id": "com.linvo.cinemeta",
+      "url": "https://v3-cinemeta.strem.io/manifest.json"
+    },
+    {
+      "name": "YouTube Channels",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "1.30.7",
+      "manifest_id": "com.linvo.stremiochannels",
+      "url": "https://v3-channels.strem.io/manifest.json"
     },
     {
       "name": "ARM64",

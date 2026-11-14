@@ -35,6 +35,7 @@ jobs:
           mkdir -p public/data public/assets
           cp index.html style.css app.js public/
           cp data/status.json public/data/
+          if [ -f data/changelog.json ]; then cp data/changelog.json public/data/; fi
           if [ -d assets ]; then cp -R assets/. public/assets/; fi
 
       - name: Upload website
