@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:111827,50:312E81,100:7C3AED&height=230&section=header&text=HASHIMXC12&fontSize=52&fontColor=ffffff&animation=fadeIn&fontAlignY=38&desc=NUVIO%20PLUGIN%20DEVELOPER&descAlignY=60&descSize=17" width="100%" />
+<img src="assets/hero.svg" width="100%" alt="HASHIMXC12 — Building the Nuvio Ecosystem" />
 
 # NUVIO PLUGIN HUB
 
@@ -14,6 +14,21 @@ Independent plugin projects for the Nuvio ecosystem.
 
 </div>
 
+<div align="center">
+
+<a href="#featured-projects"><img src="https://img.shields.io/badge/01-PROJECTS-7C3AED?style=for-the-badge" /></a>
+<a href="#nuvio--latest-downloads"><img src="https://img.shields.io/badge/02-DOWNLOADS-0891B2?style=for-the-badge" /></a>
+<a href="#install-a-plugin"><img src="https://img.shields.io/badge/03-INSTALL-0D9488?style=for-the-badge" /></a>
+<a href="#developer-statistics"><img src="https://img.shields.io/badge/04-STATS-6366F1?style=for-the-badge" /></a>
+<a href="#community-space"><img src="https://img.shields.io/badge/05-COMMUNITY-9333EA?style=for-the-badge" /></a>
+
+</div>
+
+<div align="center">
+<sub>EXPLORE THE HUB · CHOOSE A PROJECT · JOIN THE COMMUNITY</sub>
+</div>
+
+
 ---
 
 ## ✦ About This Hub
@@ -26,70 +41,40 @@ Here you can discover my Nuvio plugin projects, access their source repositories
 
 ---
 
-## 🚀 My Plugins
-
-<table>
-<tr>
-<td width="50%" valign="top">
+<a id="featured-projects"></a>
+## 🚀 PROJECT SHOWCASE
 
 <div align="center">
 
-### 🎬 CinemaBox
+<sub>THREE PROJECTS · ONE DEVELOPER HUB</sub>
 
-<img src="https://img.shields.io/badge/PLUGIN-CINEMABOX-7C3AED?style=flat-square" />
+### 🎬 CINEMABOX
 
-</div>
+<img src="assets/cinemabox.svg" width="100%" alt="CinemaBox" />
 
-A community plugin project for Nuvio.
+**Independent Nuvio plugin project**
 
-إضافة CinemaBox لمصادر المحتوى في Nuvio.
+[↗ SOURCE CODE](https://github.com/hashimxc12/CinemaBox2) · [↗ MANIFEST](https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json)
 
-**INSTALL MANIFEST**
+---
 
-```text
-https://raw.githubusercontent.com/hashimxc12/CinemaBox2/main/manifest.json
-```
+### 📺 CINEMANA
 
-<div align="center">
+<img src="assets/cinemana.svg" width="100%" alt="Cinemana" />
 
-<a href="https://github.com/hashimxc12/CinemaBox2">
-<img src="https://img.shields.io/badge/VIEW_SOURCE-181717?style=for-the-badge&logo=github" />
-</a>
+**A separate plugin project for Nuvio**
 
-</div>
+[↗ SOURCE CODE](https://github.com/hashimxc12/Cinemana_NuvioPlugin) · [↗ MANIFEST](https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json)
 
-</td>
-<td width="50%" valign="top">
+---
 
-<div align="center">
+### ⚡ ALL-IN-ONE
 
-### 📺 Cinemana
+<img src="assets/all-in-one.svg" width="100%" alt="All-in-One" />
 
-<img src="https://img.shields.io/badge/PLUGIN-CINEMANA-06B6D4?style=flat-square" />
+**Unified project concept · Coming soon**
 
 </div>
-
-A community plugin project for Nuvio.
-
-إضافة Cinemana لمصادر المحتوى في Nuvio.
-
-**INSTALL MANIFEST**
-
-```text
-https://raw.githubusercontent.com/hashimxc12/Cinemana_NuvioPlugin/main/manifest.json
-```
-
-<div align="center">
-
-<a href="https://github.com/hashimxc12/Cinemana_NuvioPlugin">
-<img src="https://img.shields.io/badge/VIEW_SOURCE-181717?style=for-the-badge&logo=github" />
-</a>
-
-</div>
-
-</td>
-</tr>
-</table>
 
 ---
 
