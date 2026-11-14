@@ -145,6 +145,11 @@ Each project repository includes:
 [✍️ JOIN THE DISCUSSION](https://github.com/hashimxc12/hashimxc12/discussions/1)
 
 <!-- GITCOMMENT:START -->
+
+<a href="https://github.com/hashimxc12/hashimxc12/discussions/1"><img src=".github/gitcomment/comments-dev.svg?v=607c279f16" alt="Community Messages" width="880"></a>
+
+<sub><a href="https://github.com/hashimxc12/hashimxc12/discussions/1">leave a message</a></sub>
+
 <!-- GITCOMMENT:END -->
 
 <sub>Comments appear here after approval.</sub>
