@@ -135,6 +135,24 @@ Each project repository includes:
 
 ---
 
+<a id="community-space"></a>
+## 💬 COMMUNITY SPACE
+
+<div align="center">
+
+**Your feedback helps these projects grow.**
+
+[✍️ JOIN THE DISCUSSION](https://github.com/hashimxc12/hashimxc12/discussions/1)
+
+<!-- GITCOMMENT:START -->
+<!-- GITCOMMENT:END -->
+
+<sub>Comments appear here after approval.</sub>
+
+</div>
+
+---
+
 <div align="center">
 
 <sub>Built with passion for the Nuvio community.</sub>

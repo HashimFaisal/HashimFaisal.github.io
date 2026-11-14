@@ -1,0 +1,12 @@
+title: "Community Messages"
+subtitle: "Ideas, feedback and messages from the Nuvio community."
+theme: dev
+variant: dark
+max_comments: 5
+message_max_length: 240
+show_avatar: true
+show_date: true
+moderation: approved
+blocked_users: []
+filter_profanity: false
+blocked_words: []

@@ -1,0 +1,26 @@
+name: GitComment
+
+on:
+  discussion_comment:
+    types: [created, edited, deleted]
+  workflow_dispatch:
+  schedule:
+    - cron: "*/15 * * * *"
+
+concurrency:
+  group: gitcomment
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  discussions: read
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: LISK819129/GitComment@v1
+        with:
+          discussion-number: 1
+          theme: dev
+          variant: dark
