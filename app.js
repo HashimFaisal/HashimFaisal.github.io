@@ -255,7 +255,7 @@ function renderDownloads(report) {
   $('#download-grid').innerHTML = assets.map(asset => {
     const ready = asset.ok && asset.download_url;
     return `<article class="download-card">
-      <strong>${escapeHTML(`Nuvio ${asset.label || 'Download'}`)}</strong>
+      <strong>Nuvio ${escapeHTML(asset.label || 'Download')}</strong>
       <small>${asset.name || t('ملف غير متاح')} · ${formatBytes(asset.size_bytes)}</small>
       ${ready
         ? `<a href="${asset.download_url}" target="_blank" rel="noopener">${t('تنزيل مباشر ↗')}</a>`
