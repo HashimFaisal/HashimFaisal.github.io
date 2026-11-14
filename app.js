@@ -55,7 +55,7 @@ const translations = {
   'ابحث عن إضافة...': 'Search add-ons...',
   'الكل': 'All',
   'إضافات Nuvio': 'Nuvio Plugins',
-  'إضافات Stremio': 'Stremio Add-ons',
+  'إضافات Stremio': 'Nuvio Add-ons',
   'جارٍ تحميل روابط التنزيل...': 'Loading download links...',
   'تحديث': 'Update',
   'نسخ الرابط': 'Copy Link',
