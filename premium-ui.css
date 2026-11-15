@@ -1082,3 +1082,43 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
     letter-spacing: 0.3em !important;
   }
 }
+
+/* === Nuvio Hero Globe V5: True 3D Tilt & Realistic Atmosphere === */
+.visual-globe {
+  /* إمالة الكرة لتبدو ثلاثية الأبعاد */
+  transform: perspective(1000px) rotateX(15deg) rotateY(-10deg) !important;
+  /* إضافة غلاف جوي متوهج */
+  box-shadow: 
+    0 0 50px rgba(212, 175, 55, 0.25), 
+    inset 0 0 20px rgba(212, 175, 55, 0.5),
+    inset -30px -30px 60px rgba(0, 0, 0, 1) !important;
+  border: 1px solid rgba(212, 175, 55, 0.3) !important;
+}
+
+.globe-image {
+  /* تحسين وضوح القارات وأضواء المدن */
+  filter: brightness(1.1) contrast(1.5) sepia(0.6) hue-rotate(-10deg) saturate(2.5) !important;
+}
+
+/* جعل النص يبدو مقوساً ومتناسقاً مع الإمالة */
+.visual-caption {
+  transform: perspective(1000px) rotateX(10deg) !important;
+  margin-top: 50px !important;
+}
+
+.visual-caption span {
+  background: linear-gradient(180deg, #fcf6ba 0%, #d4af37 50%, #aa771c 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  font-size: 1.6rem !important;
+  text-shadow: 0px 10px 20px rgba(0,0,0,0.8) !important;
+}
+
+@media (max-width: 480px) {
+  .visual-globe {
+    transform: perspective(800px) rotateX(10deg) rotateY(-5deg) !important;
+  }
+  .visual-caption {
+    margin-top: 40px !important;
+  }
+}
