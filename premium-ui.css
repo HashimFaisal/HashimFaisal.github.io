@@ -1036,3 +1036,49 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
     letter-spacing: 0.5em !important;
   }
 }
+
+/* === Nuvio Hero Globe V4: Realism & 3D Depth === */
+.visual-globe {
+  box-shadow: 
+    0 0 100px rgba(212, 175, 55, 0.4), /* هالة خارجية قوية */
+    0 0 30px rgba(212, 175, 55, 0.2),
+    inset 0 0 40px rgba(0,0,0,1) !important;
+  margin-bottom: 30px !important; /* إبعاد الكرة عن النص */
+}
+
+.globe-image {
+  /* تحسين الإضاءة وإضافة ظل داخلي قوي ليعطي شكلاً كروياً */
+  box-shadow: 
+    inset -40px -40px 80px rgba(0, 0, 0, 1), /* ظل سفلي قوي */
+    inset 15px 15px 40px rgba(255, 215, 0, 0.2) !important; /* إضاءة علوية */
+}
+
+/* إصلاح وتنسيق النص أسفل الكرة */
+.visual-caption {
+  margin-top: 40px !important; /* إنزال النص للأسفل */
+  position: relative;
+  z-index: 10;
+}
+
+.visual-caption span {
+  background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  font-size: 1.5rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.4em !important; /* تقليل التمدد ليكون مقروءاً */
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.8) !important;
+}
+
+@media (max-width: 480px) {
+  .visual-globe {
+    margin-bottom: 20px !important;
+  }
+  .visual-caption {
+    margin-top: 30px !important;
+  }
+  .visual-caption span {
+    font-size: 1.2rem !important;
+    letter-spacing: 0.3em !important;
+  }
+}
