@@ -1270,7 +1270,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 /* === Nuvio Hero Globe V11: The Bulletproof Fix === */
 
 /* 1. جعل النجوم تغطي المربع الرئيسي بالكامل */
-.hero { position: relative !important; overflow: visible !important; }
+
 
 .hero::before {
   content: "";
@@ -1367,32 +1367,37 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 
 /* === Nuvio Hero Globe: Ultimate 3D Fix (No Parent Transform) === */
+
+
+
+
+
+
+/* === Nuvio Hero Globe: FIXED LAYOUT & PROPER 3D SPIN === */
 .visual-caption {
     position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
     width: 100% !important;
-    height: 100% !important;
     display: flex !important;
-    align-items: center !important; /* توسيط عمودي */
-    justify-content: center !important; /* توسيط أفقي */
+    justify-content: center !important;
     z-index: 99 !important;
     pointer-events: none !important;
 }
-
 .visual-caption span {
-    display: block !important;
-    color: #d4af37 !important; /* ذهبي */
+    display: inline-block !important;
+    color: #d4af37 !important;
     font-size: 2.5rem !important;
     font-weight: 900 !important;
     letter-spacing: 0.3em !important;
-    /* الحركة 3D مع منظور داخلي لضمان العمل على الهواتف */
-    animation: ultimateSpin 4s linear infinite !important;
+    animation: safe3DSpin 6s linear infinite !important;
+    /* إخفاء الوجه الخلفي للنص حتى لا يظهر معكوساً */
+    backface-visibility: hidden !important; 
+    -webkit-backface-visibility: hidden !important;
     transform-style: preserve-3d !important;
-    will-change: transform !important;
 }
-
-@keyframes ultimateSpin {
-    0% { transform: perspective(800px) rotateY(0deg); }
-    100% { transform: perspective(800px) rotateY(360deg); }
+@keyframes safe3DSpin {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
 }
