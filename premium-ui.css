@@ -1498,3 +1498,37 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   0% { transform: rotateY(0deg); }
   100% { transform: rotateY(-360deg); }
 }
+
+/* === Nuvio Hero Globe V14: True Saturn Ring 3D Orbit === */
+
+/* إجبار الحاوية على بيئة 3D */
+.visual-caption {
+  perspective: 1200px !important;
+  transform-style: preserve-3d !important;
+  pointer-events: none !important;
+}
+
+/* إجبار النص على الدوران والميلان ليعطي شكل الحلقة */
+.visual-caption span {
+  display: inline-block !important;
+  color: #0a0a0a !important; 
+  -webkit-text-fill-color: #0a0a0a !important;
+  -webkit-text-stroke: 1.5px #d4af37 !important;
+  text-shadow: 0 0 25px rgba(212, 175, 55, 1), 0 0 50px rgba(212, 175, 55, 0.6) !important;
+  font-size: 2.5rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.3em !important;
+  /* الحركة بالقوة مع ميلان 15 درجة */
+  animation: saturnRingSpin 10s linear infinite !important;
+  transform-origin: center center !important;
+  will-change: transform !important;
+}
+
+@keyframes saturnRingSpin {
+  0% { 
+    transform: rotateX(15deg) rotateY(0deg); /* الميلان لتبدو حلقة */
+  }
+  100% { 
+    transform: rotateX(15deg) rotateY(-360deg); /* الدوران الكامل عكس الأرض */
+  }
+}
