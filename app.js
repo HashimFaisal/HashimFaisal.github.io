@@ -286,7 +286,7 @@ function buildNuvioPluginDeepLink(manifestUrl) {
   try {
     const url = new URL(manifestUrl);
     if (url.protocol !== 'https:') return null;
-    return `nuvio://plugins/install?url=${encodeURIComponent(url.href)}`;
+    return 'nuvio://plugins';
   } catch {
     return null;
   }
@@ -326,7 +326,29 @@ function installShareButtons() {
     button.textContent = t('فتح في Nuvio');
     button.setAttribute('aria-label', `${t('فتح في Nuvio')} ${name}`);
 
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
+      let copied = false;
+      try {
+        if (navigator.clipboard?.writeText) {
+          await navigator.clipboard.writeText(manifestUrl);
+          copied = true;
+        }
+      } catch (error) {
+        console.warn('Clipboard API failed:', error);
+      }
+
+      if (!copied) {
+        const field = document.createElement('textarea');
+        field.value = manifestUrl;
+        field.style.position = 'fixed';
+        field.style.opacity = '0';
+        document.body.appendChild(field);
+        field.select();
+        copied = document.execCommand('copy');
+        field.remove();
+      }
+
+      toast(copied ? t('تم نسخ رابط Manifest بنجاح') : t('تعذر النسخ من هذا المتصفح'));
       window.location.href = deepLink;
     });
 
