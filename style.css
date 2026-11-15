@@ -877,7 +877,7 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
 @media (max-width: 430px) {
   .hero { padding: 34px 6% 15px; }
   .hero h1 { font-size: 37px; letter-spacing: -1px; }
-  .hero-visual { height: 270px; transform: scale(.8); margin-block: -5px; }
+  .hero-visual { height: 270px; transform: scale(.9); margin-block: -5px; }
   .hero-meta { gap: 10px; font-size: 9px; }
   .stats-grid { width: 92%; gap: 8px; }
   .stat-card { padding: 12px; min-height: 100px; }
