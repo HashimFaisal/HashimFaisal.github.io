@@ -1355,3 +1355,15 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
   background: #080807;
   border-color: rgba(198,161,91,.17);
 }
+
+/* Toast visibility fix */
+.toast {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .25s ease, visibility .25s ease;
+}
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+}
