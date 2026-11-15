@@ -1133,3 +1133,15 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
   min-height: 48px;
   text-align: center;
 }
+
+/* Show installation instructions on Nuvio plugin cards */
+.nuvio-plugin-card .plugin-help {
+  display: block !important;
+  width: 100%;
+  margin: 12px 0 0;
+  line-height: 1.8;
+  text-align: start;
+  direction: inherit;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
