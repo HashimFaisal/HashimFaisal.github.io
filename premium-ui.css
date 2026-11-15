@@ -1342,6 +1342,23 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 
 /* === Nuvio Hero Globe: Final Clean Orbit === */
+
+
+
+
+/* === Nuvio Hero Globe V16: The Absolute Ring Spin Fix === */
+
+
+
+/* دوران حلقة زحل (ميلان ثم دوران كامل) */
+
+
+/* === Nuvio Hero Globe V17: Guaranteed 2D Ring Spin (Works on all browsers) === */
+
+
+
+
+/* === Nuvio Hero Globe: CLEAN TEST ANIMATION === */
 .visual-caption {
     position: absolute !important;
     top: 50% !important;
@@ -1350,62 +1367,20 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
     width: 100% !important;
     display: flex !important;
     justify-content: center !important;
-    perspective: 1000px !important;
     z-index: 99 !important;
     pointer-events: none !important;
 }
 .visual-caption span {
-    display: inline-block !important;
-    color: #0a0a0a !important;
-    -webkit-text-fill-color: #0a0a0a !important;
-    -webkit-text-stroke: 1.5px #d4af37 !important;
-    text-shadow: 0 0 20px rgba(212, 175, 55, 0.9) !important;
+    display: block !important;
+    color: #d4af37 !important; /* لون ذهبي بسيط */
     font-size: 2.5rem !important;
     font-weight: 900 !important;
     letter-spacing: 0.3em !important;
-    animation: nuvioOrbitFinal 8s linear infinite !important;
-    transform-style: preserve-3d !important;
-    backface-visibility: visible !important;
-    -webkit-backface-visibility: visible !important;
-    will-change: transform !important;
+    animation: cleanSpin 3s infinite linear !important;
+    transform-origin: center center !important;
 }
-@keyframes nuvioOrbitFinal {
-    0% { transform: rotateX(15deg) rotateY(0deg); }
-    100% { transform: rotateX(15deg) rotateY(360deg); }
-}
-
-/* === Nuvio Hero Globe V16: The Absolute Ring Spin Fix === */
-
-.visual-caption span {
-  -webkit-text-stroke: 0px !important; /* إزالة الإطار المسبب لتعليق الحركة */
-  text-shadow: 
-    0 0 10px #d4af37, 
-    0 0 20px #d4af37, 
-    0 0 40px #d4af37 !important; /* توهج بديل للإطار */
-  
-  /* حركة دورانية حقيقية */
-  animation: trueRingSpin 6s linear infinite !important;
-  transform-style: preserve-3d !important;
-  display: inline-block !important;
-}
-
-/* دوران حلقة زحل (ميلان ثم دوران كامل) */
-@keyframes trueRingSpin {
-  0% { transform: rotateX(20deg) rotateY(0deg); }
-  100% { transform: rotateX(20deg) rotateY(360deg); }
-}
-
-/* === Nuvio Hero Globe V17: Guaranteed 2D Ring Spin (Works on all browsers) === */
-.visual-caption span {
-  animation: ringSpin2D 5s linear infinite !important;
-  transform-origin: center center !important;
-  -webkit-animation: ringSpin2D 5s linear infinite !important;
-}
-
-@keyframes ringSpin2D {
-  0% { transform: scaleX(1) skewY(5deg); }
-  25% { transform: scaleX(0.1) skewY(5deg); } /* يختفي كأنه يدور للخلف */
-  50% { transform: scaleX(1) skewY(5deg); }
-  75% { transform: scaleX(0.1) skewY(5deg); } /* يختفي كأنه يدور للأمام */
-  100% { transform: scaleX(1) skewY(5deg); }
+@keyframes cleanSpin {
+    0% { transform: scaleX(1); }
+    50% { transform: scaleX(0.1); } /* يتضيق ليدور */
+    100% { transform: scaleX(1); }
 }
