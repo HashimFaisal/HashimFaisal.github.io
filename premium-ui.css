@@ -1242,3 +1242,62 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   0% { opacity: 0.5; }
   100% { opacity: 1; }
 }
+
+/* === Nuvio Hero Globe V8: Absolute Fix for Text and Stars === */
+.visual-caption {
+  display: flex !important;
+  justify-content: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  transform: translateZ(0) !important; /* يكسر بق شفافية المتصفح */
+  margin-top: 5px !important;
+  z-index: 99 !important;
+}
+
+.visual-caption span {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #d4af37 !important;
+  -webkit-text-fill-color: #d4af37 !important; /* إجبار اللون الصلب */
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  font-size: 2.2rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.3em !important;
+  text-shadow: 0 0 20px rgba(212, 175, 55, 1), 0 0 40px rgba(212, 175, 55, 0.5) !important; /* توهج قوي */
+}
+
+.hero-visual {
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+/* نجوم واضحة ومكثفة خلف الكرة */
+.hero-visual::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -1 !important;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, #ffffff, transparent),
+    radial-gradient(3px 3px at 30% 60%, #d4af37, transparent),
+    radial-gradient(1.5px 1.5px at 50% 30%, #ffffff, transparent),
+    radial-gradient(2px 2px at 70% 80%, #ffffff, transparent),
+    radial-gradient(3px 3px at 90% 10%, #d4af37, transparent),
+    radial-gradient(1.5px 1.5px at 20% 80%, #ffffff, transparent),
+    radial-gradient(2px 2px at 80% 40%, #ffffff, transparent),
+    radial-gradient(1px 1px at 40% 10%, #d4af37, transparent),
+    radial-gradient(2px 2px at 60% 90%, #ffffff, transparent) !important;
+  background-size: 250px 250px !important;
+  background-repeat: repeat !important;
+  opacity: 1 !important;
+  animation: twinkle 4s infinite alternate !important;
+  pointer-events: none !important;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
