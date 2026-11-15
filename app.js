@@ -73,6 +73,7 @@ const translations = {
   'التطبيق الرسمي · GitHub ↗': 'Official App · GitHub ↗',
   'مستودع إضافات المجتمع ↗': 'Community Add-ons Repository ↗',
   'الموقع الرسمي ↗': 'Official Website ↗',
+  'مطور مستقل · GitHub ↗': 'Independent Developer · GitHub ↗',
   'Independent Nuvio Projects ·': 'Independent Nuvio Projects ·',
   'تم نسخ رابط Manifest بنجاح': 'Manifest link copied successfully',
   'تم نسخ الرابط': 'Link copied',
