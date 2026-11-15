@@ -282,6 +282,16 @@ $$('.copy-btn').forEach(button => {
 });
 
 
+function buildNuvioPluginDeepLink(manifestUrl) {
+  try {
+    const url = new URL(manifestUrl);
+    if (url.protocol !== 'https:') return null;
+    return `nuvio://plugins/install?url=${encodeURIComponent(url.href)}`;
+  } catch {
+    return null;
+  }
+}
+
 function buildNuvioAddonDeepLink(manifestUrl) {
   try {
     const url = new URL(manifestUrl);
@@ -296,9 +306,16 @@ function installShareButtons() {
   $$('.plugin-card').forEach(card => {
     if (card.querySelector('.share-btn')) return;
 
-    const name = card.querySelector('h3')?.textContent.trim() || 'Nuvio Add-on';
+    const name = card.querySelector('h3')?.textContent.trim() || 'Nuvio';
     const manifestUrl = card.querySelector('.manifest-url')?.textContent.trim();
-    const deepLink = buildNuvioAddonDeepLink(manifestUrl);
+    const type = card.querySelector('.type-tag')?.classList.contains('external')
+      ? 'stremio'
+      : 'nuvio';
+
+    const deepLink = type === 'nuvio'
+      ? buildNuvioPluginDeepLink(manifestUrl)
+      : buildNuvioAddonDeepLink(manifestUrl);
+
     const actions = card.querySelector('.card-actions');
 
     if (!deepLink || !actions) return;
