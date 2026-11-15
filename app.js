@@ -1,7 +1,7 @@
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 
-let activeFilter = 'all';
+let activeFilter = 'nuvio';
 let currentLang = 'ar';
 try {
   const savedLang = localStorage.getItem('nuvio-language');
