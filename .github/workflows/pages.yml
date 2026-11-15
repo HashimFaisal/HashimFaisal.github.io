@@ -47,6 +47,35 @@ jobs:
           if [ -f data/changelog.json ]; then cp data/changelog.json public/data/; fi
           if [ -d assets ]; then cp -R assets/. public/assets/; fi
 
+      - name: Version local CSS and JavaScript assets
+        env:
+          ASSET_VERSION: ${{ github.sha }}
+        run: |
+          python - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+
+          path = Path("public/index.html")
+          html = path.read_text()
+          version = os.environ["ASSET_VERSION"]
+
+          pattern = r'((?:href|src)=["\'])((?!https?:|//)[^"\'?#]+\.(?:css|js))(?:\?[^"\']*)?(["\'])'
+
+          def replace(match):
+              return f"{match.group(1)}{match.group(2)}?v={version}{match.group(3)}"
+
+          updated, count = re.subn(pattern, replace, html, flags=re.IGNORECASE)
+
+          if count != 4:
+              raise SystemExit(
+                  f"Expected 4 local CSS/JS references, found {count}; refusing to deploy."
+              )
+
+          path.write_text(updated)
+          print(f"Versioned {count} local assets with commit {version}")
+          PY
+
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
