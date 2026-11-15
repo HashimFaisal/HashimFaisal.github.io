@@ -1498,3 +1498,386 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   0% { transform: rotateY(0deg); }
   100% { transform: rotateY(-360deg); }
 }
+
+/* =========================================
+   MOBILE RESPONSIVE FIX — SAFE FINAL LAYER
+   ========================================= */
+
+@media (max-width: 760px) {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    max-width: 100%;
+    overflow-x: clip;
+  }
+
+  .topbar {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .topbar nav {
+    min-width: 0;
+    max-width: 100%;
+    scrollbar-width: none;
+  }
+
+  .topbar nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hero, .section, .nuvio-dashboard,
+  .nuvio-view-active.section,
+  #status.nuvio-view-active {
+    max-width: 100%;
+  }
+
+  .hero {
+    width: 92%;
+    padding-inline: clamp(18px, 5vw, 28px);
+  }
+
+  .hero-copy, .hero-visual {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .hero-visual {
+    height: clamp(245px, 72vw, 300px);
+    margin-inline: auto;
+    transform: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .visual-globe {
+    width: min(68vw, 250px) !important;
+    height: min(68vw, 250px) !important;
+    max-width: 100%;
+    margin: 0 !important;
+  }
+
+  .visual-caption {
+    top: 50% !important;
+    left: 50% !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 8px !important;
+    transform: translate(-50%, -50%) !important;
+  }
+
+  .visual-caption span {
+    max-width: 100%;
+    font-size: clamp(1.2rem, 6.5vw, 1.8rem) !important;
+    letter-spacing: clamp(.08em, 1.2vw, .22em) !important;
+    white-space: nowrap;
+  }
+
+  .nuvio-dashboard {
+    width: 92%;
+    margin-bottom: 56px;
+  }
+
+  .nuvio-dashboard-heading {
+    min-width: 0;
+    margin-bottom: 18px;
+  }
+
+  .nuvio-dashboard-heading > div {
+    min-width: 0;
+  }
+
+  .nuvio-dashboard-heading h2 {
+    font-size: clamp(23px, 6vw, 30px);
+    line-height: 1.35;
+  }
+
+  .nuvio-dashboard-heading p {
+    font-size: 11px;
+  }
+
+  .nuvio-launch-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+  }
+
+  .nuvio-launch-card {
+    min-width: 0;
+    min-height: 175px;
+    padding: 16px;
+    border-radius: 16px;
+  }
+
+  .nuvio-launch-card strong {
+    font-size: 16px;
+    line-height: 1.4;
+  }
+
+  .nuvio-launch-description {
+    font-size: 10px;
+    overflow-wrap: anywhere;
+  }
+
+  .nuvio-view-active.section,
+  #status.nuvio-view-active {
+    width: 94%;
+    padding: clamp(14px, 4vw, 20px);
+  }
+
+  .nuvio-view-active .section-heading h2,
+  .nuvio-view-active .section-heading > div {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .nuvio-overview {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .nuvio-overview-card,
+  #status.nuvio-view-active .stat-card {
+    min-width: 0;
+    padding: 13px;
+  }
+
+  #status.nuvio-view-active {
+    gap: 9px;
+  }
+
+  #plugins .toolbar,
+  #plugins .search-box,
+  #plugins .filters,
+  #downloads .release-banner,
+  #downloads .download-grid,
+  #resources .resource-links {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  #plugins .filter,
+  .card-actions > *,
+  #downloads .release-banner a,
+  #downloads .release-banner button {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  #downloads .release-banner {
+    gap: 12px;
+  }
+
+  #downloads .release-banner strong {
+    overflow-wrap: anywhere;
+    line-height: 1.4;
+  }
+
+  .nuvio-view-back {
+    max-width: 100%;
+    white-space: normal;
+    text-align: start;
+  }
+
+  .nuvio-view-active img,
+  .nuvio-view-active svg,
+  .nuvio-view-active video {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 430px) {
+  .hero {
+    width: 94%;
+    padding: 30px 17px 18px;
+    border-radius: 19px;
+  }
+
+  .hero h1 {
+    font-size: clamp(31px, 9vw, 37px);
+    line-height: 1.3;
+    overflow-wrap: anywhere;
+  }
+
+  .hero-visual {
+    height: 245px;
+  }
+
+  .visual-globe {
+    width: min(66vw, 225px) !important;
+    height: min(66vw, 225px) !important;
+  }
+
+  .visual-caption span {
+    font-size: clamp(1.05rem, 6vw, 1.45rem) !important;
+    letter-spacing: .08em !important;
+  }
+
+  .nuvio-launch-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nuvio-launch-card {
+    min-height: 145px;
+    padding: 17px;
+  }
+
+  .nuvio-overview-card strong {
+    font-size: clamp(15px, 4.5vw, 19px);
+  }
+
+  #plugins .filters {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  #plugins .filter {
+    min-height: 36px;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  #status.nuvio-view-active .stat-card {
+    min-height: 105px;
+    padding: 11px;
+  }
+
+  #downloads .release-banner {
+    padding: 16px;
+  }
+
+  .nuvio-view-back {
+    min-height: 38px;
+    padding: 8px 11px;
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 350px) {
+  .hero, .section, .nuvio-dashboard {
+    width: 94%;
+  }
+
+  .nuvio-view-active.section,
+  #status.nuvio-view-active {
+    padding: 12px;
+  }
+
+  .nuvio-overview,
+  #status.nuvio-view-active {
+    gap: 7px;
+  }
+
+  .nuvio-overview-card,
+  #status.nuvio-view-active .stat-card {
+    padding: 9px;
+  }
+
+  .visual-caption span {
+    font-size: 1rem !important;
+    letter-spacing: .04em !important;
+  }
+}
+
+/* === NUVIO MOBILE LAYOUT REFINEMENT === */
+
+@media (max-width: 760px) {
+  .topbar nav {
+    order: 5;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px 16px;
+  }
+
+  .topbar nav a {
+    font-size: 10px;
+    padding: 5px 0;
+  }
+
+  .hero {
+    width: 94%;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    min-height: auto;
+    padding: 34px 6% 20px;
+  }
+
+  .hero-copy {
+    width: 100%;
+    max-width: none;
+    text-align: center;
+  }
+
+  .hero-copy .eyebrow,
+  .hero-actions,
+  .hero-meta {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .hero h1 {
+    font-size: clamp(32px, 8vw, 45px);
+    letter-spacing: -1px;
+  }
+
+  .hero-visual {
+    width: 100%;
+    height: clamp(245px, 68vw, 300px);
+    margin: 0 auto;
+    transform: none !important;
+  }
+
+  .visual-globe {
+    width: min(68vw, 250px) !important;
+    height: min(68vw, 250px) !important;
+    margin: 0 auto !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 430px) {
+  .hero {
+    width: 94%;
+    padding: 27px 17px 16px;
+    gap: 2px;
+  }
+
+  .hero h1 {
+    font-size: clamp(30px, 8.5vw, 37px);
+    line-height: 1.35;
+  }
+
+  .hero-visual {
+    height: 245px;
+    transform: none !important;
+  }
+
+  .visual-globe {
+    width: min(66vw, 225px) !important;
+    height: min(66vw, 225px) !important;
+  }
+
+  .hero-actions {
+    gap: 9px;
+  }
+
+  .hero-actions a {
+    max-width: 100%;
+  }
+
+  .hero-meta {
+    gap: 9px 13px;
+  }
+
+  .stats-grid {
+    width: 92%;
+    gap: 8px;
+  }
+}
+
