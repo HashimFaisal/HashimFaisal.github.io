@@ -39,6 +39,16 @@ const translations = {
   'تحتاج مراجعة': 'Needs Review',
   'آخر فحص': 'Last Check',
   'وقت التحديث': 'Last Updated',
+  'التقرير حديث': 'Report is fresh',
+  'التقرير متأخر': 'Report is delayed',
+  'التقرير قديم': 'Report is stale',
+  'بانتظار التقرير': 'Waiting for report',
+  'إضافة': 'Added',
+  'تحديث إصدار': 'Version Update',
+  'تغيّر حالة': 'Status Change',
+  'إصدار Nuvio': 'Nuvio Release',
+  'النظام': 'System',
+  'وقت التقرير غير معروف': 'Report time unavailable',
   'مكتبة الإضافات': 'Add-on Library',
   'روابط Manifest واضحة، مع نسخ مباشر من نفس الصفحة.': 'Clear manifest links with one-click copying.',
   'ابحث عن إضافة...': 'Search add-ons...',
@@ -354,14 +364,46 @@ function formatBytes(bytes) {
 
 function updateLastChecked() {
   const node = $('#last-checked');
+  const freshness = $('#report-freshness');
   if (!node) return;
 
-  node.textContent = latestReport?.checked_at
-    ? new Intl.DateTimeFormat(currentLang === 'ar' ? 'ar-IQ' : 'en-US', {
-        dateStyle: 'short',
-        timeStyle: 'short'
-      }).format(new Date(latestReport.checked_at))
-    : '—';
+  const timestamp = latestReport?.checked_at
+    ? new Date(latestReport.checked_at).getTime()
+    : NaN;
+
+  if (!Number.isFinite(timestamp) || timestamp > Date.now() + 5 * 60 * 1000) {
+    node.textContent = '—';
+    if (freshness) {
+      freshness.textContent = t('وقت التقرير غير معروف');
+      freshness.dataset.state = 'unknown';
+    }
+    return;
+  }
+
+  const now = Date.now();
+  const ageMinutes = Math.max(0, (now - timestamp) / 60000);
+  const locale = currentLang === 'ar' ? 'ar-IQ' : 'en-US';
+
+  node.textContent = new Intl.DateTimeFormat(locale, {
+    dateStyle: 'short',
+    timeStyle: 'short'
+  }).format(new Date(timestamp));
+
+  if (freshness) {
+    let state = 'stale';
+    let label = 'التقرير قديم';
+
+    if (ageMinutes <= 30) {
+      state = 'fresh';
+      label = 'التقرير حديث';
+    } else if (ageMinutes <= 60) {
+      state = 'delayed';
+      label = 'التقرير متأخر';
+    }
+
+    freshness.textContent = t(label);
+    freshness.dataset.state = state;
+  }
 }
 
 function formatDate(value) {
@@ -527,13 +569,13 @@ let changelogRequestId = 0;
 async function loadChangelog() {
   const requestId = ++changelogRequestId;
   const container = $('#changelog-list');
+  if (!container) return;
 
   try {
     const response = await fetch(`data/changelog.json?t=${Date.now()}`, { cache: 'no-store' });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const entries = await response.json();
-
     if (requestId !== changelogRequestId) return;
 
     if (!Array.isArray(entries) || entries.length === 0) {
@@ -541,19 +583,47 @@ async function loadChangelog() {
       return;
     }
 
-    container.innerHTML = entries.map(entry => `
-      <article class="changelog-entry">
-        <span class="changelog-dot"></span>
-        <div class="changelog-content">
-          <strong>${escapeHTML(t(entry.title || 'تحديث'))}</strong>
-          <p>${escapeHTML(t(entry.detail || ''))}</p>
-          <small>${escapeHTML(formatDate(entry.date))}</small>
-        </div>
-      </article>
-    `).join('');
+    const eventTypes = {
+      added: { className: 'added', label: 'إضافة' },
+      version: { className: 'version', label: 'تحديث إصدار' },
+      status: { className: 'status', label: 'تغيّر حالة' },
+      release: { className: 'release', label: 'إصدار Nuvio' },
+      system: { className: 'system', label: 'النظام' }
+    };
+
+    const sortedEntries = [...entries].sort((a, b) => {
+      const dateA = Date.parse(a?.date);
+      const dateB = Date.parse(b?.date);
+      return (Number.isFinite(dateB) ? dateB : -Infinity)
+        - (Number.isFinite(dateA) ? dateA : -Infinity);
+    });
+
+    container.innerHTML = sortedEntries.map(entry => {
+      const type = eventTypes[entry?.type] || {
+        className: 'update',
+        label: 'تحديث'
+      };
+      const validDate = Number.isFinite(Date.parse(entry?.date));
+      const dateText = validDate
+        ? `${formatDate(entry.date)} · ${formatRelativeDate(entry.date)}`
+        : formatDate(entry?.date);
+
+      return `
+        <article class="changelog-entry changelog-entry--${type.className}">
+          <span class="changelog-dot"></span>
+          <div class="changelog-content">
+            <div class="changelog-meta">
+              <span class="changelog-type">${escapeHTML(t(type.label))}</span>
+              <small>${escapeHTML(dateText)}</small>
+            </div>
+            <strong>${escapeHTML(t(entry?.title || 'تحديث'))}</strong>
+            <p>${escapeHTML(t(entry?.detail || ''))}</p>
+          </div>
+        </article>
+      `;
+    }).join('');
   } catch (error) {
     if (requestId !== changelogRequestId) return;
-
     container.innerHTML = `<p class="muted">${t('تعذر تحميل سجل التغييرات حالياً.')}</p>`;
     console.error('Changelog loading failed:', error);
   }

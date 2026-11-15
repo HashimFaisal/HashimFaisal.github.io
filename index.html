@@ -23,7 +23,7 @@
   <title>Hashim Faisal — Nuvio Control Center</title>
   <link rel="icon" href="assets/hero.svg">
   <link rel="stylesheet" href="style.css?v=20261115122700">
-  <link rel="stylesheet" href="premium-ui.css?v=20261115-night-earth4">
+  <link rel="stylesheet" href="premium-ui.css?v=20261116-signature-polish1">
 </head>
 <body>
   <div class="ambient ambient-one"></div>
@@ -86,7 +86,11 @@
 
       <article class="stat-card"><span>مصادر سليمة</span><strong id="healthy-count">—</strong><small>Manifest متاح</small></article>
       <article class="stat-card"><span>مصادر متعطلة</span><strong id="unhealthy-count">—</strong><small>تحتاج مراجعة</small></article>
-      <article class="stat-card"><span>آخر فحص</span><strong id="last-checked">—</strong><small>وقت التحديث</small></article>
+      <article class="stat-card">
+        <span>آخر فحص</span>
+        <strong id="last-checked">—</strong>
+        <small id="report-freshness" class="report-freshness" data-state="unknown">بانتظار التقرير</small>
+      </article>
 
     </section>
 
@@ -211,7 +215,7 @@
 
   <footer><div class="brand footer-brand">HASHIM<span class="accent">FAISAL</span></div><span>Independent Nuvio Projects · <span id="year"></span></span><a href="https://github.com/HashimFaisal" target="_blank" rel="noopener">GitHub ↗</a></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=20261115063610"></script>
+  <script src="app.js?v=20261116-status-changelog1"></script>
   <script src="premium-ui.js?v=1"></script>
 </body>
 </html>

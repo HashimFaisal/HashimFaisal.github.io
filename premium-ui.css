@@ -1131,3 +1131,564 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
     text-align: right;
   }
 }
+
+/* =====================================================
+   NUVIO SIGNATURE POLISH — CINEMATIC PREMIUM INTERFACE
+   ===================================================== */
+
+:root {
+  --nuvio-gold: #c6a15b;
+  --nuvio-gold-light: #e5cc96;
+  --nuvio-gold-soft: rgba(198, 161, 91, .12);
+  --nuvio-glass: rgba(20, 19, 16, .82);
+  --nuvio-border: rgba(198, 161, 91, .20);
+}
+
+/* Header refinement */
+.topbar {
+  background: rgba(9, 9, 9, .94);
+  border-bottom-color: rgba(198, 161, 91, .20);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, .20);
+}
+
+.topbar nav {
+  gap: clamp(14px, 2.2vw, 30px);
+}
+
+.topbar nav a {
+  color: #c5bdaE;
+  font-weight: 600;
+  transition: color .25s ease, text-shadow .25s ease;
+}
+
+.topbar nav a:hover,
+.topbar nav a.nuvio-nav-active {
+  color: var(--nuvio-gold-light);
+  text-shadow: 0 0 14px rgba(198, 161, 91, .22);
+}
+
+.topbar nav a.nuvio-nav-active::after {
+  background: linear-gradient(90deg, transparent, var(--nuvio-gold-light), transparent);
+  box-shadow: 0 0 10px rgba(198, 161, 91, .35);
+}
+
+.github-link,
+.language-toggle {
+  border-color: var(--nuvio-border);
+  background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(198,161,91,.035));
+  color: var(--nuvio-gold-light);
+  font-weight: 700;
+}
+
+.github-link:hover,
+.language-toggle:hover {
+  border-color: rgba(229, 204, 150, .55);
+  background: rgba(198, 161, 91, .12);
+  box-shadow: 0 5px 20px rgba(198, 161, 91, .10);
+}
+
+/* Dashboard and launch cards */
+.nuvio-dashboard {
+  position: relative;
+}
+
+.nuvio-dashboard-heading {
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(198, 161, 91, .12);
+}
+
+.nuvio-dashboard-heading h2 {
+  color: #f0e5cf;
+  letter-spacing: -.3px;
+}
+
+.nuvio-dashboard-mark {
+  filter: drop-shadow(0 0 15px rgba(198, 161, 91, .16));
+}
+
+.nuvio-launch-card {
+  border: 1px solid rgba(198, 161, 91, .17);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(198,161,91,.10), transparent 48%),
+    linear-gradient(145deg, #1b1a17, #10100f 78%);
+  box-shadow: 0 12px 32px rgba(0,0,0,.24), inset 0 1px rgba(255,255,255,.025);
+  transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+}
+
+.nuvio-launch-card::after {
+  background: radial-gradient(circle, rgba(229,204,150,.18), transparent 68%);
+}
+
+.nuvio-launch-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(229,204,150,.48);
+  box-shadow: 0 20px 42px rgba(0,0,0,.36), 0 0 25px rgba(198,161,91,.075);
+}
+
+.nuvio-launch-icon {
+  border-color: rgba(198,161,91,.28);
+  background: linear-gradient(145deg, rgba(198,161,91,.15), rgba(198,161,91,.035));
+  box-shadow: inset 0 1px rgba(255,255,255,.045), 0 5px 18px rgba(0,0,0,.18);
+}
+
+.nuvio-launch-card strong {
+  color: #eee2ca;
+}
+
+.nuvio-launch-open {
+  color: var(--nuvio-gold-light);
+}
+
+/* Navigation and section surfaces */
+.nuvio-view-back {
+  border-color: rgba(198,161,91,.25);
+  background: linear-gradient(145deg, rgba(198,161,91,.10), rgba(255,255,255,.025));
+  color: #e5cc96;
+  transition: background .25s ease, border-color .25s ease, transform .25s ease;
+}
+
+.nuvio-view-back:hover {
+  border-color: rgba(229,204,150,.55);
+  background: rgba(198,161,91,.15);
+  transform: translateX(3px);
+}
+
+.nuvio-view-active .section-heading {
+  border-bottom-color: rgba(198,161,91,.14);
+}
+
+.nuvio-view-active .eyebrow {
+  color: #c6a15b;
+  letter-spacing: .12em;
+}
+
+/* Plugin toolbar, search and filters */
+#plugins .search-box {
+  border-color: rgba(198,161,91,.20);
+  background: linear-gradient(145deg, #171613, #10100f);
+  box-shadow: inset 0 1px rgba(255,255,255,.025);
+}
+
+#plugins .search-box:focus-within {
+  border-color: rgba(229,204,150,.65);
+  box-shadow: 0 0 0 3px rgba(198,161,91,.09), 0 8px 24px rgba(0,0,0,.18);
+}
+
+#plugins .filter {
+  border-color: rgba(198,161,91,.17);
+  background: rgba(255,255,255,.025);
+  transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+#plugins .filter:hover {
+  border-color: rgba(198,161,91,.48);
+  color: #f0dfbd;
+  transform: translateY(-1px);
+}
+
+#plugins .filter.active {
+  border-color: #c6a15b;
+  background: linear-gradient(115deg, #e5cc96, #b58a43);
+  color: #17120a;
+  box-shadow: 0 5px 18px rgba(181,138,67,.17);
+}
+
+#plugins .plugin-card {
+  box-shadow: 0 14px 34px rgba(0,0,0,.24), inset 0 1px rgba(255,255,255,.025);
+  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+
+#plugins .plugin-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(229,204,150,.42);
+  box-shadow: 0 20px 42px rgba(0,0,0,.34), 0 0 22px rgba(198,161,91,.055);
+}
+
+#plugins .plugin-top img {
+  border-radius: 12px;
+}
+
+#plugins .manifest-url {
+  border-color: rgba(198,161,91,.17);
+  background: rgba(5,5,5,.42);
+}
+
+#plugins .card-actions a,
+#plugins .card-actions button {
+  transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+#plugins .card-actions a:hover,
+#plugins .card-actions button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 18px rgba(0,0,0,.22);
+}
+
+/* Status cards */
+#status.nuvio-view-active .stat-card {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(198,161,91,.075), transparent 55%),
+    linear-gradient(145deg, #1c1a16, #111110);
+  border-color: rgba(198,161,91,.18);
+}
+
+#status.nuvio-view-active .stat-card:hover {
+  border-color: rgba(229,204,150,.48);
+  transform: translateY(-3px);
+  box-shadow: 0 16px 35px rgba(0,0,0,.32), 0 0 20px rgba(198,161,91,.06);
+}
+
+/* Changelog, downloads and resources */
+#changelog .changelog-list > * {
+  border: 1px solid rgba(198,161,91,.14);
+  background: linear-gradient(115deg, #1a1916, #111110);
+  box-shadow: 0 8px 22px rgba(0,0,0,.15);
+  transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+
+#changelog .changelog-list > *:hover {
+  transform: translateY(-2px);
+  border-color: rgba(198,161,91,.38);
+  box-shadow: 0 13px 28px rgba(0,0,0,.24);
+}
+
+#downloads .download-card,
+#resources .resource-links a {
+  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+
+#downloads .download-card:hover,
+#resources .resource-links a:hover {
+  transform: translateY(-4px);
+  border-color: rgba(229,204,150,.46);
+  box-shadow: 0 18px 36px rgba(0,0,0,.30), 0 0 22px rgba(198,161,91,.055);
+}
+
+#downloads .release-banner {
+  border-color: rgba(198,161,91,.32);
+  box-shadow: inset 0 1px rgba(255,255,255,.035), 0 18px 42px rgba(0,0,0,.26);
+}
+
+/* Cinematic Earth — warm metallic atmosphere */
+.visual-globe {
+  border-color: rgba(210,177,112,.48);
+  box-shadow:
+    0 0 35px rgba(198,161,91,.16),
+    0 0 85px rgba(130,91,38,.10),
+    inset -28px -18px 42px rgba(0,0,0,.88),
+    inset 8px 5px 22px rgba(220,190,130,.10);
+}
+
+.globe-image {
+  filter: brightness(.82) contrast(1.2) saturate(.78) sepia(.12);
+}
+
+.globe-overlay {
+  background:
+    radial-gradient(ellipse at 32% 24%, rgba(230,205,155,.12), transparent 38%),
+    radial-gradient(ellipse at 78% 72%, transparent 35%, rgba(0,0,0,.28) 72%, rgba(0,0,0,.84) 100%),
+    linear-gradient(90deg, rgba(0,0,0,.30), transparent 28%, transparent 68%, rgba(0,0,0,.34));
+  box-shadow:
+    inset -30px -15px 45px rgba(0,0,0,.82),
+    inset 8px 5px 20px rgba(210,177,112,.10);
+}
+
+.visual-globe::after {
+  border-color: rgba(229,204,150,.30);
+  box-shadow:
+    0 0 17px rgba(198,161,91,.18),
+    inset 0 0 22px rgba(198,161,91,.12);
+}
+
+.nuvio-orbit-track {
+  border-color: rgba(229,204,150,.82);
+  box-shadow: 0 0 15px rgba(198,161,91,.25);
+}
+
+.nuvio-orbit-track span {
+  color: #f0dba9;
+  text-shadow: 0 0 9px rgba(212,175,55,.72), 0 2px 8px #000;
+}
+
+/* Consistent keyboard accessibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline: 2px solid #e5cc96;
+  outline-offset: 3px;
+}
+
+/* Mobile header refinement */
+@media (max-width: 760px) {
+  .topbar {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 9px;
+    padding: 10px 4%;
+    min-height: auto;
+  }
+
+  .brand {
+    min-width: 0;
+    gap: 8px;
+  }
+
+  .brand img {
+    width: 35px;
+    height: 35px;
+  }
+
+  .brand small {
+    font-size: 7px;
+    letter-spacing: 1.2px;
+  }
+
+  .topbar nav {
+    grid-column: 1 / -1;
+    order: initial;
+    display: flex;
+    width: 100%;
+    gap: 22px;
+    padding: 9px 2px 5px;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    border-top: 1px solid rgba(198,161,91,.12);
+  }
+
+  .topbar nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .topbar nav a {
+    flex: 0 0 auto;
+    font-size: 11px;
+  }
+
+  .github-link,
+  .language-toggle {
+    min-height: 34px;
+    padding: 6px 9px;
+    white-space: nowrap;
+  }
+
+  .nuvio-launch-card:hover,
+  #plugins .plugin-card:hover,
+  #downloads .download-card:hover,
+  #resources .resource-links a:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .topbar {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    gap: 6px;
+    padding-inline: 3%;
+  }
+
+  .brand {
+    font-size: 10px;
+    gap: 6px;
+  }
+
+  .brand img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .brand small {
+    font-size: 6px;
+    letter-spacing: .8px;
+  }
+
+  .github-link,
+  .language-toggle {
+    padding-inline: 7px;
+    font-size: 9px;
+  }
+
+  .topbar nav {
+    gap: 18px;
+  }
+}
+
+/* Respect reduced-motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .nuvio-launch-card,
+  #plugins .plugin-card,
+  #changelog .changelog-list > *,
+  #downloads .download-card,
+  #resources .resource-links a,
+  .nuvio-view-back,
+  .topbar nav a {
+    transition: none !important;
+  }
+}
+
+/* NUVIO STATUS & CHANGELOG — FRESHNESS AND EVENT DETAILS */
+#status .report-freshness {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  margin-top: 9px;
+  padding: 5px 10px;
+  border: 1px solid rgba(212, 175, 55, .24);
+  border-radius: 999px;
+  background: rgba(212, 175, 55, .07);
+  color: #d8bd72;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+#status .report-freshness::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  margin-inline-end: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 9px currentColor;
+}
+
+#status .report-freshness[data-state="fresh"] {
+  color: #d8bd72;
+  border-color: rgba(212, 175, 55, .3);
+}
+
+#status .report-freshness[data-state="delayed"] {
+  color: #e2a95b;
+  border-color: rgba(226, 169, 91, .32);
+  background: rgba(226, 169, 91, .08);
+}
+
+#status .report-freshness[data-state="stale"],
+#status .report-freshness[data-state="unknown"] {
+  color: #bd9292;
+  border-color: rgba(189, 146, 146, .3);
+  background: rgba(189, 146, 146, .07);
+}
+
+#changelog .changelog-entry {
+  position: relative;
+  display: grid;
+  grid-template-columns: 10px minmax(0, 1fr);
+  align-items: start;
+  gap: 14px;
+  padding: 18px 20px;
+  border: 1px solid rgba(212, 175, 55, .13);
+  border-radius: 15px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, .045), rgba(255, 255, 255, .012));
+  transition: border-color .25s ease, background .25s ease, transform .25s ease;
+}
+
+#changelog .changelog-entry:hover {
+  border-color: rgba(212, 175, 55, .34);
+  background: linear-gradient(135deg, rgba(212, 175, 55, .075), rgba(255, 255, 255, .018));
+  transform: translateY(-2px);
+}
+
+#changelog .changelog-dot {
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  border-radius: 50%;
+  background: #d4af37;
+  box-shadow: 0 0 12px rgba(212, 175, 55, .45);
+}
+
+#changelog .changelog-content {
+  min-width: 0;
+}
+
+#changelog .changelog-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  margin-bottom: 9px;
+}
+
+#changelog .changelog-type {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 9px;
+  border: 1px solid rgba(212, 175, 55, .25);
+  border-radius: 999px;
+  background: rgba(212, 175, 55, .08);
+  color: #d8bd72;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .25px;
+}
+
+#changelog .changelog-meta small {
+  color: var(--muted, #929292);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+#changelog .changelog-content > strong {
+  display: block;
+  color: var(--text, #f2eee4);
+  font-size: 14px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+#changelog .changelog-content > p {
+  margin: 5px 0 0;
+  color: var(--muted, #929292);
+  font-size: 12px;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+#changelog .changelog-entry--added .changelog-dot {
+  background: #d4af37;
+}
+
+#changelog .changelog-entry--system .changelog-dot {
+  background: #a9a9a9;
+  box-shadow: 0 0 10px rgba(169, 169, 169, .3);
+}
+
+#changelog .changelog-entry--version .changelog-dot,
+#changelog .changelog-entry--release .changelog-dot {
+  background: #e2bd75;
+  box-shadow: 0 0 12px rgba(226, 189, 117, .4);
+}
+
+@media (max-width: 480px) {
+  #status .report-freshness {
+    max-width: 100%;
+    font-size: 10px;
+  }
+
+  #changelog .changelog-entry {
+    grid-template-columns: 8px minmax(0, 1fr);
+    gap: 10px;
+    padding: 14px 12px;
+    border-radius: 12px;
+  }
+
+  #changelog .changelog-meta {
+    gap: 6px 9px;
+  }
+
+  #changelog .changelog-content > strong {
+    font-size: 13px;
+  }
+
+  #changelog .changelog-content > p {
+    font-size: 11px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #changelog .changelog-entry {
+    transition: none;
+  }
+}
