@@ -1394,3 +1394,18 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   0% { transform: rotateX(20deg) rotateY(0deg); }
   100% { transform: rotateX(20deg) rotateY(360deg); }
 }
+
+/* === Nuvio Hero Globe V17: Guaranteed 2D Ring Spin (Works on all browsers) === */
+.visual-caption span {
+  animation: ringSpin2D 5s linear infinite !important;
+  transform-origin: center center !important;
+  -webkit-animation: ringSpin2D 5s linear infinite !important;
+}
+
+@keyframes ringSpin2D {
+  0% { transform: scaleX(1) skewY(5deg); }
+  25% { transform: scaleX(0.1) skewY(5deg); } /* يختفي كأنه يدور للخلف */
+  50% { transform: scaleX(1) skewY(5deg); }
+  75% { transform: scaleX(0.1) skewY(5deg); } /* يختفي كأنه يدور للأمام */
+  100% { transform: scaleX(1) skewY(5deg); }
+}
