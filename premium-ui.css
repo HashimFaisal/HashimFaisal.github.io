@@ -1373,3 +1373,24 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
     0% { transform: rotateX(15deg) rotateY(0deg); }
     100% { transform: rotateX(15deg) rotateY(360deg); }
 }
+
+/* === Nuvio Hero Globe V16: The Absolute Ring Spin Fix === */
+
+.visual-caption span {
+  -webkit-text-stroke: 0px !important; /* إزالة الإطار المسبب لتعليق الحركة */
+  text-shadow: 
+    0 0 10px #d4af37, 
+    0 0 20px #d4af37, 
+    0 0 40px #d4af37 !important; /* توهج بديل للإطار */
+  
+  /* حركة دورانية حقيقية */
+  animation: trueRingSpin 6s linear infinite !important;
+  transform-style: preserve-3d !important;
+  display: inline-block !important;
+}
+
+/* دوران حلقة زحل (ميلان ثم دوران كامل) */
+@keyframes trueRingSpin {
+  0% { transform: rotateX(20deg) rotateY(0deg); }
+  100% { transform: rotateX(20deg) rotateY(360deg); }
+}
