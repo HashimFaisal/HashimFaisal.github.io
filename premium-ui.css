@@ -1458,3 +1458,43 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   0% { transform: rotateY(0deg); }
   100% { transform: rotateY(360deg); }
 }
+
+/* === Nuvio Hero Globe V13: Centered Saturn-like Ring Text === */
+
+/* رفع النص ليكون في منتصف الكرة تماماً */
+.visual-caption {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important; /* التوسيط المثالي */
+  z-index: 100 !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: center !important;
+  pointer-events: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* تنسيق النص الأسود الذهبي مع الدوران */
+.visual-caption span {
+  display: inline-block !important;
+  color: #0a0a0a !important; /* أسود طافي */
+  -webkit-text-fill-color: #0a0a0a !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-stroke: 1.5px #d4af37 !important; /* إطار ذهبي */
+  text-shadow: 0 0 20px rgba(212, 175, 55, 1), 0 0 40px rgba(212, 175, 55, 0.6) !important; /* توهج ذهبي */
+  font-size: 2.5rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.3em !important;
+  /* الدوران 3D ليعطي تأثير حلقة زحل */
+  animation: spinOpposite 12s linear infinite !important;
+  transform-style: preserve-3d !important;
+  backface-visibility: visible !important;
+}
+
+@keyframes spinOpposite {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(-360deg); }
+}
