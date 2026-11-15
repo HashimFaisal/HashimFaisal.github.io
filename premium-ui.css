@@ -956,3 +956,39 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
     letter-spacing: 0.4em;
   }
 }
+
+/* === Nuvio Hero Globe V2: Rotating Night Earth with Gold Lights === */
+.visual-globe {
+  background: radial-gradient(circle at 50% 50%, #0a0a0a 0%, #000000 100%) !important;
+  box-shadow: 
+    0 0 60px rgba(212, 175, 55, 0.2), 
+    inset 0 0 40px rgba(0,0,0,1),
+    inset -15px -15px 40px rgba(0,0,0,0.9),
+    inset 10px 10px 30px rgba(212,175,55,0.1) !important;
+  overflow: hidden !important; /* إبقاء الدوران داخل الكرة */
+  border-radius: 50% !important;
+}
+
+.globe-image {
+  background-image: url("https://cdn.jsdelivr.net/gh/mrdoob/three.js@master/examples/textures/planets/earth_lights_2048.png") !important;
+  background-size: 200% 100% !important;
+  background-repeat: repeat-x !important;
+  filter: sepia(1) hue-rotate(-20deg) saturate(3) brightness(1.8) !important;
+  opacity: 0.9 !important;
+  mix-blend-mode: screen !important; /* يجعل الخلفية السوداء شفافة */
+  animation: spinGlobe 45s linear infinite !important; /* دوران 360 درجة */
+  position: absolute;
+  inset: 0;
+}
+
+@keyframes spinGlobe {
+  0% { background-position: 0% center; }
+  100% { background-position: -200% center; }
+}
+
+.globe-overlay {
+  background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.15), transparent 60%) !important;
+  box-shadow: 
+    inset -25px -25px 50px rgba(0, 0, 0, 0.95), 
+    inset 10px 10px 30px rgba(212, 175, 55, 0.2) !important;
+}
