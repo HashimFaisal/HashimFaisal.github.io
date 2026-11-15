@@ -59,7 +59,7 @@ const translations = {
   'جارٍ تحميل روابط التنزيل...': 'Loading download links...',
   'تحديث': 'Update',
   'نسخ الرابط': 'Copy Link',
-  'فتح في Nuvio': 'Open in Nuvio',
+  'تثبيت في Nuvio': 'Install in Nuvio',
   'تم نسخ رابط المشاركة': 'Share link copied',
   'فتح Manifest ↗': 'Open Manifest ↗',
   'جارٍ التحقق': 'Checking',
@@ -312,6 +312,7 @@ function installShareButtons() {
       ? 'stremio'
       : 'nuvio';
     if (type === 'nuvio') card.classList.add('nuvio-plugin-card');
+    else card.classList.add('nuvio-addon-card');
 
     const deepLink = type === 'nuvio'
       ? buildNuvioPluginDeepLink(manifestUrl)
@@ -324,8 +325,8 @@ function installShareButtons() {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'copy-btn share-btn';
-    button.textContent = t('فتح في Nuvio');
-    button.setAttribute('aria-label', `${t('فتح في Nuvio')} ${name}`);
+    button.textContent = t('تثبيت في Nuvio');
+    button.setAttribute('aria-label', `${t('تثبيت في Nuvio')} ${name}`);
 
     button.addEventListener('click', async () => {
       let copied = false;

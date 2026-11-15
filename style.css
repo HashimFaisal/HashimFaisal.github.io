@@ -1110,3 +1110,26 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
   min-height: 48px;
   text-align: center;
 }
+
+/* Nuvio Add-ons: one centered full-width install action */
+.nuvio-addon-card .manifest-label,
+.nuvio-addon-card .manifest-url,
+.nuvio-addon-card .card-actions > .copy-btn:not(.share-btn),
+.nuvio-addon-card .card-actions > a {
+  display: none !important;
+}
+
+.nuvio-addon-card .card-actions {
+  width: 100%;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.nuvio-addon-card .share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  text-align: center;
+}
