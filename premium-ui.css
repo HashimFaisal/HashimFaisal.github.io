@@ -1270,10 +1270,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 /* === Nuvio Hero Globe V11: The Bulletproof Fix === */
 
 /* 1. جعل النجوم تغطي المربع الرئيسي بالكامل */
-.hero {
-  position: relative !important;
-  overflow: hidden !important; /* لضمان بقاء النجوم داخل المربع */
-}
+.hero { position: relative !important; overflow: visible !important; }
 
 .hero::before {
   content: "";
@@ -1359,6 +1356,11 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 
 /* === Nuvio Hero Globe: CLEAN TEST ANIMATION === */
+
+
+
+
+/* === Nuvio Hero Globe: TRUE 3D FLIP ANIMATION === */
 .visual-caption {
     position: absolute !important;
     top: 50% !important;
@@ -1369,18 +1371,22 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
     justify-content: center !important;
     z-index: 99 !important;
     pointer-events: none !important;
+    perspective: 1000px !important; /* يعطي إحساس العمق */
 }
 .visual-caption span {
-    display: block !important;
-    color: #d4af37 !important; /* لون ذهبي بسيط */
+    display: inline-block !important;
+    color: #d4af37 !important; /* لون ذهبي صلب */
     font-size: 2.5rem !important;
     font-weight: 900 !important;
     letter-spacing: 0.3em !important;
-    animation: cleanSpin 3s infinite linear !important;
-    transform-origin: center center !important;
+    animation: true3DFlip 6s linear infinite !important;
+    transform-style: preserve-3d !important;
+    backface-visibility: visible !important;
+    -webkit-backface-visibility: visible !important;
+    will-change: transform !important;
 }
-@keyframes cleanSpin {
-    0% { transform: scaleX(1); }
-    50% { transform: scaleX(0.1); } /* يتضيق ليدور */
-    100% { transform: scaleX(1); }
+
+@keyframes true3DFlip {
+    0% { transform: rotateX(15deg) rotateY(0deg); }
+    100% { transform: rotateX(15deg) rotateY(360deg); }
 }
