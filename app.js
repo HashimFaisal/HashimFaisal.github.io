@@ -12,17 +12,6 @@ try {
 } catch (error) {
   console.warn('Language preference unavailable:', error);
 }
-let currentTheme = 'dark';
-try {
-  const savedTheme = localStorage.getItem('nuvio-theme');
-  if (['dark', 'light'].includes(savedTheme)) {
-    currentTheme = savedTheme;
-    localStorage.setItem('nuvio-theme', savedTheme);
-  }
-} catch (error) {
-  console.warn('Theme preference unavailable:', error);
-}
-
 let latestReport = null;
 
 const translations = {
@@ -190,7 +179,6 @@ function applyLanguage() {
     renderDownloads(latestReport);
   }
 
-  applyTheme();
 }
 
 $('#language-toggle').addEventListener('click', () => {
@@ -204,38 +192,6 @@ $('#language-toggle').addEventListener('click', () => {
 
   applyLanguage();
 });
-
-function applyTheme() {
-  document.documentElement.dataset.theme = currentTheme;
-
-  const toggle = $('#theme-toggle');
-  if (toggle) {
-    toggle.textContent = currentTheme === 'dark' ? '☀️' : '🌙';
-    toggle.setAttribute(
-      'aria-label',
-      currentTheme === 'dark'
-        ? (currentLang === 'ar' ? 'تفعيل الوضع الفاتح' : 'Switch to light mode')
-        : (currentLang === 'ar' ? 'تفعيل الوضع الداكن' : 'Switch to dark mode')
-    );
-    toggle.title = currentTheme === 'dark'
-      ? (currentLang === 'ar' ? 'الوضع الفاتح' : 'Light Mode')
-      : (currentLang === 'ar' ? 'الوضع الداكن' : 'Dark Mode');
-  }
-}
-
-$('#theme-toggle').addEventListener('click', () => {
-  currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-  try {
-    localStorage.setItem('nuvio-theme', currentTheme);
-  } catch (error) {
-    console.warn('Theme preference could not be saved:', error);
-  }
-
-  applyTheme();
-});
-
-applyTheme();
 
 function toast(message) {
   const node = $('#toast');
