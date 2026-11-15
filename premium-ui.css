@@ -1083,3 +1083,51 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
     animation: none;
   }
 }
+
+
+/* NUVIO HERO TITLE — upper corner layout */
+.hero-copy {
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: clamp(100px, 12vw, 138px);
+}
+
+.hero-copy h1 {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  margin: 0;
+  color: #f1dfb9;
+  font-size: clamp(27px, 3.2vw, 39px);
+  font-weight: 800;
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-align: right;
+}
+
+.hero-copy h1 span {
+  background: linear-gradient(100deg, #f0dba9, #b78b43 75%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+@media (max-width: 760px) {
+  .hero-copy {
+    display: block;
+    padding-top: 0;
+  }
+
+  .hero-copy h1 {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin: 0 0 20px;
+    font-size: clamp(27px, 7vw, 36px);
+    line-height: 1.55;
+    text-align: right;
+  }
+}
