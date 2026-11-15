@@ -311,6 +311,7 @@ function installShareButtons() {
     const type = card.querySelector('.type-tag')?.classList.contains('external')
       ? 'stremio'
       : 'nuvio';
+    if (type === 'nuvio') card.classList.add('nuvio-plugin-card');
 
     const deepLink = type === 'nuvio'
       ? buildNuvioPluginDeepLink(manifestUrl)
