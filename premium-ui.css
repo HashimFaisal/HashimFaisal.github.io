@@ -1532,3 +1532,26 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
     transform: rotateX(15deg) rotateY(-360deg); /* الدوران الكامل عكس الأرض */
   }
 }
+
+/* === Nuvio Hero Globe V15: Bulletproof 3D Orbit Animation === */
+
+.visual-caption span {
+  /* إجبار الحركة بإضافة بادئة الويب */
+  -webkit-animation: nuvioOrbit 8s linear infinite !important;
+  animation: nuvioOrbit 8s linear infinite !important;
+  transform-style: preserve-3d !important;
+  backface-visibility: visible !important;
+  -webkit-backface-visibility: visible !important;
+  will-change: transform !important;
+}
+
+/* حركة جديدة كلياً لضمان عدم التعارض */
+@-webkit-keyframes nuvioOrbit {
+  0% { -webkit-transform: rotateY(0deg) rotateX(10deg); }
+  100% { -webkit-transform: rotateY(360deg) rotateX(10deg); }
+}
+
+@keyframes nuvioOrbit {
+  0% { transform: rotateY(0deg) rotateX(10deg); }
+  100% { transform: rotateY(360deg) rotateX(10deg); }
+}
