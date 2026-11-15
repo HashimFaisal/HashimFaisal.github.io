@@ -1,57 +1,10 @@
 {
-  "checked_at": "2026-11-15T02:58:36.121753+00:00",
-  "ok": true,
-  "passed": 11,
+  "checked_at": "2026-11-15T10:41:20.323649+00:00",
+  "ok": false,
+  "passed": 6,
   "total": 11,
-  "release": {
-    "tag": "0.6.12-beta",
-    "name": "0.6.12-beta",
-    "published_at": "2026-11-12T00:37:11Z",
-    "html_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/0.6.12-beta",
-    "assets": [
-      {
-        "label": "ARM64",
-        "name": "androidApp-full-arm64-v8a-release.apk",
-        "size_bytes": 47213791,
-        "uploaded_at": "2026-11-12T00:01:58Z",
-        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-arm64-v8a-release.apk",
-        "ok": true
-      },
-      {
-        "label": "ARMv7",
-        "name": "androidApp-full-armeabi-v7a-release.apk",
-        "size_bytes": 45564341,
-        "uploaded_at": "2026-11-12T00:01:58Z",
-        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-armeabi-v7a-release.apk",
-        "ok": true
-      },
-      {
-        "label": "x86",
-        "name": "androidApp-full-x86-release.apk",
-        "size_bytes": 47631145,
-        "uploaded_at": "2026-11-12T00:01:58Z",
-        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-x86-release.apk",
-        "ok": true
-      },
-      {
-        "label": "x86_64",
-        "name": "androidApp-full-x86_64-release.apk",
-        "size_bytes": 48604032,
-        "uploaded_at": "2026-11-12T00:01:58Z",
-        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-x86_64-release.apk",
-        "ok": true
-      },
-      {
-        "label": "iOS IPA",
-        "name": "nuvio-0.6.12-full-release.ipa",
-        "size_bytes": 69852349,
-        "uploaded_at": "2026-11-12T00:01:58Z",
-        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/nuvio-0.6.12-full-release.ipa",
-        "ok": true
-      }
-    ]
-  },
-  "release_error": null,
+  "release": null,
+  "release_error": "HTTP Error 403: rate limit exceeded",
   "checks": [
     {
       "name": "ALL-IN-ONE",
@@ -110,42 +63,32 @@
     {
       "name": "ARM64",
       "type": "download",
-      "ok": true,
-      "http_status": 200,
-      "size_bytes": 47213791,
-      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-arm64-v8a-release.apk"
+      "ok": false,
+      "error": "HTTP Error 403: rate limit exceeded"
     },
     {
       "name": "ARMv7",
       "type": "download",
-      "ok": true,
-      "http_status": 200,
-      "size_bytes": 45564341,
-      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-armeabi-v7a-release.apk"
+      "ok": false,
+      "error": "HTTP Error 403: rate limit exceeded"
     },
     {
       "name": "x86",
       "type": "download",
-      "ok": true,
-      "http_status": 200,
-      "size_bytes": 47631145,
-      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-x86-release.apk"
+      "ok": false,
+      "error": "HTTP Error 403: rate limit exceeded"
     },
     {
       "name": "x86_64",
       "type": "download",
-      "ok": true,
-      "http_status": 200,
-      "size_bytes": 48604032,
-      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/androidApp-full-x86_64-release.apk"
+      "ok": false,
+      "error": "HTTP Error 403: rate limit exceeded"
     },
     {
       "name": "iOS IPA",
       "type": "download",
-      "ok": true,
-      "http_status": 200,
-      "size_bytes": 69852349,
-      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/0.6.12-beta/nuvio-0.6.12-full-release.ipa"
+      "ok": false,
+      "error": "HTTP Error 403: rate limit exceeded"
     }
   ]
 }
