@@ -64,36 +64,6 @@
   dashboard.id = 'nuvio-dashboard';
   dashboard.className = 'nuvio-dashboard';
   dashboard.innerHTML = `
-    <div class="nuvio-dashboard-heading">
-      <div>
-        <span class="nuvio-kicker" id="nuvio-kicker"></span>
-        <h2 id="nuvio-dashboard-title"></h2>
-        <p id="nuvio-dashboard-subtitle"></p>
-      </div>
-      <span class="nuvio-dashboard-mark">N / 01</span>
-    </div>
-    <div class="nuvio-overview" id="nuvio-overview">
-      <article class="nuvio-overview-card">
-        <span data-overview-label="health"></span>
-        <strong data-overview-source="health-state">—</strong>
-        <small>LIVE CHECK</small>
-      </article>
-      <article class="nuvio-overview-card">
-        <span data-overview-label="addons"></span>
-        <strong data-overview-source="addon-count">—</strong>
-        <small>ADD-ON SOURCES</small>
-      </article>
-      <article class="nuvio-overview-card">
-        <span data-overview-label="release"></span>
-        <strong data-overview-source="release-version">—</strong>
-        <small>NUVIO MOBILE</small>
-      </article>
-      <article class="nuvio-overview-card">
-        <span data-overview-label="downloads"></span>
-        <strong data-overview-source="download-count">—</strong>
-        <small>RELEASE ASSETS</small>
-      </article>
-    </div>
     <div class="nuvio-launch-grid" id="nuvio-launch-grid"></div>
   `;
   hero.after(dashboard);
@@ -105,18 +75,6 @@
   function renderDashboard() {
     const lang = language();
     const copy = labels[lang];
-
-    $('#nuvio-kicker').textContent = copy.eyebrow;
-    $('#nuvio-dashboard-title').textContent = copy.title;
-    $('#nuvio-dashboard-subtitle').textContent = copy.subtitle;
-
-    const overviewLabels = lang === 'ar'
-      ? { health: 'حالة النظام', addons: 'الإضافات المفحوصة', release: 'أحدث إصدار', downloads: 'ملفات التنزيل' }
-      : { health: 'System health', addons: 'Checked add-ons', release: 'Latest release', downloads: 'Download files' };
-
-    $$('[data-overview-label]').forEach(node => {
-      node.textContent = overviewLabels[node.dataset.overviewLabel];
-    });
 
     $('#nuvio-launch-grid').innerHTML = Object.entries(views).map(([id]) => {
       const item = copy[id];
@@ -200,24 +158,6 @@
     });
   });
 
-  function syncOverview() {
-    $$('[data-overview-source]').forEach(node => {
-      const source = document.getElementById(node.dataset.overviewSource);
-      if (source) node.textContent = source.textContent.trim() || '—';
-    });
-  }
-
-  const overviewObserver = new MutationObserver(syncOverview);
-  ['health-state', 'addon-count', 'release-version', 'download-count'].forEach(id => {
-    const source = document.getElementById(id);
-    if (source) overviewObserver.observe(source, {
-      childList: true,
-      characterData: true,
-      subtree: true
-    });
-  });
-
   renderDashboard();
-  syncOverview();
   showView(views[location.hash.slice(1)] ? location.hash.slice(1) : 'home');
 })();
