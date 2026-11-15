@@ -242,7 +242,7 @@ function toast(message) {
   node.textContent = message;
   node.classList.add('show');
   clearTimeout(toast.timer);
-  toast.timer = setTimeout(() => node.classList.remove('show'), 2200);
+  toast.timer = setTimeout(() => node.classList.remove('show'), 3000);
 }
 
 $$('.copy-btn').forEach(button => {
