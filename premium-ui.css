@@ -1402,3 +1402,59 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   0% { transform: rotateY(0deg); }
   100% { transform: rotateY(360deg); }
 }
+
+/* === Nuvio Hero Globe V11: The Bulletproof Fix === */
+
+/* 1. جعل النجوم تغطي المربع الرئيسي بالكامل */
+.hero {
+  position: relative !important;
+  overflow: hidden !important; /* لضمان بقاء النجوم داخل المربع */
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, #ffffff, transparent),
+    radial-gradient(3px 3px at 30% 60%, #d4af37, transparent),
+    radial-gradient(1.5px 1.5px at 50% 30%, #ffffff, transparent),
+    radial-gradient(2px 2px at 70% 80%, #ffffff, transparent),
+    radial-gradient(3px 3px at 90% 10%, #d4af37, transparent),
+    radial-gradient(1.5px 1.5px at 20% 80%, #ffffff, transparent),
+    radial-gradient(2px 2px at 80% 40%, #ffffff, transparent);
+  background-size: 250px 250px;
+  animation: twinkleStarsV11 3s infinite alternate;
+  z-index: 0; /* خلف كل المحتوى */
+  pointer-events: none;
+}
+
+/* رفع محتوى المربع فوق النجوم */
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* 2. نص NUVIO بلون صلب ودوران 3D مضمون */
+.visual-caption span {
+  display: inline-block !important;
+  color: #d4af37 !important;
+  -webkit-text-fill-color: #d4af37 !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  font-size: 2.2rem !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.4em !important;
+  text-shadow: 0 0 15px rgba(212, 175, 55, 1) !important;
+  animation: spinText3D 10s linear infinite !important;
+}
+
+@keyframes twinkleStarsV11 {
+  0% { opacity: 0.4; }
+  100% { opacity: 1; }
+}
+
+@keyframes spinText3D {
+  0% { transform: rotateY(0deg); }
+  100% { transform: rotateY(360deg); }
+}
