@@ -89,20 +89,13 @@
     }).join('');
   }
 
-  function addBackButton(section) {
-    if (section.querySelector('.nuvio-view-back')) return;
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'nuvio-view-back';
-    button.innerHTML = '<span aria-hidden="true">←</span><span class="nuvio-back-label"></span>';
-    button.addEventListener('click', () => showView('home', true));
-    section.prepend(button);
+  let scrollSaveFrame = 0;
+
+  function currentView() {
+    return document.body.dataset.nuvioView || 'home';
   }
 
-  Object.values(views).forEach(addBackButton);
-
-  function showView(id, updateHistory = false) {
-    const target = id === 'home' ? 'home' : (views[id] ? id : 'home');
+  function renderView(target) {
     const home = target === 'home';
 
     hero.hidden = !home;
@@ -121,33 +114,187 @@
     $$('.topbar nav a').forEach(link => {
       const active = !home && link.hash === `#${target}`;
       link.classList.toggle('nuvio-nav-active', active);
+
       if (active) link.setAttribute('aria-current', 'page');
       else link.removeAttribute('aria-current');
     });
 
-    if (updateHistory) {
-      const hash = home ? '#home' : `#${target}`;
-      history.pushState({ nuvioView: target }, '', hash);
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
     document.body.dataset.nuvioView = target;
   }
 
+  function focusView(target) {
+    const section = target === 'home' ? hero : views[target];
+    if (!section) return;
+
+    const heading = target === 'home'
+      ? section.querySelector('h1')
+      : (section.querySelector('h1, h2, h3') || section);
+
+    if (!heading.hasAttribute('tabindex')) {
+      heading.setAttribute('tabindex', '-1');
+    }
+
+    try {
+      heading.focus({ preventScroll: true });
+    } catch {
+      heading.focus();
+    }
+  }
+
+  function restoreScroll(position = 0) {
+    const html = document.documentElement;
+    const previousBehavior = html.style.scrollBehavior;
+
+    html.style.scrollBehavior = 'auto';
+    window.scrollTo(0, Math.max(0, Number(position) || 0));
+
+    requestAnimationFrame(() => {
+      html.style.scrollBehavior = previousBehavior;
+    });
+  }
+
+  function saveCurrentEntry() {
+    const state = history.state || {};
+
+    history.replaceState({
+      ...state,
+      nuvioApp: true,
+      nuvioView: currentView(),
+      nuvioScrollY: window.scrollY,
+      nuvioIndex: Number(state.nuvioIndex) || 0
+    }, '', location.href);
+  }
+
+  function navigate(target) {
+    if (target !== 'home' && !views[target]) return;
+    if (target === currentView()) return;
+
+    saveCurrentEntry();
+
+    const index = Number(history.state?.nuvioIndex) || 0;
+
+    history.pushState({
+      nuvioApp: true,
+      nuvioView: target,
+      nuvioScrollY: 0,
+      nuvioIndex: index + 1
+    }, '', `#${target}`);
+
+    renderView(target);
+    focusView(target);
+    restoreScroll(0);
+  }
+
+  let backPending = false;
+
+  function goBack() {
+    if (backPending) return;
+
+    const state = history.state || {};
+
+    if (state.nuvioApp && Number(state.nuvioIndex) > 0) {
+      backPending = true;
+      history.back();
+      return;
+    }
+
+    if (currentView() !== 'home') {
+      history.replaceState({
+        nuvioApp: true,
+        nuvioView: 'home',
+        nuvioScrollY: 0,
+        nuvioIndex: 0
+      }, '', '#home');
+
+      renderView('home');
+      focusView('home');
+      restoreScroll(0);
+    }
+  }
+
+  function addBackButton(section) {
+    if (section.querySelector('.nuvio-view-back')) return;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'nuvio-view-back';
+    button.innerHTML = '<span aria-hidden="true">←</span><span class="nuvio-back-label"></span>';
+    button.addEventListener('click', goBack);
+    section.prepend(button);
+  }
+
+  Object.values(views).forEach(addBackButton);
+
+  renderDashboard();
+
+  history.scrollRestoration = 'manual';
+
+  const initialHash = location.hash.slice(1);
+  const initialView = views[initialHash] ? initialHash : 'home';
+  const initialState = history.state || {};
+  const initialScroll = initialState.nuvioApp &&
+    initialState.nuvioView === initialView
+      ? initialState.nuvioScrollY
+      : window.scrollY;
+
+  history.replaceState({
+    ...initialState,
+    nuvioApp: true,
+    nuvioView: initialView,
+    nuvioScrollY: initialScroll,
+    nuvioIndex: Number(initialState.nuvioIndex) || 0
+  }, '', location.href);
+
+  renderView(initialView);
+  restoreScroll(initialScroll);
+
   document.addEventListener('click', event => {
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey
+    ) return;
+
     const link = event.target.closest('a[href^="#"]');
-    if (!link) return;
+    if (
+      !link ||
+      (link.target && link.target !== '_self') ||
+      link.hasAttribute('download')
+    ) return;
 
     const id = link.getAttribute('href').slice(1);
-    if (id === 'home' || views[id]) {
+
+    if (!id || id === 'home' || views[id]) {
       event.preventDefault();
-      showView(id || 'home', true);
+      navigate(id && views[id] ? id : 'home');
     }
   });
 
-  window.addEventListener('popstate', () => {
-    showView(location.hash.slice(1) || 'home', false);
+  window.addEventListener('popstate', event => {
+    backPending = false;
+
+    const state = event.state || {};
+    const hash = location.hash.slice(1);
+    const target = views[state.nuvioView]
+      ? state.nuvioView
+      : (views[hash] ? hash : 'home');
+
+    renderView(target);
+    focusView(target);
+    restoreScroll(state.nuvioScrollY || 0);
   });
+
+  window.addEventListener('scroll', () => {
+    if (scrollSaveFrame) return;
+
+    scrollSaveFrame = requestAnimationFrame(() => {
+      scrollSaveFrame = 0;
+      saveCurrentEntry();
+    });
+  }, { passive: true });
 
   $('#language-toggle')?.addEventListener('click', () => {
     requestAnimationFrame(() => {
@@ -158,6 +305,4 @@
     });
   });
 
-  renderDashboard();
-  showView(views[location.hash.slice(1)] ? location.hash.slice(1) : 'home');
 })();
