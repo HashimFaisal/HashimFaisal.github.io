@@ -1757,3 +1757,8 @@ html[dir="rtl"] .nuvio-launch-open b {
   border-color: transparent;
   box-shadow: none;
 }
+
+/* Hide only the top navigation links */
+.topbar > nav {
+  display: none !important;
+}
