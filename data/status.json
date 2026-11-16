@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-16T02:11:51.225660+00:00",
+  "checked_at": "2026-11-16T07:01:43.886528+00:00",
   "ok": true,
   "passed": 11,
   "total": 11,
@@ -51,6 +51,13 @@
         "ok": true
       }
     ]
+  },
+  "stable_release": {
+    "tag": "1.0.0",
+    "app_version": "1.0.0",
+    "name": "1.0.0",
+    "published_at": "2026-11-15T18:28:31Z",
+    "html_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.0.0"
   },
   "release_error": null,
   "checks": [
