@@ -494,8 +494,9 @@ function renderDownloads(report) {
     return;
   }
 
-  $('#release-heading').textContent = release.tag || release.name;
-  $('#release-version').textContent = release.tag || '—';
+  const appVersion = release.app_version || '—';
+  $('#release-heading').textContent = appVersion;
+  $('#release-version').textContent = appVersion;
   $('#release-date').textContent = formatDate(release.published_at);
   $('#published-at').textContent = formatDate(release.published_at);
 
@@ -505,11 +506,14 @@ function renderDownloads(report) {
   ).length;
   $('#download-grid').innerHTML = assets.map(asset => {
     const downloadUrl = safeHttpsUrl(asset.download_url);
+    const displayName = asset.label === 'iOS IPA'
+      ? 'iOS IPA package'
+      : (asset.name || t('ملف غير متاح'));
     const ready = Boolean(asset.ok && downloadUrl);
     return `<article class="download-card">
       <strong>Nuvio ${escapeHTML(asset.label || 'Download')}</strong>
-      <small class="muted">${t('الإصدار')}: ${escapeHTML(release.tag || release.name || '—')}</small>
-      <small>${escapeHTML(asset.name || t('ملف غير متاح'))} · ${formatBytes(asset.size_bytes)}</small>
+      <small class="muted">${t('الإصدار')}: ${escapeHTML(appVersion)}</small>
+      <small>${escapeHTML(displayName)} · ${formatBytes(asset.size_bytes)}</small>
       <small class="muted">${asset.uploaded_at
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
         : t('تاريخ الرفع غير متاح')}</small>

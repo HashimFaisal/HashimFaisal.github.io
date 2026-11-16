@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 
 REPO = "NuvioMedia/NuvioMobile"
-API = f"https://api.github.com/repos/{REPO}/releases/latest"
+API = f"https://api.github.com/repos/{REPO}/releases?per_page=100"
 
 MANIFESTS = {
     "ALL-IN-ONE": "https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/refs/heads/main/manifest.json",
@@ -117,7 +117,24 @@ def main():
 
     try:
         with fetch(API) as response:
-            release = json.loads(response.read().decode("utf-8"))
+            releases = json.loads(response.read().decode("utf-8"))
+
+        if not isinstance(releases, list):
+            raise ValueError("GitHub releases response is not a list")
+
+        beta_releases = [
+            item for item in releases
+            if not item.get("draft")
+            and (item.get("tag_name") or "").endswith("-beta")
+        ]
+
+        if not beta_releases:
+            raise ValueError("No published Beta release was found")
+
+        release = max(
+            beta_releases,
+            key=lambda item: item.get("published_at") or "",
+        )
     except Exception as exc:
         release_error = str(exc)
 
@@ -132,6 +149,7 @@ def main():
 
         release_data = {
             "tag": tag,
+            "app_version": tag[:-5] if tag.endswith("-beta") else tag,
             "name": release.get("name") or tag,
             "published_at": release.get("published_at"),
             "html_url": release.get("html_url"),
@@ -178,13 +196,13 @@ def main():
                     "label": label,
                     "name": filename or "IPA asset not found",
                     "ok": False,
-                    "error": "Asset not found in latest release",
+                    "error": "Asset not found in selected Beta release",
                 }
                 results.append({
                     "name": label,
                     "type": "download",
                     "ok": False,
-                    "error": "Asset not found in latest release",
+                    "error": "Asset not found in selected Beta release",
                 })
 
             release_data["assets"].append(entry)
