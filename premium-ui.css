@@ -1369,9 +1369,9 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   box-shadow: inset 0 1px rgba(255,255,255,.035), 0 18px 42px rgba(0,0,0,.26);
 }
 
-/* Cinematic Earth — warm metallic atmosphere */
+/* Cinematic Earth — cool blue atmospheric rim */
 .visual-globe {
-  border-color: rgba(210,177,112,.48);
+  border-color: rgba(110,190,255,.38);
   box-shadow:
     0 0 32px rgba(90,180,245,.18),
     0 0 75px rgba(55,140,220,.10),
@@ -1380,24 +1380,24 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 }
 
 .globe-image {
-  filter: brightness(.82) contrast(1.2) saturate(.78) sepia(.12);
+  filter: brightness(1.12) contrast(1.16) saturate(1.0) sepia(0);
 }
 
 .globe-overlay {
   background:
-    radial-gradient(ellipse at 32% 24%, rgba(230,205,155,.12), transparent 38%),
-    radial-gradient(ellipse at 78% 72%, transparent 35%, rgba(0,0,0,.28) 72%, rgba(0,0,0,.84) 100%),
-    linear-gradient(90deg, rgba(0,0,0,.30), transparent 28%, transparent 68%, rgba(0,0,0,.34));
+    radial-gradient(ellipse at 32% 24%, rgba(230,215,180,.07), transparent 38%),
+    radial-gradient(ellipse at 78% 72%, transparent 42%, rgba(0,0,0,.18) 76%, rgba(0,0,0,.68) 100%),
+    linear-gradient(90deg, rgba(0,0,0,.16), transparent 28%, transparent 68%, rgba(0,0,0,.22));
   box-shadow:
-    inset -30px -15px 45px rgba(0,0,0,.82),
-    inset 8px 5px 20px rgba(210,177,112,.10);
+    inset -24px -12px 36px rgba(0,0,0,.68),
+    inset 8px 5px 20px rgba(130,195,255,.10);
 }
 
 .visual-globe::after {
-  border-color: rgba(229,204,150,.30);
+  border-color: rgba(125,195,255,.32);
   box-shadow:
-    0 0 17px rgba(198,161,91,.18),
-    inset 0 0 22px rgba(198,161,91,.12);
+    0 0 17px rgba(90,175,245,.22),
+    inset 0 0 22px rgba(95,165,235,.16);
 }
 
 .nuvio-orbit-track {
@@ -1702,4 +1702,58 @@ input:focus-visible {
 /* NUVIO — Direction-aware explore arrow */
 html[dir="rtl"] .nuvio-launch-open b {
   transform: scaleX(-1);
+}
+
+/* NUVIO — All small status and changelog dots in green */
+#status .report-freshness::before {
+  background: #42c879;
+  box-shadow: 0 0 9px rgba(66, 200, 121, .55);
+}
+
+#changelog .changelog-entry .changelog-dot {
+  background: #42c879;
+  box-shadow: 0 0 12px rgba(66, 200, 121, .55);
+}
+
+/* NUVIO — Black Marble 4K nighttime globe video */
+.globe-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  background: #020611;
+}
+
+.globe-image {
+  display: none;
+}
+
+.globe-overlay {
+  z-index: 1;
+}
+
+.visual-globe::after {
+  z-index: 2;
+}
+
+/* NUVIO — Enlarge the Earth inside its blue atmospheric rim */
+.globe-video {
+  transform: scale(1.45);
+  transform-origin: center center;
+}
+
+
+/* NUVIO — Remove globe outline, preserve blue atmospheric glow */
+.visual-globe {
+  border-color: transparent;
+}
+
+.visual-globe::after {
+  border-color: transparent;
+  box-shadow: none;
 }
