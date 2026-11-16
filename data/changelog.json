@@ -28,5 +28,26 @@
     "type": "release",
     "title": "صدور تحديث Nuvio: 0.6.13-beta",
     "detail": "الإصدار السابق كان 1.0.0."
+  },
+  {
+    "date": "2026-11-16T09:51:32.429303+00:00",
+    "type": "version",
+    "title": "تحديث إصدار Rodrigo's Catalog",
+    "detail": "من 1.20261109.0901 إلى 1.20261116.0901.",
+    "source": "Rodrigo's Catalog",
+    "source_url": "https://digok.github.io/nuvio-catalog/manifest.json",
+    "old_version": "1.20261109.0901",
+    "new_version": "1.20261116.0901"
+  },
+  {
+    "date": "2026-11-16T09:51:32.429303+00:00",
+    "type": "release",
+    "channel": "stable",
+    "title": "صدور إصدار مستقر من Nuvio: 1.1.0-beta.1",
+    "detail": "الإصدار المستقر السابق كان 1.0.0.",
+    "source": "Nuvio App",
+    "source_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.1.0-beta.1",
+    "old_version": "1.0.0",
+    "new_version": "1.1.0-beta.1"
   }
 ]
