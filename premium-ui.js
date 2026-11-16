@@ -84,7 +84,7 @@
           <span class="nuvio-launch-code">${item[2]}</span>
           <strong>${item[0]}</strong>
           <span class="nuvio-launch-description">${item[1]}</span>
-          <span class="nuvio-launch-open">${copy.open} <b>↗</b></span>
+          <span class="nuvio-launch-open">${copy.open}<b aria-hidden="true">↗</b></span>
         </a>`;
     }).join('');
   }
