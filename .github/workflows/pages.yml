@@ -45,6 +45,7 @@ jobs:
           cp premium-ui.css premium-ui.js public/
           cp data/status.json public/data/
           if [ -f data/changelog.json ]; then cp data/changelog.json public/data/; fi
+          if [ -f data/updates.json ]; then cp data/updates.json public/data/; fi
           if [ -d assets ]; then cp -R assets/. public/assets/; fi
 
       - name: Version local CSS and JavaScript assets

@@ -129,6 +129,8 @@ function translateStaticText() {
   while (walker.nextNode()) nodes.push(walker.currentNode);
 
   nodes.forEach(node => {
+    if (node.parentElement?.closest('#live-updates')) return;
+
     const original = node.nodeValue;
     const trimmed = original.trim();
     if (!trimmed) return;
@@ -151,6 +153,7 @@ function applyLanguage() {
     : 'Hashim Faisal — Nuvio Control Center';
 
   translateStaticText();
+  loadLiveUpdates();
 
   const changelogList = $('#changelog-list');
   if (changelogList && changelogList.children.length) {
@@ -566,6 +569,94 @@ function escapeHTML(value) {
     '"': '&quot;',
     "'": '&#39;'
   })[char]);
+}
+
+
+let liveUpdatesRequestId = 0;
+
+async function loadLiveUpdates() {
+  const requestId = ++liveUpdatesRequestId;
+  const label = $('#live-updates-label');
+  const title = $('#live-updates-title');
+  const description = $('#live-updates-description');
+  const link = $('#live-updates-link');
+
+  if (!label || !title || !description || !link) return;
+
+  const isArabic = currentLang === 'ar';
+
+  function showWelcome() {
+    if (requestId !== liveUpdatesRequestId) return;
+
+    label.textContent = isArabic ? 'رسالة ترحيبية' : 'WELCOME';
+    title.textContent = isArabic
+      ? 'Nuvio — حيث تلتقي التقنية بالإبداع، وتبدأ تجربة مختلفة.'
+      : 'Nuvio — Where technology meets creativity, a different experience begins.';
+    description.textContent = '';
+    link.hidden = true;
+    link.removeAttribute('href');
+  }
+
+  try {
+    const response = await fetch(
+      `data/updates.json?t=${Date.now()}`,
+      { cache: 'no-store' }
+    );
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    const data = await response.json();
+    if (requestId !== liveUpdatesRequestId) return;
+
+    const now = Date.now();
+    const active = (Array.isArray(data) ? data : [])
+      .filter(item => {
+        if (!item || typeof item !== 'object') return false;
+        const expiry = Date.parse(item.expiresAt);
+        const published = Date.parse(item.publishedAt);
+        return Number.isFinite(expiry) &&
+          Number.isFinite(published) &&
+          expiry > now &&
+          published <= now &&
+          item.title && typeof item.title === 'object' &&
+          item.description && typeof item.description === 'object';
+      })
+      .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
+
+    const update = active[0];
+    if (!update) {
+      showWelcome();
+      return;
+    }
+
+    const safeUrl = new URL(update.url);
+    if (safeUrl.protocol !== 'https:') {
+      showWelcome();
+      return;
+    }
+
+    const localizedTitle = update.title[isArabic ? 'ar' : 'en'];
+    const localizedDescription = update.description[isArabic ? 'ar' : 'en'];
+
+    if (
+      typeof localizedTitle !== 'string' || !localizedTitle.trim() ||
+      typeof localizedDescription !== 'string' || !localizedDescription.trim()
+    ) {
+      showWelcome();
+      return;
+    }
+
+    label.textContent = isArabic ? 'مباشر' : 'LIVE';
+    title.textContent = localizedTitle;
+    description.textContent = localizedDescription;
+    link.textContent = isArabic ? 'التفاصيل' : 'Details';
+    link.href = safeUrl.href;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+    link.hidden = false;
+  } catch (error) {
+    showWelcome();
+    console.warn('Live updates could not be loaded:', error);
+  }
 }
 
 let changelogRequestId = 0;

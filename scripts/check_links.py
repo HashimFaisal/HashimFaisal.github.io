@@ -2,7 +2,7 @@
 import json
 import os
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
 
 REPO = "NuvioMedia/NuvioMobile"
@@ -113,6 +113,7 @@ def main():
     ]
 
     release = None
+    stable_release = None
     release_error = None
 
     try:
@@ -135,8 +136,31 @@ def main():
             beta_releases,
             key=lambda item: item.get("published_at") or "",
         )
+        stable_releases = [
+            item for item in releases
+            if not item.get("draft")
+            and not (item.get("tag_name") or "").endswith("-beta")
+        ]
+        if stable_releases:
+            stable_release = max(
+                stable_releases,
+                key=lambda item: item.get("published_at") or "",
+            )
+
     except Exception as exc:
         release_error = str(exc)
+
+    stable_release_data = None
+
+    if stable_release:
+        stable_tag = stable_release.get("tag_name", "unknown")
+        stable_release_data = {
+            "tag": stable_tag,
+            "app_version": stable_tag,
+            "name": stable_release.get("name") or stable_tag,
+            "published_at": stable_release.get("published_at"),
+            "html_url": stable_release.get("html_url"),
+        }
 
     release_data = None
 
@@ -224,6 +248,7 @@ def main():
         "passed": passed,
         "total": len(results),
         "release": release_data,
+        "stable_release": stable_release_data,
         "release_error": release_error,
         "checks": results,
     }
@@ -268,7 +293,10 @@ def main():
                 "date": now,
                 "type": "added",
                 "title": f"إضافة مصدر جديد: {name}",
-                "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام."
+                "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
+                "source": name,
+                "source_url": item.get("url"),
+                "new_version": item.get("version")
             })
             continue
 
@@ -288,7 +316,11 @@ def main():
                 "date": now,
                 "type": "version",
                 "title": f"تحديث إصدار {name}",
-                "detail": f"من {old_version} إلى {new_version}."
+                "detail": f"من {old_version} إلى {new_version}.",
+                "source": name,
+                "source_url": item.get("url"),
+                "old_version": old_version,
+                "new_version": new_version
             })
 
     old_tag = (previous_report.get("release") or {}).get("tag")
@@ -297,8 +329,28 @@ def main():
         events.append({
             "date": now,
             "type": "release",
+            "channel": "beta",
             "title": f"صدور تحديث Nuvio: {new_tag}",
-            "detail": f"الإصدار السابق كان {old_tag}."
+            "detail": f"الإصدار السابق كان {old_tag}.",
+            "source": "Nuvio App",
+            "source_url": (release_data or {}).get("html_url"),
+            "old_version": old_tag,
+            "new_version": new_tag
+        })
+
+    old_stable_tag = (previous_report.get("stable_release") or {}).get("tag")
+    new_stable_tag = (stable_release_data or {}).get("tag")
+    if new_stable_tag and old_stable_tag and new_stable_tag != old_stable_tag:
+        events.append({
+            "date": now,
+            "type": "release",
+            "channel": "stable",
+            "title": f"صدور إصدار مستقر من Nuvio: {new_stable_tag}",
+            "detail": f"الإصدار المستقر السابق كان {old_stable_tag}.",
+            "source": "Nuvio App",
+            "source_url": (stable_release_data or {}).get("html_url"),
+            "old_version": old_stable_tag,
+            "new_version": new_stable_tag
         })
 
     if not history and not events:
@@ -308,6 +360,141 @@ def main():
             "title": "بدء سجل التغييرات",
             "detail": "تم تفعيل سجل التغييرات الآلي في لوحة التحكم."
         })
+
+    # Load the live feed and retain only unexpired entries.
+    updates_path = "data/updates.json"
+    updates = []
+
+    try:
+        with open(updates_path, "r", encoding="utf-8") as updates_file:
+            loaded_updates = json.load(updates_file)
+            if isinstance(loaded_updates, list):
+                updates = loaded_updates
+    except (OSError, ValueError):
+        updates = []
+
+    now_dt = datetime.now(timezone.utc)
+    active_updates = []
+
+    for update in updates:
+        if not isinstance(update, dict):
+            continue
+        raw_expiry = update.get("expiresAt")
+        if not isinstance(raw_expiry, str) or not raw_expiry.strip():
+            continue
+
+        try:
+            expiry = datetime.fromisoformat(
+                raw_expiry.replace("Z", "+00:00")
+            )
+            if expiry.tzinfo is None:
+                expiry = expiry.replace(tzinfo=timezone.utc)
+            if expiry > now_dt:
+                active_updates.append(update)
+        except (TypeError, ValueError):
+            continue
+
+    updates = active_updates
+
+    # Convert real source changes into bilingual live news.
+    plugin_names = {"CinemaBox", "Cinemana", "OpenSubtitles", "Cinemeta"}
+    addon_names = {"ALL-IN-ONE", "Rodrigo's Catalog"}
+    known_ids = {item.get("id") for item in updates if isinstance(item, dict)}
+
+    for event in events:
+        event_type = event.get("type")
+        source = event.get("source")
+        version = event.get("new_version")
+        source_url = event.get("source_url")
+
+        if event_type == "release":
+            channel = event.get("channel", "beta")
+            category = "app"
+
+            if channel == "stable":
+                title_ar = f"إصدار مستقر جديد من Nuvio: {version}"
+                title_en = f"New Nuvio stable release: {version}"
+                desc_ar = f"أصبح الإصدار المستقر من Nuvio {version} متاحاً."
+                desc_en = f"Nuvio stable version {version} is now available."
+            else:
+                title_ar = f"نسخة تجريبية جديدة من Nuvio: {version}"
+                title_en = f"New Nuvio beta release: {version}"
+                desc_ar = f"أصبحت النسخة التجريبية من Nuvio {version} متاحة للتجربة."
+                desc_en = f"Nuvio beta version {version} is now available for testing."
+
+            update_id = f"app:release:{channel}:{version}"
+
+        elif event_type in {"added", "version"}:
+            if not source or not isinstance(source_url, str) or not source_url.startswith("https://"):
+                continue
+            if not version or str(version).lower() == "not specified":
+                continue
+
+            if source in plugin_names:
+                category = "plugin"
+                category_ar = "إضافة"
+                category_en = "plugin"
+            elif source in addon_names:
+                category = "addon"
+                category_ar = "إضافة كتالوج"
+                category_en = "catalog add-on"
+            else:
+                continue
+
+            if event_type == "added":
+                # Do not announce the initial baseline as a new discovery.
+                if not previous_report.get("checks"):
+                    continue
+                title_ar = f"{category_ar} جديدة: {source}"
+                title_en = f"New {category_en}: {source}"
+                desc_ar = f"تمت إضافة {source} إلى مصادر Nuvio."
+                desc_en = f"{source} has been added to Nuvio sources."
+                update_id = f"{category}:{source}:added:{version}"
+            else:
+                old_version = event.get("old_version")
+                if not old_version or str(old_version).lower() == "not specified":
+                    continue
+                title_ar = f"تحديث {source} إلى الإصدار {version}"
+                title_en = f"{source} updated to version {version}"
+                desc_ar = f"تم تحديث الإصدار من {old_version} إلى {version}."
+                desc_en = f"Updated from version {old_version} to {version}."
+                update_id = f"{category}:{source}:version:{version}"
+        else:
+            continue
+
+        if not isinstance(source_url, str) or not source_url.startswith("https://"):
+            continue
+        if update_id in known_ids:
+            continue
+
+        try:
+            published = datetime.fromisoformat(
+                event.get("date", now).replace("Z", "+00:00")
+            )
+            if published.tzinfo is None:
+                published = published.replace(tzinfo=timezone.utc)
+        except (TypeError, ValueError):
+            published = now_dt
+
+        expires = published + timedelta(hours=24)
+        updates.append({
+            "id": update_id,
+            "type": category,
+            "title": {"ar": title_ar, "en": title_en},
+            "description": {"ar": desc_ar, "en": desc_en},
+            "url": source_url,
+            "publishedAt": published.astimezone(timezone.utc).isoformat().replace("+00:00", "Z"),
+            "expiresAt": expires.astimezone(timezone.utc).isoformat().replace("+00:00", "Z")
+        })
+        known_ids.add(update_id)
+
+    updates.sort(key=lambda item: item.get("publishedAt", ""), reverse=True)
+    updates = updates[:50]
+
+    os.makedirs("data", exist_ok=True)
+    with open(updates_path, "w", encoding="utf-8") as updates_file:
+        json.dump(updates, updates_file, ensure_ascii=False, indent=2)
+        updates_file.write("\n")
 
     history.extend(events)
     history = history[-100:]
