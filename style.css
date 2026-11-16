@@ -169,7 +169,7 @@ nav a:hover::after { transform: scaleX(1); }
   gap: 25px;
   width: min(var(--page), 92%);
   min-height: 570px;
-  margin: 38px auto 90px;
+  margin: 38px auto 48px;
   padding: 65px 6%;
   overflow: hidden;
   border: 1px solid rgba(125,177,204,.2);
@@ -384,7 +384,7 @@ nav a:hover::after { transform: scaleX(1); }
   grid-template-columns: repeat(4, minmax(0,1fr));
   gap: 14px;
   width: min(var(--page), 92%);
-  margin: 0 auto 115px;
+  margin: 0 auto 48px;
 }
 .stat-card {
   position: relative;
@@ -440,7 +440,7 @@ nav a:hover::after { transform: scaleX(1); }
 /* Content sections */
 .section {
   width: min(var(--page), 90%);
-  margin: 0 auto 110px;
+  margin: 0 auto 52px;
 }
 .section-heading {
   display: flex;
@@ -853,11 +853,11 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
     width: 90%;
     grid-template-columns: repeat(2,minmax(0,1fr));
     gap: 10px;
-    margin-bottom: 75px;
+    margin-bottom: 38px;
   }
   .stat-card { min-height: 110px; padding: 15px; }
   .stat-card strong { font-size: 22px; }
-  .section { width: 90%; margin-bottom: 80px; }
+  .section { width: 90%; margin-bottom: 48px; }
   .section-heading {
     align-items: flex-start;
     flex-direction: column;

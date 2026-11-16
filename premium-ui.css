@@ -3,7 +3,7 @@
 
 .nuvio-dashboard {
   width: min(var(--page), 90%);
-  margin: 0 auto 100px;
+  margin: 0 auto 28px;
   animation: nuvio-enter .65s both;
 }
 
@@ -239,7 +239,7 @@ html[dir="ltr"] .nuvio-view-back > span:first-child { transform: rotate(180deg);
 }
 
 @media (max-width: 560px) {
-  .nuvio-dashboard { width: 92%; margin-bottom: 70px; }
+  .nuvio-dashboard { width: 92%; margin-bottom: 28px; }
   .nuvio-dashboard-heading { align-items: flex-start; }
   .nuvio-dashboard-mark { display: none; }
   .nuvio-launch-grid { grid-template-columns: 1fr; gap: 12px; }
@@ -1768,7 +1768,7 @@ html[dir="rtl"] .nuvio-launch-open b {
   position: relative;
   isolation: isolate;
   width: min(var(--page), 92%);
-  margin: -48px auto 58px;
+  margin: -48px auto 6px;
 }
 .live-updates__shell {
   position: relative;
@@ -1897,7 +1897,7 @@ html[dir="rtl"] .live-updates__shell::before {
   50% { opacity: 1; transform: scale(1.15); }
 }
 @media (max-width: 600px) {
-  .live-updates { margin: -58px auto 48px; }
+  .live-updates { margin: -58px auto 24px; }
   .live-updates__shell {
     grid-template-columns: auto minmax(0,1fr);
     gap: 11px;

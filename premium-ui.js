@@ -4,6 +4,7 @@
 
   const main = document.querySelector('main');
   const hero = $('.hero');
+  const liveUpdates = $('#live-updates');
   const stats = $('#status');
   const plugins = $('#plugins');
   const downloads = $('#downloads');
@@ -67,6 +68,7 @@
     <div class="nuvio-launch-grid" id="nuvio-launch-grid"></div>
   `;
   hero.after(dashboard);
+  if (liveUpdates) hero.after(liveUpdates);
 
   function language() {
     return document.documentElement.lang === 'en' ? 'en' : 'ar';
@@ -99,6 +101,7 @@
     const home = target === 'home';
 
     hero.hidden = !home;
+    liveUpdates.hidden = !home;
     dashboard.hidden = !home;
     stats.hidden = !home && target !== 'status';
 
