@@ -107,5 +107,14 @@
     "source": "Ratings Aggregator",
     "source_url": "https://rating-aggregator.elfhosted.com/manifest.json",
     "new_version": "1.8.1"
+  },
+  {
+    "date": "2026-11-17T10:07:59.205117+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: The Movie Database Addon",
+    "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
+    "source": "The Movie Database Addon",
+    "source_url": "https://tmdb.elfhosted.com/manifest.json",
+    "new_version": "3.1.7"
   }
 ]

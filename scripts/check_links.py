@@ -17,6 +17,7 @@ MANIFESTS = {
     "Rodrigo's Catalog": "https://digok.github.io/nuvio-catalog/manifest.json",
     "Cinemeta": "https://v3-cinemeta.strem.io/manifest.json",
     "Nuvio Catalog": "https://catalog.nuvio.tv/manifest.json",
+    "The Movie Database Addon": "https://tmdb.elfhosted.com/manifest.json",
     "İzlemeli Catalog": "https://izlemeli.github.io/nuvio/en/manifest.json",
     "IMDb Popular": "https://imdb-popular-stremio.vercel.app/manifest.json",
     "Ratings Aggregator": "https://rating-aggregator.elfhosted.com/manifest.json",
@@ -426,6 +427,7 @@ def main():
         "İzlemeli Catalog",
         "IMDb Popular",
         "Ratings Aggregator",
+        "The Movie Database Addon",
     }
     known_ids = {item.get("id") for item in updates if isinstance(item, dict)}
 
