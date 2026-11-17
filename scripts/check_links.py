@@ -16,6 +16,10 @@ MANIFESTS = {
     "OpenSubtitles": "https://opensubtitles-v3.strem.io/manifest.json",
     "Rodrigo's Catalog": "https://digok.github.io/nuvio-catalog/manifest.json",
     "Cinemeta": "https://v3-cinemeta.strem.io/manifest.json",
+    "Nuvio Catalog": "https://catalog.nuvio.tv/manifest.json",
+    "İzlemeli Catalog": "https://izlemeli.github.io/nuvio/en/manifest.json",
+    "IMDb Popular": "https://imdb-popular-stremio.vercel.app/manifest.json",
+    "Ratings Aggregator": "https://rating-aggregator.elfhosted.com/manifest.json",
 }
 
 APK_ASSETS = {
@@ -415,7 +419,14 @@ def main():
 
     # Convert real source changes into bilingual live news.
     plugin_names = {"CinemaBox", "Cinemana", "OpenSubtitles", "Cinemeta"}
-    addon_names = {"ALL-IN-ONE", "Rodrigo's Catalog"}
+    addon_names = {
+        "ALL-IN-ONE",
+        "Rodrigo's Catalog",
+        "Nuvio Catalog",
+        "İzlemeli Catalog",
+        "IMDb Popular",
+        "Ratings Aggregator",
+    }
     known_ids = {item.get("id") for item in updates if isinstance(item, dict)}
 
     for event in events:

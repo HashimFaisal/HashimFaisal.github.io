@@ -71,5 +71,41 @@
     "source_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.0.0",
     "old_version": "1.1.0-beta.1",
     "new_version": "1.0.0"
+  },
+  {
+    "date": "2026-11-17T09:38:33.643609+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: Nuvio Catalog",
+    "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
+    "source": "Nuvio Catalog",
+    "source_url": "https://catalog.nuvio.tv/manifest.json",
+    "new_version": "1.2.0"
+  },
+  {
+    "date": "2026-11-17T09:38:33.643609+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: İzlemeli Catalog",
+    "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
+    "source": "İzlemeli Catalog",
+    "source_url": "https://izlemeli.github.io/nuvio/en/manifest.json",
+    "new_version": "1.0.115"
+  },
+  {
+    "date": "2026-11-17T09:38:33.643609+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: IMDb Popular",
+    "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
+    "source": "IMDb Popular",
+    "source_url": "https://imdb-popular-stremio.vercel.app/manifest.json",
+    "new_version": "2.1.0"
+  },
+  {
+    "date": "2026-11-17T09:38:33.643609+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: Ratings Aggregator",
+    "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
+    "source": "Ratings Aggregator",
+    "source_url": "https://rating-aggregator.elfhosted.com/manifest.json",
+    "new_version": "1.8.1"
   }
 ]

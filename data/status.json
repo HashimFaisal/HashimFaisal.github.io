@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-17T07:31:30.265116+00:00",
+  "checked_at": "2026-11-17T09:38:33.642224+00:00",
   "ok": true,
-  "passed": 11,
-  "total": 11,
+  "passed": 15,
+  "total": 15,
   "release": {
     "tag": "1.1.0-beta.1",
     "app_version": "1.1.0-beta.1",
@@ -114,6 +114,42 @@
       "version": "3.0.14",
       "manifest_id": "com.linvo.cinemeta",
       "url": "https://v3-cinemeta.strem.io/manifest.json"
+    },
+    {
+      "name": "Nuvio Catalog",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "1.2.0",
+      "manifest_id": "com.nuvio.tmdb.catalogs",
+      "url": "https://catalog.nuvio.tv/manifest.json"
+    },
+    {
+      "name": "İzlemeli Catalog",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "1.0.115",
+      "manifest_id": "com.izlemeli.nuvio.catalogs.en",
+      "url": "https://izlemeli.github.io/nuvio/en/manifest.json"
+    },
+    {
+      "name": "IMDb Popular",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "2.1.0",
+      "manifest_id": "community.imdb-popular",
+      "url": "https://imdb-popular-stremio.vercel.app/manifest.json"
+    },
+    {
+      "name": "Ratings Aggregator",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "1.8.1",
+      "manifest_id": "community.ratings.aggregator",
+      "url": "https://rating-aggregator.elfhosted.com/manifest.json"
     },
     {
       "name": "ARM64",

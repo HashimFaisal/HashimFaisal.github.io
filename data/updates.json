@@ -1,5 +1,65 @@
 [
   {
+    "id": "addon:Nuvio Catalog:added:1.2.0",
+    "type": "addon",
+    "title": {
+      "ar": "إضافة كتالوج جديدة: Nuvio Catalog",
+      "en": "New catalog add-on: Nuvio Catalog"
+    },
+    "description": {
+      "ar": "تمت إضافة Nuvio Catalog إلى مصادر Nuvio.",
+      "en": "Nuvio Catalog has been added to Nuvio sources."
+    },
+    "url": "https://catalog.nuvio.tv/manifest.json",
+    "publishedAt": "2026-11-17T09:38:33.643609Z",
+    "expiresAt": "2026-11-18T09:38:33.643609Z"
+  },
+  {
+    "id": "addon:İzlemeli Catalog:added:1.0.115",
+    "type": "addon",
+    "title": {
+      "ar": "إضافة كتالوج جديدة: İzlemeli Catalog",
+      "en": "New catalog add-on: İzlemeli Catalog"
+    },
+    "description": {
+      "ar": "تمت إضافة İzlemeli Catalog إلى مصادر Nuvio.",
+      "en": "İzlemeli Catalog has been added to Nuvio sources."
+    },
+    "url": "https://izlemeli.github.io/nuvio/en/manifest.json",
+    "publishedAt": "2026-11-17T09:38:33.643609Z",
+    "expiresAt": "2026-11-18T09:38:33.643609Z"
+  },
+  {
+    "id": "addon:IMDb Popular:added:2.1.0",
+    "type": "addon",
+    "title": {
+      "ar": "إضافة كتالوج جديدة: IMDb Popular",
+      "en": "New catalog add-on: IMDb Popular"
+    },
+    "description": {
+      "ar": "تمت إضافة IMDb Popular إلى مصادر Nuvio.",
+      "en": "IMDb Popular has been added to Nuvio sources."
+    },
+    "url": "https://imdb-popular-stremio.vercel.app/manifest.json",
+    "publishedAt": "2026-11-17T09:38:33.643609Z",
+    "expiresAt": "2026-11-18T09:38:33.643609Z"
+  },
+  {
+    "id": "addon:Ratings Aggregator:added:1.8.1",
+    "type": "addon",
+    "title": {
+      "ar": "إضافة كتالوج جديدة: Ratings Aggregator",
+      "en": "New catalog add-on: Ratings Aggregator"
+    },
+    "description": {
+      "ar": "تمت إضافة Ratings Aggregator إلى مصادر Nuvio.",
+      "en": "Ratings Aggregator has been added to Nuvio sources."
+    },
+    "url": "https://rating-aggregator.elfhosted.com/manifest.json",
+    "publishedAt": "2026-11-17T09:38:33.643609Z",
+    "expiresAt": "2026-11-18T09:38:33.643609Z"
+  },
+  {
     "id": "app:release:beta:1.1.0-beta.1",
     "type": "app",
     "title": {
