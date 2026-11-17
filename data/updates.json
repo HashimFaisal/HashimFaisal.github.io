@@ -88,35 +88,5 @@
     "url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.0.0",
     "publishedAt": "2026-11-17T02:29:09.326475Z",
     "expiresAt": "2026-11-18T02:29:09.326475Z"
-  },
-  {
-    "id": "addon:Rodrigo's Catalog:version:1.20261116.0901",
-    "type": "addon",
-    "title": {
-      "ar": "تحديث Rodrigo's Catalog إلى الإصدار 1.20261116.0901",
-      "en": "Rodrigo's Catalog updated to version 1.20261116.0901"
-    },
-    "description": {
-      "ar": "تم تحديث الإصدار من 1.20261109.0901 إلى 1.20261116.0901.",
-      "en": "Updated from version 1.20261109.0901 to 1.20261116.0901."
-    },
-    "url": "https://digok.github.io/nuvio-catalog/manifest.json",
-    "publishedAt": "2026-11-16T09:51:32.429303Z",
-    "expiresAt": "2026-11-17T09:51:32.429303Z"
-  },
-  {
-    "id": "app:release:stable:1.1.0-beta.1",
-    "type": "app",
-    "title": {
-      "ar": "إصدار مستقر جديد من Nuvio: 1.1.0-beta.1",
-      "en": "New Nuvio stable release: 1.1.0-beta.1"
-    },
-    "description": {
-      "ar": "أصبح الإصدار المستقر من Nuvio 1.1.0-beta.1 متاحاً.",
-      "en": "Nuvio stable version 1.1.0-beta.1 is now available."
-    },
-    "url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.1.0-beta.1",
-    "publishedAt": "2026-11-16T09:51:32.429303Z",
-    "expiresAt": "2026-11-17T09:51:32.429303Z"
   }
 ]
