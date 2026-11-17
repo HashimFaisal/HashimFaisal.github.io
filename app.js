@@ -590,8 +590,8 @@ async function loadLiveUpdates() {
 
     label.textContent = isArabic ? 'رسالة ترحيبية' : 'WELCOME';
     title.textContent = isArabic
-      ? 'Nuvio — حيث تلتقي التقنية بالإبداع، وتبدأ تجربة مختلفة.'
-      : 'Nuvio — Where technology meets creativity, a different experience begins.';
+      ? '👋 مرحباً بك في Nuvio، نتمنى لك وقتاً ممتعاً! ✨'
+      : '👋 Welcome to Nuvio, we hope you have a wonderful time! ✨';
     description.textContent = '';
     link.hidden = true;
     link.removeAttribute('href');
