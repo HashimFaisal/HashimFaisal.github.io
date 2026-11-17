@@ -1,11 +1,65 @@
 {
-  "checked_at": "2026-11-17T10:53:02.528602+00:00",
-  "ok": false,
-  "passed": 11,
+  "checked_at": "2026-11-17T11:41:38.988989+00:00",
+  "ok": true,
+  "passed": 16,
   "total": 16,
-  "release": null,
-  "stable_release": null,
-  "release_error": "HTTP Error 403: rate limit exceeded",
+  "release": {
+    "tag": "1.1.0-beta.1",
+    "app_version": "1.1.0-beta.1",
+    "name": "1.1.0-beta.1",
+    "published_at": "2026-11-16T12:13:03Z",
+    "html_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/tag/1.1.0-beta.1",
+    "assets": [
+      {
+        "label": "ARM64",
+        "name": "nuvio-1.1.0-beta.1-arm64-v8a-release.apk",
+        "size_bytes": 50229619,
+        "uploaded_at": "2026-11-16T11:57:51Z",
+        "download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.1/nuvio-1.1.0-beta.1-arm64-v8a-release.apk",
+        "ok": true
+      },
+      {
+        "label": "ARMv7",
+        "name": "nuvio-1.1.0-beta.1-armeabi-v7a-release.apk",
+        "size_bytes": 48346461,
+        "uploaded_at": "2026-11-16T11:58:00Z",
+        "download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.1/nuvio-1.1.0-beta.1-armeabi-v7a-release.apk",
+        "ok": true
+      },
+      {
+        "label": "x86",
+        "name": "nuvio-1.1.0-beta.1-x86-release.apk",
+        "size_bytes": 50674309,
+        "uploaded_at": "2026-11-16T11:58:11Z",
+        "download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.1/nuvio-1.1.0-beta.1-x86-release.apk",
+        "ok": true
+      },
+      {
+        "label": "x86_64",
+        "name": "nuvio-1.1.0-beta.1-x86_64-release.apk",
+        "size_bytes": 51729038,
+        "uploaded_at": "2026-11-16T11:58:05Z",
+        "download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.1/nuvio-1.1.0-beta.1-x86_64-release.apk",
+        "ok": true
+      },
+      {
+        "label": "iOS IPA",
+        "name": "nuvio-1.1.0-beta.1-enhanced-release.ipa",
+        "size_bytes": 76637661,
+        "uploaded_at": "2026-11-16T12:12:28Z",
+        "download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.1/nuvio-1.1.0-beta.1-enhanced-release.ipa",
+        "ok": true
+      }
+    ]
+  },
+  "stable_release": {
+    "tag": "1.0.0",
+    "app_version": "1.0.0",
+    "name": "1.0.0",
+    "published_at": "2026-11-16T06:50:50Z",
+    "html_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/tag/1.0.0"
+  },
+  "release_error": null,
   "checks": [
     {
       "name": "ALL-IN-ONE",
@@ -109,32 +163,42 @@
     {
       "name": "ARM64",
       "type": "download",
-      "ok": false,
-      "error": "HTTP Error 403: rate limit exceeded"
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": 50229619,
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.1/nuvio-1.1.0-beta.1-arm64-v8a-release.apk"
     },
     {
       "name": "ARMv7",
       "type": "download",
-      "ok": false,
-      "error": "HTTP Error 403: rate limit exceeded"
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": 48346461,
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.1/nuvio-1.1.0-beta.1-armeabi-v7a-release.apk"
     },
     {
       "name": "x86",
       "type": "download",
-      "ok": false,
-      "error": "HTTP Error 403: rate limit exceeded"
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": 50674309,
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.1/nuvio-1.1.0-beta.1-x86-release.apk"
     },
     {
       "name": "x86_64",
       "type": "download",
-      "ok": false,
-      "error": "HTTP Error 403: rate limit exceeded"
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": 51729038,
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.1/nuvio-1.1.0-beta.1-x86_64-release.apk"
     },
     {
       "name": "iOS IPA",
       "type": "download",
-      "ok": false,
-      "error": "HTTP Error 403: rate limit exceeded"
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": 76637661,
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.1/nuvio-1.1.0-beta.1-enhanced-release.ipa"
     }
   ]
 }
