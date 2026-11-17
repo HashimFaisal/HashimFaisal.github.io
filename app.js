@@ -19,9 +19,10 @@ const translations = {
   'التنزيلات': 'Downloads',
   'حالة النظام': 'System Status',
   'سجل التغييرات': 'Changelog',
-  'عالمٌ من الإمكانيات، يجمعه مكان واحد.': 'A world of possibilities, all in one place.',
-  'اكتشف عالَم Nuvio.': 'Discover the world of Nuvio.',
-  'من هنا تبدأ رحلتك إلى منظومة متكاملة من المشاريع والأدوات والتجارب الرقمية، حيث يلتقي الإبداع بالتقنية، وتتجدد الإمكانيات باستمرار.': 'Your journey begins here, with an integrated ecosystem of projects, tools, and digital experiences where creativity meets technology and possibilities keep evolving.',
+  'كل ما تحتاجه لعالم': 'Everything you need for the world of',
+  'Nuvio، في تجربة واحدة.': 'Nuvio, in one experience.',
+
+  'اكتشف أدواتك، واستكشف إمكانياتك، وانطلق بلا حدود.': 'Discover your tools, explore your possibilities, and move forward without limits.',
   'استكشف الإضافات': 'Explore Add-ons',
   'أحدث التنزيلات': 'Latest Downloads',
   'روابط مباشرة': 'Direct Links',
