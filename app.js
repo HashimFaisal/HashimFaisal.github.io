@@ -634,7 +634,7 @@ function escapeHTML(value) {
 
 
 let liveUpdatesRequestId = 0;
-let liveUpdatesDataPromise = null;
+let liveUpdatesRefreshTimer = null;
 
 function syncLiveUpdatesTicker() {
   const track = $('#live-updates-track');
@@ -648,6 +648,8 @@ function syncLiveUpdatesTicker() {
   const direction = document.documentElement.dir === 'rtl' ? 'rtl' : 'ltr';
 
   requestAnimationFrame(() => {
+    track.querySelectorAll('[data-live-clone]').forEach(clone => clone.remove());
+
     const segmentWidth = content.getBoundingClientRect().width;
     const viewportWidth = viewport.getBoundingClientRect().width;
 
@@ -665,64 +667,62 @@ function syncLiveUpdatesTicker() {
     }
 
     const speed = 24;
-    const distance = segmentWidth;
-    const duration = Math.max(8, distance / speed);
+    const duration = Math.max(8, segmentWidth / speed);
 
-    track.style.setProperty('--live-ticker-distance', `${distance}px`);
+    track.style.setProperty('--live-ticker-distance', `${segmentWidth}px`);
     track.style.setProperty('--live-ticker-duration', `${duration}s`);
     track.style.setProperty('--live-ticker-start', '0px');
     track.dataset.direction = direction;
-
   });
 }
+
 async function loadLiveUpdates() {
   const requestId = ++liveUpdatesRequestId;
   const label = $('#live-updates-label');
-  const title = $('#live-updates-title');
-  const description = $('#live-updates-description');
+  const content = $('#live-updates-content');
   const link = $('#live-updates-link');
 
-  if (!label || !title || !description || !link) return;
+  if (!label || !content || !link) return;
 
-  syncLiveUpdatesTicker();
+  if (!liveUpdatesRefreshTimer) {
+    liveUpdatesRefreshTimer = setInterval(() => {
+      loadLiveUpdates();
+    }, 30_000);
+  }
 
   const isArabic = currentLang === 'ar';
-  const textDirection = isArabic ? 'rtl' : 'ltr';
-  const textLanguage = isArabic ? 'ar' : 'en';
-
-  title.dir = textDirection;
-  title.lang = textLanguage;
-  description.dir = textDirection;
-  description.lang = textLanguage;
+  const language = isArabic ? 'ar' : 'en';
 
   function showWelcome() {
     if (requestId !== liveUpdatesRequestId) return;
 
     label.textContent = isArabic ? 'رسالة ترحيبية' : 'WELCOME';
-    title.textContent = isArabic
+    content.replaceChildren();
+
+    const welcome = document.createElement('strong');
+    welcome.textContent = isArabic
       ? '👋 مرحباً بك في Nuvio، نتمنى لك وقتاً ممتعاً! ✨'
       : '👋 Welcome to Nuvio, we hope you have a wonderful time! ✨';
-    description.textContent = '';
+
+    content.appendChild(welcome);
     link.hidden = true;
     link.removeAttribute('href');
     syncLiveUpdatesTicker();
   }
 
   try {
-    if (!liveUpdatesDataPromise) {
-      liveUpdatesDataPromise = fetch(
-        `data/updates.json?t=${Date.now()}`,
-        { cache: 'no-store' }
-      ).then(response => {
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json();
-      });
-    }
+    const response = await fetch(
+      `data/updates.json?t=${Date.now()}`,
+      { cache: 'no-store' }
+    );
 
-    const data = await liveUpdatesDataPromise;
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
+    const data = await response.json();
     if (requestId !== liveUpdatesRequestId) return;
 
     const now = Date.now();
+
     const active = (Array.isArray(data) ? data : [])
       .filter(item => {
         if (!item || typeof item !== 'object') return false;
@@ -739,40 +739,67 @@ async function loadLiveUpdates() {
       })
       .sort((a, b) => Date.parse(b.publishedAt) - Date.parse(a.publishedAt));
 
-    const update = active[0];
-    if (!update) {
+    const fragment = document.createDocumentFragment();
+    let displayedCount = 0;
+
+    active.forEach(update => {
+      const localizedTitle = update.title[language];
+      const localizedDescription = update.description[language];
+
+      if (
+        typeof localizedTitle !== 'string' || !localizedTitle.trim() ||
+        typeof localizedDescription !== 'string' || !localizedDescription.trim()
+      ) return;
+
+      let safeUrl;
+
+      try {
+        safeUrl = new URL(update.url);
+      } catch {
+        return;
+      }
+
+      if (safeUrl.protocol !== 'https:') return;
+
+      const item = document.createElement('span');
+      item.className = 'live-updates__item';
+      item.dir = language === 'ar' ? 'rtl' : 'ltr';
+      item.lang = language;
+
+      const title = document.createElement('strong');
+      title.textContent = localizedTitle;
+
+      const description = document.createElement('span');
+      description.textContent = localizedDescription;
+
+      const details = document.createElement('a');
+      details.className = 'live-updates__item-link';
+      details.textContent = isArabic ? 'التفاصيل' : 'Details';
+      details.href = safeUrl.href;
+      details.target = '_blank';
+      details.rel = 'noopener noreferrer';
+
+      item.append(title, description, details);
+      fragment.appendChild(item);
+      displayedCount++;
+    });
+
+    if (!displayedCount) {
       showWelcome();
       return;
     }
 
-    const safeUrl = new URL(update.url);
-    if (safeUrl.protocol !== 'https:') {
-      showWelcome();
-      return;
-    }
-
-    const localizedTitle = update.title[isArabic ? 'ar' : 'en'];
-    const localizedDescription = update.description[isArabic ? 'ar' : 'en'];
-
-    if (
-      typeof localizedTitle !== 'string' || !localizedTitle.trim() ||
-      typeof localizedDescription !== 'string' || !localizedDescription.trim()
-    ) {
-      showWelcome();
-      return;
-    }
+    if (requestId !== liveUpdatesRequestId) return;
 
     label.textContent = isArabic ? 'مباشر' : 'LIVE';
-    title.textContent = localizedTitle;
-    description.textContent = localizedDescription;
-    link.textContent = isArabic ? 'التفاصيل' : 'Details';
-    link.href = safeUrl.href;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.hidden = false;
+    content.replaceChildren(fragment);
+    link.hidden = true;
+    link.removeAttribute('href');
     syncLiveUpdatesTicker();
+
   } catch (error) {
-    liveUpdatesDataPromise = null;
+    if (requestId !== liveUpdatesRequestId) return;
+
     showWelcome();
     console.warn('Live updates could not be loaded:', error);
   }
