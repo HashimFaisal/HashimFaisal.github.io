@@ -2211,7 +2211,6 @@ body[data-nuvio-view="home"] > footer {
 
 /* Hide selected home page actions and downloads section */
 .hero-actions a[href="#plugins"],
-.hero-actions a[href="#downloads"],
-#downloads {
+.hero-actions a[href="#downloads"] {
   display: none !important;
 }
