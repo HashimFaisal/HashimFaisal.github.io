@@ -2214,3 +2214,49 @@ body[data-nuvio-view="home"] > footer {
 .hero-actions a[href="#downloads"] {
   display: none !important;
 }
+
+/* NUVIO HERO META — LIVE STATUS */
+.hero-meta {
+  position: relative;
+  margin-top: 22px;
+  transform: translateY(-5px);
+}
+
+.hero-meta i {
+  position: relative;
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  flex: 0 0 7px;
+  border-radius: 50%;
+  background: #42c879;
+  box-shadow: 0 0 9px rgba(66, 200, 121, .65);
+  animation: nuvio-live-pulse 1.8s ease-in-out infinite;
+}
+
+.hero-meta span:nth-child(2) i {
+  animation-delay: .3s;
+}
+
+.hero-meta span:nth-child(3) i {
+  animation-delay: .6s;
+}
+
+@keyframes nuvio-live-pulse {
+  0%, 100% {
+    opacity: .65;
+    box-shadow: 0 0 5px rgba(66, 200, 121, .4), 0 0 10px rgba(66, 200, 121, .2);
+    transform: scale(.85);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(66, 200, 121, .8), 0 0 17px rgba(66, 200, 121, .5);
+    transform: scale(1.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-meta i {
+    animation: none;
+  }
+}
