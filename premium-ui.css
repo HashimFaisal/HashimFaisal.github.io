@@ -2171,3 +2171,35 @@ html[dir="rtl"] .live-updates__shell::before {
     height: 190px;
   }
 }
+
+/* Preserve the original developer resources section height */
+.about .resource-links {
+  grid-template-rows: repeat(2, minmax(90px, auto));
+}
+
+.about .resource-links a:nth-child(1) {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.about .resource-links a:nth-child(2) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+@media (max-width: 760px) {
+  .about .resource-links {
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(4, minmax(90px, auto));
+  }
+
+  .about .resource-links a:nth-child(1) {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .about .resource-links a:nth-child(2) {
+    grid-column: 1;
+    grid-row: 4;
+  }
+}
