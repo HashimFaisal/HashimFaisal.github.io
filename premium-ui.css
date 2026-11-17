@@ -2203,3 +2203,8 @@ html[dir="rtl"] .live-updates__shell::before {
     grid-row: 4;
   }
 }
+
+/* Hide footer on the home screen only */
+body[data-nuvio-view="home"] > footer {
+  display: none;
+}
