@@ -634,7 +634,47 @@ function escapeHTML(value) {
 
 
 let liveUpdatesRequestId = 0;
+let liveUpdatesDataPromise = null;
 
+function syncLiveUpdatesTicker() {
+  const track = $('#live-updates-track');
+  const content = $('#live-updates-content');
+  const viewport = track?.parentElement;
+
+  if (!viewport || !track || !content) return;
+
+  track.querySelectorAll('[data-live-clone]').forEach(clone => clone.remove());
+
+  const direction = document.documentElement.dir === 'rtl' ? 'rtl' : 'ltr';
+
+  requestAnimationFrame(() => {
+    const segmentWidth = content.getBoundingClientRect().width;
+    const viewportWidth = viewport.getBoundingClientRect().width;
+
+    if (!segmentWidth || !viewportWidth) return;
+
+    const cloneCount = Math.ceil(viewportWidth / segmentWidth) + 2;
+
+    for (let i = 0; i < cloneCount; i++) {
+      const clone = content.cloneNode(true);
+      clone.removeAttribute('id');
+      clone.querySelectorAll('[id]').forEach(element => element.removeAttribute('id'));
+      clone.dataset.liveClone = 'true';
+      clone.setAttribute('aria-hidden', 'true');
+      track.appendChild(clone);
+    }
+
+    const speed = 24;
+    const distance = segmentWidth;
+    const duration = Math.max(8, distance / speed);
+
+    track.style.setProperty('--live-ticker-distance', `${distance}px`);
+    track.style.setProperty('--live-ticker-duration', `${duration}s`);
+    track.style.setProperty('--live-ticker-start', '0px');
+    track.dataset.direction = direction;
+
+  });
+}
 async function loadLiveUpdates() {
   const requestId = ++liveUpdatesRequestId;
   const label = $('#live-updates-label');
@@ -643,6 +683,8 @@ async function loadLiveUpdates() {
   const link = $('#live-updates-link');
 
   if (!label || !title || !description || !link) return;
+
+  syncLiveUpdatesTicker();
 
   const isArabic = currentLang === 'ar';
   const textDirection = isArabic ? 'rtl' : 'ltr';
@@ -663,24 +705,31 @@ async function loadLiveUpdates() {
     description.textContent = '';
     link.hidden = true;
     link.removeAttribute('href');
+    syncLiveUpdatesTicker();
   }
 
   try {
-    const response = await fetch(
-      `data/updates.json?t=${Date.now()}`,
-      { cache: 'no-store' }
-    );
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    if (!liveUpdatesDataPromise) {
+      liveUpdatesDataPromise = fetch(
+        `data/updates.json?t=${Date.now()}`,
+        { cache: 'no-store' }
+      ).then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      });
+    }
 
-    const data = await response.json();
+    const data = await liveUpdatesDataPromise;
     if (requestId !== liveUpdatesRequestId) return;
 
     const now = Date.now();
     const active = (Array.isArray(data) ? data : [])
       .filter(item => {
         if (!item || typeof item !== 'object') return false;
+
         const expiry = Date.parse(item.expiresAt);
         const published = Date.parse(item.publishedAt);
+
         return Number.isFinite(expiry) &&
           Number.isFinite(published) &&
           expiry > now &&
@@ -721,7 +770,9 @@ async function loadLiveUpdates() {
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.hidden = false;
+    syncLiveUpdatesTicker();
   } catch (error) {
+    liveUpdatesDataPromise = null;
     showWelcome();
     console.warn('Live updates could not be loaded:', error);
   }
