@@ -2208,3 +2208,10 @@ html[dir="rtl"] .live-updates__shell::before {
 body[data-nuvio-view="home"] > footer {
   display: none;
 }
+
+/* Hide selected home page actions and downloads section */
+.hero-actions a[href="#plugins"],
+.hero-actions a[href="#downloads"],
+#downloads {
+  display: none !important;
+}
