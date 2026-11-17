@@ -59,6 +59,7 @@ const translations = {
   'تحديث': 'Update',
   'نسخ الرابط': 'Copy Link',
   'تثبيت في Nuvio': 'Install in Nuvio',
+  'ضغط للنسخ والفتح Nuvio': 'Tap to copy and open Nuvio',
   'تم نسخ رابط المشاركة': 'Share link copied',
   'فتح Manifest ↗': 'Open Manifest ↗',
   'جارٍ التحقق': 'Checking',
@@ -296,8 +297,12 @@ function installShareButtons() {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'copy-btn share-btn';
-    button.textContent = t('تثبيت في Nuvio');
-    button.setAttribute('aria-label', `${t('تثبيت في Nuvio')} ${name}`);
+    const buttonLabel = type === 'nuvio'
+      ? t('ضغط للنسخ والفتح Nuvio')
+      : t('تثبيت في Nuvio');
+
+    button.textContent = buttonLabel;
+    button.setAttribute('aria-label', `${buttonLabel} ${name}`);
 
     button.addEventListener('click', async () => {
       let copied = false;
