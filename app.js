@@ -114,6 +114,11 @@ const translations = {
   'تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.': 'The manifest was added to the list of sources monitored by the system.',
   'تم تفعيل سجل التغييرات الآلي في لوحة التحكم.': 'The automated changelog was enabled in the control panel.',
   'طريقة التثبيت: اضغط للفتح في Nuvio، وانتقل إلى الإعدادات، ثم المحتوى والاكتشاف، ثم الملحقات، والصق الرابط في خانة Manifest.': 'Installation method: Tap to open in Nuvio, then go to Settings → Content & Discovery → Plugins and paste the link into the Manifest field.',
+  'كتالوج لاكتشاف الأفلام والمسلسلات ضمن إضافة Nuvio Catalog.': 'A catalog for discovering movies and series through the Nuvio Catalog add-on.',
+  'كتالوج وبيانات للأفلام والمسلسلات من TMDB، مع خيارات للبحث والتصنيفات واللغات.': 'A movie and series catalog powered by TMDB, with search, categories, and language options.',
+  'كتالوج للأفلام والمسلسلات مع بيانات ومصادر إضافية.': 'A movie and series catalog with additional metadata and sources.',
+  'كتالوج لاكتشاف العناوين الشعبية اعتماداً على IMDb.': 'A catalog for discovering popular titles based on IMDb.',
+  'يجمع تقييمات من IMDb وTMDB وMetacritic ومصادر أخرى. طريقة ظهور التقييمات داخل Nuvio تحتاج اختباراً.': 'Combines ratings from IMDb, TMDB, Metacritic, and other sources. How ratings appear in Nuvio still needs testing.',
 };
 
 const reverseTranslations = Object.fromEntries(
@@ -125,6 +130,8 @@ function t(ar) {
   return translations[ar] || ar;
 }
 
+const originalTextNodes = new WeakMap();
+
 function translateStaticText() {
   const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
   const nodes = [];
@@ -133,7 +140,11 @@ function translateStaticText() {
   nodes.forEach(node => {
     if (node.parentElement?.closest('#live-updates')) return;
 
-    const original = node.nodeValue;
+    if (!originalTextNodes.has(node)) {
+      originalTextNodes.set(node, node.nodeValue);
+    }
+
+    const original = originalTextNodes.get(node);
     const trimmed = original.trim();
     if (!trimmed) return;
 
@@ -141,10 +152,53 @@ function translateStaticText() {
       ? translations[trimmed]
       : reverseTranslations[trimmed];
 
-    if (translated) {
-      node.nodeValue = original.replace(trimmed, translated);
-    }
+    node.nodeValue = translated
+      ? original.replace(trimmed, translated)
+      : original;
   });
+}
+
+function updateShareButtonLabels() {
+  $$('.plugin-card').forEach(card => {
+    const button = card.querySelector('.share-btn');
+    if (!button) return;
+
+    const name = card.querySelector('h3')?.textContent.trim() || 'Nuvio';
+    const isExternal = card.querySelector('.type-tag')?.classList.contains('external');
+    const label = isExternal
+      ? t('تثبيت في Nuvio')
+      : t('ضغط للنسخ والفتح Nuvio');
+
+    button.textContent = label;
+    button.setAttribute('aria-label', `${label} ${name}`);
+  });
+}
+
+function translateChangelogText(value) {
+  if (currentLang === 'ar' || typeof value !== 'string') return value;
+
+  let match = value.match(/^إضافة مصدر جديد:\s*(.+)$/);
+  if (match) return `New source added: ${match[1]}`;
+
+  match = value.match(/^صدور إصدار مستقر من Nuvio:\s*(.+)$/);
+  if (match) return `Stable Nuvio release: ${match[1]}`;
+
+  match = value.match(/^صدور تحديث Nuvio:\s*(.+)$/);
+  if (match) return `Nuvio update released: ${match[1]}`;
+
+  match = value.match(/^تحديث إصدار (.+)$/);
+  if (match) return `${match[1]} version updated`;
+
+  match = value.match(/^الإصدار المستقر السابق كان (.+)\.$/);
+  if (match) return `Previous stable version was ${match[1]}.`;
+
+  match = value.match(/^الإصدار السابق كان (.+)\.$/);
+  if (match) return `Previous version was ${match[1]}.`;
+
+  match = value.match(/^من (.+) إلى (.+)\.$/);
+  if (match) return `From ${match[1]} to ${match[2]}.`;
+
+  return translations[value] || value;
 }
 
 function applyLanguage() {
@@ -155,6 +209,7 @@ function applyLanguage() {
     : 'Hashim Faisal — Nuvio Control Center';
 
   translateStaticText();
+  updateShareButtonLabels();
   loadLiveUpdates();
 
   const changelogList = $('#changelog-list');
@@ -724,8 +779,8 @@ async function loadChangelog() {
               <span class="changelog-type">${escapeHTML(t(type.label))}</span>
               <small>${escapeHTML(dateText)}</small>
             </div>
-            <strong>${escapeHTML(t(entry?.title || 'تحديث'))}</strong>
-            <p>${escapeHTML(t(entry?.detail || ''))}</p>
+            <strong>${escapeHTML(translateChangelogText(entry?.title || 'تحديث'))}</strong>
+            <p>${escapeHTML(translateChangelogText(entry?.detail || ''))}</p>
           </div>
         </article>
       `;
