@@ -1852,6 +1852,11 @@ html[dir="rtl"] .nuvio-launch-open b {
 .live-updates__content span {
   color: #a99e89;
 }
+
+.live-updates__content strong,
+.live-updates__content span {
+  unicode-bidi: isolate;
+}
 .live-updates__link {
   display: none !important;
   position: relative;

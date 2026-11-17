@@ -584,6 +584,13 @@ async function loadLiveUpdates() {
   if (!label || !title || !description || !link) return;
 
   const isArabic = currentLang === 'ar';
+  const textDirection = isArabic ? 'rtl' : 'ltr';
+  const textLanguage = isArabic ? 'ar' : 'en';
+
+  title.dir = textDirection;
+  title.lang = textLanguage;
+  description.dir = textDirection;
+  description.lang = textLanguage;
 
   function showWelcome() {
     if (requestId !== liveUpdatesRequestId) return;
