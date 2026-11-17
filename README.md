@@ -155,7 +155,7 @@ Discover plugins · Explore addons · Get direct links
 
 | RESOURCE | DESCRIPTION |
 |---|---|
-| <a href="https://github.com/NuvioMedia/NuvioMobile">Nuvio Mobile</a> | Official Nuvio Android application and releases |
+| <a href="https://github.com/luqmanfadlli/NuvioMobile-Enhanced">Nuvio Mobile</a> | Unofficial enhanced Nuvio Android build and releases |
 | <a href="https://github.com/NuvioCommunity/plugins">Nuvio Plugins</a> | Community-maintained plugin directory |
 | <a href="https://nuvio.tv">Nuvio Website</a> | Official Nuvio website |
 
@@ -170,14 +170,14 @@ Discover plugins · Explore addons · Get direct links
 
 | Architecture | Direct APK |
 |---|---|
-| **ARM64 · 64-bit** | [DOWNLOAD ↗](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-arm64-v8a-release.apk) |
-| **ARMv7 · 32-bit** | [DOWNLOAD ↗](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-armeabi-v7a-release.apk) |
-| **x86 · 32-bit** | [DOWNLOAD ↗](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-x86-release.apk) |
-| **x86_64 · 64-bit** | [DOWNLOAD ↗](https://github.com/NuvioMedia/NuvioMobile/releases/latest/download/androidApp-full-x86_64-release.apk) |
+| **ARM64 · 64-bit** | [DOWNLOAD ↗](https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases) |
+| **ARMv7 · 32-bit** | [DOWNLOAD ↗](https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases) |
+| **x86 · 32-bit** | [DOWNLOAD ↗](https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases) |
+| **x86_64 · 64-bit** | [DOWNLOAD ↗](https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases) |
 
 <div align="center">
 
-[<img src="https://img.shields.io/badge/VIEW_LATEST_RELEASE-7C3AED?style=for-the-badge&logo=github" alt="Latest Release">](https://github.com/NuvioMedia/NuvioMobile/releases/latest)
+[<img src="https://img.shields.io/badge/VIEW_LATEST_RELEASE-7C3AED?style=for-the-badge&logo=github" alt="Latest Release">](https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/latest)
 
 <sub>Latest-release URLs update automatically when matching asset names are published.</sub>
 

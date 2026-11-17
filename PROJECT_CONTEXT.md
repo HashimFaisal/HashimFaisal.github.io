@@ -34,9 +34,9 @@
 - .github/workflows/addon-health.yml
 
 ## تحديثات Nuvio
-- المصدر المعتمد: NuvioMedia/NuvioMobile
+- المصدر المعتمد: luqmanfadlli/NuvioMobile-Enhanced
 - رابط الإصدارات:
-  https://github.com/NuvioMedia/NuvioMobile/releases
+  https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases
 - فحص الإصدارات يعمل بجدولة كل 15 دقيقة.
 - السكربت يحدث بيانات الحالة وروابط الإصدارات عند نجاح الفحص.
 - لا نغيّر المصدر إلى مستودع آخر دون موافقة المستخدم.

@@ -6,7 +6,7 @@ import sys
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
 
-REPO = "NuvioMedia/NuvioMobile"
+REPO = "luqmanfadlli/NuvioMobile-Enhanced"
 API = f"https://api.github.com/repos/{REPO}/releases?per_page=100"
 
 MANIFESTS = {
@@ -19,10 +19,10 @@ MANIFESTS = {
 }
 
 APK_ASSETS = {
-    "ARM64": "androidApp-full-arm64-v8a-release.apk",
-    "ARMv7": "androidApp-full-armeabi-v7a-release.apk",
-    "x86": "androidApp-full-x86-release.apk",
-    "x86_64": "androidApp-full-x86_64-release.apk",
+    "ARM64": "-arm64-v8a-release.apk",
+    "ARMv7": "-armeabi-v7a-release.apk",
+    "x86": "-x86-release.apk",
+    "x86_64": "-x86_64-release.apk",
 }
 
 HEADERS = {
@@ -194,18 +194,21 @@ def main():
             "assets": [],
         }
 
-        expected = dict(APK_ASSETS)
+        expected = {
+            label: next(
+                (name for name in assets if name and name.endswith(suffix)),
+                None,
+            )
+            for label, suffix in APK_ASSETS.items()
+        }
 
         ipa_names = sorted(
             name for name in assets
             if name and name.startswith("nuvio-")
-            and name.endswith("-full-release.ipa")
+            and name.endswith("-enhanced-release.ipa")
         )
 
-        if ipa_names:
-            expected["iOS IPA"] = ipa_names[0]
-        else:
-            expected["iOS IPA"] = None
+        expected["iOS IPA"] = ipa_names[0] if ipa_names else None
 
         for label, filename in expected.items():
             asset = assets.get(filename) if filename else None
