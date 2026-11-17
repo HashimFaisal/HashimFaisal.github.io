@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import os
+import re
 import sys
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
@@ -123,29 +124,42 @@ def main():
         if not isinstance(releases, list):
             raise ValueError("GitHub releases response is not a list")
 
+        def is_prerelease(item):
+            tag = (item.get("tag_name") or "").strip().lower()
+            tag_marker = bool(re.search(
+                r"(?:^|[._-])(alpha|beta|rc|pre|preview|dev)(?:[._-].*|\d.*)?$",
+                tag,
+            ))
+            return bool(item.get("prerelease")) or tag_marker
+
+        published_releases = [
+            item for item in releases
+            if isinstance(item, dict) and not item.get("draft")
+        ]
+
         beta_releases = [
-            item for item in releases
-            if not item.get("draft")
-            and (item.get("tag_name") or "").endswith("-beta")
+            item for item in published_releases
+            if is_prerelease(item)
         ]
 
-        if not beta_releases:
-            raise ValueError("No published Beta release was found")
-
-        release = max(
-            beta_releases,
-            key=lambda item: item.get("published_at") or "",
-        )
         stable_releases = [
-            item for item in releases
-            if not item.get("draft")
-            and not (item.get("tag_name") or "").endswith("-beta")
+            item for item in published_releases
+            if not is_prerelease(item)
         ]
+
         if stable_releases:
             stable_release = max(
                 stable_releases,
                 key=lambda item: item.get("published_at") or "",
             )
+
+        if not beta_releases:
+            raise ValueError("No published prerelease was found")
+
+        release = max(
+            beta_releases,
+            key=lambda item: item.get("published_at") or "",
+        )
 
     except Exception as exc:
         release_error = str(exc)
