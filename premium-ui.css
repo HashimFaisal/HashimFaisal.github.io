@@ -702,12 +702,6 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 @media (max-width: 760px) {
 
-  /* Keep LIVE below the hero without changing its appearance */
-  .live-updates {
-    position: relative;
-    width: min(var(--page), 92%);
-    margin: 12px auto 24px;
-  }
   .nuvio-view-active.section,
   #status.nuvio-view-active {
     width: 92%;
@@ -1008,12 +1002,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   to { opacity: .9; }
 }
 
-@media (max-width: 480px) {
-  .visual-globe {
-    width: 260px;
-    height: 260px;
-  }
-}
+
 
 /* === NUVIO Saturn Orbit — synchronized back/front layers === */
 
@@ -1904,7 +1893,6 @@ html[dir="rtl"] .live-updates__shell::before {
   50% { opacity: 1; transform: scale(1.15); }
 }
 @media (max-width: 600px) {
-  .live-updates { margin: -58px auto 24px; }
   .live-updates__shell {
     grid-template-columns: auto minmax(0,1fr);
     gap: 11px;
