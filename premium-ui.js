@@ -101,7 +101,11 @@
     const home = target === 'home';
 
     hero.hidden = !home;
-    liveUpdates.hidden = !home;
+    if (liveUpdates) {
+      liveUpdates.hidden = false;
+      liveUpdates.classList.toggle('live-updates--background', !home);
+      liveUpdates.inert = !home;
+    }
     dashboard.hidden = !home;
     stats.hidden = !home && target !== 'status';
 

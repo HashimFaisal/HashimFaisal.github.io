@@ -2337,3 +2337,15 @@ body[data-nuvio-view="home"] > footer {
     animation: none;
   }
 }
+
+/* Keep live ticker animation running while browsing other views */
+.live-updates--background {
+  position: fixed !important;
+  top: 0 !important;
+  left: -10000px !important;
+  width: min(var(--page), 92%) !important;
+  margin: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+}
