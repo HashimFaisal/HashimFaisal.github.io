@@ -420,16 +420,6 @@ def main():
     updates = active_updates
 
     # Convert real source changes into bilingual live news.
-    plugin_names = {"CinemaBox", "Cinemana", "OpenSubtitles", "Cinemeta"}
-    addon_names = {
-        "ALL-IN-ONE",
-        "Rodrigo's Catalog",
-        "Nuvio Catalog",
-        "İzlemeli Catalog",
-        "IMDb Popular",
-        "Ratings Aggregator",
-        "The Movie Database Addon",
-    }
     known_ids = {item.get("id") for item in updates if isinstance(item, dict)}
 
     for event in events:
@@ -458,32 +448,27 @@ def main():
         elif event_type in {"added", "version"}:
             if not source or not isinstance(source_url, str) or not source_url.startswith("https://"):
                 continue
-            if not version or str(version).lower() == "not specified":
-                continue
 
-            if source in plugin_names:
-                category = "plugin"
-                category_ar = "إضافة"
-                category_en = "plugin"
-            elif source in addon_names:
-                category = "addon"
-                category_ar = "إضافة كتالوج"
-                category_en = "catalog add-on"
-            else:
-                continue
+            category = "addon"
 
             if event_type == "added":
                 # Do not announce the initial baseline as a new discovery.
                 if not previous_report.get("checks"):
                     continue
-                title_ar = f"{category_ar} جديدة: {source}"
-                title_en = f"New {category_en}: {source}"
-                desc_ar = f"تمت إضافة {source} إلى مصادر Nuvio."
-                desc_en = f"{source} has been added to Nuvio sources."
-                update_id = f"{category}:{source}:added:{version}"
+                has_version = bool(version) and str(version).lower() != "not specified"
+                version_label_ar = str(version) if has_version else "غير محدد"
+                version_label_en = str(version) if has_version else "not specified"
+                title_ar = f"مصدر جديد: {source}"
+                title_en = f"New source: {source}"
+                desc_ar = f"تمت إضافة {source} إلى مصادر Nuvio. الإصدار: {version_label_ar}."
+                desc_en = f"{source} has been added to Nuvio sources. Version: {version_label_en}."
+                update_id = f"{category}:{source}:added"
             else:
                 old_version = event.get("old_version")
-                if not old_version or str(old_version).lower() == "not specified":
+                if (
+                    not old_version or str(old_version).lower() == "not specified"
+                    or not version or str(version).lower() == "not specified"
+                ):
                     continue
                 title_ar = f"تحديث {source} إلى الإصدار {version}"
                 title_en = f"{source} updated to version {version}"
