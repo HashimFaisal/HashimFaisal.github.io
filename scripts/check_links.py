@@ -20,6 +20,7 @@ MANIFESTS = {
     "The Movie Database Addon": "https://tmdb.elfhosted.com/manifest.json",
     "İzlemeli Catalog": "https://izlemeli.github.io/nuvio/en/manifest.json",
     "IMDb Popular": "https://imdb-popular-stremio.vercel.app/manifest.json",
+    "My Lists": "https://mylistsaddon.com/manifest.json",
     "Ratings Aggregator": "https://rating-aggregator.elfhosted.com/manifest.json",
 }
 
