@@ -422,7 +422,7 @@ def main():
     # Convert real source changes into bilingual live news.
     known_ids = {item.get("id") for item in updates if isinstance(item, dict)}
 
-    for event in events:
+    for event in history + events:
         event_type = event.get("type")
         source = event.get("source")
         version = event.get("new_version")
@@ -462,7 +462,7 @@ def main():
                 title_en = f"New source: {source}"
                 desc_ar = f"تمت إضافة {source} إلى مصادر Nuvio. الإصدار: {version_label_ar}."
                 desc_en = f"{source} has been added to Nuvio sources. Version: {version_label_en}."
-                update_id = f"{category}:{source}:added"
+                update_id = f"{category}:{source}:added:{version if has_version else 'not-specified'}"
             else:
                 old_version = event.get("old_version")
                 if (
@@ -493,6 +493,8 @@ def main():
             published = now_dt
 
         expires = published + timedelta(hours=24)
+        if expires <= now_dt:
+            continue
         updates.append({
             "id": update_id,
             "type": category,

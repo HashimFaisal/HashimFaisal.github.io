@@ -1,5 +1,20 @@
 [
   {
+    "id": "addon:My Lists:added:1.5.8",
+    "type": "addon",
+    "title": {
+      "ar": "إضافة مصدر جديد: My Lists",
+      "en": "New add-on source: My Lists"
+    },
+    "description": {
+      "ar": "تمت إضافة My Lists، الإصدار 1.5.8، إلى قائمة مصادر Nuvio.",
+      "en": "My Lists version 1.5.8 has been added to Nuvio sources."
+    },
+    "url": "https://mylistsaddon.com/manifest.json",
+    "publishedAt": "2026-11-18T07:09:29.852472Z",
+    "expiresAt": "2026-11-19T07:09:29.852472Z"
+  },
+  {
     "id": "app:release:beta:1.1.0-beta.2",
     "type": "app",
     "title": {
