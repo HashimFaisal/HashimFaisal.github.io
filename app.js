@@ -768,9 +768,6 @@ async function loadLiveUpdates() {
       item.dir = language === 'ar' ? 'rtl' : 'ltr';
       item.lang = language;
 
-      const title = document.createElement('strong');
-      title.textContent = localizedTitle;
-
       const description = document.createElement('span');
       description.textContent = localizedDescription;
 
@@ -781,7 +778,7 @@ async function loadLiveUpdates() {
       details.target = '_blank';
       details.rel = 'noopener noreferrer';
 
-      item.append(title, description, details);
+      item.append(description, details);
       fragment.appendChild(item);
       displayedCount++;
     });
