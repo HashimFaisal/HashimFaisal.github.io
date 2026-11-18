@@ -1,5 +1,20 @@
 [
   {
+    "id": "addon:My Lists:added:1.5.8",
+    "type": "addon",
+    "title": {
+      "ar": "إضافة مصدر جديد: My Lists",
+      "en": "New add-on source: My Lists"
+    },
+    "description": {
+      "ar": "تمت إضافة My Lists، الإصدار 1.5.8، إلى قائمة مصادر Nuvio.",
+      "en": "My Lists version 1.5.8 has been added to Nuvio sources."
+    },
+    "url": "https://mylistsaddon.com/manifest.json",
+    "publishedAt": "2026-11-18T07:09:29.852472Z",
+    "expiresAt": "2026-11-19T07:09:29.852472Z"
+  },
+  {
     "id": "app:release:beta:1.1.0-beta.2",
     "type": "app",
     "title": {
@@ -13,80 +28,5 @@
     "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/tag/1.1.0-beta.2",
     "publishedAt": "2026-11-18T07:09:29.852472Z",
     "expiresAt": "2026-11-19T07:09:29.852472Z"
-  },
-  {
-    "id": "addon:The Movie Database Addon:added:3.1.7",
-    "type": "addon",
-    "title": {
-      "ar": "إضافة كتالوج جديدة: The Movie Database Addon",
-      "en": "New catalog add-on: The Movie Database Addon"
-    },
-    "description": {
-      "ar": "تمت إضافة The Movie Database Addon إلى مصادر Nuvio.",
-      "en": "The Movie Database Addon has been added to Nuvio sources."
-    },
-    "url": "https://tmdb.elfhosted.com/manifest.json",
-    "publishedAt": "2026-11-17T10:07:59.205117Z",
-    "expiresAt": "2026-11-18T10:07:59.205117Z"
-  },
-  {
-    "id": "addon:Nuvio Catalog:added:1.2.0",
-    "type": "addon",
-    "title": {
-      "ar": "إضافة كتالوج جديدة: Nuvio Catalog",
-      "en": "New catalog add-on: Nuvio Catalog"
-    },
-    "description": {
-      "ar": "تمت إضافة Nuvio Catalog إلى مصادر Nuvio.",
-      "en": "Nuvio Catalog has been added to Nuvio sources."
-    },
-    "url": "https://catalog.nuvio.tv/manifest.json",
-    "publishedAt": "2026-11-17T09:38:33.643609Z",
-    "expiresAt": "2026-11-18T09:38:33.643609Z"
-  },
-  {
-    "id": "addon:İzlemeli Catalog:added:1.0.115",
-    "type": "addon",
-    "title": {
-      "ar": "إضافة كتالوج جديدة: İzlemeli Catalog",
-      "en": "New catalog add-on: İzlemeli Catalog"
-    },
-    "description": {
-      "ar": "تمت إضافة İzlemeli Catalog إلى مصادر Nuvio.",
-      "en": "İzlemeli Catalog has been added to Nuvio sources."
-    },
-    "url": "https://izlemeli.github.io/nuvio/en/manifest.json",
-    "publishedAt": "2026-11-17T09:38:33.643609Z",
-    "expiresAt": "2026-11-18T09:38:33.643609Z"
-  },
-  {
-    "id": "addon:IMDb Popular:added:2.1.0",
-    "type": "addon",
-    "title": {
-      "ar": "إضافة كتالوج جديدة: IMDb Popular",
-      "en": "New catalog add-on: IMDb Popular"
-    },
-    "description": {
-      "ar": "تمت إضافة IMDb Popular إلى مصادر Nuvio.",
-      "en": "IMDb Popular has been added to Nuvio sources."
-    },
-    "url": "https://imdb-popular-stremio.vercel.app/manifest.json",
-    "publishedAt": "2026-11-17T09:38:33.643609Z",
-    "expiresAt": "2026-11-18T09:38:33.643609Z"
-  },
-  {
-    "id": "addon:Ratings Aggregator:added:1.8.1",
-    "type": "addon",
-    "title": {
-      "ar": "إضافة كتالوج جديدة: Ratings Aggregator",
-      "en": "New catalog add-on: Ratings Aggregator"
-    },
-    "description": {
-      "ar": "تمت إضافة Ratings Aggregator إلى مصادر Nuvio.",
-      "en": "Ratings Aggregator has been added to Nuvio sources."
-    },
-    "url": "https://rating-aggregator.elfhosted.com/manifest.json",
-    "publishedAt": "2026-11-17T09:38:33.643609Z",
-    "expiresAt": "2026-11-18T09:38:33.643609Z"
   }
 ]
