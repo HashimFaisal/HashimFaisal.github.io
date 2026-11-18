@@ -778,9 +778,6 @@ async function loadLiveUpdates() {
       const title = document.createElement('strong');
       title.textContent = localizedTitle;
 
-      const description = document.createElement('span');
-      description.textContent = localizedDescription;
-
       const details = document.createElement('a');
       details.className = 'live-updates__item-link';
       details.textContent = isArabic ? 'التفاصيل' : 'Details';
@@ -788,7 +785,7 @@ async function loadLiveUpdates() {
       details.target = '_blank';
       details.rel = 'noopener noreferrer';
 
-      item.append(title, description, details);
+      item.append(title, details);
       fragment.appendChild(item);
       displayedCount++;
     });
