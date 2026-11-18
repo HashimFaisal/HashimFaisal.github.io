@@ -20,7 +20,7 @@ const translations = {
   'حالة النظام': 'System Status',
   'سجل التغييرات': 'Changelog',
   'كل ما تحتاجه لعالم': 'Everything you need for the world of',
-  'Nuvio، في تجربة واحدة.': 'Nuvio, in one experience.',
+  'Nuvio في تجربة واحدة': 'Nuvio in one experience',
 
   'اكتشف أدواتك، واستكشف إمكانياتك، وانطلق بلا حدود.': 'Discover your tools, explore your possibilities, and move forward without limits.',
   'استكشف الإضافات': 'Explore Add-ons',
