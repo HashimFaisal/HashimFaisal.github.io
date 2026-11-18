@@ -1234,3 +1234,15 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
   background: #42c879;
   box-shadow: 0 0 10px rgba(66, 200, 121, .55);
 }
+
+/* SubDL API action — use the site's standard add-on button style */
+#plugins .nuvio-addon-card.subdl-card .card-actions > a.copy-btn.share-btn {
+  display: flex !important;
+}
+
+/* Match the standard filled action button — SubDL only */
+#plugins .nuvio-addon-card.subdl-card .card-actions > a.copy-btn.share-btn {
+  color: #102329 !important;
+  background: var(--cyan) !important;
+  border-color: var(--line) !important;
+}

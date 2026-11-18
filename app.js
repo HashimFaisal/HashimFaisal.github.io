@@ -68,6 +68,10 @@ const translations = {
   'مشروع إضافة مستقل ضمن مكتبة Nuvio.': 'An independent add-on in the Nuvio library.',
   'إضافة All-in-One لمشروع Nuvio من المستودع الأصلي.': 'The All-in-One add-on for Nuvio from its original repository.',
   'إضافة للبحث عن الترجمات وعرضها.': 'An add-on for searching and displaying subtitles.',
+  'إضافة للبحث عن ترجمات الأفلام والمسلسلات والأنمي.': 'An add-on for searching subtitles for movies, series, and anime.',
+  'اضغط للحصول على API.': 'Click to get API.',
+  'إعداد الإضافة من الموقع الرسمي لـ SubDL.': 'Configure the add-on on the official SubDL website.',
+  'الحصول على API وإعداد الإضافة': 'Get API & Configure Add-on',
   "كتالوج لاكتشاف العناوين وبيانات الأفلام والمسلسلات، وليس مشغّل فيديو.": "A catalog for discovering titles and movie/series metadata, not a video player.",
   'مصدر بيانات الأفلام والمسلسلات. توافقه مع Nuvio يحتاج اختباراً.': 'A source for movie and series metadata. Compatibility with Nuvio still needs testing.',
   'إضافة قنوات YouTube إلى Nuvio. توافقها يحتاج اختباراً.': 'Adds YouTube channels to Nuvio. Compatibility still needs testing.',
@@ -165,9 +169,11 @@ function updateShareButtonLabels() {
 
     const name = card.querySelector('h3')?.textContent.trim() || 'Nuvio';
     const isExternal = card.querySelector('.type-tag')?.classList.contains('external');
-    const label = isExternal
-      ? t('تثبيت في Nuvio')
-      : t('ضغط للنسخ والفتح Nuvio');
+    const label = card.classList.contains('subdl-card')
+      ? (currentLang === 'en' ? 'Click to get API' : 'اضغط للحصول على API')
+      : isExternal
+        ? t('تثبيت في Nuvio')
+        : t('ضغط للنسخ والفتح Nuvio');
 
     button.textContent = label;
     button.setAttribute('aria-label', `${label} ${name}`);
@@ -768,6 +774,9 @@ async function loadLiveUpdates() {
       item.dir = language === 'ar' ? 'rtl' : 'ltr';
       item.lang = language;
 
+      const title = document.createElement('strong');
+      title.textContent = localizedTitle;
+
       const description = document.createElement('span');
       description.textContent = localizedDescription;
 
@@ -778,7 +787,7 @@ async function loadLiveUpdates() {
       details.target = '_blank';
       details.rel = 'noopener noreferrer';
 
-      item.append(description, details);
+      item.append(title, description, details);
       fragment.appendChild(item);
       displayedCount++;
     });
