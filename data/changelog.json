@@ -116,5 +116,25 @@
     "source": "The Movie Database Addon",
     "source_url": "https://tmdb.elfhosted.com/manifest.json",
     "new_version": "3.1.7"
+  },
+  {
+    "date": "2026-11-18T07:09:29.852472+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: My Lists",
+    "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
+    "source": "My Lists",
+    "source_url": "https://mylistsaddon.com/manifest.json",
+    "new_version": "1.5.8"
+  },
+  {
+    "date": "2026-11-18T07:09:29.852472+00:00",
+    "type": "release",
+    "channel": "beta",
+    "title": "صدور تحديث Nuvio: 1.1.0-beta.2",
+    "detail": "الإصدار السابق كان 1.1.0-beta.1.",
+    "source": "Nuvio App",
+    "source_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/tag/1.1.0-beta.2",
+    "old_version": "1.1.0-beta.1",
+    "new_version": "1.1.0-beta.2"
   }
 ]
