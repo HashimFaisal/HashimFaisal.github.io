@@ -692,6 +692,8 @@ async function loadLiveUpdates() {
 
   const isArabic = currentLang === 'ar';
   const language = isArabic ? 'ar' : 'en';
+  content.dir = language;
+  content.lang = language;
 
   function showWelcome() {
     if (requestId !== liveUpdatesRequestId) return;
