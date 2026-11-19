@@ -447,7 +447,6 @@ nav a:hover::after { transform: scaleX(1); }
 }
 .search-box:focus-within {
   border-color: var(--cyan);
-  box-shadow: 0 0 0 4px rgba(88, 216, 232, 0.08);
 }
 .search-box span { color: var(--cyan); font-size: 23px; }
 .search-box input {

@@ -1323,8 +1323,6 @@ input:focus-visible {
 
 #status .report-freshness[data-state="delayed"] {
   color: var(--violet);
-  border-color: rgba(163, 148, 255, 0.32);
-  background: rgba(163, 148, 255, 0.08);
 }
 #status .report-freshness[data-state="stale"],
 #status .report-freshness[data-state="unknown"] {
@@ -1357,8 +1355,6 @@ input:focus-visible {
   height: 8px;
   margin-top: 7px;
   border-radius: 50%;
-  background: var(--cyan);
-  box-shadow: 0 0 12px rgba(88, 216, 232, 0.45);
 }
 
 #changelog .changelog-content {
