@@ -148,7 +148,8 @@ test('five dashboard cards keep their text in order without overlap', async ({ p
       };
     })
   );
-  console.log('DASHBOARD_CARD_GEOMETRY', JSON.stringify(cards));
+  const viewportWidth = await page.evaluate(() => window.innerWidth);
+  console.log('DASHBOARD_CARD_GEOMETRY', JSON.stringify({ viewportWidth, cards }));
   expect(cards).toHaveLength(5);
   for (const card of cards) {
     expect(card.items.every(item => !item.missing), JSON.stringify(card)).toBe(true);
