@@ -76,7 +76,7 @@ for css_path in CSS_FILES:
             fail(f"Unapproved RGB color in {css_path.name}: {rgb}")
     if __import__("re").search(r"hsla?\s*\(", css_text, flags=__import__("re").I):
         fail(f"Unsupported HSL color syntax in {css_path.name}")
-    for color in __import__("re").findall(r"#[0-9a-fA-F]{8}(?![0-9a-fA-F])|#[0-9a-fA-F]{6}(?![0-9a-fA-F])|#[0-9a-fA-F]{4}(?![0-9a-fA-F])|#[0-9a-fA-F]{3}(?![0-9a-fA-F])", css_text):
+    for color in __import__("re").findall(r"#[0-9a-fA-F]{8}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{6}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{4}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{3}(?![a-zA-Z0-9_-])", css_text):
         if color.lower() not in ALLOWED_CSS_HEX:
             fail(f"Unapproved CSS hex color in {css_path.name}: {color}")
     if css_path.name == "premium-ui.css":
@@ -98,7 +98,7 @@ if repository_svg != set(ACTIVE_ARTWORK):
 # color literals cannot bypass the stylesheet palette checks.
 for source_path in (HTML, ROOT / "app.js", ROOT / "premium-ui.js"):
     source_text = source_path.read_text(encoding="utf-8")
-    for color in __import__("re").findall(r"#[0-9a-fA-F]{8}(?![0-9a-fA-F])|#[0-9a-fA-F]{6}(?![0-9a-fA-F])|#[0-9a-fA-F]{4}(?![0-9a-fA-F])|#[0-9a-fA-F]{3}(?![0-9a-fA-F])", source_text):
+    for color in __import__("re").findall(r"#[0-9a-fA-F]{8}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{6}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{4}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{3}(?![a-zA-Z0-9_-])", source_text):
         if color.lower() not in ALLOWED_CSS_HEX:
             fail(f"Unapproved UI source color in {source_path.name}: {color}")
     for red, green, blue in __import__("re").findall(r"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)", source_text, flags=__import__("re").I):
