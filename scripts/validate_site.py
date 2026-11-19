@@ -61,9 +61,13 @@ for css_path in CSS_FILES:
     if parse_errors:
         fail(f"{css_path.name}: CSS parser errors: {parse_errors[:3]}")
     if css_path.name == "premium-ui.css":
-        for legacy in ("#f0e5cf", "#1b1a17", "#10100f", "#171613", "#d4af37", "#c9a44c", "#b58d38"):
+        for legacy in ("#f0e5cf", "#1b1a17", "#10100f", "#171613", "#d4af37", "#c9a44c", "#b58d38", "#1a1916", "#111110", "#c5bdae", "#d7d0c1", "#f1dfb9", "#f0dfb9", "#a99e89", "#fff0ca"):
             if legacy.lower() in css_text.lower():
                 fail(f"Legacy palette token remains in {css_path.name}: {legacy}")
+        keyframe_names = __import__("re").findall(r"@keyframes\s+([\w-]+)", css_text)
+        if len(keyframe_names) != len(set(keyframe_names)):
+            duplicates = sorted(name for name in set(keyframe_names) if keyframe_names.count(name) > 1)
+            fail(f"Duplicate CSS keyframe names in {css_path.name}: {duplicates}")
 
 # JSON parses, shapes, duplicate live update IDs, and no removed source in live updates.
 data = {}
