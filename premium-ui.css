@@ -2414,9 +2414,6 @@ footer a:hover,
   color: #a9eff8;
 }
 
-.live-updates__content {
-}
-
 .live-updates__item {
   border-color: rgba(88,216,232,.22);
 }
@@ -2748,7 +2745,6 @@ button:active,
 .hero-meta i { width: 6px; height: 6px; flex-basis: 6px; }
 
 @media (max-width: 760px) {
-  .hero-copy { }
   .hero-copy::before {
     position: static; align-self: flex-start; margin-bottom: 11px;
     min-height: 26px; font-size: 8px;
