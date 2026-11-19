@@ -2433,7 +2433,7 @@ footer a:hover,
 .download-card,
 .resource-links a,
 .nuvio-launch-card,
-.nuvio-overview-card,
+
 .changelog-entry,
 #changelog .changelog-list > *,
 .nuvio-view-active.section,
@@ -2734,7 +2734,7 @@ input:focus-visible {
 #downloads .download-card,
 #downloads .release-banner,
 #resources .resource-links a,
-.nuvio-overview-card,
+
 .live-updates,
 .hero,
 #plugins .filters .filter,
@@ -2767,7 +2767,7 @@ button,
 #downloads .download-card:active,
 #downloads .release-banner:active,
 #resources .resource-links a:active,
-.nuvio-overview-card:active,
+
 .live-updates:active {
   transform: translateY(-4px) scale(1.012);
   border-color: var(--nuvio-touch-border);
@@ -2803,7 +2803,7 @@ button:active,
 
 :where(a, button, .nuvio-launch-card, #plugins .plugin-card,
   #changelog .changelog-list > *, #downloads .download-card,
-  #resources .resource-links a, .nuvio-overview-card):focus-visible {
+  #resources .resource-links a):focus-visible {
   outline: 2px solid var(--cyan);
   outline-offset: 3px;
 }
@@ -2816,7 +2816,7 @@ button:active,
   #downloads .download-card,
   #downloads .release-banner,
   #resources .resource-links a,
-  .nuvio-overview-card,
+
   .live-updates,
   .hero,
   #plugins .filters .filter,
@@ -2841,7 +2841,7 @@ button:active,
   #downloads .download-card:active,
   #downloads .release-banner:active,
   #resources .resource-links a:active,
-  .nuvio-overview-card:active,
+
   .live-updates:active,
   button:active,
   .topbar nav a:active,
