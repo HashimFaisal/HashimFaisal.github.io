@@ -3106,3 +3106,97 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
     transition: none !important;
   }
 }
+
+
+/* NUVIO — PHASE 4: DOWNLOAD CLARITY & LIVE STATUS STATES */
+#downloads .download-card {
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 190px;
+}
+
+#downloads .download-card .download-file {
+  display: block;
+  width: 100%;
+  margin: 0;
+  color: #f2f6ff;
+  font-size: clamp(15px, 1.35vw, 18px);
+  font-weight: 850;
+  line-height: 1.55;
+  text-align: left;
+  direction: ltr;
+  unicode-bidi: isolate;
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+#downloads .download-card .download-file bdi {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+#downloads .download-card .download-platform {
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+#downloads .download-card .download-meta,
+#downloads .download-card .download-unavailable {
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.65;
+}
+
+#downloads .download-card .download-action {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+#downloads .download-card[data-ready="false"] {
+  border-style: dashed;
+}
+
+#status .stat-card[data-health="healthy"] {
+  border-color: rgba(66, 200, 121, .24);
+}
+
+#status .stat-card[data-health="healthy"] strong {
+  color: #a9e8c1;
+}
+
+#status .stat-card[data-health="warning"] {
+  border-color: rgba(255, 130, 146, .32);
+}
+
+#status .stat-card[data-health="warning"] strong {
+  color: #ffb0ba;
+}
+
+#status .stat-card[data-health="unknown"] strong {
+  color: var(--muted);
+}
+
+@media (max-width: 480px) {
+  #downloads .download-card {
+    min-height: 0;
+    padding: 17px;
+  }
+
+  #downloads .download-card .download-file {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  #downloads .download-card .download-platform {
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #downloads .download-card,
+  #status .stat-card {
+    transition: none !important;
+  }
+}
