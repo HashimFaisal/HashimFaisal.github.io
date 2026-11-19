@@ -98,12 +98,12 @@ categories = []
 for match in __import__("re").finditer(r'<article class="plugin-card[^"]*" data-category="([^"]+)"', source):
     categories.append(match.group(1))
 filters = set(__import__("re").findall(r'data-filter="([^"]+)"', source))
-if len(categories) != 21 or set(categories) != expected:
+if len(categories) != 19 or set(categories) != expected:
     fail(f"Unexpected resource list/categories: {len(categories)} cards, {set(categories)}")
 if filters != expected | {"all"}:
     fail(f"Filter/category mismatch: {filters}")
-if categories.count("ratings") != 8:
-    fail(f"Expected 8 ratings/metadata cards, found {categories.count('ratings')}")
+if categories.count("ratings") != 6:
+    fail(f"Expected 6 ratings/metadata cards, found {categories.count('ratings')}")
 
 if errors:
     print("\n".join("ERROR: " + item for item in errors))
