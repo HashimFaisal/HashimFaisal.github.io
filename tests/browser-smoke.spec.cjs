@@ -117,7 +117,7 @@ test('personal metadata manifests expose Nuvio install actions and keep setup li
   }
 });
 
-test('Manifest share action is visible and the copy handler writes its URL', async ({ page, context }) => {') + '
+test('Manifest share action is visible and the copy handler writes its URL', async ({ page, context }) => {
   await page.goto('/#plugins');
   await expect(page.locator('#plugins')).toBeVisible();
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
@@ -523,15 +523,6 @@ test('changelog and downloads sections keep content boxes separate across viewpo
   await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
   for (const width of widths) await assertSections(width);
 });
-) }) });
-    await expect(card).toHaveCount(1);
-    await expect(card.locator('.manifest-url')).toHaveText(item.manifest);
-    await expect(card.locator('.card-actions a').filter({ hasText: /إعداد|setup/i }).first()).toHaveAttribute('href', item.setup);
-    await expect(card.locator('.card-actions a[href="' + item.manifest + '"]')).toBeVisible();
-    await expect(card.locator('.share-btn')).toBeVisible();
-  }
-});
-
 test('Manifest share action is visible and the copy handler writes its URL', async ({ page, context }) => {
   await page.goto('/#plugins');
   await expect(page.locator('#plugins')).toBeVisible();
