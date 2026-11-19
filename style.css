@@ -325,66 +325,7 @@ nav a:hover::after { transform: scaleX(1); }
 }
 .orbit-two { width: 92%; transform: rotateX(68deg) rotate(38deg); border-color: rgba(171,144,245,.25); }
 .orbit-three { width: 60%; transform: rotateY(65deg) rotate(20deg); border-style: dashed; opacity: .55; }
-.visual-object {
-  position: relative;
-  width: 180px;
-  height: 180px;
-  transform: rotate(-28deg) rotateX(13deg);
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 25px 35px rgba(0,0,0,.4));
-}
-.object-back, .object-core, .object-glass, .object-highlight {
-  position: absolute;
-  inset: 0;
-  border-radius: 36px;
-  transform: rotate(45deg);
-}
-.object-back {
-  background: linear-gradient(140deg, #8b71dc, #314e83 58%, #4ec6c8);
-  box-shadow: 0 0 55px rgba(95,174,210,.22);
-}
-.object-core {
-  inset: 19px;
-  background: linear-gradient(145deg, #182b3d, #111a2b 60%, #263f50);
-  border: 1px solid rgba(190,245,245,.4);
-}
-.object-glass {
-  inset: 39px;
-  border: 2px solid rgba(140,231,226,.65);
-  background: linear-gradient(145deg, rgba(120,220,219,.24), rgba(152,126,230,.12));
-  box-shadow: inset 0 0 30px rgba(113,226,221,.17), 0 0 30px rgba(115,214,214,.12);
-}
-.object-highlight {
-  inset: 9px 75px 105px 9px;
-  border-radius: 30px;
-  background: rgba(255,255,255,.42);
-  filter: blur(9px);
-}
-.object-shard {
-  position: absolute;
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(158,233,231,.65);
-  background: linear-gradient(135deg, rgba(120,225,220,.55), rgba(137,113,220,.2));
-  transform: rotate(45deg);
-  border-radius: 8px;
-}
-.shard-one { top: -23px; right: 12px; }
-.shard-two { bottom: 3px; left: -29px; width: 24px; height: 24px; }
-.shard-three { bottom: -32px; right: 27px; width: 18px; height: 18px; }
-.visual-caption {
-  position: absolute;
-  bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #8fa7b8;
-  font: 700 8px Inter, sans-serif;
-  letter-spacing: 2px;
-}
-.visual-caption span { color: var(--cyan); font-size: 12px; }
-.visual-caption i { width: 25px; height: 1px; background: var(--cyan); }
-
+/* Removed unused legacy 3D object visual; hero now uses the globe visual. */
 /* Status dashboard */
 .stats-grid {
   display: grid;
@@ -430,10 +371,15 @@ nav a:hover::after { transform: scaleX(1); }
   border-color: var(--line-strong);
   box-shadow: 0 22px 48px rgba(0,0,0,.25);
 }
-.stat-card > span, .stat-card small {
+.stat-card > span {
   display: block;
   color: var(--muted);
   font-size: 10px;
+}
+.stat-card small {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
 }
 .stat-card strong {
   display: block;
@@ -442,7 +388,6 @@ nav a:hover::after { transform: scaleX(1); }
   font: 800 27px Inter, sans-serif;
   overflow-wrap: anywhere;
 }
-.stat-card small { font-size: 9px; }
 
 /* Content sections */
 .section {
@@ -751,15 +696,16 @@ nav a:hover::after { transform: scaleX(1); }
 }
 .download-card strong, .resource-links a span {
   color: #edf5fb;
-  font-size: 14px;
   font-weight: 800;
 }
+.resource-links a span { font-size: 14px; }
+.download-card strong { font-size: 10px; }
+
 .download-card small, .resource-links a small {
   color: #9bafc1;
   font-size: 10px;
 }
 .download-card > small:first-child { font-size: 12px; }
-.download-card strong { font-size: 10px; }
 .download-card a {
   display: inline-flex;
   align-self: flex-start;
@@ -929,22 +875,7 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
 
 
 /* Nuvio hero emblem — slow continuous rotation */
-.hero-visual .visual-object {
-  animation: nuvio-emblem-rotation 32s linear infinite !important;
-  transform-origin: center center;
-}
-
-@keyframes nuvio-emblem-rotation {
-  from { transform: rotate(-28deg) rotateX(13deg); }
-  to   { transform: rotate(332deg) rotateX(13deg); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-visual .visual-object {
-    animation: none !important;
-  }
-}
-
+/* Legacy 3D hero animation removed; current hero is globe-based. */
 .plugin-help {
   flex: 0 0 auto !important;
   min-height: 0 !important;
@@ -1100,27 +1031,6 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
   border-color: rgba(163,148,255,.30);
 }
 
-:root .object-back {
-  background: linear-gradient(140deg,#a8f3fb,#5266a8 58%,#111d33);
-  box-shadow: 0 0 55px rgba(88,216,232,.20);
-}
-
-:root .object-core {
-  background: linear-gradient(145deg,#1c3150,#101a31 60%,#29365e);
-  border-color: rgba(175,229,255,.42);
-}
-
-:root .object-glass {
-  border-color: rgba(175,229,255,.65);
-  background: linear-gradient(145deg,rgba(163,148,255,.22),rgba(163,148,255,.10));
-  box-shadow: inset 0 0 30px rgba(163,148,255,.14),0 0 30px rgba(88,216,232,.12);
-}
-
-:root .object-shard {
-  border-color: rgba(175,229,255,.65);
-  background: linear-gradient(135deg,rgba(175,229,255,.45),rgba(163,148,255,.18));
-}
-
 :root .stat-card,
 :root .plugin-card,
 :root .download-card,
@@ -1236,8 +1146,7 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
 /* NUVIO — Unified green indicator dots */
 .pulse,
 .hero-meta i,
-.card-status i,
-.card-status.bad i {
+.card-status:not(.bad) i {
   background: #42c879;
   box-shadow: 0 0 10px rgba(66, 200, 121, .55);
 }
