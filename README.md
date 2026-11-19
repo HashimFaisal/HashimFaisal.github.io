@@ -34,7 +34,7 @@ The projects and add-ons listed here are independent community resources and are
 ### Important installation notes
 
 - Where a Manifest is provided, use the card's copy/open action. Supported Nuvio plugin cards can hand off to the Nuvio app.
-- The **Subtitles** section lists only add-ons with a public, direct Manifest URL: **OpenSubtitles v3**, **TheSubtitleDB**, and **Persian Subtitles**. TheSubtitleDB offers optional language configuration; Persian Subtitles is focused on Persian-language subtitles.
+- The **Subtitles** section lists only add-ons with a public, direct Manifest URL: **OpenSubtitles v3**, **TheSubtitleDB**, **Persian Subtitles**, and **AltyaziDB Subtitles**. TheSubtitleDB offers optional language configuration; Persian Subtitles is focused on Persian-language subtitles; AltyaziDB Subtitles provides Turkish subtitles from its independent database.
 - Add-ons that require API keys, accounts, or personal configurator-generated Manifest URLs are intentionally excluded from this direct-install list.
 - Subtitle-addon listing does not guarantee in-app functionality. Nuvio exposes subtitle-addon startup behavior under Settings > Player; test each addon in the target Nuvio version.
 - External add-on compatibility and available features depend on the add-on and the installed Nuvio version.
