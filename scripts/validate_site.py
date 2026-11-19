@@ -74,7 +74,7 @@ for css_path in CSS_FILES:
         rgb = f"{red},{green},{blue}"
         if rgb not in ALLOWED_RGB:
             fail(f"Unapproved RGB color in {css_path.name}: {rgb}")
-    if __import__("re").search(r"hsla?\\s*\\(", css_text, flags=__import__("re").I):
+    if __import__("re").search(r"hsla?\s*\(", css_text, flags=__import__("re").I):
         fail(f"Unsupported HSL color syntax in {css_path.name}")
     for color in __import__("re").findall(r"#[0-9a-fA-F]{8}(?![0-9a-fA-F])|#[0-9a-fA-F]{6}(?![0-9a-fA-F])|#[0-9a-fA-F]{4}(?![0-9a-fA-F])|#[0-9a-fA-F]{3}(?![0-9a-fA-F])", css_text):
         if color.lower() not in ALLOWED_CSS_HEX:
@@ -101,11 +101,11 @@ for source_path in (HTML, ROOT / "app.js", ROOT / "premium-ui.js"):
     for color in __import__("re").findall(r"#[0-9a-fA-F]{8}(?![0-9a-fA-F])|#[0-9a-fA-F]{6}(?![0-9a-fA-F])|#[0-9a-fA-F]{4}(?![0-9a-fA-F])|#[0-9a-fA-F]{3}(?![0-9a-fA-F])", source_text):
         if color.lower() not in ALLOWED_CSS_HEX:
             fail(f"Unapproved UI source color in {source_path.name}: {color}")
-    for red, green, blue in __import__("re").findall(r"rgba?\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)", source_text, flags=__import__("re").I):
+    for red, green, blue in __import__("re").findall(r"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)", source_text, flags=__import__("re").I):
         rgb = f"{red},{green},{blue}"
         if rgb not in ALLOWED_RGB:
             fail(f"Unapproved UI source RGB color in {source_path.name}: {rgb}")
-    if __import__("re").search(r"hsla?\\s*\\(", source_text, flags=__import__("re").I):
+    if __import__("re").search(r"hsla?\s*\(", source_text, flags=__import__("re").I):
         fail(f"Unsupported HSL color syntax in {source_path.name}")
 
 for artwork_name in ACTIVE_ARTWORK:
