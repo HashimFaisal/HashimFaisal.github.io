@@ -77,7 +77,7 @@ for css_path in CSS_FILES:
     parse_errors = [rule for rule in rules if rule.type == "error"]
     if parse_errors:
         fail(f"{css_path.name}: CSS parser errors: {parse_errors[:3]}")
-    for red, green, blue in __import__("re").findall(r"rgba?\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)", css_text, flags=__import__("re").I):
+    for red, green, blue in __import__("re").findall(r"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)", css_text, flags=__import__("re").I):
         rgb = f"{red},{green},{blue}"
         if rgb not in ALLOWED_RGB:
             fail(f"Unapproved RGB color in {css_path.name}: {rgb}")
@@ -106,7 +106,7 @@ for artwork_name in ACTIVE_ARTWORK:
         "#070b16", "#0d1526", "#111d33", "#a394ff", "#58d8e8",
         "#8deaf3", "#f2f6ff", "#a2b1c8",
     }
-    for color in __import__("re").findall(r"#[0-9a-fA-F]{3,8}\\b", artwork_text):
+    for color in __import__("re").findall(r"#[0-9a-fA-F]{3,8}\b", artwork_text):
         if color.lower() not in allowed_artwork_hex:
             fail(f"Unapproved artwork color in {artwork_name}: {color}")
 
