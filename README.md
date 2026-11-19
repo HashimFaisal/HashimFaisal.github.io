@@ -34,11 +34,9 @@ The projects and add-ons listed here are independent community resources and are
 ### Important installation notes
 
 - Where a Manifest is provided, use the card's copy/open action. Supported Nuvio plugin cards can hand off to the Nuvio app.
-- **OpenSubtitles** is listed as an external subtitle add-on with a Manifest URL.
-- **SubDL** has a Nuvio subtitle-addon configurator at `https://subdl.strem.top/configure`; its API key page remains available separately at `https://subdl.com/an/panel/api`.
 - The **Subtitles** section lists only add-ons with a public, direct Manifest URL: **OpenSubtitles v3**, **TheSubtitleDB**, and **Persian Subtitles**. TheSubtitleDB offers optional language configuration; Persian Subtitles is focused on Persian-language subtitles.
 - Add-ons that require API keys, accounts, or personal configurator-generated Manifest URLs are intentionally excluded from this direct-install list.
-- Subtitle-addon listing does not guarantee in-app functionality. Nuvio exposes subtitle-addon startup behavior under Settings > Player; test generated addons in the target Nuvio version. Nuvio exposes subtitle-addon startup behavior under Settings > Player; test generated addons in the target Nuvio version.
+- Subtitle-addon listing does not guarantee in-app functionality. Nuvio exposes subtitle-addon startup behavior under Settings > Player; test each addon in the target Nuvio version.
 - External add-on compatibility and available features depend on the add-on and the installed Nuvio version.
 - **AIOMetadata** and **TMDB Discover+** require configuration first; install the generated manifest URL, not the configurator page.
 - **Anime Kitsu** provides anime catalogs and metadata; **IMDb Ratings** is a stream-resource addon, not a catalog.
