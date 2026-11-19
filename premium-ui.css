@@ -1328,7 +1328,7 @@ input:focus-visible {
 }
 #status .report-freshness[data-state="stale"],
 #status .report-freshness[data-state="unknown"] {
-  color: #ff8292;
+  color: var(--danger);
   border-color: rgba(255, 130, 146, .3);
   background: rgba(255, 130, 146, .07);
 }
@@ -1503,7 +1503,7 @@ html[dir="rtl"] .nuvio-launch-open b {
   border-radius: 17px;
   background:
     radial-gradient(ellipse at 8% 50%, rgba(88, 216, 232,.10), transparent 42%),
-    linear-gradient(115deg, var(--surface-2), var(--bg) 55%, #111a31);
+    linear-gradient(115deg, var(--surface-2), var(--bg) 55%, var(--surface-2));
   box-shadow: 0 14px 38px rgba(0,0,0,.24), inset 0 1px rgba(88, 216, 232,.055);
 }
 .live-updates__shell::before {
@@ -2330,7 +2330,7 @@ footer a:hover,
 }
 
 .card-status.bad i {
-  background: #ff8292;
+  background: var(--danger);
   box-shadow: 0 0 9px rgba(255,130,146,.55);
 }
 .changelog-entry,
@@ -2389,7 +2389,7 @@ footer a:hover,
   background:
     radial-gradient(ellipse at 8% 50%, rgba(88,216,232,.11), transparent 42%),
     radial-gradient(ellipse at 88% 50%, rgba(163,148,255,.08), transparent 42%),
-    linear-gradient(115deg, var(--surface-2), var(--bg) 55%, #111a31);
+    linear-gradient(115deg, var(--surface-2), var(--bg) 55%, var(--surface-2));
   box-shadow: 0 14px 38px rgba(0,0,0,.28), inset 0 1px rgba(190,235,255,.055);
 }
 .live-updates__shell::before,
@@ -2701,7 +2701,7 @@ button:active,
   background:
     radial-gradient(ellipse at 78% 44%, rgba(88, 216, 232, .15), transparent 42%),
     radial-gradient(ellipse at 8% 4%, rgba(163, 148, 255, .12), transparent 46%),
-    linear-gradient(128deg, #121f38 0%, var(--bg) 57%, var(--surface) 100%);
+    linear-gradient(128deg, var(--surface-2) 0%, var(--bg) 57%, var(--surface) 100%);
   box-shadow:
     0 32px 84px rgba(0, 0, 0, .46),
     inset 0 1px rgba(208, 239, 255, .09),
