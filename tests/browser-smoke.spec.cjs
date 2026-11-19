@@ -258,7 +258,7 @@ test('home dashboard cards stack vertically on compact screens in both languages
         };
       });
       return {
-        columns: gridStyle.gridTemplateColumns.trim().split(/\\s+/).length,
+        columns: gridStyle.gridTemplateColumns.trim().split(' ').filter(Boolean).length,
         cards
       };
     });
@@ -279,4 +279,161 @@ test('home dashboard cards stack vertically on compact screens in both languages
   await page.locator('#language-toggle').click();
   await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
   await assertStacked();
+});
+
+
+test('plugin library cards never overlap across responsive widths and languages', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  await expect(page.locator('#plugins')).toBeVisible();
+
+  const widths = [320, 360, 390, 430, 480, 560, 561, 600, 760, 761, 900, 1000, 1001, 1280, 1440];
+
+  const assertLibraryLayout = async width => {
+    await page.setViewportSize({ width, height: 900 });
+    const layout = await page.locator('#plugins').evaluate(section => {
+      const rectOf = element => {
+        const rect = element.getBoundingClientRect();
+        return {
+          top: rect.top, bottom: rect.bottom,
+          left: rect.left, right: rect.right,
+          width: rect.width, height: rect.height
+        };
+      };
+      const overlaps = (a, b) =>
+        Math.min(a.right, b.right) - Math.max(a.left, b.left) > 1 &&
+        Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 1;
+      const grid = section.querySelector('.plugin-grid');
+      const cards = [...grid.querySelectorAll('.plugin-card:not([hidden])')].map(card => {
+        const cardRect = rectOf(card);
+        const children = [...card.children]
+          .filter(node => {
+            const style = getComputedStyle(node);
+            const rect = node.getBoundingClientRect();
+            return style.display !== 'none' && style.visibility !== 'hidden' &&
+              rect.width > 0 && rect.height > 0;
+          })
+          .map(node => ({ name: node.className || node.tagName, rect: rectOf(node) }));
+        const nested = ['.plugin-top', '.card-actions'].flatMap(selector => {
+          const parent = card.querySelector(selector);
+          if (!parent) return [];
+          const items = [...parent.children]
+            .filter(node => getComputedStyle(node).display !== 'none')
+            .map(node => ({ name: node.className || node.tagName, rect: rectOf(node) }));
+          const collisions = [];
+          for (let i = 0; i < items.length; i++) {
+            for (let j = i + 1; j < items.length; j++) {
+              if (overlaps(items[i].rect, items[j].rect)) {
+                collisions.push([items[i].name, items[j].name]);
+              }
+            }
+          }
+          return collisions.map(pair => ({ parent: selector, pair }));
+        });
+        const collisions = [];
+        for (let i = 0; i < children.length; i++) {
+          for (let j = i + 1; j < children.length; j++) {
+            if (overlaps(children[i].rect, children[j].rect)) {
+              collisions.push([children[i].name, children[j].name]);
+            }
+          }
+        }
+        return {
+          title: card.querySelector('h3')?.textContent?.trim(),
+          rect: cardRect,
+          children,
+          collisions,
+          nestedCollisions: nested,
+          outside: children.filter(item =>
+            item.rect.left < cardRect.left - 1 ||
+            item.rect.right > cardRect.right + 1 ||
+            item.rect.top < cardRect.top - 1 ||
+            item.rect.bottom > cardRect.bottom + 1
+          ).map(item => item.name)
+        };
+      });
+      const cardCollisions = [];
+      for (let i = 0; i < cards.length; i++) {
+        for (let j = i + 1; j < cards.length; j++) {
+          if (overlaps(cards[i].rect, cards[j].rect)) {
+            cardCollisions.push([cards[i].title, cards[j].title]);
+          }
+        }
+      }
+      const gridStyle = getComputedStyle(grid);
+      return {
+        columns: gridStyle.gridTemplateColumns.trim().split(' ').filter(Boolean).length,
+        cards,
+        cardCollisions,
+        sectionWidth: rectOf(section).width,
+        viewportWidth: document.documentElement.clientWidth
+      };
+    });
+
+    const expectedColumns = await page.evaluate(() =>
+      window.matchMedia('(max-width: 560px)').matches
+        ? 1
+        : window.matchMedia('(max-width: 1000px)').matches ? 2 : 3
+    );
+    expect(layout.columns, JSON.stringify(layout)).toBe(expectedColumns);
+    expect(layout.cards, JSON.stringify(layout)).toHaveLength(21);
+    expect(layout.cardCollisions, JSON.stringify(layout)).toEqual([]);
+    for (const card of layout.cards) {
+      expect(card.collisions, JSON.stringify(card)).toEqual([]);
+      expect(card.nestedCollisions, JSON.stringify(card)).toEqual([]);
+      expect(card.outside, JSON.stringify(card)).toEqual([]);
+      expect(card.rect.left, JSON.stringify(card)).toBeGreaterThanOrEqual(-1);
+      expect(card.rect.right, JSON.stringify(card)).toBeLessThanOrEqual(layout.viewportWidth + 1);
+    }
+  };
+
+  for (const width of widths) await assertLibraryLayout(width);
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  for (const width of widths) await assertLibraryLayout(width);
+});
+
+test('status and developer-resource cards keep separate layout boxes on phone, tablet, and desktop', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const widths = [320, 390, 560, 760, 900, 1280];
+
+  const assertNoCardCollisions = async selector => {
+    const result = await page.locator(selector).evaluate(container => {
+      const nodes = [...container.children].filter(node => {
+        const rect = node.getBoundingClientRect();
+        return getComputedStyle(node).display !== 'none' && rect.width > 0 && rect.height > 0;
+      });
+      const boxes = nodes.map(node => {
+        const rect = node.getBoundingClientRect();
+        return {
+          name: node.querySelector('strong, span')?.textContent?.trim() || node.className,
+          left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom
+        };
+      });
+      const collisions = [];
+      for (let i = 0; i < boxes.length; i++) {
+        for (let j = i + 1; j < boxes.length; j++) {
+          const horizontal = Math.min(boxes[i].right, boxes[j].right) - Math.max(boxes[i].left, boxes[j].left);
+          const vertical = Math.min(boxes[i].bottom, boxes[j].bottom) - Math.max(boxes[i].top, boxes[j].top);
+          if (horizontal > 1 && vertical > 1) collisions.push([boxes[i].name, boxes[j].name]);
+        }
+      }
+      return { boxes, collisions };
+    });
+    expect(result.collisions, JSON.stringify(result)).toEqual([]);
+  };
+
+  for (const width of widths) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.locator('#nuvio-launch-grid [data-view="status"]').click();
+    await expect(page.locator('#status')).toBeVisible();
+    await assertNoCardCollisions('#status');
+    await page.locator('#status .nuvio-view-back').click();
+
+    await page.locator('#nuvio-launch-grid [data-view="resources"]').click();
+    await expect(page.locator('#resources')).toBeVisible();
+    await assertNoCardCollisions('#resources .resource-links');
+    await page.locator('#resources .nuvio-view-back').click();
+  }
 });
