@@ -2827,7 +2827,6 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
   .nuvio-launch-grid { gap: 10px; }
   .nuvio-launch-card { min-height: 178px; padding: 18px; }
   .nuvio-launch-icon { width: 40px; height: 40px; margin-bottom: 13px; }
-  .nuvio-launch-open { padding-top: 13px; }
 }
 @media (max-width: 380px) {
   .nuvio-dashboard-heading { align-items: flex-start; flex-direction: column; }
