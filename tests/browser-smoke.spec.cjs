@@ -107,7 +107,17 @@ test('personal metadata manifests expose Nuvio install actions and keep setup li
   ];
 
   for (const item of expected) {
-    const card = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: new RegExp('^' + item.name.replace(/[.*+?^${}()|[\\]\\\\]/g, '\\\\test('Manifest share action is visible and the copy handler writes its URL', async ({ page, context }) => {') + '
+    const card = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: item.name }) });
+    await expect(card).toHaveCount(1);
+    await expect(card.locator('h3')).toHaveText(item.name);
+    await expect(card.locator('.manifest-url')).toHaveText(item.manifest);
+    await expect(card.locator('.card-actions a').first()).toHaveAttribute('href', item.setup);
+    await expect(card.locator('.card-actions a[href="' + item.manifest + '"]')).toBeVisible();
+    await expect(card.locator('.share-btn')).toBeVisible();
+  }
+});
+
+test('Manifest share action is visible and the copy handler writes its URL', async ({ page, context }) => {') + '
   await page.goto('/#plugins');
   await expect(page.locator('#plugins')).toBeVisible();
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
