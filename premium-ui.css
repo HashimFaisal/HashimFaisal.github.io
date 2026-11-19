@@ -225,15 +225,6 @@ html[dir="ltr"] .nuvio-view-back > span:first-child { transform: rotate(180deg);
   to { opacity: 1; transform: translateY(0); }
 }
 
-:root[data-theme="light"] .nuvio-launch-card {
-  background:
-    radial-gradient(circle at 100% 0%, rgba(24,126,134,.09), transparent 48%),
-    linear-gradient(145deg, #fff, #f4f7fa);
-  box-shadow: 0 14px 35px rgba(39,58,83,.07);
-}
-
-:root[data-theme="light"] .nuvio-launch-card strong { color: #25354a; }
-
 @media (max-width: 900px) {
   .nuvio-launch-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
@@ -672,32 +663,6 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 /* Light theme refinements */
 
-:root[data-theme="light"] .nuvio-view-active.section,
-:root[data-theme="light"] #status.nuvio-view-active {
-  background:
-    radial-gradient(ellipse at 100% 0%, rgba(24,126,134,.055), transparent 42%),
-    linear-gradient(145deg, #fff, #f7f9fc);
-  box-shadow: 0 22px 55px rgba(39,58,83,.07);
-}
-
-:root[data-theme="light"] #plugins .manifest-url {
-  background: #f0f4f7;
-  color: #536477;
-}
-
-:root[data-theme="light"] #plugins .card-actions a {
-  color: #34465a;
-  background: #f0f4f7;
-}
-
-:root[data-theme="light"] #status.nuvio-view-active .stat-card,
-:root[data-theme="light"] #changelog .changelog-list > *,
-:root[data-theme="light"] #downloads .download-card,
-:root[data-theme="light"] #resources .resource-links a {
-  background: linear-gradient(145deg, #fff, #f5f8fb);
-  box-shadow: 0 9px 24px rgba(39,58,83,.045);
-}
-
 /* Responsive section layouts */
 
 @media (max-width: 760px) {
@@ -819,11 +784,6 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   color: var(--cyan);
   font: 800 8px Inter, sans-serif;
   letter-spacing: 1px;
-}
-
-:root[data-theme="light"] .nuvio-overview-card {
-  background: linear-gradient(145deg, #fff, #f4f8fa);
-  box-shadow: 0 8px 22px rgba(39,58,83,.05);
 }
 
 @media (max-width: 760px) {
