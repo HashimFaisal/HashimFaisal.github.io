@@ -2823,3 +2823,54 @@ button:active,
   background: none !important;
   box-shadow: none !important;
 }
+
+
+/* Nuvio night globe — natural Black Marble surface with a separate moving cloud layer.
+   Cloud imagery: matteason/live-cloud-maps (CC0); contains modified EUMETSAT data. */
+.globe-video {
+  display: none !important;
+}
+
+.globe-image {
+  display: block !important;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: 50%;
+  background-image: url("assets/earth-night-nasa.jpg");
+  background-size: 200% 100%;
+  background-position: 200% 50%;
+  background-repeat: repeat-x;
+  filter: none !important;
+  opacity: 1 !important;
+  animation: nuvio-earth-rotation 70s linear infinite;
+  will-change: background-position;
+}
+
+.globe-clouds {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: 50%;
+  pointer-events: none;
+  background-image: url("https://clouds.matteason.co.uk/images/1024x512/clouds-alpha.png");
+  background-size: 200% 100%;
+  background-position: 200% 50%;
+  background-repeat: repeat-x;
+  opacity: .42;
+  mix-blend-mode: screen;
+  animation: nuvio-cloud-drift 66s linear infinite;
+  will-change: background-position;
+}
+
+@keyframes nuvio-cloud-drift {
+  from { background-position: 200% 50%; }
+  to { background-position: 0% 50%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .globe-image,
+  .globe-clouds {
+    animation: none !important;
+  }
+}
