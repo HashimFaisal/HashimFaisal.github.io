@@ -640,3 +640,19 @@ test('all UI styles use the unified Nuvio palette without retired mixed hues', a
   await expect(video).toHaveAttribute('src', 'assets/black-marble-2016-night-1080p.mp4');
   await expect(page.locator('.globe-video')).toHaveCSS('filter', 'none');
 });
+
+
+test('Cinemeta artwork uses only the approved Nuvio palette', async ({ page }) => {
+  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  const logo = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: /^Cinemeta$/ }) }).locator('img');
+  await expect(logo).toBeVisible();
+  await expect(logo).toHaveAttribute('src', 'assets/cinemeta.svg');
+
+  const response = await page.request.get('/assets/cinemeta.svg');
+  expect(response.ok()).toBeTruthy();
+  const svg = await response.text();
+  const colors = [...svg.matchAll(/#[0-9a-fA-F]{3,8}(?![0-9a-fA-F])/g)].map(match => match[0].toLowerCase());
+  expect(colors.length).toBeGreaterThan(0);
+  const approved = new Set(['#070b16', '#0d1526', '#111d33', '#a394ff', '#58d8e8', '#8deaf3', '#f2f6ff', '#a2b1c8']);
+  expect(colors.filter(color => !approved.has(color))).toEqual([]);
+});
