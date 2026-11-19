@@ -1,5 +1,50 @@
 [
   {
+    "id": "addon:Torrentio:added:1.0.0",
+    "type": "addon",
+    "title": {
+      "ar": "إضافة جديدة: Torrentio",
+      "en": "New add-on: Torrentio"
+    },
+    "description": {
+      "ar": "تمت إضافة Torrentio إلى مكتبة إضافات Nuvio ضمن قسم إضافات Nuvio. افتح بطاقة الإضافة لعرض الإعدادات ورابط Manifest والتثبيت.",
+      "en": "Torrentio has been added to the Nuvio Plugins library. Open its card for configuration, Manifest, and install options."
+    },
+    "url": "https://torrentio.strem.fun/manifest.json",
+    "publishedAt": "2026-11-19T03:00:00Z",
+    "expiresAt": "2026-11-20T03:00:00Z"
+  },
+  {
+    "id": "addon:TMDB-Discover-Plus:added:1.0.0",
+    "type": "addon",
+    "title": {
+      "ar": "إضافة جديدة: TMDB Discover+",
+      "en": "New add-on: TMDB Discover+"
+    },
+    "description": {
+      "ar": "تمت إضافة TMDB Discover+ إلى مكتبة الإضافات، مع رابط Manifest الشخصي وخيارات التثبيت.",
+      "en": "TMDB Discover+ has been added to the plugin library with its personal Manifest and install options."
+    },
+    "url": "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
+    "publishedAt": "2026-11-19T03:00:00Z",
+    "expiresAt": "2026-11-20T03:00:00Z"
+  },
+  {
+    "id": "addon:AIOMetadata:added:1.0.0",
+    "type": "addon",
+    "title": {
+      "ar": "إضافة جديدة: AIOMetadata",
+      "en": "New add-on: AIOMetadata"
+    },
+    "description": {
+      "ar": "تمت إضافة AIOMetadata إلى مكتبة الإضافات، مع رابط Manifest الشخصي وخيارات التثبيت.",
+      "en": "AIOMetadata has been added to the plugin library with its personal Manifest and install options."
+    },
+    "url": "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
+    "publishedAt": "2026-11-19T03:00:00Z",
+    "expiresAt": "2026-11-20T03:00:00Z"
+  },
+  {
     "id": "addon:SubtitleVideo:added:1.0.0",
     "type": "addon",
     "title": {
