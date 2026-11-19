@@ -81,6 +81,7 @@ The pull-request validation workflow checks:
 - JavaScript syntax for `app.js` and `premium-ui.js`.
 - Python syntax for the health-check script.
 - Resource category/filter consistency and key installation wiring.
+- Strict Nuvio palette allowlists across CSS, active SVG artwork, HTML, and JavaScript; computed browser colors are checked for unapproved hues.
 - JSON structure and health/changelog/live-update event data.
 
 To run the syntax checks locally:
