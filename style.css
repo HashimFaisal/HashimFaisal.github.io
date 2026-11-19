@@ -430,10 +430,14 @@ nav a:hover::after { transform: scaleX(1); }
   border-color: var(--line-strong);
   box-shadow: 0 22px 48px rgba(0,0,0,.25);
 }
-.stat-card > span, .stat-card small {
+.stat-card > span {
   display: block;
   color: var(--muted);
   font-size: 10px;
+}
+.stat-card small {
+  display: block;
+  color: var(--muted);
 }
 .stat-card strong {
   display: block;
@@ -442,7 +446,7 @@ nav a:hover::after { transform: scaleX(1); }
   font: 800 27px Inter, sans-serif;
   overflow-wrap: anywhere;
 }
-.stat-card small { font-size: 9px; }
+
 
 /* Content sections */
 .section {
@@ -751,9 +755,10 @@ nav a:hover::after { transform: scaleX(1); }
 }
 .download-card strong, .resource-links a span {
   color: #edf5fb;
-  font-size: 14px;
   font-weight: 800;
 }
+.resource-links a span { font-size: 14px; }
+
 .download-card small, .resource-links a small {
   color: #9bafc1;
   font-size: 10px;
