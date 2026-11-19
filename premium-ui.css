@@ -2710,3 +2710,71 @@ button:active,
     height: 190px;
   }
 }
+
+
+/* =========================================
+   NUVIO — PHASE 1 HOME HERO REFINEMENT
+   Visual-only polish; globe/video geometry is intentionally untouched.
+   ========================================= */
+:root .hero {
+  border-color: rgba(116, 218, 235, .32);
+  background:
+    radial-gradient(ellipse at 78% 44%, rgba(88, 216, 232, .15), transparent 42%),
+    radial-gradient(ellipse at 8% 4%, rgba(163, 148, 255, .12), transparent 46%),
+    linear-gradient(128deg, #121f38 0%, #091426 57%, #101c32 100%);
+  box-shadow:
+    0 32px 84px rgba(0, 0, 0, .46),
+    inset 0 1px rgba(208, 239, 255, .09),
+    0 0 42px rgba(88, 216, 232, .035);
+}
+.hero-copy { padding-top: clamp(142px, 14vw, 158px); }
+.hero-copy::before {
+  position: absolute; top: 2px; right: 0; display: inline-flex;
+  align-items: center; min-height: 29px; padding: 0 11px;
+  border: 1px solid rgba(88, 216, 232, .24); border-radius: 999px;
+  color: #a8eaf2; background: rgba(88, 216, 232, .065);
+  content: "NUVIO  /  CONTROL CENTER";
+  font: 800 9px/1 Inter, sans-serif; letter-spacing: 1.55px;
+  box-shadow: inset 0 1px rgba(255, 255, 255, .035);
+}
+.hero-copy h1 {
+  top: 38px; font-size: clamp(31px, 3.65vw, 45px);
+  line-height: 1.48; letter-spacing: -.65px; text-wrap: balance;
+}
+.hero-copy h1 span {
+  background: linear-gradient(100deg, #c5f7ff 0%, #65dce9 54%, #b6a9ff 100%);
+  background-clip: text; -webkit-background-clip: text;
+}
+.hero-copy > p { max-width: 470px; color: #bdcadd; font-size: 14px; line-height: 2.15; }
+.hero-meta { gap: 10px; margin-top: 25px; transform: none; }
+.hero-meta span {
+  min-height: 29px; padding: 5px 10px;
+  border: 1px solid rgba(154, 190, 218, .13); border-radius: 999px;
+  background: rgba(9, 19, 35, .48); color: #c0ccdc; font-size: 10px;
+}
+.hero-meta i { width: 6px; height: 6px; flex-basis: 6px; }
+
+@media (max-width: 760px) {
+  .hero-copy { padding-top: 0; }
+  .hero-copy::before {
+    position: static; align-self: flex-start; margin-bottom: 11px;
+    min-height: 26px; font-size: 8px;
+  }
+  .hero-copy h1 {
+    position: relative; top: auto; right: auto; width: 100%;
+    margin: 0 0 12px; font-size: clamp(25px, 7vw, 37px);
+    line-height: 1.52; letter-spacing: -.35px;
+  }
+  .hero-copy > p { max-width: 100%; font-size: 12px; line-height: 1.95; }
+  .hero-meta { gap: 7px; margin-top: 15px; }
+  .hero-meta span { min-height: 27px; padding: 4px 8px; font-size: 9px; }
+}
+@media (max-width: 380px) {
+  .hero-copy::before { margin-bottom: 9px; }
+  .hero-copy h1 { font-size: clamp(23px, 7vw, 26px); }
+  .hero-meta { gap: 6px; }
+  .hero-meta span { padding-inline: 7px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-meta i { animation: none !important; }
+}
