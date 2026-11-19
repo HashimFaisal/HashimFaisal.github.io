@@ -93,6 +93,11 @@ test('plugin search and category filters return the expected cards', async ({ pa
 });
 
 test('personal metadata manifests expose Nuvio install actions and keep setup links', async ({ page }) => {
+  // The plugin library is hidden while the dashboard is active; open it before
+  // asserting that the generated install controls are visible to users.
+  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  await expect(page.locator('#plugins')).toBeVisible();
+
   const expected = [
     {
       name: 'AIOMetadata',
