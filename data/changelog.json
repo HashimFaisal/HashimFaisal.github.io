@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-11-19T06:00:00+03:00",
+    "type": "updated",
+    "title": "حصر قسم الترجمات بالعربية والإنجليزية",
+    "detail": "إزالة Persian Subtitles من الموقع وفحوصات Manifest؛ أصبح قسم الترجمات يضم OpenSubtitles v3 وTheSubtitleDB فقط."
+  },
+  {
     "date": "2026-11-19T09:00:00+03:00",
     "type": "updated",
     "title": "اعتماد إضافات الترجمات ذات Manifest مباشر فقط",
