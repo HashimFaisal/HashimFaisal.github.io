@@ -3727,3 +3727,30 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
     min-width: 0;
   }
 }
+
+
+/* NUVIO — Prevent plugin-card content from shrinking into visual collisions.
+   Grid rows already stretch cards evenly; paragraph content must keep its natural height. */
+#plugins .plugin-card {
+  min-height: 0;
+  height: auto;
+  box-sizing: border-box;
+}
+
+#plugins .plugin-card > p {
+  flex: 0 0 auto;
+  min-height: 0;
+}
+
+#plugins .plugin-card .manifest-label,
+#plugins .plugin-card .manifest-url,
+#plugins .plugin-card .card-actions,
+#plugins .plugin-card .card-status {
+  flex-shrink: 0;
+}
+
+#plugins .plugin-card .card-actions > * {
+  min-width: 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
