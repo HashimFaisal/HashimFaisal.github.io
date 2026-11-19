@@ -1,54 +1,44 @@
-# HashimFaisal Project Context
+# HashimFaisal — Nuvio Control Center
 
-## معلومات المشروع
-- اسم المشروع: HashimFaisal
-- الموقع: https://hashimfaisal.github.io/
-- مستودع GitHub:
-  https://github.com/HashimFaisal/HashimFaisal.github.io
-- مسار المشروع في Termux: ~/HashimFaisal
-- الفرع الرئيسي: main
-- الاستضافة: GitHub Pages
+## Project
+- Website: https://hashimfaisal.github.io/
+- Repository: https://github.com/HashimFaisal/HashimFaisal.github.io
+- Hosting: GitHub Pages
+- Default branch: main
 
-## طريقة العمل
-1. نشتغل خطوة بخطوة.
-2. أعطي أمراً واحداً في كل مرة.
-3. المستخدم ينفذ الأمر ويرسل النتيجة.
-4. نفحص النتيجة قبل الانتقال للخطوة التالية.
-5. لا نغيّر ملفات غير مطلوبة.
-6. لا نستخدم git add . أبداً.
-7. نضيف الملفات المطلوبة بالاسم فقط.
-8. لا ننفذ أوامر حذف أو تعديلات خطيرة دون موافقة.
+## Design system
+- Midnight Prism, dark-only.
+- Background: #070B16; surfaces: #111D33; cyan: #58D8E8; violet: #A394FF; text: #F2F6FF.
+- Preserve the established design and avoid introducing gold/bronze tones or a light theme.
 
-## تصميم الموقع
-- التصميم المعتمد: Midnight Prism (خلفية كحلية داكنة، أسطح زرقاء، سماوي وبنفسجي).
-- الوضع النهاري محذوف نهائياً.
-- لا نعيد زر تبديل الوضع الليلي والنهاري.
+## Website structure
+- index.html: page markup and resource cards
+- style.css: base styles and layout
+- premium-ui.css: premium/dashboard presentation and responsive overrides
+- app.js: language, resource filtering/copy actions, status and changelog rendering
+- premium-ui.js: dashboard navigation and view transitions
+- data/status.json: generated health/release report
+- data/changelog.json: historical changelog
+- data/updates.json: short-lived live updates
+- scripts/check_links.py: health-check script
+- scripts/validate_site.py: static integrity checks
+- .github/workflows/health-validation.yml: PR validation
+- .github/workflows/pages.yml: Pages deployment
 
-## ملفات المشروع المهمة
-- index.html
-- app.js
-- style.css
-- data/status.json
-- data/changelog.json
-- scripts/check_links.py
-- .github/workflows/addon-health.yml
+## Nuvio source
+- Release source: luqmanfadlli/NuvioMobile-Enhanced
+- Releases: https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases
+- Do not switch release sources without approval.
 
-## تحديثات Nuvio
-- المصدر المعتمد: luqmanfadlli/NuvioMobile-Enhanced
-- رابط الإصدارات:
-  https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases
-- فحص الإصدارات يعمل بجدولة كل 15 دقيقة.
-- السكربت يحدث بيانات الحالة وروابط الإصدارات عند نجاح الفحص.
-- لا نغيّر المصدر إلى مستودع آخر دون موافقة المستخدم.
+## Subtitles
+- Current subtitle resources: OpenSubtitles v3, TheSubtitleDB, and SubtitleVideo.
+- Keep subtitle language coverage Arabic and English only; do not add other languages without explicit approval.
+- SubtitleVideo is accepted as compatible; preserve it unless the user reports a problem.
 
-## التصميم الحالي
-- لوحة Midnight Prism: خلفية #070B16، أسطح #111D33، سماوي #58D8E8، بنفسجي #A394FF، نص #F2F6FF.
-- الوضع النهاري غير معتمد.
-- ملفات الواجهة الرئيسية: index.html, style.css, premium-ui.css, app.js, premium-ui.js.
-- ملفات البيانات: data/status.json, data/changelog.json, data/updates.json.
-- التحقق: .github/workflows/health-validation.yml.
-
-## ملاحظات مهمة
-- توجد ملفات نسخ احتياطية وملفات غير متتبعة في المستودع.
-- يجب عدم إضافتها عشوائياً إلى Git.
-- يجب التحقق من git status قبل كل عملية Commit.
+## Project workflow
+- Work on a separate branch and open a pull request.
+- Never merge, publish, or deploy without explicit user approval.
+- Keep changes scoped; do not bulk-stage files.
+- Preserve working features and avoid removing resources without evidence and approval.
+- Review CI results before presenting changes as validated.
+- Backups and unrelated files should not be added by default.
