@@ -258,7 +258,7 @@ test('home dashboard cards stack vertically on compact screens in both languages
         };
       });
       return {
-        columns: gridStyle.gridTemplateColumns.trim().split(/\\s+/).length,
+        columns: gridStyle.gridTemplateColumns.trim().split(' ').filter(Boolean).length,
         cards
       };
     });
