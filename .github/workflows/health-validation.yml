@@ -75,6 +75,9 @@ jobs:
               "https://subsense.nepiraw.com/configure",
               "https://submaker.elfhosted.com/configure",
               "https://aio-streaming.baby-beamup.club/",
+              "https://subdl.com/an/panel/api",
+              "https://subsource.net/api",
+              "https://aistudio.google.com",
           )
           for url in required_subtitle_urls:
               if url not in html:
