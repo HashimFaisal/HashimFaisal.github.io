@@ -1726,7 +1726,7 @@ html[dir="rtl"] .live-updates__shell::before {
     overflow: visible;
   }
 
-  .visual-globe {
+  .black-hole {
     width: clamp(185px, 58vw, 235px);
     height: clamp(185px, 58vw, 235px);
   }
@@ -1833,7 +1833,7 @@ html[dir="rtl"] .live-updates__shell::before {
     height: clamp(185px, 58vw, 215px);
   }
 
-  .visual-globe {
+  .black-hole {
     width: clamp(175px, 57vw, 200px);
     height: clamp(175px, 57vw, 200px);
   }
@@ -1857,7 +1857,7 @@ html[dir="rtl"] .live-updates__shell::before {
     height: 270px;
   }
 
-  .visual-globe {
+  .black-hole {
     width: 245px;
     height: 245px;
   }
@@ -1873,7 +1873,7 @@ html[dir="rtl"] .live-updates__shell::before {
     height: 220px;
   }
 
-  .visual-globe {
+  .black-hole {
     width: 190px;
     height: 190px;
   }
