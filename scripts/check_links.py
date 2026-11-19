@@ -369,12 +369,19 @@ def main():
             continue
 
         if bool(previous.get("ok")) != bool(item.get("ok")):
-            state = "متاح" if item.get("ok") else "متعطل"
+            old_status = "available" if previous.get("ok") else "unavailable"
+            new_status = "available" if item.get("ok") else "unavailable"
+            old_label = "متاح" if previous.get("ok") else "متعطل"
+            new_label = "متاح" if item.get("ok") else "متعطل"
             events.append({
                 "date": now,
                 "type": "status",
                 "title": f"تغيرت حالة {name}",
-                "detail": f"الحالة الجديدة: {state}."
+                "detail": f"الحالة السابقة: {old_label}. الحالة الجديدة: {new_label}.",
+                "source": name,
+                "source_url": item.get("url"),
+                "old_status": old_status,
+                "new_status": new_status,
             })
 
         old_version = previous.get("version")
@@ -500,6 +507,33 @@ def main():
 
             update_id = f"app:release:{channel}:{version}"
 
+        elif event_type == "status":
+            if (
+                not source
+                or not isinstance(source_url, str)
+                or not source_url.startswith("https://")
+                or event.get("new_status") not in {"available", "unavailable"}
+            ):
+                continue
+
+            category = "addon"
+            if event.get("new_status") == "available":
+                title_ar = f"عاد المصدر للعمل: {source}"
+                title_en = f"Source is back online: {source}"
+                desc_ar = f"عاد {source} للاستجابة بنجاح بعد أن كان متعطلاً."
+                desc_en = f"{source} is responding successfully again after an outage."
+            else:
+                title_ar = f"تعطل المصدر: {source}"
+                title_en = f"Source is unavailable: {source}"
+                desc_ar = f"فشل فحص {source} بعد أن كان متاحاً."
+                desc_en = f"{source} failed its health check after being available."
+
+            update_id = (
+                f"addon:{source}:status:"
+                f"{event.get('old_status')}-to-{event.get('new_status')}:"
+                f"{event.get('date', now)}"
+            )
+
         elif event_type in {"added", "version"}:
             if not source or not isinstance(source_url, str) or not source_url.startswith("https://"):
                 continue
@@ -577,6 +611,8 @@ def main():
             event.get("source"),
             event.get("old_version"),
             event.get("new_version"),
+            event.get("old_status"),
+            event.get("new_status"),
             event.get("title"),
         )
 
