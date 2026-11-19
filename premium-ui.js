@@ -31,6 +31,9 @@
       eyebrow: 'NUVIO CONTROL CENTER',
       title: 'مساحة عملك الرقمية',
       subtitle: 'كل أدوات Nuvio ومصادره في تجربة واحدة منظمة.',
+      dashboardTitle: 'مركز التحكم',
+      dashboardSubtitle: 'اختَر القسم الذي تريد الوصول إليه، وكل أدواتك أمامك بوضوح.',
+      dashboardMark: '05 أقسام',
       back: 'العودة إلى الرئيسية',
       open: 'استكشف القسم',
       plugins: ['مكتبة الإضافات', 'اكتشف الإضافات، ابحث بينها، وافتح روابط Manifest أو انسخها مباشرة.', 'ADD-ON LIBRARY'],
@@ -43,6 +46,9 @@
       eyebrow: 'NUVIO CONTROL CENTER',
       title: 'Your digital workspace',
       subtitle: 'All Nuvio tools and resources in one organized experience.',
+      dashboardTitle: 'Control Center',
+      dashboardSubtitle: 'Choose a destination and reach every tool from one clear workspace.',
+      dashboardMark: '05 SECTIONS',
       back: 'Back to dashboard',
       open: 'Explore section',
       plugins: ['Add-on Library', 'Discover add-ons, search the collection, and open or copy manifest links.', 'ADD-ON LIBRARY'],
@@ -65,6 +71,14 @@
   dashboard.id = 'nuvio-dashboard';
   dashboard.className = 'nuvio-dashboard';
   dashboard.innerHTML = `
+    <div class="nuvio-dashboard-heading">
+      <div>
+        <span class="nuvio-kicker" id="nuvio-dashboard-kicker"></span>
+        <h2 id="nuvio-dashboard-title"></h2>
+        <p id="nuvio-dashboard-subtitle"></p>
+      </div>
+      <span class="nuvio-dashboard-mark" id="nuvio-dashboard-mark"></span>
+    </div>
     <div class="nuvio-launch-grid" id="nuvio-launch-grid"></div>
   `;
   hero.after(dashboard);
@@ -77,6 +91,11 @@
   function renderDashboard() {
     const lang = language();
     const copy = labels[lang];
+
+    $('#nuvio-dashboard-kicker').textContent = copy.eyebrow;
+    $('#nuvio-dashboard-title').textContent = copy.dashboardTitle;
+    $('#nuvio-dashboard-subtitle').textContent = copy.dashboardSubtitle;
+    $('#nuvio-dashboard-mark').textContent = copy.dashboardMark;
 
     $('#nuvio-launch-grid').innerHTML = Object.entries(views).map(([id]) => {
       const item = copy[id];
