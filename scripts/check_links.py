@@ -444,9 +444,13 @@ def main():
 
     now_dt = datetime.now(timezone.utc)
     active_updates = []
+    active_update_ids = set()
 
     for update in updates:
         if not isinstance(update, dict):
+            continue
+        update_id = update.get("id")
+        if not isinstance(update_id, str) or not update_id.strip() or update_id in active_update_ids:
             continue
         raw_expiry = update.get("expiresAt")
         if not isinstance(raw_expiry, str) or not raw_expiry.strip():
@@ -460,6 +464,7 @@ def main():
                 expiry = expiry.replace(tzinfo=timezone.utc)
             if expiry > now_dt:
                 active_updates.append(update)
+                active_update_ids.add(update_id)
         except (TypeError, ValueError):
             continue
 
@@ -469,12 +474,16 @@ def main():
     known_ids = {item.get("id") for item in updates if isinstance(item, dict)}
 
     for event in history + events:
+        if not isinstance(event, dict):
+            continue
         event_type = event.get("type")
         source = event.get("source")
         version = event.get("new_version")
         source_url = event.get("source_url")
 
         if event_type == "release":
+            if not version or str(version).lower() == "not specified":
+                continue
             channel = event.get("channel", "beta")
             category = "app"
 
