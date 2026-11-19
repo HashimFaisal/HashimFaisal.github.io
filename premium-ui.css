@@ -1186,10 +1186,6 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   box-shadow: inset 0 1px rgba(255,255,255,.045), 0 5px 18px rgba(0,0,0,.18);
 }
 
-.nuvio-launch-card strong {
-  color: #f2f6ff;
-}
-
 .nuvio-launch-open {
   color: var(--nuvio-accent-light);
 }
@@ -1907,8 +1903,7 @@ html[dir="rtl"] .live-updates__shell::before {
     font-size: 8px;
     letter-spacing: .8px;
   }
-  .live-updates__content,
-  .live-updates__content strong {
+  .live-updates__content {
     font-size: 11px;
   }
   .live-updates__content { gap: 10px; }
@@ -1927,8 +1922,7 @@ html[dir="rtl"] .live-updates__shell::before {
     min-height: 72px;
     padding: 13px 18px;
   }
-  .live-updates__content,
-  .live-updates__content strong {
+  .live-updates__content {
     font-size: 11.5px;
   }
 }
@@ -2445,8 +2439,7 @@ footer a:hover,
 .resource-links a small,
 .nuvio-dashboard-heading p,
 .nuvio-launch-description,
-.live-updates__content,
-.live-updates__content span {
+.live-updates__content {
   color: var(--muted);
 }
 
