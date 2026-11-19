@@ -4050,3 +4050,108 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
     flex-direction: row;
   }
 }
+
+
+/* NUVIO — Phone-sized Control Center grid */
+@media (max-width: 560px) {
+  .nuvio-dashboard {
+    width: 100%;
+    margin-top: 8px;
+    margin-bottom: 14px;
+  }
+
+  .nuvio-dashboard-heading {
+    gap: 7px;
+    margin-bottom: 10px;
+    padding: 0 1px 8px;
+  }
+
+  .nuvio-dashboard-heading h2 {
+    margin: 2px 0;
+    font-size: 19px;
+    line-height: 1.35;
+  }
+
+  .nuvio-dashboard-heading p {
+    font-size: 9px;
+    line-height: 1.5;
+  }
+
+  .nuvio-dashboard-mark {
+    padding: 5px 7px;
+    font-size: 7px;
+    letter-spacing: .7px;
+  }
+
+  .nuvio-launch-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 9px;
+  }
+
+  .nuvio-launch-card,
+  .nuvio-launch-card:nth-child(4) {
+    grid-column: auto !important;
+    width: auto;
+    min-width: 0;
+    min-height: 124px;
+    padding: 11px;
+    border-radius: 14px;
+  }
+
+  .nuvio-launch-card:nth-child(5) {
+    grid-column: 1 / -1 !important;
+    justify-self: center;
+    width: calc(50% - 5px);
+    min-height: 124px;
+  }
+
+  .nuvio-launch-icon {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 7px;
+    border-radius: 9px;
+    font-size: 17px;
+  }
+
+  .nuvio-launch-code {
+    font-size: 6.5px;
+    letter-spacing: .8px;
+  }
+
+  .nuvio-launch-card strong {
+    margin-top: 4px;
+    font-size: 14px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  .nuvio-launch-description {
+    margin-top: 4px;
+    font-size: 9px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .nuvio-launch-open {
+    padding-top: 7px;
+    font-size: 8px;
+  }
+
+  .nuvio-launch-open b {
+    width: 21px;
+    height: 21px;
+  }
+}
+
+@media (max-width: 360px) {
+  .nuvio-launch-grid {
+    gap: 7px;
+  }
+
+  .nuvio-launch-card,
+  .nuvio-launch-card:nth-child(4),
+  .nuvio-launch-card:nth-child(5) {
+    padding: 9px;
+  }
+}
