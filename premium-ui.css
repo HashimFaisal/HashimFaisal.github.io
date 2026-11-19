@@ -2778,3 +2778,126 @@ button:active,
 @media (prefers-reduced-motion: reduce) {
   .hero-meta i { animation: none !important; }
 }
+
+
+/* =========================================
+   NUVIO — PHASE 2 DASHBOARD REFINEMENT
+   Five clear destinations, balanced responsive layout.
+   ========================================= */
+.nuvio-dashboard {
+  position: relative;
+  margin-top: 34px;
+  margin-bottom: 48px;
+}
+.nuvio-dashboard-heading {
+  position: relative;
+  align-items: center;
+  margin-bottom: 19px;
+  padding: 0 2px 18px;
+  border-bottom: 1px solid rgba(154, 190, 218, .12);
+}
+.nuvio-dashboard-heading h2 {
+  margin-top: 7px;
+  font-size: clamp(23px, 2.7vw, 31px);
+  letter-spacing: -.55px;
+}
+.nuvio-dashboard-heading p {
+  max-width: 560px;
+  font-size: 12px;
+}
+.nuvio-dashboard-mark {
+  border-color: rgba(88, 216, 232, .2);
+  border-radius: 999px;
+  color: #b8eaf0;
+  background: rgba(88, 216, 232, .055);
+  letter-spacing: 1.1px;
+}
+.nuvio-launch-grid {
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+}
+.nuvio-launch-card {
+  grid-column: span 2;
+  min-height: 218px;
+  padding: 22px;
+  border-color: rgba(154, 190, 218, .14);
+  border-radius: 19px;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(88, 216, 232, .105), transparent 52%),
+    linear-gradient(145deg, rgba(20, 35, 58, .96), rgba(10, 22, 39, .98));
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .16), inset 0 1px rgba(225, 245, 255, .055);
+}
+.nuvio-launch-card:nth-child(4) { grid-column: 2 / span 2; }
+.nuvio-launch-card:nth-child(5) { grid-column: 4 / span 2; }
+.nuvio-launch-card::after {
+  right: -58px;
+  bottom: -76px;
+  width: 176px;
+  height: 176px;
+  border-color: rgba(88, 216, 232, .1);
+}
+.nuvio-launch-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(88, 216, 232, .38);
+  box-shadow: 0 22px 42px rgba(0, 0, 0, .23), 0 0 26px rgba(88, 216, 232, .055);
+}
+.nuvio-launch-icon {
+  width: 45px;
+  height: 45px;
+  margin-bottom: 17px;
+  border-color: rgba(88, 216, 232, .24);
+  border-radius: 13px;
+  background: linear-gradient(145deg, rgba(88, 216, 232, .13), rgba(163, 148, 255, .09));
+  box-shadow: inset 0 1px rgba(255, 255, 255, .06);
+}
+.nuvio-launch-code {
+  font-size: 8px;
+  letter-spacing: 1.35px;
+}
+.nuvio-launch-card strong {
+  margin-top: 8px;
+  font-size: 18px;
+}
+.nuvio-launch-description {
+  max-width: 300px;
+  font-size: 11px;
+  line-height: 1.85;
+}
+.nuvio-launch-open {
+  width: 100%;
+  justify-content: space-between;
+  padding-top: 16px;
+  border-top: 1px solid rgba(154, 190, 218, .1);
+}
+.nuvio-launch-open b {
+  display: grid;
+  width: 27px;
+  height: 27px;
+  place-items: center;
+  border: 1px solid rgba(88, 216, 232, .2);
+  border-radius: 50%;
+  font-size: 15px;
+}
+html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
+@media (max-width: 900px) {
+  .nuvio-launch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .nuvio-launch-card,
+  .nuvio-launch-card:nth-child(4),
+  .nuvio-launch-card:nth-child(5) { grid-column: auto; }
+}
+@media (max-width: 560px) {
+  .nuvio-dashboard { margin-top: 26px; margin-bottom: 34px; }
+  .nuvio-dashboard-heading { gap: 10px; padding-bottom: 14px; }
+  .nuvio-dashboard-heading h2 { font-size: 24px; }
+  .nuvio-dashboard-heading p { font-size: 11px; line-height: 1.85; }
+  .nuvio-dashboard-mark { display: inline-flex; padding: 7px 9px; font-size: 8px; }
+  .nuvio-launch-grid { grid-template-columns: 1fr; gap: 10px; }
+  .nuvio-launch-card { min-height: 178px; padding: 18px; }
+  .nuvio-launch-icon { width: 40px; height: 40px; margin-bottom: 13px; }
+  .nuvio-launch-card strong { font-size: 17px; }
+  .nuvio-launch-open { padding-top: 13px; }
+}
+@media (max-width: 380px) {
+  .nuvio-dashboard-heading { align-items: flex-start; flex-direction: column; }
+  .nuvio-dashboard-mark { align-self: flex-start; }
+}
