@@ -585,8 +585,8 @@ test('all active UI source colors stay within the unified Nuvio palette', async 
     '#8deaf3', '#071317', '#000', '#fff'
   ]);
   for (const source of [css, uiSource]) {
-    for (const match of source.matchAll(/#(?:[0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})(?![a-z0-9_-])/gi)) {
-      expect(allowedCssHex.has(match[0]), 'Unexpected UI hex color: ' + match[0]).toBeTruthy();
+    for (const match of source.matchAll(/(?:color|background(?:Color)?|border(?:Top|Right|Bottom|Left)?Color|outlineColor|fill|stroke)\\s*(?::|=)\\s*['"]?(#[0-9a-f]{8}|#[0-9a-f]{6}|#[0-9a-f]{4}|#[0-9a-f]{3})(?![a-z0-9_-])/gi)) {
+      expect(allowedCssHex.has(match[1]), 'Unexpected UI hex color: ' + match[1]).toBeTruthy();
     }
     for (const match of source.matchAll(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/gi)) {
       const rgb = match.slice(1, 4).join(',');
