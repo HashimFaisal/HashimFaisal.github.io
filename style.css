@@ -34,7 +34,7 @@ body {
   background:
     radial-gradient(ellipse at 85% 4%, rgba(88, 216, 232, .10), transparent 32%),
     radial-gradient(ellipse at 5% 34%, rgba(88, 216, 232, .035), transparent 30%),
-    #090909;
+    var(--bg);
   font-family: 'IBM Plex Sans Arabic', Inter, sans-serif;
   line-height: 1.8;
   -webkit-font-smoothing: antialiased;
