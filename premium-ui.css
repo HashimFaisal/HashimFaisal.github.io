@@ -558,13 +558,11 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 /* Downloads */
 
 #downloads .release-banner {
-  position: relative;
   min-height: 135px;
   align-items: center;
   gap: 20px;
   margin-bottom: 18px;
   padding: 25px 28px;
-  overflow: hidden;
   border: 1px solid var(--line-strong);
   border-radius: 19px;
   background:
