@@ -64,7 +64,7 @@
   border-radius: 21px;
   color: var(--text);
   background:
-    radial-gradient(circle at 100% 0%, rgba(198, 161, 91,.12), transparent 48%),
+    radial-gradient(circle at 100% 0%, rgba(88, 216, 232,.12), transparent 48%),
     linear-gradient(145deg, var(--surface), var(--surface-2));
   box-shadow: 0 16px 38px rgba(0,0,0,.13), inset 0 1px rgba(255,255,255,.045);
   text-decoration: none;
@@ -83,7 +83,7 @@
   bottom: -65px;
   width: 150px;
   height: 150px;
-  border: 1px solid rgba(198, 161, 91,.12);
+  border: 1px solid rgba(88, 216, 232,.12);
   border-radius: 50%;
   content: "";
   transition: transform .4s ease;
@@ -92,7 +92,7 @@
 .nuvio-launch-card:hover {
   transform: translateY(-7px);
   border-color: var(--line-strong);
-  box-shadow: 0 25px 55px rgba(0,0,0,.22), 0 0 30px rgba(198, 161, 91,.06);
+  box-shadow: 0 25px 55px rgba(0,0,0,.22), 0 0 30px rgba(88, 216, 232,.06);
 }
 
 .nuvio-launch-card:hover::after { transform: scale(1.35); }
@@ -103,10 +103,10 @@
   height: 47px;
   place-items: center;
   margin-bottom: 20px;
-  border: 1px solid rgba(198, 161, 91,.25);
+  border: 1px solid rgba(88, 216, 232,.25);
   border-radius: 14px;
   color: var(--cyan);
-  background: rgba(198, 161, 91,.09);
+  background: rgba(88, 216, 232,.09);
   font: 700 24px Inter, sans-serif;
 }
 
@@ -269,7 +269,7 @@ html[dir="ltr"] .nuvio-view-back > span:first-child { transform: rotate(180deg);
   border: 1px solid var(--line);
   border-radius: 26px;
   background:
-    radial-gradient(ellipse at 100% 0%, rgba(198, 161, 91,.075), transparent 42%),
+    radial-gradient(ellipse at 100% 0%, rgba(88, 216, 232,.075), transparent 42%),
     linear-gradient(145deg, var(--surface), var(--surface-2));
   box-shadow: 0 25px 70px rgba(0,0,0,.12);
 }
@@ -332,7 +332,7 @@ html[dir="ltr"] .nuvio-view-back > span:first-child { transform: rotate(180deg);
   border: 1px solid var(--line);
   border-radius: 10px;
   color: var(--cyan);
-  background: rgba(198, 161, 91,.055);
+  background: rgba(88, 216, 232,.055);
   font: 800 10px Inter, sans-serif;
   letter-spacing: .8px;
 }
@@ -516,7 +516,7 @@ html[dir="ltr"] .nuvio-view-back > span:first-child { transform: rotate(180deg);
   border: 1px solid var(--line);
   border-radius: 17px;
   background:
-    radial-gradient(circle at 100% 0%, rgba(198, 161, 91,.08), transparent 55%),
+    radial-gradient(circle at 100% 0%, rgba(88, 216, 232,.08), transparent 55%),
     var(--surface-2);
   box-shadow: 0 12px 28px rgba(0,0,0,.08);
   transition: transform .22s ease, border-color .22s ease;
@@ -586,7 +586,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   border: 1px solid var(--line-strong);
   border-radius: 19px;
   background:
-    radial-gradient(circle at 95% 5%, rgba(198, 161, 91,.17), transparent 42%),
+    radial-gradient(circle at 95% 5%, rgba(88, 216, 232,.17), transparent 42%),
     linear-gradient(120deg, var(--surface-2), var(--surface));
 }
 
@@ -648,7 +648,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   border: 1px solid var(--line);
   border-radius: 16px;
   background:
-    radial-gradient(circle at 100% 0%, rgba(198, 161, 91,.08), transparent 55%),
+    radial-gradient(circle at 100% 0%, rgba(88, 216, 232,.08), transparent 55%),
     var(--surface-2);
   transition: transform .22s ease, border-color .22s ease;
 }
@@ -793,7 +793,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   border: 1px solid var(--line);
   border-radius: 15px;
   background:
-    radial-gradient(circle at 100% 0%, rgba(198, 161, 91,.09), transparent 58%),
+    radial-gradient(circle at 100% 0%, rgba(88, 216, 232,.09), transparent 58%),
     var(--surface);
 }
 
@@ -839,16 +839,16 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   }
 }
 
-/* === Nuvio release banner cinematic background (charcoal + gold) === */
+/* === Nuvio release banner cinematic background (midnight prism) === */
 #downloads .release-banner {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 85% 20%, rgba(212, 175, 55, 0.18), transparent 45%),
-    radial-gradient(circle at 70% 80%, rgba(184, 134, 11, 0.12), transparent 50%),
+    radial-gradient(circle at 85% 20%, rgba(88, 216, 232, 0.18), transparent 45%),
+    radial-gradient(circle at 70% 80%, rgba(163, 148, 255, 0.12), transparent 50%),
     linear-gradient(135deg, #0a0a0a 0%, #141414 45%, #1a1a1a 100%);
-  border-color: rgba(212, 175, 55, 0.35);
-  box-shadow: inset 0 1px 0 rgba(255, 215, 0, 0.08), 0 18px 40px rgba(0, 0, 0, 0.35);
+  border-color: rgba(88, 216, 232, 0.35);
+  box-shadow: inset 0 1px 0 rgba(88, 216, 232, 0.08), 0 18px 40px rgba(0, 0, 0, 0.35);
 }
 
 #downloads .release-banner::before {
@@ -856,7 +856,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(circle at 90% 50%, rgba(255, 215, 0, 0.12), transparent 55%),
+    radial-gradient(circle at 90% 50%, rgba(88, 216, 232, 0.12), transparent 55%),
     linear-gradient(90deg, rgba(0,0,0,0.2) 0%, transparent 40%);
   pointer-events: none;
   z-index: 1;
@@ -870,7 +870,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   width: 180px;
   height: 180px;
   transform: translateY(-50%) rotate(15deg);
-  background: conic-gradient(from 180deg at 50% 50%, rgba(212,175,55,0), rgba(212,175,55,0.18), rgba(212,175,55,0));
+  background: conic-gradient(from 180deg at 50% 50%, rgba(88, 216, 232,0), rgba(88, 216, 232,0.18), rgba(88, 216, 232,0));
   clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
   filter: blur(6px);
   opacity: 0.9;
@@ -986,10 +986,10 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   opacity: .7;
   background-image:
     radial-gradient(1.5px 1.5px at 20px 30px, #fff, transparent),
-    radial-gradient(1.5px 1.5px at 40px 70px, #d4af37, transparent),
+    radial-gradient(1.5px 1.5px at 40px 70px, #58d8e8, transparent),
     radial-gradient(1px 1px at 50px 160px, #fff, transparent),
     radial-gradient(2px 2px at 90px 40px, #fff, transparent),
-    radial-gradient(1.5px 1.5px at 130px 80px, #d4af37, transparent),
+    radial-gradient(1.5px 1.5px at 130px 80px, #58d8e8, transparent),
     radial-gradient(2px 2px at 160px 120px, #fff, transparent),
     radial-gradient(1px 1px at 180px 20px, #fff, transparent);
   background-size: 200px 200px;
@@ -1035,9 +1035,9 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 .nuvio-orbit-track {
   position: absolute;
   inset: 0;
-  border: 1px solid rgba(212, 175, 55, .78);
+  border: 1px solid rgba(88, 216, 232, .78);
   border-radius: 50%;
-  box-shadow: 0 0 12px rgba(212, 175, 55, .22);
+  box-shadow: 0 0 12px rgba(88, 216, 232, .22);
 }
 
 .nuvio-orbit-track span {
@@ -1050,7 +1050,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   font-size: clamp(12px, 2.1vw, 17px);
   font-weight: 900;
   letter-spacing: .24em;
-  text-shadow: 0 0 8px rgba(212, 175, 55, .9), 0 2px 8px #000;
+  text-shadow: 0 0 8px rgba(88, 216, 232, .9), 0 2px 8px #000;
   offset-path: ellipse(50% 50% at 50% 50%);
   offset-anchor: center;
   offset-rotate: 0deg;
@@ -1133,17 +1133,17 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
    ===================================================== */
 
 :root {
-  --nuvio-gold: #c6a15b;
-  --nuvio-gold-light: #e5cc96;
-  --nuvio-gold-soft: rgba(198, 161, 91, .12);
+  --nuvio-accent: #58d8e8;
+  --nuvio-accent-light: #8deaf3;
+  --nuvio-accent-soft: rgba(88, 216, 232, .12);
   --nuvio-glass: rgba(20, 19, 16, .82);
-  --nuvio-border: rgba(198, 161, 91, .20);
+  --nuvio-border: rgba(88, 216, 232, .20);
 }
 
 /* Header refinement */
 .topbar {
   background: rgba(9, 9, 9, .94);
-  border-bottom-color: rgba(198, 161, 91, .20);
+  border-bottom-color: rgba(88, 216, 232, .20);
   box-shadow: 0 8px 30px rgba(0, 0, 0, .20);
 }
 
@@ -1159,28 +1159,28 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 .topbar nav a:hover,
 .topbar nav a.nuvio-nav-active {
-  color: var(--nuvio-gold-light);
-  text-shadow: 0 0 14px rgba(198, 161, 91, .22);
+  color: var(--nuvio-accent-light);
+  text-shadow: 0 0 14px rgba(88, 216, 232, .22);
 }
 
 .topbar nav a.nuvio-nav-active::after {
-  background: linear-gradient(90deg, transparent, var(--nuvio-gold-light), transparent);
-  box-shadow: 0 0 10px rgba(198, 161, 91, .35);
+  background: linear-gradient(90deg, transparent, var(--nuvio-accent-light), transparent);
+  box-shadow: 0 0 10px rgba(88, 216, 232, .35);
 }
 
 .github-link,
 .language-toggle {
   border-color: var(--nuvio-border);
-  background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(198,161,91,.035));
-  color: var(--nuvio-gold-light);
+  background: linear-gradient(145deg, rgba(255,255,255,.045), rgba(88, 216, 232,.035));
+  color: var(--nuvio-accent-light);
   font-weight: 700;
 }
 
 .github-link:hover,
 .language-toggle:hover {
-  border-color: rgba(229, 204, 150, .55);
-  background: rgba(198, 161, 91, .12);
-  box-shadow: 0 5px 20px rgba(198, 161, 91, .10);
+  border-color: rgba(141, 234, 243, .55);
+  background: rgba(88, 216, 232, .12);
+  box-shadow: 0 5px 20px rgba(88, 216, 232, .10);
 }
 
 /* Dashboard and launch cards */
@@ -1190,7 +1190,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 .nuvio-dashboard-heading {
   padding-bottom: 18px;
-  border-bottom: 1px solid rgba(198, 161, 91, .12);
+  border-bottom: 1px solid rgba(88, 216, 232, .12);
 }
 
 .nuvio-dashboard-heading h2 {
@@ -1199,94 +1199,94 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 }
 
 .nuvio-dashboard-mark {
-  filter: drop-shadow(0 0 15px rgba(198, 161, 91, .16));
+  filter: drop-shadow(0 0 15px rgba(88, 216, 232, .16));
 }
 
 .nuvio-launch-card {
-  border: 1px solid rgba(198, 161, 91, .17);
+  border: 1px solid rgba(88, 216, 232, .17);
   background:
-    radial-gradient(circle at 100% 0%, rgba(198,161,91,.10), transparent 48%),
+    radial-gradient(circle at 100% 0%, rgba(88, 216, 232,.10), transparent 48%),
     linear-gradient(145deg, #1b1a17, #10100f 78%);
   box-shadow: 0 12px 32px rgba(0,0,0,.24), inset 0 1px rgba(255,255,255,.025);
   transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease;
 }
 
 .nuvio-launch-card::after {
-  background: radial-gradient(circle, rgba(229,204,150,.18), transparent 68%);
+  background: radial-gradient(circle, rgba(141, 234, 243,.18), transparent 68%);
 }
 
 .nuvio-launch-card:hover {
   transform: translateY(-5px);
-  border-color: rgba(229,204,150,.48);
-  box-shadow: 0 20px 42px rgba(0,0,0,.36), 0 0 25px rgba(198,161,91,.075);
+  border-color: rgba(141, 234, 243,.48);
+  box-shadow: 0 20px 42px rgba(0,0,0,.36), 0 0 25px rgba(88, 216, 232,.075);
 }
 
 .nuvio-launch-icon {
-  border-color: rgba(198,161,91,.28);
-  background: linear-gradient(145deg, rgba(198,161,91,.15), rgba(198,161,91,.035));
+  border-color: rgba(88, 216, 232,.28);
+  background: linear-gradient(145deg, rgba(88, 216, 232,.15), rgba(88, 216, 232,.035));
   box-shadow: inset 0 1px rgba(255,255,255,.045), 0 5px 18px rgba(0,0,0,.18);
 }
 
 .nuvio-launch-card strong {
-  color: #eee2ca;
+  color: #f2f6ff;
 }
 
 .nuvio-launch-open {
-  color: var(--nuvio-gold-light);
+  color: var(--nuvio-accent-light);
 }
 
 /* Navigation and section surfaces */
 .nuvio-view-back {
-  border-color: rgba(198,161,91,.25);
-  background: linear-gradient(145deg, rgba(198,161,91,.10), rgba(255,255,255,.025));
-  color: #e5cc96;
+  border-color: rgba(88, 216, 232,.25);
+  background: linear-gradient(145deg, rgba(88, 216, 232,.10), rgba(255,255,255,.025));
+  color: #8deaf3;
   transition: background .25s ease, border-color .25s ease, transform .25s ease;
 }
 
 .nuvio-view-back:hover {
-  border-color: rgba(229,204,150,.55);
-  background: rgba(198,161,91,.15);
+  border-color: rgba(141, 234, 243,.55);
+  background: rgba(88, 216, 232,.15);
   transform: translateX(3px);
 }
 
 .nuvio-view-active .section-heading {
-  border-bottom-color: rgba(198,161,91,.14);
+  border-bottom-color: rgba(88, 216, 232,.14);
 }
 
 .nuvio-view-active .eyebrow {
-  color: #c6a15b;
+  color: #58d8e8;
   letter-spacing: .12em;
 }
 
 /* Plugin toolbar, search and filters */
 #plugins .search-box {
-  border-color: rgba(198,161,91,.20);
+  border-color: rgba(88, 216, 232,.20);
   background: linear-gradient(145deg, #171613, #10100f);
   box-shadow: inset 0 1px rgba(255,255,255,.025);
 }
 
 #plugins .search-box:focus-within {
-  border-color: rgba(229,204,150,.65);
-  box-shadow: 0 0 0 3px rgba(198,161,91,.09), 0 8px 24px rgba(0,0,0,.18);
+  border-color: rgba(141, 234, 243,.65);
+  box-shadow: 0 0 0 3px rgba(88, 216, 232,.09), 0 8px 24px rgba(0,0,0,.18);
 }
 
 #plugins .filter {
-  border-color: rgba(198,161,91,.17);
+  border-color: rgba(88, 216, 232,.17);
   background: rgba(255,255,255,.025);
   transition: color .2s ease, background .2s ease, border-color .2s ease, transform .2s ease;
 }
 
 #plugins .filter:hover {
-  border-color: rgba(198,161,91,.48);
+  border-color: rgba(88, 216, 232,.48);
   color: #f0dfbd;
   transform: translateY(-1px);
 }
 
 #plugins .filter.active {
-  border-color: #c6a15b;
-  background: linear-gradient(115deg, #e5cc96, #b58a43);
+  border-color: #58d8e8;
+  background: linear-gradient(115deg, #8deaf3, #a394ff);
   color: #17120a;
-  box-shadow: 0 5px 18px rgba(181,138,67,.17);
+  box-shadow: 0 5px 18px rgba(163, 148, 255,.17);
 }
 
 #plugins .plugin-card {
@@ -1296,8 +1296,8 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 #plugins .plugin-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(229,204,150,.42);
-  box-shadow: 0 20px 42px rgba(0,0,0,.34), 0 0 22px rgba(198,161,91,.055);
+  border-color: rgba(141, 234, 243,.42);
+  box-shadow: 0 20px 42px rgba(0,0,0,.34), 0 0 22px rgba(88, 216, 232,.055);
 }
 
 #plugins .plugin-top img {
@@ -1305,7 +1305,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 }
 
 #plugins .manifest-url {
-  border-color: rgba(198,161,91,.17);
+  border-color: rgba(88, 216, 232,.17);
   background: rgba(5,5,5,.42);
 }
 
@@ -1323,20 +1323,20 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 /* Status cards */
 #status.nuvio-view-active .stat-card {
   background:
-    radial-gradient(ellipse at 100% 0%, rgba(198,161,91,.075), transparent 55%),
+    radial-gradient(ellipse at 100% 0%, rgba(88, 216, 232,.075), transparent 55%),
     linear-gradient(145deg, #1c1a16, #111110);
-  border-color: rgba(198,161,91,.18);
+  border-color: rgba(88, 216, 232,.18);
 }
 
 #status.nuvio-view-active .stat-card:hover {
-  border-color: rgba(229,204,150,.48);
+  border-color: rgba(141, 234, 243,.48);
   transform: translateY(-3px);
-  box-shadow: 0 16px 35px rgba(0,0,0,.32), 0 0 20px rgba(198,161,91,.06);
+  box-shadow: 0 16px 35px rgba(0,0,0,.32), 0 0 20px rgba(88, 216, 232,.06);
 }
 
 /* Changelog, downloads and resources */
 #changelog .changelog-list > * {
-  border: 1px solid rgba(198,161,91,.14);
+  border: 1px solid rgba(88, 216, 232,.14);
   background: linear-gradient(115deg, #1a1916, #111110);
   box-shadow: 0 8px 22px rgba(0,0,0,.15);
   transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
@@ -1344,7 +1344,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 #changelog .changelog-list > *:hover {
   transform: translateY(-2px);
-  border-color: rgba(198,161,91,.38);
+  border-color: rgba(88, 216, 232,.38);
   box-shadow: 0 13px 28px rgba(0,0,0,.24);
 }
 
@@ -1356,12 +1356,12 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 #downloads .download-card:hover,
 #resources .resource-links a:hover {
   transform: translateY(-4px);
-  border-color: rgba(229,204,150,.46);
-  box-shadow: 0 18px 36px rgba(0,0,0,.30), 0 0 22px rgba(198,161,91,.055);
+  border-color: rgba(141, 234, 243,.46);
+  box-shadow: 0 18px 36px rgba(0,0,0,.30), 0 0 22px rgba(88, 216, 232,.055);
 }
 
 #downloads .release-banner {
-  border-color: rgba(198,161,91,.32);
+  border-color: rgba(88, 216, 232,.32);
   box-shadow: inset 0 1px rgba(255,255,255,.035), 0 18px 42px rgba(0,0,0,.26);
 }
 
@@ -1397,20 +1397,20 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 }
 
 .nuvio-orbit-track {
-  border-color: rgba(229,204,150,.82);
-  box-shadow: 0 0 15px rgba(198,161,91,.25);
+  border-color: rgba(141, 234, 243,.82);
+  box-shadow: 0 0 15px rgba(88, 216, 232,.25);
 }
 
 .nuvio-orbit-track span {
   color: #f0dba9;
-  text-shadow: 0 0 9px rgba(212,175,55,.72), 0 2px 8px #000;
+  text-shadow: 0 0 9px rgba(88, 216, 232,.72), 0 2px 8px #000;
 }
 
 /* Consistent keyboard accessibility */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible {
-  outline: 2px solid #e5cc96;
+  outline: 2px solid #8deaf3;
   outline-offset: 3px;
 }
 
@@ -1450,7 +1450,7 @@ input:focus-visible {
     overflow-x: auto;
     overscroll-behavior-x: contain;
     scrollbar-width: none;
-    border-top: 1px solid rgba(198,161,91,.12);
+    border-top: 1px solid rgba(88, 216, 232,.12);
   }
 
   .topbar nav::-webkit-scrollbar {
@@ -1530,9 +1530,9 @@ input:focus-visible {
   width: fit-content;
   margin-top: 9px;
   padding: 5px 10px;
-  border: 1px solid rgba(212, 175, 55, .24);
+  border: 1px solid rgba(88, 216, 232, .24);
   border-radius: 999px;
-  background: rgba(212, 175, 55, .07);
+  background: rgba(88, 216, 232, .07);
   color: #d8bd72;
   font-size: 11px;
   font-weight: 700;
@@ -1551,7 +1551,7 @@ input:focus-visible {
 
 #status .report-freshness[data-state="fresh"] {
   color: #d8bd72;
-  border-color: rgba(212, 175, 55, .3);
+  border-color: rgba(88, 216, 232, .3);
 }
 
 #status .report-freshness[data-state="delayed"] {
@@ -1574,15 +1574,15 @@ input:focus-visible {
   align-items: start;
   gap: 14px;
   padding: 18px 20px;
-  border: 1px solid rgba(212, 175, 55, .13);
+  border: 1px solid rgba(88, 216, 232, .13);
   border-radius: 15px;
-  background: linear-gradient(135deg, rgba(212, 175, 55, .045), rgba(255, 255, 255, .012));
+  background: linear-gradient(135deg, rgba(88, 216, 232, .045), rgba(255, 255, 255, .012));
   transition: border-color .25s ease, background .25s ease, transform .25s ease;
 }
 
 #changelog .changelog-entry:hover {
-  border-color: rgba(212, 175, 55, .34);
-  background: linear-gradient(135deg, rgba(212, 175, 55, .075), rgba(255, 255, 255, .018));
+  border-color: rgba(88, 216, 232, .34);
+  background: linear-gradient(135deg, rgba(88, 216, 232, .075), rgba(255, 255, 255, .018));
   transform: translateY(-2px);
 }
 
@@ -1591,8 +1591,8 @@ input:focus-visible {
   height: 8px;
   margin-top: 7px;
   border-radius: 50%;
-  background: #d4af37;
-  box-shadow: 0 0 12px rgba(212, 175, 55, .45);
+  background: #58d8e8;
+  box-shadow: 0 0 12px rgba(88, 216, 232, .45);
 }
 
 #changelog .changelog-content {
@@ -1611,9 +1611,9 @@ input:focus-visible {
   display: inline-flex;
   align-items: center;
   padding: 4px 9px;
-  border: 1px solid rgba(212, 175, 55, .25);
+  border: 1px solid rgba(88, 216, 232, .25);
   border-radius: 999px;
-  background: rgba(212, 175, 55, .08);
+  background: rgba(88, 216, 232, .08);
   color: #d8bd72;
   font-size: 10px;
   font-weight: 800;
@@ -1643,7 +1643,7 @@ input:focus-visible {
 }
 
 #changelog .changelog-entry--added .changelog-dot {
-  background: #d4af37;
+  background: #58d8e8;
 }
 
 #changelog .changelog-entry--system .changelog-dot {
@@ -1759,7 +1759,7 @@ html[dir="rtl"] .nuvio-launch-open b {
   display: none !important;
 }
 
-/* NUVIO — Golden Signal live updates */
+/* NUVIO — Midnight Prism live updates */
 .live-updates {
   position: relative;
   isolation: isolate;
@@ -1775,18 +1775,18 @@ html[dir="rtl"] .nuvio-launch-open b {
   min-height: 76px;
   padding: 15px 22px;
   overflow: hidden;
-  border: 1px solid rgba(198,161,91,.24);
+  border: 1px solid rgba(88, 216, 232,.24);
   border-radius: 17px;
   background:
-    radial-gradient(ellipse at 8% 50%, rgba(198,161,91,.10), transparent 42%),
+    radial-gradient(ellipse at 8% 50%, rgba(88, 216, 232,.10), transparent 42%),
     linear-gradient(115deg, #14120e, #0a0a0a 55%, #18140d);
-  box-shadow: 0 14px 38px rgba(0,0,0,.24), inset 0 1px rgba(255,238,198,.055);
+  box-shadow: 0 14px 38px rgba(0,0,0,.24), inset 0 1px rgba(88, 216, 232,.055);
 }
 .live-updates__shell::before {
   position: absolute;
   inset: 0 auto 0 0;
   width: 2px;
-  background: linear-gradient(180deg, transparent, #e7ca8d 48%, transparent);
+  background: linear-gradient(180deg, transparent, #8deaf3 48%, transparent);
   content: "";
 }
 .live-updates__shell::after {
@@ -1795,7 +1795,7 @@ html[dir="rtl"] .nuvio-launch-open b {
   left: -35%;
   width: 28%;
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(239,211,155,.85), transparent);
+  background: linear-gradient(90deg, transparent, rgba(88, 216, 232,.85), transparent);
   content: "";
   animation: nuvio-live-shimmer 7s ease-in-out infinite;
   pointer-events: none;
@@ -1872,7 +1872,7 @@ html[dir="rtl"] .nuvio-launch-open b {
   align-items: baseline;
   gap: 13px;
   padding-inline-end: clamp(28px, 4vw, 56px);
-  border-inline-end: 1px solid rgba(198,161,91,.24);
+  border-inline-end: 1px solid rgba(88, 216, 232,.24);
 }
 
 .live-updates__item-link {
@@ -1893,7 +1893,7 @@ html[dir="rtl"] .nuvio-launch-open b {
   position: relative;
   z-index: 1;
   padding: 8px 12px;
-  border: 1px solid rgba(198,161,91,.28);
+  border: 1px solid rgba(88, 216, 232,.28);
   border-radius: 9px;
   color: #e4c990;
   font-size: 10px;
@@ -1902,8 +1902,8 @@ html[dir="rtl"] .nuvio-launch-open b {
   white-space: nowrap;
 }
 .live-updates__link:hover {
-  border-color: rgba(229,204,150,.65);
-  background: rgba(198,161,91,.10);
+  border-color: rgba(141, 234, 243,.65);
+  background: rgba(88, 216, 232,.10);
 }
 
 html[dir="rtl"] .live-updates__shell::before {
