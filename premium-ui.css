@@ -2681,3 +2681,11 @@ button:active,
   display: none;
   content: none;
 }
+
+/* Restore the original globe size on small screens. */
+@media (max-width: 480px) {
+  .visual-globe {
+    width: 260px;
+    height: 260px;
+  }
+}
