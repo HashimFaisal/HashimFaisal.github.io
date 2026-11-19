@@ -37,7 +37,7 @@ jobs:
           )
           filters = set(re.findall(r'data-filter="([^"]+)"', html))
           expected = {"nuvio", "catalog", "subtitles", "ratings"}
-          if len(categories) != 21 or set(categories) != expected:
+          if len(categories) != 22 or set(categories) != expected:
               raise SystemExit(f"Unexpected resource categories: {categories}")
           if filters != expected | {"all"}:
               raise SystemExit(f"Filters do not match categories: {filters}")
@@ -53,15 +53,15 @@ jobs:
           if 'data-category="subtitles"' not in html:
               raise SystemExit("Subtitle resources are missing.")
           subtitle_resources = (
-              "OpenSubtitles v3", "TheSubtitleDB", "Persian Subtitles",
+              "OpenSubtitles v3", "TheSubtitleDB", "Persian Subtitles", "AltyaziDB Subtitles",
           )
           subtitle_cards = re.findall(
               r'<article class="plugin-card[^"]*" data-category="subtitles">(.*?)</article>',
               html,
               re.S,
           )
-          if len(subtitle_cards) != 3:
-              raise SystemExit(f"Expected 3 subtitle resources, found {len(subtitle_cards)}")
+          if len(subtitle_cards) != 4:
+              raise SystemExit(f"Expected 4 subtitle resources, found {len(subtitle_cards)}")
           for name in subtitle_resources:
               if f"<h3>{name}</h3>" not in html:
                   raise SystemExit(f"Missing subtitle resource: {name}")
@@ -69,6 +69,7 @@ jobs:
               "https://opensubtitles-v3.strem.io/manifest.json",
               "https://api.thesubtitledb.org/integrations/stremio/manifest.json",
               "https://stremio.alirostami.com/subtitles/manifest.json",
+              "https://altyazidb.online/manifest.json",
           )
           for url in required_subtitle_urls:
               if url not in html:
