@@ -1241,8 +1241,7 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
 /* NUVIO — Unified green indicator dots */
 .pulse,
 .hero-meta i,
-.card-status i,
-.card-status.bad i {
+.card-status:not(.bad) i {
   background: #42c879;
   box-shadow: 0 0 10px rgba(66, 200, 121, .55);
 }
