@@ -73,6 +73,10 @@ const translations = {
   'مشروع إضافة مستقل ضمن مكتبة Nuvio.': 'An independent add-on in the Nuvio library.',
   'إضافة All-in-One لمشروع Nuvio من المستودع الأصلي.': 'The All-in-One add-on for Nuvio from its original repository.',
   'إضافة للبحث عن الترجمات وعرضها.': 'An add-on for searching and displaying subtitles.',
+
+  'إضافة رسمية للبحث عن ترجمات الأفلام والمسلسلات عبر Manifest عام مباشر، بدون إعداد رابط شخصي.': 'An official add-on for searching movie and series subtitles through a public direct manifest, with no personal setup required.',
+  'إضافة ترجمات للأفلام والمسلسلات. رابط Manifest عام مباشر؛ إعداد اللغات والخيارات الإضافية متاح من صفحة المزود.': 'Movie and series subtitle add-on with a public direct manifest; language preferences and extra options are available on the provider site.',
+  'إضافة مستقلة بManifest عام مباشر، متخصصة بالترجمات الفارسية للأفلام والمسلسلات.': 'An independent add-on with a public direct manifest, focused on Persian subtitles for movies and series.',
   'إضافة للبحث عن ترجمات الأفلام والمسلسلات والأنمي.': 'An add-on for searching subtitles for movies, series, and anime.',
 
   'نسخة مجتمعية من OpenSubtitles V3 بواجهة إعداد منفصلة. افتح صفحة الإعداد وأنشئ رابط Manifest الخاص بك قبل إضافته إلى Nuvio.': 'A community OpenSubtitles V3 build with a separate configuration page. Generate your personal manifest URL before adding it to Nuvio.',
