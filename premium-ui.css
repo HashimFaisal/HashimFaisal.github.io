@@ -1991,10 +1991,6 @@ html[dir="rtl"] .live-updates__shell::before {
     grid-row: 1;
   }
 
-  .about .resource-links a:nth-child(2) {
-    grid-column: 1;
-    grid-row: 2;
-  }
 }
 
 /* Hide footer on the home screen only */
