@@ -89,7 +89,7 @@ for css_path in CSS_FILES:
     for legacy in LEGACY_PALETTE:
         if legacy.lower() in css_text.lower():
             fail(f"Legacy palette token remains in {css_path.name}: {legacy}")
-    for color in __import__("re").findall(r"#[0-9a-fA-F]{3,8}\\b", css_text):
+    for color in __import__("re").findall(r"#[0-9a-fA-F]{3,8}\b", css_text):
         if color.lower() not in ALLOWED_CSS_HEX:
             fail(f"Unapproved CSS hex color in {css_path.name}: {color}")
     if css_path.name == "premium-ui.css":
