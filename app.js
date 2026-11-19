@@ -143,6 +143,8 @@ const translations = {
   'متاح': 'Available',
   'الإصدار غير متاح': 'Version unavailable',
   'رابط Manifest شخصي جاهز للتثبيت': 'Personal Manifest ready to install',
+  'متاح · الإصدار 0.0.15 · إعدادات اختيارية': 'Available · Version 0.0.15 · Optional settings',
+  'رابط Manifest شخصي جاهز للتثبيت · الإصدار غير متاح': 'Personal Manifest ready to install · Version unavailable',
   'تاريخ الرفع': 'Uploaded',
   'تاريخ الرفع غير متاح': 'Upload date unavailable',
   'لا توجد بيانات إصدار': 'No release information',
