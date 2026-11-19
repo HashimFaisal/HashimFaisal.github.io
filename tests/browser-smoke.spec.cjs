@@ -22,7 +22,9 @@ test.beforeEach(async ({ page }) => {
 
   await page.goto('/');
   await expect(page.locator('#nuvio-launch-grid .nuvio-launch-card')).toHaveCount(5);
-  await expect(page.locator('.plugin-card')).toHaveCount(21);
+  await expect(page.locator('.plugin-card')).toHaveCount(19);
+  await expect(page.locator('.plugin-card h3', { hasText: /^Ratings$/ })).toHaveCount(0);
+  await expect(page.locator('.plugin-card h3', { hasText: /^Age Ratings$/ })).toHaveCount(0);
 });
 
 test.afterEach(async ({ page }) => {
@@ -80,10 +82,10 @@ test('plugin search and category filters return the expected cards', async ({ pa
   await expect(page.locator('.plugin-card:visible')).toHaveCount(3);
 
   await page.locator('[data-filter="ratings"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(8);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(6);
 
   await page.locator('[data-filter="all"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(21);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(19);
 
   await page.locator('#search').fill('no-such-addon-987');
   await expect(page.locator('#empty-state')).toBeVisible();
