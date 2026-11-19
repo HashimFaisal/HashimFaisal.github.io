@@ -448,7 +448,6 @@ nav a:hover::after { transform: scaleX(1); }
   overflow-wrap: anywhere;
 }
 
-
 /* Content sections */
 .section {
   width: min(var(--page), 90%);
