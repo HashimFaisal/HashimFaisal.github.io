@@ -78,6 +78,15 @@ const viewports = [
           topbarOverlaps: overlaps,
           hero: document.querySelector('.hero') ? rect(document.querySelector('.hero')) : null,
           dashboard: document.querySelector('#nuvio-dashboard') ? rect(document.querySelector('#nuvio-dashboard')) : null,
+          dashboardCards: [...document.querySelectorAll('.nuvio-launch-card')].map(el => {
+            const r = el.getBoundingClientRect();
+            const childOverflow = [...el.children].some(child => {
+              const c = child.getBoundingClientRect();
+              return c.left < r.left - 1 || c.right > r.right + 1 ||
+                c.top < r.top - 1 || c.bottom > r.bottom + 1;
+            });
+            return { title: el.querySelector('strong')?.textContent || '', ...rect(el), childOverflow };
+          }),
         };
       });
 
@@ -97,6 +106,9 @@ const viewports = [
       if (metrics.horizontalOverflow) failures.push(viewport.name + ': horizontal overflow (' + metrics.documentWidth + 'px document / ' + viewport.width + 'px viewport)');
       if (metrics.topbarOverlaps.length) failures.push(viewport.name + ': topbar overlaps ' + JSON.stringify(metrics.topbarOverlaps));
       if (!metrics.dashboardPresent || !metrics.heroPresent || !metrics.globeVideoPresent) failures.push(viewport.name + ': missing key homepage element');
+      if (metrics.dashboardCards.length !== 5) failures.push(viewport.name + ': expected 5 dashboard cards, found ' + metrics.dashboardCards.length);
+      if (metrics.dashboardCards.some(card => card.childOverflow)) failures.push(viewport.name + ': dashboard card content extends outside its card');
+      if (viewport.width <= 430 && metrics.dashboardCards.some(card => card.height > 205)) failures.push(viewport.name + ': mobile dashboard card exceeds 205px height');
       if (pageErrors.length) failures.push(viewport.name + ': browser errors ' + pageErrors.join(' | '));
 
       console.log(JSON.stringify(result));
