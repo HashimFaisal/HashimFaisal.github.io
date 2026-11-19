@@ -2272,8 +2272,6 @@ footer a:hover,
 }
 
 .filter.active {
-  color: var(--on-accent);
-  border-color: var(--cyan);
   background: linear-gradient(110deg, var(--cyan-light), var(--cyan));
 }
 .search-box,
@@ -2395,9 +2393,6 @@ footer a:hover,
   border-color: rgba(88, 216, 232, 0.22);
 }
 
-.live-updates__link {
-  border-color: rgba(88, 216, 232, 0.28);
-}
 .live-updates__link:hover,
 .live-updates__item-link:hover {
   color: #fff;
