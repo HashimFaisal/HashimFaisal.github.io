@@ -76,11 +76,11 @@ const translations = {
 
   'إضافة رسمية للبحث عن ترجمات الأفلام والمسلسلات عبر Manifest عام مباشر، بدون إعداد رابط شخصي.': 'An official add-on for searching movie and series subtitles through a public direct manifest, with no personal setup required.',
   'إضافة ترجمات للأفلام والمسلسلات. رابط Manifest عام مباشر؛ إعداد اللغات والخيارات الإضافية متاح من صفحة المزود.': 'Movie and series subtitle add-on with a public direct manifest; language preferences and extra options are available on the provider site.',
-  'يجمع الترجمات من OpenSubtitles وSubDL وAddic7ed ومصادر أخرى. اختر English وArabic فقط (حتى 3 لغات) ثم أنشئ Manifest خاصاً باختياراتك. قد تتكرر بعض النتائج مع الإضافات الموجودة.': 'Aggregates subtitles from OpenSubtitles, SubDL, Addic7ed, and other sources. Select English and Arabic only (up to 3 languages) to generate a personalized manifest. Some results may overlap with existing add-ons.',
+  'إضافة ترجمات متوافقة مع Nuvio. تجمع مصادر متعددة، واختر English وArabic فقط عند إعدادها لتوليد Manifest الخاص بك.': 'A subtitle add-on tested and compatible with Nuvio. It aggregates multiple sources; select English and Arabic only during setup to generate your manifest.',
   'اختيار العربية والإنجليزية وتوليد Manifest ↗': 'Choose Arabic & English and Generate Manifest ↗',
   'بعد فتح الصفحة، فعّل English وArabic ثم اضغط Copy link. انسخ رابط Manifest الناتج وأضفه يدوياً من داخل Nuvio؛ رابط الصفحة نفسه ليس Manifest.': 'On the page, select English and Arabic, then tap Copy link. Copy the generated manifest URL and add it manually inside Nuvio; the page URL itself is not a manifest.',
-  'ترجمات · تجريبي': 'Subtitles · Experimental',
-  'إعداد خارجي · اختبار المستخدم': 'External setup · User testing',
+  'متوافق مع Nuvio · تم الاختبار': 'Nuvio compatible · Tested',
+  'متوافق مع Nuvio · تم الاختبار': 'Nuvio compatible · Tested',
   'إضافة للبحث عن ترجمات الأفلام والمسلسلات والأنمي.': 'An add-on for searching subtitles for movies, series, and anime.',
 
   'نسخة مجتمعية من OpenSubtitles V3 بواجهة إعداد منفصلة. افتح صفحة الإعداد وأنشئ رابط Manifest الخاص بك قبل إضافته إلى Nuvio.': 'A community OpenSubtitles V3 build with a separate configuration page. Generate your personal manifest URL before adding it to Nuvio.',
