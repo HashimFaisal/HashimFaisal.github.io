@@ -2801,3 +2801,25 @@ button:active,
   background: none !important;
   box-shadow: none !important;
 }
+
+
+/* Nuvio globe — strip all visual color, tint, rim and shadow effects from the Earth */
+.visual-globe {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+.globe-video {
+  filter: none !important;
+  opacity: 1 !important;
+  mix-blend-mode: normal !important;
+}
+.globe-overlay {
+  background: none !important;
+  box-shadow: none !important;
+}
+.visual-globe::after {
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+}
