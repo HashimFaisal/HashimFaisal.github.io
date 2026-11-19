@@ -160,7 +160,7 @@ test('five dashboard cards keep their text in order without overlap', async ({ p
       item.left >= card.card.left - 1 && item.right <= card.card.right + 1
     ), JSON.stringify(card)).toBe(true);
     expect(card.card.left, JSON.stringify(card)).toBeGreaterThanOrEqual(-1);
-    expect(card.card.right, JSON.stringify(card)).toBeLessThanOrEqual(391);
+    expect(card.card.right, JSON.stringify(card)).toBeLessThanOrEqual(viewportWidth + 1);
   }
 });
 
