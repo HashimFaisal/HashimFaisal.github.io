@@ -72,12 +72,17 @@ test('all five dashboard destinations open and return to the dashboard', async (
 
 test('plugin search and category filters return the expected cards', async ({ page }) => {
   await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  await expect(page.locator('[data-filter="nuvio"]')).toHaveText('مصادر البث');
 
   await page.locator('#search').fill('CinemaBox');
   await expect(page.locator('.plugin-card:visible')).toHaveCount(1);
   await expect(page.locator('.plugin-card:visible h3')).toHaveText('CinemaBox');
 
   await page.locator('#search').fill('');
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('[data-filter="nuvio"]')).toHaveText('Streaming Sources');
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('[data-filter="nuvio"]')).toHaveText('مصادر البث');
   await page.locator('[data-filter="nuvio"]').click();
   await expect(page.locator('.plugin-card:visible')).toHaveCount(4);
   await expect(page.locator('.plugin-card:visible h3')).toContainText(['CinemaBox', 'Cinemana', 'ALL-IN-ONE', 'Torrentio']);
