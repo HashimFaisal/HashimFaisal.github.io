@@ -206,5 +206,14 @@
     "source": "Persian Subtitles",
     "source_url": "https://stremio.alirostami.com/subtitles/manifest.json",
     "new_version": "1.2.0"
+  },
+  {
+    "date": "2026-11-19T04:58:33.067169+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: SubtitleVideo",
+    "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
+    "source": "SubtitleVideo",
+    "source_url": "https://subtitlevideo.com/stremio/en,ar/manifest.json",
+    "new_version": "1.0.0"
   }
 ]

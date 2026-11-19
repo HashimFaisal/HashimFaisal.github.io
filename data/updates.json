@@ -1,5 +1,20 @@
 [
   {
+    "id": "addon:SubtitleVideo:added:1.0.0",
+    "type": "addon",
+    "title": {
+      "ar": "مصدر جديد: SubtitleVideo",
+      "en": "New source: SubtitleVideo"
+    },
+    "description": {
+      "ar": "تمت إضافة SubtitleVideo إلى مصادر Nuvio. الإصدار: 1.0.0.",
+      "en": "SubtitleVideo has been added to Nuvio sources. Version: 1.0.0."
+    },
+    "url": "https://subtitlevideo.com/stremio/en,ar/manifest.json",
+    "publishedAt": "2026-11-19T04:58:33.067169Z",
+    "expiresAt": "2026-11-20T04:58:33.067169Z"
+  },
+  {
     "id": "addon:TheSubtitleDB:added:0.2.2",
     "type": "addon",
     "title": {
