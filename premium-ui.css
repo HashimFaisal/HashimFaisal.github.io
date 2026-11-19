@@ -785,8 +785,6 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 
 .hero-visual {
-  position: relative;
-  isolation: isolate;
   overflow: visible;
 }
 
@@ -2085,10 +2083,10 @@ html,
 nav,
 nav a,
 .github-link,
-.language-toggle,
-footer {
+.language-toggle {
   color: var(--muted);
 }
+
 .accent,
 .eyebrow,
 .nuvio-kicker,
@@ -2154,9 +2152,6 @@ footer a:hover,
 
 .hero h1 span {
   background: linear-gradient(100deg, var(--cyan-light), var(--cyan) 52%, var(--violet));
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
 }
 .hero-copy > p,
 .section-heading p,
@@ -2183,7 +2178,6 @@ footer a:hover,
 }
 
 .secondary-btn {
-  color: var(--text);
   border-color: rgba(163, 148, 255, 0.34);
   background: rgba(163, 148, 255, 0.055);
 }
@@ -2308,7 +2302,6 @@ footer a:hover,
 }
 
 .card-status.bad i {
-  background: var(--danger);
   box-shadow: 0 0 9px rgba(255, 130, 146, 0.55);
 }
 .changelog-entry,
@@ -2388,9 +2381,7 @@ footer a:hover,
 }
 
 footer {
-  color: var(--muted);
   border-color: rgba(88, 216, 232, 0.17);
-  background: var(--bg);
 }
 
 .toast {
@@ -2968,7 +2959,6 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
   box-shadow: 0 0 0 3px rgba(66, 200, 121, 0.12);
 }
 #plugins .card-status.bad i {
-  background: var(--danger);
   box-shadow: 0 0 0 3px rgba(255, 130, 146, 0.12);
 }
 #plugins .plugin-card[hidden] { display: none !important; }
