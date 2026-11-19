@@ -3966,3 +3966,87 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
     inset 2px 0 5px -2px rgba(220, 250, 255, 0.58);
   opacity: 0.88;
 }
+
+
+/* NUVIO — Compact the mobile Control Center */
+@media (max-width: 560px) {
+  .nuvio-dashboard {
+    margin-top: 12px;
+    margin-bottom: 18px;
+  }
+
+  .nuvio-dashboard-heading {
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+  }
+
+  .nuvio-dashboard-heading h2 {
+    margin: 4px 0 2px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+
+  .nuvio-dashboard-heading p {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .nuvio-dashboard-mark {
+    padding: 6px 8px;
+    font-size: 8px;
+  }
+
+  .nuvio-launch-grid {
+    gap: 9px;
+  }
+
+  .nuvio-launch-card {
+    min-height: 136px;
+    padding: 13px;
+    border-radius: 15px;
+  }
+
+  .nuvio-launch-icon {
+    width: 34px;
+    height: 34px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    font-size: 19px;
+  }
+
+  .nuvio-launch-code {
+    font-size: 7px;
+    letter-spacing: 1.1px;
+  }
+
+  .nuvio-launch-card strong {
+    margin-top: 5px;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .nuvio-launch-description {
+    margin-top: 5px;
+    font-size: 10px;
+    line-height: 1.55;
+  }
+
+  .nuvio-launch-open {
+    padding-top: 8px;
+    font-size: 9px;
+  }
+
+  .nuvio-launch-open b {
+    width: 23px;
+    height: 23px;
+  }
+}
+
+@media (max-width: 380px) {
+  .nuvio-dashboard-heading {
+    align-items: center;
+    flex-direction: row;
+  }
+}
