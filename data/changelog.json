@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-11-19T12:00:00+03:00",
+    "type": "added",
+    "title": "إضافة SubtitleVideo للاختبار",
+    "detail": "إضافة صفحة إعداد SubtitleVideo إلى قسم الترجمات بشكل تجريبي؛ اختر English وArabic لتوليد Manifest خاص، مع التنبيه إلى احتمال تداخل النتائج مع OpenSubtitles وSubDL."
+  },
+  {
     "date": "2026-11-19T06:00:00+03:00",
     "type": "updated",
     "title": "حصر قسم الترجمات بالعربية والإنجليزية",
