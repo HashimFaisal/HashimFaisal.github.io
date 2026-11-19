@@ -8,8 +8,8 @@
 
 ## Design system
 - Midnight Prism, dark-only.
-- Background: #070B16; surfaces: #0D1526 / #111D33 / #182744; cyan: #58D8E8; violet: #A394FF; text: #F2F6FF; supporting text: #A2B1C8.
-- Accent states: success #42C879 / #A9E8C1; danger #FF8292 / #FFB0BA; cyan highlight #8DEAF3.
+- Background: #080D19; surfaces: #101A2D / #16243A / #182744; cyan: #63D9E9; violet: #AA9BFF; text: #F2F6FF; supporting text: #B2BFD4.
+- Accent states: success #42C879 / #AFEAC7; danger #FF8292 / #FFB9C2; cyan highlight #98EDF5.
 - CSS, active SVG, HTML, and JavaScript colors must pass strict allowlists; no retired palette list is retained in source.
 - Preserve original third-party raster brand marks and the NASA Black Marble video colors; do not recolor source artwork or apply video filters.
 - Preserve the established design and avoid introducing gold/bronze tones or a light theme.
