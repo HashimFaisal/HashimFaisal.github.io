@@ -635,9 +635,9 @@ function renderDownloads(report) {
       : (asset.name || t('ملف غير متاح'));
     const ready = Boolean(asset.ok && downloadUrl);
     return `<article class="download-card">
+      <small>${escapeHTML(displayName)} · ${formatBytes(asset.size_bytes)}</small>
       <strong>Nuvio ${escapeHTML(asset.label || 'Download')}</strong>
       <small class="muted">${t('الإصدار')}: ${escapeHTML(appVersion)}</small>
-      <small>${escapeHTML(displayName)} · ${formatBytes(asset.size_bytes)}</small>
       <small class="muted">${asset.uploaded_at
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
         : t('تاريخ الرفع غير متاح')}</small>
