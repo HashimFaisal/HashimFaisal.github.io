@@ -2349,3 +2349,444 @@ body[data-nuvio-view="home"] > footer {
   pointer-events: none !important;
   z-index: -1 !important;
 }
+
+
+/* =========================================
+   NUVIO — MIDNIGHT PRISM COLOR PALETTE
+   Color-only refresh: layout and geometry unchanged.
+   ========================================= */
+:root {
+  color-scheme: dark;
+  --bg: #070b16;
+  --surface: #0d1526;
+  --surface-2: #111d33;
+  --surface-3: #182744;
+  --line: rgba(84, 217, 232, .17);
+  --line-strong: rgba(105, 205, 255, .48);
+  --text: #f2f6ff;
+  --muted: #a2b1c8;
+  --cyan: #58d8e8;
+  --violet: #a394ff;
+  --lime: #42c879;
+}
+
+html,
+:root body {
+  color: var(--text);
+  background:
+    radial-gradient(ellipse at 82% 4%, rgba(88, 216, 232, .12), transparent 34%),
+    radial-gradient(ellipse at 8% 38%, rgba(163, 148, 255, .075), transparent 33%),
+    #070b16;
+}
+
+:root body::before {
+  background-image:
+    linear-gradient(rgba(88,216,232,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(88,216,232,.028) 1px, transparent 1px);
+}
+
+.topbar,
+:root .topbar {
+  color: var(--text);
+  background: rgba(7, 11, 22, .92);
+  border-color: rgba(88,216,232,.19);
+}
+
+.brand,
+.brand small,
+nav,
+nav a,
+.github-link,
+.language-toggle,
+footer {
+  color: var(--muted);
+}
+
+.accent,
+.eyebrow,
+.nuvio-kicker,
+.nuvio-launch-code,
+.nuvio-launch-open,
+.visual-caption span,
+.visual-caption i,
+.section-count,
+.manifest-label,
+.card-actions a:hover,
+footer a:hover,
+.topbar nav a.nuvio-nav-active {
+  color: var(--cyan);
+}
+
+.brand img {
+  filter: drop-shadow(0 0 15px rgba(88,216,232,.28));
+}
+
+.github-link,
+.language-toggle,
+.secondary-btn,
+.filter,
+.nuvio-view-back {
+  color: #dce8fa;
+  background: rgba(255,255,255,.035);
+  border-color: rgba(88,216,232,.2);
+}
+
+.github-link:hover,
+.language-toggle:hover,
+.secondary-btn:hover,
+.filter:hover,
+.nuvio-view-back:hover {
+  color: #fff;
+  background: rgba(88,216,232,.09);
+  border-color: rgba(88,216,232,.52);
+}
+
+.hero,
+:root .hero {
+  color: var(--text);
+  border-color: rgba(88,216,232,.28);
+  background:
+    radial-gradient(ellipse at 82% 42%, rgba(88,216,232,.17), transparent 40%),
+    radial-gradient(ellipse at 12% 0%, rgba(163,148,255,.16), transparent 48%),
+    linear-gradient(125deg, #111d35, #091222 58%, #101b31);
+  box-shadow: 0 35px 90px rgba(0,0,0,.48), inset 0 1px rgba(190,235,255,.08);
+}
+
+:root .hero::before {
+  background: linear-gradient(115deg, transparent 45%, rgba(88,216,232,.09), transparent 75%);
+}
+
+.hero h1,
+.hero h1 span,
+.section-heading h2,
+.about h2,
+.plugin-card h3,
+.stat-card strong,
+.changelog-content strong,
+.download-card strong,
+.resource-links a span,
+.release-banner strong,
+.nuvio-dashboard-heading h2,
+.nuvio-launch-card strong {
+  color: #f2f6ff;
+}
+
+.hero h1 span {
+  background: linear-gradient(100deg, #b7f5ff, #58d8e8 52%, #a394ff);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.hero-copy > p,
+.section-heading p,
+.plugin-card > p,
+.changelog-content p,
+.download-card small,
+.resource-links a small,
+.nuvio-dashboard-heading p,
+.nuvio-launch-description,
+.live-updates__content,
+.live-updates__content span {
+  color: var(--muted);
+}
+
+.primary-btn,
+.download-card a,
+#plugins .card-actions button {
+  color: #06121e;
+  border-color: rgba(125,239,255,.55);
+  background: linear-gradient(110deg, #a8f3fb, #58d8e8 52%, #8e9cff);
+  box-shadow: 0 10px 28px rgba(88,216,232,.2);
+}
+
+.primary-btn:hover {
+  box-shadow: 0 15px 35px rgba(88,216,232,.3);
+}
+
+.secondary-btn {
+  color: #e2eaff;
+  border-color: rgba(163,148,255,.34);
+  background: rgba(163,148,255,.055);
+}
+
+.visual-aura {
+  background: radial-gradient(circle, rgba(88,216,232,.24), rgba(163,148,255,.15) 45%, transparent 72%);
+}
+
+.visual-orbit,
+.orbit-two {
+  border-color: rgba(88,216,232,.28);
+}
+
+.object-back {
+  background: linear-gradient(140deg, #a8f3fb, #6278c9 58%, #4b3c91);
+  box-shadow: 0 0 55px rgba(88,216,232,.22);
+}
+
+.object-core {
+  background: linear-gradient(145deg, #1c3150, #101a31 60%, #29365e);
+  border-color: rgba(175,229,255,.42);
+}
+
+.object-glass {
+  border-color: rgba(128,231,245,.7);
+  background: linear-gradient(145deg, rgba(88,216,232,.22), rgba(163,148,255,.14));
+  box-shadow: inset 0 0 30px rgba(88,216,232,.16), 0 0 30px rgba(88,216,232,.12);
+}
+
+.object-shard {
+  border-color: rgba(142,226,255,.65);
+  background: linear-gradient(135deg, rgba(88,216,232,.48), rgba(163,148,255,.22));
+}
+
+.visual-globe {
+  border-color: rgba(88,216,232,.35);
+  box-shadow: 0 0 38px rgba(88,216,232,.2), 0 0 90px rgba(88,216,232,.11), inset -28px -18px 42px rgba(0,0,0,.88);
+}
+
+.nuvio-orbit-track {
+  border-color: rgba(132,226,245,.82);
+  box-shadow: 0 0 15px rgba(88,216,232,.28);
+}
+
+.nuvio-orbit-track span {
+  color: #c5f7ff;
+  text-shadow: 0 0 9px rgba(88,216,232,.72), 0 2px 8px #000;
+}
+
+.stat-card,
+.plugin-card,
+.download-card,
+.resource-links a,
+.nuvio-launch-card,
+.nuvio-overview-card,
+.changelog-entry,
+#changelog .changelog-list > *,
+.nuvio-view-active.section,
+#status.nuvio-view-active,
+.about {
+  color: var(--text);
+  border-color: var(--line);
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(88,216,232,.065), transparent 55%),
+    linear-gradient(145deg, #111d33, #0b1426);
+  box-shadow: 0 16px 40px rgba(0,0,0,.28), inset 0 1px rgba(190,235,255,.035);
+}
+
+.stat-card:hover,
+.plugin-card:hover,
+.download-card:hover,
+.resource-links a:hover,
+.nuvio-launch-card:hover,
+#status.nuvio-view-active .stat-card:hover {
+  border-color: rgba(105,205,255,.48);
+  box-shadow: 0 22px 48px rgba(0,0,0,.36), 0 0 25px rgba(88,216,232,.07);
+}
+
+.stat-card::before,
+.plugin-card::before,
+.nuvio-view-active.section::before,
+#status.nuvio-view-active::before,
+.topbar nav a.nuvio-nav-active::after {
+  background: linear-gradient(90deg, var(--cyan), var(--violet), transparent);
+}
+
+.stat-card::after {
+  background: rgba(88,216,232,.09);
+}
+
+.section-count,
+.type-tag,
+.type-tag.external,
+.copy-btn,
+#plugins .type-tag,
+.nuvio-launch-icon,
+.nuvio-dashboard-mark {
+  color: #9deefa;
+  border-color: rgba(88,216,232,.27);
+  background: rgba(88,216,232,.08);
+}
+
+.type-tag,
+.nuvio-launch-icon {
+  color: #c3baff;
+  border-color: rgba(163,148,255,.3);
+  background: rgba(163,148,255,.09);
+}
+
+.filter.active {
+  color: #06121e;
+  border-color: #58d8e8;
+  background: linear-gradient(110deg, #a8f3fb, #58d8e8);
+}
+
+.search-box,
+#plugins .search-box {
+  color: var(--text);
+  border-color: rgba(88,216,232,.2);
+  background: #0b1426;
+}
+
+.search-box:focus-within {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 4px rgba(88,216,232,.09);
+}
+
+.search-box span,
+.search-box input,
+.search-box input::placeholder {
+  color: var(--muted);
+}
+
+.manifest-url,
+#plugins .manifest-url {
+  color: #a9eff8;
+  border-color: rgba(88,216,232,.19);
+  background: rgba(3,9,20,.72);
+}
+
+.copy-btn,
+#plugins .card-actions button {
+  color: #06121e;
+  border-color: rgba(88,216,232,.35);
+  background: linear-gradient(110deg, #a8f3fb, #58d8e8);
+}
+
+.card-actions a,
+#plugins .card-actions a {
+  color: #d7e4f8;
+  background: rgba(163,148,255,.055);
+}
+
+.card-status,
+.card-status.bad {
+  color: var(--muted);
+}
+
+.card-status i,
+.pulse,
+.hero-meta i,
+#changelog .changelog-dot,
+#status .report-freshness::before {
+  background: #42c879;
+  box-shadow: 0 0 10px rgba(66,200,121,.55);
+}
+
+.card-status.bad i {
+  background: #ff8292;
+  box-shadow: 0 0 9px rgba(255,130,146,.55);
+}
+
+.changelog-entry,
+#changelog .changelog-entry {
+  border-color: rgba(88,216,232,.15);
+  background: linear-gradient(120deg, rgba(88,216,232,.045), rgba(163,148,255,.025));
+}
+
+#changelog .changelog-entry:hover {
+  border-color: rgba(105,205,255,.38);
+  background: linear-gradient(120deg, rgba(88,216,232,.075), rgba(163,148,255,.04));
+}
+
+#changelog .changelog-type,
+#status .report-freshness {
+  color: #a9eff8;
+  border-color: rgba(88,216,232,.25);
+  background: rgba(88,216,232,.07);
+}
+
+#status .report-freshness[data-state="delayed"] {
+  color: #f0bd75;
+  border-color: rgba(240,189,117,.32);
+  background: rgba(240,189,117,.08);
+}
+
+#status .report-freshness[data-state="stale"],
+#status .report-freshness[data-state="unknown"] {
+  color: #e2a1ad;
+  border-color: rgba(226,161,173,.3);
+  background: rgba(226,161,173,.07);
+}
+
+.release-banner,
+#downloads .release-banner {
+  color: var(--text);
+  border-color: rgba(88,216,232,.3);
+  background:
+    radial-gradient(ellipse at 10% 50%, rgba(88,216,232,.15), transparent 45%),
+    radial-gradient(ellipse at 85% 20%, rgba(163,148,255,.12), transparent 48%),
+    linear-gradient(110deg, #14213b, #0b1426);
+  box-shadow: 0 18px 45px rgba(0,0,0,.28);
+}
+
+#downloads .release-banner::before {
+  background: radial-gradient(circle at 90% 50%, rgba(88,216,232,.12), transparent 55%), linear-gradient(90deg, rgba(0,0,0,.2), transparent 40%);
+}
+
+#downloads .release-banner::after {
+  background: conic-gradient(from 180deg at 50% 50%, rgba(88,216,232,0), rgba(88,216,232,.18), rgba(163,148,255,0));
+}
+
+.about {
+  background: radial-gradient(ellipse at 100% 0%, rgba(163,148,255,.08), transparent 50%), #0d1526;
+}
+
+.live-updates__shell {
+  color: var(--text);
+  border-color: rgba(88,216,232,.24);
+  background:
+    radial-gradient(ellipse at 8% 50%, rgba(88,216,232,.11), transparent 42%),
+    radial-gradient(ellipse at 88% 50%, rgba(163,148,255,.08), transparent 42%),
+    linear-gradient(115deg, #101d34, #091222 55%, #111a31);
+  box-shadow: 0 14px 38px rgba(0,0,0,.28), inset 0 1px rgba(190,235,255,.055);
+}
+
+.live-updates__shell::before,
+.live-updates__shell::after {
+  background: linear-gradient(90deg, transparent, #8ceaf5 48%, #a394ff, transparent);
+}
+
+.live-updates__signal,
+.live-updates__content strong,
+.live-updates__item-link,
+.live-updates__link {
+  color: #a9eff8;
+}
+
+.live-updates__content {
+  color: #c4d2e7;
+}
+
+.live-updates__item {
+  border-color: rgba(88,216,232,.22);
+}
+
+.live-updates__link {
+  border-color: rgba(88,216,232,.28);
+}
+
+.live-updates__link:hover,
+.live-updates__item-link:hover {
+  color: #fff;
+  border-color: rgba(88,216,232,.58);
+  background: rgba(88,216,232,.1);
+}
+
+footer {
+  color: var(--muted);
+  border-color: rgba(88,216,232,.17);
+  background: #060a14;
+}
+
+.toast {
+  color: #f2f6ff;
+  border-color: rgba(88,216,232,.4);
+  background: #14213b;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+  outline-color: #8ceaf5;
+}
