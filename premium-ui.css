@@ -1007,7 +1007,6 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 }
 
 .nuvio-dashboard-heading h2 {
-  color: var(--text);
   letter-spacing: -.3px;
 }
 
@@ -1029,7 +1028,6 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 }
 
 .nuvio-launch-card:hover {
-  transform: translateY(-5px);
   border-color: rgba(141, 234, 243,.48);
   box-shadow: 0 20px 42px rgba(0,0,0,.36), 0 0 25px rgba(88, 216, 232,.075);
 }
@@ -1055,7 +1053,6 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 .nuvio-view-back:hover {
   border-color: rgba(141, 234, 243,.55);
   background: rgba(88, 216, 232,.15);
-  transform: translateX(3px);
 }
 
 .nuvio-view-active .section-heading {
@@ -2365,7 +2362,6 @@ footer a:hover,
 }
 
 #status .report-freshness[data-state="delayed"] {
-  color: #a394ff;
   border-color: rgba(163,148,255,.32);
   background: rgba(163,148,255,.08);
 }
@@ -2418,10 +2414,6 @@ footer a:hover,
   color: #a9eff8;
 }
 
-.live-updates__content {
-  color: #c4d2e7;
-}
-
 .live-updates__item {
   border-color: rgba(88,216,232,.22);
 }
@@ -2457,7 +2449,6 @@ input:focus-visible {
 /* NUVIO — Final system status palette lock */
 #status.nuvio-view-active .stat-card {
   color: var(--text);
-  border-color: var(--line);
   background:
     radial-gradient(ellipse at 100% 0%, rgba(88,216,232,.08), transparent 55%),
     radial-gradient(ellipse at 0% 100%, rgba(163,148,255,.045), transparent 48%),
@@ -2743,7 +2734,6 @@ button:active,
 }
 .hero-copy h1 span {
   background: linear-gradient(100deg, #c5f7ff 0%, #65dce9 54%, #b6a9ff 100%);
-  background-clip: text; -webkit-background-clip: text;
 }
 .hero-copy > p { max-width: 470px; color: #bdcadd; font-size: 14px; line-height: 2.15; }
 .hero-meta { gap: 10px; margin-top: 25px; transform: none; }
@@ -2755,13 +2745,12 @@ button:active,
 .hero-meta i { width: 6px; height: 6px; flex-basis: 6px; }
 
 @media (max-width: 760px) {
-  .hero-copy { padding-top: 0; }
   .hero-copy::before {
     position: static; align-self: flex-start; margin-bottom: 11px;
     min-height: 26px; font-size: 8px;
   }
   .hero-copy h1 {
-    position: relative; top: auto; right: auto; width: 100%;
+    width: 100%;
     margin: 0 0 12px; font-size: clamp(25px, 7vw, 37px);
     line-height: 1.52; letter-spacing: -.35px;
   }
@@ -2785,7 +2774,6 @@ button:active,
    Five clear destinations, balanced responsive layout.
    ========================================= */
 .nuvio-dashboard {
-  position: relative;
   margin-top: 34px;
   margin-bottom: 48px;
 }
@@ -2803,7 +2791,6 @@ button:active,
 }
 .nuvio-dashboard-heading p {
   max-width: 560px;
-  font-size: 12px;
 }
 .nuvio-dashboard-mark {
   border-color: rgba(88, 216, 232, .2);
@@ -2860,7 +2847,6 @@ button:active,
 }
 .nuvio-launch-description {
   max-width: 300px;
-  font-size: 11px;
   line-height: 1.85;
 }
 .nuvio-launch-open {
@@ -2900,7 +2886,7 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
   .nuvio-dashboard-heading h2 { font-size: 24px; }
   .nuvio-dashboard-heading p { font-size: 11px; line-height: 1.85; }
   .nuvio-dashboard-mark { display: inline-flex; padding: 7px 9px; font-size: 8px; }
-  .nuvio-launch-grid { grid-template-columns: 1fr; gap: 10px; }
+  .nuvio-launch-grid { gap: 10px; }
   .nuvio-launch-card { min-height: 178px; padding: 18px; }
   .nuvio-launch-icon { width: 40px; height: 40px; margin-bottom: 13px; }
   .nuvio-launch-card strong { font-size: 17px; }
@@ -2952,15 +2938,12 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
 }
 #plugins .search-box input {
   padding-block: 11px;
-  font-size: 12px;
 }
 #plugins .filters {
   align-items: center;
-  gap: 8px;
 }
 #plugins .filter {
   min-height: 38px;
-  padding: 8px 13px;
   border-radius: 999px;
   line-height: 1.45;
 }
@@ -2992,7 +2975,6 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
 }
 #plugins .type-tag {
   max-width: 62%;
-  padding: 6px 9px;
   overflow-wrap: anywhere;
   border-radius: 999px;
   font-size: 8px;
@@ -3000,7 +2982,6 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
 }
 #plugins .plugin-card h3 {
   margin: 0 0 8px;
-  font-size: 17px;
   line-height: 1.45;
   overflow-wrap: anywhere;
 }
@@ -3024,10 +3005,7 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
 #plugins .manifest-url {
   min-height: 54px;
   padding: 10px 11px;
-  border-radius: 10px;
-  font-size: 9px;
   line-height: 1.75;
-  overflow-wrap: anywhere;
   word-break: break-word;
 }
 #plugins .card-actions {
@@ -3051,7 +3029,6 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
   gap: 8px;
   margin-top: 12px;
   padding-top: 11px;
-  font-size: 10px;
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
