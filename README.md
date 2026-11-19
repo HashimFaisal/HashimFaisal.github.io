@@ -34,7 +34,7 @@ The projects and add-ons listed here are independent community resources and are
 ### Important installation notes
 
 - Where a Manifest is provided, use the card's copy/open action. Supported Nuvio plugin cards can hand off to the Nuvio app.
-- The **Subtitles** section includes **OpenSubtitles v3** and **TheSubtitleDB** with public direct Manifest URLs, plus **SubtitleVideo**, tested and confirmed compatible with Nuvio. Open SubtitleVideo, select **English** and **Arabic**, generate its personal Manifest URL, then add that generated URL manually in Nuvio; the configuration-page URL is not a Manifest. SubtitleVideo aggregates OpenSubtitles, SubDL, Addic7ed, and other providers, so some results may overlap with existing subtitle add-ons.
+- The **Subtitles** section includes **OpenSubtitles v3**, **TheSubtitleDB**, and **SubtitleVideo**. SubtitleVideo is configured for **English + Arabic** with a direct Manifest URL shown on its card; the card supports copying/opening the Manifest and the automatic Nuvio install handoff. Use the configuration page only if you want to change the selected languages. SubtitleVideo aggregates OpenSubtitles, SubDL, Addic7ed, and other providers, so some results may overlap with existing subtitle add-ons.
 - Add-ons that require API keys or accounts are excluded from the direct-install list. SubtitleVideo is free and account-free, but generates a separate Manifest for each selected language set.
 - Subtitle-addon listing does not guarantee in-app functionality. Nuvio exposes subtitle-addon startup behavior under Settings > Player; test each addon in the target Nuvio version.
 - External add-on compatibility and available features depend on the add-on and the installed Nuvio version.
