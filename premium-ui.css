@@ -2853,30 +2853,49 @@ input:focus-visible {
   --nuvio-touch-border: rgba(141, 234, 243, .62);
 }
 
-/* Content cards */
+/* Shared transitions: cards, interactive controls and section elements */
 .nuvio-launch-card,
 #plugins .plugin-card,
 #changelog .changelog-list > *,
+#changelog .changelog-entry,
 #downloads .download-card,
+#downloads .release-banner,
 #resources .resource-links a,
 .nuvio-overview-card,
-#downloads .release-banner {
+.live-updates,
+.hero,
+#plugins .filters .filter,
+button,
+.topbar nav a,
+.github-link,
+.language-toggle,
+#plugins .card-actions a,
+#plugins .card-actions button,
+#downloads .download-card a,
+.hero-actions .primary-btn,
+.hero-actions .secondary-btn,
+.about a,
+.nuvio-view-back {
   -webkit-tap-highlight-color: transparent;
   transform-origin: center;
   transition:
     transform .26s cubic-bezier(.2,.75,.25,1),
     border-color .26s ease,
     box-shadow .26s ease,
-    background-color .26s ease;
+    background-color .26s ease,
+    color .2s ease;
 }
 
+/* Card press feedback */
 .nuvio-launch-card:active,
 #plugins .plugin-card:active,
 #changelog .changelog-list > *:active,
+#changelog .changelog-entry:active,
 #downloads .download-card:active,
+#downloads .release-banner:active,
 #resources .resource-links a:active,
 .nuvio-overview-card:active,
-#downloads .release-banner:active {
+.live-updates:active {
   transform: translateY(-4px) scale(1.012);
   border-color: var(--nuvio-touch-border);
   box-shadow:
@@ -2885,25 +2904,7 @@ input:focus-visible {
   transition-duration: .08s;
 }
 
-/* Buttons, filters, navigation and utility links */
-button,
-.topbar nav a,
-.github-link,
-.language-toggle,
-#plugins .card-actions a,
-#plugins .card-actions button,
-#downloads .download-card a,
-#resources .resource-links a,
-.nuvio-view-back {
-  -webkit-tap-highlight-color: transparent;
-  transition:
-    transform .2s cubic-bezier(.2,.75,.25,1),
-    border-color .2s ease,
-    box-shadow .2s ease,
-    background-color .2s ease,
-    color .2s ease;
-}
-
+/* Compact press feedback for controls and links */
 button:active,
 .topbar nav a:active,
 .github-link:active,
@@ -2912,6 +2913,9 @@ button:active,
 #plugins .card-actions button:active,
 #downloads .download-card a:active,
 #resources .resource-links a:active,
+.hero-actions .primary-btn:active,
+.hero-actions .secondary-btn:active,
+.about a:active,
 .nuvio-view-back:active {
   transform: translateY(-2px) scale(.975);
   border-color: var(--nuvio-touch-border);
@@ -2919,7 +2923,8 @@ button:active,
   transition-duration: .07s;
 }
 
-#plugins .filter:active {
+#plugins .filter:active,
+#plugins .filters .filter:active {
   transform: scale(.95);
 }
 
@@ -2934,14 +2939,24 @@ button:active,
   .nuvio-launch-card,
   #plugins .plugin-card,
   #changelog .changelog-list > *,
+  #changelog .changelog-entry,
   #downloads .download-card,
+  #downloads .release-banner,
   #resources .resource-links a,
   .nuvio-overview-card,
-  #downloads .release-banner,
+  .live-updates,
+  .hero,
+  #plugins .filters .filter,
   button,
   .topbar nav a,
   .github-link,
   .language-toggle,
+  #plugins .card-actions a,
+  #plugins .card-actions button,
+  #downloads .download-card a,
+  .hero-actions .primary-btn,
+  .hero-actions .secondary-btn,
+  .about a,
   .nuvio-view-back {
     transition: none !important;
   }
@@ -2949,84 +2964,25 @@ button:active,
   .nuvio-launch-card:active,
   #plugins .plugin-card:active,
   #changelog .changelog-list > *:active,
+  #changelog .changelog-entry:active,
   #downloads .download-card:active,
+  #downloads .release-banner:active,
   #resources .resource-links a:active,
   .nuvio-overview-card:active,
-  #downloads .release-banner:active,
+  .live-updates:active,
   button:active,
   .topbar nav a:active,
   .github-link:active,
   .language-toggle:active,
-  .nuvio-view-back:active,
-  #plugins .filter:active {
-    transform: none;
-    box-shadow: none;
-  }
-}
-
-
-/* NUVIO — Match touch feedback to the site's actual rendered sections */
-.hero,
-.live-updates,
-#plugins .plugin-card,
-#changelog .changelog-entry,
-#downloads .download-card,
-#downloads .release-banner,
-#plugins .filters .filter,
-.hero-actions .primary-btn,
-.hero-actions .secondary-btn,
-.about a {
-  -webkit-tap-highlight-color: transparent;
-  transform-origin: center;
-  transition:
-    transform .26s cubic-bezier(.2,.75,.25,1),
-    border-color .26s ease,
-    box-shadow .26s ease,
-    background-color .26s ease;
-}
-
-#plugins .plugin-card:active,
-#changelog .changelog-entry:active,
-#downloads .download-card:active,
-#downloads .release-banner:active,
-.live-updates:active {
-  transform: translateY(-4px) scale(1.012);
-  border-color: var(--nuvio-touch-border);
-  box-shadow: 0 12px 30px rgba(0,0,0,.28), 0 0 22px var(--nuvio-touch-glow);
-  transition-duration: .08s;
-}
-
-#plugins .filters .filter:active,
-.hero-actions .primary-btn:active,
-.hero-actions .secondary-btn:active,
-.about a:active {
-  transform: translateY(-2px) scale(.975);
-  box-shadow: 0 0 18px var(--nuvio-touch-glow);
-  transition-duration: .07s;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero,
-  .live-updates,
-  #plugins .plugin-card,
-  #changelog .changelog-entry,
-  #downloads .download-card,
-  #downloads .release-banner,
-  #plugins .filters .filter,
-  .hero-actions .primary-btn,
-  .hero-actions .secondary-btn,
-  .about a {
-    transition: none !important;
-  }
-  #plugins .plugin-card:active,
-  #changelog .changelog-entry:active,
-  #downloads .download-card:active,
-  #downloads .release-banner:active,
-  .live-updates:active,
-  #plugins .filters .filter:active,
+  #plugins .card-actions a:active,
+  #plugins .card-actions button:active,
+  #downloads .download-card a:active,
   .hero-actions .primary-btn:active,
   .hero-actions .secondary-btn:active,
-  .about a:active {
+  .about a:active,
+  .nuvio-view-back:active,
+  #plugins .filter:active,
+  #plugins .filters .filter:active {
     transform: none;
     box-shadow: none;
   }
