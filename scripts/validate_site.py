@@ -71,6 +71,11 @@ ALLOWED_RGB = {
     "162,177,200", "141,234,243", "255,255,255", "0,0,0",
     "7,11,22", "17,29,51",
 }
+ALLOWED_CSS_HEX = {
+    "#070b16", "#0d1526", "#111d33", "#182744", "#f2f6ff", "#a2b1c8",
+    "#a394ff", "#58d8e8", "#42c879", "#a9e8c1", "#ff8292", "#ffb0ba",
+    "#8deaf3", "#071317", "#000", "#fff",
+}
 for css_path in CSS_FILES:
     css_text = css_path.read_text(encoding="utf-8")
     rules = tinycss2.parse_stylesheet(css_text, skip_comments=True, skip_whitespace=True)
@@ -84,6 +89,9 @@ for css_path in CSS_FILES:
     for legacy in LEGACY_PALETTE:
         if legacy.lower() in css_text.lower():
             fail(f"Legacy palette token remains in {css_path.name}: {legacy}")
+    for color in __import__("re").findall(r"#[0-9a-fA-F]{8}(?![0-9a-fA-F])|#[0-9a-fA-F]{6}(?![0-9a-fA-F])|#[0-9a-fA-F]{4}(?![0-9a-fA-F])|#[0-9a-fA-F]{3}(?![0-9a-fA-F])", css_text):
+        if color.lower() not in ALLOWED_CSS_HEX:
+            fail(f"Unapproved CSS hex color in {css_path.name}: {color}")
     if css_path.name == "premium-ui.css":
         keyframe_names = __import__("re").findall(r"@keyframes\s+([\w-]+)", css_text)
         if len(keyframe_names) != len(set(keyframe_names)):

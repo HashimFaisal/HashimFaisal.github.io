@@ -2652,7 +2652,7 @@ button:active,
   filter: none;
   opacity: 1;
   mix-blend-mode: normal;
-  background: #020611;
+  background: var(--bg);
 }
 
 .globe-image,
