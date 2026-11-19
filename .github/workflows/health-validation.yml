@@ -18,8 +18,29 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.x"
+      - name: Validate JavaScript syntax
+        run: node --check app.js
       - name: Validate Python syntax
         run: python -m py_compile scripts/check_links.py
+      - name: Validate resource categories
+        run: |
+          python - <<'PY'
+          import re
+          from pathlib import Path
+
+          html = Path("index.html").read_text(encoding="utf-8")
+          categories = re.findall(
+              r'<article class="plugin-card[^"]*" data-category="([^"]+)"',
+              html,
+          )
+          filters = set(re.findall(r'data-filter="([^"]+)"', html))
+          expected = {"nuvio", "catalog", "subtitles", "ratings"}
+          if len(categories) != 13 or set(categories) != expected:
+              raise SystemExit(f"Unexpected resource categories: {categories}")
+          if filters != expected | {"all"}:
+              raise SystemExit(f"Filters do not match categories: {filters}")
+          print("Resource categories and filters are consistent.")
+          PY
       - name: Validate JSON data and release history
         run: |
           python - <<'PY'
@@ -46,5 +67,12 @@ jobs:
               prerelease = any(marker in version.lower() for marker in ("beta", "alpha", "rc", "preview", "dev"))
               if prerelease and channel != "beta":
                   raise SystemExit(f"Prerelease incorrectly marked stable: {version}")
+              if item.get("type") == "status":
+                  if item.get("old_status") not in {"available", "unavailable"}:
+                      raise SystemExit(f"Invalid previous status: {item}")
+                  if item.get("new_status") not in {"available", "unavailable"}:
+                      raise SystemExit(f"Invalid new status: {item}")
+                  if not item.get("source") or not item.get("source_url"):
+                      raise SystemExit(f"Status event is missing its source: {item}")
           print("JSON and changelog validations passed.")
           PY
