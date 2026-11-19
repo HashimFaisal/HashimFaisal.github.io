@@ -140,6 +140,13 @@ const translations = {
   'الحجم غير متاح': 'Size unavailable',
   'تاريخ النشر غير متاح': 'Publication date unavailable',
   'الإصدار': 'Version',
+  'متاح': 'Available',
+  'الإصدار غير متاح': 'Version unavailable',
+  'رابط Manifest شخصي جاهز للتثبيت': 'Personal Manifest ready to install',
+  'متاح · الإصدار 0.0.15 · إعدادات اختيارية': 'Available · Version 0.0.15 · Optional settings',
+  'رابط Manifest شخصي جاهز للتثبيت · الإصدار غير متاح': 'Personal Manifest ready to install · Version unavailable',
+  'متاح · الإصدار 4.1.0': 'Available · Version 4.1.0',
+  'متاح · الإصدار 2.14.7': 'Available · Version 2.14.7',
   'تاريخ الرفع': 'Uploaded',
   'تاريخ الرفع غير متاح': 'Upload date unavailable',
   'لا توجد بيانات إصدار': 'No release information',
@@ -629,11 +636,13 @@ function renderManifestStatuses(report) {
     status.classList.toggle('bad', !healthy);
 
     const indicator = document.createElement('i');
-    const version = item.version || t('غير محدد');
+    const versionLabel = item.version
+      ? `${t('الإصدار')} ${item.version}`
+      : t('الإصدار غير متاح');
 
     const label = healthy
-      ? `${t('متاح · الإصدار')} ${version}`
-      : `${t('فشل الفحص')} · ${t('الإصدار')} ${version}`;
+      ? `${t('متاح')} · ${versionLabel}`
+      : `${t('فشل الفحص')} · ${versionLabel}`;
 
     status.replaceChildren(indicator, document.createTextNode(label));
   });
