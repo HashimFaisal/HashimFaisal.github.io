@@ -12,7 +12,7 @@
   --cyan: #58d8e8;
   --success: #42c879;
   --success-light: #a9e8c1;
-  --danger: #ff8292;
+  --danger: var(--danger);
   --danger-light: #ffb0ba;
   --cyan-light: #8deaf3;
   --on-accent: #071317;
@@ -621,7 +621,7 @@ nav a:hover::after { transform: scaleX(1); }
   background: var(--lime);
   box-shadow: 0 0 9px currentColor;
 }
-.card-status.bad i { background: #ff8292; }
+.card-status.bad i { background: var(--danger); }
 .empty-state {
   padding: 30px;
   border: 1px dashed var(--line-strong);
