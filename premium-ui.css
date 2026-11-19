@@ -1112,7 +1112,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 }
 
 .topbar nav a {
-  color: #c5bdaE;
+  color: #c4d2e7;
   font-weight: 600;
   transition: color .25s ease, text-shadow .25s ease;
 }
@@ -1297,7 +1297,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 /* Changelog, downloads and resources */
 #changelog .changelog-list > * {
   border: 1px solid rgba(88, 216, 232,.14);
-  background: linear-gradient(115deg, #1a1916, #111110);
+  background: linear-gradient(115deg, var(--surface-2), var(--surface));
   box-shadow: 0 8px 22px rgba(0,0,0,.15);
   transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
 }
@@ -1808,7 +1808,7 @@ html[dir="rtl"] .nuvio-launch-open b {
   width: max-content;
   box-sizing: border-box;
   padding-inline-end: clamp(28px, 4vw, 56px);
-  color: #d7d0c1;
+  color: #c4d2e7;
   font-size: 12px;
   line-height: 1.9;
   white-space: nowrap;
