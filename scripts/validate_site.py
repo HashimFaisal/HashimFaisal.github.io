@@ -98,7 +98,14 @@ if repository_svg != set(ACTIVE_ARTWORK):
 # color literals cannot bypass the stylesheet palette checks.
 for source_path in (HTML, ROOT / "app.js", ROOT / "premium-ui.js"):
     source_text = source_path.read_text(encoding="utf-8")
-    for color in __import__("re").findall(r"#[0-9a-fA-F]{8}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{6}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{4}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{3}(?![a-zA-Z0-9_-])", source_text):
+    # Match color values only when attached to a CSS/DOM color property;
+    # selectors such as $("#add") are not color declarations.
+    color_values = __import__("re").findall(
+        r"(?:color|background(?:Color)?|border(?:Top|Right|Bottom|Left)?Color|outlineColor|fill|stroke)\\s*(?::|=)\\s*['\\"]?(#[0-9a-fA-F]{8}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{4}|#[0-9a-fA-F]{3})(?![a-zA-Z0-9_-])",
+        source_text,
+        flags=__import__("re").I,
+    )
+    for color in color_values:
         if color.lower() not in ALLOWED_CSS_HEX:
             fail(f"Unapproved UI source color in {source_path.name}: {color}")
     for red, green, blue in __import__("re").findall(r"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)", source_text, flags=__import__("re").I):
