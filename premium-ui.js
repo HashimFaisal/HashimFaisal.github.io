@@ -328,7 +328,7 @@
       void dashboard.offsetWidth;
       dashboard.classList.add('nuvio-language-switching');
       renderDashboard();
-      $('.nuvio-view-back .nuvio-back-label').forEach(node => {
+      $$('.nuvio-view-back .nuvio-back-label').forEach(node => {
         node.textContent = labels[language()].back;
       });
       window.setTimeout(() => {
