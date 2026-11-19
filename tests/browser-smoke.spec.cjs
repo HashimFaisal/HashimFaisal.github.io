@@ -559,54 +559,21 @@ test('changelog and downloads sections keep content boxes separate across viewpo
 });
 
 
-test('all UI styles use the unified Nuvio palette without retired mixed hues', async ({ page }) => {
-  const [styleCss, premiumCss, ...artwork] = await Promise.all([
-    'style.css',
-    'premium-ui.css',
-    'assets/hero.svg',
-    'assets/all-in-one.svg',
-    'assets/cinemabox.svg',
-    'assets/cinemana.svg',
-    'assets/opensubtitles.svg',
-    'assets/nuvio-catalog.svg',
-    'assets/izlemeli-catalog.svg'
-  ].map(async name => {
-    if (name.endsWith('.css')) {
-      const link = page.locator(`link[rel="stylesheet"][href*="${name}"]`);
-      const href = await link.getAttribute('href');
-      return page.evaluate(async url => {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`Could not load stylesheet: ${response.status}`);
-        return response.text();
-      }, href);
-    }
-    const response = await page.evaluate(async url => {
-      const result = await fetch(url);
-      if (!result.ok) throw new Error(`Could not load artwork: ${result.status}`);
-      return result.text();
-    }, name);
-    return response;
-  }));
-  const css = `${styleCss}\n${premiumCss}`.toLowerCase();
-  const visualPalette = artwork.join('\n').toLowerCase();
-  const retired = [
-    '#141414', '#1a1a1a', '#bd9292', '189, 146, 146', '#f2eee4', '#a9a9a9', '#929292',
-    '#131a29', '#0c1420', '#101c27', '#141f2e', '#0d1420', '#101a28',
-    '#152131', '#0e1521', '#141e2c', '#0e1622', '#17172b', '#080807', '#111a31', '#121f38',
-    '#e2a1ad', '226,161,173', '#ff8c9a', '#57d6a1',
-    '34,229,139', '190,235,255', '116, 218, 235', '208, 239, 255',
-    '225, 245, 255', '175,229,255', '8, 11, 18', '4,10,17', '154, 170, 189', '87, 214, 161', '255, 140, 154',
-    '#080b18', '#17113b', '#071c2b', '#a78bfa', '#6366f1', '#22d3ee',
-    '#7c3aed', '#a5b4fc', '#0891b2', '#8b5cf6', '#c4b5fd', '#d8ddf5',
-    '#94a3b8', '#ddd6fe', '#a5f3fc', '#11152d', '#17143b', '#64748b',
-    '#14213b', '#b7f5ff', '#160d35', '#6d28d9', '#ede9fe', '#062b3a',
-    '#0e7490', '#67e8f9', '#cffafe', '#5266a8'
+test('all active UI source colors stay within the unified Nuvio palette', async ({ page }) => {
+  const names = [
+    'style.css', 'premium-ui.css', 'index.html', 'app.js', 'premium-ui.js',
+    'assets/hero.svg', 'assets/all-in-one.svg', 'assets/cinemabox.svg',
+    'assets/cinemana.svg', 'assets/opensubtitles.svg', 'assets/cinemeta.svg',
+    'assets/nuvio-catalog.svg', 'assets/izlemeli-catalog.svg'
   ];
-  for (const value of retired) {
-    expect(css).not.toContain(value.toLowerCase());
-    expect(visualPalette).not.toContain(value.toLowerCase());
-  }
-
+  const contents = await Promise.all(names.map(async name => {
+    const response = await page.request.get('/' + name);
+    expect(response.ok(), 'Could not load palette source: ' + name).toBeTruthy();
+    return response.text();
+  }));
+  const [styleCss, premiumCss, indexHtml, appJs, premiumUiJs, ...artwork] = contents;
+  const css = (styleCss + '\n' + premiumCss).toLowerCase();
+  const uiSource = (indexHtml + '\n' + appJs + '\n' + premiumUiJs).toLowerCase();
   const allowedCssRgb = new Set([
     '88,216,232', '163,148,255', '66,200,121', '255,130,146',
     '162,177,200', '141,234,243', '255,255,255', '0,0,0',
@@ -617,21 +584,56 @@ test('all UI styles use the unified Nuvio palette without retired mixed hues', a
     '#a394ff', '#58d8e8', '#42c879', '#a9e8c1', '#ff8292', '#ffb0ba',
     '#8deaf3', '#071317', '#000', '#fff'
   ]);
-  for (const match of css.matchAll(/#(?:[0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})(?![0-9a-f])/gi)) {
-    expect(allowedCssHex.has(match[0]), 'Unexpected CSS hex palette value: ' + match[0]).toBeTruthy();
-  }
-  for (const match of css.matchAll(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/gi)) {
-    const rgb = match.slice(1, 4).join(',');
-    expect(allowedCssRgb.has(rgb), `Unexpected CSS RGB palette value: ${rgb}`).toBeTruthy();
+  for (const source of [css, uiSource]) {
+    for (const match of source.matchAll(/(?:color|background(?:Color)?|border(?:Top|Right|Bottom|Left)?Color|outlineColor|fill|stroke)\s*(?::|=)\s*['"]?(#[0-9a-f]{8}|#[0-9a-f]{6}|#[0-9a-f]{4}|#[0-9a-f]{3})(?![a-z0-9_-])/gi)) {
+      expect(allowedCssHex.has(match[1]), 'Unexpected UI hex color: ' + match[1]).toBeTruthy();
+    }
+    for (const match of source.matchAll(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/gi)) {
+      const rgb = match.slice(1, 4).join(',');
+      expect(allowedCssRgb.has(rgb), 'Unexpected UI RGB color: ' + rgb).toBeTruthy();
+    }
+    expect(source).not.toMatch(/hsla?\s*\(/i);
   }
 
   const allowedArtworkHex = new Set([
     '#070b16', '#0d1526', '#111d33', '#a394ff', '#58d8e8',
     '#8deaf3', '#f2f6ff', '#a2b1c8'
   ]);
+  const visualPalette = artwork.join('\n').toLowerCase();
   for (const match of visualPalette.matchAll(/#[0-9a-f]{3,8}\b/gi)) {
-    expect(allowedArtworkHex.has(match[0]), `Unexpected artwork color: ${match[0]}`).toBeTruthy();
+    expect(allowedArtworkHex.has(match[0]), 'Unexpected artwork color: ' + match[0]).toBeTruthy();
   }
+
+  const computedPaletteViolations = await page.evaluate(() => {
+    const approved = new Set([
+      '7,11,22', '13,21,38', '17,29,51', '24,39,68',
+      '242,246,255', '162,177,200', '163,148,255', '88,216,232',
+      '66,200,121', '169,232,193', '255,130,146', '255,176,186',
+      '141,234,243', '7,19,23', '255,255,255', '0,0,0'
+    ]);
+    const properties = [
+      'color', 'backgroundColor', 'backgroundImage',
+      'borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor',
+      'outlineColor', 'textDecorationColor', 'fill', 'stroke',
+      'boxShadow', 'textShadow', 'filter', 'caretColor', 'accentColor'
+    ];
+    const violations = [];
+    for (const element of document.querySelectorAll('*')) {
+      for (const pseudo of [null, '::before', '::after']) {
+        const style = getComputedStyle(element, pseudo);
+        for (const property of properties) {
+          const value = style[property];
+          if (!value) continue;
+          for (const match of value.matchAll(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/gi)) {
+            const rgb = match.slice(1, 4).join(',');
+            if (!approved.has(rgb)) violations.push({ element: element.tagName, pseudo, property, rgb });
+          }
+        }
+      }
+    }
+    return violations.slice(0, 30);
+  });
+  expect(computedPaletteViolations).toEqual([]);
 
   for (const token of ['--cyan-light:', '--on-accent:', '--success: #42c879;', '--danger: #ff8292;']) {
     expect(styleCss).toContain(token);
@@ -640,7 +642,6 @@ test('all UI styles use the unified Nuvio palette without retired mixed hues', a
   await expect(video).toHaveAttribute('src', 'assets/black-marble-2016-night-1080p.mp4');
   await expect(page.locator('.globe-video')).toHaveCSS('filter', 'none');
 });
-
 
 test('Cinemeta artwork uses only the approved Nuvio palette', async ({ page }) => {
   await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();

@@ -54,18 +54,6 @@ for ref in parser.local_refs:
         fail(f"Broken local reference: {ref}")
 
 # CSS syntax and retired palette tokens across the active visual system.
-LEGACY_PALETTE = (
-    "#f0e5cf", "#1b1a17", "#10100f", "#171613", "#d4af37", "#c9a44c",
-    "#b58d38", "#1a1916", "#111110", "#c5bdae", "#d7d0c1", "#f1dfb9",
-    "#f0dfb9", "#a99e89", "#fff0ca", "34,229,139", "190,235,255",
-    "116, 218, 235", "208, 239, 255", "225, 245, 255", "175,229,255", "8, 11, 18", "4,10,17",
-    "154, 170, 189", "87, 214, 161", "255, 140, 154",
-    "#080b18", "#17113b", "#071c2b", "#a78bfa", "#6366f1", "#22d3ee",
-    "#7c3aed", "#a5b4fc", "#0891b2", "#8b5cf6", "#c4b5fd", "#d8ddf5",
-    "#94a3b8", "#ddd6fe", "#a5f3fc", "#11152d", "#17143b", "#64748b",
-    "#14213b", "#b7f5ff", "#160d35", "#6d28d9", "#ede9fe", "#062b3a",
-    "#0e7490", "#67e8f9", "#cffafe", "#5266a8",
-)
 ALLOWED_RGB = {
     "88,216,232", "163,148,255", "66,200,121", "255,130,146",
     "162,177,200", "141,234,243", "255,255,255", "0,0,0",
@@ -86,10 +74,9 @@ for css_path in CSS_FILES:
         rgb = f"{red},{green},{blue}"
         if rgb not in ALLOWED_RGB:
             fail(f"Unapproved RGB color in {css_path.name}: {rgb}")
-    for legacy in LEGACY_PALETTE:
-        if legacy.lower() in css_text.lower():
-            fail(f"Legacy palette token remains in {css_path.name}: {legacy}")
-    for color in __import__("re").findall(r"#[0-9a-fA-F]{8}(?![0-9a-fA-F])|#[0-9a-fA-F]{6}(?![0-9a-fA-F])|#[0-9a-fA-F]{4}(?![0-9a-fA-F])|#[0-9a-fA-F]{3}(?![0-9a-fA-F])", css_text):
+    if __import__("re").search(r"hsla?\s*\(", css_text, flags=__import__("re").I):
+        fail(f"Unsupported HSL color syntax in {css_path.name}")
+    for color in __import__("re").findall(r"#[0-9a-fA-F]{8}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{6}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{4}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{3}(?![a-zA-Z0-9_-])", css_text):
         if color.lower() not in ALLOWED_CSS_HEX:
             fail(f"Unapproved CSS hex color in {css_path.name}: {color}")
     if css_path.name == "premium-ui.css":
@@ -98,18 +85,41 @@ for css_path in CSS_FILES:
             duplicates = sorted(name for name in set(keyframe_names) if keyframe_names.count(name) > 1)
             fail(f"Duplicate CSS keyframe names in {css_path.name}: {duplicates}")
 
+# Every repository SVG must be a reviewed, active Nuvio UI asset. Original
+# third-party raster logos and the NASA video retain their source colors.
 ACTIVE_ARTWORK = (
     "hero.svg", "all-in-one.svg", "cinemabox.svg", "cinemana.svg",
     "opensubtitles.svg", "cinemeta.svg", "nuvio-catalog.svg", "izlemeli-catalog.svg",
 )
+repository_svg = {path.name for path in (ROOT / "assets").glob("*.svg")}
+if repository_svg != set(ACTIVE_ARTWORK):
+    fail(f"Unreviewed or orphaned SVG assets: {sorted(repository_svg ^ set(ACTIVE_ARTWORK))}")
+# Scan HTML and JavaScript sources too, so inline styles or script-injected
+# color literals cannot bypass the stylesheet palette checks.
+for source_path in (HTML, ROOT / "app.js", ROOT / "premium-ui.js"):
+    source_text = source_path.read_text(encoding="utf-8")
+    # Match color values only when attached to a CSS/DOM color property;
+    # selectors such as $("#add") are not color declarations.
+    color_values = __import__("re").findall(
+        r"(?:color|background(?:Color)?|border(?:Top|Right|Bottom|Left)?Color|outlineColor|fill|stroke)\s*(?::|=)\s*['\"]?(#[0-9a-fA-F]{8}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{4}|#[0-9a-fA-F]{3})(?![a-zA-Z0-9_-])",
+        source_text,
+        flags=__import__("re").I,
+    )
+    for color in color_values:
+        if color.lower() not in ALLOWED_CSS_HEX:
+            fail(f"Unapproved UI source color in {source_path.name}: {color}")
+    for red, green, blue in __import__("re").findall(r"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)", source_text, flags=__import__("re").I):
+        rgb = f"{red},{green},{blue}"
+        if rgb not in ALLOWED_RGB:
+            fail(f"Unapproved UI source RGB color in {source_path.name}: {rgb}")
+    if __import__("re").search(r"hsla?\s*\(", source_text, flags=__import__("re").I):
+        fail(f"Unsupported HSL color syntax in {source_path.name}")
+
 for artwork_name in ACTIVE_ARTWORK:
     artwork_path = ROOT / "assets" / artwork_name
     if not artwork_path.exists():
         fail(f"Missing active artwork: {artwork_name}")
     artwork_text = artwork_path.read_text(encoding="utf-8")
-    for legacy in LEGACY_PALETTE:
-        if legacy.lower() in artwork_text.lower():
-            fail(f"Legacy palette token remains in {artwork_name}: {legacy}")
     allowed_artwork_hex = {
         "#070b16", "#0d1526", "#111d33", "#a394ff", "#58d8e8",
         "#8deaf3", "#f2f6ff", "#a2b1c8",
