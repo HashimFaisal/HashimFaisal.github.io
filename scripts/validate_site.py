@@ -66,12 +66,21 @@ LEGACY_PALETTE = (
     "#14213b", "#b7f5ff", "#160d35", "#6d28d9", "#ede9fe", "#062b3a",
     "#0e7490", "#67e8f9", "#cffafe", "#5266a8",
 )
+ALLOWED_RGB = {
+    "88,216,232", "163,148,255", "66,200,121", "255,130,146",
+    "162,177,200", "141,234,243", "255,255,255", "0,0,0",
+    "7,11,22", "17,29,51",
+}
 for css_path in CSS_FILES:
     css_text = css_path.read_text(encoding="utf-8")
     rules = tinycss2.parse_stylesheet(css_text, skip_comments=True, skip_whitespace=True)
     parse_errors = [rule for rule in rules if rule.type == "error"]
     if parse_errors:
         fail(f"{css_path.name}: CSS parser errors: {parse_errors[:3]}")
+    for red, green, blue in __import__("re").findall(r"rgba?\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)", css_text, flags=__import__("re").I):
+        rgb = f"{red},{green},{blue}"
+        if rgb not in ALLOWED_RGB:
+            fail(f"Unapproved RGB color in {css_path.name}: {rgb}")
     for legacy in LEGACY_PALETTE:
         if legacy.lower() in css_text.lower():
             fail(f"Legacy palette token remains in {css_path.name}: {legacy}")
@@ -93,6 +102,13 @@ for artwork_name in ACTIVE_ARTWORK:
     for legacy in LEGACY_PALETTE:
         if legacy.lower() in artwork_text.lower():
             fail(f"Legacy palette token remains in {artwork_name}: {legacy}")
+    allowed_artwork_hex = {
+        "#070b16", "#0d1526", "#111d33", "#a394ff", "#58d8e8",
+        "#8deaf3", "#f2f6ff", "#a2b1c8",
+    }
+    for color in __import__("re").findall(r"#[0-9a-fA-F]{3,8}\\b", artwork_text):
+        if color.lower() not in allowed_artwork_hex:
+            fail(f"Unapproved artwork color in {artwork_name}: {color}")
 
 # JSON parses, shapes, duplicate live update IDs, and no removed source in live updates.
 data = {}
