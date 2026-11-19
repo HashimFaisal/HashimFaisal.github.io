@@ -2662,36 +2662,6 @@ button:active,
   content: none;
 }
 
-/* Restore the original responsive globe dimensions. */
-@media screen and (max-width: 760px) {
-  .visual-globe {
-    width: clamp(185px, 58vw, 235px);
-    height: clamp(185px, 58vw, 235px);
-  }
-}
-
-@media screen and (max-width: 380px) {
-  .visual-globe {
-    width: clamp(175px, 57vw, 200px);
-    height: clamp(175px, 57vw, 200px);
-  }
-}
-
-@media screen and (min-width: 481px) and (max-width: 760px) {
-  .visual-globe {
-    width: 245px;
-    height: 245px;
-  }
-}
-
-@media screen and (max-width: 760px) and (orientation: landscape) {
-  .visual-globe {
-    width: 190px;
-    height: 190px;
-  }
-}
-
-
 /* =========================================
    NUVIO — PHASE 1 HOME HERO REFINEMENT
    Visual-only polish; globe/video geometry is intentionally untouched.
@@ -2744,13 +2714,9 @@ button:active,
     line-height: 1.52; letter-spacing: -.35px;
   }
   .hero-copy > p { max-width: 100%; font-size: 12px; line-height: 1.95; }
-  .hero-meta { gap: 7px; margin-top: 15px; }
   .hero-meta span { min-height: 27px; padding: 4px 8px; font-size: 9px; }
 }
 @media (max-width: 380px) {
-  .hero-copy::before { margin-bottom: 9px; }
-  .hero-copy h1 { font-size: clamp(23px, 7vw, 26px); }
-  .hero-meta { gap: 6px; }
   .hero-meta span { padding-inline: 7px; }
 }
 @media (prefers-reduced-motion: reduce) {
