@@ -1083,13 +1083,6 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 
 
-.nuvio-orbit-track {
-  box-shadow: 0 0 15px rgba(88, 216, 232, 0.25);
-}
-
-.nuvio-orbit-track span {
-  text-shadow: 0 0 9px rgba(88, 216, 232, 0.72), 0 2px 8px #000;
-}
 /* Consistent keyboard accessibility */
 a:focus-visible,
 button:focus-visible,
@@ -1731,9 +1724,6 @@ html[dir="rtl"] .live-updates__shell::before {
     height: clamp(185px, 58vw, 235px);
   }
 
-  .nuvio-orbit {
-    max-width: 100%;
-  }
 
   /* LIVE position only; preserve original shell and animation */
   .live-updates {
@@ -2107,19 +2097,8 @@ footer a:hover,
   background: rgba(163, 148, 255, 0.055);
 }
 
-.visual-aura {
-  background: radial-gradient(circle, rgba(88, 216, 232, 0.24), rgba(163, 148, 255, 0.15) 45%, transparent 72%);
-}
-.visual-orbit,
-.orbit-two {
-  border-color: rgba(88, 216, 232, 0.28);
-}
 
 
-.nuvio-orbit-track {
-  border-color: rgba(141, 234, 243, 0.82);
-  box-shadow: 0 0 15px rgba(88, 216, 232, 0.28);
-}
 
 
 .stat-card,
