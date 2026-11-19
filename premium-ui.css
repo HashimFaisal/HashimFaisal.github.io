@@ -1323,9 +1323,9 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 /* Status cards */
 #status.nuvio-view-active .stat-card {
   background:
-    radial-gradient(ellipse at 100% 0%, rgba(88, 216, 232,.075), transparent 55%),
-    linear-gradient(145deg, #1c1a16, #111110);
-  border-color: rgba(88, 216, 232,.18);
+    radial-gradient(ellipse at 100% 0%, rgba(88, 216, 232,.08), transparent 55%),
+    linear-gradient(145deg, #111d33, #0b1426);
+  border-color: var(--line);
 }
 
 #status.nuvio-view-active .stat-card:hover {
@@ -2789,4 +2789,22 @@ a:focus-visible,
 button:focus-visible,
 input:focus-visible {
   outline-color: #8ceaf5;
+}
+
+
+/* NUVIO — Final system status palette lock */
+#status.nuvio-view-active .stat-card {
+  color: var(--text);
+  border-color: var(--line);
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(88,216,232,.08), transparent 55%),
+    radial-gradient(ellipse at 0% 100%, rgba(163,148,255,.045), transparent 48%),
+    linear-gradient(145deg, #111d33, #0b1426);
+}
+#status.nuvio-view-active .stat-card::before {
+  background: linear-gradient(90deg, var(--cyan), var(--violet), transparent);
+}
+#status.nuvio-view-active .stat-card:hover {
+  border-color: var(--line-strong);
+  box-shadow: 0 16px 35px rgba(0,0,0,.32), 0 0 20px rgba(88,216,232,.07);
 }
