@@ -3522,3 +3522,10 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
     scroll-behavior: auto !important;
   }
 }
+
+/* Remove the inner focus rectangle from the add-on search input; the wrapper keeps the focus cue. */
+#plugins .search-box input:focus,
+#plugins .search-box input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
