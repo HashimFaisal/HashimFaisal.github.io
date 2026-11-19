@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-11-19T04:20:00+00:00",
+    "type": "added",
+    "title": "إضافة موارد جديدة لقسم الترجمات",
+    "detail": "إضافة OpenSubtitles PRO وCommunity Subtitles وSubSource وSubSense وSubMaker وAIO Subtitles، مع ربط إعداد SubDL وتوثيق متطلبات كل خدمة."
+  },
+  {
     "date": "2026-11-14T05:37:06.126801+00:00",
     "type": "added",
     "title": "إضافة مصدر جديد: Cinemeta",
