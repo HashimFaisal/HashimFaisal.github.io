@@ -3454,7 +3454,6 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
 
 /* NUVIO — Direction-matched dashboard ornaments and entrance motion */
 .nuvio-dashboard-heading {
-  position: relative;
   text-align: start;
 }
 
@@ -3588,13 +3587,8 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
     padding: 0;
   }
 
-  .hero-copy::before {
-    margin-bottom: 11px;
-  }
 
   .hero-copy h1 {
-    margin-bottom: 12px;
-    font-size: clamp(25px, 7vw, 37px);
     line-height: 1.42;
     letter-spacing: -.3px;
   }
@@ -3657,7 +3651,6 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
 
 #plugins .plugin-card > p {
   flex: 0 0 auto;
-  min-height: 0;
 }
 
 #plugins .plugin-card .manifest-label,
