@@ -1,0 +1,64 @@
+/* NUVIO — Midnight Prism liquid touch layer */
+.nuvio-touch-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  overflow: hidden;
+  pointer-events: none;
+  contain: strict;
+}
+.nuvio-touch-ripple {
+  position: absolute;
+  width: var(--ripple-size, 42px);
+  aspect-ratio: 1;
+  border: 1px solid rgba(105, 226, 244, .7);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(88,216,232,.18) 0%, rgba(163,148,255,.09) 42%, transparent 72%);
+  box-shadow: 0 0 22px rgba(88,216,232,.16), inset 0 0 18px rgba(163,148,255,.13);
+  transform: translate(-50%, -50%) scale(.22);
+  animation: nuvio-liquid-ripple 720ms cubic-bezier(.16,.72,.22,1) forwards;
+  will-change: transform, opacity;
+}
+.nuvio-touch-ripple::after {
+  content: "";
+  position: absolute;
+  inset: 17%;
+  border: 1px solid rgba(173,154,255,.45);
+  border-radius: inherit;
+}
+@keyframes nuvio-liquid-ripple {
+  0% { opacity: 0; transform: translate(-50%,-50%) scale(.22); }
+  15% { opacity: .82; }
+  100% { opacity: 0; transform: translate(-50%,-50%) scale(2.15); }
+}
+.nuvio-pull-water {
+  position: fixed;
+  z-index: 9997;
+  top: 0;
+  left: 50%;
+  width: min(74vw, 430px);
+  height: 84px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(-50%, -76px) scaleY(.45);
+  transform-origin: top center;
+  border-radius: 0 0 50% 50%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(88,216,232,.2), rgba(163,148,255,.13) 43%, transparent 76%);
+  filter: blur(8px);
+  transition: opacity 180ms ease, transform 220ms cubic-bezier(.2,.75,.25,1);
+}
+.nuvio-pull-water.is-pulling {
+  opacity: .95;
+  transform: translate(-50%, 0) scaleY(var(--pull-strength, .5));
+}
+.nuvio-pull-water.is-releasing {
+  opacity: 0;
+  transform: translate(-50%, -18px) scaleY(.15);
+}
+@media (hover: hover) and (pointer: fine) {
+  .nuvio-touch-ripple { --ripple-size: 48px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nuvio-touch-ripple { animation-duration: 1ms; }
+  .nuvio-pull-water { transition: none; }
+}
