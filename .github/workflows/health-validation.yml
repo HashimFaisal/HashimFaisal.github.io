@@ -37,10 +37,19 @@ jobs:
           )
           filters = set(re.findall(r'data-filter="([^"]+)"', html))
           expected = {"nuvio", "catalog", "subtitles", "ratings"}
-          if len(categories) != 13 or set(categories) != expected:
+          if len(categories) != 20 or set(categories) != expected:
               raise SystemExit(f"Unexpected resource categories: {categories}")
           if filters != expected | {"all"}:
               raise SystemExit(f"Filters do not match categories: {filters}")
+          if categories.count("ratings") != 8:
+              raise SystemExit(f"Expected 8 ratings/metadata resources, found {categories.count('ratings')}")
+          required_resources = (
+              "AIOMetadata", "TMDB Discover+", "Anime Kitsu", "IMDb Ratings",
+              "Ratings", "Age Ratings", "BetterPosters for Nuvio",
+          )
+          for name in required_resources:
+              if f"<h3>{name}</h3>" not in html:
+                  raise SystemExit(f"Missing ratings/metadata resource: {name}")
           if 'data-category="subtitles"' not in html or "subdl.com/an/panel/api" not in html:
               raise SystemExit("Subtitle resources or the SubDL API link are missing.")
           if "buildNuvioPluginDeepLink" not in Path("app.js").read_text(encoding="utf-8"):

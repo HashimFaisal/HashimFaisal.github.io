@@ -129,6 +129,20 @@ const translations = {
   'كتالوج لاكتشاف العناوين الشعبية اعتماداً على IMDb.': 'A catalog for discovering popular titles based on IMDb.',
   'كتالوجات لقوائمك الشخصية من TMDB وTrakt وMDBList، مع دعم الأفلام والمسلسلات.': 'Catalogs for your personal lists from TMDB, Trakt, and MDBList, with support for movies and series.',
   'يجمع تقييمات من IMDb وTMDB وMetacritic ومصادر أخرى. طريقة ظهور التقييمات داخل Nuvio تحتاج اختباراً.': 'Combines ratings from IMDb, TMDB, Metacritic, and other sources. How ratings appear in Nuvio still needs testing.',
+  'يجمع بيانات الأفلام والمسلسلات والأنمي من TMDB وTVDB وIMDb وAniList وMyAnimeList ومصادر أخرى. اضبط المصادر أولاً ثم انسخ Manifest الناتج إلى Nuvio.': 'Aggregates movie, series, and anime metadata from TMDB, TVDB, IMDb, AniList, MyAnimeList, and more. Configure your sources, then copy the generated manifest into Nuvio.',
+  'فتح إعداد AIOMetadata ↗': 'Configure AIOMetadata ↗',
+  'يتطلب إعداداً قبل التثبيت': 'Configuration required before installation',
+  'كتالوجات وبيانات اكتشاف إضافية من TMDB. افتح صفحة الإعداد لتوليد رابط Manifest الخاص بك قبل تثبيته في Nuvio.': 'Additional TMDB discovery catalogs and metadata. Open the configurator to generate your personal manifest before installing it in Nuvio.',
+  'فتح صفحة الإعداد ↗': 'Open configurator ↗',
+  'كتالوج وبيانات أنمي من Kitsu، مع قوائم الشائع والأعلى تقييماً والأنمي الجاري عرضه.': 'Anime catalog and metadata from Kitsu, including trending, highest-rated, and currently airing lists.',
+  'يعرض تقييم IMDb للأفلام والمسلسلات والحلقات ضمن نتائج المصادر. لا يوفر كتالوجات مستقلة؛ يعتمد ظهوره على دعم Nuvio لمورد stream.': 'Displays IMDb ratings for movies, series, and episodes in stream results. It has no standalone catalogs; display depends on Nuvio support for the stream resource.',
+  'يعرض درجات IMDb وRotten Tomatoes وMetacritic وTMDB وTrakt وLetterboxd، إضافة إلى التصنيفات العمرية. يحتاج مفاتيح TMDB وMDBList قبل التثبيت.': 'Displays IMDb, Rotten Tomatoes, Metacritic, TMDB, Trakt, and Letterboxd scores, plus age ratings. TMDB and MDBList API keys are required before installation.',
+  'إعداد التقييمات ↗': 'Configure Ratings ↗',
+  'يتطلب مفاتيح API وإعداداً': 'API keys and configuration required',
+  'يعرض التصنيف العمري حسب الدولة وتصنيف Common Sense Media. يحتاج مفتاح MDBList لبعض معلومات التصنيف.': 'Displays country-specific age ratings and Common Sense Media ratings. An MDBList key is required for some rating data.',
+  'إعداد التصنيفات العمرية ↗': 'Configure Age Ratings ↗',
+  'يحسّن ملصقات Cinemeta ويضيف شارات التقييم والأنواع والاتجاهات والجودة والتصنيف العمري. الرابط الجاهز يغلّف Cinemeta فقط؛ عطّل Cinemeta الأصلي لتجنب تكرار الكتالوجات.': 'Enhances Cinemeta posters with rating, genre, trend, quality, and age badges. The ready-made link wraps Cinemeta only; disable the original Cinemeta to avoid duplicate catalogs.',
+  'إعداد كتالوج آخر ↗': 'Configure another catalog ↗',
 };
 
 const reverseTranslations = Object.fromEntries(

@@ -29,7 +29,7 @@ The projects and add-ons listed here are independent community resources and are
 | **Nuvio Plugins** | Plugins intended for the Nuvio plugin system. |
 | **Catalogs** | Discover movies and series and view catalog metadata. Catalogs do not necessarily provide video playback. |
 | **Subtitles** | Subtitle services and add-ons, including OpenSubtitles and SubDL. |
-| **Ratings & Metadata** | Resources focused on ratings and additional title information. |
+| **Ratings & Metadata** | Metadata, anime catalogs, ratings, age classifications, and poster enhancements. |
 
 ### Important installation notes
 
@@ -37,6 +37,11 @@ The projects and add-ons listed here are independent community resources and are
 - **OpenSubtitles** is listed as an external subtitle add-on with a Manifest URL.
 - **SubDL** is presented as an API service. Obtain/configure its API details as required by the service; it is not a Nuvio Manifest installation link.
 - External add-on compatibility and available features depend on the add-on and the installed Nuvio version.
+- **AIOMetadata** and **TMDB Discover+** require configuration first; install the generated manifest URL, not the configurator page.
+- **Anime Kitsu** provides anime catalogs and metadata; **IMDb Ratings** is a stream-resource addon, not a catalog.
+- **Ratings** and **Age Ratings** require their documented API setup before installing the generated manifest.
+- **BetterPosters for Nuvio** includes a ready-to-install Cinemeta wrapper. Disable the original Cinemeta catalog to avoid duplicate rows; use its configurator to wrap other catalogs.
+- Metadata addons should be ordered near the top of the Nuvio addon list. Endpoint health checks confirm manifest availability, not in-app feature compatibility.
 
 ## Health monitoring
 
