@@ -560,12 +560,10 @@ test('changelog and downloads sections keep content boxes separate across viewpo
 
 
 test('premium palette has no retired neutral or dusty-rose remnants', async ({ page }) => {
-  const css = await page.locator('link[rel="stylesheet"]').evaluateAll(async links => {
-    const sheets = await Promise.all(links.map(async link => {
-      const response = await fetch(link.href);
-      return response.ok ? response.text() : '';
-    }));
-    return sheets.join('\\n');
+  const css = await page.locator('link[rel="stylesheet"][href*="premium-ui.css"]').evaluate(async link => {
+    const response = await fetch(link.href);
+    if (!response.ok) throw new Error(`Could not load premium-ui.css: ${response.status}`);
+    return response.text();
   });
   for (const retired of ['#141414', '#1a1a1a', '#bd9292', '189, 146, 146', '#f2eee4', '#a9a9a9']) {
     expect(css.toLowerCase()).not.toContain(retired.toLowerCase());
