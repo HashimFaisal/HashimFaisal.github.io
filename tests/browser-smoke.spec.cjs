@@ -112,7 +112,7 @@ test('personal metadata manifests expose Nuvio install actions and keep setup li
     await expect(card.locator('h3')).toHaveText(item.name);
     await expect(card.locator('.manifest-url')).toHaveText(item.manifest);
     await expect(card.locator('.card-actions a').first()).toHaveAttribute('href', item.setup);
-    await expect(card.locator('.card-actions a[href="' + item.manifest + '"]')).toBeVisible();
+    await expect(card.locator('.card-actions a[href="' + item.manifest + '"]')).toHaveAttribute('href', item.manifest);
     await expect(card.locator('.share-btn')).toBeVisible();
   }
 });
