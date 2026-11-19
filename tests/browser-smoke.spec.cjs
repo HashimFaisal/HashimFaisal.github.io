@@ -559,13 +559,31 @@ test('changelog and downloads sections keep content boxes separate across viewpo
 });
 
 
-test('premium palette has no retired neutral or dusty-rose remnants', async ({ page }) => {
-  const css = await page.locator('link[rel="stylesheet"][href*="premium-ui.css"]').evaluate(async link => {
-    const response = await fetch(link.href);
-    if (!response.ok) throw new Error(`Could not load premium-ui.css: ${response.status}`);
-    return response.text();
-  });
-  for (const retired of ['#141414', '#1a1a1a', '#bd9292', '189, 146, 146', '#f2eee4', '#a9a9a9']) {
-    expect(css.toLowerCase()).not.toContain(retired.toLowerCase());
+test('all UI styles use the unified Nuvio palette without retired mixed hues', async ({ page }) => {
+  const [styleCss, premiumCss] = await Promise.all(
+    ['style.css', 'premium-ui.css'].map(async name => {
+      const link = page.locator(`link[rel="stylesheet"][href*="${name}"]`);
+      const href = await link.getAttribute('href');
+      const response = await page.evaluate(async url => fetch(url).then(result => {
+        if (!result.ok) throw new Error(`Could not load stylesheet: ${result.status}`);
+        return result.text();
+      }), href);
+      return response;
+    })
+  );
+  const css = `${styleCss}\n${premiumCss}`.toLowerCase();
+  const retired = [
+    '#141414', '#1a1a1a', '#bd9292', '189, 146, 146', '#f2eee4', '#a9a9a9', '#929292',
+    '#131a29', '#0c1420', '#101c27', '#141f2e', '#0d1420', '#101a28',
+    '#152131', '#0e1521', '#141e2c', '#0e1622', '#17172b', '#080807',
+    '#e2a1ad', '226,161,173', '#ff8c9a', '#57d6a1'
+  ];
+  for (const value of retired) expect(css).not.toContain(value.toLowerCase());
+
+  for (const token of ['--cyan-light:', '--on-accent:', '--success:', '--danger:']) {
+    expect(styleCss).toContain(token);
   }
+  const video = page.locator('.globe-video source');
+  await expect(video).toHaveAttribute('src', 'assets/black-marble-2016-night-1080p.mp4');
+  await expect(page.locator('.globe-video')).toHaveCSS('filter', 'none');
 });
