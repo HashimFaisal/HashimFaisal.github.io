@@ -2827,7 +2827,6 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
   .nuvio-launch-grid { gap: 10px; }
   .nuvio-launch-card { min-height: 178px; padding: 18px; }
   .nuvio-launch-icon { width: 40px; height: 40px; margin-bottom: 13px; }
-  .nuvio-launch-card strong { font-size: 17px; }
   .nuvio-launch-open { padding-top: 13px; }
 }
 @media (max-width: 380px) {
@@ -3012,7 +3011,7 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
   #plugins .toolbar { margin-bottom: 17px; }
   #plugins .search-box { min-height: 47px; }
   #plugins .plugin-grid { grid-template-columns: 1fr; gap: 11px; }
-  #plugins .plugin-card { padding: 17px; border-radius: 16px; }
+  #plugins .plugin-card { border-radius: 16px; }
   #plugins .plugin-top img { width: 43px; height: 43px; }
   #plugins .plugin-card h3 { font-size: 16px; }
   #plugins .plugin-card > p { font-size: 11px; }
