@@ -78,16 +78,16 @@
     "id": "addon:Torrentio:added:1.0.0",
     "type": "addon",
     "title": {
-      "ar": "إضافة جديدة: Torrentio",
-      "en": "New add-on: Torrentio"
+      "ar": "تحديث إصدار Torrentio: 0.0.15",
+      "en": "Torrentio version update: 0.0.15"
     },
     "description": {
-      "ar": "تمت إضافة Torrentio إلى مكتبة إضافات Nuvio ضمن قسم إضافات Nuvio. افتح بطاقة الإضافة لعرض الإعدادات ورابط Manifest والتثبيت.",
-      "en": "Torrentio has been added to the Nuvio Plugins library. Open its card for configuration, Manifest, and install options."
+      "ar": "تم تأكيد الإصدار الرسمي الحالي من Torrentio: 0.0.15. رابط Manifest وإعدادات المصدر متاحة من بطاقة الإضافة.",
+      "en": "The current official Torrentio version is confirmed as 0.0.15. Its Manifest and source settings are available from the add-on card."
     },
     "url": "https://torrentio.strem.fun/manifest.json",
-    "publishedAt": "2026-11-19T03:00:00Z",
-    "expiresAt": "2026-11-20T03:00:00Z"
+    "publishedAt": "2026-11-19T20:54:12.671Z",
+    "expiresAt": "2026-11-21T20:54:12.671Z"
   },
   {
     "id": "addon:TMDB-Discover-Plus:added:1.0.0",
@@ -97,12 +97,12 @@
       "en": "New add-on: TMDB Discover+"
     },
     "description": {
-      "ar": "تمت إضافة TMDB Discover+ إلى مكتبة الإضافات، مع رابط Manifest الشخصي وخيارات التثبيت.",
-      "en": "TMDB Discover+ has been added to the plugin library with its personal Manifest and install options."
+      "ar": "تمت إضافة TMDB Discover+ إلى مكتبة الإضافات، مع رابط Manifest الشخصي وخيارات التثبيت في Nuvio.",
+      "en": "TMDB Discover+ has been added to the add-on library with its personal Manifest and Nuvio installation options."
     },
     "url": "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
-    "publishedAt": "2026-11-19T03:00:00Z",
-    "expiresAt": "2026-11-20T03:00:00Z"
+    "publishedAt": "2026-11-19T20:54:12.671Z",
+    "expiresAt": "2026-11-21T20:54:12.671Z"
   },
   {
     "id": "addon:AIOMetadata:added:1.0.0",
@@ -112,11 +112,11 @@
       "en": "New add-on: AIOMetadata"
     },
     "description": {
-      "ar": "تمت إضافة AIOMetadata إلى مكتبة الإضافات، مع رابط Manifest الشخصي وخيارات التثبيت.",
-      "en": "AIOMetadata has been added to the plugin library with its personal Manifest and install options."
+      "ar": "تمت إضافة AIOMetadata إلى مكتبة الإضافات، مع رابط Manifest الشخصي وخيارات التثبيت في Nuvio.",
+      "en": "AIOMetadata has been added to the add-on library with its personal Manifest and Nuvio installation options."
     },
     "url": "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
-    "publishedAt": "2026-11-19T03:00:00Z",
-    "expiresAt": "2026-11-20T03:00:00Z"
+    "publishedAt": "2026-11-19T20:54:12.671Z",
+    "expiresAt": "2026-11-21T20:54:12.671Z"
   }
 ]
