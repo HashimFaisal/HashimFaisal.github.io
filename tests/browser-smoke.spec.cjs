@@ -580,7 +580,7 @@ test('all UI styles use the unified Nuvio palette without retired mixed hues', a
   ];
   for (const value of retired) expect(css).not.toContain(value.toLowerCase());
 
-  for (const token of ['--cyan-light:', '--on-accent:', '--success:', '--danger:']) {
+  for (const token of ['--cyan-light:', '--on-accent:', '--success: #42c879;', '--danger: #ff8292;']) {
     expect(styleCss).toContain(token);
   }
   const video = page.locator('.globe-video source');
