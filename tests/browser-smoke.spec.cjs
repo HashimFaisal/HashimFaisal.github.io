@@ -22,7 +22,7 @@ test.beforeEach(async ({ page }) => {
 
   await page.goto('/');
   await expect(page.locator('#nuvio-launch-grid .nuvio-launch-card')).toHaveCount(5);
-  await expect(page.locator('.plugin-card')).toHaveCount(19);
+  await expect(page.locator('.plugin-card')).toHaveCount(20);
   await expect(page.locator('.plugin-card h3', { hasText: /^Ratings$/ })).toHaveCount(0);
   await expect(page.locator('.plugin-card h3', { hasText: /^Age Ratings$/ })).toHaveCount(0);
 });
@@ -78,6 +78,10 @@ test('plugin search and category filters return the expected cards', async ({ pa
   await expect(page.locator('.plugin-card:visible h3')).toHaveText('CinemaBox');
 
   await page.locator('#search').fill('');
+  await page.locator('[data-filter="streaming"]').click();
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(1);
+  await expect(page.locator('.plugin-card:visible h3')).toHaveText('Torrentio');
+
   await page.locator('[data-filter="subtitles"]').click();
   await expect(page.locator('.plugin-card:visible')).toHaveCount(3);
 
@@ -85,11 +89,25 @@ test('plugin search and category filters return the expected cards', async ({ pa
   await expect(page.locator('.plugin-card:visible')).toHaveCount(6);
 
   await page.locator('[data-filter="all"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(19);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(20);
 
   await page.locator('#search').fill('no-such-addon-987');
   await expect(page.locator('#empty-state')).toBeVisible();
   await expect(page.locator('.plugin-card:visible')).toHaveCount(0);
+});
+
+test('Torrentio manifest exposes a Nuvio install action and its configuration page', async ({ page }) => {
+  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  await expect(page.locator('#plugins')).toBeVisible();
+
+  const card = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: /^Torrentio$/ }) });
+  const manifest = 'https://torrentio.strem.fun/manifest.json';
+  await expect(card).toHaveCount(1);
+  await expect(card).toHaveAttribute('data-category', 'streaming');
+  await expect(card.locator('.manifest-url')).toHaveText(manifest);
+  await expect(card.locator('.card-actions a').first()).toHaveAttribute('href', 'https://torrentio.strem.fun');
+  await expect(card.locator('.card-actions a[href="' + manifest + '"]')).toHaveAttribute('href', manifest);
+  await expect(card.locator('.share-btn')).toBeVisible();
 });
 
 test('personal metadata manifests expose Nuvio install actions and keep setup links', async ({ page }) => {
@@ -408,7 +426,7 @@ test('plugin library cards never overlap across responsive widths and languages'
         : window.matchMedia('(max-width: 1000px)').matches ? 2 : 3
     );
     expect(layout.columns, JSON.stringify(layout)).toBe(expectedColumns);
-    expect(layout.cards, JSON.stringify(layout)).toHaveLength(19);
+    expect(layout.cards, JSON.stringify(layout)).toHaveLength(20);
     expect(layout.cardCollisions, JSON.stringify(layout)).toEqual([]);
     for (const card of layout.cards) {
       expect(card.collisions, JSON.stringify(card)).toEqual([]);

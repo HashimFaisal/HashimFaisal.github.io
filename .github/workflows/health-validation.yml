@@ -38,21 +38,22 @@ jobs:
               html,
           )
           filters = set(re.findall(r'data-filter="([^"]+)"', html))
-          expected = {"nuvio", "catalog", "subtitles", "ratings"}
-          if len(categories) != 19 or set(categories) != expected:
+          expected = {"nuvio", "catalog", "streaming", "subtitles", "ratings"}
+          if len(categories) != 20 or set(categories) != expected:
               raise SystemExit(f"Unexpected resource categories: {categories}")
           if filters != expected | {"all"}:
               raise SystemExit(f"Filters do not match categories: {filters}")
           if categories.count("ratings") != 6:
               raise SystemExit(f"Expected 6 ratings/metadata resources, found {categories.count('ratings')}")
           required_resources = (
-              "AIOMetadata", "TMDB Discover+", "Anime Kitsu", "IMDb Ratings",
+              "Torrentio", "AIOMetadata", "TMDB Discover+", "Anime Kitsu", "IMDb Ratings",
               "BetterPosters for Nuvio",
           )
           for name in required_resources:
               if f"<h3>{name}</h3>" not in html:
                   raise SystemExit(f"Missing ratings/metadata resource: {name}")
           required_manifests = (
+              "https://torrentio.strem.fun/manifest.json",
               "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
               "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
           )
