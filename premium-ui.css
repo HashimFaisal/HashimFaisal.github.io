@@ -2076,17 +2076,6 @@ body[data-nuvio-view="home"] > footer {
    ========================================= */
 :root {
   color-scheme: dark;
-  --bg: #070b16;
-  --surface: #0d1526;
-  --surface-2: #111d33;
-  --surface-3: #182744;
-  --line: rgba(84, 217, 232, .17);
-  --line-strong: rgba(105, 205, 255, .48);
-  --text: #f2f6ff;
-  --muted: #a2b1c8;
-  --cyan: #58d8e8;
-  --violet: #a394ff;
-  --lime: var(--success);
 }
 html,
 :root body {
@@ -2138,7 +2127,7 @@ footer a:hover,
 .secondary-btn,
 .filter,
 .nuvio-view-back {
-  color: #dce8fa;
+  color: var(--text);
   background: rgba(255,255,255,.035);
   border-color: rgba(88,216,232,.2);
 }
