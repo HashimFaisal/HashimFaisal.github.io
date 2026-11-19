@@ -362,7 +362,7 @@ test('plugin library cards never overlap across responsive widths and languages'
       }
       const gridStyle = getComputedStyle(grid);
       return {
-        columns: gridStyle.gridTemplateColumns.trim().split(/\\s+/).length,
+        columns: gridStyle.gridTemplateColumns.trim().split(' ').filter(Boolean).length,
         cards,
         cardCollisions,
         sectionWidth: rectOf(section).width,
