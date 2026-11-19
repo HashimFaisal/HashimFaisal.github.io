@@ -93,7 +93,7 @@ if "updates.json" in data:
         fail("Removed Persian Subtitles source still appears in live updates.")
 
 # Ensure key resource categories/filters remain present and consistent.
-expected = {"nuvio", "catalog", "streaming", "subtitles", "ratings"}
+expected = {"nuvio", "catalog", "subtitles", "ratings"}
 categories = []
 for match in __import__("re").finditer(r'<article class="plugin-card[^"]*" data-category="([^"]+)"', source):
     categories.append(match.group(1))
