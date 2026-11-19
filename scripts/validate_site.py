@@ -85,6 +85,40 @@ for css_path in CSS_FILES:
             duplicates = sorted(name for name in set(keyframe_names) if keyframe_names.count(name) > 1)
             fail(f"Duplicate CSS keyframe names in {css_path.name}: {duplicates}")
 
+# Detect exact duplicate CSS selector/declaration rules within the same at-rule scope.
+# Media-query variants are kept separate; keyframe steps are intentionally excluded.
+def check_duplicate_css_rules(rules, context, css_name, seen):
+    for rule in rules:
+        if rule.type == "qualified-rule":
+            selector = tinycss2.serialize(rule.prelude).strip()
+            declarations = tinycss2.parse_declaration_list(
+                rule.content, skip_comments=True, skip_whitespace=True
+            )
+            normalized = []
+            for declaration in declarations:
+                if declaration.type == "declaration":
+                    normalized.append((
+                        declaration.lower_name,
+                        tinycss2.serialize(declaration.value).strip(),
+                        declaration.important,
+                    ))
+            signature = (context, selector, tuple(sorted(normalized)))
+            if signature in seen:
+                fail(f"Duplicate CSS rule in {css_name} within {context or 'root'}: {selector}")
+            else:
+                seen.add(signature)
+        elif rule.type == "at-rule" and rule.content is not None:
+            if rule.lower_at_keyword in {"keyframes", "-webkit-keyframes"}:
+                continue
+            prelude = tinycss2.serialize(rule.prelude).strip()
+            nested = tinycss2.parse_rule_list(
+                rule.content, skip_comments=True, skip_whitespace=True
+            )
+            check_duplicate_css_rules(
+                nested, context + (f"@{rule.lower_at_keyword} {prelude}",),
+                css_name, seen,
+            )
+
 # Every repository SVG must be a reviewed, active Nuvio UI asset. Original
 # third-party raster logos and the NASA video retain their source colors.
 ACTIVE_ARTWORK = (
