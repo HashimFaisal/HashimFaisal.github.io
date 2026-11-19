@@ -2963,3 +2963,71 @@ button:active,
     box-shadow: none;
   }
 }
+
+
+/* NUVIO — Match touch feedback to the site's actual rendered sections */
+.hero,
+.live-updates,
+#plugins .plugin-card,
+#changelog .changelog-entry,
+#downloads .download-card,
+#downloads .release-banner,
+#plugins .filters .filter,
+.hero-actions .primary-btn,
+.hero-actions .secondary-btn,
+.about a {
+  -webkit-tap-highlight-color: transparent;
+  transform-origin: center;
+  transition:
+    transform .26s cubic-bezier(.2,.75,.25,1),
+    border-color .26s ease,
+    box-shadow .26s ease,
+    background-color .26s ease;
+}
+
+#plugins .plugin-card:active,
+#changelog .changelog-entry:active,
+#downloads .download-card:active,
+#downloads .release-banner:active,
+.live-updates:active {
+  transform: translateY(-4px) scale(1.012);
+  border-color: var(--nuvio-touch-border);
+  box-shadow: 0 12px 30px rgba(0,0,0,.28), 0 0 22px var(--nuvio-touch-glow);
+  transition-duration: .08s;
+}
+
+#plugins .filters .filter:active,
+.hero-actions .primary-btn:active,
+.hero-actions .secondary-btn:active,
+.about a:active {
+  transform: translateY(-2px) scale(.975);
+  box-shadow: 0 0 18px var(--nuvio-touch-glow);
+  transition-duration: .07s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero,
+  .live-updates,
+  #plugins .plugin-card,
+  #changelog .changelog-entry,
+  #downloads .download-card,
+  #downloads .release-banner,
+  #plugins .filters .filter,
+  .hero-actions .primary-btn,
+  .hero-actions .secondary-btn,
+  .about a {
+    transition: none !important;
+  }
+  #plugins .plugin-card:active,
+  #changelog .changelog-entry:active,
+  #downloads .download-card:active,
+  #downloads .release-banner:active,
+  .live-updates:active,
+  #plugins .filters .filter:active,
+  .hero-actions .primary-btn:active,
+  .hero-actions .secondary-btn:active,
+  .about a:active {
+    transform: none;
+    box-shadow: none;
+  }
+}
