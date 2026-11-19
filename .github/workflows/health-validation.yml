@@ -68,6 +68,7 @@ jobs:
           required_subtitle_urls = (
               "https://opensubtitles-v3.strem.io/manifest.json",
               "https://api.thesubtitledb.org/integrations/stremio/manifest.json",
+              "https://subtitlevideo.com/stremio/en,ar/manifest.json",
               "https://www.subtitlevideo.com/stremio-subtitles-addon.php",
           )
           for url in required_subtitle_urls:

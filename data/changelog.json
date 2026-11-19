@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-11-19T04:57:57.370Z",
+    "type": "updated",
+    "title": "تفعيل رابط Manifest مباشر لـ SubtitleVideo",
+    "detail": "إضافة Manifest الخاص باللغتين العربية والإنجليزية إلى بطاقة SubtitleVideo، وربطه بزر التثبيت في Nuvio وفحص الحالة التلقائي."
+  },
+  {
     "date": "2026-11-19T07:50:00+03:00",
     "type": "updated",
     "title": "توحيد بطاقة SubtitleVideo مع بطاقات الترجمات",
