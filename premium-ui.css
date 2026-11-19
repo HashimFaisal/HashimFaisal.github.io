@@ -3851,3 +3851,21 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
     height: 76%;
   }
 }
+
+/* Remove the dark rim around the Earth without changing its outer size. */
+.visual-globe {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  clip-path: circle(50% at 50% 50%);
+}
+
+.globe-video {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  clip-path: circle(50% at 50% 50%);
+  transform: scale(1.2);
+}
