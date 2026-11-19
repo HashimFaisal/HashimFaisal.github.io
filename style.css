@@ -980,9 +980,6 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
   border-color: rgba(88, 216, 232, 0.18);
 }
 
-:root .brand img {
-  filter: drop-shadow(0 0 15px rgba(88, 216, 232, 0.24));
-}
 
 :root .ambient-one,
 :root .ambient-two {
