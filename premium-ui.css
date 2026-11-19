@@ -4376,3 +4376,92 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
     padding: 10px 11px;
   }
 }
+
+
+/* Header identity fit: keep the full wordmark on one line on phones. */
+@media (max-width: 600px) {
+  .topbar {
+    grid-template-columns: minmax(0, 1fr) auto auto;
+    column-gap: 7px;
+    padding-inline: 3.5%;
+  }
+
+  .topbar > .brand {
+    width: 100%;
+    max-width: none;
+    min-width: 0;
+    flex: initial;
+    gap: 5px;
+    white-space: nowrap;
+  }
+
+  .topbar > .brand img {
+    width: 30px;
+    height: 30px;
+    flex: 0 0 30px;
+  }
+
+  .topbar > .brand > span {
+    display: block;
+    min-width: 0;
+    overflow: visible;
+    text-overflow: clip;
+    white-space: nowrap;
+    font-size: 10px;
+    line-height: 1.25;
+    letter-spacing: .35px;
+  }
+
+  .topbar > .brand .accent {
+    display: inline;
+  }
+
+  .topbar > .brand small {
+    display: block;
+    margin-top: 2px;
+    white-space: nowrap;
+    font-size: 6px;
+    line-height: 1.25;
+    letter-spacing: .65px;
+  }
+
+  .topbar > .github-link,
+  .topbar > .language-toggle {
+    min-width: 0;
+    padding-inline: 7px;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .topbar {
+    column-gap: 5px;
+    padding-inline: 3%;
+  }
+
+  .topbar > .brand {
+    gap: 4px;
+  }
+
+  .topbar > .brand img {
+    width: 27px;
+    height: 27px;
+    flex-basis: 27px;
+  }
+
+  .topbar > .brand > span {
+    font-size: 9px;
+    letter-spacing: .2px;
+  }
+
+  .topbar > .brand small {
+    font-size: 5.5px;
+    letter-spacing: .45px;
+  }
+
+  .topbar > .github-link,
+  .topbar > .language-toggle {
+    padding-inline: 6px;
+    font-size: 7.5px;
+  }
+}
