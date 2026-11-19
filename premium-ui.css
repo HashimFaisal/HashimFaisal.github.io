@@ -846,7 +846,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   background:
     radial-gradient(circle at 85% 20%, rgba(88, 216, 232, 0.18), transparent 45%),
     radial-gradient(circle at 70% 80%, rgba(163, 148, 255, 0.12), transparent 50%),
-    linear-gradient(135deg, #0a0a0a 0%, #141414 45%, #1a1a1a 100%);
+    linear-gradient(135deg, #091222 0%, #141414 45%, #1a1a1a 100%);
   border-color: rgba(88, 216, 232, 0.35);
   box-shadow: inset 0 1px 0 rgba(88, 216, 232, 0.08), 0 18px 40px rgba(0, 0, 0, 0.35);
 }
@@ -1046,7 +1046,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   left: 0;
   display: inline-block;
   white-space: nowrap;
-  color: #f3d77a;
+  color: #a9eff8;
   font-size: clamp(12px, 2.1vw, 17px);
   font-weight: 900;
   letter-spacing: .24em;
@@ -1105,7 +1105,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 }
 
 .hero-copy h1 span {
-  background: linear-gradient(100deg, #f0dba9, #b78b43 75%);
+  background: linear-gradient(100deg, #b7f5ff, #58d8e8 75%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -1278,14 +1278,14 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 #plugins .filter:hover {
   border-color: rgba(88, 216, 232,.48);
-  color: #f0dfbd;
+  color: #e2eaff;
   transform: translateY(-1px);
 }
 
 #plugins .filter.active {
   border-color: #58d8e8;
   background: linear-gradient(115deg, #8deaf3, #a394ff);
-  color: #17120a;
+  color: #06121e;
   box-shadow: 0 5px 18px rgba(163, 148, 255,.17);
 }
 
@@ -1372,7 +1372,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
     0 0 32px rgba(90,180,245,.18),
     0 0 75px rgba(55,140,220,.10),
     inset -28px -18px 42px rgba(0,0,0,.88),
-    inset 8px 5px 22px rgba(220,190,130,.10);
+    inset 8px 5px 22px rgba(163,148,255,.10);
 }
 
 .globe-image {
@@ -1402,7 +1402,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 }
 
 .nuvio-orbit-track span {
-  color: #f0dba9;
+  color: #b7f5ff;
   text-shadow: 0 0 9px rgba(88, 216, 232,.72), 0 2px 8px #000;
 }
 
@@ -1533,7 +1533,7 @@ input:focus-visible {
   border: 1px solid rgba(88, 216, 232, .24);
   border-radius: 999px;
   background: rgba(88, 216, 232, .07);
-  color: #d8bd72;
+  color: #a9eff8;
   font-size: 11px;
   font-weight: 700;
   line-height: 1.5;
@@ -1550,14 +1550,14 @@ input:focus-visible {
 }
 
 #status .report-freshness[data-state="fresh"] {
-  color: #d8bd72;
+  color: #a9eff8;
   border-color: rgba(88, 216, 232, .3);
 }
 
 #status .report-freshness[data-state="delayed"] {
-  color: #e2a95b;
-  border-color: rgba(226, 169, 91, .32);
-  background: rgba(226, 169, 91, .08);
+  color: #a394ff;
+  border-color: rgba(163,148,255, .32);
+  background: rgba(163,148,255, .08);
 }
 
 #status .report-freshness[data-state="stale"],
@@ -1614,7 +1614,7 @@ input:focus-visible {
   border: 1px solid rgba(88, 216, 232, .25);
   border-radius: 999px;
   background: rgba(88, 216, 232, .08);
-  color: #d8bd72;
+  color: #a9eff8;
   font-size: 10px;
   font-weight: 800;
   letter-spacing: .25px;
@@ -1653,8 +1653,8 @@ input:focus-visible {
 
 #changelog .changelog-entry--version .changelog-dot,
 #changelog .changelog-entry--release .changelog-dot {
-  background: #e2bd75;
-  box-shadow: 0 0 12px rgba(226, 189, 117, .4);
+  background: #a394ff;
+  box-shadow: 0 0 12px rgba(163,148,255, .4);
 }
 
 @media (max-width: 480px) {
@@ -1779,7 +1779,7 @@ html[dir="rtl"] .nuvio-launch-open b {
   border-radius: 17px;
   background:
     radial-gradient(ellipse at 8% 50%, rgba(88, 216, 232,.10), transparent 42%),
-    linear-gradient(115deg, #14120e, #0a0a0a 55%, #18140d);
+    linear-gradient(115deg, #101d34, #091222 55%, #111a31);
   box-shadow: 0 14px 38px rgba(0,0,0,.24), inset 0 1px rgba(88, 216, 232,.055);
 }
 .live-updates__shell::before {
@@ -1806,7 +1806,7 @@ html[dir="rtl"] .nuvio-launch-open b {
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  color: #d9bd83;
+  color: #a9eff8;
   font: 800 9px/1.4 Inter,sans-serif;
   letter-spacing: 1.35px;
   white-space: nowrap;
@@ -1876,7 +1876,7 @@ html[dir="rtl"] .nuvio-launch-open b {
 }
 
 .live-updates__item-link {
-  color: #e4c990;
+  color: #a9eff8;
   font-size: 10px;
   font-weight: 750;
   text-decoration: none;
@@ -1895,7 +1895,7 @@ html[dir="rtl"] .nuvio-launch-open b {
   padding: 8px 12px;
   border: 1px solid rgba(88, 216, 232,.28);
   border-radius: 9px;
-  color: #e4c990;
+  color: #a9eff8;
   font-size: 10px;
   font-weight: 750;
   text-decoration: none;
@@ -2697,9 +2697,9 @@ footer a:hover,
 }
 
 #status .report-freshness[data-state="delayed"] {
-  color: #f0bd75;
-  border-color: rgba(240,189,117,.32);
-  background: rgba(240,189,117,.08);
+  color: #a394ff;
+  border-color: rgba(163,148,255,.32);
+  background: rgba(163,148,255,.08);
 }
 
 #status .report-freshness[data-state="stale"],
