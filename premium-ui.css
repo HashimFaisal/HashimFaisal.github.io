@@ -3549,3 +3549,91 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
   border-color: rgba(88, 216, 232, .34);
   box-shadow: 0 16px 32px rgba(0, 0, 0, .22);
 }
+
+
+/* NUVIO — Direction-aware dashboard ornaments and entrance motion */
+.nuvio-dashboard-heading {
+  position: relative;
+  text-align: start;
+}
+
+.nuvio-dashboard-heading::after {
+  position: absolute;
+  inset-inline-start: 2px;
+  bottom: -1px;
+  width: clamp(76px, 15%, 150px);
+  height: 1px;
+  background: linear-gradient(90deg, var(--cyan), rgba(163, 148, 255, .34), transparent);
+  content: "";
+  pointer-events: none;
+}
+
+html[dir="rtl"] .nuvio-dashboard-heading::after {
+  background: linear-gradient(to left, var(--cyan), rgba(163, 148, 255, .34), transparent);
+}
+
+html[dir="ltr"] .nuvio-dashboard-heading::after {
+  background: linear-gradient(to right, var(--cyan), rgba(163, 148, 255, .34), transparent);
+}
+
+.nuvio-launch-card {
+  text-align: start;
+  transform-origin: center;
+}
+
+.nuvio-launch-card::after {
+  right: auto;
+  left: auto;
+  inset-inline-end: -58px;
+  inset-inline-start: auto;
+}
+
+html[dir="rtl"] .nuvio-launch-card {
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(88, 216, 232, .105), transparent 52%),
+    linear-gradient(145deg, rgba(20, 35, 58, .96), rgba(10, 22, 39, .98));
+  animation-name: nuvio-card-enter-rtl;
+}
+
+html[dir="ltr"] .nuvio-launch-card {
+  background:
+    radial-gradient(ellipse at 0% 0%, rgba(88, 216, 232, .105), transparent 52%),
+    linear-gradient(145deg, rgba(20, 35, 58, .96), rgba(10, 22, 39, .98));
+  animation-name: nuvio-card-enter-ltr;
+}
+
+@keyframes nuvio-card-enter-rtl {
+  from { opacity: 0; transform: translate3d(22px, 14px, 0) scale(.985); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+@keyframes nuvio-card-enter-ltr {
+  from { opacity: 0; transform: translate3d(-22px, 14px, 0) scale(.985); }
+  to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
+}
+
+.nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-heading {
+  animation: nuvio-dashboard-heading-rtl .48s cubic-bezier(.2, .75, .25, 1) both;
+}
+
+html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-heading {
+  animation-name: nuvio-dashboard-heading-ltr;
+}
+
+@keyframes nuvio-dashboard-heading-rtl {
+  from { opacity: .55; transform: translate3d(12px, 5px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@keyframes nuvio-dashboard-heading-ltr {
+  from { opacity: .55; transform: translate3d(-12px, 5px, 0); }
+  to { opacity: 1; transform: translate3d(0, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-heading,
+  html[dir="rtl"] .nuvio-launch-card,
+  html[dir="ltr"] .nuvio-launch-card {
+    animation: none !important;
+  }
+}
