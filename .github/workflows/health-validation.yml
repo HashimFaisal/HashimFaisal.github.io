@@ -146,3 +146,16 @@ jobs:
 
           print("Health report, changelog, and live update data are valid.")
           PY
+
+  browser-smoke:
+    needs: validate
+    runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.56.1-noble
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install Playwright test runner
+        run: npm install --no-save --package-lock=false @playwright/test@1.56.1
+      - name: Run desktop and mobile browser tests
+        run: npx playwright test
