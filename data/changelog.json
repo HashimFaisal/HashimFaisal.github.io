@@ -119,5 +119,32 @@
     "source_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/tag/1.1.0-beta.2",
     "old_version": "1.1.0-beta.1",
     "new_version": "1.1.0-beta.2"
+  },
+  {
+    "date": "2026-11-19T04:16:52.378613+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: Anime Kitsu",
+    "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
+    "source": "Anime Kitsu",
+    "source_url": "https://anime-kitsu.strem.fun/manifest.json",
+    "new_version": "0.0.10"
+  },
+  {
+    "date": "2026-11-19T04:16:52.378613+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: IMDb Ratings",
+    "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
+    "source": "IMDb Ratings",
+    "source_url": "https://imdbratings.kgenovz.com/manifest.json",
+    "new_version": "1.0.0"
+  },
+  {
+    "date": "2026-11-19T04:16:52.378613+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: BetterPosters for Nuvio",
+    "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
+    "source": "BetterPosters for Nuvio",
+    "source_url": "https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json",
+    "new_version": "1.0.0"
   }
 ]
