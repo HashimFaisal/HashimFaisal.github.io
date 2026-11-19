@@ -817,83 +817,6 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 
 
-/* === NUVIO Saturn Orbit — synchronized back/front layers === */
-
-
-
-
-.nuvio-orbit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(122%, 460px);
-  height: 76%;
-  pointer-events: none;
-  transform: translate(-50%, -50%) rotate(-18deg) rotateX(68deg);
-  transform-style: preserve-3d;
-}
-
-.nuvio-orbit-back {
-  z-index: 2;
-  clip-path: inset(0 0 50% 0);
-  opacity: .62;
-}
-
-.nuvio-orbit-front {
-  z-index: 4;
-  clip-path: inset(50% 0 0 0);
-  opacity: .96;
-}
-
-.nuvio-orbit-track {
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(88, 216, 232, 0.78);
-  border-radius: 50%;
-  box-shadow: 0 0 12px rgba(88, 216, 232, 0.22);
-}
-
-.nuvio-orbit-track span {
-  position: absolute;
-  top: 0;
-  left: 0;
-  display: inline-block;
-  white-space: nowrap;
-  color: var(--cyan-light);
-  font-size: clamp(12px, 2.1vw, 17px);
-  font-weight: 900;
-  letter-spacing: .24em;
-  text-shadow: 0 0 8px rgba(88, 216, 232, 0.9), 0 2px 8px #000;
-  offset-path: ellipse(50% 50% at 50% 50%);
-  offset-anchor: center;
-  offset-rotate: 0deg;
-  animation: nuvio-word-orbit 18s linear infinite;
-}
-
-@keyframes nuvio-word-orbit {
-  from { offset-distance: 100%; }
-  to { offset-distance: 0%; }
-}
-
-@media (max-width: 480px) {
-  .nuvio-orbit {
-    width: min(110%, 360px);
-    height: 74%;
-  }
-
-  .nuvio-orbit-track span {
-    font-size: 13px;
-    letter-spacing: .18em;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .nuvio-orbit-track span {
-    animation: none;
-  }
-}
-
-
 /* NUVIO HERO TITLE — upper corner layout */
 .hero-copy {
   align-self: stretch;
@@ -2584,45 +2507,77 @@ button:active,
 }
 
 
-/* Nuvio globe — single source of truth: original NASA night video, no image layer or color grading. */
-.visual-globe {
+/* NUVIO HERO — cinematic black hole; preserve the original visual footprint. */
+.black-hole {
   position: relative;
   width: 320px;
   height: 320px;
   margin: 0 auto;
-  border: 0;
-  border-radius: 50%;
-  overflow: hidden;
   isolation: isolate;
   z-index: 3;
   transform: perspective(1000px) rotateX(15deg) rotateY(-10deg);
-  background: transparent;
-  box-shadow: none;
-}
-
-.globe-video {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
+  overflow: visible;
   border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
-  transform: scale(1.45);
-  transform-origin: center center;
-  filter: none;
-  opacity: 1;
-  mix-blend-mode: normal;
-  background: var(--bg);
+  background: radial-gradient(circle, rgba(2, 3, 10, 0.98) 0 24%, rgba(3, 5, 14, 0.2) 43%, transparent 68%);
+  filter: drop-shadow(0 0 28px rgba(88, 216, 232, 0.16));
 }
-
-.globe-image,
-.globe-overlay,
-.visual-globe::after {
-  display: none;
-  content: none;
+.black-hole__disk {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 94%;
+  height: 35%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-17deg);
+  background:
+    radial-gradient(ellipse at center, #03040a 0 24%, transparent 25%),
+    conic-gradient(from 8deg, transparent 0deg, rgba(94, 224, 245, .18) 32deg, #9cefff 58deg, #7358d9 83deg, #f7c28a 108deg, #fff0c7 126deg, #8deaf3 151deg, rgba(112, 89, 224, .72) 190deg, transparent 226deg, rgba(88, 216, 232, .22) 282deg, transparent 360deg);
+  filter: blur(1.2px) drop-shadow(0 0 13px rgba(88, 216, 232, .52));
+  animation: black-hole-disk 18s linear infinite;
+}
+.black-hole__photon-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 43%;
+  height: 43%;
+  border: 2px solid rgba(235, 246, 255, .88);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 8px rgba(255, 255, 255, .75), 0 0 22px rgba(88, 216, 232, .72), 0 0 42px rgba(163, 148, 255, .42);
+  opacity: .9;
+}
+.black-hole__horizon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 37%;
+  height: 37%;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 42% 38%, #000 0 55%, #01020a 72%, rgba(0, 0, 0, .96) 100%);
+  box-shadow: 0 0 0 7px rgba(2, 4, 12, .94), 0 0 28px 12px rgba(0, 0, 0, .98);
+  z-index: 2;
+}
+.black-hole__glow {
+  position: absolute;
+  inset: 8%;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 50%, transparent 0 30%, rgba(88, 216, 232, .10) 48%, rgba(163, 148, 255, .08) 57%, transparent 72%);
+  filter: blur(9px);
+  z-index: -1;
+  animation: black-hole-pulse 5s ease-in-out infinite alternate;
+}
+@keyframes black-hole-disk {
+  from { filter: blur(1.2px) drop-shadow(0 0 11px rgba(88, 216, 232, .42)); }
+  to { filter: blur(1.2px) drop-shadow(0 0 18px rgba(163, 148, 255, .58)); }
+}
+@keyframes black-hole-pulse {
+  from { opacity: .55; transform: scale(.96); }
+  to { opacity: 1; transform: scale(1.04); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .black-hole__disk, .black-hole__glow { animation: none; }
 }
 
 /* =========================================
