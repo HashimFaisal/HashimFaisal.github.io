@@ -78,9 +78,9 @@ test('plugin search and category filters return the expected cards', async ({ pa
   await expect(page.locator('.plugin-card:visible h3')).toHaveText('CinemaBox');
 
   await page.locator('#search').fill('');
-  await page.locator('[data-filter="streaming"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(1);
-  await expect(page.locator('.plugin-card:visible h3')).toHaveText('Torrentio');
+  await page.locator('[data-filter="nuvio"]').click();
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(4);
+  await expect(page.locator('.plugin-card:visible h3')).toContainText(['CinemaBox', 'Cinemana', 'ALL-IN-ONE', 'Torrentio']);
 
   await page.locator('[data-filter="subtitles"]').click();
   await expect(page.locator('.plugin-card:visible')).toHaveCount(3);
@@ -103,7 +103,7 @@ test('Torrentio manifest exposes a Nuvio install action and its configuration pa
   const card = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: /^Torrentio$/ }) });
   const manifest = 'https://torrentio.strem.fun/manifest.json';
   await expect(card).toHaveCount(1);
-  await expect(card).toHaveAttribute('data-category', 'streaming');
+  await expect(card).toHaveAttribute('data-category', 'nuvio');
   await expect(card.locator('.manifest-url')).toHaveText(manifest);
   await expect(card.locator('.card-actions a').first()).toHaveAttribute('href', 'https://torrentio.strem.fun');
   await expect(card.locator('.card-actions a[href="' + manifest + '"]')).toHaveAttribute('href', manifest);
