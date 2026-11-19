@@ -247,6 +247,20 @@ def main():
 
         expected["iOS IPA"] = ipa_names[0] if ipa_names else None
 
+        download_targets = [
+            (label, assets[filename])
+            for label, filename in expected.items()
+            if filename and filename in assets
+        ]
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            download_checks = dict(zip(
+                (label for label, _ in download_targets),
+                executor.map(
+                    lambda target: check_download(*target),
+                    download_targets,
+                ),
+            ))
+
         for label, filename in expected.items():
             asset = assets.get(filename) if filename else None
 
@@ -259,7 +273,7 @@ def main():
                     "download_url": asset.get("browser_download_url"),
                     "ok": True,
                 }
-                download_check = check_download(label, asset)
+                download_check = download_checks[label]
                 entry["ok"] = download_check["ok"]
                 if not download_check["ok"]:
                     entry["error"] = download_check.get(
