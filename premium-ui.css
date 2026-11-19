@@ -1323,8 +1323,6 @@ input:focus-visible {
 
 #status .report-freshness[data-state="delayed"] {
   color: var(--violet);
-  border-color: rgba(163, 148, 255, 0.32);
-  background: rgba(163, 148, 255, 0.08);
 }
 #status .report-freshness[data-state="stale"],
 #status .report-freshness[data-state="unknown"] {
