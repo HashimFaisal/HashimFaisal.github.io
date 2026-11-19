@@ -2808,3 +2808,40 @@ input:focus-visible {
   border-color: var(--line-strong);
   box-shadow: 0 16px 35px rgba(0,0,0,.32), 0 0 20px rgba(88,216,232,.07);
 }
+
+
+/* NUVIO — Match System Status card interactions to Add-on Library */
+#status.nuvio-view-active .stat-card {
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform .28s ease, border-color .28s ease, box-shadow .28s ease;
+}
+
+#status.nuvio-view-active .stat-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(141, 234, 243,.42);
+  box-shadow: 0 20px 42px rgba(0,0,0,.34), 0 0 22px rgba(88,216,232,.055);
+}
+
+#status.nuvio-view-active .stat-card:active {
+  transform: translateY(-1px) scale(.985);
+  border-color: rgba(141, 234, 243,.58);
+  box-shadow: 0 10px 24px rgba(0,0,0,.28), 0 0 20px rgba(88,216,232,.1);
+  transition-duration: .08s;
+}
+
+#status.nuvio-view-active .stat-card:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #status.nuvio-view-active .stat-card {
+    transition: none;
+  }
+  #status.nuvio-view-active .stat-card:hover,
+  #status.nuvio-view-active .stat-card:active {
+    transform: none;
+  }
+}
