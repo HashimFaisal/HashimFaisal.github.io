@@ -91,23 +91,48 @@ test('plugin search and category filters return the expected cards', async ({ pa
 });
 
 test('manifest copy button writes its URL to the clipboard', async ({ page, context }) => {
-  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  await page.goto('/#plugins');
+  await expect(page.locator('#plugins')).toBeVisible();
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
 
-  const copyButton = page.locator('.plugin-card .copy-btn[data-copy]').first();
+  const copyButton = page.locator('#plugins .plugin-card .copy-btn[data-copy]').first();
+  await expect(copyButton).toBeVisible();
   const expected = await copyButton.getAttribute('data-copy');
+  await copyButton.scrollIntoViewIfNeeded();
   await copyButton.click();
 
   await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe(expected);
 });
 
 test('page has no horizontal overflow at the selected viewport', async ({ page }) => {
-  const dimensions = await page.evaluate(() => ({
-    viewport: document.documentElement.clientWidth,
-    document: document.documentElement.scrollWidth,
-    body: document.body.scrollWidth
-  }));
+  const diagnostics = await page.evaluate(() => {
+    const width = document.documentElement.clientWidth;
+    const offenders = [...document.querySelectorAll('body *')]
+      .map(element => {
+        const rect = element.getBoundingClientRect();
+        return {
+          tag: element.tagName.toLowerCase(),
+          id: element.id || '',
+          className: typeof element.className === 'string' ? element.className : '',
+          left: Math.round(rect.left * 10) / 10,
+          right: Math.round(rect.right * 10) / 10,
+          width: Math.round(rect.width * 10) / 10,
+          scrollWidth: element.scrollWidth,
+          clientWidth: element.clientWidth
+        };
+      })
+      .filter(item => item.width > 0 && (item.left < -1 || item.right > width + 1))
+      .sort((a, b) => b.right - a.right)
+      .slice(0, 15);
 
-  expect(dimensions.document, JSON.stringify(dimensions)).toBeLessThanOrEqual(dimensions.viewport);
-  expect(dimensions.body, JSON.stringify(dimensions)).toBeLessThanOrEqual(dimensions.viewport);
+    return {
+      viewport: width,
+      document: document.documentElement.scrollWidth,
+      body: document.body.scrollWidth,
+      offenders
+    };
+  });
+
+  expect(diagnostics.document, JSON.stringify(diagnostics)).toBeLessThanOrEqual(diagnostics.viewport);
+  expect(diagnostics.body, JSON.stringify(diagnostics)).toBeLessThanOrEqual(diagnostics.viewport);
 });
