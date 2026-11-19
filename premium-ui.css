@@ -3614,3 +3614,100 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
     animation: none !important;
   }
 }
+
+
+/* NUVIO — Home hero copy: keep the title and supporting content in one clean flow. */
+.hero-copy {
+  align-self: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 0;
+  min-width: 0;
+}
+
+.hero-copy::before {
+  position: static;
+  align-self: flex-start;
+  margin: 0 0 16px;
+  max-width: 100%;
+}
+
+.hero-copy h1 {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  margin: 0 0 16px;
+  line-height: 1.4;
+  text-align: start;
+  text-wrap: balance;
+}
+
+.hero-copy > p {
+  max-width: 100%;
+  margin: 0;
+  line-height: 1.9;
+}
+
+.hero-actions {
+  gap: 10px;
+  margin-top: 22px;
+}
+
+.hero-meta {
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.hero-meta span {
+  max-width: 100%;
+}
+
+@media (max-width: 760px) {
+  .hero-copy {
+    align-self: stretch;
+    width: 100%;
+    padding: 0;
+  }
+
+  .hero-copy::before {
+    margin-bottom: 11px;
+  }
+
+  .hero-copy h1 {
+    margin-bottom: 12px;
+    font-size: clamp(25px, 7vw, 37px);
+    line-height: 1.42;
+    letter-spacing: -.3px;
+  }
+
+  .hero-copy > p {
+    font-size: 12px;
+    line-height: 1.9;
+  }
+
+  .hero-actions {
+    gap: 9px;
+    margin-top: 17px;
+  }
+
+  .hero-meta {
+    gap: 7px;
+    margin-top: 15px;
+  }
+}
+
+@media (max-width: 380px) {
+  .hero-copy h1 {
+    font-size: clamp(23px, 7vw, 26px);
+    line-height: 1.4;
+  }
+
+  .hero-copy::before {
+    margin-bottom: 9px;
+  }
+
+  .hero-meta {
+    gap: 6px;
+  }
+}
