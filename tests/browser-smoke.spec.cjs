@@ -557,3 +557,17 @@ test('changelog and downloads sections keep content boxes separate across viewpo
   await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
   for (const width of widths) await assertSections(width);
 });
+
+
+test('premium palette has no retired neutral or dusty-rose remnants', async ({ page }) => {
+  const css = await page.locator('link[rel="stylesheet"]').evaluateAll(async links => {
+    const sheets = await Promise.all(links.map(async link => {
+      const response = await fetch(link.href);
+      return response.ok ? response.text() : '';
+    }));
+    return sheets.join('\\n');
+  });
+  for (const retired of ['#141414', '#1a1a1a', '#bd9292', '189, 146, 146', '#f2eee4', '#a9a9a9']) {
+    expect(css.toLowerCase()).not.toContain(retired.toLowerCase());
+  }
+});
