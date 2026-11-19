@@ -1032,7 +1032,7 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
   background:
     radial-gradient(ellipse at 85% 3%, rgba(88,216,232,.10), transparent 34%),
     radial-gradient(ellipse at 5% 40%, rgba(88,216,232,.035), transparent 32%),
-    #090909;
+    var(--bg);
 }
 
 :root body::before {
