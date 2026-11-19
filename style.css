@@ -758,6 +758,8 @@ nav a:hover::after { transform: scaleX(1); }
   color: #9bafc1;
   font-size: 10px;
 }
+.download-card > small:first-child { font-size: 12px; }
+.download-card strong { font-size: 10px; }
 .download-card a {
   display: inline-flex;
   align-self: flex-start;
