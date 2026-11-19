@@ -23,7 +23,6 @@
     "title": "صدور تحديث Nuvio: 0.6.13-beta",
     "detail": "الإصدار السابق كان 1.0.0.",
     "new_version": "0.6.13-beta",
-    "old_version": "1.0.0",
     "channel": "beta"
   },
   {
@@ -44,7 +43,6 @@
     "detail": "الإصدار السابق كان 1.1.0-beta.1.",
     "source": "Nuvio App",
     "source_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.0.0",
-    "old_version": "1.1.0-beta.1",
     "new_version": "1.0.0"
   },
   {
@@ -55,7 +53,6 @@
     "detail": "الإصدار السابق كان 0.6.13-beta.",
     "source": "Nuvio App",
     "source_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.1.0-beta.1",
-    "old_version": "0.6.13-beta",
     "new_version": "1.1.0-beta.1"
   },
   {
