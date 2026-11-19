@@ -3200,3 +3200,316 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
     transition: none !important;
   }
 }
+
+
+/* =========================================
+   NUVIO — PHASE 5 MOBILE EXPERIENCE
+   Touch-friendly navigation, readable layouts, and safe small-screen spacing.
+   Globe/video presentation intentionally remains untouched.
+   ========================================= */
+@media (max-width: 760px) {
+  html {
+    scroll-padding-top: 126px;
+  }
+
+  .topbar {
+    padding-top: max(9px, env(safe-area-inset-top));
+    padding-bottom: 8px;
+    gap: 8px 10px;
+  }
+
+  .topbar > .brand {
+    min-width: 0;
+    gap: 8px;
+  }
+
+  .topbar > .brand > span {
+    min-width: 0;
+    line-height: 1.35;
+  }
+
+  .topbar > .brand small {
+    font-size: 7px;
+    letter-spacing: 1.15px;
+  }
+
+  .topbar > nav {
+    min-width: 0;
+    min-height: 42px;
+    align-items: center;
+    gap: 9px;
+    padding: 3px 1px 5px;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-inline: contain;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .topbar > nav::-webkit-scrollbar,
+  #plugins .filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .topbar > nav a {
+    display: inline-flex;
+    min-height: 40px;
+    flex: 0 0 auto;
+    align-items: center;
+    padding: 7px 11px;
+    border: 1px solid rgba(154, 190, 218, .12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .025);
+    scroll-snap-align: start;
+  }
+
+  .topbar > nav a::after {
+    display: none;
+  }
+
+  .topbar > nav a.nuvio-nav-active {
+    border-color: rgba(88, 216, 232, .34);
+    color: #d9faff;
+    background: rgba(88, 216, 232, .09);
+  }
+
+  .topbar > .github-link,
+  .topbar > .language-toggle {
+    min-height: 38px;
+    padding-inline: 10px;
+    border-radius: 11px;
+  }
+
+  .nuvio-dashboard {
+    width: 92%;
+    margin-top: 23px;
+  }
+
+  .nuvio-dashboard-heading {
+    align-items: flex-start;
+  }
+
+  .nuvio-dashboard-heading > div {
+    min-width: 0;
+  }
+
+  .nuvio-dashboard-heading p {
+    max-width: 48ch;
+  }
+
+  .nuvio-launch-card {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  .nuvio-launch-description {
+    line-height: 1.8;
+  }
+
+  #status.nuvio-view-active,
+  .nuvio-view-active.section {
+    width: 94%;
+    max-width: 100%;
+    margin-inline: auto;
+    padding: clamp(15px, 3.8vw, 21px);
+    border-radius: 18px;
+  }
+
+  #status.nuvio-view-active {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  #status.nuvio-view-active .stat-card {
+    min-width: 0;
+    min-height: 116px;
+    padding: 13px;
+  }
+
+  #status .stat-card strong {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    line-height: 1.35;
+  }
+
+  .nuvio-view-active .section-heading {
+    gap: 9px;
+    margin-bottom: 18px;
+  }
+
+  .nuvio-view-active .section-heading > div,
+  .nuvio-view-active .section-heading p {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  #plugins .toolbar {
+    gap: 11px;
+  }
+
+  #plugins .search-box {
+    min-height: 48px;
+  }
+
+  #plugins .filters {
+    max-width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    padding: 3px 1px 8px;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #plugins .filter {
+    min-height: 40px;
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  #plugins .plugin-card {
+    min-width: 0;
+  }
+
+  #plugins .manifest-url {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  #plugins .card-actions button,
+  #plugins .card-actions a {
+    min-height: 42px;
+  }
+
+  #downloads .download-card,
+  #resources .resource-links a {
+    min-width: 0;
+  }
+
+  #downloads .download-card .download-file {
+    overflow-wrap: anywhere;
+    line-height: 1.6;
+  }
+
+  .nuvio-view-active .nuvio-view-back {
+    min-height: 42px;
+    padding-inline: 13px;
+  }
+
+  footer {
+    padding-bottom: max(22px, env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 430px) {
+  html {
+    scroll-padding-top: 120px;
+  }
+
+  .topbar {
+    column-gap: 7px;
+    padding-inline: 3.5%;
+  }
+
+  .topbar > .brand {
+    gap: 6px;
+  }
+
+  .topbar > .brand img {
+    width: 33px;
+    height: 33px;
+  }
+
+  .topbar > .brand > span {
+    font-size: 11px;
+    letter-spacing: .7px;
+  }
+
+  .topbar > .brand small {
+    font-size: 6.5px;
+    letter-spacing: .9px;
+  }
+
+  .topbar > .github-link,
+  .topbar > .language-toggle {
+    min-height: 36px;
+    padding-inline: 8px;
+    font-size: 9px;
+  }
+
+  .nuvio-dashboard {
+    width: 92%;
+  }
+
+  .nuvio-dashboard-heading h2 {
+    font-size: 23px;
+  }
+
+  .nuvio-launch-card {
+    min-height: 158px;
+    padding: 16px;
+  }
+
+  #status.nuvio-view-active,
+  .nuvio-view-active.section {
+    width: 94%;
+    padding: 14px;
+  }
+
+  #status.nuvio-view-active {
+    gap: 8px;
+  }
+
+  #status.nuvio-view-active .stat-card {
+    min-height: 108px;
+    padding: 11px;
+  }
+
+  #status .stat-card > span,
+  #status .stat-card small {
+    line-height: 1.55;
+    overflow-wrap: anywhere;
+  }
+
+  #plugins .card-actions {
+    gap: 8px;
+  }
+
+  #plugins .card-actions button,
+  #plugins .card-actions a {
+    min-height: 42px;
+    padding-inline: 7px;
+  }
+}
+
+@media (max-width: 360px) {
+  .topbar > .brand img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .topbar > .brand > span {
+    font-size: 10px;
+  }
+
+  .topbar > .brand small {
+    letter-spacing: .55px;
+  }
+
+  .topbar > .github-link,
+  .topbar > .language-toggle {
+    padding-inline: 6px;
+    font-size: 8px;
+  }
+
+  #status.nuvio-view-active .stat-card {
+    padding: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .topbar > nav,
+  #plugins .filters {
+    scroll-behavior: auto !important;
+  }
+}
