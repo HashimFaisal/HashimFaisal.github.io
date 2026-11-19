@@ -62,7 +62,7 @@ ALLOWED_RGB = {
 ALLOWED_CSS_HEX = {
     "#070b16", "#0d1526", "#111d33", "#182744", "#f2f6ff", "#a2b1c8",
     "#a394ff", "#58d8e8", "#42c879", "#a9e8c1", "#ff8292", "#ffb0ba",
-    #8deaf3", "#63d9e9", "#aa9bff", "#080d19", "#101a2d", "#16243a",
+    "#8deaf3", "#63d9e9", "#aa9bff", "#080d19", "#101a2d", "#16243a",
     "#b2bfd4", "#afeac7", "#ffb9c2", "#98edf5", "#071317", "#000", "#fff",
 }
 # Detect exact duplicate CSS selector/declaration rules within the same at-rule scope.
