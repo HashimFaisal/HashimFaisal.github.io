@@ -560,25 +560,52 @@ test('changelog and downloads sections keep content boxes separate across viewpo
 
 
 test('all UI styles use the unified Nuvio palette without retired mixed hues', async ({ page }) => {
-  const [styleCss, premiumCss] = await Promise.all(
-    ['style.css', 'premium-ui.css'].map(async name => {
+  const [styleCss, premiumCss, ...artwork] = await Promise.all([
+    'style.css',
+    'premium-ui.css',
+    'assets/hero.svg',
+    'assets/all-in-one.svg',
+    'assets/cinemabox.svg',
+    'assets/cinemana.svg',
+    'assets/opensubtitles.svg',
+    'assets/nuvio-catalog.svg',
+    'assets/izlemeli-catalog.svg'
+  ].map(async name => {
+    if (name.endsWith('.css')) {
       const link = page.locator(`link[rel="stylesheet"][href*="${name}"]`);
       const href = await link.getAttribute('href');
-      const response = await page.evaluate(async url => fetch(url).then(result => {
-        if (!result.ok) throw new Error(`Could not load stylesheet: ${result.status}`);
-        return result.text();
-      }), href);
-      return response;
-    })
-  );
+      return page.evaluate(async url => {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Could not load stylesheet: ${response.status}`);
+        return response.text();
+      }, href);
+    }
+    const response = await page.evaluate(async url => {
+      const result = await fetch(url);
+      if (!result.ok) throw new Error(`Could not load artwork: ${result.status}`);
+      return result.text();
+    }, name);
+    return response;
+  }));
   const css = `${styleCss}\n${premiumCss}`.toLowerCase();
+  const visualPalette = artwork.join('\n').toLowerCase();
   const retired = [
     '#141414', '#1a1a1a', '#bd9292', '189, 146, 146', '#f2eee4', '#a9a9a9', '#929292',
     '#131a29', '#0c1420', '#101c27', '#141f2e', '#0d1420', '#101a28',
     '#152131', '#0e1521', '#141e2c', '#0e1622', '#17172b', '#080807', '#111a31', '#121f38',
-    '#e2a1ad', '226,161,173', '#ff8c9a', '#57d6a1'
+    '#e2a1ad', '226,161,173', '#ff8c9a', '#57d6a1',
+    '34,229,139', '190,235,255', '116, 218, 235', '208, 239, 255',
+    '225, 245, 255', '154, 170, 189', '87, 214, 161', '255, 140, 154',
+    '#080b18', '#17113b', '#071c2b', '#a78bfa', '#6366f1', '#22d3ee',
+    '#7c3aed', '#a5b4fc', '#0891b2', '#8b5cf6', '#c4b5fd', '#d8ddf5',
+    '#94a3b8', '#ddd6fe', '#a5f3fc', '#11152d', '#17143b', '#64748b',
+    '#14213b', '#b7f5ff', '#160d35', '#6d28d9', '#ede9fe', '#062b3a',
+    '#0e7490', '#67e8f9', '#cffafe', '#5266a8'
   ];
-  for (const value of retired) expect(css).not.toContain(value.toLowerCase());
+  for (const value of retired) {
+    expect(css).not.toContain(value.toLowerCase());
+    expect(visualPalette).not.toContain(value.toLowerCase());
+  }
 
   for (const token of ['--cyan-light:', '--on-accent:', '--success: #42c879;', '--danger: #ff8292;']) {
     expect(styleCss).toContain(token);
