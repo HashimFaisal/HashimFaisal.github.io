@@ -337,7 +337,7 @@ test('plugin library cards never overlap across responsive widths and languages'
   await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
   await expect(page.locator('#plugins')).toBeVisible();
 
-  const widths = [320, 360, 390, 430, 480, 560, 561, 600, 760, 761, 900, 1000, 1001, 1280, 1440];
+  const widths = [320, 360, 390, 408, 430, 480, 560, 600, 640, 680, 681, 760, 761, 900, 1000, 1001, 1280, 1440];
 
   const assertLibraryLayout = async width => {
     await page.setViewportSize({ width, height: 900 });
@@ -421,11 +421,17 @@ test('plugin library cards never overlap across responsive widths and languages'
     });
 
     const expectedColumns = await page.evaluate(() =>
-      window.matchMedia('(max-width: 560px)').matches
+      window.matchMedia('(max-width: 680px)').matches
         ? 1
         : window.matchMedia('(max-width: 1000px)').matches ? 2 : 3
     );
     expect(layout.columns, JSON.stringify(layout)).toBe(expectedColumns);
+    if (width <= 680) {
+      expect(layout.sectionWidth, JSON.stringify(layout)).toBeGreaterThanOrEqual(width * 0.97);
+      for (const card of layout.cards) {
+        expect(card.rect.width, JSON.stringify(card)).toBeGreaterThan(width * 0.85);
+      }
+    }
     expect(layout.cards, JSON.stringify(layout)).toHaveLength(20);
     expect(layout.cardCollisions, JSON.stringify(layout)).toEqual([]);
     for (const card of layout.cards) {
