@@ -198,3 +198,42 @@ test('page cannot be horizontally scrolled at the selected viewport', async ({ p
   console.log('HORIZONTAL_OVERFLOW_DIAGNOSTICS', JSON.stringify({ ...diagnostics, horizontalScroll }));
   expect(horizontalScroll, JSON.stringify({ ...diagnostics, horizontalScroll })).toBe(0);
 });
+
+test('home hero title and supporting text stay aligned without overlap', async ({ page }) => {
+  const layout = await page.locator('.hero').evaluate(hero => {
+    const copy = hero.querySelector('.hero-copy');
+    const copyRect = copy.getBoundingClientRect();
+    const heroRect = hero.getBoundingClientRect();
+    const selectors = ['h1', ':scope > p', '.hero-actions', '.hero-meta'];
+    const items = selectors.map(selector => {
+      const node = copy.querySelector(selector);
+      const rect = node.getBoundingClientRect();
+      return {
+        selector,
+        top: rect.top,
+        bottom: rect.bottom,
+        left: rect.left,
+        right: rect.right
+      };
+    });
+    return {
+      hero: { top: heroRect.top, bottom: heroRect.bottom, left: heroRect.left, right: heroRect.right },
+      copy: { top: copyRect.top, bottom: copyRect.bottom, left: copyRect.left, right: copyRect.right },
+      headingPosition: getComputedStyle(copy.querySelector('h1')).position,
+      badgePosition: getComputedStyle(copy, '::before').position,
+      items
+    };
+  });
+
+  expect(layout.headingPosition).not.toBe('absolute');
+  expect(layout.badgePosition).toBe('static');
+  for (let i = 1; i < layout.items.length; i++) {
+    expect(layout.items[i].top, JSON.stringify(layout)).toBeGreaterThanOrEqual(layout.items[i - 1].bottom - 1);
+  }
+  for (const item of layout.items) {
+    expect(item.left, JSON.stringify(layout)).toBeGreaterThanOrEqual(layout.copy.left - 1);
+    expect(item.right, JSON.stringify(layout)).toBeLessThanOrEqual(layout.copy.right + 1);
+    expect(item.top, JSON.stringify(layout)).toBeGreaterThanOrEqual(layout.hero.top - 1);
+    expect(item.bottom, JSON.stringify(layout)).toBeLessThanOrEqual(layout.hero.bottom + 1);
+  }
+});
