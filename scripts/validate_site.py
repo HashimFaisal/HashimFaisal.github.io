@@ -100,7 +100,7 @@ for css_path in CSS_FILES:
 
 ACTIVE_ARTWORK = (
     "hero.svg", "all-in-one.svg", "cinemabox.svg", "cinemana.svg",
-    "opensubtitles.svg", "nuvio-catalog.svg", "izlemeli-catalog.svg",
+    "opensubtitles.svg", "cinemeta.svg", "nuvio-catalog.svg", "izlemeli-catalog.svg",
 )
 for artwork_name in ACTIVE_ARTWORK:
     artwork_path = ROOT / "assets" / artwork_name
