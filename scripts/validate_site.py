@@ -64,27 +64,6 @@ ALLOWED_CSS_HEX = {
     "#a394ff", "#58d8e8", "#42c879", "#a9e8c1", "#ff8292", "#ffb0ba",
     "#8deaf3", "#071317", "#000", "#fff",
 }
-for css_path in CSS_FILES:
-    css_text = css_path.read_text(encoding="utf-8")
-    rules = tinycss2.parse_stylesheet(css_text, skip_comments=True, skip_whitespace=True)
-    parse_errors = [rule for rule in rules if rule.type == "error"]
-    if parse_errors:
-        fail(f"{css_path.name}: CSS parser errors: {parse_errors[:3]}")
-    for red, green, blue in __import__("re").findall(r"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)", css_text, flags=__import__("re").I):
-        rgb = f"{red},{green},{blue}"
-        if rgb not in ALLOWED_RGB:
-            fail(f"Unapproved RGB color in {css_path.name}: {rgb}")
-    if __import__("re").search(r"hsla?\s*\(", css_text, flags=__import__("re").I):
-        fail(f"Unsupported HSL color syntax in {css_path.name}")
-    for color in __import__("re").findall(r"#[0-9a-fA-F]{8}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{6}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{4}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{3}(?![a-zA-Z0-9_-])", css_text):
-        if color.lower() not in ALLOWED_CSS_HEX:
-            fail(f"Unapproved CSS hex color in {css_path.name}: {color}")
-    if css_path.name == "premium-ui.css":
-        keyframe_names = __import__("re").findall(r"@keyframes\s+([\w-]+)", css_text)
-        if len(keyframe_names) != len(set(keyframe_names)):
-            duplicates = sorted(name for name in set(keyframe_names) if keyframe_names.count(name) > 1)
-            fail(f"Duplicate CSS keyframe names in {css_path.name}: {duplicates}")
-
 # Detect exact duplicate CSS selector/declaration rules within the same at-rule scope.
 # Media-query variants are kept separate; keyframe steps are intentionally excluded.
 def check_duplicate_css_rules(rules, context, css_name, seen):
@@ -118,6 +97,28 @@ def check_duplicate_css_rules(rules, context, css_name, seen):
                 nested, context + (f"@{rule.lower_at_keyword} {prelude}",),
                 css_name, seen,
             )
+
+for css_path in CSS_FILES:
+    css_text = css_path.read_text(encoding="utf-8")
+    rules = tinycss2.parse_stylesheet(css_text, skip_comments=True, skip_whitespace=True)
+    parse_errors = [rule for rule in rules if rule.type == "error"]
+    if parse_errors:
+        fail(f"{css_path.name}: CSS parser errors: {parse_errors[:3]}")
+    check_duplicate_css_rules(rules, tuple(), css_path.name, set())
+    for red, green, blue in __import__("re").findall(r"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)", css_text, flags=__import__("re").I):
+        rgb = f"{red},{green},{blue}"
+        if rgb not in ALLOWED_RGB:
+            fail(f"Unapproved RGB color in {css_path.name}: {rgb}")
+    if __import__("re").search(r"hsla?\s*\(", css_text, flags=__import__("re").I):
+        fail(f"Unsupported HSL color syntax in {css_path.name}")
+    for color in __import__("re").findall(r"#[0-9a-fA-F]{8}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{6}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{4}(?![a-zA-Z0-9_-])|#[0-9a-fA-F]{3}(?![a-zA-Z0-9_-])", css_text):
+        if color.lower() not in ALLOWED_CSS_HEX:
+            fail(f"Unapproved CSS hex color in {css_path.name}: {color}")
+    if css_path.name == "premium-ui.css":
+        keyframe_names = __import__("re").findall(r"@keyframes\s+([\w-]+)", css_text)
+        if len(keyframe_names) != len(set(keyframe_names)):
+            duplicates = sorted(name for name in set(keyframe_names) if keyframe_names.count(name) > 1)
+            fail(f"Duplicate CSS keyframe names in {css_path.name}: {duplicates}")
 
 # Every repository SVG must be a reviewed, active Nuvio UI asset. Original
 # third-party raster logos and the NASA video retain their source colors.
