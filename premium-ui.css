@@ -289,7 +289,6 @@ html[dir="ltr"] .nuvio-view-back > span:first-child { transform: rotate(180deg);
   display: inline-flex;
   align-items: center;
   gap: 9px;
-  color: var(--cyan);
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 1.5px;
