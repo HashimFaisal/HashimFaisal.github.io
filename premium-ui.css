@@ -2083,7 +2083,9 @@ html,
 nav,
 nav a,
 .github-link,
-.language-toggle,
+.language-toggle {
+  color: var(--muted);
+}
 
 .accent,
 .eyebrow,
