@@ -20,9 +20,11 @@
   {
     "date": "2026-11-16T00:42:31.589774+00:00",
     "type": "release",
-    "title": "صدور إصدار مستقر من Nuvio: ",
-    "detail": "أصبح الإصدار المستقر  متاحاً.",
-    "channel": "stable"
+    "title": "صدور تحديث Nuvio: 0.6.13-beta",
+    "detail": "الإصدار السابق كان 1.0.0.",
+    "new_version": "0.6.13-beta",
+    "old_version": "1.0.0",
+    "channel": "beta"
   },
   {
     "date": "2026-11-16T09:51:32.429303+00:00",
@@ -37,17 +39,6 @@
   {
     "date": "2026-11-17T02:29:09.326475+00:00",
     "type": "release",
-    "channel": "beta",
-    "title": "صدور تحديث Nuvio: 1.1.0-beta.1",
-    "detail": "الإصدار السابق كان 0.6.13-beta.",
-    "source": "Nuvio App",
-    "source_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.1.0-beta.1",
-    "old_version": "0.6.13-beta",
-    "new_version": "1.1.0-beta.1"
-  },
-  {
-    "date": "2026-11-17T02:29:09.326475+00:00",
-    "type": "release",
     "channel": "stable",
     "title": "صدور إصدار مستقر من Nuvio: 1.0.0",
     "detail": "الإصدار السابق كان 1.1.0-beta.1.",
@@ -55,6 +46,17 @@
     "source_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.0.0",
     "old_version": "1.1.0-beta.1",
     "new_version": "1.0.0"
+  },
+  {
+    "date": "2026-11-17T02:29:09.326475+00:00",
+    "type": "release",
+    "channel": "beta",
+    "title": "صدور تحديث Nuvio: 1.1.0-beta.1",
+    "detail": "الإصدار السابق كان 0.6.13-beta.",
+    "source": "Nuvio App",
+    "source_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.1.0-beta.1",
+    "old_version": "0.6.13-beta",
+    "new_version": "1.1.0-beta.1"
   },
   {
     "date": "2026-11-17T09:38:33.643609+00:00",
