@@ -2790,3 +2790,14 @@ button:active,
     box-shadow: none;
   }
 }
+
+/* Nuvio globe — restore source video colors, remove color grading overlays */
+.globe-video {
+  filter: none !important;
+  opacity: 1;
+  mix-blend-mode: normal;
+}
+.globe-overlay {
+  background: none !important;
+  box-shadow: none !important;
+}
