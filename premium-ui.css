@@ -2867,7 +2867,16 @@ button:active,
   width: 100%;
   justify-content: space-between;
   padding-top: 16px;
-  border-top: 1px solid rgba(154, 190, 218, .1);
+  border-top: 0;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: 100% 1px;
+}
+html[dir="rtl"] .nuvio-launch-open {
+  background-image: linear-gradient(to left, rgba(154, 190, 218, .18), transparent);
+}
+html[dir="ltr"] .nuvio-launch-open {
+  background-image: linear-gradient(to right, rgba(154, 190, 218, .18), transparent);
 }
 .nuvio-launch-open b {
   display: grid;
