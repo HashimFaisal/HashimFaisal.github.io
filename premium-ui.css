@@ -946,7 +946,6 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
    ===================================================== */
 
 :root {
-  --nuvio-accent: var(--cyan);
   --nuvio-accent-light: var(--cyan-light);
   --nuvio-border: rgba(88, 216, 232, 0.2);
 }
