@@ -370,7 +370,11 @@ test('plugin library cards never overlap across responsive widths and languages'
       };
     });
 
-    const expectedColumns = width <= 560 ? 1 : width <= 1000 ? 2 : 3;
+    const expectedColumns = await page.evaluate(() =>
+      window.matchMedia('(max-width: 560px)').matches
+        ? 1
+        : window.matchMedia('(max-width: 1000px)').matches ? 2 : 3
+    );
     expect(layout.columns, JSON.stringify(layout)).toBe(expectedColumns);
     expect(layout.cards, JSON.stringify(layout)).toHaveLength(21);
     expect(layout.cardCollisions, JSON.stringify(layout)).toEqual([]);
