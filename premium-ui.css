@@ -2682,10 +2682,31 @@ button:active,
   content: none;
 }
 
-/* Restore the original globe size on small screens. */
-@media (max-width: 480px) {
+/* Restore the original responsive globe dimensions. */
+@media screen and (max-width: 760px) {
   .visual-globe {
-    width: 260px;
-    height: 260px;
+    width: clamp(185px, 58vw, 235px);
+    height: clamp(185px, 58vw, 235px);
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .visual-globe {
+    width: clamp(175px, 57vw, 200px);
+    height: clamp(175px, 57vw, 200px);
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 760px) {
+  .visual-globe {
+    width: 245px;
+    height: 245px;
+  }
+}
+
+@media screen and (max-width: 760px) and (orientation: landscape) {
+  .visual-globe {
+    width: 190px;
+    height: 190px;
   }
 }
