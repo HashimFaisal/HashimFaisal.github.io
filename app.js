@@ -650,7 +650,7 @@ function renderDownloads(report) {
 
 async function loadStatus() {
   try {
-    const response = await fetch(`data/status.json?t=${Date.now()}`, { cache: 'no-store' });
+    const response = await fetch('data/status.json', { cache: 'no-cache' });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const report = await response.json();
@@ -757,8 +757,8 @@ async function loadLiveUpdates() {
 
   if (!liveUpdatesRefreshTimer) {
     liveUpdatesRefreshTimer = setInterval(() => {
-      loadLiveUpdates();
-    }, 30_000);
+      if (document.visibilityState === 'visible') loadLiveUpdates();
+    }, 120_000);
   }
 
   const isArabic = currentLang === 'ar';
@@ -784,10 +784,7 @@ async function loadLiveUpdates() {
   }
 
   try {
-    const response = await fetch(
-      `data/updates.json?t=${Date.now()}`,
-      { cache: 'no-store' }
-    );
+    const response = await fetch('data/updates.json', { cache: 'no-cache' });
 
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
@@ -883,7 +880,7 @@ async function loadChangelog() {
   if (!container) return;
 
   try {
-    const response = await fetch(`data/changelog.json?t=${Date.now()}`, { cache: 'no-store' });
+    const response = await fetch('data/changelog.json', { cache: 'no-cache' });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
     const entries = await response.json();
