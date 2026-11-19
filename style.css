@@ -281,7 +281,6 @@ nav a:hover::after { transform: scaleX(1); }
 }
 .primary-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 17px 38px rgba(88, 216, 232, 0.3);
 }
 .secondary-btn {
   color: var(--text);
@@ -619,7 +618,6 @@ nav a:hover::after { transform: scaleX(1); }
   height: 6px;
   border-radius: 50%;
   background: var(--lime);
-  box-shadow: 0 0 9px currentColor;
 }
 .card-status.bad i { background: var(--danger); }
 .empty-state {
