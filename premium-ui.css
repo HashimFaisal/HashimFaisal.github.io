@@ -4535,3 +4535,47 @@ footer {
     transform: none !important;
   }
 }
+
+
+/* NUVIO — Compact mobile dashboard cards after Chromium visual review.
+   Keep the five destinations readable while reducing unnecessary vertical space. */
+@media (max-width: 560px) {
+  .nuvio-launch-grid {
+    grid-auto-rows: auto;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+  .nuvio-launch-card,
+  .nuvio-launch-card:nth-child(4),
+  .nuvio-launch-card:nth-child(5) {
+    min-height: 0;
+    height: auto;
+    padding: 13px 15px;
+    box-sizing: border-box;
+  }
+
+  .nuvio-launch-icon {
+    width: 34px;
+    height: 34px;
+    margin-bottom: 7px;
+    border-radius: 11px;
+    font-size: 18px;
+  }
+
+  .nuvio-launch-card strong {
+    margin-top: 4px;
+    font-size: 16px;
+    line-height: 1.45;
+  }
+
+  .nuvio-launch-description {
+    margin-top: 4px;
+    font-size: 10px;
+    line-height: 1.55;
+  }
+
+  .nuvio-launch-open {
+    padding-top: 8px;
+  }
+}
