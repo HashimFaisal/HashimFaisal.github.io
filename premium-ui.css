@@ -2901,3 +2901,208 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
   .nuvio-dashboard-heading { align-items: flex-start; flex-direction: column; }
   .nuvio-dashboard-mark { align-self: flex-start; }
 }
+
+
+/* =========================================
+   NUVIO — PHASE 3 PLUGIN LIBRARY REFINEMENT
+   Clearer discovery, consistent cards, mobile-first controls.
+   ========================================= */
+#plugins .section-heading {
+  align-items: flex-end;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(154, 190, 218, .12);
+}
+#plugins .section-heading > div { min-width: 0; }
+#plugins .section-heading p {
+  max-width: 540px;
+  line-height: 1.9;
+}
+#plugins .section-count {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border: 1px solid rgba(88, 216, 232, .2);
+  border-radius: 999px;
+  color: #b8eaf0;
+  background: rgba(88, 216, 232, .055);
+  font: 800 9px Inter, sans-serif;
+  letter-spacing: .9px;
+}
+#plugins .toolbar {
+  align-items: stretch;
+  gap: 13px;
+  margin-bottom: 21px;
+}
+#plugins .search-box {
+  min-height: 49px;
+  padding-inline: 15px;
+  border-radius: 13px;
+}
+#plugins .search-box > span {
+  color: var(--nuvio-accent-light, #8deaf3);
+  font-size: 19px;
+}
+#plugins .search-box input {
+  padding-block: 11px;
+  font-size: 12px;
+}
+#plugins .filters {
+  align-items: center;
+  gap: 8px;
+}
+#plugins .filter {
+  min-height: 38px;
+  padding: 8px 13px;
+  border-radius: 999px;
+  line-height: 1.45;
+}
+#plugins .plugin-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 15px;
+}
+#plugins .plugin-card {
+  min-height: 100%;
+  padding: 19px;
+  border-color: rgba(154, 190, 218, .14);
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at 100% 0%, rgba(88, 216, 232, .075), transparent 52%),
+    linear-gradient(150deg, rgba(20, 35, 58, .97), rgba(10, 22, 39, .99));
+}
+#plugins .plugin-top {
+  min-height: 46px;
+  align-items: center;
+  margin-bottom: 13px;
+}
+#plugins .plugin-top img {
+  width: 46px;
+  height: 46px;
+  padding: 5px;
+  border-color: rgba(255, 255, 255, .14);
+  border-radius: 13px;
+}
+#plugins .type-tag {
+  max-width: 62%;
+  padding: 6px 9px;
+  overflow-wrap: anywhere;
+  border-radius: 999px;
+  font-size: 8px;
+  letter-spacing: .75px;
+}
+#plugins .plugin-card h3 {
+  margin: 0 0 8px;
+  font-size: 17px;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+#plugins .plugin-card > p {
+  min-height: 0;
+  margin-bottom: 9px;
+  line-height: 1.85;
+}
+#plugins .plugin-card > p.plugin-help {
+  margin-top: 2px;
+  padding: 10px 11px;
+  border-inline-start: 2px solid rgba(88, 216, 232, .42);
+  border-radius: 7px;
+  background: rgba(88, 216, 232, .045);
+  font-size: 10px;
+}
+#plugins .manifest-label {
+  margin-top: auto;
+  padding-top: 12px;
+}
+#plugins .manifest-url {
+  min-height: 54px;
+  padding: 10px 11px;
+  border-radius: 10px;
+  font-size: 9px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+#plugins .card-actions {
+  gap: 8px;
+  margin-top: 12px;
+}
+#plugins .card-actions button,
+#plugins .card-actions a {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 39px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  text-align: center;
+  line-height: 1.45;
+}
+#plugins .card-status {
+  display: flex;
+  min-height: 35px;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 11px;
+  font-size: 10px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+#plugins .card-status i {
+  flex: 0 0 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #9aaabd;
+  box-shadow: 0 0 0 3px rgba(154, 170, 189, .1);
+}
+#plugins .card-status.ok i {
+  background: #57d6a1;
+  box-shadow: 0 0 0 3px rgba(87, 214, 161, .12);
+}
+#plugins .card-status.bad i {
+  background: #ff8c9a;
+  box-shadow: 0 0 0 3px rgba(255, 140, 154, .12);
+}
+#plugins .plugin-card[hidden] { display: none !important; }
+#plugins .filter:focus-visible,
+#plugins .card-actions a:focus-visible,
+#plugins .card-actions button:focus-visible {
+  outline: 2px solid #8deaf3;
+  outline-offset: 3px;
+}
+@media (max-width: 1000px) {
+  #plugins .plugin-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 760px) {
+  #plugins .section-heading { align-items: flex-start; }
+  #plugins .toolbar { gap: 12px; }
+  #plugins .filters { display: flex; flex-wrap: nowrap; overflow-x: auto; padding: 2px 1px 8px; scrollbar-width: thin; }
+  #plugins .filter { flex: 0 0 auto; white-space: nowrap; }
+  #plugins .plugin-grid { gap: 12px; }
+  #plugins .plugin-card { padding: 17px; }
+}
+@media (max-width: 560px) {
+  #plugins .section-heading { gap: 10px; }
+  #plugins .section-heading h2 { font-size: 25px; }
+  #plugins .section-heading p { font-size: 11px; }
+  #plugins .section-count { align-self: flex-start; font-size: 8px; }
+  #plugins .toolbar { margin-bottom: 17px; }
+  #plugins .search-box { min-height: 47px; }
+  #plugins .plugin-grid { grid-template-columns: 1fr; gap: 11px; }
+  #plugins .plugin-card { padding: 17px; border-radius: 16px; }
+  #plugins .plugin-top img { width: 43px; height: 43px; }
+  #plugins .plugin-card h3 { font-size: 16px; }
+  #plugins .plugin-card > p { font-size: 11px; }
+  #plugins .plugin-card > p.plugin-help { font-size: 10px; }
+  #plugins .manifest-url { min-height: 48px; font-size: 9px; }
+  #plugins .card-actions { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #plugins .card-actions button,
+  #plugins .card-actions a { width: 100%; font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #plugins .plugin-card,
+  #plugins .filter,
+  #plugins .card-actions a,
+  #plugins .card-actions button {
+    transition: none !important;
+  }
+}
