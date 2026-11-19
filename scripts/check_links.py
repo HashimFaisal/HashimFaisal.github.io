@@ -3,6 +3,7 @@ import json
 import os
 import re
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
 
@@ -39,7 +40,7 @@ HEADERS = {
 
 def fetch(url, method="GET"):
     request = Request(url, headers=HEADERS, method=method)
-    return urlopen(request, timeout=30)
+    return urlopen(request, timeout=20)
 
 
 def check_manifest(name, url):
@@ -53,12 +54,30 @@ def check_manifest(name, url):
             if not isinstance(payload, dict):
                 raise ValueError("JSON root is not an object")
 
+            version = payload.get("version")
+            if not isinstance(version, str) or not version.strip():
+                raise ValueError("Manifest field 'version' must be a non-empty string")
+
+            for field in ("id", "name", "description"):
+                value = payload.get(field)
+                if value is not None and not isinstance(value, str):
+                    raise ValueError(f"Manifest field '{field}' must be a string")
+
+            for field in ("resources", "types", "catalogs"):
+                value = payload.get(field)
+                if value is not None and not isinstance(value, list):
+                    raise ValueError(f"Manifest field '{field}' must be an array")
+
+            behavior_hints = payload.get("behaviorHints")
+            if behavior_hints is not None and not isinstance(behavior_hints, dict):
+                raise ValueError("Manifest field 'behaviorHints' must be an object")
+
             return {
                 "name": name,
                 "type": "manifest",
                 "ok": True,
                 "http_status": response.status,
-                "version": str(payload.get("version", "not specified")),
+                "version": version.strip(),
                 "manifest_id": str(payload.get("id", "not specified")),
                 "url": url,
             }
@@ -93,7 +112,8 @@ def check_download(name, asset):
                 headers={**HEADERS, "Range": "bytes=0-0"},
                 method="GET",
             )
-            with urlopen(request, timeout=30) as response:
+            with urlopen(request, timeout=20) as response:
+                response.read(1)
                 return {
                     "name": name,
                     "type": "download",
@@ -114,10 +134,11 @@ def check_download(name, asset):
 
 
 def main():
-    results = [
-        check_manifest(name, url)
-        for name, url in MANIFESTS.items()
-    ]
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        results = list(executor.map(
+            lambda entry: check_manifest(*entry),
+            MANIFESTS.items(),
+        ))
 
     release = None
     stable_release = None
@@ -170,6 +191,16 @@ def main():
     except Exception as exc:
         release_error = str(exc)
 
+    # Add an explicit beta-release health check so a failed release lookup
+    # cannot leave the overall report looking fully healthy.
+    results.append({
+        "name": "Nuvio beta release",
+        "type": "release",
+        "ok": release is not None,
+        "tag": (release or {}).get("tag_name"),
+        "error": release_error,
+    })
+
     stable_release_data = None
 
     if stable_release:
@@ -216,6 +247,20 @@ def main():
 
         expected["iOS IPA"] = ipa_names[0] if ipa_names else None
 
+        download_targets = [
+            (label, assets[filename])
+            for label, filename in expected.items()
+            if filename and filename in assets
+        ]
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            download_checks = dict(zip(
+                (label for label, _ in download_targets),
+                executor.map(
+                    lambda target: check_download(*target),
+                    download_targets,
+                ),
+            ))
+
         for label, filename in expected.items():
             asset = assets.get(filename) if filename else None
 
@@ -228,7 +273,7 @@ def main():
                     "download_url": asset.get("browser_download_url"),
                     "ok": True,
                 }
-                download_check = check_download(label, asset)
+                download_check = download_checks[label]
                 entry["ok"] = download_check["ok"]
                 if not download_check["ok"]:
                     entry["error"] = download_check.get(
@@ -334,7 +379,8 @@ def main():
 
         old_version = previous.get("version")
         new_version = item.get("version")
-        if old_version and new_version and old_version != new_version:
+        # Do not record version changes from failed/incomplete checks.
+        if previous.get("ok") and item.get("ok") and old_version and new_version and old_version != new_version:
             events.append({
                 "date": now,
                 "type": "version",
@@ -398,9 +444,13 @@ def main():
 
     now_dt = datetime.now(timezone.utc)
     active_updates = []
+    active_update_ids = set()
 
     for update in updates:
         if not isinstance(update, dict):
+            continue
+        update_id = update.get("id")
+        if not isinstance(update_id, str) or not update_id.strip() or update_id in active_update_ids:
             continue
         raw_expiry = update.get("expiresAt")
         if not isinstance(raw_expiry, str) or not raw_expiry.strip():
@@ -414,6 +464,7 @@ def main():
                 expiry = expiry.replace(tzinfo=timezone.utc)
             if expiry > now_dt:
                 active_updates.append(update)
+                active_update_ids.add(update_id)
         except (TypeError, ValueError):
             continue
 
@@ -423,12 +474,16 @@ def main():
     known_ids = {item.get("id") for item in updates if isinstance(item, dict)}
 
     for event in history + events:
+        if not isinstance(event, dict):
+            continue
         event_type = event.get("type")
         source = event.get("source")
         version = event.get("new_version")
         source_url = event.get("source_url")
 
         if event_type == "release":
+            if not version or str(version).lower() == "not specified":
+                continue
             channel = event.get("channel", "beta")
             category = "app"
 
@@ -514,7 +569,27 @@ def main():
         json.dump(updates, updates_file, ensure_ascii=False, indent=2)
         updates_file.write("\n")
 
-    history.extend(events)
+    # Deduplicate repeated transitions by their stable event identity.
+    def event_key(event):
+        return (
+            event.get("type"),
+            event.get("channel"),
+            event.get("source"),
+            event.get("old_version"),
+            event.get("new_version"),
+            event.get("title"),
+        )
+
+    seen_events = {event_key(item) for item in history if isinstance(item, dict)}
+    unique_events = []
+    for event in events:
+        key = event_key(event)
+        if key in seen_events:
+            continue
+        seen_events.add(key)
+        unique_events.append(event)
+
+    history.extend(unique_events)
     history = history[-100:]
 
     os.makedirs("data", exist_ok=True)
