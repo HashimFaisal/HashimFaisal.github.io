@@ -148,7 +148,6 @@ jobs:
           PY
 
   browser-smoke:
-    needs: validate
     runs-on: ubuntu-latest
     container:
       image: mcr.microsoft.com/playwright:v1.56.1-noble
