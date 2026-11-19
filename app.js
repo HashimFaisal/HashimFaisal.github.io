@@ -54,7 +54,6 @@ const translations = {
   'روابط Manifest واضحة، مع نسخ مباشر من نفس الصفحة.': 'Clear manifest links with one-click copying.',
   'ابحث عن إضافة...': 'Search add-ons...',
   'الكل': 'All',
-  'إضافات Nuvio': 'Nuvio Plugins',
   'إضافات Nuvio Add-ons': 'Nuvio Add-ons',
   'الكتالوجات': 'Catalogs',
   'مصادر البث': 'Streaming Sources',
