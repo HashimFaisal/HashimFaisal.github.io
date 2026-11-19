@@ -3754,3 +3754,37 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
   max-width: 100%;
   overflow-wrap: anywhere;
 }
+
+/* NUVIO — Give the plugin library room to breathe on phones and narrow tablets. */
+@media (max-width: 680px) {
+  #plugins.nuvio-view-active.section {
+    width: min(98%, 1120px);
+    padding: clamp(16px, 3.5vw, 24px);
+  }
+
+  #plugins .plugin-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  #plugins .plugin-card {
+    padding: 20px;
+  }
+
+  #plugins .plugin-card > p {
+    line-height: 1.95;
+  }
+
+  #plugins .plugin-card > p.plugin-help {
+    padding: 12px;
+  }
+
+  #plugins .manifest-url {
+    font-size: clamp(9px, 2.4vw, 10px);
+  }
+
+  #plugins .card-actions button,
+  #plugins .card-actions a {
+    min-height: 44px;
+  }
+}
