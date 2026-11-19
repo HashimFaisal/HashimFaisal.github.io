@@ -118,19 +118,22 @@
     <section class="section" id="plugins">
       <div class="section-heading">
         <div><div class="eyebrow">01 / PLUGIN LIBRARY</div><h2>مكتبة الإضافات</h2><p>روابط Manifest واضحة، مع نسخ مباشر من نفس الصفحة.</p></div>
-        <span class="section-count" id="visible-count">06 RESOURCES</span>
+        <span class="section-count" id="visible-count">13 RESOURCES</span>
       </div>
 
       <div class="toolbar">
         <label class="search-box"><span>⌕</span><input id="search" type="search" placeholder="ابحث عن إضافة..." aria-label="ابحث عن إضافة" autocomplete="off"></label>
         <div class="filters" id="filters">
-          <button class="filter active" data-filter="nuvio" aria-pressed="true">إضافات Nuvio</button>
-          <button class="filter" data-filter="stremio" aria-pressed="false">إضافات Nuvio Add-ons</button>
+          <button class="filter active" data-filter="all" aria-pressed="true">الكل</button>
+          <button class="filter" data-filter="nuvio" aria-pressed="false">إضافات Nuvio</button>
+          <button class="filter" data-filter="catalog" aria-pressed="false">الكتالوجات</button>
+          <button class="filter" data-filter="subtitles" aria-pressed="false">الترجمات</button>
+          <button class="filter" data-filter="ratings" aria-pressed="false">التقييمات والبيانات</button>
         </div>
       </div>
 
       <div class="plugin-grid" id="plugin-grid">
-        <article class="plugin-card">
+        <article class="plugin-card" data-category="nuvio">
           <div class="plugin-top"><img src="assets/cinemabox.png" alt="CinemaBox"><span class="type-tag">NUVIO</span></div>
           <h3>CinemaBox</h3><p>إضافة مستقلة لمشاريع Nuvio.</p>
           <p class="plugin-help">طريقة التثبيت: اضغط للفتح في Nuvio، وانتقل إلى الإعدادات، ثم المحتوى والاكتشاف، ثم الملحقات، والصق الرابط في خانة Manifest.</p>
@@ -140,7 +143,7 @@
           <div class="card-status" data-check="CinemaBox"><i></i> جارٍ التحقق</div>
         </article>
 
-        <article class="plugin-card">
+        <article class="plugin-card" data-category="nuvio">
           <div class="plugin-top"><img src="assets/cinemana.png" alt="Cinemana"><span class="type-tag">NUVIO</span></div>
           <h3>Cinemana</h3><p>مشروع إضافة مستقل ضمن مكتبة Nuvio.</p>
           <p class="plugin-help">طريقة التثبيت: اضغط للفتح في Nuvio، وانتقل إلى الإعدادات، ثم المحتوى والاكتشاف، ثم الملحقات، والصق الرابط في خانة Manifest.</p>
@@ -150,7 +153,7 @@
           <div class="card-status" data-check="Cinemana"><i></i> جارٍ التحقق</div>
         </article>
 
-        <article class="plugin-card">
+        <article class="plugin-card" data-category="nuvio">
           <div class="plugin-top"><img src="assets/all-in-one.svg" alt="ALL-IN-ONE"><span class="type-tag">NUVIO</span></div>
           <h3>ALL-IN-ONE</h3>
           <p>إضافة All-in-One لمشروع Nuvio من المستودع الأصلي.</p>
@@ -161,8 +164,8 @@
           <div class="card-status" data-check="ALL-IN-ONE"><i></i> جارٍ التحقق</div>
         </article>
 
-        <article class="plugin-card">
-          <div class="plugin-top"><img src="assets/opensubtitles.svg" alt="OpenSubtitles"><span class="type-tag external">الإضافات</span></div>
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img src="assets/opensubtitles.svg" alt="OpenSubtitles"><span class="type-tag external">الترجمات</span></div>
           <h3>OpenSubtitles</h3><p>إضافة للبحث عن الترجمات وعرضها.</p>
           <div class="manifest-label">MANIFEST URL</div>
           <code class="manifest-url">https://opensubtitles-v3.strem.io/manifest.json</code>
@@ -170,8 +173,8 @@
           <div class="card-status" data-check="OpenSubtitles"><i></i> جارٍ التحقق</div>
         </article>
 
-        <article class="plugin-card subdl-card nuvio-addon-card">
-          <div class="plugin-top"><img src="assets/subdl.svg" alt="SubDL"><span class="type-tag external">الإضافات</span></div>
+        <article class="plugin-card subdl-card nuvio-addon-card" data-category="subtitles">
+          <div class="plugin-top"><img src="assets/subdl.svg" alt="SubDL"><span class="type-tag external">الترجمات</span></div>
           <h3>SubDL</h3>
           <p>إضافة للبحث عن ترجمات الأفلام والمسلسلات والأنمي.</p>
           <div class="card-actions">
@@ -180,8 +183,8 @@
           <div class="card-status"><i></i> <span data-i18n="الإصدار">الإصدار</span> 1.1.2</div>
         </article>
 
-        <article class="plugin-card">
-          <div class="plugin-top"><img src="https://github.com/Digok.png" alt="Rodrigo Catalog"><span class="type-tag external">الإضافات</span></div>
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img src="https://github.com/Digok.png" alt="Rodrigo Catalog"><span class="type-tag external">كتالوج</span></div>
           <h3>Rodrigo's Catalog</h3><p>كتالوج لاكتشاف العناوين وبيانات الأفلام والمسلسلات، وليس مشغّل فيديو.</p>
           <div class="manifest-label">MANIFEST URL</div>
           <code class="manifest-url">https://digok.github.io/nuvio-catalog/manifest.json</code>
@@ -190,8 +193,8 @@
         </article>
 
 
-        <article class="plugin-card">
-          <div class="plugin-top"><img src="assets/cinemeta.svg" alt="Cinemeta"><span class="type-tag external">الإضافات</span></div>
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img src="assets/cinemeta.svg" alt="Cinemeta"><span class="type-tag external">كتالوج</span></div>
           <h3>Cinemeta</h3>
           <p>مصدر بيانات الأفلام والمسلسلات. توافقه مع Nuvio يحتاج اختباراً.</p>
           <div class="manifest-label">MANIFEST URL</div>
@@ -205,8 +208,8 @@
 
 
 
-        <article class="plugin-card">
-          <div class="plugin-top"><img src="assets/nuvio-catalog.svg" alt="Nuvio Catalog"><span class="type-tag external">الإضافات</span></div>
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img src="assets/nuvio-catalog.svg" alt="Nuvio Catalog"><span class="type-tag external">كتالوج</span></div>
           <h3>Nuvio Catalog</h3>
           <p>كتالوج لاكتشاف الأفلام والمسلسلات ضمن إضافة Nuvio Catalog.</p>
           <div class="manifest-label">MANIFEST URL</div>
@@ -215,8 +218,8 @@
           <div class="card-status" data-check="Nuvio Catalog"><i></i> جارٍ التحقق</div>
         </article>
 
-        <article class="plugin-card">
-          <div class="plugin-top"><img src="https://tmdb.elfhosted.com/logo.png" alt="The Movie Database Addon"><span class="type-tag external">الإضافات</span></div>
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img src="https://tmdb.elfhosted.com/logo.png" alt="The Movie Database Addon"><span class="type-tag external">كتالوج</span></div>
           <h3>The Movie Database Addon</h3>
           <p>كتالوج وبيانات للأفلام والمسلسلات من TMDB، مع خيارات للبحث والتصنيفات واللغات.</p>
           <div class="manifest-label">MANIFEST URL</div>
@@ -225,8 +228,8 @@
           <div class="card-status" data-check="The Movie Database Addon"><i></i> جارٍ التحقق</div>
         </article>
 
-        <article class="plugin-card">
-          <div class="plugin-top"><img src="assets/izlemeli-catalog.svg" alt="İzlemeli Catalog"><span class="type-tag external">الإضافات</span></div>
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img src="assets/izlemeli-catalog.svg" alt="İzlemeli Catalog"><span class="type-tag external">كتالوج</span></div>
           <h3>İzlemeli Catalog</h3>
           <p>كتالوج للأفلام والمسلسلات مع بيانات ومصادر إضافية.</p>
           <div class="manifest-label">MANIFEST URL</div>
@@ -235,8 +238,8 @@
           <div class="card-status" data-check="İzlemeli Catalog"><i></i> جارٍ التحقق</div>
         </article>
 
-        <article class="plugin-card">
-          <div class="plugin-top"><img src="https://imdb-popular-stremio.vercel.app/logo.png" alt="IMDb Popular"><span class="type-tag external">الإضافات</span></div>
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img src="https://imdb-popular-stremio.vercel.app/logo.png" alt="IMDb Popular"><span class="type-tag external">كتالوج</span></div>
           <h3>IMDb Popular</h3>
           <p>كتالوج لاكتشاف العناوين الشعبية اعتماداً على IMDb.</p>
           <div class="manifest-label">MANIFEST URL</div>
@@ -245,8 +248,8 @@
           <div class="card-status" data-check="IMDb Popular"><i></i> جارٍ التحقق</div>
         </article>
 
-        <article class="plugin-card">
-          <div class="plugin-top"><img src="https://mylistsaddon.com/icon.png" alt="My Lists"><span class="type-tag external">الإضافات</span></div>
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img src="https://mylistsaddon.com/icon.png" alt="My Lists"><span class="type-tag external">كتالوج</span></div>
           <h3>My Lists</h3>
           <p>كتالوجات لقوائمك الشخصية من TMDB وTrakt وMDBList، مع دعم الأفلام والمسلسلات.</p>
           <div class="manifest-label">MANIFEST URL</div>
@@ -255,8 +258,8 @@
           <div class="card-status" data-check="My Lists"><i></i> <span data-i18n="الإصدار">الإصدار</span> 1.5.8</div>
         </article>
 
-        <article class="plugin-card">
-          <div class="plugin-top"><img src="https://emojicdn.elk.sh/%F0%9F%8E%AF?style=google" alt="Ratings Aggregator"><span class="type-tag external">الإضافات</span></div>
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img src="https://emojicdn.elk.sh/%F0%9F%8E%AF?style=google" alt="Ratings Aggregator"><span class="type-tag external">التقييمات</span></div>
           <h3>Ratings Aggregator</h3>
           <p>يجمع تقييمات من IMDb وTMDB وMetacritic ومصادر أخرى. طريقة ظهور التقييمات داخل Nuvio تحتاج اختباراً.</p>
           <div class="manifest-label">MANIFEST URL</div>
@@ -266,7 +269,7 @@
         </article>
 
 </div>
-      <div class="empty-state" id="empty-state" hidden>ما لقينا إضافات تطابق بحثك.</div>
+      <div class="empty-state" id="empty-state" hidden>ما لقينا موارد تطابق بحثك.</div>
     </section>
 
 
