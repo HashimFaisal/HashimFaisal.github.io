@@ -437,3 +437,62 @@ test('status and developer-resource cards keep separate layout boxes on phone, t
     await page.locator('#resources .nuvio-view-back').click();
   }
 });
+
+
+test('changelog and downloads sections keep content boxes separate across viewport widths and languages', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const widths = [320, 390, 560, 760, 900, 1280];
+
+  const assertNoOverlaps = async selector => {
+    const result = await page.locator(selector).evaluate(container => {
+      const rectOf = node => {
+        const rect = node.getBoundingClientRect();
+        return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
+      };
+      const nodes = [...container.children].filter(node => {
+        const rect = node.getBoundingClientRect();
+        const style = getComputedStyle(node);
+        return style.display !== 'none' && style.visibility !== 'hidden' &&
+          rect.width > 0 && rect.height > 0;
+      });
+      const boxes = nodes.map(node => ({
+        name: node.className || node.tagName,
+        rect: rectOf(node)
+      }));
+      const collisions = [];
+      for (let i = 0; i < boxes.length; i++) {
+        for (let j = i + 1; j < boxes.length; j++) {
+          const a = boxes[i].rect, b = boxes[j].rect;
+          if (Math.min(a.right, b.right) - Math.max(a.left, b.left) > 1 &&
+              Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 1) {
+            collisions.push([boxes[i].name, boxes[j].name]);
+          }
+        }
+      }
+      return { boxes, collisions };
+    });
+    expect(result.collisions, JSON.stringify(result)).toEqual([]);
+  };
+
+  const assertSections = async width => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.locator('#nuvio-launch-grid [data-view="changelog"]').click();
+    await expect(page.locator('#changelog')).toBeVisible();
+    await assertNoOverlaps('#changelog');
+    await assertNoOverlaps('#changelog-list');
+    await page.locator('#changelog .nuvio-view-back').click();
+
+    await page.locator('#nuvio-launch-grid [data-view="downloads"]').click();
+    await expect(page.locator('#downloads')).toBeVisible();
+    await assertNoOverlaps('#downloads');
+    await assertNoOverlaps('#downloads .release-banner');
+    await assertNoOverlaps('#download-grid');
+    await page.locator('#downloads .nuvio-view-back').click();
+  };
+
+  for (const width of widths) await assertSections(width);
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  for (const width of widths) await assertSections(width);
+});
