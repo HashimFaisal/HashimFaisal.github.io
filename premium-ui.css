@@ -3711,3 +3711,19 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
     gap: 6px;
   }
 }
+
+
+/* NUVIO — Keep the home dashboard cards stacked on compact screens.
+   This intentionally overrides the earlier six-column desktop composition. */
+@media (max-width: 560px) {
+  .nuvio-launch-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .nuvio-launch-card,
+  .nuvio-launch-card:nth-child(4),
+  .nuvio-launch-card:nth-child(5) {
+    grid-column: 1 / -1;
+    min-width: 0;
+  }
+}
