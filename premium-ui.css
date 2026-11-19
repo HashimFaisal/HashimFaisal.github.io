@@ -4654,3 +4654,20 @@ footer {
     gap: 10px;
   }
 }
+
+/* NUVIO — Keep the Earth perfectly circular at every responsive size.
+   Earlier max-height caps could shrink only the globe's height on short
+   hero containers, making the video appear vertically compressed. */
+.visual-globe {
+  height: auto;
+  aspect-ratio: 1 / 1;
+  max-width: none;
+  max-height: none;
+}
+
+.globe-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
