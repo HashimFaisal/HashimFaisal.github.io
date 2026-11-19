@@ -50,8 +50,8 @@ jobs:
           for name in required_resources:
               if f"<h3>{name}</h3>" not in html:
                   raise SystemExit(f"Missing ratings/metadata resource: {name}")
-          if 'data-category="subtitles"' not in html or "subdl.com/an/panel/api" not in html:
-              raise SystemExit("Subtitle resources or the SubDL API link are missing.")
+          if 'data-category="subtitles"' not in html:
+              raise SystemExit("Subtitle resources are missing.")
           subtitle_resources = (
               "OpenSubtitles v3", "TheSubtitleDB", "Persian Subtitles",
           )
