@@ -325,66 +325,7 @@ nav a:hover::after { transform: scaleX(1); }
 }
 .orbit-two { width: 92%; transform: rotateX(68deg) rotate(38deg); border-color: rgba(171,144,245,.25); }
 .orbit-three { width: 60%; transform: rotateY(65deg) rotate(20deg); border-style: dashed; opacity: .55; }
-.visual-object {
-  position: relative;
-  width: 180px;
-  height: 180px;
-  transform: rotate(-28deg) rotateX(13deg);
-  transform-style: preserve-3d;
-  filter: drop-shadow(0 25px 35px rgba(0,0,0,.4));
-}
-.object-back, .object-core, .object-glass, .object-highlight {
-  position: absolute;
-  inset: 0;
-  border-radius: 36px;
-  transform: rotate(45deg);
-}
-.object-back {
-  background: linear-gradient(140deg, #8b71dc, #314e83 58%, #4ec6c8);
-  box-shadow: 0 0 55px rgba(95,174,210,.22);
-}
-.object-core {
-  inset: 19px;
-  background: linear-gradient(145deg, #182b3d, #111a2b 60%, #263f50);
-  border: 1px solid rgba(190,245,245,.4);
-}
-.object-glass {
-  inset: 39px;
-  border: 2px solid rgba(140,231,226,.65);
-  background: linear-gradient(145deg, rgba(120,220,219,.24), rgba(152,126,230,.12));
-  box-shadow: inset 0 0 30px rgba(113,226,221,.17), 0 0 30px rgba(115,214,214,.12);
-}
-.object-highlight {
-  inset: 9px 75px 105px 9px;
-  border-radius: 30px;
-  background: rgba(255,255,255,.42);
-  filter: blur(9px);
-}
-.object-shard {
-  position: absolute;
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(158,233,231,.65);
-  background: linear-gradient(135deg, rgba(120,225,220,.55), rgba(137,113,220,.2));
-  transform: rotate(45deg);
-  border-radius: 8px;
-}
-.shard-one { top: -23px; right: 12px; }
-.shard-two { bottom: 3px; left: -29px; width: 24px; height: 24px; }
-.shard-three { bottom: -32px; right: 27px; width: 18px; height: 18px; }
-.visual-caption {
-  position: absolute;
-  bottom: 15px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #8fa7b8;
-  font: 700 8px Inter, sans-serif;
-  letter-spacing: 2px;
-}
-.visual-caption span { color: var(--cyan); font-size: 12px; }
-.visual-caption i { width: 25px; height: 1px; background: var(--cyan); }
-
+/* Removed unused legacy 3D object visual; hero now uses the globe visual. */
 /* Status dashboard */
 .stats-grid {
   display: grid;
