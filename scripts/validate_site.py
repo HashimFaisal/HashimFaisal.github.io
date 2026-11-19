@@ -101,7 +101,7 @@ for source_path in (HTML, ROOT / "app.js", ROOT / "premium-ui.js"):
     # Match color values only when attached to a CSS/DOM color property;
     # selectors such as $("#add") are not color declarations.
     color_values = __import__("re").findall(
-        r"(?:color|background(?:Color)?|border(?:Top|Right|Bottom|Left)?Color|outlineColor|fill|stroke)\\s*(?::|=)\\s*['\\"]?(#[0-9a-fA-F]{8}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{4}|#[0-9a-fA-F]{3})(?![a-zA-Z0-9_-])",
+        r"(?:color|background(?:Color)?|border(?:Top|Right|Bottom|Left)?Color|outlineColor|fill|stroke)\s*(?::|=)\s*['\"]?(#[0-9a-fA-F]{8}|#[0-9a-fA-F]{6}|#[0-9a-fA-F]{4}|#[0-9a-fA-F]{3})(?![a-zA-Z0-9_-])",
         source_text,
         flags=__import__("re").I,
     )
