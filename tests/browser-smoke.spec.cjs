@@ -92,6 +92,36 @@ test('plugin search and category filters return the expected cards', async ({ pa
   await expect(page.locator('.plugin-card:visible')).toHaveCount(0);
 });
 
+test('personal metadata manifests expose Nuvio install actions and keep setup links', async ({ page }) => {
+  // The plugin library is hidden while the dashboard is active; open it before
+  // asserting that the generated install controls are visible to users.
+  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  await expect(page.locator('#plugins')).toBeVisible();
+
+  const expected = [
+    {
+      name: 'AIOMetadata',
+      manifest: 'https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json',
+      setup: 'https://aiometadata.elfhosted.com/configure'
+    },
+    {
+      name: 'TMDB Discover+',
+      manifest: 'https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json',
+      setup: 'https://tmdb-discover-plus.elfhosted.com/'
+    }
+  ];
+
+  for (const item of expected) {
+    const card = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: item.name }) });
+    await expect(card).toHaveCount(1);
+    await expect(card.locator('h3')).toHaveText(item.name);
+    await expect(card.locator('.manifest-url')).toHaveText(item.manifest);
+    await expect(card.locator('.card-actions a').first()).toHaveAttribute('href', item.setup);
+    await expect(card.locator('.card-actions a[href="' + item.manifest + '"]')).toHaveAttribute('href', item.manifest);
+    await expect(card.locator('.share-btn')).toBeVisible();
+  }
+});
+
 test('Manifest share action is visible and the copy handler writes its URL', async ({ page, context }) => {
   await page.goto('/#plugins');
   await expect(page.locator('#plugins')).toBeVisible();
@@ -378,7 +408,7 @@ test('plugin library cards never overlap across responsive widths and languages'
         : window.matchMedia('(max-width: 1000px)').matches ? 2 : 3
     );
     expect(layout.columns, JSON.stringify(layout)).toBe(expectedColumns);
-    expect(layout.cards, JSON.stringify(layout)).toHaveLength(21);
+    expect(layout.cards, JSON.stringify(layout)).toHaveLength(19);
     expect(layout.cardCollisions, JSON.stringify(layout)).toEqual([]);
     for (const card of layout.cards) {
       expect(card.collisions, JSON.stringify(card)).toEqual([]);
