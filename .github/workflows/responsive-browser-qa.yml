@@ -1,0 +1,64 @@
+name: Responsive browser QA
+
+on:
+  push:
+    branches:
+      - redesign/responsive-system-2026-11-19
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "premium-ui.css"
+      - "premium-ui.js"
+      - "tests/responsive-check.cjs"
+      - ".github/workflows/responsive-browser-qa.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chromium-responsive-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright
+        run: npm install --no-save playwright
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Start local website
+        run: |
+          python3 -m http.server 4173 --bind 127.0.0.1 > /tmp/nuvio-http.log 2>&1 &
+          echo $! > /tmp/nuvio-http.pid
+          for attempt in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/nuvio-http.log
+          exit 1
+
+      - name: Test real Chromium layouts
+        run: node tests/responsive-check.cjs
+
+      - name: Upload viewport screenshots and report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nuvio-responsive-browser-qa
+          path: |
+            artifacts/responsive/
+          if-no-files-found: warn
+          retention-days: 14
