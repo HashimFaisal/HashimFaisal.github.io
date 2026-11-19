@@ -43,6 +43,7 @@ jobs:
           mkdir -p public/data public/assets
           cp index.html style.css app.js public/
           cp premium-ui.css premium-ui.js public/
+          cp touch-effects.css touch-effects.js public/
           cp data/status.json public/data/
           if [ -f data/changelog.json ]; then cp data/changelog.json public/data/; fi
           if [ -f data/updates.json ]; then cp data/updates.json public/data/; fi
@@ -68,9 +69,9 @@ jobs:
 
           updated, count = re.subn(pattern, replace, html, flags=re.IGNORECASE)
 
-          if count != 4:
+          if count != 6:
               raise SystemExit(
-                  f"Expected 4 local CSS/JS references, found {count}; refusing to deploy."
+                  f"Expected 6 local CSS/JS references, found {count}; refusing to deploy."
               )
 
           path.write_text(updated)
