@@ -624,7 +624,7 @@ test('all active UI source colors stay within the unified Nuvio palette', async 
         for (const property of properties) {
           const value = style[property];
           if (!value) continue;
-          for (const match of value.matchAll(/rgba?\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)/gi)) {
+          for (const match of value.matchAll(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/gi)) {
             const rgb = match.slice(1, 4).join(',');
             if (!approved.has(rgb)) violations.push({ element: element.tagName, pseudo, property, rgb });
           }
