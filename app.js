@@ -1,7 +1,7 @@
 const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 
-let activeFilter = 'nuvio';
+let activeFilter = 'all';
 let currentLang = 'ar';
 try {
   const savedLang = localStorage.getItem('nuvio-language');
@@ -56,6 +56,11 @@ const translations = {
   'الكل': 'All',
   'إضافات Nuvio': 'Nuvio Plugins',
   'إضافات Nuvio Add-ons': 'Nuvio Add-ons',
+  'الكتالوجات': 'Catalogs',
+  'الترجمات': 'Subtitles',
+  'التقييمات والبيانات': 'Ratings & Metadata',
+  'ما لقينا موارد تطابق بحثك.': 'No resources match your search.',
+  'موارد': 'RESOURCES',
   'جارٍ تحميل روابط التنزيل...': 'Loading download links...',
   'تحديث': 'Update',
   'نسخ الرابط': 'Copy Link',
@@ -402,7 +407,7 @@ function filterCards() {
   let count = 0;
 
   $$('.plugin-card').forEach(card => {
-    const type = card.querySelector('.type-tag').classList.contains('external') ? 'stremio' : 'nuvio';
+    const type = card.dataset.category || 'nuvio';
     const matchType = activeFilter === 'all' || activeFilter === type;
     const matchText = card.innerText.toLowerCase().includes(term);
     card.hidden = !(matchType && matchText);
@@ -410,7 +415,7 @@ function filterCards() {
   });
 
   $('#visible-count').textContent =
-    `${String(count).padStart(2, '0')} ${currentLang === 'ar' ? 'إضافة' : 'ADD-ONS'}`;
+    `${String(count).padStart(2, '0')} ${t('موارد')}`;
   $('#empty-state').hidden = count !== 0;
 }
 
