@@ -3869,3 +3869,73 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
   clip-path: circle(50% at 50% 50%);
   transform: scale(1.2);
 }
+
+
+/* NUVIO — Mobile hero and dashboard spacing refinement */
+@media (max-width: 560px) {
+  /* The source Earth video contains generous black padding; restore its
+     original close crop so the globe fills its circular viewport. */
+  .globe-video {
+    transform: scale(1.45);
+  }
+
+  .nuvio-dashboard {
+    margin-bottom: 18px;
+  }
+
+  .nuvio-dashboard-heading {
+    gap: 10px;
+    margin-bottom: 15px;
+    padding-bottom: 11px;
+  }
+
+  .nuvio-dashboard-heading h2 {
+    margin: 5px 0 3px;
+    font-size: clamp(22px, 5.8vw, 26px);
+  }
+
+  .nuvio-dashboard-heading p {
+    font-size: 11px;
+    line-height: 1.65;
+  }
+
+  .nuvio-dashboard-mark {
+    padding: 7px 9px;
+    font-size: 9px;
+    white-space: nowrap;
+  }
+
+  .nuvio-launch-grid {
+    gap: 10px;
+  }
+
+  .nuvio-launch-card {
+    min-height: 158px;
+    padding: 16px;
+    border-radius: 17px;
+  }
+
+  .nuvio-launch-icon {
+    width: 39px;
+    height: 39px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    font-size: 21px;
+  }
+
+  .nuvio-launch-card strong {
+    margin-top: 7px;
+    font-size: 17px;
+  }
+
+  .nuvio-launch-description {
+    margin-top: 6px;
+    font-size: 10px;
+    line-height: 1.7;
+  }
+
+  .nuvio-launch-open {
+    padding-top: 11px;
+    font-size: 9px;
+  }
+}
