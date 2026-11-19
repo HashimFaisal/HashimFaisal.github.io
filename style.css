@@ -1024,7 +1024,7 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
 }
 
 /* =====================================
-   LUXURY CINEMATIC — MATTE BLACK / GOLD
+   NUVIO — MIDNIGHT PRISM COLOR PALETTE
    ===================================== */
 :root body {
   background:
@@ -1154,7 +1154,7 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
 }
 
 :root .type-tag.external {
-  color: #e5cb98;
+  color: #a9eff8;
   border-color: rgba(88,216,232,.32);
   background: rgba(88,216,232,.08);
 }
