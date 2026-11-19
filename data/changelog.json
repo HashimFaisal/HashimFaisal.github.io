@@ -1,5 +1,23 @@
 [
   {
+    "date": "2026-11-19T09:00:00+03:00",
+    "type": "updated",
+    "title": "اعتماد إضافات الترجمات ذات Manifest مباشر فقط",
+    "detail": "استبدال بطاقات الإعداد والحسابات الشخصية بإضافات Manifest عامة مباشرة: TheSubtitleDB وPersian Subtitles، مع الإبقاء على OpenSubtitles v3."
+  },
+  {
+    "date": "2026-11-19T08:30:00+03:00",
+    "type": "updated",
+    "title": "توضيح متطلبات API وروابط Manifest للترجمات",
+    "detail": "تمييز الإضافات التي تحتاج API فعلياً عن الإضافات التي تعمل بدونه، وإضافة روابط مفاتيح SubDL وSubSource الاختيارية في SubSense ورابط مزود AI الاختياري في SubMaker، وتوضيح أن روابط Manifest لبعض الخدمات شخصية وتُولّد من صفحات الإعداد."
+  },
+  {
+    "date": "2026-11-19T04:20:00+00:00",
+    "type": "added",
+    "title": "إضافة موارد جديدة لقسم الترجمات",
+    "detail": "إضافة OpenSubtitles PRO وCommunity Subtitles وSubSource وSubSense وSubMaker وAIO Subtitles، مع ربط إعداد SubDL وتوثيق متطلبات كل خدمة."
+  },
+  {
     "date": "2026-11-14T05:37:06.126801+00:00",
     "type": "added",
     "title": "إضافة مصدر جديد: Cinemeta",
