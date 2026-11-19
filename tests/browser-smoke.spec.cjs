@@ -612,7 +612,7 @@ test('all UI styles use the unified Nuvio palette without retired mixed hues', a
     '162,177,200', '141,234,243', '255,255,255', '0,0,0',
     '7,11,22', '17,29,51'
   ]);
-  for (const match of css.matchAll(/rgba?\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)/gi)) {
+  for (const match of css.matchAll(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/gi)) {
     const rgb = match.slice(1, 4).join(',');
     expect(allowedCssRgb.has(rgb), `Unexpected CSS RGB palette value: ${rgb}`).toBeTruthy();
   }
@@ -621,7 +621,7 @@ test('all UI styles use the unified Nuvio palette without retired mixed hues', a
     '#070b16', '#0d1526', '#111d33', '#a394ff', '#58d8e8',
     '#8deaf3', '#f2f6ff', '#a2b1c8'
   ]);
-  for (const match of visualPalette.matchAll(/#[0-9a-f]{3,8}\\b/gi)) {
+  for (const match of visualPalette.matchAll(/#[0-9a-f]{3,8}\b/gi)) {
     expect(allowedArtworkHex.has(match[0]), `Unexpected artwork color: ${match[0]}`).toBeTruthy();
   }
 
