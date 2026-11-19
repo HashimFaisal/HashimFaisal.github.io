@@ -96,7 +96,7 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   gap: 22px;
   min-height: 76px;
   padding: 10px max(calc((100% - var(--page))/2), 4%);
-  background: rgba(8, 11, 18, .88);
+  background: rgba(7, 11, 22, .88);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
@@ -578,7 +578,7 @@ nav a:hover::after { transform: scaleX(1); }
   border: 1px solid rgba(88,216,232,.14);
   border-radius: 11px;
   color: var(--cyan-light);
-  background: rgba(4,10,17,.7);
+  background: rgba(7,11,22,.7);
   font-size: 10px;
   line-height: 1.8;
 }
@@ -1000,7 +1000,7 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
     radial-gradient(ellipse at 82% 45%, rgba(88,216,232,.13), transparent 40%),
     radial-gradient(ellipse at 12% 0%, rgba(88,216,232,.07), transparent 48%),
     linear-gradient(125deg,var(--surface-2),var(--bg) 58%,var(--surface));
-  box-shadow: 0 35px 90px rgba(0,0,0,.48), inset 0 1px rgba(175,229,255,.07);
+  box-shadow: 0 35px 90px rgba(0,0,0,.48), inset 0 1px rgba(255,255,255,.07);
 }
 
 :root .hero::before {
@@ -1046,7 +1046,7 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
   background:
     radial-gradient(ellipse at 100% 0%,rgba(88,216,232,.055),transparent 55%),
     linear-gradient(145deg,var(--surface-2),var(--bg));
-  box-shadow: 0 16px 40px rgba(0,0,0,.30),inset 0 1px rgba(175,229,255,.035);
+  box-shadow: 0 16px 40px rgba(0,0,0,.30),inset 0 1px rgba(255,255,255,.035);
 }
 
 :root .stat-card::before,
