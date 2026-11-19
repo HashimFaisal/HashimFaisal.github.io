@@ -572,8 +572,8 @@ test('all active UI source colors stay within the unified Nuvio palette', async 
     return response.text();
   }));
   const [styleCss, premiumCss, indexHtml, appJs, premiumUiJs, ...artwork] = contents;
-  const css = (styleCss + '\\n' + premiumCss).toLowerCase();
-  const uiSource = (indexHtml + '\\n' + appJs + '\\n' + premiumUiJs).toLowerCase();
+  const css = (styleCss + '\n' + premiumCss).toLowerCase();
+  const uiSource = (indexHtml + '\n' + appJs + '\n' + premiumUiJs).toLowerCase();
   const allowedCssRgb = new Set([
     '88,216,232', '163,148,255', '66,200,121', '255,130,146',
     '162,177,200', '141,234,243', '255,255,255', '0,0,0',
@@ -588,19 +588,19 @@ test('all active UI source colors stay within the unified Nuvio palette', async 
     for (const match of source.matchAll(/#(?:[0-9a-f]{8}|[0-9a-f]{6}|[0-9a-f]{4}|[0-9a-f]{3})(?![0-9a-f])/gi)) {
       expect(allowedCssHex.has(match[0]), 'Unexpected UI hex color: ' + match[0]).toBeTruthy();
     }
-    for (const match of source.matchAll(/rgba?\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)/gi)) {
+    for (const match of source.matchAll(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/gi)) {
       const rgb = match.slice(1, 4).join(',');
       expect(allowedCssRgb.has(rgb), 'Unexpected UI RGB color: ' + rgb).toBeTruthy();
     }
-    expect(source).not.toMatch(/hsla?\\s*\\(/i);
+    expect(source).not.toMatch(/hsla?\s*\(/i);
   }
 
   const allowedArtworkHex = new Set([
     '#070b16', '#0d1526', '#111d33', '#a394ff', '#58d8e8',
     '#8deaf3', '#f2f6ff', '#a2b1c8'
   ]);
-  const visualPalette = artwork.join('\\n').toLowerCase();
-  for (const match of visualPalette.matchAll(/#[0-9a-f]{3,8}\\b/gi)) {
+  const visualPalette = artwork.join('\n').toLowerCase();
+  for (const match of visualPalette.matchAll(/#[0-9a-f]{3,8}\b/gi)) {
     expect(allowedArtworkHex.has(match[0]), 'Unexpected artwork color: ' + match[0]).toBeTruthy();
   }
 
