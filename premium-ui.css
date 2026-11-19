@@ -1778,7 +1778,7 @@ html[dir="rtl"] .nuvio-launch-open b {
   border-radius: 50%;
   background: #22e58b;
   box-shadow: 0 0 6px rgba(34,229,139,.9), 0 0 13px rgba(34,229,139,.55);
-  animation: nuvio-live-pulse 1.4s ease-in-out infinite;
+  animation: nuvio-live-ticker-pulse 1.4s ease-in-out infinite;
 }
 .live-updates__viewport {
   position: relative;
@@ -1891,7 +1891,7 @@ html[dir="rtl"] .live-updates__shell::before {
   35% { opacity: .8; }
   65%,100% { left: 110%; opacity: 0; }
 }
-@keyframes nuvio-live-pulse {
+@keyframes nuvio-live-ticker-pulse {
   0%,100% { opacity: .65; transform: scale(.85); }
   50% { opacity: 1; transform: scale(1.15); }
 }
