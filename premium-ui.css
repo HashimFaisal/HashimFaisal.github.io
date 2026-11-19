@@ -1541,7 +1541,7 @@ html[dir="rtl"] .nuvio-launch-open b {
   flex: 0 0 7px;
   border-radius: 50%;
   background: var(--success);
-  box-shadow: 0 0 6px rgba(34,229,139,.9), 0 0 13px rgba(34,229,139,.55);
+  box-shadow: 0 0 6px rgba(66,200,121,.9), 0 0 13px rgba(66,200,121,.55);
   animation: nuvio-live-ticker-pulse 1.4s ease-in-out infinite;
 }
 .live-updates__viewport {
@@ -2148,7 +2148,7 @@ footer a:hover,
     radial-gradient(ellipse at 82% 42%, rgba(88,216,232,.17), transparent 40%),
     radial-gradient(ellipse at 12% 0%, rgba(163,148,255,.16), transparent 48%),
     linear-gradient(125deg, var(--surface-2), var(--bg) 58%, var(--surface));
-  box-shadow: 0 35px 90px rgba(0,0,0,.48), inset 0 1px rgba(190,235,255,.08);
+  box-shadow: 0 35px 90px rgba(0,0,0,.48), inset 0 1px rgba(255,255,255,.08);
 }
 
 :root .hero::before {
@@ -2238,7 +2238,7 @@ footer a:hover,
   background:
     radial-gradient(ellipse at 100% 0%, rgba(88,216,232,.065), transparent 55%),
     linear-gradient(145deg, var(--surface-2), var(--bg));
-  box-shadow: 0 16px 40px rgba(0,0,0,.28), inset 0 1px rgba(190,235,255,.035);
+  box-shadow: 0 16px 40px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.035);
 }
 .stat-card:hover,
 .plugin-card:hover,
@@ -2390,7 +2390,7 @@ footer a:hover,
     radial-gradient(ellipse at 8% 50%, rgba(88,216,232,.11), transparent 42%),
     radial-gradient(ellipse at 88% 50%, rgba(163,148,255,.08), transparent 42%),
     linear-gradient(115deg, var(--surface-2), var(--bg) 55%, var(--surface-2));
-  box-shadow: 0 14px 38px rgba(0,0,0,.28), inset 0 1px rgba(190,235,255,.055);
+  box-shadow: 0 14px 38px rgba(0,0,0,.28), inset 0 1px rgba(255,255,255,.055);
 }
 .live-updates__shell::before,
 .live-updates__shell::after {
@@ -2697,14 +2697,14 @@ button:active,
    Visual-only polish; globe/video geometry is intentionally untouched.
    ========================================= */
 :root .hero {
-  border-color: rgba(116, 218, 235, .32);
+  border-color: rgba(88, 216, 232, .32);
   background:
     radial-gradient(ellipse at 78% 44%, rgba(88, 216, 232, .15), transparent 42%),
     radial-gradient(ellipse at 8% 4%, rgba(163, 148, 255, .12), transparent 46%),
     linear-gradient(128deg, var(--surface-2) 0%, var(--bg) 57%, var(--surface) 100%);
   box-shadow:
     0 32px 84px rgba(0, 0, 0, .46),
-    inset 0 1px rgba(208, 239, 255, .09),
+    inset 0 1px rgba(255, 255, 255, .09),
     0 0 42px rgba(88, 216, 232, .035);
 }
 .hero-copy { padding-top: clamp(142px, 14vw, 158px); }
@@ -2729,7 +2729,7 @@ button:active,
 .hero-meta span {
   min-height: 29px; padding: 5px 10px;
   border: 1px solid rgba(162, 177, 200, .13); border-radius: 999px;
-  background: rgba(9, 19, 35, .48); color: var(--muted); font-size: 10px;
+  background: rgba(7, 11, 22, .48); color: var(--muted); font-size: 10px;
 }
 .hero-meta i { width: 6px; height: 6px; flex-basis: 6px; }
 
@@ -2801,7 +2801,7 @@ button:active,
   background:
     radial-gradient(ellipse at 100% 0%, rgba(88, 216, 232, .105), transparent 52%),
     linear-gradient(145deg, rgba(17, 29, 51, .96), rgba(7, 11, 22, .98));
-  box-shadow: 0 14px 34px rgba(0, 0, 0, .16), inset 0 1px rgba(225, 245, 255, .055);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .16), inset 0 1px rgba(255, 255, 255, .055);
 }
 .nuvio-launch-card:nth-child(4) { grid-column: 2 / span 2; }
 .nuvio-launch-card:nth-child(5) { grid-column: 4 / span 2; }
@@ -3027,15 +3027,15 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
   height: 7px;
   border-radius: 50%;
   background: var(--muted);
-  box-shadow: 0 0 0 3px rgba(154, 170, 189, .1);
+  box-shadow: 0 0 0 3px rgba(162, 177, 200, .1);
 }
 #plugins .card-status.ok i {
   background: var(--success);
-  box-shadow: 0 0 0 3px rgba(87, 214, 161, .12);
+  box-shadow: 0 0 0 3px rgba(66, 200, 121, .12);
 }
 #plugins .card-status.bad i {
   background: var(--danger);
-  box-shadow: 0 0 0 3px rgba(255, 140, 154, .12);
+  box-shadow: 0 0 0 3px rgba(255, 130, 146, .12);
 }
 #plugins .plugin-card[hidden] { display: none !important; }
 #plugins .filter:focus-visible,

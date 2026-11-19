@@ -53,21 +53,62 @@ for ref in parser.local_refs:
     if not path.exists():
         fail(f"Broken local reference: {ref}")
 
-# CSS syntax and old palette tokens.
+# CSS syntax and retired palette tokens across the active visual system.
+LEGACY_PALETTE = (
+    "#f0e5cf", "#1b1a17", "#10100f", "#171613", "#d4af37", "#c9a44c",
+    "#b58d38", "#1a1916", "#111110", "#c5bdae", "#d7d0c1", "#f1dfb9",
+    "#f0dfb9", "#a99e89", "#fff0ca", "34,229,139", "190,235,255",
+    "116, 218, 235", "208, 239, 255", "225, 245, 255", "175,229,255", "8, 11, 18", "4,10,17",
+    "154, 170, 189", "87, 214, 161", "255, 140, 154",
+    "#080b18", "#17113b", "#071c2b", "#a78bfa", "#6366f1", "#22d3ee",
+    "#7c3aed", "#a5b4fc", "#0891b2", "#8b5cf6", "#c4b5fd", "#d8ddf5",
+    "#94a3b8", "#ddd6fe", "#a5f3fc", "#11152d", "#17143b", "#64748b",
+    "#14213b", "#b7f5ff", "#160d35", "#6d28d9", "#ede9fe", "#062b3a",
+    "#0e7490", "#67e8f9", "#cffafe", "#5266a8",
+)
+ALLOWED_RGB = {
+    "88,216,232", "163,148,255", "66,200,121", "255,130,146",
+    "162,177,200", "141,234,243", "255,255,255", "0,0,0",
+    "7,11,22", "17,29,51",
+}
 for css_path in CSS_FILES:
     css_text = css_path.read_text(encoding="utf-8")
     rules = tinycss2.parse_stylesheet(css_text, skip_comments=True, skip_whitespace=True)
     parse_errors = [rule for rule in rules if rule.type == "error"]
     if parse_errors:
         fail(f"{css_path.name}: CSS parser errors: {parse_errors[:3]}")
+    for red, green, blue in __import__("re").findall(r"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)", css_text, flags=__import__("re").I):
+        rgb = f"{red},{green},{blue}"
+        if rgb not in ALLOWED_RGB:
+            fail(f"Unapproved RGB color in {css_path.name}: {rgb}")
+    for legacy in LEGACY_PALETTE:
+        if legacy.lower() in css_text.lower():
+            fail(f"Legacy palette token remains in {css_path.name}: {legacy}")
     if css_path.name == "premium-ui.css":
-        for legacy in ("#f0e5cf", "#1b1a17", "#10100f", "#171613", "#d4af37", "#c9a44c", "#b58d38", "#1a1916", "#111110", "#c5bdae", "#d7d0c1", "#f1dfb9", "#f0dfb9", "#a99e89", "#fff0ca"):
-            if legacy.lower() in css_text.lower():
-                fail(f"Legacy palette token remains in {css_path.name}: {legacy}")
         keyframe_names = __import__("re").findall(r"@keyframes\s+([\w-]+)", css_text)
         if len(keyframe_names) != len(set(keyframe_names)):
             duplicates = sorted(name for name in set(keyframe_names) if keyframe_names.count(name) > 1)
             fail(f"Duplicate CSS keyframe names in {css_path.name}: {duplicates}")
+
+ACTIVE_ARTWORK = (
+    "hero.svg", "all-in-one.svg", "cinemabox.svg", "cinemana.svg",
+    "opensubtitles.svg", "nuvio-catalog.svg", "izlemeli-catalog.svg",
+)
+for artwork_name in ACTIVE_ARTWORK:
+    artwork_path = ROOT / "assets" / artwork_name
+    if not artwork_path.exists():
+        fail(f"Missing active artwork: {artwork_name}")
+    artwork_text = artwork_path.read_text(encoding="utf-8")
+    for legacy in LEGACY_PALETTE:
+        if legacy.lower() in artwork_text.lower():
+            fail(f"Legacy palette token remains in {artwork_name}: {legacy}")
+    allowed_artwork_hex = {
+        "#070b16", "#0d1526", "#111d33", "#a394ff", "#58d8e8",
+        "#8deaf3", "#f2f6ff", "#a2b1c8",
+    }
+    for color in __import__("re").findall(r"#[0-9a-fA-F]{3,8}\b", artwork_text):
+        if color.lower() not in allowed_artwork_hex:
+            fail(f"Unapproved artwork color in {artwork_name}: {color}")
 
 # JSON parses, shapes, duplicate live update IDs, and no removed source in live updates.
 data = {}
