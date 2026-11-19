@@ -13,8 +13,8 @@
   aspect-ratio: 1;
   border: 1px solid rgba(105, 226, 244, .7);
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(88,216,232,.18) 0%, rgba(129,112,255,.09) 42%, transparent 72%);
-  box-shadow: 0 0 22px rgba(88,216,232,.16), inset 0 0 18px rgba(129,112,255,.13);
+  background: radial-gradient(circle, rgba(88,216,232,.18) 0%, rgba(163,148,255,.09) 42%, transparent 72%);
+  box-shadow: 0 0 22px rgba(88,216,232,.16), inset 0 0 18px rgba(163,148,255,.13);
   transform: translate(-50%, -50%) scale(.22);
   animation: nuvio-liquid-ripple 720ms cubic-bezier(.16,.72,.22,1) forwards;
   will-change: transform, opacity;
@@ -43,7 +43,7 @@
   transform: translate(-50%, -76px) scaleY(.45);
   transform-origin: top center;
   border-radius: 0 0 50% 50%;
-  background: radial-gradient(ellipse at 50% 0%, rgba(88,216,232,.2), rgba(129,112,255,.13) 43%, transparent 76%);
+  background: radial-gradient(ellipse at 50% 0%, rgba(88,216,232,.2), rgba(163,148,255,.13) 43%, transparent 76%);
   filter: blur(8px);
   transition: opacity 180ms ease, transform 220ms cubic-bezier(.2,.75,.25,1);
 }
