@@ -133,7 +133,7 @@
       section.classList.toggle('nuvio-view-active', !home && key === target);
     });
 
-    $('.nuvio-view-back .nuvio-back-label').forEach(node => {
+    $$('.nuvio-view-back .nuvio-back-label').forEach(node => {
       node.textContent = labels[language()].back;
     });
 
