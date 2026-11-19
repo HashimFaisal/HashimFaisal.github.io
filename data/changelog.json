@@ -1,5 +1,11 @@
 [
   {
+    "date": "2026-11-19T08:30:00+03:00",
+    "type": "updated",
+    "title": "توضيح متطلبات API وروابط Manifest للترجمات",
+    "detail": "تمييز الإضافات التي تحتاج API فعلياً عن الإضافات التي تعمل بدونه، وإضافة روابط مفاتيح SubDL وSubSource الاختيارية في SubSense ورابط مزود AI الاختياري في SubMaker، وتوضيح أن روابط Manifest لبعض الخدمات شخصية وتُولّد من صفحات الإعداد."
+  },
+  {
     "date": "2026-11-19T04:20:00+00:00",
     "type": "added",
     "title": "إضافة موارد جديدة لقسم الترجمات",
@@ -153,4 +159,4 @@
     "source_url": "https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json",
     "new_version": "1.0.0"
   }
-]
+]\n
