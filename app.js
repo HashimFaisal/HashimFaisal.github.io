@@ -630,20 +630,20 @@ function renderDownloads(report) {
   ).length;
   $('#download-grid').innerHTML = assets.map(asset => {
     const downloadUrl = safeHttpsUrl(asset.download_url);
-    const displayName = asset.label === 'iOS IPA'
-      ? 'iOS IPA package'
-      : (asset.name || t('ملف غير متاح'));
+    const displayName = asset.name || (
+      asset.label === 'iOS IPA' ? 'iOS IPA package' : t('ملف غير متاح')
+    );
     const ready = Boolean(asset.ok && downloadUrl);
-    return `<article class="download-card">
-      <small>${escapeHTML(displayName)} · ${formatBytes(asset.size_bytes)}</small>
-      <strong>Nuvio ${escapeHTML(asset.label || 'Download')}</strong>
-      <small class="muted">${t('الإصدار')}: ${escapeHTML(appVersion)}</small>
-      <small class="muted">${asset.uploaded_at
+    return `<article class="download-card" data-ready="${ready ? 'true' : 'false'}">
+      <strong class="download-file"><bdi dir="ltr">${escapeHTML(displayName)} · ${formatBytes(asset.size_bytes)}</bdi></strong>
+      <small class="download-platform">Nuvio · ${escapeHTML(asset.label || 'Download')}</small>
+      <small class="download-meta">${t('الإصدار')}: ${escapeHTML(appVersion)}</small>
+      <small class="download-meta">${asset.uploaded_at
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
         : t('تاريخ الرفع غير متاح')}</small>
       ${ready
-        ? `<a href="${escapeHTML(downloadUrl)}" target="_blank" rel="noopener noreferrer">${t('تنزيل مباشر ↗')}</a>`
-        : `<span class="muted">${t('غير متاح حالياً')}</span>`}
+        ? `<a class="download-action" href="${escapeHTML(downloadUrl)}" target="_blank" rel="noopener noreferrer">${t('تنزيل مباشر ↗')}</a>`
+        : `<span class="download-unavailable muted">${t('غير متاح حالياً')}</span>`}
     </article>`;
   }).join('');
 }
@@ -664,9 +664,18 @@ async function loadStatus() {
 
     const checks = report.checks || [];
     const manifests = checks.filter(item => item.type === 'manifest');
+    const healthyManifests = manifests.filter(item => item.ok);
+    const unhealthyManifests = manifests.filter(item => !item.ok);
 
-    $('#healthy-count').textContent = manifests.filter(item => item.ok).length;
-    $('#unhealthy-count').textContent = manifests.filter(item => !item.ok).length;
+    $('#healthy-count').textContent = healthyManifests.length;
+    $('#unhealthy-count').textContent = unhealthyManifests.length;
+
+    const healthCard = $('#health-state')?.closest('.stat-card');
+    const healthyCard = $('#healthy-count')?.closest('.stat-card');
+    const unhealthyCard = $('#unhealthy-count')?.closest('.stat-card');
+    if (healthCard) healthCard.dataset.health = report.ok ? 'healthy' : 'warning';
+    if (healthyCard) healthyCard.dataset.health = healthyManifests.length ? 'healthy' : 'unknown';
+    if (unhealthyCard) unhealthyCard.dataset.health = unhealthyManifests.length ? 'warning' : 'healthy';
 
     latestReport = report;
     updateLastChecked();
@@ -676,6 +685,8 @@ async function loadStatus() {
   } catch (error) {
     $('#health-state').textContent = t('غير متاح');
     $('#health-detail').textContent = t('تعذر تحميل تقرير الفحص');
+    const healthCard = $('#health-state')?.closest('.stat-card');
+    if (healthCard) healthCard.dataset.health = 'unknown';
     $('#download-grid').innerHTML =
       `<p class="muted">${t('تعذر جلب معلومات الإصدار الأخير.')}</p>`;
     console.error('Status loading failed:', error);
