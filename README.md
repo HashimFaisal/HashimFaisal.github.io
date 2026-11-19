@@ -35,7 +35,11 @@ The projects and add-ons listed here are independent community resources and are
 
 - Where a Manifest is provided, use the card's copy/open action. Supported Nuvio plugin cards can hand off to the Nuvio app.
 - **OpenSubtitles** is listed as an external subtitle add-on with a Manifest URL.
-- **SubDL** is presented as an API service. Obtain/configure its API details as required by the service; it is not a Nuvio Manifest installation link.
+- **SubDL** has a Nuvio subtitle-addon configurator at `https://subdl.strem.top/configure`; its API key page remains available separately at `https://subdl.com/an/panel/api`.
+- The Nuvio subtitle-addon guide also lists **OpenSubtitles PRO**, **Stremio Community Subtitles**, **SubSource**, **SubDL**, **SubSense**, **SubMaker**, and **AIO Subtitles**. Configurator pages and personal-account links are not static manifests; generate or retrieve the final URL on each provider's site, then add that URL in Nuvio.
+- **Stremio Community Subtitles** requires an account and a personal installation URL. **SubSource** requires its provider API key. **SubSense** aggregates multiple subtitle providers and may use optional provider keys. **SubMaker** can fetch subtitles without AI translation; AI translation requires a configured AI provider.
+- **AIO Subtitles** is listed in the Nuvio Wiki, but its public setup endpoint could not be independently confirmed during this update. Treat it as a reference link and verify availability before relying on it.
+- Subtitle-addon listing does not guarantee in-app functionality. Nuvio exposes subtitle-addon startup behavior under Settings > Player; test generated addons in the target Nuvio version.
 - External add-on compatibility and available features depend on the add-on and the installed Nuvio version.
 - **AIOMetadata** and **TMDB Discover+** require configuration first; install the generated manifest URL, not the configurator page.
 - **Anime Kitsu** provides anime catalogs and metadata; **IMDb Ratings** is a stream-resource addon, not a catalog.
