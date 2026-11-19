@@ -1166,7 +1166,6 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 }
 
 .nuvio-orbit-track span {
-  color: var(--cyan-light);
   text-shadow: 0 0 9px rgba(88, 216, 232, 0.72), 0 2px 8px #000;
 }
 /* Consistent keyboard accessibility */
@@ -3544,9 +3543,6 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
 /* NUVIO — Home hero copy: keep the title and supporting content in one clean flow. */
 .hero-copy {
   align-self: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   padding-block: 0;
   min-width: 0;
 }
@@ -3561,11 +3557,8 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
 .hero-copy h1 {
   position: relative;
   inset: auto;
-  width: 100%;
   margin: 0 0 16px;
   line-height: 1.4;
-  text-align: start;
-  text-wrap: balance;
 }
 
 .hero-copy > p {
