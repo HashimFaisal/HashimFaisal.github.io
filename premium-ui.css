@@ -3551,7 +3551,7 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
 }
 
 
-/* NUVIO — Direction-aware dashboard ornaments and entrance motion */
+/* NUVIO — Direction-matched dashboard ornaments and entrance motion */
 .nuvio-dashboard-heading {
   position: relative;
   text-align: start;
@@ -3569,11 +3569,11 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
 }
 
 html[dir="rtl"] .nuvio-dashboard-heading::after {
-  background: linear-gradient(to left, var(--cyan), rgba(163, 148, 255, .34), transparent);
+  background: linear-gradient(to right, var(--cyan), rgba(163, 148, 255, .34), transparent);
 }
 
 html[dir="ltr"] .nuvio-dashboard-heading::after {
-  background: linear-gradient(to right, var(--cyan), rgba(163, 148, 255, .34), transparent);
+  background: linear-gradient(to left, var(--cyan), rgba(163, 148, 255, .34), transparent);
 }
 
 .nuvio-launch-card {
@@ -3584,31 +3584,31 @@ html[dir="ltr"] .nuvio-dashboard-heading::after {
 .nuvio-launch-card::after {
   right: auto;
   left: auto;
-  inset-inline-end: -58px;
-  inset-inline-start: auto;
+  inset-inline-start: -58px;
+  inset-inline-end: auto;
 }
 
 html[dir="rtl"] .nuvio-launch-card {
   background:
-    radial-gradient(ellipse at 100% 0%, rgba(88, 216, 232, .105), transparent 52%),
+    radial-gradient(ellipse at 0% 0%, rgba(88, 216, 232, .105), transparent 52%),
     linear-gradient(145deg, rgba(20, 35, 58, .96), rgba(10, 22, 39, .98));
   animation-name: nuvio-card-enter-rtl;
 }
 
 html[dir="ltr"] .nuvio-launch-card {
   background:
-    radial-gradient(ellipse at 0% 0%, rgba(88, 216, 232, .105), transparent 52%),
+    radial-gradient(ellipse at 100% 0%, rgba(88, 216, 232, .105), transparent 52%),
     linear-gradient(145deg, rgba(20, 35, 58, .96), rgba(10, 22, 39, .98));
   animation-name: nuvio-card-enter-ltr;
 }
 
 @keyframes nuvio-card-enter-rtl {
-  from { opacity: 0; transform: translate3d(22px, 14px, 0) scale(.985); }
+  from { opacity: 0; transform: translate3d(-22px, 14px, 0) scale(.985); }
   to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
 @keyframes nuvio-card-enter-ltr {
-  from { opacity: 0; transform: translate3d(-22px, 14px, 0) scale(.985); }
+  from { opacity: 0; transform: translate3d(22px, 14px, 0) scale(.985); }
   to { opacity: 1; transform: translate3d(0, 0, 0) scale(1); }
 }
 
@@ -3621,12 +3621,12 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
 }
 
 @keyframes nuvio-dashboard-heading-rtl {
-  from { opacity: .55; transform: translate3d(12px, 5px, 0); }
+  from { opacity: .55; transform: translate3d(-12px, 5px, 0); }
   to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
 @keyframes nuvio-dashboard-heading-ltr {
-  from { opacity: .55; transform: translate3d(-12px, 5px, 0); }
+  from { opacity: .55; transform: translate3d(12px, 5px, 0); }
   to { opacity: 1; transform: translate3d(0, 0, 0); }
 }
 
