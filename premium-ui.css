@@ -3737,10 +3737,7 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
     height: 235px;
   }
 
-  .visual-globe {
-    width: 188px;
-    height: 188px;
-  }
+  
 }
 
 /* =====================================================
@@ -3905,9 +3902,7 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
     white-space: nowrap;
   }
 
-  .nuvio-launch-grid {
-    gap: 10px;
-  }
+  
 
   .nuvio-launch-card {
     min-height: 158px;
@@ -3945,7 +3940,7 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
 .visual-globe {
   filter:
     drop-shadow(-3px 0 7px rgba(88, 216, 232, 0.24))
-    drop-shadow(-1px 0 2px rgba(210, 250, 255, 0.22));
+    drop-shadow(-1px 0 2px rgba(141, 234, 243, 0.22));
 }
 
 .visual-globe::after {
@@ -3958,12 +3953,12 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
   pointer-events: none;
   background:
     radial-gradient(ellipse 16% 72% at 2% 50%,
-      rgba(190, 246, 255, 0.23) 0%,
+      rgba(141, 234, 243, 0.23) 0%,
       rgba(88, 216, 232, 0.12) 32%,
       transparent 100%);
   box-shadow:
-    inset 8px 0 16px -9px rgba(188, 246, 255, 0.72),
-    inset 2px 0 5px -2px rgba(220, 250, 255, 0.58);
+    inset 8px 0 16px -9px rgba(141, 234, 243, 0.72),
+    inset 2px 0 5px -2px rgba(141, 234, 243, 0.58);
   opacity: 0.88;
 }
 
@@ -4577,5 +4572,13 @@ footer {
 
   .nuvio-launch-open {
     padding-top: 8px;
+  }
+}
+
+
+/* Tablet-width plugin library: use the two-column layout validated above 680px. */
+@media (min-width: 681px) and (max-width: 760px) {
+  #plugins .plugin-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
