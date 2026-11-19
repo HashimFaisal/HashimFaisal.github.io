@@ -237,3 +237,46 @@ test('home hero title and supporting text stay aligned without overlap', async (
     expect(item.bottom, JSON.stringify(layout)).toBeLessThanOrEqual(layout.hero.bottom + 1);
   }
 });
+
+
+test('home dashboard cards stack vertically on compact screens in both languages', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+
+  const assertStacked = async () => {
+    const layout = await page.locator('#nuvio-launch-grid').evaluate(grid => {
+      const gridStyle = getComputedStyle(grid);
+      const cards = [...grid.querySelectorAll('.nuvio-launch-card')].map(card => {
+        const rect = card.getBoundingClientRect();
+        return {
+          top: rect.top,
+          bottom: rect.bottom,
+          left: rect.left,
+          right: rect.right,
+          column: getComputedStyle(card).gridColumn
+        };
+      });
+      return {
+        columns: gridStyle.gridTemplateColumns.trim().split(/\\s+/).length,
+        cards
+      };
+    });
+
+    expect(layout.columns, JSON.stringify(layout)).toBe(1);
+    expect(layout.cards).toHaveLength(5);
+    for (let i = 0; i < layout.cards.length; i++) {
+      const card = layout.cards[i];
+      expect(card.column, JSON.stringify(layout)).toBe('1 / -1');
+      expect(card.right - card.left, JSON.stringify(layout)).toBeGreaterThan(300);
+      if (i > 0) {
+        expect(card.top, JSON.stringify(layout)).toBeGreaterThanOrEqual(layout.cards[i - 1].bottom);
+      }
+    }
+  };
+
+  await assertStacked();
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  await assertStacked();
+});
