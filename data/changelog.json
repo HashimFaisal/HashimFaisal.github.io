@@ -164,5 +164,23 @@
     "source": "BetterPosters for Nuvio",
     "source_url": "https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json",
     "new_version": "1.0.0"
+  },
+  {
+    "date": "2026-11-19T04:32:17.633293+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: TheSubtitleDB",
+    "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
+    "source": "TheSubtitleDB",
+    "source_url": "https://api.thesubtitledb.org/integrations/stremio/manifest.json",
+    "new_version": "0.2.2"
+  },
+  {
+    "date": "2026-11-19T04:32:17.633293+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: Persian Subtitles",
+    "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
+    "source": "Persian Subtitles",
+    "source_url": "https://stremio.alirostami.com/subtitles/manifest.json",
+    "new_version": "1.2.0"
   }
 ]

@@ -1,5 +1,35 @@
 [
   {
+    "id": "addon:TheSubtitleDB:added:0.2.2",
+    "type": "addon",
+    "title": {
+      "ar": "مصدر جديد: TheSubtitleDB",
+      "en": "New source: TheSubtitleDB"
+    },
+    "description": {
+      "ar": "تمت إضافة TheSubtitleDB إلى مصادر Nuvio. الإصدار: 0.2.2.",
+      "en": "TheSubtitleDB has been added to Nuvio sources. Version: 0.2.2."
+    },
+    "url": "https://api.thesubtitledb.org/integrations/stremio/manifest.json",
+    "publishedAt": "2026-11-19T04:32:17.633293Z",
+    "expiresAt": "2026-11-20T04:32:17.633293Z"
+  },
+  {
+    "id": "addon:Persian Subtitles:added:1.2.0",
+    "type": "addon",
+    "title": {
+      "ar": "مصدر جديد: Persian Subtitles",
+      "en": "New source: Persian Subtitles"
+    },
+    "description": {
+      "ar": "تمت إضافة Persian Subtitles إلى مصادر Nuvio. الإصدار: 1.2.0.",
+      "en": "Persian Subtitles has been added to Nuvio sources. Version: 1.2.0."
+    },
+    "url": "https://stremio.alirostami.com/subtitles/manifest.json",
+    "publishedAt": "2026-11-19T04:32:17.633293Z",
+    "expiresAt": "2026-11-20T04:32:17.633293Z"
+  },
+  {
     "id": "addon:Anime Kitsu:added:0.0.10",
     "type": "addon",
     "title": {
