@@ -575,7 +575,7 @@ test('all UI styles use the unified Nuvio palette without retired mixed hues', a
   const retired = [
     '#141414', '#1a1a1a', '#bd9292', '189, 146, 146', '#f2eee4', '#a9a9a9', '#929292',
     '#131a29', '#0c1420', '#101c27', '#141f2e', '#0d1420', '#101a28',
-    '#152131', '#0e1521', '#141e2c', '#0e1622', '#17172b', '#080807',
+    '#152131', '#0e1521', '#141e2c', '#0e1622', '#17172b', '#080807', '#111a31', '#121f38',
     '#e2a1ad', '226,161,173', '#ff8c9a', '#57d6a1'
   ];
   for (const value of retired) expect(css).not.toContain(value.toLowerCase());
