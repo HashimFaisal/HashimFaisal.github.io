@@ -3529,3 +3529,23 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
   outline: none;
   box-shadow: none;
 }
+
+
+/* NUVIO — Clean, unified System Status card frames */
+#status.nuvio-view-active .stat-card {
+  border-color: var(--line);
+  background: linear-gradient(145deg, var(--surface-2), var(--surface));
+  box-shadow: 0 12px 28px rgba(0, 0, 0, .16);
+}
+
+/* Remove legacy cyan/violet decorative layers from status card frames only. */
+#status.nuvio-view-active .stat-card::before,
+#status.nuvio-view-active .stat-card::after {
+  display: none;
+  content: none;
+}
+
+#status.nuvio-view-active .stat-card:hover {
+  border-color: rgba(88, 216, 232, .34);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, .22);
+}
