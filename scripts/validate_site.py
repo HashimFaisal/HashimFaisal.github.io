@@ -64,12 +64,47 @@ ALLOWED_CSS_HEX = {
     "#a394ff", "#58d8e8", "#42c879", "#a9e8c1", "#ff8292", "#ffb0ba",
     "#8deaf3", "#071317", "#000", "#fff",
 }
+# Detect exact duplicate CSS selector/declaration rules within the same at-rule scope.
+# Media-query variants are kept separate; keyframe steps are intentionally excluded.
+def check_duplicate_css_rules(rules, context, css_name, seen):
+    for rule in rules:
+        if rule.type == "qualified-rule":
+            selector = tinycss2.serialize(rule.prelude).strip()
+            declarations = tinycss2.parse_declaration_list(
+                rule.content, skip_comments=True, skip_whitespace=True
+            )
+            normalized = []
+            for declaration in declarations:
+                if declaration.type == "declaration":
+                    normalized.append((
+                        declaration.lower_name,
+                        tinycss2.serialize(declaration.value).strip(),
+                        declaration.important,
+                    ))
+            signature = (context, selector, tuple(sorted(normalized)))
+            if signature in seen:
+                fail(f"Duplicate CSS rule in {css_name} within {context or 'root'}: {selector}")
+            else:
+                seen.add(signature)
+        elif rule.type == "at-rule" and rule.content is not None:
+            if rule.lower_at_keyword in {"keyframes", "-webkit-keyframes"}:
+                continue
+            prelude = tinycss2.serialize(rule.prelude).strip()
+            nested = tinycss2.parse_rule_list(
+                rule.content, skip_comments=True, skip_whitespace=True
+            )
+            check_duplicate_css_rules(
+                nested, context + (f"@{rule.lower_at_keyword} {prelude}",),
+                css_name, seen,
+            )
+
 for css_path in CSS_FILES:
     css_text = css_path.read_text(encoding="utf-8")
     rules = tinycss2.parse_stylesheet(css_text, skip_comments=True, skip_whitespace=True)
     parse_errors = [rule for rule in rules if rule.type == "error"]
     if parse_errors:
         fail(f"{css_path.name}: CSS parser errors: {parse_errors[:3]}")
+    check_duplicate_css_rules(rules, tuple(), css_path.name, set())
     for red, green, blue in __import__("re").findall(r"rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)", css_text, flags=__import__("re").I):
         rgb = f"{red},{green},{blue}"
         if rgb not in ALLOWED_RGB:
