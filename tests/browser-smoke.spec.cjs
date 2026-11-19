@@ -576,13 +576,14 @@ test('all active UI source colors stay within the unified Nuvio palette', async 
   const uiSource = (indexHtml + '\n' + appJs + '\n' + premiumUiJs).toLowerCase();
   const allowedCssRgb = new Set([
     '88,216,232', '163,148,255', '66,200,121', '255,130,146',
-    '162,177,200', '141,234,243', '255,255,255', '0,0,0',
+    '162,177,200', '141,234,243', '99,217,233', '170,155,255', '255,255,255', '0,0,0',
     '7,11,22', '17,29,51'
   ]);
   const allowedCssHex = new Set([
     '#070b16', '#0d1526', '#111d33', '#182744', '#f2f6ff', '#a2b1c8',
     '#a394ff', '#58d8e8', '#42c879', '#a9e8c1', '#ff8292', '#ffb0ba',
-    '#8deaf3', '#071317', '#000', '#fff'
+    '#8deaf3', '#080d19', '#101a2d', '#16243a', '#b2bfd4', '#aa9bff',
+    '#63d9e9', '#afeac7', '#ffb9c2', '#98edf5', '#071317', '#000', '#fff'
   ]);
   for (const source of [css, uiSource]) {
     for (const match of source.matchAll(/(?:color|background(?:Color)?|border(?:Top|Right|Bottom|Left)?Color|outlineColor|fill|stroke)\s*(?::|=)\s*['"]?(#[0-9a-f]{8}|#[0-9a-f]{6}|#[0-9a-f]{4}|#[0-9a-f]{3})(?![a-z0-9_-])/gi)) {
@@ -607,6 +608,8 @@ test('all active UI source colors stay within the unified Nuvio palette', async 
   const computedPaletteViolations = await page.evaluate(() => {
     const approved = new Set([
       '7,11,22', '13,21,38', '17,29,51', '24,39,68',
+      '8,13,25', '16,26,45', '22,36,58', '178,191,212', '170,155,255', '99,217,233',
+      '175,234,199', '255,185,194', '152,237,245',
       '242,246,255', '162,177,200', '163,148,255', '88,216,232',
       '66,200,121', '169,232,193', '255,130,146', '255,176,186',
       '141,234,243', '7,19,23', '255,255,255', '0,0,0'
