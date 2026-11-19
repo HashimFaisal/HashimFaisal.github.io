@@ -604,6 +604,37 @@ test('all active UI source colors stay within the unified Nuvio palette', async 
     expect(allowedArtworkHex.has(match[0]), 'Unexpected artwork color: ' + match[0]).toBeTruthy();
   }
 
+  const computedPaletteViolations = await page.evaluate(() => {
+    const approved = new Set([
+      '7,11,22', '13,21,38', '17,29,51', '24,39,68',
+      '242,246,255', '162,177,200', '163,148,255', '88,216,232',
+      '66,200,121', '169,232,193', '255,130,146', '255,176,186',
+      '141,234,243', '7,19,23', '255,255,255', '0,0,0'
+    ]);
+    const properties = [
+      'color', 'backgroundColor', 'backgroundImage',
+      'borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor',
+      'outlineColor', 'textDecorationColor', 'fill', 'stroke',
+      'boxShadow', 'textShadow', 'filter', 'caretColor', 'accentColor'
+    ];
+    const violations = [];
+    for (const element of document.querySelectorAll('*')) {
+      for (const pseudo of [null, '::before', '::after']) {
+        const style = getComputedStyle(element, pseudo);
+        for (const property of properties) {
+          const value = style[property];
+          if (!value) continue;
+          for (const match of value.matchAll(/rgba?\\(\\s*(\\d+)\\s*,\\s*(\\d+)\\s*,\\s*(\\d+)/gi)) {
+            const rgb = match.slice(1, 4).join(',');
+            if (!approved.has(rgb)) violations.push({ element: element.tagName, pseudo, property, rgb });
+          }
+        }
+      }
+    }
+    return violations.slice(0, 30);
+  });
+  expect(computedPaletteViolations).toEqual([]);
+
   for (const token of ['--cyan-light:', '--on-accent:', '--success: #42c879;', '--danger: #ff8292;']) {
     expect(styleCss).toContain(token);
   }
