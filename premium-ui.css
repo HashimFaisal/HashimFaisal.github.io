@@ -4589,3 +4589,68 @@ footer {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+
+/* Restore the original one-line live ticker on phones.
+   Keep the LIVE indicator beside the scrolling update, as in the approved layout. */
+@media screen and (max-width: 760px) {
+  .live-updates {
+    width: 90%;
+    margin: 14px auto 22px !important;
+  }
+
+  .live-updates__shell {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 10px;
+    min-height: 58px;
+    padding: 10px 14px;
+  }
+
+  .live-updates__signal {
+    grid-column: 1;
+    justify-self: start;
+    display: inline-flex;
+    align-items: center;
+    min-height: 0;
+    gap: 7px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: var(--cyan-light);
+    font: 800 10px/1.4 "IBM Plex Sans Arabic", sans-serif;
+    letter-spacing: 0;
+    white-space: nowrap;
+  }
+
+  .live-updates__pulse {
+    width: 7px;
+    height: 7px;
+    flex: 0 0 7px;
+  }
+
+  .live-updates__viewport {
+    grid-column: 2;
+    min-width: 0;
+    min-height: 0;
+    width: 100%;
+    align-self: center;
+  }
+
+  .live-updates__track,
+  .live-updates__content {
+    align-items: center;
+  }
+
+  .live-updates__content,
+  .live-updates__content strong {
+    font-size: 11px;
+    line-height: 1.6;
+  }
+
+  .live-updates__content {
+    gap: 10px;
+  }
+}
