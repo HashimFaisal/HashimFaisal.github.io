@@ -785,84 +785,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   }
 }
 
-/* === NUVIO Globe — cinematic NASA night Earth === */
-.visual-globe {
-  position: relative;
-  width: 320px;
-  height: 320px;
-  margin: 0 auto;
-  border: 1px solid rgba(110, 180, 235, .38);
-  border-radius: 50%;
-  overflow: hidden;
-  isolation: isolate;
-  z-index: 3;
-  transform: perspective(1000px) rotateX(15deg) rotateY(-10deg);
-  box-shadow:
-    0 0 48px rgba(65, 145, 215, .20),
-    0 0 100px rgba(25, 75, 130, .12),
-    inset -28px -18px 42px rgba(0, 0, 0, .88),
-    inset 8px 5px 22px rgba(130, 195, 255, .12);
-}
 
-.globe-image {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background-image: url("assets/earth-night-nasa.jpg");
-  background-size: 200% 100%;
-  background-position: 0% 50%;
-  background-repeat: repeat-x;
-  filter: brightness(.88) contrast(1.18) saturate(1.12);
-  opacity: .98;
-  animation: nuvio-earth-rotation 70s linear infinite;
-  will-change: background-position;
-}
-
-@keyframes nuvio-earth-rotation {
-  from { background-position: 200% 50%; }
-  to { background-position: 0% 50%; }
-}
-
-.globe-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  border-radius: 50%;
-  background:
-    radial-gradient(ellipse at 32% 24%, rgba(190, 220, 255, .13), transparent 38%),
-    radial-gradient(ellipse at 78% 72%, transparent 35%, rgba(0, 0, 0, .28) 72%, rgba(0, 0, 0, .82) 100%),
-    linear-gradient(90deg, rgba(0, 0, 0, .30), transparent 28%, transparent 68%, rgba(0, 0, 0, .34));
-  box-shadow:
-    inset -30px -15px 45px rgba(0, 0, 0, .82),
-    inset 8px 5px 20px rgba(130, 195, 255, .13);
-  pointer-events: none;
-}
-
-.visual-globe::after {
-  content: "";
-  position: absolute;
-  inset: 1px;
-  z-index: 2;
-  border: 1px solid rgba(135, 195, 255, .24);
-  border-radius: 50%;
-  box-shadow:
-    0 0 16px rgba(90, 165, 235, .25),
-    inset 0 0 22px rgba(95, 165, 235, .16);
-  pointer-events: none;
-}
-
-@media (max-width: 480px) {
-  .visual-globe {
-    width: 260px;
-    height: 260px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .globe-image {
-    animation: none;
-  }
-}
 
 .hero-visual {
   position: relative;
@@ -1245,36 +1168,7 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   box-shadow: inset 0 1px rgba(255,255,255,.035), 0 18px 42px rgba(0,0,0,.26);
 }
 
-/* Cinematic Earth — cool blue atmospheric rim */
-.visual-globe {
-  border-color: rgba(110,190,255,.38);
-  box-shadow:
-    0 0 32px rgba(90,180,245,.18),
-    0 0 75px rgba(55,140,220,.10),
-    inset -28px -18px 42px rgba(0,0,0,.88),
-    inset 8px 5px 22px rgba(163,148,255,.10);
-}
 
-.globe-image {
-  filter: brightness(1.12) contrast(1.16) saturate(1.0) sepia(0);
-}
-
-.globe-overlay {
-  background:
-    radial-gradient(ellipse at 32% 24%, rgba(230,215,180,.07), transparent 38%),
-    radial-gradient(ellipse at 78% 72%, transparent 42%, rgba(0,0,0,.18) 76%, rgba(0,0,0,.68) 100%),
-    linear-gradient(90deg, rgba(0,0,0,.16), transparent 28%, transparent 68%, rgba(0,0,0,.22));
-  box-shadow:
-    inset -24px -12px 36px rgba(0,0,0,.68),
-    inset 8px 5px 20px rgba(130,195,255,.10);
-}
-
-.visual-globe::after {
-  border-color: rgba(125,195,255,.32);
-  box-shadow:
-    0 0 17px rgba(90,175,245,.22),
-    inset 0 0 22px rgba(95,165,235,.16);
-}
 
 .nuvio-orbit-track {
   border-color: rgba(141, 234, 243,.82);
@@ -1585,47 +1479,7 @@ html[dir="rtl"] .nuvio-launch-open b {
   box-shadow: 0 0 12px rgba(66, 200, 121, .55);
 }
 
-/* NUVIO — Black Marble 4K nighttime globe video */
-.globe-video {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  display: block;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
-  background: #020611;
-}
 
-.globe-image {
-  display: none;
-}
-
-.globe-overlay {
-  z-index: 1;
-}
-
-.visual-globe::after {
-  z-index: 2;
-}
-
-/* NUVIO — Enlarge the Earth inside its blue atmospheric rim */
-.globe-video {
-  transform: scale(1.45);
-  transform-origin: center center;
-}
-
-/* NUVIO — Remove globe outline, preserve blue atmospheric glow */
-.visual-globe {
-  border-color: transparent;
-}
-
-.visual-globe::after {
-  border-color: transparent;
-  box-shadow: none;
-}
 
 /* Hide only the top navigation links */
 .topbar > nav {
@@ -2373,11 +2227,6 @@ footer a:hover,
   border-color: rgba(88,216,232,.28);
 }
 
-/* Legacy 3D object styles removed; the active hero uses .visual-globe. */
-.visual-globe {
-  border-color: rgba(88,216,232,.35);
-  box-shadow: 0 0 38px rgba(88,216,232,.2), 0 0 90px rgba(88,216,232,.11), inset -28px -18px 42px rgba(0,0,0,.88);
-}
 
 .nuvio-orbit-track {
   border-color: rgba(132,226,245,.82);
@@ -2791,35 +2640,44 @@ button:active,
   }
 }
 
-/* Nuvio globe — restore source video colors, remove color grading overlays */
+
+/* Nuvio globe — single source of truth: original NASA night video, no image layer or color grading. */
+.visual-globe {
+  position: relative;
+  width: 320px;
+  height: 320px;
+  margin: 0 auto;
+  border: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  isolation: isolate;
+  z-index: 3;
+  transform: perspective(1000px) rotateX(15deg) rotateY(-10deg);
+  background: transparent;
+  box-shadow: none;
+}
+
 .globe-video {
-  filter: none !important;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.45);
+  transform-origin: center center;
+  filter: none;
   opacity: 1;
   mix-blend-mode: normal;
-}
-.globe-overlay {
-  background: none !important;
-  box-shadow: none !important;
+  background: #020611;
 }
 
-
-/* Nuvio globe — strip all visual color, tint, rim and shadow effects from the Earth */
-.visual-globe {
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-}
-.globe-video {
-  filter: none !important;
-  opacity: 1 !important;
-  mix-blend-mode: normal !important;
-}
-.globe-overlay {
-  background: none !important;
-  box-shadow: none !important;
-}
+.globe-image,
+.globe-overlay,
 .visual-globe::after {
-  border: none !important;
-  background: none !important;
-  box-shadow: none !important;
+  display: none;
+  content: none;
 }
