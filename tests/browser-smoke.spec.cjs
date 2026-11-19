@@ -617,7 +617,7 @@ test('all UI styles use the unified Nuvio palette without retired mixed hues', a
     '#a394ff', '#58d8e8', '#42c879', '#a9e8c1', '#ff8292', '#ffb0ba',
     '#8deaf3', '#071317', '#000', '#fff'
   ]);
-  for (const match of css.matchAll(/#(?:[0-9a-f]{3,8})\\b/gi)) {
+  for (const match of css.matchAll(/#(?:[0-9a-f]{3,8})\b/gi)) {
     expect(allowedCssHex.has(match[0]), 'Unexpected CSS hex palette value: ' + match[0]).toBeTruthy();
   }
   for (const match of css.matchAll(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/gi)) {
