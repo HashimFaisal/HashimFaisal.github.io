@@ -38,7 +38,7 @@ jobs:
               html,
           )
           filters = set(re.findall(r'data-filter="([^"]+)"', html))
-          expected = {"nuvio", "catalog", "streaming", "subtitles", "ratings"}
+          expected = {"nuvio", "catalog", "subtitles", "ratings"}
           if len(categories) != 20 or set(categories) != expected:
               raise SystemExit(f"Unexpected resource categories: {categories}")
           if filters != expected | {"all"}:
