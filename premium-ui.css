@@ -799,12 +799,12 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   pointer-events: none;
   opacity: .34;
   background-image:
-    radial-gradient(1px 1px at 18px 28px, rgba(255,255,255,.9), transparent 100%),
-    radial-gradient(1px 1px at 62px 86px, rgba(150,220,238,.8), transparent 100%),
-    radial-gradient(1.2px 1.2px at 112px 42px, rgba(255,255,255,.8), transparent 100%),
-    radial-gradient(.8px .8px at 154px 132px, rgba(255,255,255,.75), transparent 100%),
-    radial-gradient(1px 1px at 214px 74px, rgba(150,220,238,.7), transparent 100%),
-    radial-gradient(.8px .8px at 246px 184px, rgba(255,255,255,.7), transparent 100%);
+    radial-gradient(1px 1px at 18px 28px, color-mix(in srgb, var(--text) 92%, var(--cyan-light)), transparent 100%),
+    radial-gradient(1px 1px at 62px 86px, color-mix(in srgb, var(--cyan-light) 88%, var(--text)), transparent 100%),
+    radial-gradient(1.2px 1.2px at 112px 42px, color-mix(in srgb, var(--text) 88%, var(--cyan-light)), transparent 100%),
+    radial-gradient(.8px .8px at 154px 132px, color-mix(in srgb, var(--text) 84%, var(--cyan)), transparent 100%),
+    radial-gradient(1px 1px at 214px 74px, color-mix(in srgb, var(--cyan) 78%, var(--text)), transparent 100%),
+    radial-gradient(.8px .8px at 246px 184px, color-mix(in srgb, var(--text) 82%, var(--cyan-light)), transparent 100%);
   background-size: 280px 240px;
   background-repeat: repeat;
   animation: nuvio-stars-pulse 7s ease-in-out infinite alternate;
@@ -4714,9 +4714,9 @@ footer {
   border-radius: 50%;
   pointer-events: none;
   background: radial-gradient(ellipse at 8% 48%,
-    rgba(226, 244, 255, .24) 0%,
-    rgba(133, 205, 238, .12) 24%,
-    rgba(88, 166, 218, .045) 48%,
+    color-mix(in srgb, var(--text) 82%, var(--cyan-light)) 0%,
+    color-mix(in srgb, var(--cyan-light) 62%, transparent) 24%,
+    color-mix(in srgb, var(--cyan) 24%, transparent) 48%,
     transparent 72%);
   filter: blur(13px);
   opacity: .42;
@@ -4740,10 +4740,10 @@ footer {
   transform-origin: right center;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(185, 214, 235, 0.025) 52%,
-    rgba(205, 229, 245, 0.22) 86%,
-    rgba(245, 250, 255, 0.62) 100%);
-  box-shadow: 0 0 3px rgba(175, 216, 242, 0.18);
+    color-mix(in srgb, var(--cyan-light) 5%, transparent) 52%,
+    color-mix(in srgb, var(--cyan-light) 28%, transparent) 86%,
+    color-mix(in srgb, var(--text) 72%, var(--cyan-light)) 100%);
+  box-shadow: 0 0 3px color-mix(in srgb, var(--cyan-light) 22%, transparent);
   filter: blur(.18px);
   will-change: transform, opacity;
 }
@@ -4757,8 +4757,8 @@ footer {
   height: 2px;
   border-radius: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.88);
-  box-shadow: 0 0 3px 1px rgba(205, 231, 248, 0.24);
+  background: color-mix(in srgb, var(--text) 92%, var(--cyan-light));
+  box-shadow: 0 0 3px 1px color-mix(in srgb, var(--cyan-light) 28%, transparent);
 }
 
 .hero-visual .meteor-one {
