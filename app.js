@@ -247,8 +247,7 @@ function translateStaticText() {
       ? translations[trimmed]
       : reverseTranslations[trimmed];
 
-    node.nodeValue = translated
-      ? original.replace(trimmed, translated)
+    node.nodeValue = translated      ? original.replace(trimmed, translated)
       : original;
   });
 }
@@ -498,7 +497,6 @@ function filterCards() {
     card.hidden = !(matchType && matchText);
     if (!card.hidden) count++;
   });
-
   $('#visible-count').textContent =
     `${String(count).padStart(2, '0')} ${t('موارد')}`;
   $('#empty-state').hidden = count !== 0;
@@ -626,7 +624,7 @@ function renderManifestStatuses(report) {
   const checks = Array.isArray(report?.checks) ? report.checks : [];
   const manifests = checks.filter(item => item.type === 'manifest');
 
-  $$('.card-status[data-check]').forEach(status => {
+  $('.card-status[data-check]').forEach(status => {
     const name = status.dataset.check;
     const item = manifests.find(check => check.name === name);
     if (!item) return;
@@ -636,15 +634,36 @@ function renderManifestStatuses(report) {
     status.classList.toggle('bad', !healthy);
 
     const indicator = document.createElement('i');
-    const versionLabel = item.version
-      ? `${t('الإصدار')} ${item.version}`
-      : t('الإصدار غير متاح');
+    const renderVersion = version => {
+      const versionLabel = version
+        ? `${t('الإصدار')} ${version}`
+        : t('الإصدار غير متاح');
+      const label = healthy
+        ? `${t('متاح')} · ${versionLabel}`
+        : `${t('فشل الفحص')} · ${versionLabel}`;
+      status.replaceChildren(indicator, document.createTextNode(label));
+    };
 
-    const label = healthy
-      ? `${t('متاح')} · ${versionLabel}`
-      : `${t('فشل الفحص')} · ${versionLabel}`;
+    renderVersion(item.version);
 
-    status.replaceChildren(indicator, document.createTextNode(label));
+    const card = status.closest('.plugin-card');
+    const manifestNode = card?.querySelector('.manifest-url');
+    const manifestUrl = manifestNode?.textContent.trim();
+    if (!manifestUrl || !/^https:\/\//i.test(manifestUrl)) return;
+
+    fetch(manifestUrl, { cache: 'no-store' })
+      .then(response => {
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      })
+      .then(manifest => {
+        if (typeof manifest?.version === 'string' && manifest.version.trim()) {
+          renderVersion(manifest.version.trim());
+        }
+      })
+      .catch(error => {
+        console.debug(`Live manifest version unavailable for ${name}; using report version.`, error);
+      });
   });
 }
 
@@ -747,8 +766,7 @@ let liveUpdatesRequestId = 0;
 let liveUpdatesRefreshTimer = null;
 
 function syncLiveUpdatesTicker() {
-  const track = $('#live-updates-track');
-  const content = $('#live-updates-content');
+  const track = $('#live-updates-track');  const content = $('#live-updates-content');
   const viewport = track?.parentElement;
 
   if (!viewport || !track || !content) return;
