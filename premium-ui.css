@@ -790,29 +790,29 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   overflow: visible;
 }
 
-/* Fine, sparse stars: keep the hero atmospheric rather than glittery. */
 .hero-visual::before {
   content: "";
   position: absolute;
   inset: -10%;
   z-index: 0;
   pointer-events: none;
-  opacity: .34;
+  opacity: .7;
   background-image:
-    radial-gradient(1px 1px at 18px 28px, color-mix(in srgb, var(--text) 92%, var(--cyan-light)), transparent 100%),
-    radial-gradient(1px 1px at 62px 86px, color-mix(in srgb, var(--cyan-light) 88%, var(--text)), transparent 100%),
-    radial-gradient(1.2px 1.2px at 112px 42px, color-mix(in srgb, var(--text) 88%, var(--cyan-light)), transparent 100%),
-    radial-gradient(.8px .8px at 154px 132px, color-mix(in srgb, var(--text) 84%, var(--cyan)), transparent 100%),
-    radial-gradient(1px 1px at 214px 74px, color-mix(in srgb, var(--cyan) 78%, var(--text)), transparent 100%),
-    radial-gradient(.8px .8px at 246px 184px, color-mix(in srgb, var(--text) 82%, var(--cyan-light)), transparent 100%);
-  background-size: 280px 240px;
+    radial-gradient(1.5px 1.5px at 20px 30px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 40px 70px, var(--cyan), transparent),
+    radial-gradient(1px 1px at 50px 160px, #fff, transparent),
+    radial-gradient(2px 2px at 90px 40px, #fff, transparent),
+    radial-gradient(1.5px 1.5px at 130px 80px, var(--cyan), transparent),
+    radial-gradient(2px 2px at 160px 120px, #fff, transparent),
+    radial-gradient(1px 1px at 180px 20px, #fff, transparent);
+  background-size: 200px 200px;
   background-repeat: repeat;
-  animation: nuvio-stars-pulse 7s ease-in-out infinite alternate;
+  animation: nuvio-stars-pulse 4s ease-in-out infinite alternate;
 }
 
 @keyframes nuvio-stars-pulse {
-  from { opacity: .16; }
-  to { opacity: .42; }
+  from { opacity: .4; }
+  to { opacity: .9; }
 }
 
 
@@ -4704,30 +4704,6 @@ footer {
   pointer-events: none;
 }
 
-/* A distant off-frame sunlight bloom, kept behind the Earth disc. */
-.hero-visual .solar-glow {
-  position: absolute;
-  left: 7%;
-  top: 2%;
-  width: 48%;
-  height: 58%;
-  border-radius: 50%;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 8% 48%,
-    color-mix(in srgb, var(--text) 82%, var(--cyan-light)) 0%,
-    color-mix(in srgb, var(--cyan-light) 62%, transparent) 24%,
-    color-mix(in srgb, var(--cyan) 24%, transparent) 48%,
-    transparent 72%);
-  filter: blur(13px);
-  opacity: .42;
-  animation: solar-bloom 12s ease-in-out infinite alternate;
-}
-
-@keyframes solar-bloom {
-  from { opacity: .28; transform: scale(.96); }
-  to { opacity: .46; transform: scale(1.04); }
-}
-
 .hero-visual .meteor {
   position: absolute;
   left: -28%;
@@ -4740,10 +4716,10 @@ footer {
   transform-origin: right center;
   background: linear-gradient(90deg,
     transparent 0%,
-    color-mix(in srgb, var(--cyan-light) 5%, transparent) 52%,
-    color-mix(in srgb, var(--cyan-light) 28%, transparent) 86%,
-    color-mix(in srgb, var(--text) 72%, var(--cyan-light)) 100%);
-  box-shadow: 0 0 3px color-mix(in srgb, var(--cyan-light) 22%, transparent);
+    rgba(185, 214, 235, 0.025) 52%,
+    rgba(205, 229, 245, 0.22) 86%,
+    rgba(245, 250, 255, 0.62) 100%);
+  box-shadow: 0 0 3px rgba(175, 216, 242, 0.18);
   filter: blur(.18px);
   will-change: transform, opacity;
 }
@@ -4757,8 +4733,8 @@ footer {
   height: 2px;
   border-radius: 50%;
   transform: translateY(-50%);
-  background: color-mix(in srgb, var(--text) 92%, var(--cyan-light));
-  box-shadow: 0 0 3px 1px color-mix(in srgb, var(--cyan-light) 28%, transparent);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 0 3px 1px rgba(205, 231, 248, 0.24);
 }
 
 .hero-visual .meteor-one {
@@ -4770,58 +4746,33 @@ footer {
   top: 68%;
   width: clamp(44px, 12%, 88px);
   height: .8px;
-  animation: meteor-cross-earth-low 19s ease-in-out 6.5s infinite;
+  animation: meteor-cross-earth 18s ease-in-out 5.5s infinite;
 }
 
 .hero-visual .meteor-three {
   top: 44%;
   width: clamp(36px, 9%, 68px);
   height: .7px;
-  animation: meteor-cross-earth-high 22s ease-in-out 12s infinite;
-}
-
-.hero-visual .meteor-four,
-.hero-visual .meteor-five {
-  width: clamp(30px, 8%, 58px);
-  height: .7px;
-}
-
-.hero-visual .meteor-four {
-  top: 16%;
-  animation: meteor-cross-earth-high 25s ease-in-out 17s infinite;
-  opacity: 0;
-}
-
-.hero-visual .meteor-five {
-  top: 82%;
-  width: clamp(38px, 10%, 72px);
-  animation: meteor-cross-earth-low 27s ease-in-out 21s infinite;
-  opacity: 0;
+  animation: meteor-cross-earth 20s ease-in-out 11s infinite;
 }
 
 @keyframes meteor-cross-earth {
-  0%, 9% { opacity: 0; transform: translate3d(0, 0, 0) rotate(-16deg); }
+  0%, 9% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(-16deg);
+  }
   16% { opacity: .34; }
   35% { opacity: .26; }
-  49%, 100% { opacity: 0; transform: translate3d(570%, 28px, 0) rotate(-16deg); }
-}
-
-@keyframes meteor-cross-earth-low {
-  0%, 10% { opacity: 0; transform: translate3d(0, 0, 0) rotate(-11deg); }
-  18% { opacity: .25; }
-  36% { opacity: .18; }
-  52%, 100% { opacity: 0; transform: translate3d(570%, -18px, 0) rotate(-11deg); }
-}
-
-@keyframes meteor-cross-earth-high {
-  0%, 11% { opacity: 0; transform: translate3d(0, 0, 0) rotate(-21deg); }
-  19% { opacity: .22; }
-  34% { opacity: .15; }
-  50%, 100% { opacity: 0; transform: translate3d(570%, 42px, 0) rotate(-21deg); }
+  49% {
+    opacity: 0;
+    transform: translate3d(570%, 28px, 0) rotate(-16deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(570%, 28px, 0) rotate(-16deg);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-visual .meteor-field { display: none; }
-  .hero-visual::before { animation: none; opacity: .24; }
-  .hero-visual .solar-glow { animation: none; opacity: .3; }
 }
