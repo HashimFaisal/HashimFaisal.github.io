@@ -4693,3 +4693,90 @@ footer {
     inset 0 0 16px rgba(88, 216, 232, 0.07);
   opacity: 0.72;
 }
+
+
+/* NUVIO — meteors crossing behind the Earth */
+.hero-visual .meteor-field {
+  position: absolute;
+  inset: -8% -14%;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero-visual .meteor {
+  position: absolute;
+  left: -34%;
+  display: block;
+  width: clamp(90px, 24%, 190px);
+  height: 2px;
+  border-radius: 999px;
+  opacity: 0;
+  transform: translate3d(0, 0, 0) rotate(-17deg);
+  transform-origin: right center;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(90, 174, 255, 0.08) 48%,
+    rgba(148, 218, 255, 0.7) 88%,
+    rgba(255, 255, 255, 0.98) 100%);
+  box-shadow: 0 0 5px rgba(116, 205, 255, 0.7),
+              0 0 13px rgba(82, 169, 255, 0.35);
+  will-change: transform, opacity;
+}
+
+.hero-visual .meteor::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  box-shadow: 0 0 5px 2px rgba(196, 235, 255, 0.9),
+              0 0 15px 5px rgba(91, 181, 255, 0.48);
+}
+
+.hero-visual .meteor-one {
+  top: 23%;
+  animation: meteor-cross-earth 9.5s linear infinite;
+}
+
+.hero-visual .meteor-two {
+  top: 69%;
+  width: clamp(75px, 18%, 145px);
+  height: 1.5px;
+  transform: rotate(-12deg);
+  animation: meteor-cross-earth 12s linear 3.8s infinite;
+}
+
+.hero-visual .meteor-three {
+  top: 43%;
+  width: clamp(55px, 13%, 105px);
+  height: 1px;
+  opacity: 0;
+  transform: rotate(-21deg);
+  animation: meteor-cross-earth 11s linear 7s infinite;
+}
+
+@keyframes meteor-cross-earth {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(-17deg);
+  }
+  7% { opacity: 0.9; }
+  42% { opacity: 0.78; }
+  57% {
+    opacity: 0;
+    transform: translate3d(570%, 34px, 0) rotate(-17deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(570%, 34px, 0) rotate(-17deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-visual .meteor-field { display: none; }
+}
