@@ -1,6 +1,10 @@
 name: Deploy Nuvio Cinematic Enrichment
 
 on:
+  pull_request:
+    paths:
+      - "nuvio-cinematic-enrichment/**"
+      - ".github/workflows/deploy-nuvio-cinematic-enrichment.yml"
   push:
     branches: [main]
     paths:
@@ -9,15 +13,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy:
+  validate:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Check Worker syntax
         run: node --input-type=module --check < nuvio-cinematic-enrichment/worker.js
 
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
       - name: Deploy Worker
         uses: cloudflare/wrangler-action@v4
         with:
