@@ -26,8 +26,8 @@ The add-on accepts IMDb IDs beginning with `tt`.
 
 1. Create a Worker named `nuvio-cinematic-enrichment` in Cloudflare.
 2. Deploy this directory with Wrangler, or connect the repository using the included GitHub Actions workflow.
-3. In Worker **Settings → Variables and Secrets**, add `TMDB_API_KEY` as a **Secret** (TMDB API v3 key). Never put the key in source code, a public GitHub variable, or the website.
-4. Set GitHub repository secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` if using automatic deployment.
+3. If deploying manually, in Worker **Settings → Variables and Secrets**, add `TMDB_API_KEY` as a **Secret** (TMDB API v3 key). Never put the key in source code, a public GitHub variable, or the website.
+4. For automatic deployment, add these three GitHub Actions repository secrets: `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID`, and `TMDB_API_KEY`. The workflow uploads `TMDB_API_KEY` to the Worker as a server-side secret.
 5. Open `https://YOUR-WORKER.workers.dev/manifest.json` and verify the manifest, then test a known IMDb ID and `/health`.
 
 For local deployment with Wrangler:
