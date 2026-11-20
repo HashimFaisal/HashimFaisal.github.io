@@ -3,6 +3,7 @@ import json
 import os
 import re
 import sys
+import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
@@ -40,6 +41,8 @@ APK_ASSETS = {
 HEADERS = {
     "User-Agent": "Nuvio-Control-Center/3.0",
     "Accept": "application/vnd.github+json, application/json, */*",
+    "Cache-Control": "no-cache, no-store, max-age=0",
+    "Pragma": "no-cache",
 }
 
 
@@ -50,7 +53,9 @@ def fetch(url, method="GET"):
 
 def check_manifest(name, url):
     try:
-        with fetch(url) as response:
+        # Bypass stale intermediary caches when checking live manifests.
+        cache_busted_url = url + ("&" if "?" in url else "?") + "_health_check=" + str(time.time_ns())
+        with fetch(cache_busted_url) as response:
             body = response.read(2 * 1024 * 1024 + 1)
             if len(body) > 2 * 1024 * 1024:
                 raise ValueError("Manifest exceeds 2 MiB")
