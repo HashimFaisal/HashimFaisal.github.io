@@ -1,5 +1,35 @@
 [
   {
+    "id": "addon:CinemaBox:version:1.1.2",
+    "type": "addon",
+    "title": {
+      "ar": "تحديث CinemaBox إلى الإصدار 1.1.2",
+      "en": "CinemaBox updated to version 1.1.2"
+    },
+    "description": {
+      "ar": "تم تحديث الإصدار من 1.1.0 إلى 1.1.2.",
+      "en": "Updated from version 1.1.0 to 1.1.2."
+    },
+    "url": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json",
+    "publishedAt": "2026-11-20T05:09:56.105265Z",
+    "expiresAt": "2026-11-21T05:09:56.105265Z"
+  },
+  {
+    "id": "addon:Cinemana:version:0.3.3",
+    "type": "addon",
+    "title": {
+      "ar": "تحديث Cinemana إلى الإصدار 0.3.3",
+      "en": "Cinemana updated to version 0.3.3"
+    },
+    "description": {
+      "ar": "تم تحديث الإصدار من 0.3.1 إلى 0.3.3.",
+      "en": "Updated from version 0.3.1 to 0.3.3."
+    },
+    "url": "https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json",
+    "publishedAt": "2026-11-20T05:09:56.105265Z",
+    "expiresAt": "2026-11-21T05:09:56.105265Z"
+  },
+  {
     "id": "addon:Torrentio:added:1.0.0",
     "type": "addon",
     "title": {
@@ -43,95 +73,5 @@
     "url": "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
     "publishedAt": "2026-11-19T20:54:12.671Z",
     "expiresAt": "2026-11-21T20:54:12.671Z"
-  },
-  {
-    "id": "addon:SubtitleVideo:added:1.0.0",
-    "type": "addon",
-    "title": {
-      "ar": "مصدر جديد: SubtitleVideo",
-      "en": "New source: SubtitleVideo"
-    },
-    "description": {
-      "ar": "تمت إضافة SubtitleVideo إلى مصادر Nuvio. الإصدار: 1.0.0.",
-      "en": "SubtitleVideo has been added to Nuvio sources. Version: 1.0.0."
-    },
-    "url": "https://subtitlevideo.com/stremio/en,ar/manifest.json",
-    "publishedAt": "2026-11-19T04:58:33.067169Z",
-    "expiresAt": "2026-11-20T04:58:33.067169Z"
-  },
-  {
-    "id": "addon:TheSubtitleDB:added:0.2.2",
-    "type": "addon",
-    "title": {
-      "ar": "مصدر جديد: TheSubtitleDB",
-      "en": "New source: TheSubtitleDB"
-    },
-    "description": {
-      "ar": "تمت إضافة TheSubtitleDB إلى مصادر Nuvio. الإصدار: 0.2.2.",
-      "en": "TheSubtitleDB has been added to Nuvio sources. Version: 0.2.2."
-    },
-    "url": "https://api.thesubtitledb.org/integrations/stremio/manifest.json",
-    "publishedAt": "2026-11-19T04:32:17.633293Z",
-    "expiresAt": "2026-11-20T04:32:17.633293Z"
-  },
-  {
-    "id": "addon:Persian Subtitles:added:1.2.0",
-    "type": "addon",
-    "title": {
-      "ar": "مصدر جديد: Persian Subtitles",
-      "en": "New source: Persian Subtitles"
-    },
-    "description": {
-      "ar": "تمت إضافة Persian Subtitles إلى مصادر Nuvio. الإصدار: 1.2.0.",
-      "en": "Persian Subtitles has been added to Nuvio sources. Version: 1.2.0."
-    },
-    "url": "https://stremio.alirostami.com/subtitles/manifest.json",
-    "publishedAt": "2026-11-19T04:32:17.633293Z",
-    "expiresAt": "2026-11-20T04:32:17.633293Z"
-  },
-  {
-    "id": "addon:Anime Kitsu:added:0.0.10",
-    "type": "addon",
-    "title": {
-      "ar": "مصدر جديد: Anime Kitsu",
-      "en": "New source: Anime Kitsu"
-    },
-    "description": {
-      "ar": "تمت إضافة Anime Kitsu إلى مصادر Nuvio. الإصدار: 0.0.10.",
-      "en": "Anime Kitsu has been added to Nuvio sources. Version: 0.0.10."
-    },
-    "url": "https://anime-kitsu.strem.fun/manifest.json",
-    "publishedAt": "2026-11-19T04:16:52.378613Z",
-    "expiresAt": "2026-11-20T04:16:52.378613Z"
-  },
-  {
-    "id": "addon:IMDb Ratings:added:1.0.0",
-    "type": "addon",
-    "title": {
-      "ar": "مصدر جديد: IMDb Ratings",
-      "en": "New source: IMDb Ratings"
-    },
-    "description": {
-      "ar": "تمت إضافة IMDb Ratings إلى مصادر Nuvio. الإصدار: 1.0.0.",
-      "en": "IMDb Ratings has been added to Nuvio sources. Version: 1.0.0."
-    },
-    "url": "https://imdbratings.kgenovz.com/manifest.json",
-    "publishedAt": "2026-11-19T04:16:52.378613Z",
-    "expiresAt": "2026-11-20T04:16:52.378613Z"
-  },
-  {
-    "id": "addon:BetterPosters for Nuvio:added:1.0.0",
-    "type": "addon",
-    "title": {
-      "ar": "مصدر جديد: BetterPosters for Nuvio",
-      "en": "New source: BetterPosters for Nuvio"
-    },
-    "description": {
-      "ar": "تمت إضافة BetterPosters for Nuvio إلى مصادر Nuvio. الإصدار: 1.0.0.",
-      "en": "BetterPosters for Nuvio has been added to Nuvio sources. Version: 1.0.0."
-    },
-    "url": "https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json",
-    "publishedAt": "2026-11-19T04:16:52.378613Z",
-    "expiresAt": "2026-11-20T04:16:52.378613Z"
   }
 ]

@@ -221,5 +221,25 @@
     "source": "SubtitleVideo",
     "source_url": "https://subtitlevideo.com/stremio/en,ar/manifest.json",
     "new_version": "1.0.0"
+  },
+  {
+    "date": "2026-11-20T05:09:56.105265+00:00",
+    "type": "version",
+    "title": "تحديث إصدار CinemaBox",
+    "detail": "من 1.1.0 إلى 1.1.2.",
+    "source": "CinemaBox",
+    "source_url": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json",
+    "old_version": "1.1.0",
+    "new_version": "1.1.2"
+  },
+  {
+    "date": "2026-11-20T05:09:56.105265+00:00",
+    "type": "version",
+    "title": "تحديث إصدار Cinemana",
+    "detail": "من 0.3.1 إلى 0.3.3.",
+    "source": "Cinemana",
+    "source_url": "https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json",
+    "old_version": "0.3.1",
+    "new_version": "0.3.3"
   }
 ]

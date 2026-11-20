@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-20T00:39:21.028005+00:00",
+  "checked_at": "2026-11-20T05:09:56.105070+00:00",
   "ok": true,
   "passed": 23,
   "total": 23,
@@ -75,7 +75,7 @@
       "type": "manifest",
       "ok": true,
       "http_status": 200,
-      "version": "1.1.0",
+      "version": "1.1.2",
       "manifest_id": "cinemabox",
       "url": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json"
     },
@@ -84,7 +84,7 @@
       "type": "manifest",
       "ok": true,
       "http_status": 200,
-      "version": "0.3.1",
+      "version": "0.3.3",
       "manifest_id": "cinemana",
       "url": "https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json"
     },
