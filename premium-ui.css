@@ -4671,3 +4671,25 @@ footer {
   object-fit: cover;
   object-position: center;
 }
+
+/* NUVIO — subtle, realistic atmospheric limb around the Earth. */
+.visual-globe {
+  filter:
+    drop-shadow(0 0 6px rgba(88, 216, 232, 0.18))
+    drop-shadow(0 0 13px rgba(88, 216, 232, 0.07));
+}
+
+.visual-globe::after {
+  background: radial-gradient(
+    circle,
+    transparent 66.5%,
+    rgba(88, 216, 232, 0.035) 68.5%,
+    rgba(141, 234, 243, 0.20) 70.5%,
+    rgba(88, 216, 232, 0.09) 72.5%,
+    transparent 76%
+  );
+  box-shadow:
+    inset 0 0 8px rgba(141, 234, 243, 0.18),
+    inset 0 0 16px rgba(88, 216, 232, 0.07);
+  opacity: 0.72;
+}
