@@ -247,8 +247,7 @@ function translateStaticText() {
       ? translations[trimmed]
       : reverseTranslations[trimmed];
 
-    node.nodeValue = translated      ? original.replace(trimmed, translated)
-      : original;
+    node.nodeValue = translated      ? original.replace(trimmed, translated)      : original;
   });
 }
 
@@ -497,8 +496,7 @@ function filterCards() {
     card.hidden = !(matchType && matchText);
     if (!card.hidden) count++;
   });
-  $('#visible-count').textContent =
-    `${String(count).padStart(2, '0')} ${t('موارد')}`;
+  $('#visible-count').textContent =    `${String(count).padStart(2, '0')} ${t('موارد')}`;
   $('#empty-state').hidden = count !== 0;
 }
 
@@ -747,8 +745,7 @@ async function loadStatus() {
     if (healthCard) healthCard.dataset.health = 'unknown';
     $('#download-grid').innerHTML =
       `<p class="muted">${t('تعذر جلب معلومات الإصدار الأخير.')}</p>`;
-    console.error('Status loading failed:', error);
-  }
+    console.error('Status loading failed:', error);  }
 }
 
 function escapeHTML(value) {
