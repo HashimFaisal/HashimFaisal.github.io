@@ -33,7 +33,7 @@ function json(data, status = 200, extra = {}) {
 
 async function tmdb(path, env, params = {}) {
   if (!env.TMDB_API_KEY) throw new Error("TMDB_API_KEY is not configured");
-  const url = new URL(TM​​DB_API + path);
+  const url = new URL(TMDB_API + path);
   url.search = new URLSearchParams({
     api_key: env.TMDB_API_KEY,
     language: "en-US",
