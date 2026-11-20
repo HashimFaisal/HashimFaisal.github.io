@@ -4695,7 +4695,7 @@ footer {
 }
 
 
-/* NUVIO — meteors crossing behind the Earth */
+/* NUVIO — restrained, natural meteor trails behind the Earth */
 .hero-visual .meteor-field {
   position: absolute;
   inset: -8% -14%;
@@ -4706,74 +4706,70 @@ footer {
 
 .hero-visual .meteor {
   position: absolute;
-  left: -34%;
+  left: -28%;
   display: block;
-  width: clamp(90px, 24%, 190px);
-  height: 2px;
+  width: clamp(54px, 15%, 112px);
+  height: 1px;
   border-radius: 999px;
   opacity: 0;
-  transform: translate3d(0, 0, 0) rotate(-17deg);
+  transform: translate3d(0, 0, 0) rotate(-16deg);
   transform-origin: right center;
   background: linear-gradient(90deg,
     transparent 0%,
-    rgba(90, 174, 255, 0.08) 48%,
-    rgba(148, 218, 255, 0.7) 88%,
-    rgba(255, 255, 255, 0.98) 100%);
-  box-shadow: 0 0 5px rgba(116, 205, 255, 0.7),
-              0 0 13px rgba(82, 169, 255, 0.35);
+    rgba(185, 214, 235, 0.025) 52%,
+    rgba(205, 229, 245, 0.22) 86%,
+    rgba(245, 250, 255, 0.62) 100%);
+  box-shadow: 0 0 3px rgba(175, 216, 242, 0.18);
+  filter: blur(.18px);
   will-change: transform, opacity;
 }
 
 .hero-visual .meteor::after {
   content: "";
   position: absolute;
-  right: -2px;
+  right: -1px;
   top: 50%;
-  width: 7px;
-  height: 7px;
+  width: 2px;
+  height: 2px;
   border-radius: 50%;
   transform: translateY(-50%);
-  background: #fff;
-  box-shadow: 0 0 5px 2px rgba(196, 235, 255, 0.9),
-              0 0 15px 5px rgba(91, 181, 255, 0.48);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 0 3px 1px rgba(205, 231, 248, 0.24);
 }
 
 .hero-visual .meteor-one {
-  top: 23%;
-  animation: meteor-cross-earth 9.5s linear infinite;
+  top: 24%;
+  animation: meteor-cross-earth 15s ease-in-out infinite;
 }
 
 .hero-visual .meteor-two {
-  top: 69%;
-  width: clamp(75px, 18%, 145px);
-  height: 1.5px;
-  transform: rotate(-12deg);
-  animation: meteor-cross-earth 12s linear 3.8s infinite;
+  top: 68%;
+  width: clamp(44px, 12%, 88px);
+  height: .8px;
+  animation: meteor-cross-earth 18s ease-in-out 5.5s infinite;
 }
 
 .hero-visual .meteor-three {
-  top: 43%;
-  width: clamp(55px, 13%, 105px);
-  height: 1px;
-  opacity: 0;
-  transform: rotate(-21deg);
-  animation: meteor-cross-earth 11s linear 7s infinite;
+  top: 44%;
+  width: clamp(36px, 9%, 68px);
+  height: .7px;
+  animation: meteor-cross-earth 20s ease-in-out 11s infinite;
 }
 
 @keyframes meteor-cross-earth {
-  0% {
+  0%, 9% {
     opacity: 0;
-    transform: translate3d(0, 0, 0) rotate(-17deg);
+    transform: translate3d(0, 0, 0) rotate(-16deg);
   }
-  7% { opacity: 0.9; }
-  42% { opacity: 0.78; }
-  57% {
+  16% { opacity: .34; }
+  35% { opacity: .26; }
+  49% {
     opacity: 0;
-    transform: translate3d(570%, 34px, 0) rotate(-17deg);
+    transform: translate3d(570%, 28px, 0) rotate(-16deg);
   }
   100% {
     opacity: 0;
-    transform: translate3d(570%, 34px, 0) rotate(-17deg);
+    transform: translate3d(570%, 28px, 0) rotate(-16deg);
   }
 }
 
