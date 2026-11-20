@@ -247,8 +247,7 @@ function translateStaticText() {
       ? translations[trimmed]
       : reverseTranslations[trimmed];
 
-    node.nodeValue = translated      ? original.replace(trimmed, translated)      : original;
-  });
+    node.nodeValue = translated      ? original.replace(trimmed, translated)      : original;  });
 }
 
 function updateShareButtonLabels() {
@@ -497,8 +496,7 @@ function filterCards() {
     if (!card.hidden) count++;
   });
   $('#visible-count').textContent =    `${String(count).padStart(2, '0')} ${t('موارد')}`;
-  $('#empty-state').hidden = count !== 0;
-}
+  $('#empty-state').hidden = count !== 0;}
 
 $('#search').addEventListener('input', filterCards);
 
@@ -622,7 +620,7 @@ function renderManifestStatuses(report) {
   const checks = Array.isArray(report?.checks) ? report.checks : [];
   const manifests = checks.filter(item => item.type === 'manifest');
 
-  $('.card-status[data-check]').forEach(status => {
+  document.querySelectorAll('.card-status[data-check]').forEach(status => {
     const name = status.dataset.check;
     const item = manifests.find(check => check.name === name);
     if (!item) return;
@@ -747,7 +745,6 @@ async function loadStatus() {
       `<p class="muted">${t('تعذر جلب معلومات الإصدار الأخير.')}</p>`;
     console.error('Status loading failed:', error);  }
 }
-
 function escapeHTML(value) {
   return String(value ?? '').replace(/[&<>"']/g, char => ({
     '&': '&amp;',
