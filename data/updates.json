@@ -1,35 +1,5 @@
 [
   {
-    "id": "addon:CinemaBox:version:1.1.2",
-    "type": "addon",
-    "title": {
-      "ar": "تحديث CinemaBox إلى الإصدار 1.1.2",
-      "en": "CinemaBox updated to version 1.1.2"
-    },
-    "description": {
-      "ar": "تم تحديث الإصدار من 1.1.0 إلى 1.1.2.",
-      "en": "Updated from version 1.1.0 to 1.1.2."
-    },
-    "url": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json",
-    "publishedAt": "2026-11-20T05:09:56.105265Z",
-    "expiresAt": "2026-11-21T05:09:56.105265Z"
-  },
-  {
-    "id": "addon:Cinemana:version:0.3.3",
-    "type": "addon",
-    "title": {
-      "ar": "تحديث Cinemana إلى الإصدار 0.3.3",
-      "en": "Cinemana updated to version 0.3.3"
-    },
-    "description": {
-      "ar": "تم تحديث الإصدار من 0.3.1 إلى 0.3.3.",
-      "en": "Updated from version 0.3.1 to 0.3.3."
-    },
-    "url": "https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json",
-    "publishedAt": "2026-11-20T05:09:56.105265Z",
-    "expiresAt": "2026-11-21T05:09:56.105265Z"
-  },
-  {
     "id": "addon:Torrentio:added:1.0.0",
     "type": "addon",
     "title": {
