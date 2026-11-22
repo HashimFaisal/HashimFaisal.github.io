@@ -349,7 +349,7 @@ const translations = {
   "توضيح متطلبات API وروابط Manifest للترجمات": "Clarified API requirements and subtitle Manifest links",
   "تمييز الإضافات التي تحتاج API فعلياً عن الإضافات التي تعمل بدونه، وإضافة روابط مفاتيح SubDL وSubSource الاختيارية في SubSense ورابط مزود AI الاختياري في SubMaker، وتوضيح أن روابط Manifest لبعض الخدمات شخصية وتُولّد من صفحات الإعداد.": "Clarified which add-ons actually require an API, added optional SubDL and SubSource key links for SubSense and an optional AI provider link for SubMaker, and explained that some services generate personal Manifest links through their setup pages.",
   "إضافة موارد جديدة لقسم الترجمات": "Added new resources to the subtitles section",
-  "إضافة OpenSubtitles PRO وCommunity Subtitles وSubSource وSubSense وSubMaker وAIO Subtitles، مع ربط إعداد SubDL وتوثيق متطلبات كل خدمة.": "Added OpenSubtitles PRO, Community Subtitles, SubSource, SubSense, SubMaker, and AIO Subtitles, along with the SubDL setup link and each service's requirements.",,
+  "إضافة OpenSubtitles PRO وCommunity Subtitles وSubSource وSubSense وSubMaker وAIO Subtitles، مع ربط إعداد SubDL وتوثيق متطلبات كل خدمة.": "Added OpenSubtitles PRO, Community Subtitles, SubSource, SubSense, SubMaker, and AIO Subtitles, along with the SubDL setup link and each service's requirements.",
 
   'جارٍ فحص روابط الإصدار...': 'Checking edition links...',
   'الإصدار': 'Version',
