@@ -183,7 +183,6 @@ def save_release_cache(release, stable_release):
         return False
     cache = {"cached_at": datetime.now(timezone.utc).isoformat(), "release": release, "stable_release": stable_release}
     # Only replace a good snapshot with a release containing every expected download.
-    candidate = {"release": release}
     try:
         for suffix in REQUIRED_RELEASE_ASSETS:
             asset = next((item for item in release["assets"] if isinstance(item, dict) and item.get("name", "").endswith(suffix)), None)
@@ -257,11 +256,10 @@ def main():
     except Exception as exc:
         release_error = str(exc)
 
+    release_fetch_succeeded = release is not None
     release_fallback_used = False
     release_cache_timestamp = None
-    if release is not None:
-        save_release_cache(release, stable_release)
-    else:
+    if release is None:
         cached = load_release_cache()
         if cached:
             release = cached.get("release")
@@ -274,7 +272,7 @@ def main():
     results.append({
         "name": "Nuvio beta release",
         "type": "release",
-        "ok": release is not None,
+        "ok": release_fetch_succeeded,
         "tag": (release or {}).get("tag_name"),
         "error": release_error,
     })
@@ -385,6 +383,9 @@ def main():
                 "ok": False,
                 "error": release_error or "Release unavailable",
             })
+
+    if release_fetch_succeeded and release_data and len(release_data.get("assets", [])) == 5 and all(asset.get("ok") for asset in release_data["assets"]):
+        save_release_cache(release, stable_release)
 
     passed = sum(1 for item in results if item["ok"])
 
