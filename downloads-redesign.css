@@ -165,10 +165,15 @@
   gap: 8px;
 }
 #downloads .downloads-device-status .downloads-device-status-dot {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
   flex: 0 0 7px;
   width: 7px;
+  min-width: 7px;
   height: 7px;
+  min-height: 7px;
   border-radius: 50%;
-  background: var(--success);
+  background: var(--success, #42c879);
   box-shadow: 0 0 0 3px rgba(66, 200, 121, 0.12);
 }
