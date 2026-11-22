@@ -739,6 +739,7 @@ test('Nuvio editions are separated by device and link directly to published inst
   await expect(page.locator('#versions-tv a.version-download[href*="/releases"]')).toHaveCount(0);
   await expect(page.locator('#versions-desktop a.version-download[href*="/releases"]')).toHaveCount(0);
   await expect(page.locator('.version-platform a.version-download.secondary')).toHaveCount(0);
+  await expect(page.locator('.version-platform a.version-source')).toHaveCount(0);
   await expect(page.locator('#versions-smart-tv a.version-download[href*="/releases"]')).toHaveCount(0);
   await expect(page.locator('.version-platform a.version-download')).not.toHaveCount(0);
 
