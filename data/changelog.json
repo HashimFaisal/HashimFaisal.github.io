@@ -241,5 +241,32 @@
     "source_url": "https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json",
     "old_version": "0.3.1",
     "new_version": "0.3.3"
+  },
+  {
+    "date": "2026-11-22T06:00:30.527023+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: Torrentio",
+    "detail": "تم إدراج Manifest والتحقق من استجابته وصحة بنيته.",
+    "source": "Torrentio",
+    "source_url": "https://torrentio.strem.fun/manifest.json",
+    "new_version": "0.0.15"
+  },
+  {
+    "date": "2026-11-22T06:00:30.527023+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: AIOMetadata",
+    "detail": "تم إدراج Manifest والتحقق من استجابته وصحة بنيته.",
+    "source": "AIOMetadata",
+    "source_url": "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
+    "new_version": "4.1.0"
+  },
+  {
+    "date": "2026-11-22T06:00:30.527023+00:00",
+    "type": "added",
+    "title": "إضافة مصدر جديد: TMDB Discover+",
+    "detail": "تم إدراج Manifest والتحقق من استجابته وصحة بنيته.",
+    "source": "TMDB Discover+",
+    "source_url": "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
+    "new_version": "2.14.7+49f99dd0e277"
   }
 ]

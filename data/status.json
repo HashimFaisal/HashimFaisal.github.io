@@ -1,8 +1,13 @@
 {
-  "checked_at": "2026-11-22T05:47:45.652968+00:00",
+  "checked_at": "2026-11-22T06:00:30.526752+00:00",
   "ok": true,
-  "passed": 23,
-  "total": 23,
+  "passed": 26,
+  "total": 26,
+  "manifest_coverage": {
+    "configured": 20,
+    "healthy": 20,
+    "failed": 0
+  },
   "release": {
     "tag": "1.1.0-beta.3",
     "app_version": "1.1.0-beta.3",
@@ -102,6 +107,19 @@
       "version": "0.3.3",
       "manifest_id": "cinemana",
       "url": "https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
+      "name": "Torrentio",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "0.0.15",
+      "manifest_id": "com.stremio.torrentio.addon",
+      "url": "https://torrentio.strem.fun/manifest.json",
       "failure_code": "healthy",
       "failure_category": "healthy",
       "severity": "info",
@@ -251,6 +269,32 @@
       "recommended_action": "No action required."
     },
     {
+      "name": "AIOMetadata",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "4.1.0",
+      "manifest_id": "aio-metadata",
+      "url": "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
+      "name": "TMDB Discover+",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "2.14.7+49f99dd0e277",
+      "manifest_id": "community.tmdb.discover.plus.stable",
+      "url": "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
       "name": "Anime Kitsu",
       "type": "manifest",
       "ok": true,
@@ -362,11 +406,41 @@
     }
   ],
   "change_summary": {
-    "count": 0,
-    "by_type": {},
-    "events": []
+    "count": 3,
+    "by_type": {
+      "added": 3
+    },
+    "events": [
+      {
+        "date": "2026-11-22T06:00:30.527023+00:00",
+        "type": "added",
+        "title": "إضافة مصدر جديد: Torrentio",
+        "detail": "تم إدراج Manifest والتحقق من استجابته وصحة بنيته.",
+        "source": "Torrentio",
+        "source_url": "https://torrentio.strem.fun/manifest.json",
+        "new_version": "0.0.15"
+      },
+      {
+        "date": "2026-11-22T06:00:30.527023+00:00",
+        "type": "added",
+        "title": "إضافة مصدر جديد: AIOMetadata",
+        "detail": "تم إدراج Manifest والتحقق من استجابته وصحة بنيته.",
+        "source": "AIOMetadata",
+        "source_url": "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
+        "new_version": "4.1.0"
+      },
+      {
+        "date": "2026-11-22T06:00:30.527023+00:00",
+        "type": "added",
+        "title": "إضافة مصدر جديد: TMDB Discover+",
+        "detail": "تم إدراج Manifest والتحقق من استجابته وصحة بنيته.",
+        "source": "TMDB Discover+",
+        "source_url": "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
+        "new_version": "2.14.7+49f99dd0e277"
+      }
+    ]
   },
-  "change_count": 0,
+  "change_count": 3,
   "proactive_monitoring": {
     "status": "healthy",
     "alert_count": 0,
@@ -376,11 +450,11 @@
   "risk_forecast": {
     "status": "healthy",
     "integrity": {
-      "input_result_count": 23,
+      "input_result_count": 26,
       "evaluated_failure_count": 0,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
-      "history_window_size": 30,
+      "history_window_size": 33,
       "history_evidence_deduplicated": true
     },
     "overall_level": "low",
