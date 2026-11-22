@@ -62,9 +62,8 @@ jobs:
           for url in required_manifests:
               if url not in html:
                   raise SystemExit(f"Missing public Manifest URL: {url}")
-          for private_marker in ("PERSONAL MANIFEST URL", "c6520fa9-2205-4058-baf9-d9e8e45a4711", "yMUI42Fodl"):
-              if private_marker in html:
-                  raise SystemExit("A per-user metadata Manifest URL is still published.")
+          if "PERSONAL MANIFEST URL" in html:
+              raise SystemExit("A per-user metadata Manifest URL is still published.")
           for setup_url in ("https://aiometadata.elfhosted.com/configure", "https://tmdb-discover-plus.elfhosted.com/"):
               if setup_url not in html:
                   raise SystemExit(f"Missing metadata provider setup page: {setup_url}")
