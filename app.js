@@ -2,7 +2,6 @@ const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 
 let activeFilter = 'all';
-let activeDownloadsFilter = 'all';
 let activeDownloadsDevice = 'mobile';
 let currentLang = 'ar';
 try {
@@ -509,18 +508,6 @@ function applyLanguage() {
     );
   }
 
-  const downloadsFilters = $('#downloads-filters');
-  if (downloadsFilters) downloadsFilters.setAttribute('aria-label', currentLang === 'ar' ? 'تصفية ملفات التنزيل' : 'Filter download files');
-
-  const downloadsSearch = $('#downloads-search');
-  if (downloadsSearch) {
-    downloadsSearch.placeholder = currentLang === 'ar'
-      ? 'ابحث عن ملف تنزيل...'
-      : 'Search download files...';
-    downloadsSearch.setAttribute('aria-label',
-      currentLang === 'ar' ? 'ابحث عن ملف تنزيل' : 'Search download files');
-  }
-
   const toggle = $('#language-toggle');
   if (toggle) {
     toggle.textContent = currentLang === 'ar' ? 'English' : 'العربية';
@@ -950,67 +937,6 @@ function downloadCategory(asset) {
   return 'other';
 }
 
-function renderDownloadFilters(assets) {
-  const container = $('#downloads-filters');
-  if (!container) return;
-
-  const counts = {
-    all: assets.length,
-    android: assets.filter(asset => downloadCategory(asset) === 'android').length,
-    ios: assets.filter(asset => downloadCategory(asset) === 'ios').length,
-    other: assets.filter(asset => downloadCategory(asset) === 'other').length
-  };
-  const filters = [
-    ['all', 'الكل'],
-    ['android', 'Android APK'],
-    ['ios', 'iOS IPA'],
-    ['other', 'ملفات أخرى']
-  ].filter(([key]) => key === 'all' || counts[key] > 0);
-
-  if (!filters.some(([key]) => key === activeDownloadsFilter)) {
-    activeDownloadsFilter = 'all';
-  }
-
-  container.innerHTML = filters.map(([key, label]) => {
-    const active = key === activeDownloadsFilter;
-    return `<button class="filter${active ? ' active' : ''}" type="button"
-      data-download-filter="${key}" aria-pressed="${active}" >
-      ${t(label)} <span class="download-filter-count">${counts[key]}</span>
-    </button>`;
-  }).join('');
-}
-
-function filterDownloads() {
-  const term = ($('#downloads-search')?.value || '').trim().toLowerCase();
-  const cards = $$('#download-grid .downloads-device-card');
-  const releaseCards = cards.filter(card => card.classList.contains('release-asset-card'));
-  let visibleAssets = 0;
-  let visibleCards = 0;
-
-  cards.forEach(card => {
-    const isReleaseAsset = card.classList.contains('release-asset-card');
-    const matchesCategory = !isReleaseAsset || activeDownloadsFilter === 'all' ||
-      card.dataset.category === activeDownloadsFilter;
-    const matchesText = !term || card.textContent.toLowerCase().includes(term);
-    card.hidden = !(matchesCategory && matchesText);
-    if (!card.hidden) {
-      visibleCards++;
-      if (isReleaseAsset) visibleAssets++;
-    }
-  });
-
-  const count = $('#downloads-visible-count');
-  if (count) count.textContent = `${String(visibleAssets).padStart(2, '0')} ${t('ملفات')}`;
-
-  const empty = $('#downloads-empty-state');
-  if (empty) {
-    empty.hidden = visibleCards !== 0;
-    empty.textContent = releaseCards.length
-      ? t('ما لقينا ملفات تطابق بحثك.')
-      : t('لا توجد ملفات تنزيل منشورة لهذا الإصدار.');
-  }
-}
-
 function setDownloadsDevice(device) {
   const validDevices = ['mobile', 'tv', 'desktop'];
   if (!validDevices.includes(device)) return;
@@ -1026,19 +952,6 @@ function setDownloadsDevice(device) {
 }$('#downloads-device-nav')?.addEventListener('click', event => {
   const button = event.target.closest('[data-download-device]');
   if (button) setDownloadsDevice(button.dataset.downloadDevice);
-});
-
-$('#downloads-search')?.addEventListener('input', filterDownloads);
-$('#downloads-filters')?.addEventListener('click', event => {
-  const button = event.target.closest('[data-download-filter]');
-  if (!button) return;
-  activeDownloadsFilter = button.dataset.downloadFilter;
-  $('#downloads-filters').querySelectorAll('[data-download-filter]').forEach(item => {
-    const active = item === button;
-    item.classList.toggle('active', active);
-    item.setAttribute('aria-pressed', String(active));
-  });
-  filterDownloads();
 });
 
 function renderDownloads(report) {
@@ -1058,8 +971,6 @@ function renderDownloads(report) {
     if (healthLabel) healthLabel.textContent = t('غير متاح');
     if (health) health.dataset.state = 'unknown';
     if (grid) grid.querySelectorAll('.release-asset-card').forEach(card => card.remove());
-    renderDownloadFilters([]);
-    filterDownloads();
     if (empty) empty.textContent = t('تعذر جلب معلومات الإصدار الأخير.');
     return;
   }
@@ -1137,8 +1048,6 @@ function renderDownloads(report) {
     grid.insertAdjacentHTML('beforeend', renderedAssets);
   }
 
-  renderDownloadFilters(validAssets);
-  filterDownloads();
 }
 
 async function loadStatus() {
@@ -1184,8 +1093,6 @@ async function loadStatus() {
     const healthCard = $('#health-state')?.closest('.stat-card');
     if (healthCard) healthCard.dataset.health = 'unknown';
     $('#download-grid')?.querySelectorAll('.release-asset-card').forEach(card => card.remove());
-    renderDownloadFilters([]);
-    filterDownloads();
     const downloadsEmpty = $('#downloads-empty-state');
     if (downloadsEmpty) downloadsEmpty.textContent = t('تعذر جلب معلومات الإصدار الأخير.');
     console.error('Status loading failed:', error);
