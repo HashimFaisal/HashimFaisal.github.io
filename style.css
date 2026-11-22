@@ -1267,6 +1267,15 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
   border-color: var(--cyan);
   background: rgba(99, 217, 233, .15);
 }
+.version-card-status {
+  display: block;
+  margin: 6px 0 10px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.version-card-status[data-state="healthy"] { color: var(--success); }
+.version-card-status[data-state="warning"] { color: var(--danger); }
 .version-card > small {
   margin-top: 10px;
   color: var(--muted);
@@ -1289,4 +1298,68 @@ html[dir="ltr"] .version-card ul { padding-inline-start: 19px; }
 @media (max-width: 560px) {
   .version-grid { grid-template-columns: 1fr; gap: 12px; }
   .version-card { padding: 18px; }
+}
+
+
+/* Nuvio editions — clearly separated platform sections */
+.version-platform + .version-platform { margin-top: 34px; }
+.version-platform-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0 0 17px;
+  padding: 0 0 13px;
+  border-bottom: 1px solid var(--line);
+}
+.version-platform-heading .eyebrow {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--cyan);
+  font: 700 9px Inter, sans-serif;
+  letter-spacing: 1.5px;
+}
+.version-platform-heading h3 {
+  margin: 0 0 5px;
+  color: var(--text);
+  font-size: 19px;
+  font-weight: 800;
+}
+.version-platform-heading p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+.version-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+  padding-top: 14px;
+}
+.version-actions .version-download {
+  flex: 1 1 auto;
+  min-width: 120px;
+  margin: 0;
+}
+.version-actions .version-download.secondary {
+  color: var(--muted);
+  background: var(--surface);
+}
+.version-source {
+  display: inline-flex;
+  align-self: flex-start;
+  margin-top: 12px;
+  color: var(--cyan-light);
+  font-size: 10px;
+  font-weight: 700;
+}
+.version-source:hover { color: var(--cyan); }
+.version-card > small { margin-top: 10px; }
+@media (max-width: 560px) {
+  .version-platform + .version-platform { margin-top: 27px; }
+  .version-platform-heading h3 { font-size: 17px; }
+  .version-actions { flex-direction: column; }
+  .version-actions .version-download { width: 100%; }
 }

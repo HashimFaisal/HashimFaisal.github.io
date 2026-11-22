@@ -1,5 +1,20 @@
 [
   {
+    "id": "nuvio-editions:smart-download-checks:2026-11-22",
+    "type": "site",
+    "title": {
+      "ar": "تحديث نسخ Nuvio: فحص الروابط وأرقام الإصدارات",
+      "en": "Nuvio editions update: link checks and version numbers"
+    },
+    "description": {
+      "ar": "أصبحت نسخ الموبايل والتلفزيون والتلفزيونات الذكية والكمبيوتر مرتبطة بالفحص الذكي لروابط التثبيت المباشرة، مع عرض رقم الإصدار وحالة الروابط ودعم العربية والإنكليزية.",
+      "en": "Mobile, TV, Smart TV, and desktop editions are now connected to smart checks for direct installer links, with version numbers, link status, and Arabic/English support."
+    },
+    "url": "https://hashimfaisal.github.io/#versions",
+    "publishedAt": "2026-11-22T08:10:00Z",
+    "expiresAt": "2026-11-23T08:10:00Z"
+  },
+  {
     "id": "addon:Nuvio Catalog:status:available-to-unavailable:2026-11-22T07:52:40.260834+00:00",
     "type": "addon",
     "title": {

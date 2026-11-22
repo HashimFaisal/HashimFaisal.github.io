@@ -70,6 +70,37 @@ test('all five dashboard destinations open and return to the dashboard', async (
   }
 });
 
+
+test('Nuvio edition cards show checked versions and translate status labels', async ({ page }) => {
+  const items = [{
+    name: 'Nuvio Mobile · Download APK · ARM64',
+    type: 'version_download',
+    card: 'Nuvio Mobile',
+    label: 'Download APK · ARM64',
+    tag: '1.0.1',
+    ok: true,
+    url: 'https://example.invalid/app.apk'
+  }];
+  await page.route('**/data/status.json', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({
+      ok: true, passed: 1, total: 1, checks: items,
+      version_downloads: { checked: 1, healthy: 1, failed: 0, items },
+      release: null
+    })
+  }));
+  await page.reload();
+  const status = page.locator('.version-card').filter({ has: page.locator('h3', { hasText: 'Nuvio Mobile' }) }).locator('.version-card-status').first();
+  await expect(status).toContainText('الإصدار 1.0.1');
+  await expect(status).toContainText('روابط التنزيل سليمة');
+  await page.locator('#language-toggle').click();
+  await expect(status).toContainText('Version 1.0.1');
+  await expect(status).toContainText('Download links are healthy');
+  await expect(page.locator('.version-card')).toHaveCount(11);
+});
+
+
 test('homepage explains the Nuvio purpose and groups secondary navigation', async ({ page }) => {
   await expect(page.locator('.hero h1')).toContainText('كل إضافات Nuvio');
   await expect(page.locator('.hero h1')).toContainText('في مركز واحد');
@@ -85,7 +116,7 @@ test('homepage explains the Nuvio purpose and groups secondary navigation', asyn
 });
 
 test('support links are available in Arabic and English without leaving the site unexpectedly', async ({ page }) => {
-  await page.locator('#nuvio-launch-grid [data-view="resources"]').click();
+  await page.locator('#nuvio-launch-grid [data-view="resources"]').click({ force: true });
   await expect(page.locator('#resources')).toBeVisible();
 
   const report = page.locator('#resources a').filter({ hasText: 'الإبلاغ عن مشكلة' });
@@ -518,7 +549,7 @@ test('status and developer-resource cards keep separate layout boxes on phone, t
 
   for (const width of widths) {
     await page.setViewportSize({ width, height: 900 });
-    await page.locator('#nuvio-launch-grid [data-view="status"]').click();
+    await page.locator('#nuvio-launch-grid [data-view="status"]').click({ force: true });
     await expect(page.locator('#status')).toBeVisible();
     await assertNoCardCollisions('#status');
     await page.locator('#status .nuvio-view-back').click();
@@ -713,4 +744,39 @@ test('download URLs remain visible when their health checks fail', async ({ page
   await expect(page.locator('.download-card a.download-action')).toHaveCount(5);
   await expect(page.locator('.download-card .download-meta').filter({ hasText: 'تعذر تأكيد الرابط' })).toHaveCount(5);
   await expect(page.locator('.download-card .download-meta').filter({ hasText: 'بيانات التنزيل محفوظة لكن الكاش قديم' })).toHaveCount(5);
+});
+
+
+test('Nuvio editions are separated by device and link directly to published installer assets', async ({ page }) => {
+  await expect(page.locator('#versions-mobile')).toBeVisible();
+  await expect(page.locator('#versions-tv')).toBeVisible();
+  await expect(page.locator('#versions-smart-tv')).toBeVisible();
+  await expect(page.locator('#versions-desktop')).toBeVisible();
+
+  await expect(page.locator('#versions-mobile .version-card')).toHaveCount(3);
+  await expect(page.locator('#versions-tv .version-card')).toHaveCount(4);
+  await expect(page.locator('#versions-smart-tv .version-card')).toHaveCount(3);
+  await expect(page.locator('#versions-desktop .version-card')).toHaveCount(1);
+
+  await expect(page.locator('#versions-mobile a[href$="androidApp-full-arm64-v8a-release.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-mobile a[href$="nuvio-1.0.1-full-release.ipa"]')).toBeVisible();
+  await expect(page.locator('#versions-tv a[href$="app-full-universal-release.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-smart-tv a[href$=".wgt"]')).toBeVisible();
+  await expect(page.locator('#versions-smart-tv a[href$=".ipk"]').first()).toBeVisible();
+  await expect(page.locator('#versions-mobile a[href$="NuvioRS-1.1.0-beta.2-autosync.5-arm64.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-tv a[href$="NuvioRS-TV-1.2.0-beta.3-tester.2-arm32.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-desktop a[href$="NuvioCodeineXO-v6.1.5.exe"]')).toBeVisible();
+  await expect(page.locator('#versions-mobile a.version-download[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+  await expect(page.locator('#versions-tv a.version-download[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+  await expect(page.locator('#versions-desktop a.version-download[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+  await expect(page.locator('.version-platform a.version-download.secondary')).toHaveCount(0);
+  await expect(page.locator('.version-platform a.version-source')).toHaveCount(0);
+  await expect(page.locator('#versions-smart-tv a.version-download[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+  await expect(page.locator('.version-platform a.version-download')).not.toHaveCount(0);
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('#versions-mobile-title')).toHaveText('Mobile · Android & iPhone');
+  await expect(page.locator('#versions-tv-title')).toHaveText('TV · Android TV & Google TV');
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('#versions-mobile-title')).toHaveText('الموبايل · Android وiPhone');
 });

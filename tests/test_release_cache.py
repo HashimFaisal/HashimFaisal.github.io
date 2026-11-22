@@ -83,5 +83,41 @@ class ReleaseCacheTests(unittest.TestCase):
                 self.assertFalse(check_links.save_release_cache(incomplete, None))
 
 
+    def test_discover_version_downloads_extracts_card_and_tag(self):
+        html = '''
+        <article class="version-card">
+          <h3>Nuvio Mobile</h3>
+          <div class="version-actions">
+            <a class="version-download" href="https://github.com/example/app/releases/download/v2.4.0/app.apk">Download APK · ARM64</a>
+          </div>
+        </article>
+        '''
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "index.html"
+            path.write_text(html, encoding="utf-8")
+            entries, error = check_links.discover_version_downloads(str(path))
+        self.assertIsNone(error)
+        self.assertEqual(len(entries), 1)
+        self.assertEqual(entries[0]["card"], "Nuvio Mobile")
+        self.assertEqual(entries[0]["tag"], "v2.4.0")
+        self.assertEqual(entries[0]["label"], "Download APK · ARM64")
+
+    def test_discover_version_downloads_ignores_non_download_source_links(self):
+        html = '''
+        <article class="version-card">
+          <h3>Nuvio TV</h3>
+          <a class="version-source" href="https://github.com/example/app/releases">Source</a>
+          <a class="version-download" href="https://github.com/example/app/releases/download/1.0/tv.apk">Download</a>
+        </article>
+        '''
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "index.html"
+            path.write_text(html, encoding="utf-8")
+            entries, error = check_links.discover_version_downloads(str(path))
+        self.assertIsNone(error)
+        self.assertEqual(len(entries), 1)
+        self.assertEqual(entries[0]["tag"], "1.0")
+
+
 if __name__ == "__main__":
     unittest.main()

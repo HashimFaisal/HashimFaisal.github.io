@@ -17,6 +17,78 @@ let latestReport = null;
 const translations = {
   'الإضافات': 'Add-ons',
   'نسخ Nuvio': 'Nuvio Editions',
+  'اختر جهازك للوصول إلى النسخة المناسبة. روابط التنزيل المباشر متاحة عندما ينشر المطوّر ملف تثبيت.': 'Choose your device to find the right edition. Direct downloads are available when the developer publishes an installer.',
+  'الموبايل · Android وiPhone': 'Mobile · Android & iPhone',
+  'نسخ الهواتف، مع روابط APK وIPA المباشرة عند توفرها.': 'Phone editions, with direct APK and IPA links where available.',
+  'Android · رسمي': 'Android · Official',
+  'التطبيق الرسمي لهواتف Android. اختر ملف APK حسب معمارية جهازك.': 'The official Android phone app. Choose the APK that matches your device architecture.',
+  'تنزيل APK · ARM64': 'Download APK · ARM64',
+  'تنزيل APK · ARMv7': 'Download APK · ARMv7',
+  'تنزيل APK · x86_64': 'Download APK · x86_64',
+  'كل ملفات وإصدارات Android ↗': 'All Android assets & releases ↗',
+  'إذا لم تعرف معمارية هاتفك، راجع صفحة الإصدار أو استخدم ملف ARM64 للأجهزة الحديثة المتوافقة.': 'If you are unsure of your phone architecture, check the release page or use ARM64 for compatible modern devices.',
+  'iPhone · iOS': 'iPhone · iOS',
+  'Nuvio Mobile for iOS': 'Nuvio Mobile for iOS',
+  'ملف IPA الرسمي المنشور من مطوّر Nuvio.': 'The official IPA file published by the Nuvio developer.',
+  'تنزيل ملف IPA': 'Download IPA',
+  'صفحة الإصدار الأصلية ↗': 'Original release page ↗',
+  'تثبيت IPA على iPhone قد يتطلب أداة تثبيت جانبي؛ هذا ليس رابط App Store.': 'Installing an IPA on iPhone may require a sideloading tool; this is not an App Store link.',
+  'Android · مجتمعي': 'Android · Community',
+  'تفرّع مجتمعي للموبايل مع تعديلات على المشغّل والترجمات وتجربة الاستخدام.': 'A community mobile fork with player, subtitle, and usability changes.',
+  'فتح الإصدارات ↗': 'Open releases ↗',
+  'لم نعثر على ملف إصدار منشور يمكن ربطه مباشرةً حالياً؛ لذلك يفتح الرابط صفحة المطوّر.': 'No published release asset could be verified for a direct link, so this opens the developer page.',
+  'التلفزيون · Android TV وGoogle TV': 'TV · Android TV & Google TV',
+  'ملفات APK مباشرة للتلفزيون، مع اختيار المعمارية المناسبة.': 'Direct TV APK files, with architecture choices.',
+  'Android TV · رسمي': 'Android TV · Official',
+  'التطبيق الرسمي المصمم للشاشة الكبيرة والتحكم عن بُعد.': 'The official app designed for the big screen and remote control.',
+  'تنزيل APK · Universal': 'Download APK · Universal',
+  'كل ملفات وإصدارات التلفزيون ↗': 'All TV assets & releases ↗',
+  'Android TV · مجتمعي': 'Android TV · Community',
+  'نسخة تجريبية مستقلة مبنية على Nuvio TV وتضيف تعديلات من صاحب المشروع.': 'An independent experimental fork based on Nuvio TV with maintainer-specific changes.',
+  'صفحة الإصدارات ↗': 'Releases page ↗',
+  'مشروع مجتمعي مستقل؛ لا ترسل مشكلاته إلى دعم التطبيق الرسمي.': 'An independent community project; do not send its issues to official app support.',
+  'نسخة خفيفة تستهدف أجهزة التلفزيون ذات الموارد المحدودة.': 'A lightweight edition targeting TVs with limited resources.',
+  'تنزيل APK · Universal': 'Download APK · Universal',
+  'كل ملفات الإصدار ↗': 'All release assets ↗',
+  'تعطّل هذه النسخة JavaScript Plugins وبعض الوظائف؛ اقرأ التفاصيل قبل التثبيت.': 'This edition disables JavaScript Plugins and some features; read the details before installing.',
+  'تفرّع Reshaped المخصص لتجربة الشاشة الكبيرة.': 'The Reshaped fork designed for the big-screen experience.',
+  'التلفزيونات الذكية · Samsung وLG': 'Smart TVs · Samsung & LG',
+  'روابط منفصلة حسب نظام التلفزيون ونوع حزمة التثبيت.': 'Separate links based on the TV operating system and installer package.',
+  'Samsung Tizen': 'Samsung Tizen',
+  'Nuvio Native Legacy · Tizen': 'Nuvio Native Legacy · Tizen',
+  'نسخة مخصصة لبعض تلفزيونات Samsung بنظام Tizen. اختر الحزمة المطابقة لجيل جهازك.': 'An edition for selected Samsung Tizen TVs. Choose the package matching your device generation.',
+  'تنزيل WGT': 'Download WGT',
+  'تنزيل TPK': 'Download TPK',
+  'Tizen 4.0': 'Tizen 4.0',
+  'Tizen 6.0': 'Tizen 6.0',
+  'Tizen 6.5': 'Tizen 6.5',
+  'قد تتطلب ملفات TPK/WGT تفعيل وضع المطوّر وطريقة تثبيت خاصة بالتلفزيون.': 'TPK/WGT files may require Developer Mode and a TV-specific installation process.',
+  'LG webOS': 'LG webOS',
+  'Nuvio Native Legacy · webOS': 'Nuvio Native Legacy · webOS',
+  'حزمة IPK لتلفزيونات LG المتوافقة بنظام webOS.': 'An IPK package for compatible LG webOS TVs.',
+  'تنزيل IPK': 'Download IPK',
+  'تنزيل IPK · High Cache': 'Download IPK · High Cache',
+  'صفحة المطوّر ↗': 'Developer page ↗',
+  'تأكد من توافق إصدار webOS وطراز التلفزيون قبل التثبيت.': 'Check your webOS version and TV model compatibility before installing.',
+  'Android TV / Android Box': 'Android TV / Android Box',
+  'Nuvio Native Legacy · Android': 'Nuvio Native Legacy · Android',
+  'ملفات APK مستقلة ضمن مشروع Native Legacy لأجهزة Android المتوافقة.': 'Standalone APK files in the Native Legacy project for compatible Android devices.',
+  'تنزيل APK': 'Download APK',
+  'APK Lite · ARM64': 'APK Lite · ARM64',
+  'APK Lite · ARMv7': 'APK Lite · ARMv7',
+  'الكمبيوتر · Windows': 'Desktop · Windows',
+  'نسخ سطح المكتب المتاحة وروابط مشاريعها الأصلية.': 'Available desktop editions and their original project links.',
+  'Windows · مجتمعي': 'Windows · Community',
+  'تفرّع مجتمعي لسطح المكتب على Windows مع تعديلات على المشغّل والترجمات.': 'A community Windows desktop fork with player and subtitle changes.',
+  'فتح صفحة المشروع والإصدارات ↗': 'Open project & releases ↗',
+  'لا توجد حالياً حزمة إصدار مباشرة منشورة في صفحة Releases؛ سنعرض صفحة المشروع بدلاً من رابط تنزيل غير متحقق.': 'There is currently no published direct release asset; we show the project page instead of an unverified download link.',
+  'هذه قائمة مستقلة للوصول إلى المشاريع الأصلية. لا نستضيف ملفات التثبيت. روابط APK وIPA وWGT وTPK وIPK المباشرة مأخوذة من ملفات الإصدارات المنشورة لدى المطوّرين، وقد تتغير عند صدور تحديث جديد. افحص توافق جهازك دائماً؛ المشاريع المجتمعية غير رسمية وقد يختلف دعمها وميزاتها.': 'This independent directory links to original projects. We do not host installers. Direct APK, IPA, WGT, TPK, and IPK links come from developer release assets and may change with new releases. Always check device compatibility; community projects are unofficial and may differ in support and features.',
+  'تنزيل APK · ARM32': 'Download APK · ARM32',
+  'تنزيل APK · x64': 'Download APK · x64',
+  'تنزيل APK · x86': 'Download APK · x86',
+  'المصدر · كل الإصدارات ↗': 'Source · All releases ↗',
+  'هذه نسخة مجتمعية تجريبية؛ تحقق من توافق معمارية هاتفك قبل التثبيت.': 'This is an experimental community build; check your phone architecture before installing.',
+  'تنزيل Windows · EXE': 'Download Windows · EXE',
   'الموبايل': 'Mobile',
   'التلفزيون': 'TV',
   'الكمبيوتر': 'Desktop',
@@ -278,6 +350,17 @@ const translations = {
   "تمييز الإضافات التي تحتاج API فعلياً عن الإضافات التي تعمل بدونه، وإضافة روابط مفاتيح SubDL وSubSource الاختيارية في SubSense ورابط مزود AI الاختياري في SubMaker، وتوضيح أن روابط Manifest لبعض الخدمات شخصية وتُولّد من صفحات الإعداد.": "Clarified which add-ons actually require an API, added optional SubDL and SubSource key links for SubSense and an optional AI provider link for SubMaker, and explained that some services generate personal Manifest links through their setup pages.",
   "إضافة موارد جديدة لقسم الترجمات": "Added new resources to the subtitles section",
   "إضافة OpenSubtitles PRO وCommunity Subtitles وSubSource وSubSense وSubMaker وAIO Subtitles، مع ربط إعداد SubDL وتوثيق متطلبات كل خدمة.": "Added OpenSubtitles PRO, Community Subtitles, SubSource, SubSense, SubMaker, and AIO Subtitles, along with the SubDL setup link and each service's requirements.",
+
+  'جارٍ فحص روابط الإصدار...': 'Checking edition links...',
+  'الإصدار': 'Version',
+  'تعذر التحقق من روابط الإصدار': 'Could not verify edition links',
+  'روابط التنزيل سليمة': 'Download links are healthy',
+  'رابط تنزيل غير متاح': 'A download link is unavailable',
+  'لا توجد روابط تنزيل مباشرة': 'No direct download links',
+  'فحص روابط التنزيل': 'Download link check',
+
+  "ربط نسخ Nuvio بالفحص الذكي والأخبار وأرقام الإصدارات": "Connected Nuvio editions to smart link checks, news, and version numbers",
+  "إضافة فحص مباشر لكل روابط APK وIPA وWGT وTPK وIPK وEXE في بطاقات نسخ Nuvio، وإظهار رقم الإصدار وحالة الروابط على كل بطاقة، مع دعم العربية والإنجليزية.": "Added live checks for every APK, IPA, WGT, TPK, IPK, and EXE link in Nuvio edition cards, displaying each version number and link status in Arabic and English.",
 };
 
 const reverseTranslations = Object.fromEntries(
@@ -368,6 +451,7 @@ function applyLanguage() {
 
   translateStaticText();
   updateShareButtonLabels();
+  if (latestReport) renderVersionCardStatuses(latestReport);
   loadLiveUpdates();
 
   const changelogList = $('#changelog-list');
@@ -765,6 +849,46 @@ function renderManifestStatuses(report) {
   });
 }
 
+
+function renderVersionCardStatuses(report) {
+  const items = Array.isArray(report?.version_downloads?.items)
+    ? report.version_downloads.items
+    : (Array.isArray(report?.checks) ? report.checks.filter(item => item.type === 'version_download') : []);
+
+  document.querySelectorAll('.version-card').forEach(card => {
+    const status = card.querySelector('.version-card-status');
+    if (!status) return;
+    const title = card.querySelector('h3')?.textContent.trim();
+    const cardItems = items.filter(item => item.card === title);
+    if (!cardItems.length) {
+      const tags = [...new Set([...card.querySelectorAll('a.version-download')].map(link => {
+        try {
+          const parts = new URL(link.href).pathname.split('/').filter(Boolean);
+          const index = parts.indexOf('download');
+          return index >= 0 ? parts[index + 1] : null;
+        } catch {
+          return null;
+        }
+      }).filter(Boolean))];
+      const versionText = tags.length ? `${t('الإصدار')} ${tags.join(' / ')}` : t('الإصدار غير متاح');
+      status.textContent = `${versionText} · ${t('تعذر التحقق من روابط الإصدار')}`;
+      status.dataset.state = 'unknown';
+      return;
+    }
+
+    const tags = [...new Set(cardItems.map(item => item.tag).filter(Boolean))];
+    const failed = cardItems.filter(item => !item.ok).length;
+    const versionText = tags.length ? `${t('الإصدار')} ${tags.join(' / ')}` : t('الإصدار غير متاح');
+    const healthText = failed
+      ? `${failed} · ${t('رابط تنزيل غير متاح')}`
+      : t('روابط التنزيل سليمة');
+    status.textContent = `${versionText} · ${healthText}`;
+    status.dataset.state = failed ? 'warning' : 'healthy';
+    status.title = `${t('فحص روابط التنزيل')}: ${cardItems.length}`;
+  });
+}
+
+
 function renderDownloads(report) {
   const release = report.release;
 
@@ -837,6 +961,7 @@ async function loadStatus() {
     updateLastChecked();
 
     renderManifestStatuses(report);
+    renderVersionCardStatuses(report);
     renderDownloads(report);
   } catch (error) {
     $('#health-state').textContent = t('غير متاح');
@@ -1097,19 +1222,4 @@ installShareButtons();
 loadStatus();
 loadChangelog();
 
-document.addEventListener('click', (event) => {
-  const button = event.target.closest('[data-version-filter]');
-  if (!button) return;
-
-  const selected = button.dataset.versionFilter;
-  document.querySelectorAll('[data-version-filter]').forEach((item) => {
-    const active = item === button;
-    item.classList.toggle('active', active);
-    item.setAttribute('aria-pressed', String(active));
-  });
-
-  document.querySelectorAll('.version-card').forEach((card) => {
-    card.hidden = selected !== 'all' && card.dataset.versionPlatform !== selected;
-  });
-});
 
