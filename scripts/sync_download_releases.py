@@ -46,7 +46,15 @@ def fetch_latest_release(repository: str):
     ]
     if not published:
         raise ValueError("No published GitHub release with assets was found")
-    return max(published, key=lambda item: item.get("published_at") or "")
+
+    def is_prerelease(item):
+        tag = str(item.get("tag_name") or "").lower()
+        marker = re.search(r"(?:^|[._-])(alpha|beta|rc|pre|preview|dev)(?:[._-].*|\\d.*)?$", tag)
+        return bool(item.get("prerelease")) or bool(marker)
+
+    stable = [item for item in published if not is_prerelease(item)]
+    candidates = stable or published
+    return max(candidates, key=lambda item: item.get("published_at") or "")
 
 
 def asset_features(name: str):
