@@ -33,12 +33,17 @@ class ManifestCoverageTests(unittest.TestCase):
         self.assertNotIn("TMDB Discover+", check_links.MANIFESTS)
         self.assertIn("يتطلب إعداداً شخصياً", html)
 
-    def test_personal_manifest_tokens_are_not_published(self):
+    def test_personal_manifest_urls_are_not_published(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
-        checker = (ROOT / "scripts/check_links.py").read_text(encoding="utf-8")
-        for token in ("c6520fa9-2205-4058-baf9-d9e8e45a4711", "yMUI42Fodl"):
-            self.assertNotIn(token, html)
-            self.assertNotIn(token, checker)
+        for name in ("AIOMetadata", "TMDB Discover+"):
+            heading = html.index(f"<h3>{name}</h3>")
+            card_start = html.rfind("<article", 0, heading)
+            card_end = html.index("</article>", heading)
+            card = html[card_start:card_end]
+            self.assertNotIn("manifest-url", card)
+            self.assertNotIn("PERSONAL MANIFEST URL", card)
+        self.assertNotIn("AIOMetadata", check_links.MANIFESTS)
+        self.assertNotIn("TMDB Discover+", check_links.MANIFESTS)
 
     def test_manifest_http_errors_keep_the_status_code(self):
         error = HTTPError(
