@@ -608,7 +608,7 @@ test('changelog and downloads sections keep content boxes separate across viewpo
     await page.locator('#nuvio-launch-grid [data-view="downloads"]').click();
     await expect(page.locator('#downloads')).toBeVisible();
     await assertNoOverlaps('#downloads');
-    await assertNoOverlaps('#downloads .release-banner');
+    await assertNoOverlaps('#downloads .downloads-toolbar');
     await assertNoOverlaps('#download-grid');
     await page.locator('#downloads .nuvio-view-back').click();
   };
@@ -752,13 +752,24 @@ test('Nuvio downloads library has searchable platform filters and direct release
   await expect(page.locator('#downloads')).toBeVisible();
   await expect(page.locator('#downloads .nuvio-view-back')).toBeVisible();
   await expect(page.locator('#downloads-title')).toHaveText('تنزيلات Nuvio');
-  await expect(page.locator('#downloads .downloads-release-panel')).toBeVisible();
-  await expect(page.locator('#downloads .downloads-release-details')).toBeVisible();
+  await expect(page.locator('#downloads .downloads-release-panel')).toHaveCount(0);
+  await expect(page.locator('#downloads .downloads-release-details')).toHaveCount(0);
   await expect(page.locator('#downloads-search')).toBeVisible();
   await expect(page.locator('#downloads-filters [data-download-filter="all"]')).toBeVisible();
   await expect(page.locator('#downloads-filters [data-download-filter="android"]')).toBeVisible();
   await expect(page.locator('#downloads-filters [data-download-filter="ios"]')).toBeVisible();
   await expect(page.locator('#download-grid .download-card')).toHaveCount(5);
+  await expect(page.locator('#download-grid .download-library-card')).toHaveCount(5);
+  await expect(page.locator('#download-grid .plugin-card')).toHaveCount(0);
+  const downloadColumns = await page.locator('#download-grid').evaluate(el =>
+    getComputedStyle(el).gridTemplateColumns.trim().split(' ').filter(Boolean).length
+  );
+  const expectedColumns = await page.evaluate(() =>
+    window.matchMedia('(max-width: 680px)').matches
+      ? 1
+      : window.matchMedia('(max-width: 1000px)').matches ? 2 : 3
+  );
+  expect(downloadColumns).toBe(expectedColumns);
   await expect(page.locator('#download-grid .download-card a.download-action[href*="/releases/download/"]')).toHaveCount(5);
 
   await page.locator('#downloads-filters [data-download-filter="android"]').click();
