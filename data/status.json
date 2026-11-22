@@ -1,12 +1,12 @@
 {
-  "checked_at": "2026-11-22T07:22:06.549502+00:00",
-  "ok": true,
-  "passed": 30,
+  "checked_at": "2026-11-22T07:52:40.260416+00:00",
+  "ok": false,
+  "passed": 29,
   "total": 30,
   "manifest_coverage": {
     "configured": 20,
-    "healthy": 20,
-    "failed": 0
+    "healthy": 19,
+    "failed": 1
   },
   "source_retrieval": {
     "tested": 3,
@@ -168,9 +168,24 @@
   "release_cache_timestamp": null,
   "release_cache_age_seconds": null,
   "release_cache_stale": false,
-  "diagnostic_summary": "All checks are healthy.",
-  "failure_categories": [],
-  "diagnostics": [],
+  "diagnostic_summary": "1 failure(s): categories 1 upstream.",
+  "failure_categories": [
+    "upstream"
+  ],
+  "diagnostics": [
+    {
+      "name": "Nuvio Catalog",
+      "type": "manifest",
+      "ok": false,
+      "http_status": 522,
+      "error": "HTTP 522: <none>",
+      "url": "https://catalog.nuvio.tv/manifest.json",
+      "failure_code": "upstream_server_error",
+      "failure_category": "upstream",
+      "severity": "warning",
+      "recommended_action": "Retry later and check the upstream service status."
+    }
+  ],
   "checks": [
     {
       "name": "ALL-IN-ONE",
@@ -292,15 +307,14 @@
     {
       "name": "Nuvio Catalog",
       "type": "manifest",
-      "ok": true,
-      "http_status": 200,
-      "version": "1.2.0",
-      "manifest_id": "com.nuvio.tmdb.catalogs",
+      "ok": false,
+      "http_status": 522,
+      "error": "HTTP 522: <none>",
       "url": "https://catalog.nuvio.tv/manifest.json",
-      "failure_code": "healthy",
-      "failure_category": "healthy",
-      "severity": "info",
-      "recommended_action": "No action required."
+      "failure_code": "upstream_server_error",
+      "failure_category": "upstream",
+      "severity": "warning",
+      "recommended_action": "Retry later and check the upstream service status."
     },
     {
       "name": "The Movie Database Addon",
@@ -574,38 +588,83 @@
     }
   ],
   "change_summary": {
-    "count": 0,
-    "by_type": {},
-    "events": []
+    "count": 1,
+    "by_type": {
+      "status": 1
+    },
+    "events": [
+      {
+        "date": "2026-11-22T07:52:40.260834+00:00",
+        "type": "status",
+        "title": "تغيرت حالة Nuvio Catalog",
+        "detail": "الحالة السابقة: متاح. الحالة الجديدة: متعطل.",
+        "source": "Nuvio Catalog",
+        "source_url": "https://catalog.nuvio.tv/manifest.json",
+        "old_status": "available",
+        "new_status": "unavailable"
+      }
+    ]
   },
-  "change_count": 0,
+  "change_count": 1,
   "proactive_monitoring": {
-    "status": "healthy",
-    "alert_count": 0,
-    "alerts": [],
-    "summary": "No proactive warnings; all measured checks are healthy."
+    "status": "attention",
+    "alert_count": 1,
+    "alerts": [
+      {
+        "severity": "medium",
+        "code": "upstream_server_error",
+        "resource": "Nuvio Catalog",
+        "message": "HTTP 522: <none>",
+        "recommended_action": "Retry later and check the upstream service status."
+      }
+    ],
+    "summary": "1 warning(s) detected; 0 high-priority."
   },
   "risk_forecast": {
-    "status": "healthy",
+    "status": "attention",
     "integrity": {
       "input_result_count": 30,
-      "evaluated_failure_count": 0,
+      "evaluated_failure_count": 1,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
-      "history_window_size": 33,
+      "history_window_size": 34,
       "history_evidence_deduplicated": true
     },
-    "overall_level": "low",
-    "risk_count": 0,
+    "overall_level": "medium",
+    "risk_count": 1,
     "high_risk_count": 0,
-    "medium_risk_count": 0,
-    "risks": [],
+    "medium_risk_count": 1,
+    "risks": [
+      {
+        "resource": "Nuvio Catalog",
+        "score": 50,
+        "level": "medium",
+        "score_breakdown": {
+          "current_failure": 45,
+          "consecutive_failure": 0,
+          "outage_history": 5
+        },
+        "signals": [
+          "current_check_failed",
+          "recurring_outage_history"
+        ],
+        "confidence": "medium",
+        "confidence_basis": "Number of distinct evidence signals; not predictive accuracy.",
+        "confidence_details": "Medium confidence from 2 distinct signal(s): current_check_failed, recurring_outage_history.",
+        "evidence_count": 1,
+        "recommended_action": "Retry later and check the upstream service status.",
+        "previous_score": null,
+        "score_delta": null,
+        "trend": "new",
+        "trend_basis": "No matching risk in the previous forecast; baseline for trend comparison."
+      }
+    ],
     "trend_summary": {
       "status": "baseline",
       "previous_total_score": null,
       "current_total_score": null,
       "total_score_delta": null,
-      "new_count": 0,
+      "new_count": 1,
       "worsening_count": 0,
       "improving_count": 0,
       "stable_count": 0,

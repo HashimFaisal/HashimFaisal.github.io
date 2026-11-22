@@ -1,5 +1,20 @@
 [
   {
+    "id": "addon:Nuvio Catalog:status:available-to-unavailable:2026-11-22T07:52:40.260834+00:00",
+    "type": "addon",
+    "title": {
+      "ar": "تعطل المصدر: Nuvio Catalog",
+      "en": "Source is unavailable: Nuvio Catalog"
+    },
+    "description": {
+      "ar": "فشل فحص Nuvio Catalog بعد أن كان متاحاً.",
+      "en": "Nuvio Catalog failed its health check after being available."
+    },
+    "url": "https://catalog.nuvio.tv/manifest.json",
+    "publishedAt": "2026-11-22T07:52:40.260834Z",
+    "expiresAt": "2026-11-23T07:52:40.260834Z"
+  },
+  {
     "id": "addon:Torrentio:added:0.0.15",
     "type": "addon",
     "title": {

@@ -268,5 +268,15 @@
     "source": "TMDB Discover+",
     "source_url": "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
     "new_version": "2.14.7+49f99dd0e277"
+  },
+  {
+    "date": "2026-11-22T07:52:40.260834+00:00",
+    "type": "status",
+    "title": "تغيرت حالة Nuvio Catalog",
+    "detail": "الحالة السابقة: متاح. الحالة الجديدة: متعطل.",
+    "source": "Nuvio Catalog",
+    "source_url": "https://catalog.nuvio.tv/manifest.json",
+    "old_status": "available",
+    "new_status": "unavailable"
   }
 ]
