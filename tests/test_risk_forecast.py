@@ -105,5 +105,26 @@ class RiskForecastTests(unittest.TestCase):
         self.assertEqual(unchanged["risks"][0]["trend"], "stable")
         self.assertEqual(unchanged["trend_summary"]["status"], "stable")
 
+    def test_invalid_previous_scores_are_baseline(self):
+        item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
+        for score in (None, "45", True, -1, 101, float("nan")):
+            with self.subTest(score=score):
+                previous = {"risk_forecast": {"risks": [{"resource": "API", "score": score}]}}
+                result = check_links.build_risk_forecast([item], previous, [])
+                risk = result["risks"][0]
+                self.assertEqual(risk["trend"], "baseline")
+                self.assertIsNone(risk["previous_score"])
+                self.assertIsNone(risk["score_delta"])
+                self.assertEqual(result["trend_summary"]["status"], "baseline")
+                self.assertEqual(result["trend_summary"]["baseline_count"], 1)
+                self.assertIsNone(result["trend_summary"]["previous_total_score"])
+
+    def test_invalid_prior_resource_shapes_are_ignored(self):
+        item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
+        previous = {"risk_forecast": {"risks": [None, {"resource": [], "score": 40}, {"resource": "API", "score": {}}]}}
+        result = check_links.build_risk_forecast([item], previous, [])
+        self.assertEqual(result["risks"][0]["trend"], "baseline")
+        self.assertEqual(result["trend_summary"]["status"], "baseline")
+
 if __name__ == "__main__":
     unittest.main()
