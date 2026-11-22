@@ -773,10 +773,10 @@ def diagnose_check(item):
             "release_lookup_failed", "release",
             "Check the releases API and confirm a published beta release exists."
         )
-    elif check_type == "download":
+    elif check_type in {"download", "version_download"}:
         code, category, action = (
             "download_check_failed", "download",
-            "Verify the release asset exists and its download URL responds."
+            "Verify the release asset exists and its direct download URL responds."
         )
     else:
         code, category, action = (
