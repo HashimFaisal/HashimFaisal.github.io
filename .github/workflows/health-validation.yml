@@ -88,7 +88,21 @@ jobs:
                   raise SystemExit(f"Missing subtitle setup URL: {url}")
           if "buildNuvioPluginDeepLink" not in Path("app.js").read_text(encoding="utf-8"):
               raise SystemExit("Nuvio plugin deep-link handler is missing.")
-          print("Resource categories and key install actions are present.")
+          version_cards = re.findall(
+              r'<article class="version-card">(.*?)</article>',
+              html,
+              re.S,
+          )
+          if len(version_cards) != 11:
+              raise SystemExit(f"Expected 11 Nuvio edition cards, found {len(version_cards)}")
+          if 'class="version-source"' in html:
+              raise SystemExit("Nuvio edition cards must not contain separate source links.")
+          if html.count('class="version-card-status"') != len(version_cards):
+              raise SystemExit("Every Nuvio edition card must show its live version/link-check status.")
+          for card in version_cards:
+              if 'class="version-download"' not in card:
+                  raise SystemExit("A Nuvio edition card has no direct download button.")
+          print("Resource categories, Nuvio edition cards, and direct download actions are present.")
           PY
       - name: Validate JSON data and event history
         run: |
