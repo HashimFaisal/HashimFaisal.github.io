@@ -105,3 +105,11 @@ python -m py_compile scripts/check_links.py
 **Built independently for the Nuvio community.**
 
 </div>
+
+## Feedback and support
+
+- [Report a website or add-on listing problem](https://github.com/HashimFaisal/HashimFaisal.github.io/issues/new?title=Website%20problem%20report)
+- [Suggest an add-on](https://github.com/HashimFaisal/HashimFaisal.github.io/issues/new?title=Add-on%20suggestion)
+- [Contact the maintainer on GitHub](https://github.com/HashimFaisal)
+
+When reporting an issue, include the affected add-on, what you expected to happen, what happened instead, and the steps to reproduce it. Do not include passwords, API tokens, or other private credentials.
