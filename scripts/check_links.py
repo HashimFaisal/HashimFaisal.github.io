@@ -199,6 +199,22 @@ def release_cache_is_stale(cached_at, now=None):
     return age is None or age > RELEASE_CACHE_MAX_AGE_SECONDS
 
 
+def normalize_http_status(value):
+    """Return a valid HTTP status integer, accepting digit-only strings safely."""
+    if isinstance(value, bool):
+        return None
+    if isinstance(value, int):
+        status = value
+    elif isinstance(value, str) and value.strip().isdigit():
+        try:
+            status = int(value.strip())
+        except (TypeError, ValueError, OverflowError):
+            return None
+    else:
+        return None
+    return status if 100 <= status <= 599 else None
+
+
 def diagnose_check(item):
     """Attach a stable failure code and actionable hint to an unsuccessful health check."""
     if item.get("ok"):
@@ -209,7 +225,7 @@ def diagnose_check(item):
             "recommended_action": "No action required.",
         }
 
-    status = item.get("http_status")
+    status = normalize_http_status(item.get("http_status"))
     error = str(item.get("error") or "").lower()
     check_type = item.get("type", "unknown")
     name = item.get("name", "Unknown")
