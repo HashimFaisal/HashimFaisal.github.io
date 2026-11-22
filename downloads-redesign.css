@@ -294,7 +294,7 @@
   font-size: 10px;
 }
 #downloads .download-filter-count { opacity: .75; font: 700 9px Inter, sans-serif; }
-#downloads .download-grid {
+#downloads .release-assets-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch;
@@ -442,7 +442,7 @@
 #downloads .release-asset-card::after { content: none !important; display: none !important; }
 @media (max-width: 1000px) {
   #downloads .downloads-device-nav { grid-template-columns: repeat(2, minmax(0,1fr)); }
-  #downloads .download-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  #downloads .release-assets-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
 @media (max-width: 680px) {
   #downloads.downloads-redesign { width: 94%; margin-bottom: 42px; }
@@ -465,7 +465,7 @@
   #downloads .downloads-search-box { width: 100%; flex-basis: auto; }
   #downloads .downloads-filters { overflow: visible; }
   #downloads .downloads-filters .filter { padding: 7px 9px; font-size: 9px; }
-  #downloads .download-grid { grid-template-columns: minmax(0,1fr); gap: 9px; }
+  #downloads .release-assets-grid { grid-template-columns: minmax(0,1fr); gap: 9px; }
   #downloads .release-asset-card { padding: 15px; border-radius: 13px; }
 }
 @media (prefers-reduced-motion: reduce) {
