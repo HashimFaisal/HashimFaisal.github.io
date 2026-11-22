@@ -235,7 +235,12 @@ def diagnose_check(item):
             "rate_limited", "rate_limit",
             "Wait for the API rate limit to reset; avoid repeated retries."
         )
-    elif status in (408, 504) or any(term in error for term in ("timed out", "timeout")):\n        code, category, action = (\n            "timeout", "network",\n            "Retry after a short delay; check network reachability if persistent."\n        )\n    elif status in (401, 403) or "unauthorized" in error or "forbidden" in error:
+    elif status in (408, 504) or any(term in error for term in ("timed out", "timeout")):
+        code, category, action = (
+            "timeout", "network",
+            "Retry after a short delay; check network reachability if persistent."
+        )
+    elif status in (401, 403) or "unauthorized" in error or "forbidden" in error:
         code, category, action = (
             "access_denied", "access",
             "Verify access permissions or token configuration."
