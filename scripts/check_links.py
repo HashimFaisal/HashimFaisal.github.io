@@ -260,7 +260,9 @@ def main():
 
     stable_release_data = None
 
-    if stable_release:
+    if release_is_cached:
+        stable_release_data = previous_report.get("stable_release")
+    elif stable_release:
         stable_tag = stable_release.get("tag_name", "unknown")
         stable_release_data = {
             "tag": stable_tag,
