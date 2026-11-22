@@ -58,12 +58,15 @@ jobs:
                   raise SystemExit(f"Missing ratings/metadata resource: {name}")
           required_manifests = (
               "https://torrentio.strem.fun/manifest.json",
-              "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
-              "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
           )
           for url in required_manifests:
               if url not in html:
-                  raise SystemExit(f"Missing personal metadata Manifest URL: {url}")
+                  raise SystemExit(f"Missing public Manifest URL: {url}")
+          if "PERSONAL MANIFEST URL" in html:
+              raise SystemExit("A per-user metadata Manifest URL is still published.")
+          for setup_url in ("https://aiometadata.elfhosted.com/configure", "https://tmdb-discover-plus.elfhosted.com/"):
+              if setup_url not in html:
+                  raise SystemExit(f"Missing metadata provider setup page: {setup_url}")
           if 'data-category="subtitles"' not in html:
               raise SystemExit("Subtitle resources are missing.")
           subtitle_resources = (

@@ -91,12 +91,12 @@ test('all five dashboard destinations open and return to the dashboard', async (
 });
 
 
-test('all 20 add-on cards receive their published manifest health status', async ({ page }) => {
+test('all 18 public-manifest cards receive their published health status', async ({ page }) => {
   const names = await page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
     nodes.map(node => node.dataset.check).filter(Boolean)
   );
-  expect(names).toHaveLength(20);
-  expect(new Set(names).size).toBe(20);
+  expect(names).toHaveLength(18);
+  expect(new Set(names).size).toBe(18);
 
   const checks = names.map(name => ({
     name,
@@ -110,8 +110,8 @@ test('all 20 add-on cards receive their published manifest health status', async
     contentType: 'application/json',
     body: JSON.stringify({
       ok: true,
-      passed: 20,
-      total: 20,
+      passed: 18,
+      total: 18,
       checks,
       release: null,
       version_downloads: { checked: 0, healthy: 0, failed: 0, items: [] }
@@ -130,8 +130,8 @@ test('all 20 add-on cards receive their published manifest health status', async
 
   await page.reload();
   await expect(page.locator('#health-state')).toHaveText('سليم');
-  await expect(page.locator('#addon-count')).toHaveText('20');
-  await expect(page.locator('#plugins .plugin-card .card-status')).toHaveCount(20);
+  await expect(page.locator('#addon-count')).toHaveText('18');
+  await expect(page.locator('#plugins .plugin-card .card-status[data-check]')).toHaveCount(18);
   await expect.poll(() => page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
     nodes.every(node => !node.textContent.includes('جارٍ التحقق'))
   )).toBe(true);
@@ -271,32 +271,25 @@ test('Torrentio manifest exposes a Nuvio install action and its configuration pa
   await expect(card.locator('.share-btn')).toBeVisible();
 });
 
-test('personal metadata manifests expose Nuvio install actions and keep setup links', async ({ page }) => {
+test('personal metadata cards expose setup links without publishing per-user manifest URLs', async ({ page }) => {
   // The plugin library is hidden while the dashboard is active; open it before
   // asserting that the generated install controls are visible to users.
   await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
   await expect(page.locator('#plugins')).toBeVisible();
 
   const expected = [
-    {
-      name: 'AIOMetadata',
-      manifest: 'https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json',
-      setup: 'https://aiometadata.elfhosted.com/configure'
-    },
-    {
-      name: 'TMDB Discover+',
-      manifest: 'https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json',
-      setup: 'https://tmdb-discover-plus.elfhosted.com/'
-    }
+    { name: 'AIOMetadata', setup: 'https://aiometadata.elfhosted.com/configure' },
+    { name: 'TMDB Discover+', setup: 'https://tmdb-discover-plus.elfhosted.com/' }
   ];
 
   for (const item of expected) {
-    const card = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: item.name }) });    await expect(card).toHaveCount(1);
+    const card = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: item.name }) });
+    await expect(card).toHaveCount(1);
     await expect(card.locator('h3')).toHaveText(item.name);
-    await expect(card.locator('.manifest-url')).toHaveText(item.manifest);
+    await expect(card.locator('.manifest-url')).toHaveCount(0);
     await expect(card.locator('.card-actions a').first()).toHaveAttribute('href', item.setup);
-    await expect(card.locator('.card-actions a[href="' + item.manifest + '"]')).toHaveAttribute('href', item.manifest);
-    await expect(card.locator('.share-btn')).toBeVisible();
+    await expect(card.locator('.card-status')).toContainText('يتطلب إعداداً شخصياً');
+    await expect(card.locator('.share-btn')).toHaveCount(0);
   }
 });
 
