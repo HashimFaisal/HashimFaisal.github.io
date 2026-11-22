@@ -27,6 +27,12 @@ class ReleaseCacheTests(unittest.TestCase):
         self.assertEqual(check_links.release_cache_age_seconds(cached_at, now=now), 86400)
         self.assertFalse(check_links.release_cache_is_stale(cached_at, now=now))
 
+    def test_cache_is_fresh_at_exact_72_hour_boundary(self):
+        now = check_links.datetime(2026, 11, 22, 12, 0, tzinfo=check_links.timezone.utc)
+        cached_at = "2026-11-19T12:00:00Z"
+        self.assertEqual(check_links.release_cache_age_seconds(cached_at, now=now), 259200)
+        self.assertFalse(check_links.release_cache_is_stale(cached_at, now=now))
+
     def test_cache_is_stale_after_72_hours(self):
         now = check_links.datetime(2026, 11, 22, 12, 0, tzinfo=check_links.timezone.utc)
         cached_at = "2026-11-19T11:59:59Z"
