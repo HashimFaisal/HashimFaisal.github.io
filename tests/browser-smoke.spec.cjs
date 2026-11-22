@@ -747,15 +747,37 @@ test('download URLs remain visible when their health checks fail', async ({ page
 });
 
 
-test('Nuvio downloads view has a complete responsive release header', async ({ page }) => {
+test('Nuvio downloads library has searchable platform filters and direct release assets', async ({ page }) => {
   await page.goto('/#downloads');
   await expect(page.locator('#downloads')).toBeVisible();
   await expect(page.locator('#downloads .nuvio-view-back')).toBeVisible();
   await expect(page.locator('#downloads-title')).toHaveText('تنزيلات Nuvio');
   await expect(page.locator('#downloads .downloads-release-panel')).toBeVisible();
   await expect(page.locator('#downloads .downloads-release-details')).toBeVisible();
-  await expect(page.locator('#downloads .downloads-list-heading')).toBeVisible();
-  await expect(page.locator('#downloads .downloads-releases-link')).toHaveAttribute('href', /releases/);
+  await expect(page.locator('#downloads-search')).toBeVisible();
+  await expect(page.locator('#downloads-filters [data-download-filter="all"]')).toBeVisible();
+  await expect(page.locator('#downloads-filters [data-download-filter="android"]')).toBeVisible();
+  await expect(page.locator('#downloads-filters [data-download-filter="ios"]')).toBeVisible();
+  await expect(page.locator('#download-grid .download-card')).toHaveCount(5);
+  await expect(page.locator('#download-grid .download-card a.download-action[href*="/releases/download/"]')).toHaveCount(5);
+
+  await page.locator('#downloads-filters [data-download-filter="android"]').click();
+  await expect(page.locator('#download-grid .download-card:visible')).toHaveCount(4);
+  await page.locator('#downloads-filters [data-download-filter="ios"]').click();
+  await expect(page.locator('#download-grid .download-card:visible')).toHaveCount(1);
+  await page.locator('#downloads-filters [data-download-filter="all"]').click();
+
+  await page.locator('#downloads-search').fill('x86_64');
+  await expect(page.locator('#download-grid .download-card:visible')).toHaveCount(1);
+  await page.locator('#downloads-search').fill('');
+  await expect(page.locator('#download-grid .download-card:visible')).toHaveCount(5);
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  await expect(page.locator('#downloads-search')).toHaveAttribute('placeholder', 'Search download files...');
+  await expect(page.locator('#download-grid .download-card:visible')).toHaveCount(5);
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
 });
 
 test('Nuvio editions are separated by device and link directly to published installer assets', async ({ page }) => {
