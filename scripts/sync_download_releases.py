@@ -18,6 +18,7 @@ from urllib.request import Request, urlopen
 
 INDEX_PATH = Path("index.html")
 UPDATES_PATH = Path("data/updates.json")
+CARD_REGISTRY_PATH = Path("data/download-cards-seen.json")
 API_HEADERS = {
     "Accept": "application/vnd.github+json",
     "User-Agent": "Nuvio-Control-Center-release-sync",
@@ -130,6 +131,13 @@ def select_asset(current_name: str, old_tag: str, assets: list[dict]):
     return ranked[0][1]
 
 
+def normalize_card_id(title: str):
+    """Return a stable card identity, excluding a displayed version number."""
+    value = unescape(title).strip().lower()
+    value = re.sub(r"\bv?\d+(?:\.\d+)+(?:-[a-z0-9.-]+)?\b", " ", value)
+    return re.sub(r"[^a-z0-9]+", "-", value).strip("-") or "unknown-card"
+
+
 def sync_download_cards(document: str, release_loader=fetch_latest_release):
     card_pattern = re.compile(
         r'(<article class="[^"]*\bdownloads-device-card\b[^"]*">)'
@@ -165,7 +173,7 @@ def sync_download_cards(document: str, release_loader=fetch_latest_release):
                 release = releases[repository]
                 latest_tag = str(release.get("tag_name") or "").strip()
                 if latest_tag and latest_tag != old_tag:
-                    release_events.setdefault((repository, latest_tag), {"repository": repository, "tag": latest_tag, "card": title, "url": release.get("html_url") or ("https://github.com/" + repository + "/releases/tag/" + latest_tag), "published_at": release.get("published_at")})
+                    release_events.setdefault((card_id, repository, latest_tag), {"card_id": card_id, "repository": repository, "tag": latest_tag, "card": title, "url": release.get("html_url") or ("https://github.com/" + repository + "/releases/tag/" + latest_tag), "published_at": release.get("published_at")})
                 asset = select_asset(current_name, old_tag, release.get("assets", []))
             except (HTTPError, URLError, TimeoutError, ValueError, OSError) as exc:
                 skipped_links.append(f"{title}: {current_name} ({exc})")
@@ -198,12 +206,13 @@ def sync_download_cards(document: str, release_loader=fetch_latest_release):
         "updated_cards": updated_cards,
         "skipped_links": skipped_links,
         "repositories_checked": sorted(releases),
-        "release_events": list(release_events.values()),
+        "release_events": list(release_events.values()),\n        "card_events": list(card_events.values()),
     }
 
 
 
-def update_live_release_news(events, updates_path=UPDATES_PATH, now=None):
+def update_live_release_news(events, updates_path=UPDATES_PATH, now=None,
+                            card_events=(), registry_path=CARD_REGISTRY_PATH):
     now = now or datetime.now(timezone.utc)
     if now.tzinfo is None:
         now = now.replace(tzinfo=timezone.utc)
@@ -227,14 +236,18 @@ def update_live_release_news(events, updates_path=UPDATES_PATH, now=None):
         if item_id and expiry > now and item_id not in known_ids:
             active.append(item)
             known_ids.add(item_id)
+
     added = 0
     for event in events:
         repository, tag = event.get("repository"), event.get("tag")
         card, url = event.get("card") or repository, event.get("url")
         if not repository or not tag or not isinstance(url, str) or not url.startswith("https://"):
             continue
-        update_id = "app:download-release:" + repository + ":" + tag
-        if update_id in known_ids:
+        card_id = event.get("card_id")
+        update_id = ("app:download-release:" + card_id + ":" if card_id else
+                     "app:download-release:") + repository + ":" + tag
+        legacy_id = "app:download-release:" + repository + ":" + tag
+        if update_id in known_ids or legacy_id in known_ids:
             continue
         active.append({
             "id": update_id,
@@ -253,9 +266,48 @@ def update_live_release_news(events, updates_path=UPDATES_PATH, now=None):
         })
         known_ids.add(update_id)
         added += 1
+
+    # Persist card identities independently from the 24-hour ticker items.
+    try:
+        registry = json.loads(registry_path.read_text(encoding="utf-8"))
+        if not isinstance(registry, dict):
+            registry = {}
+    except (OSError, ValueError):
+        registry = {}
+    seen_card_ids = set(registry.get("seen_card_ids", []))
+    for event in card_events:
+        card_id = event.get("card_id")
+        card, url = event.get("card"), event.get("url")
+        if (not card_id or card_id in seen_card_ids or not card
+                or not isinstance(url, str) or not url.startswith("https://")):
+            continue
+        update_id = "app:download-card-added:" + card_id
+        if update_id not in known_ids:
+            active.append({
+                "id": update_id,
+                "type": "app",
+                "title": {
+                    "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: " + str(card),
+                    "en": "New download option added: " + str(card),
+                },
+                "description": {
+                    "ar": "أُضيفت " + str(card) + " إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
+                    "en": str(card) + " has been added to the download center. Open the release page for downloads and release details.",
+                },
+                "url": url,
+                "publishedAt": now.isoformat().replace("+00:00", "Z"),
+                "expiresAt": (now + timedelta(hours=24)).isoformat().replace("+00:00", "Z"),
+            })
+            known_ids.add(update_id)
+            added += 1
+        seen_card_ids.add(card_id)
+
     active.sort(key=lambda item: item.get("publishedAt", ""), reverse=True)
     updates_path.parent.mkdir(parents=True, exist_ok=True)
     updates_path.write_text(json.dumps(active[:50], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    registry_path.parent.mkdir(parents=True, exist_ok=True)
+    registry_path.write_text(json.dumps({"seen_card_ids": sorted(seen_card_ids)},
+                                         ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return added
 
 
@@ -267,7 +319,7 @@ def main():
     if updated != original:
         INDEX_PATH.write_text(updated, encoding="utf-8")
     print(f"Release sync checked {len(report['repositories_checked'])} repositories.")
-    news_added = update_live_release_news(report["release_events"])
+    news_added = update_live_release_news(report["release_events"], card_events=report["card_events"])
     print("Updated {} download links across {} cards.".format(report["updated_links"], len(report["updated_cards"])))
     print("Published {} new app release update(s) to the live ticker.".format(news_added))
     for item in report["skipped_links"]:
