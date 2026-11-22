@@ -305,6 +305,39 @@ def build_change_summary(events):
     }
 
 
+def build_proactive_alerts(report):
+    """Produce concise early-warning items from measured health data only."""
+    alerts = []
+    for item in report.get("diagnostics", []):
+        category = item.get("failure_category", "unknown")
+        severity = "high" if category in {"access", "data_validation", "release", "download", "missing_resource"} else "medium"
+        alerts.append({
+            "severity": severity,
+            "code": item.get("failure_code", "check_failed"),
+            "resource": item.get("name", "Unknown"),
+            "message": item.get("error") or item.get("recommended_action", "Check reported issue."),
+            "recommended_action": item.get("recommended_action", "Inspect the check and retry after addressing its cause."),
+        })
+    if report.get("release_cache_stale"):
+        alerts.append({
+            "severity": "medium",
+            "code": "release_cache_stale",
+            "resource": "Release cache",
+            "message": "Cached release data is older than the freshness threshold or has an invalid timestamp.",
+            "recommended_action": "Confirm the release API is reachable; stale fallback links remain available while checking.",
+        })
+    if not alerts:
+        return {"status": "healthy", "alert_count": 0, "alerts": [], "summary": "No proactive warnings; all measured checks are healthy."}
+    high_count = sum(1 for alert in alerts if alert["severity"] == "high")
+    status = "critical" if high_count else "attention"
+    return {
+        "status": status,
+        "alert_count": len(alerts),
+        "alerts": alerts,
+        "summary": f"{len(alerts)} warning(s) detected; {high_count} high-priority.",
+    }
+
+
 def load_release_cache():
     try:
         with open(RELEASE_CACHE_PATH, "r", encoding="utf-8") as cache_file:
@@ -879,6 +912,7 @@ def main():
     history = history[-100:]
     report["change_summary"] = build_change_summary(unique_events)
     report["change_count"] = len(unique_events)
+    report["proactive_monitoring"] = build_proactive_alerts(report)
 
     os.makedirs("data", exist_ok=True)
 
