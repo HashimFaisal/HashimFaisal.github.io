@@ -91,7 +91,7 @@ class StreamSourceDiagnosticsTests(unittest.TestCase):
             "test_title_not_indexed",
         )
 
-    def test_cinemana_distinguishes_provider_host_failure_from_network_failure(self):
+    def test_cinemana_outside_earthlink_is_inconclusive_not_a_provider_failure(self):
         from urllib.error import URLError
 
         with patch.object(
@@ -100,12 +100,30 @@ class StreamSourceDiagnosticsTests(unittest.TestCase):
         ):
             result = check_links.check_cinemana_stream()
 
-        self.assertFalse(result["ok"])
-        self.assertEqual(result["probe_status"], "upstream_unreachable_internet_ok")
+        self.assertTrue(result["ok"])
+        self.assertEqual(result["probe_status"], "inconclusive")
+        self.assertEqual(result["reason_code"], "network_specific_provider")
+        self.assertEqual(result["verification_scope"], "Earthlink user network")
         self.assertEqual(
             check_links.diagnose_check(result)["failure_code"],
-            "upstream_host_unreachable",
+            "test_title_not_indexed",
         )
+
+    def test_cinemabox_reports_the_failing_probe_stage_without_exposing_urls(self):
+        from urllib.error import HTTPError
+        from io import BytesIO
+
+        payloads = [
+            ({"meta": {"name": "The Matrix", "year": "1999"}}, 200),
+            HTTPError("https://cinema.albox.co/api/v4/search", 404, "Not Found", {}, BytesIO(b"missing")),
+        ]
+        with patch.object(check_links, "fetch_json", side_effect=payloads):
+            result = check_links.check_cinemabox_stream()
+
+        self.assertFalse(result["ok"])
+        self.assertEqual(result["probe_stage"], "catalog_search")
+        self.assertEqual(result["http_status"], 404)
+        self.assertNotIn("url", result)
 
     def test_all_in_one_checks_registry_and_sample_provider_files(self):
         manifest = {
