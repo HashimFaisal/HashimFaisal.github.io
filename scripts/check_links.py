@@ -352,14 +352,17 @@ def build_risk_forecast(results, previous_report=None, history=None):
     }
     results = results if isinstance(results, list) else []
     failure_items = [item for item in results if isinstance(item, dict) and not item.get("ok")]
+    ignored_result_count = sum(1 for item in results if not isinstance(item, dict))
     risks = []
     # Duplicate failed checks for one resource should not inflate risk totals.
     seen_failed_resources = set()
+    duplicate_failure_count = 0
     for item in failure_items:
         raw_name = item.get("name")
         name = raw_name.strip() if isinstance(raw_name, str) and raw_name.strip() else "Unknown"
         resource_key = normalize_resource_key(name)
         if resource_key in seen_failed_resources:
+            duplicate_failure_count += 1
             continue
         seen_failed_resources.add(resource_key)
         diagnostic = diagnose_check(item)
@@ -463,6 +466,14 @@ def build_risk_forecast(results, previous_report=None, history=None):
     )
     return {
         "status": "attention" if risks else "healthy",
+        "integrity": {
+            "input_result_count": len(results),
+            "evaluated_failure_count": len(failure_items) - duplicate_failure_count,
+            "ignored_malformed_result_count": ignored_result_count,
+            "duplicate_failure_count": duplicate_failure_count,
+            "history_window_size": min(100, len(history)),
+            "history_evidence_deduplicated": True,
+        },
         "overall_level": overall,
         "risk_count": len(risks),
         "high_risk_count": high,
