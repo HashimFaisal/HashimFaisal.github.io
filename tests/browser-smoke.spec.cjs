@@ -91,13 +91,13 @@ test('Nuvio edition cards show checked versions and translate status labels', as
     })
   }));
   await page.reload();
-  const status = page.locator('.version-card').filter({ has: page.locator('h3', { hasText: 'Nuvio Mobile' }) }).locator('.version-card-status').first();
+  const status = page.locator('.downloads-device-card').filter({ has: page.locator('h3', { hasText: 'Nuvio Mobile' }) }).locator('.downloads-device-status').first();
   await expect(status).toContainText('الإصدار 1.0.1');
   await expect(status).toContainText('روابط التنزيل سليمة');
   await page.locator('#language-toggle').click();
   await expect(status).toContainText('Version 1.0.1');
   await expect(status).toContainText('Download links are healthy');
-  await expect(page.locator('.version-card')).toHaveCount(11);
+  await expect(page.locator('.downloads-device-card')).toHaveCount(11);
 });
 
 
@@ -763,7 +763,6 @@ test('Nuvio downloads library has searchable platform filters and direct release
   await expect(page.locator('#downloads-filters [data-download-filter="android"]')).toBeVisible();
   await expect(page.locator('#downloads-filters [data-download-filter="ios"]')).toBeVisible();
   await expect(page.locator('#download-grid .release-asset-card')).toHaveCount(5);
-  await expect(page.locator('#download-grid .release-asset-card')).toHaveCount(5);
   await expect(page.locator('#download-grid .plugin-card')).toHaveCount(0);
   const downloadColumns = await page.locator('#download-grid').evaluate(el =>
     getComputedStyle(el).gridTemplateColumns.trim().split(' ').filter(Boolean).length
@@ -774,7 +773,7 @@ test('Nuvio downloads library has searchable platform filters and direct release
       : window.matchMedia('(max-width: 1000px)').matches ? 2 : 3
   );
   expect(downloadColumns).toBe(expectedColumns);
-  await expect(page.locator('#download-grid .release-asset-card a.download-action[href*="/releases/download/"]')).toHaveCount(5);
+  await expect(page.locator('#download-grid .release-asset-card a.release-asset-action[href*="/releases/download/"]')).toHaveCount(5);
 
   await page.locator('#downloads-filters [data-download-filter="android"]').click();
   await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(4);
@@ -803,10 +802,10 @@ test('Nuvio editions are separated by device and link directly to published inst
   await expect(page.locator('#versions-smart-tv')).toBeVisible();
   await expect(page.locator('#versions-desktop')).toBeVisible();
 
-  await expect(page.locator('#versions-mobile .version-card')).toHaveCount(3);
-  await expect(page.locator('#versions-tv .version-card')).toHaveCount(5);
-  await expect(page.locator('#versions-smart-tv .version-card')).toHaveCount(2);
-  await expect(page.locator('#versions-desktop .version-card')).toHaveCount(1);
+  await expect(page.locator('#versions-mobile .downloads-device-card')).toHaveCount(3);
+  await expect(page.locator('#versions-tv .downloads-device-card')).toHaveCount(5);
+  await expect(page.locator('#versions-smart-tv .downloads-device-card')).toHaveCount(2);
+  await expect(page.locator('#versions-desktop .downloads-device-card')).toHaveCount(1);
 
   await expect(page.locator('#versions-mobile a[href$="androidApp-full-arm64-v8a-release.apk"]')).toBeVisible();
   await expect(page.locator('#versions-mobile a[href$="nuvio-1.0.1-full-release.ipa"]')).toBeVisible();
@@ -816,13 +815,13 @@ test('Nuvio editions are separated by device and link directly to published inst
   await expect(page.locator('#versions-mobile a[href$="NuvioRS-1.1.0-beta.2-autosync.5-arm64.apk"]')).toBeVisible();
   await expect(page.locator('#versions-tv a[href$="NuvioRS-TV-1.2.0-beta.3-tester.2-arm32.apk"]')).toBeVisible();
   await expect(page.locator('#versions-desktop a[href$="NuvioCodeineXO-v6.1.5.exe"]')).toBeVisible();
-  await expect(page.locator('#versions-mobile a.version-download[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
-  await expect(page.locator('#versions-tv a.version-download[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
-  await expect(page.locator('#versions-desktop a.version-download[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
-  await expect(page.locator('.version-platform a.version-download.secondary')).toHaveCount(0);
-  await expect(page.locator('.version-platform a.version-source')).toHaveCount(0);
-  await expect(page.locator('#versions-smart-tv a.version-download[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
-  await expect(page.locator('.version-platform a.version-download')).not.toHaveCount(0);
+  await expect(page.locator('#versions-mobile a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+  await expect(page.locator('#versions-tv a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+  await expect(page.locator('#versions-desktop a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+  await expect(page.locator('.downloads-device-section a.downloads-device-link.secondary')).toHaveCount(0);
+  await expect(page.locator('.downloads-device-section a.version-source')).toHaveCount(0);
+  await expect(page.locator('#versions-smart-tv a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+  await expect(page.locator('.downloads-device-section a.downloads-device-link')).not.toHaveCount(0);
 
   await page.locator('#language-toggle').click();
   await expect(page.locator('#versions-mobile-title')).toHaveText('Mobile · Android & iPhone');
