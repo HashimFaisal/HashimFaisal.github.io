@@ -284,5 +284,15 @@
     "source_url": "https://catalog.nuvio.tv/manifest.json",
     "old_status": "available",
     "new_status": "unavailable"
+  },
+  {
+    "date": "2026-11-22T12:27:28.188068+00:00",
+    "type": "status",
+    "title": "تغيرت حالة Nuvio Catalog",
+    "detail": "الحالة السابقة: متعطل. الحالة الجديدة: متاح.",
+    "source": "Nuvio Catalog",
+    "source_url": "https://catalog.nuvio.tv/manifest.json",
+    "old_status": "unavailable",
+    "new_status": "available"
   }
 ]

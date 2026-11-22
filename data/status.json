@@ -1,12 +1,12 @@
 {
-  "checked_at": "2026-11-22T12:14:38.596449+00:00",
+  "checked_at": "2026-11-22T12:27:28.187767+00:00",
   "ok": false,
-  "passed": 29,
+  "passed": 30,
   "total": 31,
   "manifest_coverage": {
     "configured": 20,
-    "healthy": 19,
-    "failed": 1
+    "healthy": 20,
+    "failed": 0
   },
   "source_retrieval": {
     "tested": 3,
@@ -185,24 +185,11 @@
   "release_cache_timestamp": null,
   "release_cache_age_seconds": null,
   "release_cache_stale": false,
-  "diagnostic_summary": "2 failure(s): categories 1 download, 1 upstream.",
+  "diagnostic_summary": "1 failure(s): categories 1 download.",
   "failure_categories": [
-    "download",
-    "upstream"
+    "download"
   ],
   "diagnostics": [
-    {
-      "name": "Nuvio Catalog",
-      "type": "manifest",
-      "ok": false,
-      "http_status": 522,
-      "error": "HTTP 522: <none>",
-      "url": "https://catalog.nuvio.tv/manifest.json",
-      "failure_code": "upstream_server_error",
-      "failure_category": "upstream",
-      "severity": "warning",
-      "recommended_action": "Retry later and check the upstream service status."
-    },
     {
       "name": "Nuvio edition download inventory",
       "type": "version_download",
@@ -335,14 +322,15 @@
     {
       "name": "Nuvio Catalog",
       "type": "manifest",
-      "ok": false,
-      "http_status": 522,
-      "error": "HTTP 522: <none>",
+      "ok": true,
+      "http_status": 200,
+      "version": "1.2.0",
+      "manifest_id": "com.nuvio.tmdb.catalogs",
       "url": "https://catalog.nuvio.tv/manifest.json",
-      "failure_code": "upstream_server_error",
-      "failure_category": "upstream",
-      "severity": "warning",
-      "recommended_action": "Retry later and check the upstream service status."
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "The Movie Database Addon",
@@ -626,22 +614,28 @@
     }
   ],
   "change_summary": {
-    "count": 0,
-    "by_type": {},
-    "events": []
+    "count": 1,
+    "by_type": {
+      "status": 1
+    },
+    "events": [
+      {
+        "date": "2026-11-22T12:27:28.188068+00:00",
+        "type": "status",
+        "title": "تغيرت حالة Nuvio Catalog",
+        "detail": "الحالة السابقة: متعطل. الحالة الجديدة: متاح.",
+        "source": "Nuvio Catalog",
+        "source_url": "https://catalog.nuvio.tv/manifest.json",
+        "old_status": "unavailable",
+        "new_status": "available"
+      }
+    ]
   },
-  "change_count": 0,
+  "change_count": 1,
   "proactive_monitoring": {
     "status": "critical",
-    "alert_count": 2,
+    "alert_count": 1,
     "alerts": [
-      {
-        "severity": "medium",
-        "code": "upstream_server_error",
-        "resource": "Nuvio Catalog",
-        "message": "HTTP 522: <none>",
-        "recommended_action": "Retry later and check the upstream service status."
-      },
       {
         "severity": "high",
         "code": "download_check_failed",
@@ -650,47 +644,23 @@
         "recommended_action": "Verify the release asset exists and its direct download URL responds."
       }
     ],
-    "summary": "2 warning(s) detected; 1 high-priority."
+    "summary": "1 warning(s) detected; 1 high-priority."
   },
   "risk_forecast": {
     "status": "attention",
     "integrity": {
       "input_result_count": 31,
-      "evaluated_failure_count": 2,
+      "evaluated_failure_count": 1,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
-      "history_window_size": 35,
+      "history_window_size": 36,
       "history_evidence_deduplicated": true
     },
     "overall_level": "high",
-    "risk_count": 2,
-    "high_risk_count": 2,
+    "risk_count": 1,
+    "high_risk_count": 1,
     "medium_risk_count": 0,
     "risks": [
-      {
-        "resource": "Nuvio Catalog",
-        "score": 75,
-        "level": "high",
-        "score_breakdown": {
-          "current_failure": 45,
-          "consecutive_failure": 25,
-          "outage_history": 5
-        },
-        "signals": [
-          "current_check_failed",
-          "consecutive_failure",
-          "recurring_outage_history"
-        ],
-        "confidence": "high",
-        "confidence_basis": "Number of distinct evidence signals; not predictive accuracy.",
-        "confidence_details": "High confidence from 3 distinct signal(s): current_check_failed, consecutive_failure, recurring_outage_history.",
-        "evidence_count": 1,
-        "recommended_action": "Retry later and check the upstream service status.",
-        "previous_score": 75,
-        "score_delta": 0,
-        "trend": "stable",
-        "trend_basis": "Score compared with the immediately previous saved risk forecast."
-      },
       {
         "resource": "Nuvio edition download inventory",
         "score": 70,
@@ -717,15 +687,17 @@
     ],
     "trend_summary": {
       "status": "stable",
-      "previous_total_score": 145,
-      "current_total_score": 145,
+      "previous_total_score": 70,
+      "current_total_score": 70,
       "total_score_delta": 0,
       "new_count": 0,
       "worsening_count": 0,
       "improving_count": 0,
-      "stable_count": 2,
+      "stable_count": 1,
       "baseline_count": 0,
-      "resolved_resources": [],
+      "resolved_resources": [
+        "Nuvio Catalog"
+      ],
       "basis": "Comparison of risks with valid numeric prior scores only; resolved and incomparable risks are excluded from trend totals. Not a statistical prediction."
     },
     "note": "Evidence-based risk indicators, not certainty or a statistical prediction."

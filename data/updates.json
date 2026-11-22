@@ -1,5 +1,20 @@
 [
   {
+    "id": "addon:Nuvio Catalog:status:unavailable-to-available:2026-11-22T12:27:28.188068+00:00",
+    "type": "addon",
+    "title": {
+      "ar": "عاد المصدر للعمل: Nuvio Catalog",
+      "en": "Source is back online: Nuvio Catalog"
+    },
+    "description": {
+      "ar": "عاد Nuvio Catalog للاستجابة بنجاح بعد أن كان متعطلاً.",
+      "en": "Nuvio Catalog is responding successfully again after an outage."
+    },
+    "url": "https://catalog.nuvio.tv/manifest.json",
+    "publishedAt": "2026-11-22T12:27:28.188068Z",
+    "expiresAt": "2026-11-23T12:27:28.188068Z"
+  },
+  {
     "id": "nuvio-editions:smart-download-checks:2026-11-22",
     "type": "site",
     "title": {
