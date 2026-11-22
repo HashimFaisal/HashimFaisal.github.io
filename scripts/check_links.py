@@ -318,7 +318,24 @@ def check_cinemana_stream():
         "Origin": "https://cinemana.shabakaty.cc",
     }
     try:
-        _, health_status = fetch_text(CINEMANA_HEALTH, extra_headers=headers)
+        try:
+            _, health_status = fetch_text(CINEMANA_HEALTH, extra_headers=headers)
+        except Exception as host_error:
+            # Compare with a neutral control endpoint to separate a target-host
+            # outage/block from a wider runner connectivity problem.
+            try:
+                fetch_text("https://api.github.com/zen", extra_headers=SOURCE_HEADERS)
+                return source_check(
+                    "Cinemana", False, test_title=TEST_MOVIE_TITLE,
+                    probe_status="upstream_unreachable_internet_ok",
+                    error="Cinemana health endpoint failed while the independent GitHub control endpoint remained reachable: " + str(host_error),
+                )
+            except Exception as control_error:
+                return source_check(
+                    "Cinemana", False, test_title=TEST_MOVIE_TITLE,
+                    probe_status="network_unclear",
+                    error="Cinemana and the independent control endpoint both failed: " + str(host_error) + "; " + str(control_error),
+                )
         meta_payload, _ = fetch_json(CINEMETA_BASE + "/meta/movie/" + TEST_MOVIE_ID + ".json", extra_headers=headers)
         meta = meta_payload.get("meta") if isinstance(meta_payload, dict) else None
         if not isinstance(meta, dict) or not meta.get("name"):
@@ -556,6 +573,27 @@ def diagnose_check(item):
             "failure_category": "stream_retrieval",
             "severity": "warning",
             "recommended_action": "The provider responded but returned no playable candidates for the known test title; verify its catalogue, region restrictions, and player API.",
+        }
+    if item.get("probe_status") == "upstream_unreachable_internet_ok":
+        return {
+            "failure_code": "upstream_host_unreachable",
+            "failure_category": "upstream",
+            "severity": "warning",
+            "recommended_action": "The control endpoint is reachable but this provider host is not; the host may be down or inaccessible from the monitoring region. Confirm from the user's network before calling it a local ISP block.",
+        }
+    if item.get("probe_status") == "network_unclear":
+        return {
+            "failure_code": "network_connectivity_unclear",
+            "failure_category": "network",
+            "severity": "warning",
+            "recommended_action": "Both the provider and independent control endpoint failed from the monitoring runner; retry before attributing the issue to the provider.",
+        }
+    if item.get("type") == "provider_bundle" and not item.get("ok"):
+        return {
+            "failure_code": "provider_source_file_missing",
+            "failure_category": "provider_bundle",
+            "severity": "warning",
+            "recommended_action": "Check the ALL-IN-ONE repository manifest and sampled provider source-file paths.",
         }
     if item.get("ok"):
         return {
