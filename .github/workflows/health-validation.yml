@@ -93,8 +93,8 @@ jobs:
               html,
               re.S,
           )
-          if len(version_cards) != 11:
-              raise SystemExit(f"Expected 11 Nuvio device cards, found {len(version_cards)}")
+          if len(version_cards) != 12:
+              raise SystemExit(f"Expected 12 Nuvio device cards, found {len(version_cards)}")
           if 'class="version-source"' in html:
               raise SystemExit("Nuvio device cards must not contain separate source links.")
           if html.count('class="downloads-device-status"') != len(version_cards):
