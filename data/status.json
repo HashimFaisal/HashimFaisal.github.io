@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-22T12:39:02.813853+00:00",
+  "checked_at": "2026-11-22T12:56:29.706401+00:00",
   "ok": true,
   "passed": 35,
   "total": 35,
@@ -767,9 +767,7 @@
       "improving_count": 0,
       "stable_count": 0,
       "baseline_count": 0,
-      "resolved_resources": [
-        "Nuvio edition download inventory"
-      ],
+      "resolved_resources": [],
       "basis": "Comparison of risks with valid numeric prior scores only; resolved and incomparable risks are excluded from trend totals. Not a statistical prediction."
     },
     "note": "Evidence-based risk indicators, not certainty or a statistical prediction."
