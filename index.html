@@ -363,92 +363,169 @@
 
     <section class="section app-versions" id="versions">
       <div class="section-heading">
-        <div><div class="eyebrow">02 / NUVIO EDITIONS</div><h2>نسخ Nuvio</h2><p>اكتشف التطبيقات الرسمية والنسخ المجتمعية حسب جهازك، ونزّلها من مستودعات مطوريها.</p></div>
+        <div><div class="eyebrow">02 / NUVIO EDITIONS</div><h2>نسخ Nuvio</h2><p>اختر جهازك للوصول إلى النسخة المناسبة. روابط التنزيل المباشر متاحة عندما ينشر المطوّر ملف تثبيت.</p></div>
         <span class="section-count">APP DIRECTORY</span>
       </div>
 
-      <div class="version-filters" role="group" aria-label="Filter Nuvio editions">
-        <button class="version-filter active" type="button" data-version-filter="all" aria-pressed="true">الكل</button>
-        <button class="version-filter" type="button" data-version-filter="mobile" aria-pressed="false">الموبايل</button>
-        <button class="version-filter" type="button" data-version-filter="tv" aria-pressed="false">التلفزيون</button>
-        <button class="version-filter" type="button" data-version-filter="desktop" aria-pressed="false">الكمبيوتر</button>
-        <button class="version-filter" type="button" data-version-filter="smart-tv" aria-pressed="false">التلفزيونات الذكية</button>
-      </div>
+      <section class="version-platform" id="versions-mobile" aria-labelledby="versions-mobile-title">
+        <div class="version-platform-heading">
+          <div><span class="eyebrow">01 / MOBILE</span><h3 id="versions-mobile-title">الموبايل · Android وiPhone</h3><p>نسخ الهواتف، مع روابط APK وIPA المباشرة عند توفرها.</p></div>
+        </div>
+        <div class="version-grid">
+          <article class="version-card">
+            <div class="version-card-meta"><span>Android · رسمي</span><span class="version-kind official">رسمي</span></div>
+            <h3>Nuvio Mobile</h3>
+            <p>التطبيق الرسمي لهواتف Android. اختر ملف APK حسب معمارية جهازك.</p>
+            <div class="version-actions">
+              <a class="version-download" href="https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-arm64-v8a-release.apk">تنزيل APK · ARM64</a>
+              <a class="version-download secondary" href="https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-armeabi-v7a-release.apk">تنزيل APK · ARMv7</a>
+              <a class="version-download secondary" href="https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-x86_64-release.apk">تنزيل APK · x86_64</a>
+            </div>
+            <a class="version-source" href="https://github.com/NuvioMedia/NuvioMobile/releases" target="_blank" rel="noopener">كل ملفات وإصدارات Android ↗</a>
+            <small>إذا لم تعرف معمارية هاتفك، راجع صفحة الإصدار أو استخدم ملف ARM64 للأجهزة الحديثة المتوافقة.</small>
+          </article>
 
-      <div class="version-grid" id="version-grid">
-        <article class="version-card" data-version-platform="mobile">
-          <div class="version-card-meta"><span>الموبايل</span><span class="version-kind official">رسمي</span></div>
-          <h3>Nuvio Mobile</h3>
-          <p>التطبيق الرسمي للهواتف، وهو نقطة البداية الموصى بها لمعظم المستخدمين.</p>
-          <ul><li>Android وiOS بحسب ملفات الإصدار المتاحة.</li><li>تابع القنوات المستقرة والتجريبية من صفحة الإصدارات.</li></ul>
-          <a class="version-download" href="https://github.com/NuvioMedia/NuvioMobile/releases" target="_blank" rel="noopener">التنزيلات والإصدارات ↗</a>
-          <small>تحقق من توافق إصدار نظام جهازك قبل التثبيت.</small>
-        </article>
+          <article class="version-card">
+            <div class="version-card-meta"><span>iPhone · iOS</span><span class="version-kind official">رسمي</span></div>
+            <h3>Nuvio Mobile for iOS</h3>
+            <p>ملف IPA الرسمي المنشور من مطوّر Nuvio.</p>
+            <div class="version-actions">
+              <a class="version-download" href="https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/nuvio-1.0.1-full-release.ipa">تنزيل ملف IPA</a>
+            </div>
+            <a class="version-source" href="https://github.com/NuvioMedia/NuvioMobile/releases" target="_blank" rel="noopener">صفحة الإصدار الأصلية ↗</a>
+            <small>تثبيت IPA على iPhone قد يتطلب أداة تثبيت جانبي؛ هذا ليس رابط App Store.</small>
+          </article>
 
-        <article class="version-card" data-version-platform="tv">
-          <div class="version-card-meta"><span>التلفزيون</span><span class="version-kind official">رسمي</span></div>
-          <h3>Nuvio TV</h3>
-          <p>التطبيق الرسمي المخصص لتجربة التلفزيون وأجهزة Android TV.</p>
-          <ul><li>واجهة مناسبة للتحكم عن بُعد.</li><li>اختر ملف الإصدار المناسب لمعمارية جهازك.</li></ul>
-          <a class="version-download" href="https://github.com/NuvioMedia/NuvioTV/releases" target="_blank" rel="noopener">التنزيلات والإصدارات ↗</a>
-          <small>راجع متطلبات النظام وملاحظات الإصدار في المستودع.</small>
-        </article>
+          <article class="version-card">
+            <div class="version-card-meta"><span>Android · مجتمعي</span><span class="version-kind community">مجتمعي</span></div>
+            <h3>Nuvio Reshaped Mobile</h3>
+            <p>تفرّع مجتمعي للموبايل مع تعديلات على المشغّل والترجمات وتجربة الاستخدام.</p>
+            <div class="version-actions">
+              <a class="version-download" href="https://github.com/pattoly/NuvioMobile-Reshaped/releases" target="_blank" rel="noopener">فتح الإصدارات ↗</a>
+            </div>
+            <small>لم نعثر على ملف إصدار منشور يمكن ربطه مباشرةً حالياً؛ لذلك يفتح الرابط صفحة المطوّر.</small>
+          </article>
+        </div>
+      </section>
 
-        <article class="version-card" data-version-platform="tv">
-          <div class="version-card-meta"><span>Android TV</span><span class="version-kind community">مجتمعي</span></div>
-          <h3>Nuvio Arc</h3>
-          <p>تفرّع مجتمعي لتجربة التلفزيون، مع تعديلات وميزات إضافية مقارنة بالتطبيق الأساسي.</p>
-          <ul><li>موجّه لأجهزة Android TV.</li><li>راجع سجل التغييرات قبل الانتقال إليه.</li></ul>
-          <a class="version-download" href="https://github.com/ysosrs123/NuvioTV-Fork/releases" target="_blank" rel="noopener">صفحة الإصدارات ↗</a>
-          <small>مشروع مستقل غير رسمي؛ التوافق والدعم من صاحب المستودع.</small>
-        </article>
+      <section class="version-platform" id="versions-tv" aria-labelledby="versions-tv-title">
+        <div class="version-platform-heading">
+          <div><span class="eyebrow">02 / ANDROID TV</span><h3 id="versions-tv-title">التلفزيون · Android TV وGoogle TV</h3><p>ملفات APK مباشرة للتلفزيون، مع اختيار المعمارية المناسبة.</p></div>
+        </div>
+        <div class="version-grid">
+          <article class="version-card">
+            <div class="version-card-meta"><span>Android TV · رسمي</span><span class="version-kind official">رسمي</span></div>
+            <h3>Nuvio TV</h3>
+            <p>التطبيق الرسمي المصمم للشاشة الكبيرة والتحكم عن بُعد.</p>
+            <div class="version-actions">
+              <a class="version-download" href="https://github.com/NuvioMedia/NuvioTV/releases/download/1.1.1/app-full-arm64-v8a-release.apk">تنزيل APK · ARM64</a>
+              <a class="version-download secondary" href="https://github.com/NuvioMedia/NuvioTV/releases/download/1.1.1/app-full-armeabi-v7a-release.apk">تنزيل APK · ARMv7</a>
+              <a class="version-download secondary" href="https://github.com/NuvioMedia/NuvioTV/releases/download/1.1.1/app-full-universal-release.apk">تنزيل APK · Universal</a>
+            </div>
+            <a class="version-source" href="https://github.com/NuvioMedia/NuvioTV/releases" target="_blank" rel="noopener">كل ملفات وإصدارات التلفزيون ↗</a>
+          </article>
 
-        <article class="version-card" data-version-platform="tv">
-          <div class="version-card-meta"><span>Android TV</span><span class="version-kind community">مجتمعي</span></div>
-          <h3>NuvioTV-Lite</h3>
-          <p>نسخة خفيفة تستهدف أجهزة التلفزيون ذات الموارد المحدودة.</p>
-          <ul><li>مصممة لتقليل استهلاك الموارد.</li><li>تعطّل JavaScript Plugins وبعض الوظائف؛ ليست مناسبة لمن يعتمد على Plugins.</li></ul>
-          <a class="version-download" href="https://github.com/hackerslash/NuvioTV-Lite/releases" target="_blank" rel="noopener">صفحة الإصدارات ↗</a>
-          <small>اقرأ قائمة الميزات المستبعدة قبل التثبيت.</small>
-        </article>
+          <article class="version-card">
+            <div class="version-card-meta"><span>Android TV · مجتمعي</span><span class="version-kind community">مجتمعي</span></div>
+            <h3>Nuvio Arc</h3>
+            <p>نسخة تجريبية مستقلة مبنية على Nuvio TV وتضيف تعديلات من صاحب المشروع.</p>
+            <div class="version-actions">
+              <a class="version-download" href="https://github.com/ysosrs123/NuvioTV-Fork/releases/download/1.2.0-arc.3/app-full-arm64-v8a-release.apk">تنزيل APK · ARM64</a>
+              <a class="version-download secondary" href="https://github.com/ysosrs123/NuvioTV-Fork/releases/download/1.2.0-arc.3/app-full-armeabi-v7a-release.apk">تنزيل APK · ARMv7</a>
+            </div>
+            <a class="version-source" href="https://github.com/ysosrs123/NuvioTV-Fork/releases" target="_blank" rel="noopener">صفحة الإصدارات ↗</a>
+            <small>مشروع مجتمعي مستقل؛ لا ترسل مشكلاته إلى دعم التطبيق الرسمي.</small>
+          </article>
 
-        <article class="version-card" data-version-platform="mobile">
-          <div class="version-card-meta"><span>Android</span><span class="version-kind community">مجتمعي</span></div>
-          <h3>Nuvio Reshaped Mobile</h3>
-          <p>تفرّع للموبايل يضيف تحسينات على المشغّل والترجمات وتجربة الاستخدام.</p>
-          <ul><li>يتضمن تحسينات مثل مزامنة الترجمة التلقائية بحسب وصف المشروع.</li><li>تحقق من قناة Stable أو Beta قبل التنزيل.</li></ul>
-          <a class="version-download" href="https://github.com/pattoly/NuvioMobile-Reshaped/releases" target="_blank" rel="noopener">صفحة الإصدارات ↗</a>
-          <small>نسخة مجتمعية وليست إصداراً رسمياً من Nuvio.</small>
-        </article>
+          <article class="version-card">
+            <div class="version-card-meta"><span>Android TV · مجتمعي</span><span class="version-kind community">مجتمعي</span></div>
+            <h3>NuvioTV-Lite</h3>
+            <p>نسخة خفيفة تستهدف أجهزة التلفزيون ذات الموارد المحدودة.</p>
+            <div class="version-actions">
+              <a class="version-download" href="https://github.com/hackerslash/NuvioTV-Lite/releases/download/v2.4.6-lite/app-lite-arm64-v8a-release.apk">تنزيل APK · ARM64</a>
+              <a class="version-download secondary" href="https://github.com/hackerslash/NuvioTV-Lite/releases/download/v2.4.6-lite/app-lite-armeabi-v7a-release.apk">تنزيل APK · ARMv7</a>
+              <a class="version-download secondary" href="https://github.com/hackerslash/NuvioTV-Lite/releases/download/v2.4.6-lite/app-lite-universal-release.apk">تنزيل APK · Universal</a>
+            </div>
+            <a class="version-source" href="https://github.com/hackerslash/NuvioTV-Lite/releases" target="_blank" rel="noopener">كل ملفات الإصدار ↗</a>
+            <small>تعطّل هذه النسخة JavaScript Plugins وبعض الوظائف؛ اقرأ التفاصيل قبل التثبيت.</small>
+          </article>
 
-        <article class="version-card" data-version-platform="tv">
-          <div class="version-card-meta"><span>Android TV</span><span class="version-kind community">مجتمعي</span></div>
-          <h3>Nuvio Reshaped TV</h3>
-          <p>تفرّع Reshaped المخصص لأجهزة التلفزيون.</p>
-          <ul><li>واجهة معدّلة لتجربة الشاشة الكبيرة.</li><li>راجع ملفات الإصدار والمتطلبات في المستودع.</li></ul>
-          <a class="version-download" href="https://github.com/ntbenett/NuvioTV-Reshaped/releases" target="_blank" rel="noopener">صفحة الإصدارات ↗</a>
-          <small>مشروع مجتمعي مستقل.</small>
-        </article>
+          <article class="version-card">
+            <div class="version-card-meta"><span>Android TV · مجتمعي</span><span class="version-kind community">مجتمعي</span></div>
+            <h3>Nuvio Reshaped TV</h3>
+            <p>تفرّع Reshaped المخصص لتجربة الشاشة الكبيرة.</p>
+            <div class="version-actions">
+              <a class="version-download" href="https://github.com/ntbenett/NuvioTV-Reshaped/releases" target="_blank" rel="noopener">فتح صفحة الإصدارات ↗</a>
+            </div>
+            <small>لم نعثر على ملف إصدار منشور يمكن ربطه مباشرةً حالياً؛ الرابط يفتح صفحة المطوّر.</small>
+          </article>
+        </div>
+      </section>
 
-        <article class="version-card" data-version-platform="smart-tv">
-          <div class="version-card-meta"><span>Smart TV</span><span class="version-kind community">مجتمعي</span></div>
-          <h3>Nuvio Native Legacy</h3>
-          <p>مشروع عميل لأجهزة التلفزيون ذات الأنظمة المختلفة، ويحتاج اختيار حزمة التثبيت المطابقة لطراز الجهاز.</p>
-          <ul><li>تحقق من دعم نظام وتوليفة جهازك في صفحة المشروع.</li><li>قد تختلف طريقة التثبيت عن تثبيت APK المعتاد.</li></ul>
-          <a class="version-download" href="https://github.com/iqui27/nuvio-native-legacy/releases" target="_blank" rel="noopener">صفحة الإصدارات ↗</a>
-          <small>لا تثبّت حزمة قبل التأكد من توافقها مع جهازك.</small>
-        </article>
+      <section class="version-platform" id="versions-smart-tv" aria-labelledby="versions-smart-tv-title">
+        <div class="version-platform-heading">
+          <div><span class="eyebrow">03 / SMART TV</span><h3 id="versions-smart-tv-title">التلفزيونات الذكية · Samsung وLG</h3><p>روابط منفصلة حسب نظام التلفزيون ونوع حزمة التثبيت.</p></div>
+        </div>
+        <div class="version-grid">
+          <article class="version-card">
+            <div class="version-card-meta"><span>Samsung Tizen</span><span class="version-kind community">مجتمعي</span></div>
+            <h3>Nuvio Native Legacy · Tizen</h3>
+            <p>نسخة مخصصة لبعض تلفزيونات Samsung بنظام Tizen. اختر الحزمة المطابقة لجيل جهازك.</p>
+            <div class="version-actions">
+              <a class="version-download" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/NuvioTV-2.0.8-tizen.wgt">تنزيل WGT</a>
+              <a class="version-download secondary" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/Nuvio-2.0.8-NuvioTpk.tpk">تنزيل TPK</a>
+              <a class="version-download secondary" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/Nuvio-2.0.8-NuvioTpk40.tpk">Tizen 4.0</a>
+              <a class="version-download secondary" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/Nuvio-2.0.8-NuvioTpk60.tpk">Tizen 6.0</a>
+              <a class="version-download secondary" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/Nuvio-2.0.8-NuvioTpk65.tpk">Tizen 6.5</a>
+            </div>
+            <a class="version-source" href="https://github.com/iqui27/nuvio-native-legacy/releases" target="_blank" rel="noopener">كل ملفات الإصدار ↗</a>
+            <small>قد تتطلب ملفات TPK/WGT تفعيل وضع المطوّر وطريقة تثبيت خاصة بالتلفزيون.</small>
+          </article>
 
-        <article class="version-card" data-version-platform="desktop">
-          <div class="version-card-meta"><span>Windows</span><span class="version-kind community">مجتمعي</span></div>
-          <h3>NuvioCodeineXO</h3>
-          <p>تفرّع لسطح المكتب على Windows مع تحسينات للمشغّل والترجمات وميزات إضافية.</p>
-          <ul><li>ليس تطبيقاً رسمياً.</li><li>راجع نوع ملف التثبيت ومتطلبات Windows في صفحة الإصدار.</li></ul>
-          <a class="version-download" href="https://github.com/codeineXO/NuvioCodeineXO/releases" target="_blank" rel="noopener">صفحة الإصدارات ↗</a>
-          <small>الميزات والتحديثات تخضع لصاحب المشروع المستقل.</small>
-        </article>
-      </div>
-      <p class="version-disclaimer">هذه قائمة مستقلة لتسهيل الوصول إلى المشاريع. لا نستضيف ملفات التثبيت ولا نضمن توافق كل نسخة مع جميع الأجهزة. روابط التنزيل تفتح صفحات المطورين الأصلية. دعم Plugins وميزات Debrid يختلف حسب التطبيق والإضافات المستخدمة.</p>
+          <article class="version-card">
+            <div class="version-card-meta"><span>LG webOS</span><span class="version-kind community">مجتمعي</span></div>
+            <h3>Nuvio Native Legacy · webOS</h3>
+            <p>حزمة IPK لتلفزيونات LG المتوافقة بنظام webOS.</p>
+            <div class="version-actions">
+              <a class="version-download" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/space.nuvio.native.legacy_2.0.8_arm.ipk">تنزيل IPK</a>
+              <a class="version-download secondary" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/space.nuvio.native.legacy_2.0.8_arm-highcache.ipk">تنزيل IPK · High Cache</a>
+            </div>
+            <a class="version-source" href="https://github.com/iqui27/nuvio-native-legacy/releases" target="_blank" rel="noopener">صفحة المطوّر ↗</a>
+            <small>تأكد من توافق إصدار webOS وطراز التلفزيون قبل التثبيت.</small>
+          </article>
+
+          <article class="version-card">
+            <div class="version-card-meta"><span>Android TV / Android Box</span><span class="version-kind community">مجتمعي</span></div>
+            <h3>Nuvio Native Legacy · Android</h3>
+            <p>ملفات APK مستقلة ضمن مشروع Native Legacy لأجهزة Android المتوافقة.</p>
+            <div class="version-actions">
+              <a class="version-download" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/Nuvio-2.0.8-android.apk">تنزيل APK</a>
+              <a class="version-download secondary" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/Nuvio-2.0.8-android-lite-arm64.apk">APK Lite · ARM64</a>
+              <a class="version-download secondary" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/Nuvio-2.0.8-android-lite-armv7.apk">APK Lite · ARMv7</a>
+            </div>
+            <a class="version-source" href="https://github.com/iqui27/nuvio-native-legacy/releases" target="_blank" rel="noopener">صفحة المطوّر ↗</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="version-platform" id="versions-desktop" aria-labelledby="versions-desktop-title">
+        <div class="version-platform-heading">
+          <div><span class="eyebrow">04 / DESKTOP</span><h3 id="versions-desktop-title">الكمبيوتر · Windows</h3><p>نسخ سطح المكتب المتاحة وروابط مشاريعها الأصلية.</p></div>
+        </div>
+        <div class="version-grid">
+          <article class="version-card">
+            <div class="version-card-meta"><span>Windows · مجتمعي</span><span class="version-kind community">مجتمعي</span></div>
+            <h3>NuvioCodeineXO</h3>
+            <p>تفرّع مجتمعي لسطح المكتب على Windows مع تعديلات على المشغّل والترجمات.</p>
+            <div class="version-actions">
+              <a class="version-download" href="https://github.com/codeineXO/NuvioCodeineXO/releases" target="_blank" rel="noopener">فتح صفحة المشروع والإصدارات ↗</a>
+            </div>
+            <small>لا توجد حالياً حزمة إصدار مباشرة منشورة في صفحة Releases؛ سنعرض صفحة المشروع بدلاً من رابط تنزيل غير متحقق.</small>
+          </article>
+        </div>
+      </section>
+
+      <p class="version-disclaimer">هذه قائمة مستقلة للوصول إلى المشاريع الأصلية. لا نستضيف ملفات التثبيت. روابط APK وIPA وWGT وTPK وIPK المباشرة مأخوذة من ملفات الإصدارات المنشورة لدى المطوّرين، وقد تتغير عند صدور تحديث جديد. افحص توافق جهازك دائماً؛ المشاريع المجتمعية غير رسمية وقد يختلف دعمها وميزاتها.</p>
     </section>
 
     <section class="section" id="downloads">
