@@ -644,6 +644,12 @@ function renderManifestStatuses(report) {
       ? report?.source_retrieval?.provider_bundle
       : null;
     const renderSourceDetail = () => {
+      // Keep internal retrieval diagnostics out of public install cards.
+      // Manifest availability is the relevant installation signal for these
+      // network/runtime-dependent providers; their probe results remain in the
+      // private operational health report.
+      if (['CinemaBox', 'Cinemana'].includes(name)) return;
+
       if (streamCheck) {
         const detail = document.createElement('small');
         detail.className = 'source-probe-detail';
