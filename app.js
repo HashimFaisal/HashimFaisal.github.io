@@ -248,8 +248,13 @@ const translations = {
   'لا توجد تغييرات مسجلة حالياً.': 'No changes recorded yet.',
   'تعذر تحميل سجل التغييرات حالياً.': 'Could not load the changelog.',
   'تنزيلات Nuvio': 'Nuvio Downloads',
-  'ملفات الإصدار الأحدث تُقرأ من تقرير الفحص.': 'Latest release files are loaded from the health report.',
+  'الإصدارات الرسمية وملفات التثبيت المباشرة، مع حالة التحقق من كل ملف.': 'Official releases and direct installer files, with each file verification status.',
   'صفحة الإصدارات ↗': 'Releases Page ↗',
+  'تاريخ النشر': 'Published',
+  'ملفات التثبيت': 'Installer files',
+  'الإصدار الأحدث المتاح من Nuvio': 'The latest available Nuvio release',
+  'ملفات التنزيل': 'Download files',
+  'روابط مباشرة · فحص حالة الملفات': 'Direct links · File health checks',
   'LATEST RELEASE': 'LATEST RELEASE',
   'جارٍ تحميل الإصدار...': 'Loading release...',
   'مصادر المطوّرين': 'Developer Resources',
@@ -894,6 +899,8 @@ function renderDownloads(report) {
 
   if (!release) {
     $('#release-heading').textContent = t('لا توجد بيانات إصدار');
+    $('#published-at').textContent = '—';
+    $('#downloads-file-count').textContent = '0';
     $('#download-grid').innerHTML = `<p class="muted">${t('تعذر جلب معلومات الإصدار الأخير.')}</p>`;
     return;
   }
@@ -906,6 +913,7 @@ function renderDownloads(report) {
   $('#release-version').textContent = appVersion;
   $('#release-date').textContent = formatDate(release.published_at);
   $('#published-at').textContent = formatDate(release.published_at);
+  $('#downloads-file-count').textContent = assets.length;
   $('#download-count').textContent = assets.filter(item => safeHttpsUrl(item.download_url)).length;
 
   const banner = $('#downloads .release-banner');
