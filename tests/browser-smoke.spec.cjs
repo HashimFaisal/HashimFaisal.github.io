@@ -736,7 +736,7 @@ test('Nuvio Enhanced card keeps one set of stable download buttons when latest r
     body: JSON.stringify({ checked_at: new Date().toISOString(), ok: false, passed: 0, total: 5, release_fallback_used: true, release_cache_stale: true, release: { tag: '1.2.3', app_version: '1.2.3', published_at: new Date().toISOString(), assets }, checks: [] })
   }));
   await page.goto('/');
-  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\\.0\\.0$/ }) });
+  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.0\.0$/ }) });
   await expect(enhancedCard.locator('a.version-download')).toHaveCount(5);
   await expect(enhancedCard.locator('a.enhanced-latest-release, .enhanced-latest-release')).toHaveCount(0);
   await expect(enhancedCard.locator('a.release-enhanced-link')).toHaveCount(0);
@@ -840,7 +840,7 @@ test('Nuvio editions are separated by device and link directly to published inst
 
 test('Nuvio Enhanced card never adds a duplicate latest-release button group', async ({ page }) => {
   await page.goto('/');
-  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\\.0\\.0$/ }) });
+  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.0\.0$/ }) });
   await expect(enhancedCard.locator('a.version-download')).toHaveCount(5);
   await expect(enhancedCard.locator('.enhanced-latest-release')).toHaveCount(0);
 
