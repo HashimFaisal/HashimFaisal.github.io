@@ -970,7 +970,7 @@ function renderDownloads(report) {
     if (fileCount) fileCount.textContent = '0';
     if (healthLabel) healthLabel.textContent = t('غير متاح');
     if (health) health.dataset.state = 'unknown';
-    if (grid) grid.querySelectorAll('.release-asset-card').forEach(card => card.remove());
+    if (grid) grid.querySelectorAll('.release-asset-card, .enhanced-latest-release').forEach(card => card.remove());
     if (empty) empty.textContent = t('تعذر جلب معلومات الإصدار الأخير.');
     return;
   }
@@ -980,6 +980,11 @@ function renderDownloads(report) {
   const validAssets = assets.filter(asset => asset && typeof asset === 'object');
   const healthyAssets = validAssets.filter(asset => asset.ok === true && safeHttpsUrl(asset.download_url));
   const releaseHealthy = validAssets.length > 0 && healthyAssets.length === validAssets.length;
+
+  // Remove previously rendered latest-release links when the report has no assets.
+  if (grid && validAssets.length === 0) {
+    grid.querySelectorAll('.enhanced-latest-release').forEach(group => group.remove());
+  }
 
   if (heading) heading.innerHTML = `<bdi dir="ltr">${escapeHTML(appVersion)}</bdi>`;
   $('#release-version').textContent = appVersion;
@@ -1098,7 +1103,7 @@ async function loadStatus() {
     $('#health-detail').textContent = t('تعذر تحميل تقرير الفحص');
     const healthCard = $('#health-state')?.closest('.stat-card');
     if (healthCard) healthCard.dataset.health = 'unknown';
-    $('#download-grid')?.querySelectorAll('.release-asset-card').forEach(card => card.remove());
+    $('#download-grid')?.querySelectorAll('.release-asset-card, .enhanced-latest-release').forEach(card => card.remove());
     const downloadsEmpty = $('#downloads-empty-state');
     if (downloadsEmpty) downloadsEmpty.textContent = t('تعذر جلب معلومات الإصدار الأخير.');
     console.error('Status loading failed:', error);
