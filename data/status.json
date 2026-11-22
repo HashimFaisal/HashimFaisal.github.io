@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-22T22:11:16.459766+00:00",
+  "checked_at": "2026-11-22T22:21:55.043468+00:00",
   "ok": true,
   "passed": 61,
   "total": 61,
@@ -1559,7 +1559,7 @@
   "risk_forecast": {
     "status": "healthy",
     "integrity": {
-      "input_result_count": 63,
+      "input_result_count": 61,
       "evaluated_failure_count": 0,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
