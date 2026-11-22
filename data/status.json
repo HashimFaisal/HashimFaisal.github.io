@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-22T08:49:10.402663+00:00",
+  "checked_at": "2026-11-22T09:03:24.404164+00:00",
   "ok": false,
   "passed": 57,
   "total": 58,
@@ -1488,21 +1488,21 @@
         "confidence_details": "High confidence from 3 distinct signal(s): current_check_failed, consecutive_failure, recurring_outage_history.",
         "evidence_count": 1,
         "recommended_action": "Retry later and check the upstream service status.",
-        "previous_score": 50,
-        "score_delta": 25,
-        "trend": "worsening",
+        "previous_score": 75,
+        "score_delta": 0,
+        "trend": "stable",
         "trend_basis": "Score compared with the immediately previous saved risk forecast."
       }
     ],
     "trend_summary": {
-      "status": "worsening",
-      "previous_total_score": 50,
+      "status": "stable",
+      "previous_total_score": 75,
       "current_total_score": 75,
-      "total_score_delta": 25,
+      "total_score_delta": 0,
       "new_count": 0,
-      "worsening_count": 1,
+      "worsening_count": 0,
       "improving_count": 0,
-      "stable_count": 0,
+      "stable_count": 1,
       "baseline_count": 0,
       "resolved_resources": [],
       "basis": "Comparison of risks with valid numeric prior scores only; resolved and incomparable risks are excluded from trend totals. Not a statistical prediction."
