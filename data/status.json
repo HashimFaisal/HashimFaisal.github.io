@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-11-22T06:10:32.402914+00:00",
+  "checked_at": "2026-11-22T06:19:47.767985+00:00",
   "ok": false,
-  "passed": 28,
+  "passed": 29,
   "total": 30,
   "manifest_coverage": {
     "configured": 20,
@@ -11,8 +11,8 @@
   "source_retrieval": {
     "tested": 3,
     "streams_found": 1,
-    "inconclusive": 0,
-    "failed": 2,
+    "inconclusive": 1,
+    "failed": 1,
     "stream_checks": [
       {
         "name": "Torrentio",
@@ -34,6 +34,7 @@
         "ok": false,
         "http_status": 404,
         "test_title": "The Matrix",
+        "probe_stage": "catalog_search",
         "error": "HTTP 404: Not Found",
         "failure_code": "not_found",
         "failure_category": "missing_resource",
@@ -43,14 +44,16 @@
       {
         "name": "Cinemana",
         "type": "stream",
-        "ok": false,
+        "ok": true,
         "test_title": "The Matrix",
-        "probe_status": "upstream_unreachable_internet_ok",
-        "error": "Cinemana health endpoint failed while the independent GitHub control endpoint remained reachable: <urlopen error timed out>",
-        "failure_code": "upstream_host_unreachable",
-        "failure_category": "upstream",
-        "severity": "warning",
-        "recommended_action": "The control endpoint is reachable but this provider host is not; the host may be down or inaccessible from the monitoring region. Confirm from the user's network before calling it a local ISP block."
+        "probe_status": "inconclusive",
+        "reason_code": "network_specific_provider",
+        "verification_scope": "Earthlink user network",
+        "error": "Cinemana could not be verified from the GitHub monitoring region. The user reports that Cinemana is tied to Earthlink; verify it from that network before assigning a health status. Runner error: <urlopen error timed out>",
+        "failure_code": "test_title_not_indexed",
+        "failure_category": "content_coverage",
+        "severity": "info",
+        "recommended_action": "The provider endpoint responded, but the test title was not indexed; this result is inconclusive about other titles."
       }
     ],
     "provider_bundle": {
@@ -141,10 +144,9 @@
   "release_cache_timestamp": null,
   "release_cache_age_seconds": null,
   "release_cache_stale": false,
-  "diagnostic_summary": "2 failure(s): categories 1 missing_resource, 1 upstream.",
+  "diagnostic_summary": "1 failure(s): categories 1 missing_resource.",
   "failure_categories": [
-    "missing_resource",
-    "upstream"
+    "missing_resource"
   ],
   "diagnostics": [
     {
@@ -153,23 +155,12 @@
       "ok": false,
       "http_status": 404,
       "test_title": "The Matrix",
+      "probe_stage": "catalog_search",
       "error": "HTTP 404: Not Found",
       "failure_code": "not_found",
       "failure_category": "missing_resource",
       "severity": "warning",
       "recommended_action": "Confirm the resource URL, release tag, or asset name."
-    },
-    {
-      "name": "Cinemana",
-      "type": "stream",
-      "ok": false,
-      "test_title": "The Matrix",
-      "probe_status": "upstream_unreachable_internet_ok",
-      "error": "Cinemana health endpoint failed while the independent GitHub control endpoint remained reachable: <urlopen error timed out>",
-      "failure_code": "upstream_host_unreachable",
-      "failure_category": "upstream",
-      "severity": "warning",
-      "recommended_action": "The control endpoint is reachable but this provider host is not; the host may be down or inaccessible from the monitoring region. Confirm from the user's network before calling it a local ISP block."
     }
   ],
   "checks": [
@@ -453,6 +444,7 @@
       "ok": false,
       "http_status": 404,
       "test_title": "The Matrix",
+      "probe_stage": "catalog_search",
       "error": "HTTP 404: Not Found",
       "failure_code": "not_found",
       "failure_category": "missing_resource",
@@ -462,14 +454,16 @@
     {
       "name": "Cinemana",
       "type": "stream",
-      "ok": false,
+      "ok": true,
       "test_title": "The Matrix",
-      "probe_status": "upstream_unreachable_internet_ok",
-      "error": "Cinemana health endpoint failed while the independent GitHub control endpoint remained reachable: <urlopen error timed out>",
-      "failure_code": "upstream_host_unreachable",
-      "failure_category": "upstream",
-      "severity": "warning",
-      "recommended_action": "The control endpoint is reachable but this provider host is not; the host may be down or inaccessible from the monitoring region. Confirm from the user's network before calling it a local ISP block."
+      "probe_status": "inconclusive",
+      "reason_code": "network_specific_provider",
+      "verification_scope": "Earthlink user network",
+      "error": "Cinemana could not be verified from the GitHub monitoring region. The user reports that Cinemana is tied to Earthlink; verify it from that network before assigning a health status. Runner error: <urlopen error timed out>",
+      "failure_code": "test_title_not_indexed",
+      "failure_category": "content_coverage",
+      "severity": "info",
+      "recommended_action": "The provider endpoint responded, but the test title was not indexed; this result is inconclusive about other titles."
     },
     {
       "name": "ALL-IN-ONE provider bundle",
@@ -576,7 +570,7 @@
   "change_count": 0,
   "proactive_monitoring": {
     "status": "critical",
-    "alert_count": 2,
+    "alert_count": 1,
     "alerts": [
       {
         "severity": "high",
@@ -584,88 +578,62 @@
         "resource": "CinemaBox",
         "message": "HTTP 404: Not Found",
         "recommended_action": "Confirm the resource URL, release tag, or asset name."
-      },
-      {
-        "severity": "medium",
-        "code": "upstream_host_unreachable",
-        "resource": "Cinemana",
-        "message": "Cinemana health endpoint failed while the independent GitHub control endpoint remained reachable: <urlopen error timed out>",
-        "recommended_action": "The control endpoint is reachable but this provider host is not; the host may be down or inaccessible from the monitoring region. Confirm from the user's network before calling it a local ISP block."
       }
     ],
-    "summary": "2 warning(s) detected; 1 high-priority."
+    "summary": "1 warning(s) detected; 1 high-priority."
   },
   "risk_forecast": {
     "status": "attention",
     "integrity": {
       "input_result_count": 30,
-      "evaluated_failure_count": 2,
+      "evaluated_failure_count": 1,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
       "history_window_size": 33,
       "history_evidence_deduplicated": true
     },
-    "overall_level": "medium",
-    "risk_count": 2,
-    "high_risk_count": 0,
-    "medium_risk_count": 2,
+    "overall_level": "high",
+    "risk_count": 1,
+    "high_risk_count": 1,
+    "medium_risk_count": 0,
     "risks": [
       {
         "resource": "CinemaBox",
-        "score": 45,
-        "level": "medium",
+        "score": 70,
+        "level": "high",
         "score_breakdown": {
           "current_failure": 45,
-          "consecutive_failure": 0,
+          "consecutive_failure": 25,
           "outage_history": 0
         },
         "signals": [
-          "current_check_failed"
+          "current_check_failed",
+          "consecutive_failure"
         ],
-        "confidence": "low",
+        "confidence": "medium",
         "confidence_basis": "Number of distinct evidence signals; not predictive accuracy.",
-        "confidence_details": "Low confidence from 1 distinct signal(s): current_check_failed.",
+        "confidence_details": "Medium confidence from 2 distinct signal(s): current_check_failed, consecutive_failure.",
         "evidence_count": 0,
         "recommended_action": "Confirm the resource URL, release tag, or asset name.",
-        "previous_score": null,
-        "score_delta": null,
-        "trend": "new",
-        "trend_basis": "No matching risk in the previous forecast; baseline for trend comparison."
-      },
-      {
-        "resource": "Cinemana",
-        "score": 45,
-        "level": "medium",
-        "score_breakdown": {
-          "current_failure": 45,
-          "consecutive_failure": 0,
-          "outage_history": 0
-        },
-        "signals": [
-          "current_check_failed"
-        ],
-        "confidence": "low",
-        "confidence_basis": "Number of distinct evidence signals; not predictive accuracy.",
-        "confidence_details": "Low confidence from 1 distinct signal(s): current_check_failed.",
-        "evidence_count": 0,
-        "recommended_action": "The control endpoint is reachable but this provider host is not; the host may be down or inaccessible from the monitoring region. Confirm from the user's network before calling it a local ISP block.",
-        "previous_score": null,
-        "score_delta": null,
-        "trend": "new",
-        "trend_basis": "No matching risk in the previous forecast; baseline for trend comparison."
+        "previous_score": 45,
+        "score_delta": 25,
+        "trend": "worsening",
+        "trend_basis": "Score compared with the immediately previous saved risk forecast."
       }
     ],
     "trend_summary": {
-      "status": "baseline",
-      "previous_total_score": null,
-      "current_total_score": null,
-      "total_score_delta": null,
-      "new_count": 2,
-      "worsening_count": 0,
+      "status": "worsening",
+      "previous_total_score": 45,
+      "current_total_score": 70,
+      "total_score_delta": 25,
+      "new_count": 0,
+      "worsening_count": 1,
       "improving_count": 0,
       "stable_count": 0,
       "baseline_count": 0,
-      "resolved_resources": [],
+      "resolved_resources": [
+        "Cinemana"
+      ],
       "basis": "Comparison of risks with valid numeric prior scores only; resolved and incomparable risks are excluded from trend totals. Not a statistical prediction."
     },
     "note": "Evidence-based risk indicators, not certainty or a statistical prediction."
