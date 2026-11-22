@@ -9,6 +9,7 @@ from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse, urlencode, quote
+from html import unescape
 
 REPO = "luqmanfadlli/NuvioMobile-Enhanced"
 API = f"https://api.github.com/repos/{REPO}/releases?per_page=100"
@@ -561,6 +562,64 @@ def check_download(name, asset):
                 "error": f"HEAD: {head_error}; GET: {exc}",
                 "url": url,
             }
+
+
+def discover_version_downloads(path="index.html"):
+    """Read direct installer links from the edition cards so checks follow the UI."""
+    try:
+        with open(path, encoding="utf-8") as file:
+            document = file.read()
+    except OSError as exc:
+        return [], str(exc)
+
+    cards = []
+    card_pattern = re.compile(r'<article class="version-card">([\\s\\S]*?)</article>')
+    link_pattern = re.compile(r'<a class="version-download" href="([^"]+)">([\\s\\S]*?)</a>')
+    for card_html in card_pattern.findall(document):
+        title_match = re.search(r'<h3>([\\s\\S]*?)</h3>', card_html)
+        card_name = re.sub(r'<[^>]+>', '', title_match.group(1)).strip() if title_match else "Nuvio edition"
+        for url, label_html in link_pattern.findall(card_html):
+            label = unescape(re.sub(r'<[^>]+>', '', label_html)).strip()
+            parsed = urlparse(unescape(url))
+            parts = [part for part in parsed.path.split("/") if part]
+            tag = parts[parts.index("download") + 1] if "download" in parts and parts.index("download") + 1 < len(parts) else None
+            cards.append({"card": card_name, "label": label, "url": unescape(url), "tag": tag})
+    return cards, None
+
+
+def check_version_downloads(path="index.html"):
+    """Check every direct installer URL displayed in the Nuvio edition directory."""
+    entries, discovery_error = discover_version_downloads(path)
+    if discovery_error:
+        return [{
+            "name": "Nuvio edition download inventory",
+            "type": "version_download",
+            "ok": False,
+            "error": discovery_error,
+        }]
+    if not entries:
+        return [{
+            "name": "Nuvio edition download inventory",
+            "type": "version_download",
+            "ok": False,
+            "error": "No direct version-download links were found in index.html.",
+        }]
+
+    def probe(entry):
+        result = check_download(f"{entry['card']} · {entry['label']}", {
+            "browser_download_url": entry["url"],
+            "size": None,
+        })
+        result.update({
+            "type": "version_download",
+            "card": entry["card"],
+            "label": entry["label"],
+            "tag": entry["tag"],
+        })
+        return result
+
+    with ThreadPoolExecutor(max_workers=8) as executor:
+        return list(executor.map(probe, entries))
 
 
 
@@ -1229,6 +1288,12 @@ def main():
         },
         "runtime_evidence": build_user_reported_runtime_evidence(),
         "release": release_data,
+        "version_downloads": {
+            "checked": len(version_download_results),
+            "healthy": sum(1 for item in version_download_results if item.get("ok")),
+            "failed": sum(1 for item in version_download_results if not item.get("ok")),
+            "items": version_download_results,
+        },
         "stable_release": stable_release_data,
         "release_error": release_error,
         "release_fallback_used": release_fallback_used,
