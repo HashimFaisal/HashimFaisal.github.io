@@ -9,7 +9,15 @@ from html5lib.html5parser import HTMLParser
 
 ROOT = Path(__file__).resolve().parents[1]
 HTML = ROOT / "index.html"
-CSS_FILES = (ROOT / "style.css", ROOT / "premium-ui.css")
+# Validate every stylesheet loaded by index.html, including the touch and
+# download-center layers, so syntax/palette/duplicate-rule checks cover the
+# complete active visual system.
+CSS_FILES = (
+    ROOT / "style.css",
+    ROOT / "premium-ui.css",
+    ROOT / "touch-effects.css",
+    ROOT / "downloads-redesign.css",
+)
 JSON_FILES = (ROOT / "data/status.json", ROOT / "data/changelog.json", ROOT / "data/updates.json")
 errors = []
 
@@ -57,13 +65,13 @@ for ref in parser.local_refs:
 ALLOWED_RGB = {
     "88,216,232", "163,148,255", "66,200,121", "255,130,146",
     "162,177,200", "141,234,243", "99,217,233", "170,155,255", "255,255,255", "0,0,0",
-    "7,11,22", "17,29,51", "185,214,235", "205,229,245", "245,250,255", "175,216,242", "205,231,248"
+    "7,11,22", "17,29,51", "185,214,235", "105,226,244", "173,154,255", "205,229,245", "245,250,255", "175,216,242", "205,231,248"
 }
 ALLOWED_CSS_HEX = {
     "#070b16", "#0d1526", "#111d33", "#182744", "#f2f6ff", "#a2b1c8",
     "#a394ff", "#58d8e8", "#42c879", "#a9e8c1", "#ff8292", "#ffb0ba",
     "#8deaf3", "#63d9e9", "#aa9bff", "#080d19", "#101a2d", "#16243a",
-    "#b2bfd4", "#afeac7", "#ffb9c2", "#98edf5", "#071317", "#000", "#fff",
+    "#b2bfd4", "#afeac7", "#ffb9c2", "#98edf5", "#071317", "#07111b", "#000", "#fff",
 }
 # Detect exact duplicate CSS selector/declaration rules within the same at-rule scope.
 # Media-query variants are kept separate; keyframe steps are intentionally excluded.
@@ -100,6 +108,9 @@ def check_duplicate_css_rules(rules, context, css_name, seen):
             )
 
 for css_path in CSS_FILES:
+    if not css_path.exists():
+        fail(f"Missing active stylesheet: {css_path.name}")
+        continue
     css_text = css_path.read_text(encoding="utf-8")
     rules = tinycss2.parse_stylesheet(css_text, skip_comments=True, skip_whitespace=True)
     parse_errors = [rule for rule in rules if rule.type == "error"]
