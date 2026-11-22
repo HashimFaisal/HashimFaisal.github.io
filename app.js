@@ -687,22 +687,25 @@ function filterCards() {
   const term = $('#search').value.trim().toLowerCase();
   let count = 0;
 
-  $$('.plugin-card').forEach(card => {
+  // Keep library filtering scoped to the library: download cards intentionally
+  // reuse the plugin-card class for their shared visual design.
+  $$('#plugins .plugin-card').forEach(card => {
     const type = card.dataset.category || 'nuvio';
     const matchType = activeFilter === 'all' || activeFilter === type;
     const matchText = card.innerText.toLowerCase().includes(term);
     card.hidden = !(matchType && matchText);
     if (!card.hidden) count++;
   });
-  $('#visible-count').textContent =    `${String(count).padStart(2, '0')} ${t('موارد')}`;
-  $('#empty-state').hidden = count !== 0;}
+  $('#visible-count').textContent = String(count).padStart(2, '0') + ' ' + t('موارد');
+  $('#empty-state').hidden = count !== 0;
+}
 
 $('#search').addEventListener('input', filterCards);
 
-$$('.filter').forEach(button => {
+$$('#plugins .filter[data-filter]').forEach(button => {
   button.addEventListener('click', () => {
     activeFilter = button.dataset.filter;
-    $$('.filter').forEach(item => {
+    $$('#plugins .filter[data-filter]').forEach(item => {
       const active = item === button;
       item.classList.toggle('active', active);
       item.setAttribute('aria-pressed', String(active));
