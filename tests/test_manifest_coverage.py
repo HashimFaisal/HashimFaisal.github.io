@@ -12,7 +12,7 @@ import check_links
 
 
 class ManifestCoverageTests(unittest.TestCase):
-    def test_every_plugin_card_has_a_health_manifest(self):
+    def test_public_manifest_cards_have_health_checks_and_personal_cards_require_setup(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
         card_names = []
         pattern = re.compile(
@@ -25,20 +25,20 @@ class ManifestCoverageTests(unittest.TestCase):
 
         self.assertEqual(len(card_names), 20, "Expected all 20 published plugin cards.")
         self.assertEqual(
-            set(card_names),
+            set(card_names) - {"AIOMetadata", "TMDB Discover+"},
             set(check_links.MANIFESTS),
-            "Every published plugin card must have exactly one configured health manifest.",
+            "Every public-manifest card must have exactly one configured health check.",
         )
+        self.assertNotIn("AIOMetadata", check_links.MANIFESTS)
+        self.assertNotIn("TMDB Discover+", check_links.MANIFESTS)
+        self.assertIn("يتطلب إعداداً شخصياً", html)
 
-    def test_newly_covered_manifest_urls_match_site_install_urls(self):
-        expected = {
-            "Torrentio": "https://torrentio.strem.fun/manifest.json",
-            "AIOMetadata": "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
-            "TMDB Discover+": "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
-        }
-        for name, url in expected.items():
-            with self.subTest(name=name):
-                self.assertEqual(check_links.MANIFESTS.get(name), url)
+    def test_personal_manifest_tokens_are_not_published(self):
+        html = (ROOT / "index.html").read_text(encoding="utf-8")
+        checker = (ROOT / "scripts/check_links.py").read_text(encoding="utf-8")
+        for token in ("c6520fa9-2205-4058-baf9-d9e8e45a4711", "yMUI42Fodl"):
+            self.assertNotIn(token, html)
+            self.assertNotIn(token, checker)
 
     def test_manifest_http_errors_keep_the_status_code(self):
         error = HTTPError(
