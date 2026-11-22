@@ -808,7 +808,7 @@ test('Nuvio editions are separated by device and link directly to published inst
   await expect(page.locator('#versions-smart-tv')).toBeHidden();
   await expect(page.locator('#versions-desktop')).toBeHidden();
 
-  await expect(page.locator('#versions-mobile .downloads-device-card')).toHaveCount(3);
+  await expect(page.locator('#versions-mobile .downloads-device-card')).toHaveCount(8);
   await expect(page.locator('#versions-tv .downloads-device-card')).toHaveCount(5);
   await expect(page.locator('#versions-smart-tv .downloads-device-card')).toHaveCount(2);
   await expect(page.locator('#versions-desktop .downloads-device-card')).toHaveCount(1);
