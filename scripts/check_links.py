@@ -424,13 +424,13 @@ def build_risk_forecast(results, previous_report=None, history=None):
     def valid_prior_score(value):
         return isinstance(value, (int, float)) and not isinstance(value, bool) and 0 <= value <= 100
     comparable = {
-        risk["resource"]: previous_risks[risk["resource"]]["score"]
+        normalize_resource_key(risk["resource"]): previous_risks[normalize_resource_key(risk["resource"])]["score"]
         for risk in risks
         if normalize_resource_key(risk["resource"]) in previous_risks
         and valid_prior_score(previous_risks[normalize_resource_key(risk["resource"])].get("score"))
     }
     matched_previous_total = sum(comparable.values())
-    comparable_current_total = sum(risk["score"] for risk in risks if risk["resource"] in comparable)
+    comparable_current_total = sum(risk["score"] for risk in risks if normalize_resource_key(risk["resource"]) in comparable)
     for risk in risks:
         prior_risk = previous_risks.get(normalize_resource_key(risk["resource"]))
         raw_prior_score = prior_risk.get("score") if isinstance(prior_risk, dict) else None
