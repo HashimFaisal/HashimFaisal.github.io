@@ -747,6 +747,17 @@ test('download URLs remain visible when their health checks fail', async ({ page
 });
 
 
+test('Nuvio downloads view has a complete responsive release header', async ({ page }) => {
+  await page.goto('/#downloads');
+  await expect(page.locator('#downloads')).toBeVisible();
+  await expect(page.locator('#downloads .nuvio-view-back')).toBeVisible();
+  await expect(page.locator('#downloads-title')).toHaveText('تنزيلات Nuvio');
+  await expect(page.locator('#downloads .downloads-release-panel')).toBeVisible();
+  await expect(page.locator('#downloads .downloads-release-details')).toBeVisible();
+  await expect(page.locator('#downloads .downloads-list-heading')).toBeVisible();
+  await expect(page.locator('#downloads .downloads-releases-link')).toHaveAttribute('href', /releases/);
+});
+
 test('Nuvio editions are separated by device and link directly to published installer assets', async ({ page }) => {
   await expect(page.locator('#versions-mobile')).toBeVisible();
   await expect(page.locator('#versions-tv')).toBeVisible();

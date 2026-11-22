@@ -1363,3 +1363,72 @@ html[dir="ltr"] .version-card ul { padding-inline-start: 19px; }
   .version-actions { flex-direction: column; }
   .version-actions .version-download { width: 100%; }
 }
+
+
+/* Legacy Nuvio downloads now share the editions card system. */
+#downloads .download-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 13px;
+}
+#downloads .download-card.version-card {
+  min-width: 0;
+  padding: 21px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: linear-gradient(145deg, var(--surface-2), var(--bg));
+}
+#downloads .download-card.version-card h3 {
+  margin: 15px 0 7px;
+  color: var(--text);
+  font: 800 15px Inter, 'IBM Plex Sans Arabic', sans-serif;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+#downloads .download-card .download-meta {
+  display: block;
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.8;
+}
+#downloads .download-card .version-actions { padding-top: 13px; }
+#downloads .download-card .version-download {
+  width: 100%;
+  margin: 0;
+  color: var(--bg);
+  border-color: transparent;
+  background: var(--cyan);
+}
+#downloads .download-card .version-download:hover {
+  background: var(--cyan-light);
+}
+.download-health-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-inline-end: 7px;
+  border-radius: 50%;
+  vertical-align: middle;
+  background: var(--muted);
+  box-shadow: 0 0 0 3px var(--line);
+}
+.download-health-dot.is-healthy {
+  background: var(--success);
+  box-shadow: 0 0 0 3px rgba(66, 200, 121, .13), 0 0 10px rgba(66, 200, 121, .35);
+}
+.download-health-dot.is-warning {
+  background: var(--danger);
+  box-shadow: 0 0 0 3px rgba(255, 130, 146, .12);
+}
+#downloads .release-health {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 700;
+}
+@media (max-width: 560px) {
+  #downloads .download-grid { grid-template-columns: 1fr; gap: 12px; }
+  #downloads .download-card.version-card { padding: 18px; }
+}

@@ -4794,3 +4794,162 @@ footer {
     transform: scale(1.45);
   }
 }
+
+
+/* Complete Nuvio downloads view — unified header, release panel and file list. */
+#downloads.nuvio-view-active {
+  isolation: isolate;
+}
+#downloads .downloads-heading {
+  align-items: center;
+  gap: 22px;
+  margin: 4px 0 24px;
+  padding: 0 0 22px;
+  border-bottom: 1px solid var(--line);
+}
+#downloads .downloads-heading-copy { min-width: 0; }
+#downloads .downloads-heading-copy .eyebrow,
+#downloads .downloads-list-heading .eyebrow {
+  display: block;
+  color: var(--cyan);
+  font: 800 9px Inter, sans-serif;
+  letter-spacing: 1.7px;
+}
+#downloads .downloads-heading h2 {
+  margin: 9px 0 7px;
+  font-size: clamp(25px, 3.2vw, 36px);
+  line-height: 1.25;
+}
+#downloads .downloads-heading p {
+  max-width: 620px;
+  font-size: 12px;
+  line-height: 1.9;
+}
+#downloads .downloads-heading-actions {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  gap: 12px;
+  flex: 0 0 auto;
+}
+#downloads .downloads-heading-actions .section-count {
+  border-radius: 999px;
+  padding: 8px 12px;
+}
+#downloads .downloads-releases-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  color: var(--cyan-light);
+  background: var(--surface-2);
+  font-size: 11px;
+  font-weight: 750;
+}
+#downloads .downloads-releases-link:hover {
+  border-color: var(--line-strong);
+  color: var(--cyan);
+}
+#downloads .downloads-release-panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(210px, .8fr);
+  align-items: stretch;
+  gap: 22px;
+  min-height: 0;
+  margin: 0 0 28px;
+  padding: clamp(20px, 3vw, 30px);
+  border-color: var(--line-strong);
+  border-radius: 20px;
+  background: radial-gradient(ellipse at 100% 0%, rgba(88, 216, 232, .12), transparent 48%), linear-gradient(135deg, var(--surface-2), var(--surface));
+  box-shadow: none;
+}
+#downloads .downloads-release-main {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+#downloads .downloads-release-kicker {
+  color: var(--cyan);
+  font: 800 9px Inter, sans-serif;
+  letter-spacing: 1.8px;
+}
+#downloads .downloads-release-main #release-heading {
+  max-width: 100%;
+  margin-top: 10px;
+  overflow-wrap: anywhere;
+  font-size: clamp(24px, 3vw, 34px);
+  line-height: 1.35;
+}
+#downloads .downloads-release-caption {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.8;
+}
+#downloads .downloads-release-details {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-content: center;
+  gap: 10px;
+}
+#downloads .downloads-release-stat {
+  min-width: 0;
+  padding: 13px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--surface);
+}
+#downloads .downloads-release-stat > span {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
+}
+#downloads .downloads-release-stat > strong {
+  display: block;
+  margin-top: 7px;
+  color: var(--text);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+#downloads .downloads-list-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+  margin: 0 0 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+#downloads .downloads-list-heading h3 {
+  margin: 6px 0 0;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 800;
+}
+#downloads .downloads-list-note {
+  color: var(--muted);
+  font-size: 10px;
+  text-align: end;
+}
+#downloads .download-grid { margin-top: 0; }
+#downloads .download-card.version-card { height: 100%; }
+#downloads .download-card .version-actions { margin-top: auto; }
+#downloads .release-health { margin-top: 8px; }
+@media (max-width: 700px) {
+  #downloads .downloads-heading { align-items: flex-start; flex-direction: column; }
+  #downloads .downloads-heading-actions { align-items: flex-start; flex-direction: row; flex-wrap: wrap; }
+  #downloads .downloads-release-panel { grid-template-columns: 1fr; gap: 17px; }
+  #downloads .downloads-release-details { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  #downloads .downloads-list-heading { align-items: flex-start; flex-direction: column; }
+  #downloads .downloads-list-note { text-align: start; }
+}
+@media (max-width: 420px) {
+  #downloads .downloads-release-stat { padding: 11px; }
+  #downloads .downloads-release-stat > strong { font-size: 12px; }
+  #downloads .downloads-heading-actions { width: 100%; }
+}
