@@ -1411,7 +1411,7 @@ html[dir="ltr"] .version-card ul { padding-inline-start: 19px; }
   border-radius: 50%;
   vertical-align: middle;
   background: var(--muted);
-  box-shadow: 0 0 0 3px rgba(178, 191, 212, .10);
+  box-shadow: 0 0 0 3px var(--line);
 }
 .download-health-dot.is-healthy {
   background: var(--success);
