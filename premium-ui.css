@@ -460,19 +460,17 @@ html[dir="ltr"] .nuvio-view-back > span:first-child { transform: rotate(180deg);
   background: var(--cyan);
 }
 
-/* API setup buttons reuse the exact final plugin-card surface palette. */
+/* API setup buttons use the same cyan treatment as install buttons. */
 #plugins .setup-api-card .card-actions a {
-  color: var(--text);
-  border-color: rgba(88, 216, 232, 0.16);
-  background:
-    radial-gradient(ellipse at 100% 0%, rgba(88, 216, 232, 0.055), transparent 55%),
-    linear-gradient(145deg, var(--surface-2), var(--bg));
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.3), inset 0 1px rgba(255, 255, 255, 0.035);
+  color: var(--on-accent);
+  border-color: rgba(88, 216, 232, 0.35);
+  background: linear-gradient(110deg, var(--cyan-light), var(--cyan));
+  box-shadow: 0 10px 28px rgba(88, 216, 232, 0.2);
 }
 #plugins .setup-api-card .card-actions a:hover {
-  color: var(--text);
-  border-color: rgba(141, 234, 243, 0.42);
-  box-shadow: 0 0 18px rgba(88, 216, 232, 0.07), inset 0 1px rgba(255, 255, 255, 0.035);
+  color: var(--on-accent);
+  border-color: rgba(141, 234, 243, 0.55);
+  box-shadow: 0 15px 35px rgba(88, 216, 232, 0.3);
 }
 
 #plugins .card-actions a {
