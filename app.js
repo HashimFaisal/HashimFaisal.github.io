@@ -982,7 +982,7 @@ function renderDownloadFilters(assets) {
 
 function filterDownloads() {
   const term = ($('#downloads-search')?.value || '').trim().toLowerCase();
-  const cards = $('#download-grid .downloads-device-card');
+  const cards = $$('#download-grid .downloads-device-card');
   const releaseCards = cards.filter(card => card.classList.contains('release-asset-card'));
   let visibleAssets = 0;
   let visibleCards = 0;
