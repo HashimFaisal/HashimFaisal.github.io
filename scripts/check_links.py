@@ -353,11 +353,19 @@ def build_risk_forecast(results, previous_report=None, history=None):
         diagnostic = diagnose_check(item)
         prior = previous_checks.get(name, {})
         repeated = not prior.get("ok") and bool(prior)
-        matching_events = [
-            event for event in history[-100:]
-            if isinstance(event, dict) and event.get("source") == name
-            and event.get("type") == "status" and event.get("new_status") == "unavailable"
-        ]
+        matching_events = []
+        seen_event_signatures = set()
+        for event in history[-100:]:
+            if not (
+                isinstance(event, dict) and event.get("source") == name
+                and event.get("type") == "status" and event.get("new_status") == "unavailable"
+            ):
+                continue
+            signature = json.dumps(event, sort_keys=True, separators=(",", ":"), default=str)
+            if signature in seen_event_signatures:
+                continue
+            seen_event_signatures.add(signature)
+            matching_events.append(event)
         components = {
             "current_failure": 45 if diagnostic.get("severity") == "warning" else 35,
             "consecutive_failure": 25 if repeated else 0,
