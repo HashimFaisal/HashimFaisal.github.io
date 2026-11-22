@@ -92,7 +92,7 @@ const viewports = [
 
       await page.locator('#nuvio-launch-grid [data-view="downloads"]').click();
       await page.waitForSelector('#downloads.nuvio-view-active', { timeout: 10000 });
-      await page.waitForFunction(() => document.querySelectorAll('#downloads #download-grid .release-asset-card').length === 5, null, { timeout: 12000 });
+      await page.waitForFunction(() => document.querySelectorAll('#downloads #download-grid .release-mobile-link').length === 5, null, { timeout: 12000 });
       const downloadLayout = await page.evaluate(() => {
         const section = document.querySelector('#downloads');
         const downloadsSectionCount = document.querySelectorAll('main > #downloads').length;
@@ -103,11 +103,15 @@ const viewports = [
         const mobileGroup = section.querySelector('#versions-mobile');
         const mobileGrid = mobileGroup?.querySelector('.downloads-device-grid');
         const latest = mobileGroup?.querySelector('.downloads-mobile-release-assets');
+        const mobileCard = [...(mobileGrid?.children || [])].find(card =>
+          card.querySelector('h3')?.textContent.trim() === 'Nuvio Mobile'
+        );
         const releaseAssetsGrid = Boolean(
           releaseGrid &&
           releaseGrid === mobileGrid &&
           releaseGrid.classList.contains('plugin-grid') &&
-          !latest
+          !latest &&
+          mobileCard?.querySelectorAll('.release-mobile-link').length === 5
         );
         const installerLink = section.querySelector('.downloads-device-link');
         const installerStyle = installerLink ? getComputedStyle(installerLink) : null;
@@ -150,13 +154,13 @@ const viewports = [
       if (downloadLayout.groupsCount !== 4 || JSON.stringify(downloadLayout.ids) !== JSON.stringify(downloadLayout.expectedIds)) failures.push(viewport.name + ': platform groups missing or out of order ' + JSON.stringify(downloadLayout.ids));
       if (downloadLayout.overlaps.length) failures.push(viewport.name + ': platform groups overlap ' + JSON.stringify(downloadLayout.overlaps));
       if (downloadLayout.siblingOverlaps.length) failures.push(viewport.name + ': downloads children overlap ' + JSON.stringify(downloadLayout.siblingOverlaps));
-      if (downloadLayout.cardCount !== 5) failures.push(viewport.name + ': expected 5 latest-release assets, found ' + downloadLayout.cardCount);
+      if (downloadLayout.cardCount !== 0) failures.push(viewport.name + ': standalone latest-release cards remain (' + downloadLayout.cardCount + ')');
       if (downloadLayout.columns !== expectedColumns) failures.push(viewport.name + ': latest-release grid expected ' + expectedColumns + ' columns, found ' + downloadLayout.columns);
       if (downloadLayout.statusVisible) failures.push(viewport.name + ': System Status appears in Downloads view');
       if (downloadLayout.legacyVersionsSection) failures.push(viewport.name + ': old versions section remains');
       if (downloadLayout.latestReleaseOverlap) failures.push(viewport.name + ': latest release overlaps mobile editions');
       if (!downloadLayout.cardsWithinGrid) failures.push(viewport.name + ': latest release card escapes grid');
-      if (JSON.stringify(downloadLayout.platformCardCounts) !== JSON.stringify([9,1,5,2])) failures.push(viewport.name + ': unexpected platform card counts ' + JSON.stringify(downloadLayout.platformCardCounts));
+      if (JSON.stringify(downloadLayout.platformCardCounts) !== JSON.stringify([4,1,5,2])) failures.push(viewport.name + ': unexpected platform card counts ' + JSON.stringify(downloadLayout.platformCardCounts));
       const downloadsScreenshot = path.join(outputDir, 'downloads-' + viewport.name + '.png');
       await page.screenshot({ path: downloadsScreenshot, fullPage: true, animations: 'disabled' });
 
