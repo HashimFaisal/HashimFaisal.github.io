@@ -104,14 +104,14 @@ const viewports = [
         const mobileGrid = mobileGroup?.querySelector('.downloads-device-grid');
         const latest = mobileGroup?.querySelector('.downloads-mobile-release-assets');
         const mobileCard = [...(mobileGrid?.children || [])].find(card =>
-          card.querySelector('h3')?.textContent.trim() === 'Nuvio Mobile'
+          card.querySelector('h3')?.textContent.trim() === 'Nuvio Enhanced 1.0.0'
         );
         const releaseAssetsGrid = Boolean(
           releaseGrid &&
           releaseGrid === mobileGrid &&
           releaseGrid.classList.contains('plugin-grid') &&
           !latest &&
-          mobileCard?.querySelectorAll('.release-mobile-link').length === 5
+          mobileCard?.querySelectorAll('.release-enhanced-link').length === 5
         );
         const installerLink = section.querySelector('.downloads-device-link');
         const installerStyle = installerLink ? getComputedStyle(installerLink) : null;
