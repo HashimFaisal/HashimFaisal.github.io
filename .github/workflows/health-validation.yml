@@ -150,7 +150,7 @@ jobs:
 
           app_js = Path("app.js").read_text(encoding="utf-8")
           handler_match = re.search(
-              r'function setDownloadsDevice\(device\)\s*\\{(.*?)\n\\}',
+              r'function setDownloadsDevice\(device\)\s*\{(.*?)\n\}',
               app_js,
               re.S,
           )
