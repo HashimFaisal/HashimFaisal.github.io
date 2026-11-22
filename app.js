@@ -349,7 +349,15 @@ const translations = {
   "توضيح متطلبات API وروابط Manifest للترجمات": "Clarified API requirements and subtitle Manifest links",
   "تمييز الإضافات التي تحتاج API فعلياً عن الإضافات التي تعمل بدونه، وإضافة روابط مفاتيح SubDL وSubSource الاختيارية في SubSense ورابط مزود AI الاختياري في SubMaker، وتوضيح أن روابط Manifest لبعض الخدمات شخصية وتُولّد من صفحات الإعداد.": "Clarified which add-ons actually require an API, added optional SubDL and SubSource key links for SubSense and an optional AI provider link for SubMaker, and explained that some services generate personal Manifest links through their setup pages.",
   "إضافة موارد جديدة لقسم الترجمات": "Added new resources to the subtitles section",
-  "إضافة OpenSubtitles PRO وCommunity Subtitles وSubSource وSubSense وSubMaker وAIO Subtitles، مع ربط إعداد SubDL وتوثيق متطلبات كل خدمة.": "Added OpenSubtitles PRO, Community Subtitles, SubSource, SubSense, SubMaker, and AIO Subtitles, along with the SubDL setup link and each service's requirements.",
+  "إضافة OpenSubtitles PRO وCommunity Subtitles وSubSource وSubSense وSubMaker وAIO Subtitles، مع ربط إعداد SubDL وتوثيق متطلبات كل خدمة.": "Added OpenSubtitles PRO, Community Subtitles, SubSource, SubSense, SubMaker, and AIO Subtitles, along with the SubDL setup link and each service's requirements.",,
+
+  'جارٍ فحص روابط الإصدار...': 'Checking edition links...',
+  'الإصدار': 'Version',
+  'تعذر التحقق من روابط الإصدار': 'Could not verify edition links',
+  'روابط التنزيل سليمة': 'Download links are healthy',
+  'رابط تنزيل غير متاح': 'A download link is unavailable',
+  'لا توجد روابط تنزيل مباشرة': 'No direct download links',
+  'فحص روابط التنزيل': 'Download link check',
 };
 
 const reverseTranslations = Object.fromEntries(
@@ -440,6 +448,7 @@ function applyLanguage() {
 
   translateStaticText();
   updateShareButtonLabels();
+  if (latestReport) renderVersionCardStatuses(latestReport);
   loadLiveUpdates();
 
   const changelogList = $('#changelog-list');
@@ -837,6 +846,36 @@ function renderManifestStatuses(report) {
   });
 }
 
+
+function renderVersionCardStatuses(report) {
+  const items = Array.isArray(report?.version_downloads?.items)
+    ? report.version_downloads.items
+    : (Array.isArray(report?.checks) ? report.checks.filter(item => item.type === 'version_download') : []);
+
+  document.querySelectorAll('.version-card').forEach(card => {
+    const status = card.querySelector('.version-card-status');
+    if (!status) return;
+    const title = card.querySelector('h3')?.textContent.trim();
+    const cardItems = items.filter(item => item.card === title);
+    if (!cardItems.length) {
+      status.textContent = t('لا توجد روابط تنزيل مباشرة');
+      status.dataset.state = 'unknown';
+      return;
+    }
+
+    const tags = [...new Set(cardItems.map(item => item.tag).filter(Boolean))];
+    const failed = cardItems.filter(item => !item.ok).length;
+    const versionText = tags.length ? `${t('الإصدار')} ${tags.join(' / ')}` : t('الإصدار غير متاح');
+    const healthText = failed
+      ? `${failed} · ${t('رابط تنزيل غير متاح')}`
+      : t('روابط التنزيل سليمة');
+    status.textContent = `${versionText} · ${healthText}`;
+    status.dataset.state = failed ? 'warning' : 'healthy';
+    status.title = `${t('فحص روابط التنزيل')}: ${cardItems.length}`;
+  });
+}
+
+
 function renderDownloads(report) {
   const release = report.release;
 
@@ -909,6 +948,7 @@ async function loadStatus() {
     updateLastChecked();
 
     renderManifestStatuses(report);
+    renderVersionCardStatuses(report);
     renderDownloads(report);
   } catch (error) {
     $('#health-state').textContent = t('غير متاح');
