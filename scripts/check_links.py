@@ -149,6 +149,18 @@ def check_download(name, asset):
 
 
 def main():
+    previous_report = {}
+    try:
+        with open("data/status.json", "r", encoding="utf-8") as previous_file:
+            previous_report = json.load(previous_file)
+    except (OSError, ValueError):
+        previous_report = {}
+
+    previous_checks = {
+        item.get("name"): item
+        for item in previous_report.get("checks", [])
+        if isinstance(item, dict)
+    }
     with ThreadPoolExecutor(max_workers=4) as executor:
         results = list(executor.map(
             lambda entry: check_manifest(*entry),
@@ -158,6 +170,7 @@ def main():
     release = None
     stable_release = None
     release_error = None
+    release_is_cached = False
 
     try:
         with fetch(API) as response:
@@ -206,19 +219,70 @@ def main():
     except Exception as exc:
         release_error = str(exc)
 
+    # Keep the last known release and download links when GitHub's API is
+    # temporarily unavailable. The report still records this run as degraded.
+    if release is None:
+        cached_release = previous_report.get("release")
+        if isinstance(cached_release, dict) and cached_release.get("assets"):
+            release = dict(cached_release)
+            release["stale"] = True
+            release["cache_checked_at"] = (
+                cached_release.get("cache_checked_at") or previous_report.get("checked_at")
+            )
+            release["cache_error"] = release_error
+            release_is_cached = True
+            stable_release = previous_report.get("stable_release")
+            for asset in release.get("assets", []):
+                if not isinstance(asset, dict):
+                    continue
+                asset["stale"] = True
+                asset["last_verified_at"] = (
+                    asset.get("last_verified_at") or previous_report.get("checked_at")
+                )
+
+    # Preserve last known manifest versions when a source check fails.
+    for item in results:
+        if item.get("type") != "manifest" or item.get("ok"):
+            continue
+        previous = previous_checks.get(item.get("name"))
+        cached_version = (
+            previous.get("cached_version")
+            if isinstance(previous, dict)
+            else None
+        )
+        last_good_version = (
+            previous.get("version")
+            if isinstance(previous, dict) and previous.get("ok")
+            else cached_version or (
+                previous.get("version") if isinstance(previous, dict) else None
+            )
+        )
+        if last_good_version:
+            item["version"] = last_good_version
+            item["cached_version"] = last_good_version
+            item["stale"] = True
+            item["last_verified_at"] = (
+                previous.get("last_verified_at")
+                if isinstance(previous, dict) and previous.get("stale")
+                else previous_report.get("checked_at")
+            )
+
     # Add an explicit beta-release health check so a failed release lookup
     # cannot leave the overall report looking fully healthy.
     results.append({
         "name": "Nuvio beta release",
         "type": "release",
-        "ok": release is not None,
-        "tag": (release or {}).get("tag_name"),
+        "ok": release is not None and not release_is_cached,
+        "tag": (release or {}).get("tag") or (release or {}).get("tag_name"),
         "error": release_error,
+        "stale": release_is_cached,
     })
 
     stable_release_data = None
 
-    if stable_release:
+    if release_is_cached:
+        stable_release_data = previous_report.get("stable_release")
+    elif stable_release:
         stable_tag = stable_release.get("tag_name", "unknown")
         stable_release_data = {
             "tag": stable_tag,
@@ -230,7 +294,21 @@ def main():
 
     release_data = None
 
-    if release:
+    if release and release_is_cached:
+        release_data = release
+        for asset in release_data.get("assets", []):
+            if not isinstance(asset, dict):
+                continue
+            results.append({
+                "name": asset.get("label", "download"),
+                "type": "download",
+                "ok": False,
+                "stale": True,
+                "error": release_error or "Release data is cached",
+                "url": asset.get("download_url"),
+            })
+
+    elif release:
         tag = release.get("tag_name", "unknown")
         assets = {
             item.get("name"): item
@@ -333,19 +411,13 @@ def main():
         "release": release_data,
         "stable_release": stable_release_data,
         "release_error": release_error,
+        "stale": release_is_cached,
         "checks": results,
     }
 
 
     history_path = "data/changelog.json"
-    previous_report = {}
     history = []
-
-    try:
-        with open("data/status.json", "r", encoding="utf-8") as previous_file:
-            previous_report = json.load(previous_file)
-    except (OSError, ValueError):
-        previous_report = {}
 
     try:
         with open(history_path, "r", encoding="utf-8") as history_file:
