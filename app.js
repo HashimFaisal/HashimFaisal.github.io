@@ -36,6 +36,12 @@ const translations = {
   'ملفات التنزيل': 'Download Files',
   'مصادر سليمة': 'Healthy Sources',
   'مصادر متعطلة': 'Unavailable Sources',
+  'اختبار جلب المصادر': 'Stream retrieval test',
+  'نتيجة مرشحة': 'candidates',
+  'الخادم ردّ، لكن ما رجّع مصادر للفيلم التجريبي': 'The server responded but returned no sources for the test movie.',
+  'الفيلم التجريبي غير موجود بفهرس المزود؛ النتيجة غير حاسمة': 'The test movie is not indexed by this provider; result is inconclusive.',
+  'تعذر اختبار جلب المصادر': 'Stream retrieval test failed',
+  'فحص ملفات المزود': 'Provider file check',
   'Manifest متاح': 'Manifest Available',
   'تحتاج مراجعة': 'Needs Review',
   'آخر فحص': 'Last Check',
@@ -633,6 +639,37 @@ function renderManifestStatuses(report) {
     status.classList.toggle('bad', !healthy);
 
     const indicator = document.createElement('i');
+    const streamCheck = report?.source_retrieval?.stream_checks?.find(check => check.name === name);
+    const providerBundle = name === 'ALL-IN-ONE'
+      ? report?.source_retrieval?.provider_bundle
+      : null;
+    const renderSourceDetail = () => {
+      if (streamCheck) {
+        const detail = document.createElement('small');
+        detail.className = 'source-probe-detail';
+        if (streamCheck.probe_status === 'streams_found') {
+          detail.textContent = `${t('اختبار جلب المصادر')}: ${Number(streamCheck.stream_count) || 0} ${t('نتيجة مرشحة')}`;
+        } else if (streamCheck.probe_status === 'no_streams') {
+          detail.textContent = t('الخادم ردّ، لكن ما رجّع مصادر للفيلم التجريبي');
+        } else if (streamCheck.probe_status === 'inconclusive') {
+          detail.textContent = t('الفيلم التجريبي غير موجود بفهرس المزود؛ النتيجة غير حاسمة');
+        } else {
+          detail.textContent = `${t('تعذر اختبار جلب المصادر')}: ${streamCheck.failure_code || 'unknown'}`;
+        }
+        status.append(detail);
+      } else if (providerBundle) {
+        const detail = document.createElement('small');
+        detail.className = 'source-probe-detail';
+        const available = Array.isArray(providerBundle.available_provider_files)
+          ? providerBundle.available_provider_files.length
+          : 0;
+        const sampled = Array.isArray(providerBundle.sampled_provider_files)
+          ? providerBundle.sampled_provider_files.length
+          : 0;
+        detail.textContent = `${t('فحص ملفات المزود')}: ${available}/${sampled}`;
+        status.append(detail);
+      }
+    };
     const renderVersion = version => {
       const versionLabel = version
         ? `${t('الإصدار')} ${version}`
@@ -641,6 +678,7 @@ function renderManifestStatuses(report) {
         ? `${t('متاح')} · ${versionLabel}`
         : `${t('فشل الفحص')} · ${versionLabel}`;
       status.replaceChildren(indicator, document.createTextNode(label));
+      renderSourceDetail();
     };
 
     renderVersion(item.version);
