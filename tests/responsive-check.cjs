@@ -92,10 +92,10 @@ const viewports = [
 
       await page.locator('#nuvio-launch-grid [data-view="downloads"]').click();
       await page.waitForSelector('#downloads.nuvio-view-active', { timeout: 10000 });
-      await page.waitForFunction(() => document.querySelectorAll('#downloads #download-grid .download-library-card').length === 5, null, { timeout: 12000 });
+      await page.waitForFunction(() => document.querySelectorAll('#downloads #download-grid .release-asset-card').length === 5, null, { timeout: 12000 });
       const downloadLayout = await page.evaluate(() => {
         const section = document.querySelector('#downloads');
-        const groups = [...section.querySelectorAll('.version-platform')];
+        const groups = [...section.querySelectorAll('.downloads-device-section')];
         const expectedIds = ['versions-mobile','versions-desktop','versions-tv','versions-smart-tv'];
         const ids = groups.map(group => group.id);
         const overlaps = [];
@@ -111,15 +111,15 @@ const viewports = [
           if(a.left<b.right-1&&a.right>b.left+1&&a.top<b.bottom-1&&a.bottom>b.top+1)siblingOverlaps.push([children[i].className,children[j].className]);
         }
         const grid=document.querySelector('#download-grid');
-        const cards=[...grid.querySelectorAll('.download-library-card')].filter(card=>!card.hidden);
+        const cards=[...grid.querySelectorAll('.release-asset-card')].filter(card=>!card.hidden);
         const columns=getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length;
         const mobileGroup=section.querySelector('#versions-mobile');
-        const mobileGrid=mobileGroup?.querySelector('.version-grid');
-        const latest=mobileGroup?.querySelector('.download-release-subsection');
+        const mobileGrid=mobileGroup?.querySelector('.downloads-device-grid');
+        const latest=mobileGroup?.querySelector('.downloads-mobile-release-assets');
         const mobileGridRect=mobileGrid?.getBoundingClientRect(),latestRect=latest?.getBoundingClientRect(),gridRect=grid.getBoundingClientRect();
         const latestReleaseOverlap=Boolean(mobileGridRect&&latestRect&&mobileGridRect.left<latestRect.right-1&&mobileGridRect.right>latestRect.left+1&&mobileGridRect.top<latestRect.bottom-1&&mobileGridRect.bottom>latestRect.top+1);
         const cardsWithinGrid=cards.every(card=>{const r=card.getBoundingClientRect();return r.left>=gridRect.left-1&&r.right<=gridRect.right+1;});
-        const platformCardCounts=groups.map(group=>group.querySelectorAll('.version-card').length);
+        const platformCardCounts=groups.map(group=>group.querySelectorAll('.downloads-device-card').length);
         return {ids,expectedIds,groupsCount:groups.length,overlaps,siblingOverlaps,cardCount:cards.length,columns,statusVisible:!document.querySelector('#status').hidden,legacyVersionsSection:!!document.querySelector('#versions'),latestReleaseOverlap,cardsWithinGrid,platformCardCounts};
       });
       const expectedColumns = viewport.width <= 480 ? 1 : viewport.width <= 1000 ? 2 : 3;
