@@ -714,3 +714,28 @@ test('download URLs remain visible when their health checks fail', async ({ page
   await expect(page.locator('.download-card .download-meta').filter({ hasText: 'تعذر تأكيد الرابط' })).toHaveCount(5);
   await expect(page.locator('.download-card .download-meta').filter({ hasText: 'بيانات التنزيل محفوظة لكن الكاش قديم' })).toHaveCount(5);
 });
+
+
+test('Nuvio editions are separated by device and link directly to published installer assets', async ({ page }) => {
+  await expect(page.locator('#versions-mobile')).toBeVisible();
+  await expect(page.locator('#versions-tv')).toBeVisible();
+  await expect(page.locator('#versions-smart-tv')).toBeVisible();
+  await expect(page.locator('#versions-desktop')).toBeVisible();
+
+  await expect(page.locator('#versions-mobile .version-card')).toHaveCount(3);
+  await expect(page.locator('#versions-tv .version-card')).toHaveCount(4);
+  await expect(page.locator('#versions-smart-tv .version-card')).toHaveCount(3);
+  await expect(page.locator('#versions-desktop .version-card')).toHaveCount(1);
+
+  await expect(page.locator('#versions-mobile a[href$="androidApp-full-arm64-v8a-release.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-mobile a[href$="nuvio-1.0.1-full-release.ipa"]')).toBeVisible();
+  await expect(page.locator('#versions-tv a[href$="app-full-universal-release.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-smart-tv a[href$=".wgt"]')).toBeVisible();
+  await expect(page.locator('#versions-smart-tv a[href$=".ipk"]')).toBeVisible();
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('#versions-mobile-title')).toHaveText('Mobile · Android & iPhone');
+  await expect(page.locator('#versions-tv-title')).toHaveText('TV · Android TV & Google TV');
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('#versions-mobile-title')).toHaveText('الموبايل · Android وiPhone');
+});
