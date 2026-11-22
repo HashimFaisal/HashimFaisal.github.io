@@ -197,8 +197,7 @@ test('personal metadata manifests expose Nuvio install actions and keep setup li
   ];
 
   for (const item of expected) {
-    const card = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: item.name }) });
-    await expect(card).toHaveCount(1);
+    const card = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: item.name }) });    await expect(card).toHaveCount(1);
     await expect(card.locator('h3')).toHaveText(item.name);
     await expect(card.locator('.manifest-url')).toHaveText(item.manifest);
     await expect(card.locator('.card-actions a').first()).toHaveAttribute('href', item.setup);
@@ -398,7 +397,6 @@ test('home dashboard cards stack vertically on compact screens in both languages
   await assertStacked();
 });
 
-
 test('plugin library cards never overlap across responsive widths and languages', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
@@ -597,8 +595,7 @@ test('changelog and downloads sections keep content boxes separate across viewpo
     expect(result.collisions, JSON.stringify(result)).toEqual([]);
   };
 
-  const assertSections = async width => {
-    await page.setViewportSize({ width, height: 900 });
+  const assertSections = async width => {    await page.setViewportSize({ width, height: 900 });
     await page.locator('#nuvio-launch-grid [data-view="changelog"]').click();
     await expect(page.locator('#changelog')).toBeVisible();
     await assertNoOverlaps('#changelog');
@@ -815,7 +812,7 @@ test('Nuvio editions are separated by device and link directly to published inst
   await expect(page.locator('#versions-tv a[href$="app-full-universal-release.apk"]')).toBeVisible();
   await expect(page.locator('#versions-smart-tv a[href$=".wgt"]')).toBeVisible();
   await expect(page.locator('#versions-smart-tv a[href$=".ipk"]').first()).toBeVisible();
-  await expect(page.locator('#versions-tv a[href$="NuvioRS-TV-1.2.0-beta.3-tester.2-arm32.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-tv a[href$="NuvioRS-TV-1.0.0-autosync.22-arm32.apk"]')).toBeVisible();
   await expect(page.locator('#versions-tv a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
   await expect(page.locator('#versions-smart-tv a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
 
