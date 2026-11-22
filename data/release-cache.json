@@ -1,5 +1,5 @@
 {
-  "cached_at": "2026-11-22T09:28:57.613613+00:00",
+  "cached_at": "2026-11-22T09:42:24.166397+00:00",
   "release": {
     "url": "https://api.github.com/repos/luqmanfadlli/NuvioMobile-Enhanced/releases/454068184",
     "assets_url": "https://api.github.com/repos/luqmanfadlli/NuvioMobile-Enhanced/releases/454068184/assets",
@@ -69,7 +69,7 @@
         "state": "uploaded",
         "size": 54139882,
         "digest": "sha256:120653fb09456ca54f19a21eac8c556df6b19b22dab5396988f855e3176ab410",
-        "download_count": 412,
+        "download_count": 430,
         "created_at": "2026-11-21T23:51:50Z",
         "updated_at": "2026-11-21T23:52:00Z",
         "browser_download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-arm64-v8a-release.apk"
@@ -105,7 +105,7 @@
         "state": "uploaded",
         "size": 51555330,
         "digest": "sha256:ac903c384133c7928109fafcf5adcabf086c6434dd769463830f04de015d2064",
-        "download_count": 33,
+        "download_count": 34,
         "created_at": "2026-11-21T23:52:00Z",
         "updated_at": "2026-11-21T23:52:07Z",
         "browser_download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-armeabi-v7a-release.apk"
@@ -141,7 +141,7 @@
         "state": "uploaded",
         "size": 55791004,
         "digest": "sha256:1ae6831c8c8b20b0ae06d0fd3476d3f9b82d0ea5227a99f105d096eb8f5139a8",
-        "download_count": 29,
+        "download_count": 30,
         "created_at": "2026-11-21T23:52:07Z",
         "updated_at": "2026-11-21T23:52:15Z",
         "browser_download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-x86_64-release.apk"
@@ -177,7 +177,7 @@
         "state": "uploaded",
         "size": 55215642,
         "digest": "sha256:7207b8748792f723b7eaa9ece283febc0454c675bbac3d0a2168c107cb6fbc21",
-        "download_count": 29,
+        "download_count": 30,
         "created_at": "2026-11-21T23:52:15Z",
         "updated_at": "2026-11-21T23:52:24Z",
         "browser_download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-x86-release.apk"
@@ -213,7 +213,7 @@
         "state": "uploaded",
         "size": 77920396,
         "digest": "sha256:7e25704e21f60474e8c2b0ae14c6065b4e66618491cd25cc600ff1e215126fd1",
-        "download_count": 116,
+        "download_count": 117,
         "created_at": "2026-11-22T02:18:39Z",
         "updated_at": "2026-11-22T02:19:08Z",
         "browser_download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-enhanced-release.ipa"
@@ -306,7 +306,7 @@
         "state": "uploaded",
         "size": 75657908,
         "digest": "sha256:0c0c21e5296c824c1b4fbe8e4890778a38ab757e3ddf572c61971f996336f050",
-        "download_count": 3492,
+        "download_count": 3498,
         "created_at": "2026-11-16T06:49:58Z",
         "updated_at": "2026-11-16T06:50:10Z",
         "browser_download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.0.0/nuvio-1.0.0-enhanced-release.ipa"
@@ -342,7 +342,7 @@
         "state": "uploaded",
         "size": 49374528,
         "digest": "sha256:e131d209929f542ef0be390a014cade5ba4d7d6ef13699fe46dc7635faf1bbb7",
-        "download_count": 1489,
+        "download_count": 1496,
         "created_at": "2026-11-16T10:02:27Z",
         "updated_at": "2026-11-16T10:02:35Z",
         "browser_download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.0.0/nuvio-1.0.0-arm64-v8a-release.apk"
@@ -378,7 +378,7 @@
         "state": "uploaded",
         "size": 47491370,
         "digest": "sha256:6fae82ed226e68cfed09c046c6ce9c91512e6b8b39a2bcdd8b9ce53332727741",
-        "download_count": 122,
+        "download_count": 123,
         "created_at": "2026-11-16T10:02:35Z",
         "updated_at": "2026-11-16T10:02:41Z",
         "browser_download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.0.0/nuvio-1.0.0-armeabi-v7a-release.apk"
