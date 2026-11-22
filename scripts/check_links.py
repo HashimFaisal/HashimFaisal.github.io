@@ -305,6 +305,65 @@ def build_change_summary(events):
     }
 
 
+def build_risk_forecast(results, previous_report=None, history=None):
+    """Score evidence-based operational risk without claiming certainty or fabricating forecasts."""
+    previous_report = previous_report if isinstance(previous_report, dict) else {}
+    history = history if isinstance(history, list) else []
+    previous_checks = {
+        item.get("name"): item for item in previous_report.get("checks", [])
+        if isinstance(item, dict) and item.get("name")
+    }
+    failure_items = [item for item in results if not item.get("ok")]
+    risks = []
+    for item in failure_items:
+        name = item.get("name", "Unknown")
+        diagnostic = diagnose_check(item)
+        prior = previous_checks.get(name, {})
+        repeated = not prior.get("ok") and bool(prior)
+        matching_events = [
+            event for event in history[-100:]
+            if isinstance(event, dict) and event.get("source") == name
+            and event.get("type") == "status" and event.get("new_status") == "unavailable"
+        ]
+        score = 45 if diagnostic.get("severity") == "warning" else 35
+        if repeated:
+            score += 25
+        if matching_events:
+            score += min(20, 5 * len(matching_events))
+        score = min(100, score)
+        level = "high" if score >= 70 else "medium" if score >= 40 else "low"
+        risks.append({
+            "resource": name,
+            "score": score,
+            "level": level,
+            "signals": ["current_check_failed"] + (["consecutive_failure"] if repeated else []) + (["recurring_outage_history"] if matching_events else []),
+            "evidence_count": len(matching_events),
+            "recommended_action": diagnostic.get("recommended_action", "Review current check evidence."),
+        })
+    cache_stale = bool(previous_report.get("release_cache_stale"))
+    if cache_stale:
+        risks.append({
+            "resource": "Release cache",
+            "score": 55,
+            "level": "medium",
+            "signals": ["previous_report_cache_stale"],
+            "evidence_count": 0,
+            "recommended_action": "Verify release API connectivity and cache freshness.",
+        })
+    high = sum(1 for risk in risks if risk["level"] == "high")
+    medium = sum(1 for risk in risks if risk["level"] == "medium")
+    overall = "high" if high else "medium" if medium else "low"
+    return {
+        "status": "attention" if risks else "healthy",
+        "overall_level": overall,
+        "risk_count": len(risks),
+        "high_risk_count": high,
+        "medium_risk_count": medium,
+        "risks": risks,
+        "note": "Evidence-based risk indicators, not certainty or a statistical prediction.",
+    }
+
+
 def build_proactive_alerts(report):
     """Produce concise early-warning items from measured health data only."""
     alerts = []
@@ -913,6 +972,7 @@ def main():
     report["change_summary"] = build_change_summary(unique_events)
     report["change_count"] = len(unique_events)
     report["proactive_monitoring"] = build_proactive_alerts(report)
+    report["risk_forecast"] = build_risk_forecast(results, previous_report, history)
 
     os.makedirs("data", exist_ok=True)
 
