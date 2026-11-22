@@ -90,10 +90,40 @@ const viewports = [
         };
       });
 
+      await page.locator('#nuvio-launch-grid [data-view="downloads"]').click();
+      await page.waitForSelector('#downloads.nuvio-view-active', { timeout: 10000 });
+      await page.waitForFunction(() => document.querySelectorAll('#download-grid .download-library-card').length === 5, null, { timeout: 12000 });
+      const downloadLayout = await page.evaluate(() => {
+        const section = document.querySelector('#downloads');
+        const grid = document.querySelector('#download-grid');
+        const cards = [...grid.querySelectorAll('.download-library-card')].filter(card => !card.hidden);
+        const sectionRect = section.getBoundingClientRect();
+        const gridRect = grid.getBoundingClientRect();
+        const overlaps = [];
+        const visibleChildren = [...section.children].filter(el => {
+          const r = el.getBoundingClientRect();
+          return getComputedStyle(el).display !== 'none' && r.width > 0 && r.height > 0;
+        });
+        for (let i = 0; i < visibleChildren.length; i++) for (let j = i + 1; j < visibleChildren.length; j++) {
+          const a = visibleChildren[i].getBoundingClientRect(), b = visibleChildren[j].getBoundingClientRect();
+          if (a.left < b.right - 1 && a.right > b.left + 1 && a.top < b.bottom - 1 && a.bottom > b.top + 1) overlaps.push([visibleChildren[i].className, visibleChildren[j].className]);
+        }
+        const columns = getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length;
+        return {sectionWidth: sectionRect.width, gridWidth: gridRect.width, columns, cardCount: cards.length, overlaps, cardsWithinGrid: cards.every(card => {
+          const r = card.getBoundingClientRect(); return r.left >= gridRect.left - 1 && r.right <= gridRect.right + 1;
+        })};
+      });
+      const expectedColumns = viewport.width <= 480 ? 1 : viewport.width <= 1000 ? 2 : 3;
+      if (downloadLayout.cardCount !== 5) failures.push(viewport.name + ': expected 5 download cards, found ' + downloadLayout.cardCount);
+      if (downloadLayout.columns !== expectedColumns) failures.push(viewport.name + ': downloads grid expected ' + expectedColumns + ' columns, found ' + downloadLayout.columns);
+      if (downloadLayout.overlaps.length) failures.push(viewport.name + ': downloads section overlap ' + JSON.stringify(downloadLayout.overlaps));
+      if (!downloadLayout.cardsWithinGrid) failures.push(viewport.name + ': downloads card exceeds grid bounds');
+      await page.locator('#downloads .nuvio-view-back').click();
       const screenshot = path.join(outputDir, viewport.name + '.png');
       await page.screenshot({ path: screenshot, fullPage: true, animations: 'disabled' });
 
       const result = {
+        downloadLayout,
         name: viewport.name,
         status: response ? response.status() : null,
         ...metrics,
