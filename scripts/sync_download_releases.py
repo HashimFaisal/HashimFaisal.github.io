@@ -88,7 +88,7 @@ def normalized_asset_name(name: str, old_tag: str):
     for token in (old_tag, old_tag.lstrip("vV")):
         if token:
             value = re.sub(re.escape(token.lower()), " ", value)
-    value = re.sub(r"v?\d+(?:\.\d+)+(?:[-+._][a-z0-9.-]+)?", " ", value)
+    value = re.sub(r"v?\d+(?:\.\d+)+", " ", value)
     value = re.sub(r"[^a-z0-9]+", " ", value)
     ignored = {"release", "download", "build", "app", "nuvio"}
     return {part for part in value.split() if part and part not in ignored}
