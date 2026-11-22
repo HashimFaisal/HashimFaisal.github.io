@@ -28,7 +28,7 @@ jobs:
       - name: Validate synchronizer
         run: |
           python -m py_compile scripts/sync_download_releases.py
-          python -m unittest tests.test_release_sync -v
+          python -m unittest discover -s tests -p 'test_release_sync.py' -v
       - name: Update download links from source releases
         run: python scripts/sync_download_releases.py
       - name: Commit updated release links
