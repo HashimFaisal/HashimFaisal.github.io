@@ -152,6 +152,7 @@ def sync_download_cards(document: str, release_loader=fetch_latest_release):
     skipped_links = []
     updated_cards = []
     release_events = {}
+    card_events = {}
 
     def update_card(match):
         nonlocal updated_links
@@ -159,6 +160,19 @@ def sync_download_cards(document: str, release_loader=fetch_latest_release):
         title_match = re.search(r"<h3>([\s\S]*?)</h3>", body)
         title = unescape(re.sub(r"<[^>]+>", "", title_match.group(1))).strip() if title_match else "Unknown card"
         card_updates = []
+        card_id = normalize_card_id(title)
+        for link_match in link_pattern.finditer(body):
+            source = github_release_source(link_match.group(2))
+            if source:
+                repository, current_tag, _ = source
+                card_events.setdefault(card_id, {
+                    "card_id": card_id,
+                    "card": title,
+                    "repository": repository,
+                    "tag": current_tag,
+                    "url": "https://github.com/" + repository + "/releases/tag/" + current_tag,
+                })
+                break
 
         def update_link(link_match):
             nonlocal updated_links
@@ -206,13 +220,14 @@ def sync_download_cards(document: str, release_loader=fetch_latest_release):
         "updated_cards": updated_cards,
         "skipped_links": skipped_links,
         "repositories_checked": sorted(releases),
-        "release_events": list(release_events.values()),\n        "card_events": list(card_events.values()),
+        "release_events": list(release_events.values()),
+        "card_events": list(card_events.values()),
     }
 
 
 
 def update_live_release_news(events, updates_path=UPDATES_PATH, now=None,
-                            card_events=(), registry_path=CARD_REGISTRY_PATH):
+                            card_events=(), registry_path=None):
     now = now or datetime.now(timezone.utc)
     if now.tzinfo is None:
         now = now.replace(tzinfo=timezone.utc)
@@ -268,6 +283,8 @@ def update_live_release_news(events, updates_path=UPDATES_PATH, now=None,
         added += 1
 
     # Persist card identities independently from the 24-hour ticker items.
+    if registry_path is None:
+        registry_path = Path(updates_path).parent / "download-cards-seen.json"
     try:
         registry = json.loads(registry_path.read_text(encoding="utf-8"))
         if not isinstance(registry, dict):
@@ -319,7 +336,7 @@ def main():
     if updated != original:
         INDEX_PATH.write_text(updated, encoding="utf-8")
     print(f"Release sync checked {len(report['repositories_checked'])} repositories.")
-    news_added = update_live_release_news(report["release_events"], card_events=report["card_events"])
+    news_added = update_live_release_news(report["release_events"], card_events=report["card_events"], registry_path=CARD_REGISTRY_PATH)
     print("Updated {} download links across {} cards.".format(report["updated_links"], len(report["updated_cards"])))
     print("Published {} new app release update(s) to the live ticker.".format(news_added))
     for item in report["skipped_links"]:
