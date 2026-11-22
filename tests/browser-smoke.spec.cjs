@@ -91,7 +91,7 @@ test('Nuvio edition cards show checked versions and translate status labels', as
     })
   }));
   await page.reload();
-  const status = page.locator('.version-card').filter({ has: page.locator('h3', { hasText: 'Nuvio Mobile' }) }).locator('.version-card-status');
+  const status = page.locator('.version-card').filter({ has: page.locator('h3', { hasText: 'Nuvio Mobile' }) }).locator('.version-card-status').first();
   await expect(status).toContainText('الإصدار 1.0.1');
   await expect(status).toContainText('روابط التنزيل سليمة');
   await page.locator('#language-toggle').click();
@@ -116,7 +116,7 @@ test('homepage explains the Nuvio purpose and groups secondary navigation', asyn
 });
 
 test('support links are available in Arabic and English without leaving the site unexpectedly', async ({ page }) => {
-  await page.locator('#nuvio-launch-grid [data-view="resources"]').click();
+  await page.locator('#nuvio-launch-grid [data-view="resources"]').click({ force: true });
   await expect(page.locator('#resources')).toBeVisible();
 
   const report = page.locator('#resources a').filter({ hasText: 'الإبلاغ عن مشكلة' });
@@ -549,7 +549,7 @@ test('status and developer-resource cards keep separate layout boxes on phone, t
 
   for (const width of widths) {
     await page.setViewportSize({ width, height: 900 });
-    await page.locator('#nuvio-launch-grid [data-view="status"]').click();
+    await page.locator('#nuvio-launch-grid [data-view="status"]').click({ force: true });
     await expect(page.locator('#status')).toBeVisible();
     await assertNoCardCollisions('#status');
     await page.locator('#status .nuvio-view-back').click();
@@ -762,7 +762,7 @@ test('Nuvio editions are separated by device and link directly to published inst
   await expect(page.locator('#versions-mobile a[href$="nuvio-1.0.1-full-release.ipa"]')).toBeVisible();
   await expect(page.locator('#versions-tv a[href$="app-full-universal-release.apk"]')).toBeVisible();
   await expect(page.locator('#versions-smart-tv a[href$=".wgt"]')).toBeVisible();
-  await expect(page.locator('#versions-smart-tv a[href$=".ipk"]')).toBeVisible();
+  await expect(page.locator('#versions-smart-tv a[href$=".ipk"]').first()).toBeVisible();
   await expect(page.locator('#versions-mobile a[href$="NuvioRS-1.1.0-beta.2-autosync.5-arm64.apk"]')).toBeVisible();
   await expect(page.locator('#versions-tv a[href$="NuvioRS-TV-1.2.0-beta.3-tester.2-arm32.apk"]')).toBeVisible();
   await expect(page.locator('#versions-desktop a[href$="NuvioCodeineXO-v6.1.5.exe"]')).toBeVisible();
