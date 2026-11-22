@@ -89,7 +89,7 @@ jobs:
           if "buildNuvioPluginDeepLink" not in Path("app.js").read_text(encoding="utf-8"):
               raise SystemExit("Nuvio plugin deep-link handler is missing.")
           version_cards = re.findall(
-              r'<article class="downloads-device-card">(.*?)</article>',
+              r'<article class="[^"]*\bdownloads-device-card\b[^"]*">(.*?)</article>',
               html,
               re.S,
           )
