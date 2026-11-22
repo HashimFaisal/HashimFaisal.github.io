@@ -70,6 +70,20 @@ test('all five dashboard destinations open and return to the dashboard', async (
   }
 });
 
+test('homepage explains the Nuvio purpose, credits its maintainer, and groups secondary navigation', async ({ page }) => {
+  await expect(page.locator('.hero h1')).toContainText('كل إضافات Nuvio');
+  await expect(page.locator('.hero h1')).toContainText('في مركز واحد');
+  await expect(page.locator('.hero-byline a')).toHaveAttribute('href', 'https://github.com/HashimFaisal');
+  await expect(page.locator('nav a')).toHaveCount(4);
+  await expect(page.locator('nav a[href="#changelog"]')).toHaveCount(0);
+  await expect(page.locator('#resources a[href="#changelog"]')).toBeAttached();
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('.hero h1')).toContainText('All Nuvio add-ons');
+  await expect(page.locator('.hero h1')).toContainText('in one place');
+  await expect(page.locator('.hero-byline')).toContainText('An independent project by');
+});
+
 test('support links are available in Arabic and English without leaving the site unexpectedly', async ({ page }) => {
   await page.locator('#nuvio-launch-grid [data-view="resources"]').click();
   await expect(page.locator('#resources')).toBeVisible();
