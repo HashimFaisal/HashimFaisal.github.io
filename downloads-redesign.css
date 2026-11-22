@@ -139,14 +139,16 @@
 #downloads .release-asset-action {
   border-color: rgba(88, 216, 232, .42);
   color: var(--on-accent, #07111b);
-  background: var(--cyan, #58d8e8);
+  background-color: var(--cyan, #58d8e8);
+  background-image: linear-gradient(135deg, var(--cyan, #58d8e8), #a394ff);
   box-shadow: 0 5px 14px rgba(88, 216, 232, .12);
 }
 #downloads .downloads-device-actions .downloads-device-link:hover,
 #downloads .release-asset-action:hover {
   border-color: rgba(141, 234, 243, .85);
   color: var(--on-accent, #07111b);
-  background: var(--cyan, #58d8e8);
+  background-color: var(--cyan, #58d8e8);
+  background-image: linear-gradient(135deg, var(--cyan, #58d8e8), #a394ff);
   box-shadow: 0 8px 20px rgba(88, 216, 232, .22);
 }
 #downloads .downloads-device-actions .downloads-device-link:focus-visible,
