@@ -1,6 +1,13 @@
 name: Sync Nuvio download releases
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "scripts/sync_download_releases.py"
+      - ".github/workflows/release-sync.yml"
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
