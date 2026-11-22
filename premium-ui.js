@@ -211,31 +211,26 @@
     restoreScroll(0);
   }
 
-  let backPending = false;
-
   function goBack() {
-    if (backPending) return;
+    if (currentView() === 'home') return;
 
     const state = history.state || {};
 
-    if (state.nuvioApp && Number(state.nuvioIndex) > 0) {
-      backPending = true;
-      history.back();
-      return;
-    }
-
-    if (currentView() !== 'home') {
+    try {
       history.replaceState({
+        ...state,
         nuvioApp: true,
         nuvioView: 'home',
         nuvioScrollY: 0,
         nuvioIndex: 0
       }, '', '#home');
-
-      renderView('home');
-      focusView('home');
-      restoreScroll(0);
+    } catch (error) {
+      console.warn('Nuvio navigation: could not update history state.', error);
     }
+
+    renderView('home');
+    focusView('home');
+    restoreScroll(0);
   }
 
   function addBackButton(section) {
