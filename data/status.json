@@ -1,11 +1,11 @@
 {
   "checked_at": "2026-11-22T22:11:16.459766+00:00",
   "ok": true,
-  "passed": 63,
-  "total": 63,
+  "passed": 61,
+  "total": 61,
   "manifest_coverage": {
-    "configured": 20,
-    "healthy": 20,
+    "configured": 18,
+    "healthy": 18,
     "failed": 0
   },
   "source_retrieval": {
@@ -864,32 +864,6 @@
       "version": "1.8.1",
       "manifest_id": "community.ratings.aggregator",
       "url": "https://rating-aggregator.elfhosted.com/manifest.json",
-      "failure_code": "healthy",
-      "failure_category": "healthy",
-      "severity": "info",
-      "recommended_action": "No action required."
-    },
-    {
-      "name": "AIOMetadata",
-      "type": "manifest",
-      "ok": true,
-      "http_status": 200,
-      "version": "4.1.0",
-      "manifest_id": "aio-metadata",
-      "url": "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
-      "failure_code": "healthy",
-      "failure_category": "healthy",
-      "severity": "info",
-      "recommended_action": "No action required."
-    },
-    {
-      "name": "TMDB Discover+",
-      "type": "manifest",
-      "ok": true,
-      "http_status": 200,
-      "version": "2.14.7+49f99dd0e277",
-      "manifest_id": "community.tmdb.discover.plus.stable",
-      "url": "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
       "failure_code": "healthy",
       "failure_category": "healthy",
       "severity": "info",
