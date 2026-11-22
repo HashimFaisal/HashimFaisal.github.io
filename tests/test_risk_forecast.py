@@ -250,5 +250,27 @@ class RiskForecastTests(unittest.TestCase):
         result = check_links.build_risk_forecast(failures, {}, [])
         self.assertEqual(result["risk_count"], 1)
 
+    def test_integrity_summary_reports_filtered_and_duplicate_inputs(self):
+        failures = [
+            {"name": "API", "ok": False, "error": "timeout"},
+            {"name": "API", "ok": False, "error": "connection reset"},
+            None,
+            "malformed",
+        ]
+        result = check_links.build_risk_forecast(failures, {}, [])
+        self.assertEqual(result["integrity"], {
+            "input_result_count": 4,
+            "evaluated_failure_count": 1,
+            "ignored_malformed_result_count": 2,
+            "duplicate_failure_count": 1,
+            "history_window_size": 0,
+            "history_evidence_deduplicated": True,
+        })
+
+    def test_integrity_summary_reports_bounded_history_window(self):
+        history = [{"type": "note"} for _ in range(125)]
+        result = check_links.build_risk_forecast([], {}, history)
+        self.assertEqual(result["integrity"]["history_window_size"], 100)
+
 if __name__ == "__main__":
     unittest.main()
