@@ -469,6 +469,7 @@ def main():
         save_release_cache(release, stable_release)
 
     passed = sum(1 for item in results if item["ok"])
+    failure_diagnostics = enrich_failures(results)
 
     report = {
         "checked_at": datetime.now(timezone.utc).isoformat(),
