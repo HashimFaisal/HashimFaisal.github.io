@@ -1,5 +1,50 @@
 [
   {
+    "id": "app:download-release:nuvio-enhanced:luqmanfadlli/NuvioMobile-Enhanced:1.1.0-beta.3",
+    "type": "app",
+    "title": {
+      "ar": "تحديث جديد لتطبيق Nuvio Enhanced 1.0.0: 1.1.0-beta.3",
+      "en": "New Nuvio Enhanced 1.0.0 app release: 1.1.0-beta.3"
+    },
+    "description": {
+      "ar": "صدر إصدار جديد من Nuvio Enhanced 1.0.0 برقم 1.1.0-beta.3. اضغط للتفاصيل.",
+      "en": "A new Nuvio Enhanced 1.0.0 release (1.1.0-beta.3) is available. Open the release notes for details."
+    },
+    "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/tag/1.1.0-beta.3",
+    "publishedAt": "2026-11-22T21:43:46.879687Z",
+    "expiresAt": "2026-11-23T21:43:46.879687Z"
+  },
+  {
+    "id": "app:download-release:nuvio-arc:ysosrs123/NuvioTV-Fork:1.2.0-arc.3",
+    "type": "app",
+    "title": {
+      "ar": "تحديث جديد لتطبيق Nuvio Arc: 1.2.0-arc.3",
+      "en": "New Nuvio Arc app release: 1.2.0-arc.3"
+    },
+    "description": {
+      "ar": "صدر إصدار جديد من Nuvio Arc برقم 1.2.0-arc.3. اضغط للتفاصيل.",
+      "en": "A new Nuvio Arc release (1.2.0-arc.3) is available. Open the release notes for details."
+    },
+    "url": "https://github.com/ysosrs123/NuvioTV-Fork/releases/tag/1.2.0-arc.3",
+    "publishedAt": "2026-11-22T21:43:46.879687Z",
+    "expiresAt": "2026-11-23T21:43:46.879687Z"
+  },
+  {
+    "id": "app:download-release:nuvio-reshaped-tv:DavidVamaiotu/NuvioTV-Reshaped:1.2.0-beta.3-autosync.3",
+    "type": "app",
+    "title": {
+      "ar": "تحديث جديد لتطبيق Nuvio Reshaped TV: 1.2.0-beta.3-autosync.3",
+      "en": "New Nuvio Reshaped TV app release: 1.2.0-beta.3-autosync.3"
+    },
+    "description": {
+      "ar": "صدر إصدار جديد من Nuvio Reshaped TV برقم 1.2.0-beta.3-autosync.3. اضغط للتفاصيل.",
+      "en": "A new Nuvio Reshaped TV release (1.2.0-beta.3-autosync.3) is available. Open the release notes for details."
+    },
+    "url": "https://github.com/DavidVamaiotu/NuvioTV-Reshaped/releases/tag/1.2.0-beta.3-autosync.3",
+    "publishedAt": "2026-11-22T21:43:46.879687Z",
+    "expiresAt": "2026-11-23T21:43:46.879687Z"
+  },
+  {
     "id": "app:download-card-added:nuviocodeinexo",
     "type": "app",
     "title": {
