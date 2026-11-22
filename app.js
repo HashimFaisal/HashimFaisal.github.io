@@ -365,6 +365,9 @@ const translations = {
   'لا توجد روابط تنزيل مباشرة': 'No direct download links',
   'فحص روابط التنزيل': 'Download link check',
   'ابحث عن ملف تنزيل...': 'Search download files...',
+  'تصفّح ملفات الإصدار الرسمي، ابحث حسب اسم الملف أو معمارية الجهاز، ونزّل مباشرة.': 'Browse official release files, search by filename or device architecture, and download directly.',
+  'تصفية ملفات التنزيل': 'Filter download files',
+
   'ملفات': 'FILES',
   'Android APK': 'Android APK',
   'iOS IPA': 'iOS IPA',
@@ -490,6 +493,9 @@ function applyLanguage() {
       currentLang === 'ar' ? 'ابحث عن إضافة' : 'Search add-ons'
     );
   }
+
+  const downloadsFilters = $('#downloads-filters');
+  if (downloadsFilters) downloadsFilters.setAttribute('aria-label', currentLang === 'ar' ? 'تصفية ملفات التنزيل' : 'Filter download files');
 
   const downloadsSearch = $('#downloads-search');
   if (downloadsSearch) {
@@ -1135,9 +1141,13 @@ async function loadStatus() {
     $('#health-detail').textContent = t('تعذر تحميل تقرير الفحص');
     const healthCard = $('#health-state')?.closest('.stat-card');
     if (healthCard) healthCard.dataset.health = 'unknown';
-    $('#download-grid').innerHTML =
-      `<p class="muted">${t('تعذر جلب معلومات الإصدار الأخير.')}</p>`;
-    console.error('Status loading failed:', error);  }
+    $('#download-grid').innerHTML = '';
+    renderDownloadFilters([]);
+    filterDownloads();
+    const downloadsEmpty = $('#downloads-empty-state');
+    if (downloadsEmpty) downloadsEmpty.textContent = t('تعذر جلب معلومات الإصدار الأخير.');
+    console.error('Status loading failed:', error);
+  }
 }
 function escapeHTML(value) {
   return String(value ?? '').replace(/[&<>"']/g, char => ({
