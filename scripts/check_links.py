@@ -316,7 +316,7 @@ def build_risk_forecast(results, previous_report=None, history=None):
     previous_forecast = previous_report.get("risk_forecast")
     previous_risks = {
         item.get("resource"): item for item in previous_forecast.get("risks", [])
-        if isinstance(item, dict) and item.get("resource")
+        if isinstance(item, dict) and isinstance(item.get("resource"), str) and item.get("resource")
     } if isinstance(previous_forecast, dict) else {}
     failure_items = [item for item in results if not item.get("ok")]
     risks = []
