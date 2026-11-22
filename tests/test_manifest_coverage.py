@@ -31,7 +31,7 @@ class ManifestCoverageTests(unittest.TestCase):
         )
         self.assertNotIn("AIOMetadata", check_links.MANIFESTS)
         self.assertNotIn("TMDB Discover+", check_links.MANIFESTS)
-        self.assertIn("يتطلب إعداداً شخصياً", html)
+        self.assertEqual(html.count("يتطلب إعداد API"), 2, "Both personal API cards must clearly require API setup.")
 
     def test_personal_manifest_urls_are_not_published(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
