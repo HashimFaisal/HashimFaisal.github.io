@@ -87,7 +87,8 @@ class ReleaseSyncTests(unittest.TestCase):
             updates_path = Path(directory) / "updates.json"
             now = datetime(2026, 11, 22, 12, 0, tzinfo=timezone.utc)
             event = {"card_id": "example-app", "repository": "example/project", "tag": "v2.0.0", "card": "Example App", "url": "https://github.com/example/project/releases/tag/v2.0.0"}
-            registry_path = Path(directory) / "download-cards-seen.json"\n            added = update_live_release_news([event], updates_path, now, registry_path=registry_path)
+            registry_path = Path(directory) / "download-cards-seen.json"
+            added = update_live_release_news([event], updates_path, now, registry_path=registry_path)
             self.assertEqual(added, 1)
             data = __import__("json").loads(updates_path.read_text(encoding="utf-8"))
             self.assertEqual(len(data), 1)
