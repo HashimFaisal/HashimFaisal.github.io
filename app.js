@@ -1018,12 +1018,41 @@ function renderDownloads(report) {
   if (grid) grid.querySelectorAll('.enhanced-latest-release').forEach(group => group.remove());
 }
 
+function getEmbeddedSiteData(key) {
+  const node = document.getElementById('nuvio-site-data');
+  if (!node) return null;
+
+  try {
+    const data = JSON.parse(node.textContent || '{}');
+    return Object.prototype.hasOwnProperty.call(data, key) ? data[key] : null;
+  } catch (error) {
+    console.warn('Embedded site data is invalid:', error);
+    return null;
+  }
+}
+
+async function loadSiteData(key, path) {
+  const embedded = getEmbeddedSiteData(key);
+  if (embedded !== null) return embedded;
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 10000);
+
+  try {
+    const response = await fetch(path, {
+      cache: 'no-store',
+      signal: controller.signal
+    });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 async function loadStatus() {
   try {
-    const response = await fetch('data/status.json', { cache: 'no-cache' });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const report = await response.json();
+    const report = await loadSiteData('status', 'data/status.json');
 
     $('#health-state').textContent = t(report.ok ? 'سليم' : 'يحتاج مراجعة');
     $('#health-detail').textContent =
@@ -1061,6 +1090,21 @@ async function loadStatus() {
     const healthCard = $('#health-state')?.closest('.stat-card');
     if (healthCard) healthCard.dataset.health = 'unknown';
     $('#download-grid')?.querySelectorAll('.release-asset-card, .enhanced-latest-release').forEach(card => card.remove());
+    const freshness = $('#report-freshness');
+    if (freshness) {
+      freshness.textContent = t('تعذر تحميل التقرير');
+      freshness.dataset.state = 'unknown';
+    }
+    document.querySelectorAll('.card-status[data-check]').forEach(status => {
+      status.textContent = t('تعذر تحميل حالة الإضافة');
+      status.dataset.state = 'unknown';
+      status.classList.remove('ok', 'bad');
+    });
+    document.querySelectorAll('.downloads-device-status').forEach(status => {
+      status.textContent = t('تعذر تحميل تقرير الفحص');
+      status.dataset.state = 'unknown';
+      status.classList.remove('ok', 'bad');
+    });
     const downloadsEmpty = $('#downloads-empty-state');
     if (downloadsEmpty) downloadsEmpty.textContent = t('تعذر جلب معلومات الإصدار الأخير.');
     console.error('Status loading failed:', error);
@@ -1156,11 +1200,7 @@ async function loadLiveUpdates() {
   }
 
   try {
-    const response = await fetch('data/updates.json', { cache: 'no-cache' });
-
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const data = await response.json();
+    const data = await loadSiteData('updates', 'data/updates.json');
     if (requestId !== liveUpdatesRequestId) return;
 
     const now = Date.now();
@@ -1252,10 +1292,7 @@ async function loadChangelog() {
   if (!container) return;
 
   try {
-    const response = await fetch('data/changelog.json', { cache: 'no-cache' });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-    const entries = await response.json();
+    const entries = await loadSiteData('changelog', 'data/changelog.json');
     if (requestId !== changelogRequestId) return;
 
     if (!Array.isArray(entries) || entries.length === 0) {
