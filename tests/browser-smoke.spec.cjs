@@ -752,13 +752,17 @@ test('Nuvio downloads library has searchable platform filters and direct release
   await expect(page.locator('#downloads')).toBeVisible();
   await expect(page.locator('#downloads .nuvio-view-back')).toBeVisible();
   await expect(page.locator('#downloads-title')).toHaveText('تنزيلات Nuvio');
-  await expect(page.locator('#downloads .downloads-release-panel')).toBeVisible();
-  await expect(page.locator('#downloads .downloads-release-details')).toBeVisible();
+  await expect(page.locator('#downloads .downloads-release-panel')).toHaveCount(0);
+  await expect(page.locator('#downloads .downloads-release-details')).toHaveCount(0);
   await expect(page.locator('#downloads-search')).toBeVisible();
   await expect(page.locator('#downloads-filters [data-download-filter="all"]')).toBeVisible();
   await expect(page.locator('#downloads-filters [data-download-filter="android"]')).toBeVisible();
   await expect(page.locator('#downloads-filters [data-download-filter="ios"]')).toBeVisible();
   await expect(page.locator('#download-grid .download-card')).toHaveCount(5);
+  await expect(page.locator('#download-grid .download-card.plugin-card')).toHaveCount(5);
+  const downloadColumns = await page.locator('#download-grid').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length);
+  const libraryColumns = await page.locator('#plugin-grid').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length);
+  expect(downloadColumns).toBe(libraryColumns);
   await expect(page.locator('#download-grid .download-card a.download-action[href*="/releases/download/"]')).toHaveCount(5);
 
   await page.locator('#downloads-filters [data-download-filter="android"]').click();
