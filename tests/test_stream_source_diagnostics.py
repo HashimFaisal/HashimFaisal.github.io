@@ -91,6 +91,22 @@ class StreamSourceDiagnosticsTests(unittest.TestCase):
             "test_title_not_indexed",
         )
 
+    def test_cinemana_distinguishes_provider_host_failure_from_network_failure(self):
+        from urllib.error import URLError
+
+        with patch.object(
+            check_links, "fetch_text",
+            side_effect=[URLError("host unreachable"), ("ok", 200)],
+        ):
+            result = check_links.check_cinemana_stream()
+
+        self.assertFalse(result["ok"])
+        self.assertEqual(result["probe_status"], "upstream_unreachable_internet_ok")
+        self.assertEqual(
+            check_links.diagnose_check(result)["failure_code"],
+            "upstream_host_unreachable",
+        )
+
     def test_all_in_one_checks_registry_and_sample_provider_files(self):
         manifest = {
             "scrapers": [
