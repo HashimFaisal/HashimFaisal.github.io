@@ -1,0 +1,51 @@
+name: Sync Nuvio download releases
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "scripts/sync_download_releases.py"
+      - ".github/workflows/release-sync.yml"
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-nuvio-download-releases
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Validate synchronizer
+        run: |
+          python -m py_compile scripts/sync_download_releases.py
+          python -m unittest discover -s tests -p 'test_release_sync.py' -v
+      - name: Update download links from source releases
+        run: python scripts/sync_download_releases.py
+      - name: Commit updated release links
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "All download cards already point to the latest matched release assets."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "chore: sync latest Nuvio download releases"
+          git push origin HEAD:main

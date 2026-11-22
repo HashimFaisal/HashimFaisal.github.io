@@ -565,7 +565,7 @@ def check_download(name, asset):
 
 
 def discover_version_downloads(path="index.html"):
-    """Read direct installer links from the edition cards so checks follow the UI."""
+    """Read every direct installer link from every device download card."""
     try:
         with open(path, encoding="utf-8") as file:
             document = file.read()
@@ -573,8 +573,8 @@ def discover_version_downloads(path="index.html"):
         return [], str(exc)
 
     cards = []
-    card_pattern = re.compile(r'<article class="[^"]*\bversion-card\b[^"]*">([\s\S]*?)</article>')
-    link_pattern = re.compile(r'<a class="[^"]*\bversion-download\b[^"]*" href="([^"]+)">([\s\S]*?)</a>')
+    card_pattern = re.compile(r'<article class="[^"]*\bdownloads-device-card\b[^"]*">([\s\S]*?)</article>')
+    link_pattern = re.compile(r'<a class="[^"]*\bdownloads-device-link\b[^"]*" href="([^"]+)">([\s\S]*?)</a>')
     for card_html in card_pattern.findall(document):
         title_match = re.search(r'<h3>([\s\S]*?)</h3>', card_html)
         card_name = re.sub(r'<[^>]+>', '', title_match.group(1)).strip() if title_match else "Nuvio edition"
@@ -588,7 +588,7 @@ def discover_version_downloads(path="index.html"):
 
 
 def check_version_downloads(path="index.html"):
-    """Check every direct installer URL displayed in the Nuvio edition directory."""
+    """Check every direct installer URL displayed across all device cards."""
     entries, discovery_error = discover_version_downloads(path)
     if discovery_error:
         return [{
@@ -602,7 +602,7 @@ def check_version_downloads(path="index.html"):
             "name": "Nuvio edition download inventory",
             "type": "version_download",
             "ok": False,
-            "error": "No direct version-download links were found in index.html.",
+            "error": "No direct download links were found in the device cards.",
         }]
 
     def probe(entry):
