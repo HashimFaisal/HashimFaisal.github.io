@@ -487,7 +487,7 @@ function applyLanguage() {
 
   translateStaticText();
   updateShareButtonLabels();
-  if (latestReport) renderVersionCardStatuses(latestReport);
+  if (latestReport) renderDeviceCardStatuses(latestReport);
   loadLiveUpdates();
 
   const changelogList = $('#changelog-list');
@@ -898,7 +898,7 @@ function renderManifestStatuses(report) {
 }
 
 
-function renderVersionCardStatuses(report) {
+function renderDeviceCardStatuses(report) {
   const items = Array.isArray(report?.version_downloads?.items)
     ? report.version_downloads.items
     : (Array.isArray(report?.checks) ? report.checks.filter(item => item.type === 'version_download') : []);
@@ -1146,7 +1146,7 @@ async function loadStatus() {
     updateLastChecked();
 
     renderManifestStatuses(report);
-    renderVersionCardStatuses(report);
+    renderDeviceCardStatuses(report);
     renderDownloads(report);
   } catch (error) {
     $('#health-state').textContent = t('غير متاح');
