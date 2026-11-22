@@ -903,13 +903,13 @@ function renderVersionCardStatuses(report) {
     ? report.version_downloads.items
     : (Array.isArray(report?.checks) ? report.checks.filter(item => item.type === 'version_download') : []);
 
-  document.querySelectorAll('.version-card').forEach(card => {
-    const status = card.querySelector('.version-card-status');
+  document.querySelectorAll('.downloads-device-card').forEach(card => {
+    const status = card.querySelector('.downloads-device-status');
     if (!status) return;
     const title = card.querySelector('h3')?.textContent.trim();
     const cardItems = items.filter(item => item.card === title);
     if (!cardItems.length) {
-      const tags = [...new Set([...card.querySelectorAll('a.version-download')].map(link => {
+      const tags = [...new Set([...card.querySelectorAll('a.downloads-device-link')].map(link => {
         try {
           const parts = new URL(link.href).pathname.split('/').filter(Boolean);
           const index = parts.indexOf('download');
