@@ -99,6 +99,10 @@ class ReleaseSyncTests(unittest.TestCase):
             self.assertEqual(added_again, 0)
             data_again = __import__("json").loads(updates_path.read_text(encoding="utf-8"))
             self.assertEqual(len(data_again), 1)
+            later = now.replace(day=24)
+            added_after_expiry = update_live_release_news([event], updates_path, later)
+            self.assertEqual(added_after_expiry, 0)
+            self.assertEqual(__import__("json").loads(updates_path.read_text(encoding="utf-8")), [])
 
     def test_new_download_cards_are_announced_once_and_registry_outlives_news(self):
         with tempfile.TemporaryDirectory() as directory:
