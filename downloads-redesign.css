@@ -876,3 +876,97 @@
 #downloads .release-asset-action:hover {
   background-image: linear-gradient(135deg, rgba(88,216,232,.19), rgba(163,148,255,.13));
 }
+
+
+/* Device navigation behaves as three real filters, not in-page anchor links. */
+#downloads .downloads-device-nav {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+}
+#downloads .downloads-device-nav button {
+  display: inline-flex;
+  min-width: 0;
+  min-height: 39px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 13px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  color: var(--text);
+  background: rgba(162,177,200,.045);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: color .2s ease, border-color .2s ease, background .2s ease;
+}
+#downloads .downloads-device-nav button:hover,
+#downloads .downloads-device-nav button:focus-visible,
+#downloads .downloads-device-nav button.active {
+  border-color: var(--line-strong);
+  color: var(--cyan);
+  background: rgba(88,216,232,.075);
+}
+#downloads .downloads-device-nav button:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+}
+#downloads .downloads-device-nav button .downloads-nav-index {
+  color: var(--cyan);
+  font: 800 9px Inter, sans-serif;
+}
+#downloads .downloads-device-nav button > span:nth-child(2) {
+  color: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+}
+#downloads .downloads-device-section[hidden] { display: none !important; }
+
+/* Keep latest-release assets compact and visually aligned with library cards. */
+#downloads .downloads-mobile-release-assets {
+  margin: 28px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+#downloads .release-assets-grid { align-items: stretch; }
+#downloads .release-asset-card {
+  min-height: 0;
+  padding: 17px;
+  border-radius: 17px;
+  background: linear-gradient(150deg, var(--surface-2), var(--surface));
+  box-shadow: 0 12px 30px rgba(0,0,0,.09);
+}
+#downloads .release-asset-name {
+  margin: 11px 0 5px;
+  font-size: 13px;
+  line-height: 1.55;
+}
+#downloads .release-asset-description { margin-bottom: 8px; }
+#downloads .release-asset-meta { gap: 4px; margin-bottom: 8px; }
+#downloads .release-asset-status { margin: 6px 0 10px; }
+#downloads .release-asset-actions { margin-top: 0; }
+@media (max-width: 680px) {
+  #downloads .downloads-device-nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+    padding: 10px;
+    overflow: visible;
+  }
+  #downloads .downloads-device-nav button {
+    min-height: 42px;
+    gap: 5px;
+    padding: 8px 6px;
+    white-space: nowrap;
+  }
+  #downloads .downloads-device-nav button .downloads-nav-index { font-size: 8px; }
+  #downloads .downloads-device-nav button > span:nth-child(2) { font-size: 10px; }
+  #downloads .downloads-mobile-release-assets { margin-top: 22px; }
+  #downloads .release-asset-card { padding: 15px; border-radius: 15px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #downloads .downloads-device-nav button { transition: none; }
+}
