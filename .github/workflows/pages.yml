@@ -55,6 +55,7 @@ jobs:
           ASSET_VERSION: ${{ github.sha }}
         run: |
           python - <<'PY'
+          import json
           import os
           import re
           from pathlib import Path
@@ -77,6 +78,26 @@ jobs:
 
           path.write_text(updated)
           print(f"Versioned {count} local assets with commit {version}")
+
+          # Embed the public JSON data in the page so stalled secondary
+          # requests cannot leave dashboard widgets on their loading labels.
+          site_data = {}
+          for key in ("status", "changelog", "updates"):
+              data_path = Path("public/data") / f"{key}.json"
+              if not data_path.is_file():
+                  raise SystemExit(f"Required site data is missing: {data_path}")
+              site_data[key] = json.loads(data_path.read_text(encoding="utf-8"))
+
+          payload = json.dumps(site_data, separators=(",", ":"))
+          payload = payload.replace("&", "\\u0026").replace("<", "\\u003c").replace(">", "\\u003e")
+          marker = '  <script src="app.js'
+          if marker not in updated:
+              raise SystemExit("Could not locate the main application script.")
+          embedded = f'  <script id="nuvio-site-data" type="application/json">{payload}</script>\\n'
+          updated = updated.replace(marker, embedded + marker, 1)
+          path.write_text(updated)
+          print("Embedded status, changelog, and live-update data in the page.")
+
           if not (Path("public/downloads-redesign.css").is_file() and Path("public/downloads-redesign.css").stat().st_size > 0):
               raise SystemExit("downloads-redesign.css is missing from the deployment artifact.")
           PY
