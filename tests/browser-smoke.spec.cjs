@@ -724,28 +724,23 @@ test('Cinemeta artwork uses only the approved Nuvio palette', async ({ page }) =
 });
 
 
-test('latest release download URLs remain inside the Nuvio Enhanced card when health checks fail', async ({ page }) => {
-  const suffixes = ['arm64-v8a-release.apk', 'armeabi-v7a-release.apk', 'x86-release.apk', 'x86_64-release.apk', 'enhanced-release.ipa'];
-  const assets = suffixes.map((suffix, index) => ({
-    label: ['ARM64', 'ARMv7', 'x86', 'x86_64', 'iOS IPA'][index],
-    name: `nuvio-1.2.3-${suffix}`,
-    size_bytes: 1000000,
-    download_url: `https://example.invalid/nuvio-${suffix}`,
+test('Nuvio Enhanced card keeps one set of stable download buttons when latest release checks fail', async ({ page }) => {
+  const assets = ['arm64-v8a-release.apk', 'armeabi-v7a-release.apk', 'x86-release.apk', 'x86_64-release.apk', 'enhanced-release.ipa'].map(name => ({
+    name,
+    download_url: `https://example.invalid/${name}`,
     ok: false
   }));
   await page.route('**/data/status.json', route => route.fulfill({
     status: 200,
     contentType: 'application/json',
-    body: JSON.stringify({ checked_at: new Date().toISOString(), ok: false, passed: 0, total: 5, release_fallback_used: true, release_cache_stale: true, release: { tag: '1.2.3', app_version: '1.2.3', name: 'Nuvio', published_at: new Date().toISOString(), html_url: 'https://example.invalid/release', assets }, checks: [] })
+    body: JSON.stringify({ checked_at: new Date().toISOString(), ok: false, passed: 0, total: 5, release_fallback_used: true, release_cache_stale: true, release: { tag: '1.2.3', app_version: '1.2.3', published_at: new Date().toISOString(), assets }, checks: [] })
   }));
   await page.goto('/');
-  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.0\.0$/ }) });
-  await expect(enhancedCard.locator('a.release-enhanced-link')).toHaveCount(5);
-  await expect(enhancedCard.locator('a.release-enhanced-link[href*="arm64-v8a-release.apk"]')).toHaveCount(1);
-  await expect(enhancedCard.locator('a.release-enhanced-link[href*="enhanced-release.ipa"]')).toHaveCount(1);
-  await expect(enhancedCard.locator('a.release-enhanced-link[target="_blank"]')).toHaveCount(0);
-  await expect(enhancedCard.locator('.enhanced-latest-release__status')).toContainText('0/5');
-  await expect(enhancedCard.locator('.enhanced-latest-release__status')).toHaveAttribute('data-state', 'warning');
+  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\\.0\\.0$/ }) });
+  await expect(enhancedCard.locator('a.version-download')).toHaveCount(5);
+  await expect(enhancedCard.locator('a.enhanced-latest-release, .enhanced-latest-release')).toHaveCount(0);
+  await expect(enhancedCard.locator('a.release-enhanced-link')).toHaveCount(0);
+  await expect(enhancedCard.locator('a.version-download[href*="/releases/download/1.0.0/"]')).toHaveCount(5);
   await expect(page.locator('#download-grid .release-asset-card')).toHaveCount(0);
 });
 
@@ -843,26 +838,19 @@ test('Nuvio editions are separated by device and link directly to published inst
   await expect(page.locator('#versions-mobile-title')).toHaveText('الموبايل · Android وiPhone');
 });
 
-test('stale latest Enhanced links are cleared when release data disappears', async ({ page }) => {
+test('Nuvio Enhanced card never adds a duplicate latest-release button group', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('#download-grid > .version-card h3').filter({ hasText: /^Nuvio Enhanced 1\\.0\\.0$/ })).toBeVisible();
+  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\\.0\\.0$/ }) });
+  await expect(enhancedCard.locator('a.version-download')).toHaveCount(5);
+  await expect(enhancedCard.locator('.enhanced-latest-release')).toHaveCount(0);
 
   await page.evaluate(() => renderDownloads({
-    release: {
-      app_version: '1.2.3',
-      assets: [{
-        label: 'ARM64',
-        name: 'arm64-v8a-release.apk',
-        download_url: 'https://example.com/arm64-v8a-release.apk',
-        ok: true
-      }]
-    }
+    release: { app_version: '1.2.3', assets: [{ name: 'arm64.apk', download_url: 'https://example.com/arm64.apk', ok: true }] }
   }));
-  await expect(page.locator('#download-grid .enhanced-latest-release a.release-enhanced-link')).toHaveCount(1);
+  await expect(enhancedCard.locator('a.version-download')).toHaveCount(5);
+  await expect(enhancedCard.locator('.enhanced-latest-release')).toHaveCount(0);
 
   await page.evaluate(() => renderDownloads({ release: { app_version: '1.2.3', assets: [] } }));
-  await expect(page.locator('#download-grid .enhanced-latest-release')).toHaveCount(0);
-
-  await page.evaluate(() => renderDownloads({}));
-  await expect(page.locator('#download-grid .enhanced-latest-release')).toHaveCount(0);
+  await expect(enhancedCard.locator('a.version-download')).toHaveCount(5);
+  await expect(enhancedCard.locator('.enhanced-latest-release')).toHaveCount(0);
 });
