@@ -870,9 +870,9 @@
 #downloads .downloads-device-actions .downloads-device-link,
 #downloads .release-asset-action {
   border-top-width: 1px;
-  background-image: linear-gradient(135deg, rgba(88,216,232,.12), rgba(162,140,255,.08));
+  background-image: linear-gradient(135deg, rgba(88,216,232,.12), rgba(163,148,255,.08));
 }
 #downloads .downloads-device-actions .downloads-device-link:hover,
 #downloads .release-asset-action:hover {
-  background-image: linear-gradient(135deg, rgba(88,216,232,.19), rgba(162,140,255,.13));
+  background-image: linear-gradient(135deg, rgba(88,216,232,.19), rgba(163,148,255,.13));
 }
