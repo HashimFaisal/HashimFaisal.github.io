@@ -9,8 +9,12 @@ on:
       - main
     paths:
       - "index.html"
+      - "app.js"
+      - "style.css"
       - "premium-ui.css"
       - "premium-ui.js"
+      - "touch-effects.css"
+      - "touch-effects.js"
       - "downloads-redesign.css"
       - "tests/responsive-check.cjs"
       - ".github/workflows/responsive-browser-qa.yml"
