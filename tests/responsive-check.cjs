@@ -92,7 +92,7 @@ const viewports = [
 
       await page.locator('#nuvio-launch-grid [data-view="downloads"]').click();
       await page.waitForSelector('#downloads.nuvio-view-active', { timeout: 10000 });
-      await page.waitForFunction(() => document.querySelectorAll('#downloads #versions-mobile .version-card .version-download').length === 5, null, { timeout: 12000 });
+      await page.waitForFunction(() => document.querySelectorAll('#downloads #versions-mobile .downloads-device-card').length === 4, null, { timeout: 12000 });
       const downloadLayout = await page.evaluate(() => {
         const section = document.querySelector('#downloads');
         const downloadsSectionCount = document.querySelectorAll('main > #downloads').length;
@@ -103,15 +103,16 @@ const viewports = [
         const mobileGroup = section.querySelector('#versions-mobile');
         const mobileGrid = mobileGroup?.querySelector('.downloads-device-grid');
         const latest = mobileGroup?.querySelector('.downloads-mobile-release-assets');
-        const mobileCard = [...(mobileGrid?.children || [])].find(card =>
-          card.querySelector('h3')?.textContent.trim() === 'Nuvio Enhanced 1.0.0'
+        const mobileCards = [...(mobileGrid?.children || [])].filter(card =>
+          card.classList.contains('downloads-device-card')
         );
         const releaseAssetsGrid = Boolean(
           releaseGrid &&
           releaseGrid === mobileGrid &&
           releaseGrid.classList.contains('plugin-grid') &&
           !latest &&
-          mobileCard?.querySelectorAll('.version-download').length === 5
+          mobileCards.length === 4 &&
+          mobileCards.every(card => card.querySelector('.downloads-device-actions .downloads-device-link'))
         );
         const installerLink = section.querySelector('.downloads-device-link');
         const installerStyle = installerLink ? getComputedStyle(installerLink) : null;
