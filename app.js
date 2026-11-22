@@ -58,7 +58,7 @@ const translations = {
   'الميزات والتحديثات تخضع لصاحب المشروع المستقل.': 'Features and updates are maintained by the independent project owner.',
   'هذه قائمة مستقلة لتسهيل الوصول إلى المشاريع. لا نستضيف ملفات التثبيت ولا نضمن توافق كل نسخة مع جميع الأجهزة. روابط التنزيل تفتح صفحات المطورين الأصلية. دعم Plugins وميزات Debrid يختلف حسب التطبيق والإضافات المستخدمة.': 'This independent directory helps you find projects. We do not host installers or guarantee compatibility with every device. Download links open the original developer pages. Plugin support and Debrid features vary by app and the add-ons you use.',
   'NUVIO EDITIONS': 'NUVIO EDITIONS',
-  'APP DIRECTORY': 'APP DIRECTORY'
+  'APP DIRECTORY': 'APP DIRECTORY',
 
   'التنزيلات': 'Downloads',
   'حالة النظام': 'System Status',
