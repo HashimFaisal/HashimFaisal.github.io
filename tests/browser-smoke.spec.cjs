@@ -105,7 +105,7 @@ test('homepage explains the Nuvio purpose and groups secondary navigation', asyn
   await expect(page.locator('.hero h1')).toContainText('كل إضافات Nuvio');
   await expect(page.locator('.hero h1')).toContainText('في مركز واحد');
   await expect(page.locator('.hero-byline')).toHaveCount(0);
-  await expect(page.locator('nav a')).toHaveCount(5);
+  await expect(page.locator('.topbar nav a')).toHaveCount(5);
   await expect(page.locator('nav a[href="#changelog"]')).toHaveCount(0);
   await expect(page.locator('#resources a[href="#changelog"]')).toBeAttached();
 
@@ -623,7 +623,7 @@ test('changelog and downloads sections keep content boxes separate across viewpo
 
 test('all active UI source colors stay within the unified Nuvio palette', async ({ page }) => {
   const names = [
-    'style.css', 'premium-ui.css', 'index.html', 'app.js', 'premium-ui.js',
+    'style.css', 'premium-ui.css', 'downloads-redesign.css', 'index.html', 'app.js', 'premium-ui.js',
     'assets/hero.svg', 'assets/all-in-one.svg', 'assets/cinemabox.svg',
     'assets/cinemana.svg', 'assets/opensubtitles.svg', 'assets/cinemeta.svg',
     'assets/nuvio-catalog.svg', 'assets/izlemeli-catalog.svg'
@@ -639,13 +639,13 @@ test('all active UI source colors stay within the unified Nuvio palette', async 
   const allowedCssRgb = new Set([
     '88,216,232', '163,148,255', '66,200,121', '255,130,146',
     '162,177,200', '141,234,243', '99,217,233', '170,155,255', '255,255,255', '0,0,0',
-    '7,11,22', '17,29,51', '185,214,235', '205,229,245', '245,250,255', '175,216,242', '205,231,248'
+    '7,11,22', '17,29,51', '185,214,235', '205,229,245', '245,250,255', '175,216,242', '205,231,248', '4,10,20'
   ]);
   const allowedCssHex = new Set([
     '#070b16', '#0d1526', '#111d33', '#182744', '#f2f6ff', '#a2b1c8',
     '#a394ff', '#58d8e8', '#42c879', '#a9e8c1', '#ff8292', '#ffb0ba',
     '#8deaf3', '#080d19', '#101a2d', '#16243a', '#b2bfd4', '#aa9bff',
-    '#63d9e9', '#afeac7', '#ffb9c2', '#98edf5', '#071317', '#000', '#fff'
+    '#63d9e9', '#afeac7', '#ffb9c2', '#98edf5', '#071317', '#000', '#fff', '#101827', '#6de0a1', '#ff9d9d'
   ]);
   for (const source of [css, uiSource]) {
     for (const match of source.matchAll(/(?:color|background(?:Color)?|border(?:Top|Right|Bottom|Left)?Color|outlineColor|fill|stroke)\s*(?::|=)\s*['"]?(#[0-9a-f]{8}|#[0-9a-f]{6}|#[0-9a-f]{4}|#[0-9a-f]{3})(?![a-z0-9_-])/gi)) {
@@ -674,7 +674,7 @@ test('all active UI source colors stay within the unified Nuvio palette', async 
       '175,234,199', '255,185,194', '152,237,245',
       '242,246,255', '162,177,200', '163,148,255', '88,216,232',
       '66,200,121', '169,232,193', '255,130,146', '255,176,186',
-      '141,234,243', '7,19,23', '255,255,255', '0,0,0', '185,214,235', '205,229,245', '245,250,255', '175,216,242', '205,231,248'
+      '141,234,243', '7,19,23', '255,255,255', '0,0,0', '185,214,235', '205,229,245', '245,250,255', '175,216,242', '205,231,248', '4,10,20'
     ]);
     const properties = [
       'color', 'backgroundColor', 'backgroundImage',
@@ -751,7 +751,7 @@ test('Nuvio downloads library has searchable platform filters and direct release
   await page.goto('/#downloads');
   await expect(page.locator('#downloads')).toBeVisible();
   await expect(page.locator('#downloads .nuvio-view-back')).toBeVisible();
-  await expect(page.locator('#downloads-title')).toHaveText('مكتبة تنزيلات Nuvio');
+  await expect(page.locator('#downloads-title')).toHaveText('مركز التنزيلات');
   await expect(page.locator('#downloads .downloads-release-panel')).toHaveCount(0);
   await expect(page.locator('#downloads .downloads-release-details')).toHaveCount(0);
   await expect(page.locator('#downloads-search')).toBeVisible();
