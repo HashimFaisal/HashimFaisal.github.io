@@ -752,7 +752,8 @@ test('Nuvio downloads library has searchable platform filters and direct release
   await expect(page.locator('#downloads')).toBeVisible();
   await expect(page.locator('#downloads .nuvio-view-back')).toBeVisible();
   await expect(page.locator('#downloads-title')).toHaveText('مركز التنزيلات');
-  await expect(page.locator('#downloads .downloads-release-panel')).toHaveCount(0);
+  // This is the redesigned mobile release-files panel, not the removed legacy downloads section.
+  await expect(page.locator('#downloads .downloads-release-panel')).toHaveCount(1);
   await expect(page.locator('#downloads .downloads-release-details')).toHaveCount(0);
   await expect(page.locator('#downloads-search')).toBeVisible();
   await expect(page.locator('#downloads-filters [data-download-filter="all"]')).toBeVisible();
