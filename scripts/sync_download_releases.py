@@ -41,6 +41,14 @@ def select_latest_release(releases: list[dict]):
         item for item in releases
         if isinstance(item, dict) and not item.get("draft")
         and item.get("tag_name") and isinstance(item.get("assets"), list) and item.get("assets")
+        and any(
+            Path(str(asset.get("name") or "")).suffix.lower() in {
+                ".apk", ".ipa", ".exe", ".wgt", ".tpk", ".ipk",
+                ".msi", ".dmg", ".pkg", ".deb", ".rpm", ".zip",
+            }
+            for asset in item.get("assets", [])
+            if isinstance(asset, dict)
+        )
         and item.get("published_at")
     ]
     if not published:
