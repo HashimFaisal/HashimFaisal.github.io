@@ -741,9 +741,9 @@ test('download URLs remain visible when their health checks fail', async ({ page
   await page.goto('/');
   await expect(page.locator('.release-asset-card')).toHaveCount(5);
   await expect(page.locator('.release-asset-card[data-ready="true"]')).toHaveCount(5);
-  await expect(page.locator('.release-asset-card a.download-action')).toHaveCount(5);
-  await expect(page.locator('.release-asset-card .download-meta').filter({ hasText: 'تعذر تأكيد الرابط' })).toHaveCount(5);
-  await expect(page.locator('.release-asset-card .download-meta').filter({ hasText: 'بيانات التنزيل محفوظة لكن الكاش قديم' })).toHaveCount(5);
+  await expect(page.locator('.release-asset-card a.release-asset-action')).toHaveCount(5);
+  await expect(page.locator('.release-asset-card .release-asset-meta small').filter({ hasText: 'تعذر تأكيد الرابط' })).toHaveCount(5);
+  await expect(page.locator('.release-asset-card .release-asset-meta small').filter({ hasText: 'بيانات التنزيل محفوظة لكن الكاش قديم' })).toHaveCount(5);
 });
 
 
