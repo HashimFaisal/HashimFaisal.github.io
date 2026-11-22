@@ -931,6 +931,7 @@ function renderDownloads(report) {
       <small class="version-card-status" data-state="${healthy ? 'healthy' : 'warning'}"><i class="download-health-dot ${healthy ? 'is-healthy' : 'is-warning'}" aria-hidden="true"></i>${versionStatus} · ${t('الإصدار')} <bdi dir="ltr">${escapeHTML(appVersion)}</bdi></small>
       <p class="download-meta">${formatBytes(asset.size_bytes)}</p>
       ${report.release_fallback_used ? `<small class="download-meta">${t(report.release_cache_stale ? 'بيانات التنزيل محفوظة لكن الكاش قديم؛ استخدمها بحذر.' : 'بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.')}</small>` : ''}
+      ${ready && !healthy ? `<small class="download-meta">${t('تعذر تأكيد الرابط حالياً؛ الرابط محفوظ ويمكن تجربته.')}</small>` : ''}
       <small class="download-meta">${asset.uploaded_at
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
         : t('تاريخ الرفع غير متاح')}</small>
