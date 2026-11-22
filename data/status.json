@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-22T10:51:56.149000+00:00",
+  "checked_at": "2026-11-22T11:07:42.860394+00:00",
   "ok": false,
   "passed": 29,
   "total": 31,
@@ -664,8 +664,8 @@
     },
     "overall_level": "high",
     "risk_count": 2,
-    "high_risk_count": 1,
-    "medium_risk_count": 1,
+    "high_risk_count": 2,
+    "medium_risk_count": 0,
     "risks": [
       {
         "resource": "Nuvio Catalog",
@@ -693,34 +693,35 @@
       },
       {
         "resource": "Nuvio edition download inventory",
-        "score": 45,
-        "level": "medium",
+        "score": 70,
+        "level": "high",
         "score_breakdown": {
           "current_failure": 45,
-          "consecutive_failure": 0,
+          "consecutive_failure": 25,
           "outage_history": 0
         },
         "signals": [
-          "current_check_failed"
+          "current_check_failed",
+          "consecutive_failure"
         ],
-        "confidence": "low",
+        "confidence": "medium",
         "confidence_basis": "Number of distinct evidence signals; not predictive accuracy.",
-        "confidence_details": "Low confidence from 1 distinct signal(s): current_check_failed.",
+        "confidence_details": "Medium confidence from 2 distinct signal(s): current_check_failed, consecutive_failure.",
         "evidence_count": 0,
         "recommended_action": "Verify the release asset exists and its direct download URL responds.",
-        "previous_score": null,
-        "score_delta": null,
-        "trend": "new",
-        "trend_basis": "No matching risk in the previous forecast; baseline for trend comparison."
+        "previous_score": 45,
+        "score_delta": 25,
+        "trend": "worsening",
+        "trend_basis": "Score compared with the immediately previous saved risk forecast."
       }
     ],
     "trend_summary": {
-      "status": "stable",
-      "previous_total_score": 75,
-      "current_total_score": 75,
-      "total_score_delta": 0,
-      "new_count": 1,
-      "worsening_count": 0,
+      "status": "worsening",
+      "previous_total_score": 120,
+      "current_total_score": 145,
+      "total_score_delta": 25,
+      "new_count": 0,
+      "worsening_count": 1,
       "improving_count": 0,
       "stable_count": 1,
       "baseline_count": 0,
