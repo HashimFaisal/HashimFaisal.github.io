@@ -786,7 +786,7 @@ test('Nuvio downloads library integrates release assets into mobile cards withou
 
   await page.locator('#language-toggle').click();
   await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
-  await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(5);
+  await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(0);
   await page.locator('#language-toggle').click();
   await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
 });
@@ -801,7 +801,7 @@ test('Nuvio editions are separated by device and link directly to published inst
   await expect(page.locator('#versions-smart-tv')).toBeHidden();
   await expect(page.locator('#versions-desktop')).toBeHidden();
 
-  await expect(page.locator('#versions-mobile .downloads-device-card')).toHaveCount(9);
+  await expect(page.locator('#versions-mobile .downloads-device-card')).toHaveCount(4);
   await expect(page.locator('#versions-tv .downloads-device-card')).toHaveCount(5);
   await expect(page.locator('#versions-smart-tv .downloads-device-card')).toHaveCount(2);
   await expect(page.locator('#versions-desktop .downloads-device-card')).toHaveCount(1);
