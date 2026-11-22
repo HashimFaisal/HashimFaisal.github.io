@@ -724,7 +724,7 @@ test('Cinemeta artwork uses only the approved Nuvio palette', async ({ page }) =
 });
 
 
-test('latest release download URLs remain inside the Nuvio Mobile card when health checks fail', async ({ page }) => {
+test('latest release download URLs remain inside the Nuvio Enhanced card when health checks fail', async ({ page }) => {
   const suffixes = ['arm64-v8a-release.apk', 'armeabi-v7a-release.apk', 'x86-release.apk', 'x86_64-release.apk', 'enhanced-release.ipa'];
   const assets = suffixes.map((suffix, index) => ({
     label: ['ARM64', 'ARMv7', 'x86', 'x86_64', 'iOS IPA'][index],
@@ -739,7 +739,7 @@ test('latest release download URLs remain inside the Nuvio Mobile card when heal
     body: JSON.stringify({ checked_at: new Date().toISOString(), ok: false, passed: 0, total: 5, release_fallback_used: true, release_cache_stale: true, release: { tag: '1.2.3', app_version: '1.2.3', name: 'Nuvio', published_at: new Date().toISOString(), html_url: 'https://example.invalid/release', assets }, checks: [] })
   }));
   await page.goto('/');
-  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\\.0\\.0$/ }) });
+  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.0\.0$/ }) });
   await expect(enhancedCard.locator('a.release-enhanced-link')).toHaveCount(5);
   await expect(enhancedCard.locator('a[href*="arm64-v8a-release.apk"]')).toHaveCount(1);
   await expect(enhancedCard.locator('a[href*="enhanced-release.ipa"]')).toHaveCount(1);
