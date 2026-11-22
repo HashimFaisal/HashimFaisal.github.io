@@ -215,19 +215,16 @@
     if (currentView() === 'home') return;
 
     const state = history.state || {};
+    const index = Number(state.nuvioIndex) || 0;
 
-    try {
-      history.replaceState({
-        ...state,
-        nuvioApp: true,
-        nuvioView: 'home',
-        nuvioScrollY: 0,
-        nuvioIndex: 0
-      }, '', '#home');
-    } catch (error) {
-      console.warn('Nuvio navigation: could not update history state.', error);
+    // Return to the actual previous history entry so its saved view and
+    // scroll position (including the originating card) are restored by popstate.
+    if (state.nuvioApp && index > 0) {
+      history.back();
+      return;
     }
 
+    // A section opened directly has no in-app entry to return to.
     renderView('home');
     focusView('home');
     restoreScroll(0);
