@@ -111,6 +111,8 @@ test('Nuvio edition cards show checked versions and translate status labels', as
     })
   }));
   await page.reload();
+  await page.locator('.nuvio-launch-card[data-view="downloads"]').click();
+  await expect(page.locator('#downloads')).toBeVisible();
   const status = page.locator('.downloads-device-card').filter({ has: page.locator('h3', { hasText: 'Nuvio Mobile' }) }).locator('.downloads-device-status').first();
   await expect(status).toContainText('الإصدار 1.0.1');
   await expect(status).toHaveClass(/healthy|ok/);
