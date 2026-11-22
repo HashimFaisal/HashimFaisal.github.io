@@ -353,7 +353,7 @@ def normalize_resource_key(value):\n    """Create a stable comparison key withou
     for item in failure_items:
         raw_name = item.get("name")
         name = raw_name.strip() if isinstance(raw_name, str) and raw_name.strip() else "Unknown"
-        resource_key = name
+        resource_key = normalize_resource_key(name)
         if resource_key in seen_failed_resources:
             duplicate_failure_count += 1
             continue
