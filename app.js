@@ -1166,9 +1166,11 @@ async function loadStatus() {
     latestReport = report;
     updateLastChecked();
 
+    // Render the release grid first so a secondary status-widget error cannot
+    // leave the Download Center stuck on its loading placeholder.
+    renderDownloads(report);
     renderManifestStatuses(report);
     renderDeviceCardStatuses(report);
-    renderDownloads(report);
   } catch (error) {
     $('#health-state').textContent = t('غير متاح');
     $('#health-detail').textContent = t('تعذر تحميل تقرير الفحص');
