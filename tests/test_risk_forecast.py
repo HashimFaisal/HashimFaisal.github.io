@@ -172,5 +172,28 @@ class RiskForecastTests(unittest.TestCase):
                 self.assertEqual(result["risk_count"], 1)
                 self.assertEqual(result["risks"][0]["trend"], "new")
 
+
+    def test_http_status_normalization_accepts_valid_codes_and_numeric_strings(self):
+        for value, expected in ((503, 503), (" 429 ", 429), (404, 404), (200, 200)):
+            with self.subTest(value=value):
+                self.assertEqual(check_links.normalize_http_status(value), expected)
+
+    def test_http_status_normalization_rejects_invalid_values(self):
+        for value in (None, True, False, "5xx", "503.0", {}, [], 99, 600, -1):
+            with self.subTest(value=value):
+                self.assertIsNone(check_links.normalize_http_status(value))
+
+    def test_diagnose_check_handles_malformed_http_status_without_crashing(self):
+        for status in ("503", "invalid", True, 999, None):
+            with self.subTest(status=status):
+                item = {"name": "API", "ok": False, "http_status": status, "error": ""}
+                diagnostic = check_links.diagnose_check(item)
+                self.assertIsInstance(diagnostic, dict)
+                self.assertIn("failure_code", diagnostic)
+        numeric_string = check_links.diagnose_check(
+            {"name": "API", "ok": False, "http_status": "503"}
+        )
+        self.assertEqual(numeric_string["failure_code"], "upstream_server_error")
+
 if __name__ == "__main__":
     unittest.main()
