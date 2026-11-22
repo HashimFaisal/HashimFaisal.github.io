@@ -44,5 +44,30 @@ class RiskForecastTests(unittest.TestCase):
         self.assertLessEqual(result["risks"][0]["score"], 100)
 
 
+    def test_score_breakdown_and_confidence_are_explained(self):
+        item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
+        previous = {"checks": [{"name": "API", "ok": False}]}
+        history = [{"type": "status", "source": "API", "new_status": "unavailable"}] * 2
+        risk = check_links.build_risk_forecast([item], previous, history)["risks"][0]
+        self.assertEqual(risk["score_breakdown"], {
+            "current_failure": 45,
+            "consecutive_failure": 25,
+            "outage_history": 10,
+        })
+        self.assertEqual(risk["confidence"], "high")
+        self.assertIn("distinct evidence signals", risk["confidence_basis"])
+
+    def test_single_failure_has_low_evidence_confidence(self):
+        item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
+        risk = check_links.build_risk_forecast([item], {}, [])["risks"][0]
+        self.assertEqual(risk["confidence"], "low")
+        self.assertEqual(risk["score_breakdown"]["consecutive_failure"], 0)
+        self.assertEqual(risk["score_breakdown"]["outage_history"], 0)
+
+    def test_cache_risk_exposes_its_score_basis(self):
+        risk = check_links.build_risk_forecast([], {"release_cache_stale": True}, [])["risks"][0]
+        self.assertEqual(risk["score_breakdown"], {"previous_report_cache_stale": 55})
+        self.assertEqual(risk["confidence"], "low")
+
 if __name__ == "__main__":
     unittest.main()

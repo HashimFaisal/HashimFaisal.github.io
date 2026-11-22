@@ -325,18 +325,23 @@ def build_risk_forecast(results, previous_report=None, history=None):
             if isinstance(event, dict) and event.get("source") == name
             and event.get("type") == "status" and event.get("new_status") == "unavailable"
         ]
-        score = 45 if diagnostic.get("severity") == "warning" else 35
-        if repeated:
-            score += 25
-        if matching_events:
-            score += min(20, 5 * len(matching_events))
-        score = min(100, score)
+        components = {
+            "current_failure": 45 if diagnostic.get("severity") == "warning" else 35,
+            "consecutive_failure": 25 if repeated else 0,
+            "outage_history": min(20, 5 * len(matching_events)),
+        }
+        score = min(100, sum(components.values()))
         level = "high" if score >= 70 else "medium" if score >= 40 else "low"
+        signals = ["current_check_failed"] + (["consecutive_failure"] if repeated else []) + (["recurring_outage_history"] if matching_events else [])
+        confidence = "high" if len(signals) >= 3 else "medium" if len(signals) == 2 else "low"
         risks.append({
             "resource": name,
             "score": score,
             "level": level,
-            "signals": ["current_check_failed"] + (["consecutive_failure"] if repeated else []) + (["recurring_outage_history"] if matching_events else []),
+            "score_breakdown": components,
+            "signals": signals,
+            "confidence": confidence,
+            "confidence_basis": "Number of distinct evidence signals; not predictive accuracy.",
             "evidence_count": len(matching_events),
             "recommended_action": diagnostic.get("recommended_action", "Review current check evidence."),
         })
@@ -347,6 +352,9 @@ def build_risk_forecast(results, previous_report=None, history=None):
             "score": 55,
             "level": "medium",
             "signals": ["previous_report_cache_stale"],
+            "score_breakdown": {"previous_report_cache_stale": 55},
+            "confidence": "low",
+            "confidence_basis": "One evidence signal; not predictive accuracy.",
             "evidence_count": 0,
             "recommended_action": "Verify release API connectivity and cache freshness.",
         })
