@@ -1,0 +1,11 @@
+{
+  "seen_card_ids": [
+    "nuvio-mobile",
+    "nuvio-mobile-for-ios",
+    "nuvio-reshaped-mobile",
+    "nuvio-enhanced"
+  ],
+  "seen_release_ids": [
+    "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.0.0-autosync.2"
+  ]
+}

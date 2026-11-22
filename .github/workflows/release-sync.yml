@@ -8,6 +8,14 @@ on:
       - "index.html"
       - "scripts/sync_download_releases.py"
       - ".github/workflows/release-sync.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "scripts/sync_download_releases.py"
+      - "tests/test_release_sync.py"
+      - ".github/workflows/release-sync.yml"
   schedule:
     - cron: "17 * * * *"
   workflow_dispatch:
@@ -26,7 +34,7 @@ jobs:
       - name: Checkout main
         uses: actions/checkout@v4
         with:
-          ref: main
+          ref: ${{ github.event.pull_request.head.sha || 'main' }}
           token: ${{ secrets.GITHUB_TOKEN }}
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -39,13 +47,14 @@ jobs:
       - name: Update download links from source releases
         run: python scripts/sync_download_releases.py
       - name: Commit updated release links
+        if: github.event_name != 'pull_request'
         run: |
-          if git diff --quiet -- index.html data/updates.json; then
+          if git diff --quiet -- index.html data/updates.json data/download-cards-seen.json; then
             echo "Download links and live release news are already up to date."
             exit 0
           fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html data/updates.json
+          git add index.html data/updates.json data/download-cards-seen.json
           git commit -m "chore: sync latest Nuvio download releases"
           git push origin HEAD:main
