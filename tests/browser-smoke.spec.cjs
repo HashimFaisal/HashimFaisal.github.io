@@ -74,7 +74,7 @@ test('homepage explains the Nuvio purpose and groups secondary navigation', asyn
   await expect(page.locator('.hero h1')).toContainText('كل إضافات Nuvio');
   await expect(page.locator('.hero h1')).toContainText('في مركز واحد');
   await expect(page.locator('.hero-byline')).toHaveCount(0);
-  await expect(page.locator('nav a')).toHaveCount(4);
+  await expect(page.locator('nav a')).toHaveCount(5);
   await expect(page.locator('nav a[href="#changelog"]')).toHaveCount(0);
   await expect(page.locator('#resources a[href="#changelog"]')).toBeAttached();
 
