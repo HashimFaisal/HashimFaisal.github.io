@@ -928,11 +928,15 @@ function renderDeviceCardStatuses(report) {
     const tags = [...new Set(cardItems.map(item => item.tag).filter(Boolean))];
     const failed = cardItems.filter(item => !item.ok).length;
     const versionText = tags.length ? `${t('الإصدار')} ${tags.join(' / ')}` : t('الإصدار غير متاح');
-    const healthText = failed
-      ? `${failed} · ${t('رابط تنزيل غير متاح')}`
-      : t('روابط التنزيل سليمة');
-    status.textContent = `${versionText} · ${healthText}`;
     status.dataset.state = failed ? 'warning' : 'healthy';
+    status.classList.add('card-status');
+    status.classList.toggle('ok', !failed);
+    status.classList.toggle('bad', Boolean(failed));
+    if (failed) {
+      status.textContent = `${versionText} · ${failed} · ${t('رابط تنزيل غير متاح')}`;
+    } else {
+      status.textContent = versionText;
+    }
     status.title = `${t('فحص روابط التنزيل')}: ${cardItems.length}`;
   });
 }

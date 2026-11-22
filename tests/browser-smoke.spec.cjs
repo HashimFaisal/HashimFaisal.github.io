@@ -111,12 +111,19 @@ test('Nuvio edition cards show checked versions and translate status labels', as
     })
   }));
   await page.reload();
+  await page.locator('.nuvio-launch-card[data-view="downloads"]').click();
+  await expect(page.locator('#downloads')).toBeVisible();
   const status = page.locator('.downloads-device-card').filter({ has: page.locator('h3', { hasText: 'Nuvio Mobile' }) }).locator('.downloads-device-status').first();
   await expect(status).toContainText('الإصدار 1.0.1');
-  await expect(status).toContainText('روابط التنزيل سليمة');
+  await expect(status).toHaveClass(/healthy|ok/);
+  await expect(status).toBeVisible();
+  await expect.poll(() => status.evaluate(el => getComputedStyle(el, '::before').content)).toBe('""');
+  await expect(status).not.toContainText('روابط التنزيل سليمة');
   await page.locator('#language-toggle').click();
   await expect(status).toContainText('Version 1.0.1');
-  await expect(status).toContainText('Download links are healthy');
+  await expect(status).toBeVisible();
+  await expect.poll(() => status.evaluate(el => getComputedStyle(el, '::before').content)).toBe('""');
+  await expect(status).not.toContainText('Download links are healthy');
   await expect(page.locator('.downloads-device-card')).toHaveCount(12);
 });
 
