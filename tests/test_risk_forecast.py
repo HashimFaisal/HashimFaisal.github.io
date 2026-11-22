@@ -100,7 +100,7 @@ class RiskForecastTests(unittest.TestCase):
         result = check_links.build_risk_forecast([item], previous, [])
         self.assertEqual(result["risks"][0]["trend"], "improving")
         self.assertEqual(result["trend_summary"]["status"], "improving")
-        unchanged_previous = {"risk_forecast": {"risks": [{"resource": "API", "score": 35}]}}
+        unchanged_previous = {"risk_forecast": {"risks": [{"resource": "API", "score": 45}]}}
         unchanged = check_links.build_risk_forecast([item], unchanged_previous, [])
         self.assertEqual(unchanged["risks"][0]["trend"], "stable")
         self.assertEqual(unchanged["trend_summary"]["status"], "stable")
