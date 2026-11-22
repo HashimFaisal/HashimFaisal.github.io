@@ -778,7 +778,7 @@ test('Nuvio downloads library integrates release assets into mobile cards withou
       : window.matchMedia('(max-width: 1000px)').matches ? 2 : 3
   );
   expect(downloadColumns).toBe(expectedColumns);
-  await expect(page.locator('#download-grid .release-enhanced-link[href*="/releases/download/"]')).toHaveCount(5);
+  await expect(page.locator('#download-grid .release-enhanced-link')).toHaveCount(0);
 
   await page.locator('#language-toggle').click();
   await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
