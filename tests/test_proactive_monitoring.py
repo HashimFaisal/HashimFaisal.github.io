@@ -44,5 +44,5 @@ class ProactiveAlertTests(unittest.TestCase):
         self.assertEqual(result["alerts"][0]["severity"], "medium")
 
 
-if ____ == "__main__":
+if __name__ == "__main__":
     unittest.main()
