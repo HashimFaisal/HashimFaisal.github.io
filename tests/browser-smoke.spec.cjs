@@ -724,7 +724,7 @@ test('Cinemeta artwork uses only the approved Nuvio palette', async ({ page }) =
 });
 
 
-test('download URLs remain visible when their health checks fail', async ({ page }) => {
+test('latest release download URLs remain inside the Nuvio Enhanced card when health checks fail', async ({ page }) => {
   const suffixes = ['arm64-v8a-release.apk', 'armeabi-v7a-release.apk', 'x86-release.apk', 'x86_64-release.apk', 'enhanced-release.ipa'];
   const assets = suffixes.map((suffix, index) => ({
     label: ['ARM64', 'ARMv7', 'x86', 'x86_64', 'iOS IPA'][index],
@@ -739,13 +739,15 @@ test('download URLs remain visible when their health checks fail', async ({ page
     body: JSON.stringify({ checked_at: new Date().toISOString(), ok: false, passed: 0, total: 5, release_fallback_used: true, release_cache_stale: true, release: { tag: '1.2.3', app_version: '1.2.3', name: 'Nuvio', published_at: new Date().toISOString(), html_url: 'https://example.invalid/release', assets }, checks: [] })
   }));
   await page.goto('/');
-  await expect(page.locator('.release-asset-card')).toHaveCount(5);
-  await expect(page.locator('.release-asset-card[data-ready="true"]')).toHaveCount(5);
-  await expect(page.locator('.release-asset-card a.release-asset-action')).toHaveCount(5);
-  await expect(page.locator('.release-asset-card .release-asset-meta small').filter({ hasText: 'تعذر تأكيد الرابط' })).toHaveCount(5);
-  await expect(page.locator('.release-asset-card .release-asset-meta small').filter({ hasText: 'بيانات التنزيل محفوظة لكن الكاش قديم' })).toHaveCount(5);
+  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.0\.0$/ }) });
+  await expect(enhancedCard.locator('a.release-enhanced-link')).toHaveCount(5);
+  await expect(enhancedCard.locator('a.release-enhanced-link[href*="arm64-v8a-release.apk"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a.release-enhanced-link[href*="enhanced-release.ipa"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a.release-enhanced-link[target="_blank"]')).toHaveCount(0);
+  await expect(enhancedCard.locator('.enhanced-latest-release__status')).toContainText('0/5');
+  await expect(enhancedCard.locator('.enhanced-latest-release__status')).toHaveAttribute('data-state', 'warning');
+  await expect(page.locator('#download-grid .release-asset-card')).toHaveCount(0);
 });
-
 
 test('Nuvio downloads library integrates release assets into mobile cards without a legacy toolbar', async ({ page }) => {
   await page.goto('/#downloads');
@@ -767,10 +769,10 @@ test('Nuvio downloads library integrates release assets into mobile cards withou
   await expect(page.locator('main > #downloads')).toHaveCount(1);
   await expect(page.locator('#downloads #versions-mobile, #downloads #versions-desktop, #downloads #versions-tv, #downloads #versions-smart-tv')).toHaveCount(4);
   await expect(page.locator('#downloads .downloads-release-details')).toHaveCount(0);
-  await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(5);
-  await expect(page.locator('#download-grid .release-asset-card')).toHaveCount(5);
+  await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(0);
+  await expect(page.locator('#download-grid .release-asset-card')).toHaveCount(0);
   // Download cards intentionally share the library's plugin-card visual class.
-  await expect(page.locator('#download-grid .plugin-card')).toHaveCount(9);
+  await expect(page.locator('#download-grid .plugin-card')).toHaveCount(4);
   await expect(page.locator('#download-grid > .downloads-device-card:not(.release-asset-card)')).toHaveCount(4);
   const downloadColumns = await page.locator('#download-grid').evaluate(el =>
     getComputedStyle(el).gridTemplateColumns.trim().split(' ').filter(Boolean).length
@@ -781,11 +783,11 @@ test('Nuvio downloads library integrates release assets into mobile cards withou
       : window.matchMedia('(max-width: 1000px)').matches ? 2 : 3
   );
   expect(downloadColumns).toBe(expectedColumns);
-  await expect(page.locator('#download-grid .release-asset-card a.release-asset-action[href*="/releases/download/"]')).toHaveCount(5);
+  await expect(page.locator('#download-grid .release-enhanced-link[href*="/releases/download/"]')).toHaveCount(5);
 
   await page.locator('#language-toggle').click();
   await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
-  await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(5);
+  await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(0);
   await page.locator('#language-toggle').click();
   await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
 });
@@ -800,7 +802,7 @@ test('Nuvio editions are separated by device and link directly to published inst
   await expect(page.locator('#versions-smart-tv')).toBeHidden();
   await expect(page.locator('#versions-desktop')).toBeHidden();
 
-  await expect(page.locator('#versions-mobile .downloads-device-card')).toHaveCount(9);
+  await expect(page.locator('#versions-mobile .downloads-device-card')).toHaveCount(4);
   await expect(page.locator('#versions-tv .downloads-device-card')).toHaveCount(5);
   await expect(page.locator('#versions-smart-tv .downloads-device-card')).toHaveCount(2);
   await expect(page.locator('#versions-desktop .downloads-device-card')).toHaveCount(1);
