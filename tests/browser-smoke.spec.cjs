@@ -70,6 +70,37 @@ test('all five dashboard destinations open and return to the dashboard', async (
   }
 });
 
+
+test('Nuvio edition cards show checked versions and translate status labels', async ({ page }) => {
+  const items = [{
+    name: 'Nuvio Mobile · Download APK · ARM64',
+    type: 'version_download',
+    card: 'Nuvio Mobile',
+    label: 'Download APK · ARM64',
+    tag: '1.0.1',
+    ok: true,
+    url: 'https://example.invalid/app.apk'
+  }];
+  await page.route('**/data/status.json', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({
+      ok: true, passed: 1, total: 1, checks: items,
+      version_downloads: { checked: 1, healthy: 1, failed: 0, items },
+      release: null
+    })
+  }));
+  await page.reload();
+  const status = page.locator('.version-card').filter({ has: page.locator('h3', { hasText: 'Nuvio Mobile' }) }).locator('.version-card-status');
+  await expect(status).toContainText('الإصدار 1.0.1');
+  await expect(status).toContainText('روابط التنزيل سليمة');
+  await page.locator('#language-toggle').click();
+  await expect(status).toContainText('Version 1.0.1');
+  await expect(status).toContainText('Download links are healthy');
+  await expect(page.locator('.version-card')).toHaveCount(11);
+});
+
+
 test('homepage explains the Nuvio purpose and groups secondary navigation', async ({ page }) => {
   await expect(page.locator('.hero h1')).toContainText('كل إضافات Nuvio');
   await expect(page.locator('.hero h1')).toContainText('في مركز واحد');
