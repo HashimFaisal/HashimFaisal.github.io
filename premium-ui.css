@@ -476,6 +476,16 @@ html[dir="ltr"] .nuvio-view-back > span:first-child { transform: rotate(180deg);
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 10px;
+  flex-wrap: wrap;
+}
+
+.card-status .source-probe-detail {
+  display: block;
+  flex: 1 0 100%;
+  margin-inline-start: 14px;
+  color: var(--muted);
+  font-size: 9px;
+  line-height: 1.55;
 }
 
 /* System status */
