@@ -58,6 +58,9 @@ jobs:
             echo "Health report unchanged."
           else
             git commit -m "Update automated health report"
+            # Rebase onto the latest main to avoid non-fast-forward races with other writers.
+            git fetch origin main
+            git rebase origin/main
             git push
           fi
 
