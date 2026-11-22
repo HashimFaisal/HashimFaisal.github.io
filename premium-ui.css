@@ -4786,3 +4786,11 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .hero-visual .meteor-field { display: none; }
 }
+
+
+/* Desktop globe crop: remove the source video's black outer padding without enlarging its circular frame. */
+@media (min-width: 761px) {
+  .visual-globe .globe-video {
+    transform: scale(1.45);
+  }
+}
