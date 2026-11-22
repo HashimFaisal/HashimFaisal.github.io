@@ -156,3 +156,19 @@
   outline: 2px solid var(--cyan, #58d8e8);
   outline-offset: 3px;
 }
+
+
+/* Match the Add-on Library's compact green health indicator on download cards. */
+#downloads .downloads-device-status.card-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#downloads .downloads-device-status .downloads-device-status-dot {
+  flex: 0 0 7px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 0 3px rgba(66, 200, 121, 0.12);
+}
