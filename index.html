@@ -25,7 +25,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700;800;900&amp;display=swap">
-  <link rel="stylesheet" href="style.css?v=20261122-clarity1">
+  <link rel="stylesheet" href="style.css?v=20261122-app-versions1">
   <link rel="stylesheet" href="premium-ui.css?v=20261119-liveticker1">
   <link rel="stylesheet" href="touch-effects.css?v=20261120-liquid1">
 </head>
@@ -40,6 +40,7 @@
     </a>
     <nav>
       <a href="#plugins">الإضافات</a>
+      <a href="#versions">نسخ Nuvio</a>
       <a href="#downloads">التنزيلات</a>
       <a href="#status">حالة النظام</a>
       <a href="#resources">الدعم والملاحظات</a>
@@ -360,6 +361,96 @@
       </div>
     </section>
 
+    <section class="section app-versions" id="versions">
+      <div class="section-heading">
+        <div><div class="eyebrow">02 / NUVIO EDITIONS</div><h2>نسخ Nuvio</h2><p>اكتشف التطبيقات الرسمية والنسخ المجتمعية حسب جهازك، ونزّلها من مستودعات مطوريها.</p></div>
+        <span class="section-count">APP DIRECTORY</span>
+      </div>
+
+      <div class="version-filters" role="group" aria-label="Filter Nuvio editions">
+        <button class="version-filter active" type="button" data-version-filter="all" aria-pressed="true">الكل</button>
+        <button class="version-filter" type="button" data-version-filter="mobile" aria-pressed="false">الموبايل</button>
+        <button class="version-filter" type="button" data-version-filter="tv" aria-pressed="false">التلفزيون</button>
+        <button class="version-filter" type="button" data-version-filter="desktop" aria-pressed="false">الكمبيوتر</button>
+        <button class="version-filter" type="button" data-version-filter="smart-tv" aria-pressed="false">التلفزيونات الذكية</button>
+      </div>
+
+      <div class="version-grid" id="version-grid">
+        <article class="version-card" data-version-platform="mobile">
+          <div class="version-card-meta"><span>الموبايل</span><span class="version-kind official">رسمي</span></div>
+          <h3>Nuvio Mobile</h3>
+          <p>التطبيق الرسمي للهواتف، وهو نقطة البداية الموصى بها لمعظم المستخدمين.</p>
+          <ul><li>Android وiOS بحسب ملفات الإصدار المتاحة.</li><li>تابع القنوات المستقرة والتجريبية من صفحة الإصدارات.</li></ul>
+          <a class="version-download" href="https://github.com/NuvioMedia/NuvioMobile/releases" target="_blank" rel="noopener">التنزيلات والإصدارات ↗</a>
+          <small>تحقق من توافق إصدار نظام جهازك قبل التثبيت.</small>
+        </article>
+
+        <article class="version-card" data-version-platform="tv">
+          <div class="version-card-meta"><span>التلفزيون</span><span class="version-kind official">رسمي</span></div>
+          <h3>Nuvio TV</h3>
+          <p>التطبيق الرسمي المخصص لتجربة التلفزيون وأجهزة Android TV.</p>
+          <ul><li>واجهة مناسبة للتحكم عن بُعد.</li><li>اختر ملف الإصدار المناسب لمعمارية جهازك.</li></ul>
+          <a class="version-download" href="https://github.com/NuvioMedia/NuvioTV/releases" target="_blank" rel="noopener">التنزيلات والإصدارات ↗</a>
+          <small>راجع متطلبات النظام وملاحظات الإصدار في المستودع.</small>
+        </article>
+
+        <article class="version-card" data-version-platform="tv">
+          <div class="version-card-meta"><span>Android TV</span><span class="version-kind community">مجتمعي</span></div>
+          <h3>Nuvio Arc</h3>
+          <p>تفرّع مجتمعي لتجربة التلفزيون، مع تعديلات وميزات إضافية مقارنة بالتطبيق الأساسي.</p>
+          <ul><li>موجّه لأجهزة Android TV.</li><li>راجع سجل التغييرات قبل الانتقال إليه.</li></ul>
+          <a class="version-download" href="https://github.com/ysosrs123/NuvioTV-Fork/releases" target="_blank" rel="noopener">صفحة الإصدارات ↗</a>
+          <small>مشروع مستقل غير رسمي؛ التوافق والدعم من صاحب المستودع.</small>
+        </article>
+
+        <article class="version-card" data-version-platform="tv">
+          <div class="version-card-meta"><span>Android TV</span><span class="version-kind community">مجتمعي</span></div>
+          <h3>NuvioTV-Lite</h3>
+          <p>نسخة خفيفة تستهدف أجهزة التلفزيون ذات الموارد المحدودة.</p>
+          <ul><li>مصممة لتقليل استهلاك الموارد.</li><li>تعطّل JavaScript Plugins وبعض الوظائف؛ ليست مناسبة لمن يعتمد على Plugins.</li></ul>
+          <a class="version-download" href="https://github.com/hackerslash/NuvioTV-Lite/releases" target="_blank" rel="noopener">صفحة الإصدارات ↗</a>
+          <small>اقرأ قائمة الميزات المستبعدة قبل التثبيت.</small>
+        </article>
+
+        <article class="version-card" data-version-platform="mobile">
+          <div class="version-card-meta"><span>Android</span><span class="version-kind community">مجتمعي</span></div>
+          <h3>Nuvio Reshaped Mobile</h3>
+          <p>تفرّع للموبايل يضيف تحسينات على المشغّل والترجمات وتجربة الاستخدام.</p>
+          <ul><li>يتضمن تحسينات مثل مزامنة الترجمة التلقائية بحسب وصف المشروع.</li><li>تحقق من قناة Stable أو Beta قبل التنزيل.</li></ul>
+          <a class="version-download" href="https://github.com/pattoly/NuvioMobile-Reshaped/releases" target="_blank" rel="noopener">صفحة الإصدارات ↗</a>
+          <small>نسخة مجتمعية وليست إصداراً رسمياً من Nuvio.</small>
+        </article>
+
+        <article class="version-card" data-version-platform="tv">
+          <div class="version-card-meta"><span>Android TV</span><span class="version-kind community">مجتمعي</span></div>
+          <h3>Nuvio Reshaped TV</h3>
+          <p>تفرّع Reshaped المخصص لأجهزة التلفزيون.</p>
+          <ul><li>واجهة معدّلة لتجربة الشاشة الكبيرة.</li><li>راجع ملفات الإصدار والمتطلبات في المستودع.</li></ul>
+          <a class="version-download" href="https://github.com/ntbenett/NuvioTV-Reshaped/releases" target="_blank" rel="noopener">صفحة الإصدارات ↗</a>
+          <small>مشروع مجتمعي مستقل.</small>
+        </article>
+
+        <article class="version-card" data-version-platform="smart-tv">
+          <div class="version-card-meta"><span>Smart TV</span><span class="version-kind community">مجتمعي</span></div>
+          <h3>Nuvio Native Legacy</h3>
+          <p>مشروع عميل لأجهزة التلفزيون ذات الأنظمة المختلفة، ويحتاج اختيار حزمة التثبيت المطابقة لطراز الجهاز.</p>
+          <ul><li>تحقق من دعم نظام وتوليفة جهازك في صفحة المشروع.</li><li>قد تختلف طريقة التثبيت عن تثبيت APK المعتاد.</li></ul>
+          <a class="version-download" href="https://github.com/iqui27/nuvio-native-legacy/releases" target="_blank" rel="noopener">صفحة الإصدارات ↗</a>
+          <small>لا تثبّت حزمة قبل التأكد من توافقها مع جهازك.</small>
+        </article>
+
+        <article class="version-card" data-version-platform="desktop">
+          <div class="version-card-meta"><span>Windows</span><span class="version-kind community">مجتمعي</span></div>
+          <h3>NuvioCodeineXO</h3>
+          <p>تفرّع لسطح المكتب على Windows مع تحسينات للمشغّل والترجمات وميزات إضافية.</p>
+          <ul><li>ليس تطبيقاً رسمياً.</li><li>راجع نوع ملف التثبيت ومتطلبات Windows في صفحة الإصدار.</li></ul>
+          <a class="version-download" href="https://github.com/codeineXO/NuvioCodeineXO/releases" target="_blank" rel="noopener">صفحة الإصدارات ↗</a>
+          <small>الميزات والتحديثات تخضع لصاحب المشروع المستقل.</small>
+        </article>
+      </div>
+      <p class="version-disclaimer">هذه قائمة مستقلة لتسهيل الوصول إلى المشاريع. لا نستضيف ملفات التثبيت ولا نضمن توافق كل نسخة مع جميع الأجهزة. روابط التنزيل تفتح صفحات المطورين الأصلية. دعم Plugins وميزات Debrid يختلف حسب التطبيق والإضافات المستخدمة.</p>
+    </section>
+
     <section class="section" id="downloads">
       <div class="section-heading">
         <div><div class="eyebrow">03 / OFFICIAL RELEASES</div><h2>تنزيلات Nuvio</h2><p>ملفات الإصدار الأحدث تُقرأ من تقرير الفحص.</p></div>
@@ -386,7 +477,7 @@
 
   <footer><div class="brand footer-brand">HASHIM<span class="accent">FAISAL</span></div><span>Independent Nuvio Projects · </span><span id="year"></span><a href="https://github.com/HashimFaisal" target="_blank" rel="noopener">GitHub ↗</a></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=20261122-clarity1"></script>
+  <script src="app.js?v=20261122-app-versions1"></script>
   <script src="premium-ui.js?v=20261119-languagefix1"></script>
   <script src="touch-effects.js?v=20261120-liquid1" defer></script>
 </body>

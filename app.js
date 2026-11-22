@@ -16,6 +16,50 @@ let latestReport = null;
 
 const translations = {
   'الإضافات': 'Add-ons',
+  'نسخ Nuvio': 'Nuvio Editions',
+  'الموبايل': 'Mobile',
+  'التلفزيون': 'TV',
+  'الكمبيوتر': 'Desktop',
+  'التلفزيونات الذكية': 'Smart TVs',
+  'اكتشف التطبيقات الرسمية والنسخ المجتمعية حسب جهازك، ونزّلها من مستودعات مطوريها.': 'Explore official apps and community editions by device, and download them from their developers’ repositories.',
+  'رسمي': 'Official',
+  'مجتمعي': 'Community',
+  'Android وiOS بحسب ملفات الإصدار المتاحة.': 'Android and iOS, subject to available release assets.',
+  'تابع القنوات المستقرة والتجريبية من صفحة الإصدارات.': 'Check the releases page for stable and beta channels.',
+  'التنزيلات والإصدارات ↗': 'Downloads & Releases ↗',
+  'تحقق من توافق إصدار نظام جهازك قبل التثبيت.': 'Check your device OS compatibility before installing.',
+  'واجهة مناسبة للتحكم عن بُعد.': 'A TV interface designed for remote control.',
+  'اختر ملف الإصدار المناسب لمعمارية جهازك.': 'Choose the release asset matching your device architecture.',
+  'راجع متطلبات النظام وملاحظات الإصدار في المستودع.': 'Review system requirements and release notes in the repository.',
+  'تفرّع مجتمعي لتجربة التلفزيون، مع تعديلات وميزات إضافية مقارنة بالتطبيق الأساسي.': 'A community TV fork with changes and extra features compared with the base app.',
+  'موجّه لأجهزة Android TV.': 'Designed for Android TV devices.',
+  'راجع سجل التغييرات قبل الانتقال إليه.': 'Review the changelog before switching.',
+  'صفحة الإصدارات ↗': 'Releases ↗',
+  'مشروع مستقل غير رسمي؛ التوافق والدعم من صاحب المستودع.': 'An unofficial independent project; compatibility and support are provided by its maintainer.',
+  'نسخة خفيفة تستهدف أجهزة التلفزيون ذات الموارد المحدودة.': 'A lightweight edition targeting TVs with limited resources.',
+  'مصممة لتقليل استهلاك الموارد.': 'Designed to reduce resource usage.',
+  'تعطّل JavaScript Plugins وبعض الوظائف؛ ليست مناسبة لمن يعتمد على Plugins.': 'Disables JavaScript Plugins and some features; not suitable if you rely on Plugins.',
+  'اقرأ قائمة الميزات المستبعدة قبل التثبيت.': 'Read the list of excluded features before installing.',
+  'تفرّع للموبايل يضيف تحسينات على المشغّل والترجمات وتجربة الاستخدام.': 'A mobile fork with player, subtitle, and usability improvements.',
+  'يتضمن تحسينات مثل مزامنة الترجمة التلقائية بحسب وصف المشروع.': 'Includes improvements such as automatic subtitle synchronization, according to the project description.',
+  'تحقق من قناة Stable أو Beta قبل التنزيل.': 'Check whether the Stable or Beta channel is right for you before downloading.',
+  'نسخة مجتمعية وليست إصداراً رسمياً من Nuvio.': 'A community edition, not an official Nuvio release.',
+  'تفرّع Reshaped المخصص لأجهزة التلفزيون.': 'The Reshaped fork designed for TV devices.',
+  'واجهة معدّلة لتجربة الشاشة الكبيرة.': 'A modified interface for the big-screen experience.',
+  'راجع ملفات الإصدار والمتطلبات في المستودع.': 'Review release assets and requirements in the repository.',
+  'مشروع مجتمعي مستقل.': 'An independent community project.',
+  'مشروع عميل لأجهزة التلفزيون ذات الأنظمة المختلفة، ويحتاج اختيار حزمة التثبيت المطابقة لطراز الجهاز.': 'A client project for selected smart TV platforms; choose the installation package that matches your device model.',
+  'تحقق من دعم نظام وتوليفة جهازك في صفحة المشروع.': 'Check your OS and device model support on the project page.',
+  'قد تختلف طريقة التثبيت عن تثبيت APK المعتاد.': 'The installation method may differ from a standard APK install.',
+  'لا تثبّت حزمة قبل التأكد من توافقها مع جهازك.': 'Do not install a package until you confirm device compatibility.',
+  'تفرّع لسطح المكتب على Windows مع تحسينات للمشغّل والترجمات وميزات إضافية.': 'A Windows desktop fork with player, subtitle, and additional feature improvements.',
+  'ليس تطبيقاً رسمياً.': 'Not an official app.',
+  'راجع نوع ملف التثبيت ومتطلبات Windows في صفحة الإصدار.': 'Check the installer type and Windows requirements on the release page.',
+  'الميزات والتحديثات تخضع لصاحب المشروع المستقل.': 'Features and updates are maintained by the independent project owner.',
+  'هذه قائمة مستقلة لتسهيل الوصول إلى المشاريع. لا نستضيف ملفات التثبيت ولا نضمن توافق كل نسخة مع جميع الأجهزة. روابط التنزيل تفتح صفحات المطورين الأصلية. دعم Plugins وميزات Debrid يختلف حسب التطبيق والإضافات المستخدمة.': 'This independent directory helps you find projects. We do not host installers or guarantee compatibility with every device. Download links open the original developer pages. Plugin support and Debrid features vary by app and the add-ons you use.',
+  'NUVIO EDITIONS': 'NUVIO EDITIONS',
+  'APP DIRECTORY': 'APP DIRECTORY',
+
   'التنزيلات': 'Downloads',
   'حالة النظام': 'System Status',
   'سجل التغييرات': 'Changelog',
@@ -1052,3 +1096,20 @@ applyLanguage();
 installShareButtons();
 loadStatus();
 loadChangelog();
+
+document.addEventListener('click', (event) => {
+  const button = event.target.closest('[data-version-filter]');
+  if (!button) return;
+
+  const selected = button.dataset.versionFilter;
+  document.querySelectorAll('[data-version-filter]').forEach((item) => {
+    const active = item === button;
+    item.classList.toggle('active', active);
+    item.setAttribute('aria-pressed', String(active));
+  });
+
+  document.querySelectorAll('.version-card').forEach((card) => {
+    card.hidden = selected !== 'all' && card.dataset.versionPlatform !== selected;
+  });
+});
+
