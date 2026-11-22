@@ -175,6 +175,12 @@
   overflow: visible;
   transform: none;
 }
+#downloads .downloads-device-grid > .downloads-device-card:only-child {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: 760px;
+  justify-self: center;
+}
 #downloads .downloads-device-card:hover {
   transform: translateY(-2px);
   border-color: var(--line-strong, rgba(88,216,232,.32));
@@ -261,6 +267,10 @@
 #downloads .downloads-device-actions .downloads-device-link:hover {
   transform: translateY(-1px);
   filter: brightness(1.04);
+}
+#downloads .downloads-device-actions .downloads-device-link:focus-visible {
+  outline: 2px solid var(--cyan-light, #98edf5);
+  outline-offset: 3px;
 }
 #downloads .downloads-device-actions .downloads-device-link:only-child {
   grid-column: 1 / -1;
