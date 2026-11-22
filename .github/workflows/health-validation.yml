@@ -26,6 +26,8 @@ jobs:
           node --check premium-ui.js
       - name: Validate Python syntax
         run: python -m py_compile scripts/check_links.py
+      - name: Test health failure diagnosis
+        run: python -m unittest discover -s tests -p 'test_failure_diagnosis.py'
       - name: Validate resource categories and install actions
         run: |
           python - <<'PY'
