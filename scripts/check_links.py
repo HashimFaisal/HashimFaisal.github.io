@@ -264,7 +264,7 @@ def build_diagnostic_summary(results):
     categories = ", ".join(
         f"{count} {category}" for category, count in sorted(counts.items())
     )
-    return f"{len(failures)} failure(s): {categories {categories}}."
+    return f"{len(failures)} failure(s): categories {categories}."
 
 
 def load_release_cache():
