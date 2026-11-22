@@ -100,7 +100,7 @@ jobs:
           if html.count('class="downloads-device-status"') != len(version_cards):
               raise SystemExit("Every Nuvio device card must show its live version/link-check status.")
           for card in version_cards:
-              if not re.search(r'class="[^"]*\\bdownloads-device-link\\b[^"]*"', card):
+              if not re.search(r'class="[^"]*\bdownloads-device-link\b[^"]*"', card):
                   raise SystemExit("A Nuvio device card has no direct download button.")
 
           downloads_start = html.find('<section class="section downloads-center downloads-redesign" id="downloads"')
