@@ -266,6 +266,7 @@
       "en": "TMDB Discover+ has been added to Nuvio sources. Version: 2.14.7+49f99dd0e277."
     },
     "publishedAt": "2026-11-22T06:00:30.527023Z",
-    "expiresAt": "2026-11-23T06:00:30.527023Z"
+    "expiresAt": "2026-11-23T06:00:30.527023Z",
+    "url": "https://tmdb-discover-plus.elfhosted.com/"
   }
 ]
