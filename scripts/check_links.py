@@ -358,7 +358,7 @@ def build_risk_forecast(results, previous_report=None, history=None):
     for item in failure_items:
         raw_name = item.get("name")
         name = raw_name.strip() if isinstance(raw_name, str) and raw_name.strip() else "Unknown"
-        resource_key = name
+        resource_key = normalize_resource_key(name)
         if resource_key in seen_failed_resources:
             continue
         seen_failed_resources.add(resource_key)
@@ -369,7 +369,7 @@ def build_risk_forecast(results, previous_report=None, history=None):
         seen_event_signatures = set()
         for event in history[-100:]:
             if not (
-                isinstance(event, dict) and event.get("source") == name
+                isinstance(event, dict) and normalize_resource_key(event.get("source")) == resource_key
                 and event.get("type") == "status" and event.get("new_status") == "unavailable"
             ):
                 continue
