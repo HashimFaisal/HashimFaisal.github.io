@@ -1000,66 +1000,7 @@ function renderDownloads(report) {
   }
   if (healthLabel) healthLabel.textContent = t(releaseHealthy ? 'متاح' : 'يحتاج مراجعة');
 
-  if (grid) {
-    // Keep the latest Enhanced release files inside its existing edition card.
-    // The stable 1.0.0 links remain untouched in the same card.
-    const enhancedCard = [...grid.children].find(card =>
-      card.classList.contains('version-card') &&
-      card.querySelector('h3')?.textContent.trim() === 'Nuvio Enhanced 1.0.0'
-    );
-
-    if (enhancedCard && validAssets.length) {
-      let releaseGroup = enhancedCard.querySelector('.enhanced-latest-release');
-      if (!releaseGroup) {
-        releaseGroup = document.createElement('div');
-        releaseGroup.className = 'enhanced-latest-release';
-        const heading = document.createElement('small');
-        heading.className = 'enhanced-latest-release__heading';
-        releaseGroup.appendChild(heading);
-        const status = document.createElement('small');
-        status.className = 'enhanced-latest-release__status';
-        status.setAttribute('aria-live', 'polite');
-        releaseGroup.appendChild(status);
-        const actions = document.createElement('div');
-        actions.className = 'downloads-device-actions enhanced-latest-release__actions';
-        releaseGroup.appendChild(actions);
-        enhancedCard.querySelector('.downloads-device-actions')?.after(releaseGroup);
-      }
-
-      const heading = releaseGroup.querySelector('.enhanced-latest-release__heading');
-      const status = releaseGroup.querySelector('.enhanced-latest-release__status');
-      const actions = releaseGroup.querySelector('.enhanced-latest-release__actions');
-      if (heading) heading.textContent = `أحدث إصدار · ${appVersion}`;
-      if (status) {
-        status.textContent = `${healthyAssets.length}/${validAssets.length} ${t('روابط تنزيل سليمة')}`;
-        status.dataset.state = releaseHealthy ? 'healthy' : 'warning';
-        status.title = report.release_fallback_used
-          ? t(report.release_cache_stale ? 'بيانات التنزيل محفوظة لكن الكاش قديم؛ استخدمها بحذر.' : 'بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.')
-          : t('حالة روابط ملفات الإصدار الأخير');
-      }
-      if (actions) {
-        actions.replaceChildren();
-        validAssets.forEach(asset => {
-          const downloadUrl = safeHttpsUrl(asset.download_url);
-          if (!downloadUrl) return;
-          const displayName = asset.name || '';
-          const isIos = downloadCategory(asset) === 'ios';
-          const label = String(asset.label || '').trim();
-          const architecture = label && !/ios|ipa/i.test(label)
-            ? label
-            : (displayName.match(/arm64|armv7|armeabi-v7a|x86_64|x86|universal/i)?.[0] || '');
-          const link = document.createElement('a');
-          link.className = 'downloads-device-link release-enhanced-link';
-          link.href = downloadUrl;
-          link.textContent = isIos
-            ? 'تنزيل IPA · iOS'
-            : `تنزيل APK · ${architecture || 'Android'}`;
-          actions.appendChild(link);
-        });
-      }
-    }
-  }
-}
+  if (grid) grid.querySelectorAll('.enhanced-latest-release').forEach(group => group.remove());}
 
 async function loadStatus() {
   try {
