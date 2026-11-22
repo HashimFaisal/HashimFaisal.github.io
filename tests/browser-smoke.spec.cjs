@@ -741,8 +741,8 @@ test('latest release download URLs remain inside the Nuvio Enhanced card when he
   await page.goto('/');
   const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.0\.0$/ }) });
   await expect(enhancedCard.locator('a.release-enhanced-link')).toHaveCount(5);
-  await expect(enhancedCard.locator('a[href*="arm64-v8a-release.apk"]')).toHaveCount(1);
-  await expect(enhancedCard.locator('a[href*="enhanced-release.ipa"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a.release-enhanced-link[href*="arm64-v8a-release.apk"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a.release-enhanced-link[href*="enhanced-release.ipa"]')).toHaveCount(1);
   await expect(enhancedCard.locator('a.release-enhanced-link[target="_blank"]')).toHaveCount(0);
   await expect(enhancedCard.locator('.enhanced-latest-release__status')).toContainText('0/5');
   await expect(enhancedCard.locator('.enhanced-latest-release__status')).toHaveAttribute('data-state', 'warning');
