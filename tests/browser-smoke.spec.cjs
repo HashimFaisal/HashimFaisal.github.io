@@ -608,7 +608,7 @@ test('changelog and downloads sections keep content boxes separate across viewpo
     await page.locator('#nuvio-launch-grid [data-view="downloads"]').click();
     await expect(page.locator('#downloads')).toBeVisible();
     await assertNoOverlaps('#downloads');
-    await assertNoOverlaps('#downloads .downloads-toolbar');
+    await assertNoOverlaps('#downloads-device-nav');
     await assertNoOverlaps('#download-grid');
     await page.locator('#downloads .nuvio-view-back').click();
   };
