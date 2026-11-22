@@ -5237,3 +5237,10 @@ footer {
 @media (max-width: 480px) {
   #downloads .download-grid { grid-template-columns: 1fr; }
 }
+
+/* One downloads view, organized by device groups. */
+#downloads.unified-download-library .version-platform { position: relative; }
+#downloads.unified-download-library .download-release-subsection { margin-top: 28px; padding-top: 20px; border-top: 1px solid var(--line); }
+#downloads.unified-download-library .download-release-subsection .version-platform-heading { margin-bottom: 12px; }
+#downloads.unified-download-library .downloads-toolbar { margin-bottom: 13px; }
+#downloads.unified-download-library .download-grid { margin-top: 0; }

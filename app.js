@@ -18,6 +18,11 @@ let latestReport = null;
 const translations = {
   'الإضافات': 'Add-ons',
   'نسخ Nuvio': 'Nuvio Editions',
+  'مكتبة تنزيلات Nuvio': 'Nuvio Download Library',
+  'ملفات الإصدار الأخير': 'Latest release files',
+  'مكتبة واحدة مرتبة حسب نوع الجهاز، مع روابط تنزيل مباشرة وأحدث ملفات الإصدار.': 'One library organized by device, with direct download links and the latest release files.',
+  'ملفات مباشرة مرتبطة بالإصدار المنشور، مع فحص حالة الروابط.': 'Direct files from the published release, with link health checks.',
+  '4 أقسام': '4 sections',
   'اختر جهازك للوصول إلى النسخة المناسبة. روابط التنزيل المباشر متاحة عندما ينشر المطوّر ملف تثبيت.': 'Choose your device to find the right edition. Direct downloads are available when the developer publishes an installer.',
   'الموبايل · Android وiPhone': 'Mobile · Android & iPhone',
   'نسخ الهواتف، مع روابط APK وIPA المباشرة عند توفرها.': 'Phone editions, with direct APK and IPA links where available.',

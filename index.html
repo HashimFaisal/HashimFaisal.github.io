@@ -26,7 +26,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700;800;900&amp;display=swap">
   <link rel="stylesheet" href="style.css?v=20261122-downloads-fullview2">
-  <link rel="stylesheet" href="premium-ui.css?v=20261122-downloads-unified4">
+  <link rel="stylesheet" href="premium-ui.css?v=20261122-unified-download-sections1">
   <link rel="stylesheet" href="touch-effects.css?v=20261120-liquid1">
 </head>
 <body>
@@ -40,7 +40,7 @@
     </a>
     <nav>
       <a href="#plugins">الإضافات</a>
-      <a href="#versions">نسخ Nuvio</a>
+      <a href="#downloads">نسخ Nuvio</a>
       <a href="#downloads">التنزيلات</a>
       <a href="#status">حالة النظام</a>
       <a href="#resources">الدعم والملاحظات</a>
@@ -361,13 +361,9 @@
       </div>
     </section>
 
-    <section class="section app-versions" id="versions">
-      <div class="section-heading">
-        <div><div class="eyebrow">02 / NUVIO EDITIONS</div><h2>نسخ Nuvio</h2><p>اختر جهازك للوصول إلى النسخة المناسبة. روابط التنزيل المباشر متاحة عندما ينشر المطوّر ملف تثبيت.</p></div>
-        <span class="section-count">APP DIRECTORY</span>
-      </div>
-
-      <section class="version-platform" id="versions-mobile" aria-labelledby="versions-mobile-title">
+    <section class="section app-versions unified-download-library" id="downloads" aria-labelledby="downloads-title">
+      <div class="section-heading downloads-heading"><div class="downloads-heading-copy"><div class="eyebrow">02 / NUVIO DOWNLOAD LIBRARY</div><h2 id="downloads-title">مكتبة تنزيلات Nuvio</h2><p>مكتبة واحدة مرتبة حسب نوع الجهاز، مع روابط تنزيل مباشرة وأحدث ملفات الإصدار.</p></div><span class="section-count">4 أقسام</span></div>
+<section class="version-platform" id="versions-mobile" aria-labelledby="versions-mobile-title">
         <div class="version-platform-heading">
           <div><span class="eyebrow">01 / MOBILE</span><h3 id="versions-mobile-title">الموبايل · Android وiPhone</h3><p>نسخ الهواتف، مع روابط APK وIPA المباشرة عند توفرها.</p></div>
         </div>
@@ -410,11 +406,48 @@
             <small>هذه نسخة مجتمعية تجريبية؛ تحقق من توافق معمارية هاتفك قبل التثبيت.</small>
           </article>
         </div>
+
+        <div class="download-release-subsection">
+          <div class="version-platform-heading">
+            <div><span class="eyebrow">LATEST OFFICIAL RELEASE</span><h3>ملفات الإصدار الأخير</h3><p>ملفات مباشرة مرتبطة بالإصدار المنشور، مع فحص حالة الروابط.</p></div>
+            <span class="section-count" id="downloads-visible-count">05 FILES</span>
+          </div>
+          <div class="toolbar downloads-toolbar">
+        <label class="search-box downloads-search-box">
+          <span aria-hidden="true">⌕</span>
+          <input id="downloads-search" type="search" placeholder="ابحث عن ملف تنزيل..." aria-label="ابحث عن ملف تنزيل" autocomplete="off">
+        </label>
+        <div class="filters downloads-filters" id="downloads-filters" role="group" aria-label="تصفية ملفات التنزيل"></div>
+      </div>
+
+      <div class="download-grid" id="download-grid" aria-live="polite">
+        <p class="muted">جارٍ تحميل روابط التنزيل...</p>
+      </div>
+      <div class="empty-state downloads-empty-state" id="downloads-empty-state" hidden>ما لقينا ملفات تطابق بحثك.</div>
+    
+        </div>
       </section>
 
-      <section class="version-platform" id="versions-tv" aria-labelledby="versions-tv-title">
+<section class="version-platform" id="versions-desktop" aria-labelledby="versions-desktop-title">
         <div class="version-platform-heading">
-          <div><span class="eyebrow">02 / ANDROID TV</span><h3 id="versions-tv-title">التلفزيون · Android TV وGoogle TV</h3><p>ملفات APK مباشرة للتلفزيون، مع اختيار المعمارية المناسبة.</p></div>
+          <div><span class="eyebrow">02 / DESKTOP</span><h3 id="versions-desktop-title">الكمبيوتر · Windows</h3><p>نسخ سطح المكتب المتاحة وروابط مشاريعها الأصلية.</p></div>
+        </div>
+        <div class="version-grid">
+          <article class="version-card">
+            <div class="version-card-meta"><span>Windows · مجتمعي</span><span class="version-kind community">مجتمعي</span></div>
+            <h3>NuvioCodeineXO</h3>
+            <small class="version-card-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
+            <p>تفرّع مجتمعي لسطح المكتب على Windows مع تعديلات على المشغّل والترجمات.</p>
+            <div class="version-actions">
+              <a class="version-download" href="https://github.com/codeineXO/NuvioCodeineXO/releases/download/v6.1.5/NuvioCodeineXO-v6.1.5.exe">تنزيل Windows · EXE</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+<section class="version-platform" id="versions-tv" aria-labelledby="versions-tv-title">
+        <div class="version-platform-heading">
+          <div><span class="eyebrow">03 / ANDROID TV</span><h3 id="versions-tv-title">التلفزيون · Android TV وGoogle TV</h3><p>ملفات APK مباشرة للتلفزيون، مع اختيار المعمارية المناسبة.</p></div>
         </div>
         <div class="version-grid">
           <article class="version-card">
@@ -464,14 +497,30 @@
             </div>
             <small>الإصدار الأحدث الذي تحقّقنا منه يوفر ARM32 فقط؛ بقية المعماريات غير متاحة في هذا الإصدار.</small>
           </article>
+        
+
+          
+
+          <article class="version-card">
+            <div class="version-card-meta"><span>Android TV / Android Box</span><span class="version-kind community">مجتمعي</span></div>
+            <h3>Nuvio Native Legacy · Android</h3>
+            <small class="version-card-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
+            <p>ملفات APK مستقلة ضمن مشروع Native Legacy لأجهزة Android المتوافقة.</p>
+            <div class="version-actions">
+              <a class="version-download" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/Nuvio-2.0.8-android.apk">تنزيل APK</a>
+              <a class="version-download" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/Nuvio-2.0.8-android-lite-arm64.apk">APK Lite · ARM64</a>
+              <a class="version-download" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/Nuvio-2.0.8-android-lite-armv7.apk">APK Lite · ARMv7</a>
+            </div>
+          </article>
         </div>
       </section>
 
-      <section class="version-platform" id="versions-smart-tv" aria-labelledby="versions-smart-tv-title">
+<section class="version-platform" id="versions-smart-tv" aria-labelledby="versions-smart-tv-title">
         <div class="version-platform-heading">
-          <div><span class="eyebrow">03 / SMART TV</span><h3 id="versions-smart-tv-title">التلفزيونات الذكية · Samsung وLG</h3><p>روابط منفصلة حسب نظام التلفزيون ونوع حزمة التثبيت.</p></div>
+          <div><span class="eyebrow">04 / SMART TV</span><h3 id="versions-smart-tv-title">التلفزيونات الذكية · Samsung وLG</h3><p>روابط منفصلة حسب نظام التلفزيون ونوع حزمة التثبيت.</p></div>
         </div>
         <div class="version-grid">
+
           <article class="version-card">
             <div class="version-card-meta"><span>Samsung Tizen</span><span class="version-kind community">مجتمعي</span></div>
             <h3>Nuvio Native Legacy · Tizen</h3>
@@ -499,65 +548,15 @@
             <small>تأكد من توافق إصدار webOS وطراز التلفزيون قبل التثبيت.</small>
           </article>
 
-          <article class="version-card">
-            <div class="version-card-meta"><span>Android TV / Android Box</span><span class="version-kind community">مجتمعي</span></div>
-            <h3>Nuvio Native Legacy · Android</h3>
-            <small class="version-card-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
-            <p>ملفات APK مستقلة ضمن مشروع Native Legacy لأجهزة Android المتوافقة.</p>
-            <div class="version-actions">
-              <a class="version-download" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/Nuvio-2.0.8-android.apk">تنزيل APK</a>
-              <a class="version-download" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/Nuvio-2.0.8-android-lite-arm64.apk">APK Lite · ARM64</a>
-              <a class="version-download" href="https://github.com/iqui27/nuvio-native-legacy/releases/download/v2.0.8/Nuvio-2.0.8-android-lite-armv7.apk">APK Lite · ARMv7</a>
-            </div>
-          </article>
+          
+        
         </div>
       </section>
 
-      <section class="version-platform" id="versions-desktop" aria-labelledby="versions-desktop-title">
-        <div class="version-platform-heading">
-          <div><span class="eyebrow">04 / DESKTOP</span><h3 id="versions-desktop-title">الكمبيوتر · Windows</h3><p>نسخ سطح المكتب المتاحة وروابط مشاريعها الأصلية.</p></div>
-        </div>
-        <div class="version-grid">
-          <article class="version-card">
-            <div class="version-card-meta"><span>Windows · مجتمعي</span><span class="version-kind community">مجتمعي</span></div>
-            <h3>NuvioCodeineXO</h3>
-            <small class="version-card-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
-            <p>تفرّع مجتمعي لسطح المكتب على Windows مع تعديلات على المشغّل والترجمات.</p>
-            <div class="version-actions">
-              <a class="version-download" href="https://github.com/codeineXO/NuvioCodeineXO/releases/download/v6.1.5/NuvioCodeineXO-v6.1.5.exe">تنزيل Windows · EXE</a>
-            </div>
-          </article>
-        </div>
-      </section>
+<p class="version-disclaimer">هذه قائمة مستقلة للوصول إلى المشاريع الأصلية. لا نستضيف ملفات التثبيت. روابط APK وIPA وWGT وTPK وIPK المباشرة مأخوذة من ملفات الإصدارات المنشورة لدى المطوّرين، وقد تتغير عند صدور تحديث جديد. افحص توافق جهازك دائماً؛ المشاريع المجتمعية غير رسمية وقد يختلف دعمها وميزاتها.</p>
+    
 
-      <p class="version-disclaimer">هذه قائمة مستقلة للوصول إلى المشاريع الأصلية. لا نستضيف ملفات التثبيت. روابط APK وIPA وWGT وTPK وIPK المباشرة مأخوذة من ملفات الإصدارات المنشورة لدى المطوّرين، وقد تتغير عند صدور تحديث جديد. افحص توافق جهازك دائماً؛ المشاريع المجتمعية غير رسمية وقد يختلف دعمها وميزاتها.</p>
-    </section>
-
-    <section class="section" id="downloads" aria-labelledby="downloads-title">
-      <div class="section-heading downloads-heading">
-        <div class="downloads-heading-copy">
-          <div class="eyebrow">03 / DOWNLOAD LIBRARY</div>
-          <h2 id="downloads-title">تنزيلات Nuvio</h2>
-          <p>تصفّح ملفات الإصدار الرسمي، ابحث حسب اسم الملف أو معمارية الجهاز، ونزّل مباشرة.</p>
-        </div>
-        <span class="section-count" id="downloads-visible-count">05 FILES</span>
-      </div>
-
-      <div class="toolbar downloads-toolbar">
-        <label class="search-box downloads-search-box">
-          <span aria-hidden="true">⌕</span>
-          <input id="downloads-search" type="search" placeholder="ابحث عن ملف تنزيل..." aria-label="ابحث عن ملف تنزيل" autocomplete="off">
-        </label>
-        <div class="filters downloads-filters" id="downloads-filters" role="group" aria-label="تصفية ملفات التنزيل"></div>
-      </div>
-
-      <div class="download-grid" id="download-grid" aria-live="polite">
-        <p class="muted">جارٍ تحميل روابط التنزيل...</p>
-      </div>
-      <div class="empty-state downloads-empty-state" id="downloads-empty-state" hidden>ما لقينا ملفات تطابق بحثك.</div>
-    </section>
-
-    <section class="section about" id="resources">
+    </section><section class="section about" id="resources">
       <div class="eyebrow">04 / SUPPORT & COMMUNITY</div>
       <h2>الدعم والتواصل</h2>
       <p class="muted">مركز مستقل يطوّره Hashim Faisal لتسهيل اكتشاف إضافات Nuvio ومتابعة تحديثاتها. واجهت مشكلة أو عندك اقتراح؟ نرحّب بملاحظاتك.</p>
@@ -574,7 +573,7 @@
 
   <footer><div class="brand footer-brand">HASHIM<span class="accent">FAISAL</span></div><span>Independent Nuvio Projects · </span><span id="year"></span><a href="https://github.com/HashimFaisal" target="_blank" rel="noopener">GitHub ↗</a></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=20261122-downloads-library3"></script>
+  <script src="app.js?v=20261122-unified-download-sections1"></script>
   <script src="premium-ui.js?v=20261119-languagefix1"></script>
   <script src="touch-effects.js?v=20261120-liquid1" defer></script>
 </body>

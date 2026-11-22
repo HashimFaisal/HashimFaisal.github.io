@@ -92,32 +92,47 @@ const viewports = [
 
       await page.locator('#nuvio-launch-grid [data-view="downloads"]').click();
       await page.waitForSelector('#downloads.nuvio-view-active', { timeout: 10000 });
-      await page.waitForFunction(() => document.querySelectorAll('#download-grid .download-library-card').length === 5, null, { timeout: 12000 });
+      await page.waitForFunction(() => document.querySelectorAll('#downloads #download-grid .download-library-card').length === 5, null, { timeout: 12000 });
       const downloadLayout = await page.evaluate(() => {
         const section = document.querySelector('#downloads');
-        const grid = document.querySelector('#download-grid');
-        const cards = [...grid.querySelectorAll('.download-library-card')].filter(card => !card.hidden);
-        const sectionRect = section.getBoundingClientRect();
-        const gridRect = grid.getBoundingClientRect();
+        const groups = [...section.querySelectorAll('.version-platform')];
+        const expectedIds = ['versions-mobile','versions-desktop','versions-tv','versions-smart-tv'];
+        const ids = groups.map(group => group.id);
         const overlaps = [];
-        const visibleChildren = [...section.children].filter(el => {
-          const r = el.getBoundingClientRect();
-          return getComputedStyle(el).display !== 'none' && r.width > 0 && r.height > 0;
-        });
-        for (let i = 0; i < visibleChildren.length; i++) for (let j = i + 1; j < visibleChildren.length; j++) {
-          const a = visibleChildren[i].getBoundingClientRect(), b = visibleChildren[j].getBoundingClientRect();
-          if (a.left < b.right - 1 && a.right > b.left + 1 && a.top < b.bottom - 1 && a.bottom > b.top + 1) overlaps.push([visibleChildren[i].className, visibleChildren[j].className]);
+        const rects = groups.map(group => ({id: group.id, rect: group.getBoundingClientRect()}));
+        for (let i=0;i<rects.length;i++) for (let j=i+1;j<rects.length;j++) {
+          const a=rects[i].rect,b=rects[j].rect;
+          if (a.left<b.right-1 && a.right>b.left+1 && a.top<b.bottom-1 && a.bottom>b.top+1) overlaps.push([rects[i].id,rects[j].id]);
         }
-        const columns = getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length;
-        return {sectionWidth: sectionRect.width, gridWidth: gridRect.width, columns, cardCount: cards.length, overlaps, cardsWithinGrid: cards.every(card => {
-          const r = card.getBoundingClientRect(); return r.left >= gridRect.left - 1 && r.right <= gridRect.right + 1;
-        })};
+        const children=[...section.children].filter(el=>!el.classList.contains('nuvio-view-back')&&getComputedStyle(el).display!=='none');
+        const siblingOverlaps=[];
+        for(let i=0;i<children.length;i++)for(let j=i+1;j<children.length;j++){
+          const a=children[i].getBoundingClientRect(),b=children[j].getBoundingClientRect();
+          if(a.left<b.right-1&&a.right>b.left+1&&a.top<b.bottom-1&&a.bottom>b.top+1)siblingOverlaps.push([children[i].className,children[j].className]);
+        }
+        const grid=document.querySelector('#download-grid');
+        const cards=[...grid.querySelectorAll('.download-library-card')].filter(card=>!card.hidden);
+        const columns=getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length;
+        const mobileGroup=section.querySelector('#versions-mobile');
+        const mobileGrid=mobileGroup?.querySelector('.version-grid');
+        const latest=mobileGroup?.querySelector('.download-release-subsection');
+        const mobileGridRect=mobileGrid?.getBoundingClientRect(),latestRect=latest?.getBoundingClientRect(),gridRect=grid.getBoundingClientRect();
+        const latestReleaseOverlap=Boolean(mobileGridRect&&latestRect&&mobileGridRect.left<latestRect.right-1&&mobileGridRect.right>latestRect.left+1&&mobileGridRect.top<latestRect.bottom-1&&mobileGridRect.bottom>latestRect.top+1);
+        const cardsWithinGrid=cards.every(card=>{const r=card.getBoundingClientRect();return r.left>=gridRect.left-1&&r.right<=gridRect.right+1;});
+        const platformCardCounts=groups.map(group=>group.querySelectorAll('.version-card').length);
+        return {ids,expectedIds,groupsCount:groups.length,overlaps,siblingOverlaps,cardCount:cards.length,columns,statusVisible:!document.querySelector('#status').hidden,legacyVersionsSection:!!document.querySelector('#versions'),latestReleaseOverlap,cardsWithinGrid,platformCardCounts};
       });
       const expectedColumns = viewport.width <= 480 ? 1 : viewport.width <= 1000 ? 2 : 3;
-      if (downloadLayout.cardCount !== 5) failures.push(viewport.name + ': expected 5 download cards, found ' + downloadLayout.cardCount);
-      if (downloadLayout.columns !== expectedColumns) failures.push(viewport.name + ': downloads grid expected ' + expectedColumns + ' columns, found ' + downloadLayout.columns);
-      if (downloadLayout.overlaps.length) failures.push(viewport.name + ': downloads section overlap ' + JSON.stringify(downloadLayout.overlaps));
-      if (!downloadLayout.cardsWithinGrid) failures.push(viewport.name + ': downloads card exceeds grid bounds');
+      if (downloadLayout.groupsCount !== 4 || JSON.stringify(downloadLayout.ids) !== JSON.stringify(downloadLayout.expectedIds)) failures.push(viewport.name + ': platform groups missing or out of order ' + JSON.stringify(downloadLayout.ids));
+      if (downloadLayout.overlaps.length) failures.push(viewport.name + ': platform groups overlap ' + JSON.stringify(downloadLayout.overlaps));
+      if (downloadLayout.siblingOverlaps.length) failures.push(viewport.name + ': downloads children overlap ' + JSON.stringify(downloadLayout.siblingOverlaps));
+      if (downloadLayout.cardCount !== 5) failures.push(viewport.name + ': expected 5 latest-release assets, found ' + downloadLayout.cardCount);
+      if (downloadLayout.columns !== expectedColumns) failures.push(viewport.name + ': latest-release grid expected ' + expectedColumns + ' columns, found ' + downloadLayout.columns);
+      if (downloadLayout.statusVisible) failures.push(viewport.name + ': System Status appears in Downloads view');
+      if (downloadLayout.legacyVersionsSection) failures.push(viewport.name + ': old versions section remains');
+      if (downloadLayout.latestReleaseOverlap) failures.push(viewport.name + ': latest release overlaps mobile editions');
+      if (!downloadLayout.cardsWithinGrid) failures.push(viewport.name + ': latest release card escapes grid');
+      if (JSON.stringify(downloadLayout.platformCardCounts) !== JSON.stringify([3,1,5,2])) failures.push(viewport.name + ': unexpected platform card counts ' + JSON.stringify(downloadLayout.platformCardCounts));
       await page.locator('#downloads .nuvio-view-back').click();
       const screenshot = path.join(outputDir, viewport.name + '.png');
       await page.screenshot({ path: screenshot, fullPage: true, animations: 'disabled' });
