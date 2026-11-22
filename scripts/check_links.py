@@ -483,6 +483,8 @@ def main():
         "release_cache_timestamp": release_cache_timestamp,
         "release_cache_age_seconds": release_cache_age,
         "release_cache_stale": release_cache_stale,
+        "issues": failure_diagnostics["issues"],
+        "failure_categories": failure_diagnostics["failure_categories"],
         "checks": results,
     }
 
