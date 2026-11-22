@@ -861,7 +861,17 @@ function renderVersionCardStatuses(report) {
     const title = card.querySelector('h3')?.textContent.trim();
     const cardItems = items.filter(item => item.card === title);
     if (!cardItems.length) {
-      status.textContent = t('لا توجد روابط تنزيل مباشرة');
+      const tags = [...new Set([...card.querySelectorAll('a.version-download')].map(link => {
+        try {
+          const parts = new URL(link.href).pathname.split('/').filter(Boolean);
+          const index = parts.indexOf('download');
+          return index >= 0 ? parts[index + 1] : null;
+        } catch {
+          return null;
+        }
+      }).filter(Boolean))];
+      const versionText = tags.length ? `${t('الإصدار')} ${tags.join(' / ')}` : t('الإصدار غير متاح');
+      status.textContent = `${versionText} · ${t('تعذر التحقق من روابط الإصدار')}`;
       status.dataset.state = 'unknown';
       return;
     }
