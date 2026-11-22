@@ -981,11 +981,6 @@ function renderDownloads(report) {
   const healthyAssets = validAssets.filter(asset => asset.ok === true && safeHttpsUrl(asset.download_url));
   const releaseHealthy = validAssets.length > 0 && healthyAssets.length === validAssets.length;
 
-  // Remove previously rendered latest-release links when the report has no assets.
-  if (grid && validAssets.length === 0) {
-    grid.querySelectorAll('.enhanced-latest-release').forEach(group => group.remove());
-  }
-
   if (heading) heading.innerHTML = `<bdi dir="ltr">${escapeHTML(appVersion)}</bdi>`;
   $('#release-version').textContent = appVersion;
   $('#release-date').textContent = formatDate(release.published_at);
@@ -1000,7 +995,8 @@ function renderDownloads(report) {
   }
   if (healthLabel) healthLabel.textContent = t(releaseHealthy ? 'متاح' : 'يحتاج مراجعة');
 
-  if (grid) grid.querySelectorAll('.enhanced-latest-release').forEach(group => group.remove());}
+  if (grid) grid.querySelectorAll('.enhanced-latest-release').forEach(group => group.remove());
+}
 
 async function loadStatus() {
   try {
