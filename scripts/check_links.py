@@ -292,6 +292,19 @@ def build_diagnostic_summary(results):
     return f"{len(failures)} failure(s): categories {categories}."
 
 
+def build_change_summary(events):
+    """Summarize only evidence-backed changes detected against the previous report."""
+    counts = {}
+    for event in events:
+        event_type = event.get("type", "unknown")
+        counts[event_type] = counts.get(event_type, 0) + 1
+    return {
+        "count": len(events),
+        "by_type": dict(sorted(counts.items())),
+        "events": events,
+    }
+
+
 def load_release_cache():
     try:
         with open(RELEASE_CACHE_PATH, "r", encoding="utf-8") as cache_file:
@@ -592,15 +605,17 @@ def main():
         previous = old_manifests.get(name)
 
         if previous is None:
-            events.append({
-                "date": now,
-                "type": "added",
-                "title": f"إضافة مصدر جديد: {name}",
-                "detail": "تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.",
-                "source": name,
-                "source_url": item.get("url"),
-                "new_version": item.get("version")
-            })
+            # Report newly discovered sources only when the manifest is validated.
+            if item.get("ok"):
+                events.append({
+                    "date": now,
+                    "type": "added",
+                    "title": f"إضافة مصدر جديد: {name}",
+                    "detail": "تم إدراج Manifest والتحقق من استجابته وصحة بنيته.",
+                    "source": name,
+                    "source_url": item.get("url"),
+                    "new_version": item.get("version")
+                })
             continue
 
         if bool(previous.get("ok")) != bool(item.get("ok")):
@@ -862,6 +877,8 @@ def main():
 
     history.extend(unique_events)
     history = history[-100:]
+    report["change_summary"] = build_change_summary(unique_events)
+    report["change_count"] = len(unique_events)
 
     os.makedirs("data", exist_ok=True)
 
