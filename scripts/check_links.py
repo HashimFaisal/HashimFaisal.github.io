@@ -7,6 +7,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse
 
 REPO = "luqmanfadlli/NuvioMobile-Enhanced"
@@ -47,13 +48,37 @@ HEADERS = {
 }
 
 
-def fetch(url, method="GET"):
+def fetch(url, method="GET", retries=2, backoff_seconds=0.5):
+    """Retry transient network/upstream failures with bounded exponential backoff."""
     request_headers = dict(HEADERS)
     token = os.environ.get("GITHUB_TOKEN")
     if token and urlparse(url).hostname == "api.github.com":
         request_headers["Authorization"] = f"Bearer {token}"
     request = Request(url, headers=request_headers, method=method)
-    return urlopen(request, timeout=20)
+    for attempt in range(retries + 1):
+        try:
+            response = urlopen(request, timeout=20)
+            if response.status >= 500 and attempt < retries:
+                response.close()
+                time.sleep(min(backoff_seconds * (2 ** attempt), 3))
+                continue
+            return response
+        except HTTPError as exc:
+            if exc.code not in (429, 500, 502, 503, 504) or attempt >= retries:
+                raise
+            retry_after = exc.headers.get("Retry-After") if exc.headers else None
+            try:
+                delay = min(float(retry_after), 3) if retry_after else min(backoff_seconds * (2 ** attempt), 3)
+            except (TypeError, ValueError):
+                delay = min(backoff_seconds * (2 ** attempt), 3)
+            exc.close()
+            time.sleep(delay)
+        except (URLError, TimeoutError):
+            if attempt >= retries:
+                raise
+            time.sleep(min(backoff_seconds * (2 ** attempt), 3))
+    raise RuntimeError("Fetch retry loop exhausted")
+
 
 
 def check_manifest(name, url):
