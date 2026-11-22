@@ -134,3 +134,14 @@
  #downloads .downloads-device-card,#downloads .release-asset-card,#downloads .downloads-device-nav .filter,#downloads .downloads-device-actions .downloads-device-link,#downloads .release-asset-action {transition:none!important}
  #downloads .downloads-device-card:hover,#downloads .release-asset-card:hover {transform:none!important}
 }
+
+/* Preserve the shared accent treatment used by library action controls. */
+#downloads .downloads-device-actions .downloads-device-link,
+#downloads .release-asset-action {
+  border-top-width: 1px;
+  background-image: linear-gradient(135deg, rgba(88,216,232,.12), rgba(163,148,255,.08));
+}
+#downloads .downloads-device-actions .downloads-device-link:hover,
+#downloads .release-asset-action:hover {
+  background-image: linear-gradient(135deg, rgba(88,216,232,.19), rgba(163,148,255,.13));
+}
