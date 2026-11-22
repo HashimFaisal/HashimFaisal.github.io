@@ -176,8 +176,8 @@ jobs:
           if any(token in downloads_html for token in legacy_classes):
               raise SystemExit("Legacy Downloads Center components remain in the new section.")
           app_js = Path("app.js").read_text(encoding="utf-8")
-          if "release-enhanced-link" not in app_js or "enhanced-latest-release" not in app_js:
-              raise SystemExit("Latest Enhanced release assets are not integrated into the Enhanced edition card.")
+          if "release-enhanced-link" in app_js or "enhanced-latest-release" in app_js:
+              raise SystemExit("Duplicate latest-release buttons must not be injected into the Nuvio Enhanced card.")
           if "querySelectorAll('.downloads-device-card')" not in app_js:
               raise SystemExit("Device version status checks are not connected to the new cards.")
           print("Resource categories, standalone device groups, and direct download actions are present.")
