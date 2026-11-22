@@ -1,53 +1,29 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="390" viewBox="0 0 1200 390">
-<defs>
-  <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="#070B16"/>
-    <stop offset=".52" stop-color="#111D33"/>
-    <stop offset="1" stop-color="#0D1526"/>
-  </linearGradient>
-  <linearGradient id="glow" x1="0" y1="0" x2="1" y2="1">
-    <stop stop-color="#A394FF"/>
-    <stop offset=".55" stop-color="#A394FF"/>
-    <stop offset="1" stop-color="#58D8E8"/>
-  </linearGradient>
-  <radialGradient id="orb">
-    <stop stop-color="#A394FF" stop-opacity=".42"/>
-    <stop offset="1" stop-color="#A394FF" stop-opacity="0"/>
-  </radialGradient>
-  <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
-    <path d="M32 0H0V32" fill="none" stroke="#A394FF" stroke-opacity=".09"/>
-  </pattern>
-  <filter id="blur"><feGaussianBlur stdDeviation="24"/></filter>
-  <filter id="shadow"><feGaussianBlur stdDeviation="5"/></filter>
-</defs>
-<rect width="1200" height="390" rx="26" fill="url(#bg)"/>
-<rect width="1200" height="390" rx="26" fill="url(#grid)"/>
-<circle cx="930" cy="100" r="210" fill="url(#orb)"/>
-<circle cx="1080" cy="310" r="170" fill="#58D8E8" opacity=".12" filter="url(#blur)"/>
-<path d="M0 310C230 250 350 390 600 315S970 220 1200 280" fill="none" stroke="url(#glow)" stroke-opacity=".28" stroke-width="2"/>
-<path d="M0 330C230 270 350 410 600 335S970 240 1200 300" fill="none" stroke="#A394FF" stroke-opacity=".13" stroke-width="1"/>
-<rect x="66" y="52" width="190" height="30" rx="15" fill="#A394FF" fill-opacity=".16" stroke="#A394FF" stroke-opacity=".45"/>
-<circle cx="85" cy="67" r="4" fill="#58D8E8"/>
-<text x="99" y="72" fill="#A394FF" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">INDEPENDENT DEVELOPER</text>
-<text x="64" y="166" fill="#F2F6FF" font-family="Arial,sans-serif" font-size="62" font-weight="800" letter-spacing="-2">HashimFaisal</text>
-<rect x="67" y="190" width="82" height="4" rx="2" fill="url(#glow)"/>
-<text x="66" y="229" fill="#F2F6FF" font-family="Arial,sans-serif" font-size="21" letter-spacing="1">BUILDING THE NUVIO ECOSYSTEM</text>
-<text x="66" y="263" fill="#A2B1C8" font-family="Arial,sans-serif" font-size="15">Plugins • Open-source projects • Community</text>
-<g transform="translate(66 302)">
-  <rect width="132" height="34" rx="17" fill="#F2F6FF" fill-opacity=".06" stroke="#A394FF" stroke-opacity=".35"/>
-  <text x="66" y="22" fill="#A394FF" font-family="Arial,sans-serif" font-size="12" text-anchor="middle">NUVIO PLUGINS</text>
-  <rect x="145" width="112" height="34" rx="17" fill="#F2F6FF" fill-opacity=".06" stroke="#58D8E8" stroke-opacity=".35"/>
-  <text x="201" y="22" fill="#8DEAF3" font-family="Arial,sans-serif" font-size="12" text-anchor="middle">DEVELOPMENT</text>
-</g>
-<g transform="translate(830 80)">
-  <circle cx="145" cy="115" r="105" fill="none" stroke="#A394FF" stroke-opacity=".2" stroke-width="1"/>
-  <circle cx="145" cy="115" r="82" fill="#0D1526" stroke="url(#glow)" stroke-width="2"/>
-  <circle cx="145" cy="115" r="67" fill="#111D33" stroke="#A394FF" stroke-opacity=".35"/>
-  <path d="M115 83L85 115L115 147M175 83L205 115L175 147M155 70L135 160" fill="none" stroke="url(#glow)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-  <circle cx="145" cy="115" r="118" fill="none" stroke="#58D8E8" stroke-opacity=".18" stroke-dasharray="4 10"/>
-  <circle cx="145" cy="-3" r="5" fill="#58D8E8"/>
-  <circle cx="263" cy="115" r="5" fill="#A394FF"/>
-  <circle cx="27" cy="115" r="5" fill="#58D8E8"/>
-</g>
-<text x="1130" y="360" fill="#A2B1C8" font-family="Arial,sans-serif" font-size="11" text-anchor="end" letter-spacing="2">DESIGNED TO EVOLVE</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" role="img" aria-labelledby="title desc">
+  <title id="title">Hashim Faisal logo</title>
+  <desc id="desc">A static geometric silver and cyan emblem with a central play symbol.</desc>
+  <defs>
+    <linearGradient id="silver" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F2F6FF"/>
+      <stop offset=".5" stop-color="#A2B1C8"/>
+      <stop offset="1" stop-color="#F2F6FF"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#58D8E8"/>
+      <stop offset=".55" stop-color="#A394FF"/>
+      <stop offset="1" stop-color="#58D8E8"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#58D8E8"/>
+      <stop offset="1" stop-color="#A394FF"/>
+    </linearGradient>
+  </defs>
+  <g stroke-linejoin="round" stroke-linecap="round">
+    <path d="M80 13 132 43 132 111 80 141 28 111 28 43Z" fill="#070B16" stroke="#58D8E8" stroke-opacity=".35" stroke-width="2"/>
+    <path d="M80 23 122 47 122 105 80 129 38 105 38 47Z" fill="#0D1526" stroke="url(#edge)" stroke-width="3"/>
+    <path d="M80 23 80 76 38 101 38 47Z" fill="url(#silver)" stroke="#F2F6FF" stroke-width="1.5"/>
+    <path d="M80 23 122 47 122 105 80 129 80 76Z" fill="url(#cyan)" stroke="#58D8E8" stroke-width="1.5"/>
+    <path d="M80 76 122 52 122 105 80 129Z" fill="#111D33" opacity=".22"/>
+    <path d="M69 57 101 76 69 95Z" fill="#070B16" stroke="#F2F6FF" stroke-width="2"/>
+    <path d="M58 111 80 124 102 111" fill="none" stroke="#A2B1C8" stroke-width="2" opacity=".8"/>
+  </g>
 </svg>
