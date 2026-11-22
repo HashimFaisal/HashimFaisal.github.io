@@ -195,5 +195,20 @@ class RiskForecastTests(unittest.TestCase):
         )
         self.assertEqual(numeric_string["failure_code"], "upstream_server_error")
 
+    def test_http_timeout_statuses_are_classified_as_network_timeouts(self):
+        for status in (408, 504, "408", "504"):
+            with self.subTest(status=status):
+                diagnostic = check_links.diagnose_check(
+                    {"name": "API", "ok": False, "http_status": status}
+                )
+                self.assertEqual(diagnostic["failure_code"], "timeout")
+                self.assertEqual(diagnostic["failure_category"], "network")
+
+    def test_http_425_is_classified_as_retryable_rate_limit(self):
+        diagnostic = check_links.diagnose_check(
+            {"name": "API", "ok": False, "http_status": 425}
+        )
+        self.assertEqual(diagnostic["failure_code"], "rate_limited")
+
 if __name__ == "__main__":
     unittest.main()
