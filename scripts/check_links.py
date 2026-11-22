@@ -17,6 +17,7 @@ MANIFESTS = {
     "ALL-IN-ONE": "https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/refs/heads/main/manifest.json",
     "CinemaBox": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json",
     "Cinemana": "https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json",
+    "Torrentio": "https://torrentio.strem.fun/manifest.json",
     "OpenSubtitles": "https://opensubtitles-v3.strem.io/manifest.json",
     "TheSubtitleDB": "https://api.thesubtitledb.org/integrations/stremio/manifest.json",
     "SubtitleVideo": "https://subtitlevideo.com/stremio/en,ar/manifest.json",
@@ -28,6 +29,8 @@ MANIFESTS = {
     "IMDb Popular": "https://imdb-popular-stremio.vercel.app/manifest.json",
     "My Lists": "https://mylistsaddon.com/manifest.json",
     "Ratings Aggregator": "https://rating-aggregator.elfhosted.com/manifest.json",
+    "AIOMetadata": "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
+    "TMDB Discover+": "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
     "Anime Kitsu": "https://anime-kitsu.strem.fun/manifest.json",
     "IMDb Ratings": "https://imdbratings.kgenovz.com/manifest.json",
     "BetterPosters for Nuvio": "https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json",
@@ -121,6 +124,17 @@ def check_manifest(name, url):
                 "manifest_id": str(payload.get("id", "not specified")),
                 "url": url,
             }
+    except HTTPError as exc:
+        # Preserve the upstream HTTP response so diagnostics can distinguish
+        # missing manifests, access blocks, rate limits, and server outages.
+        return {
+            "name": name,
+            "type": "manifest",
+            "ok": False,
+            "http_status": exc.code,
+            "error": f"HTTP {exc.code}: {exc.reason}",
+            "url": url,
+        }
     except Exception as exc:
         return {
             "name": name,
@@ -260,10 +274,19 @@ def diagnose_check(item):
             "timeout", "network",
             "Retry after a short delay; check network reachability if persistent."
         )
-    elif any(term in error for term in ("dns", "name or service", "getaddrinfo")):
+    elif any(term in error for term in ("dns", "name or service", "name resolution", "getaddrinfo")):
         code, category, action = (
             "dns_failure", "network",
             "Check DNS resolution and network connectivity."
+        )
+    elif any(term in error for term in (
+        "connection refused", "connection reset", "network is unreachable",
+        "no route to host", "remote end closed connection",
+        "failed to establish a new connection",
+    )):
+        code, category, action = (
+            "connection_failed", "network",
+            "Check whether the upstream host is reachable and accepting HTTPS connections."
         )
     elif any(term in error for term in ("ssl", "tls", "certificate")):
         code, category, action = (
@@ -777,6 +800,11 @@ def main():
         "ok": passed == len(results),
         "passed": passed,
         "total": len(results),
+        "manifest_coverage": {
+            "configured": len(MANIFESTS),
+            "healthy": sum(1 for item in results if item.get("type") == "manifest" and item.get("ok")),
+            "failed": sum(1 for item in results if item.get("type") == "manifest" and not item.get("ok")),
+        },
         "release": release_data,
         "stable_release": stable_release_data,
         "release_error": release_error,
