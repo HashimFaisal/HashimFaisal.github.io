@@ -756,7 +756,7 @@ test('Nuvio downloads library integrates release assets into mobile cards withou
   await expect(page.locator('#downloads .downloads-mobile-release-assets')).toHaveCount(0);
   await expect(page.locator('#downloads .downloads-toolbar, #downloads-search, #downloads-filters, #downloads-visible-count, #downloads .downloads-disclaimer')).toHaveCount(0);
   await expect(page.locator('#downloads .download-card, #downloads .download-library-card, #downloads .download-release-subsection, #downloads .download-grid, #downloads .version-platform')).toHaveCount(0);
-  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\\.0\\.0$/ }) });
+  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.0\.0$/ }) });
   await expect(enhancedCard).toHaveCount(1);
   await expect(enhancedCard.locator('a.version-download')).toHaveCount(5);
   await expect(enhancedCard.locator('a[href$="nuvio-1.0.0-arm64-v8a-release.apk"]')).toHaveCount(1);
