@@ -225,7 +225,7 @@ def diagnose_check(item):
             "recommended_action": "No action required.",
         }
 
-    status = item.get("http_status")
+    status = normalize_http_status(item.get("http_status"))
     error = str(item.get("error") or "").lower()
     check_type = item.get("type", "unknown")
     name = item.get("name", "Unknown")
