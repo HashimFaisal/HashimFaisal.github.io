@@ -56,6 +56,62 @@ def fetch(url, method="GET"):
     return urlopen(request, timeout=20)
 
 
+FAILURE_GUIDANCE = {
+    "rate_limit": "Wait for the API limit to reset or use an authenticated request.",
+    "server_error": "Retry later; the upstream service may be temporarily unavailable.",
+    "client_error": "Check the endpoint, resource, and access permissions.",
+    "timeout": "Retry with a longer timeout or check upstream responsiveness.",
+    "dns": "Check hostname and DNS resolution for the upstream service.",
+    "tls": "Check the upstream certificate and TLS configuration.",
+    "network": "Check connectivity from the runner to the upstream service.",
+    "malformed_response": "The endpoint responded, but its content or schema was invalid.",
+    "missing_asset": "Verify the expected release asset exists and its name matches.",
+    "unknown": "Inspect the error details and retry the check.",
+}
+
+def diagnose_failure(error, check_type=None):
+    message = str(error or "").lower()
+    if any(marker in message for marker in ("429", "rate limit", "too many requests")):
+        category = "rate_limit"
+    elif any(marker in message for marker in ("timed out", "timeout", "time-out")):
+        category = "timeout"
+    elif any(marker in message for marker in ("name or service not known", "temporary failure in name resolution", "getaddrinfo", "dns")):
+        category = "dns"
+    elif any(marker in message for marker in ("ssl", "tls", "certificate", "cert verify")):
+        category = "tls"
+    elif any(marker in message for marker in ("connection refused", "connection reset", "network is unreachable", "urlopen error")):
+        category = "network"
+    elif any(marker in message for marker in ("502", "503", "504", "500", "bad gateway", "service unavailable")):
+        category = "server_error"
+    elif any(marker in message for marker in ("404", "403", "401", "400", "410")):
+        category = "client_error"
+    elif any(marker in message for marker in ("json", "manifest field", "exceeds", "not an object", "must be a")):
+        category = "malformed_response"
+    elif check_type == "download" and any(marker in message for marker in ("asset not found", "not found in selected")):
+        category = "missing_asset"
+    else:
+        category = "unknown"
+    return {"failure_category": category, "failure_hint": FAILURE_GUIDANCE[category]}
+
+def enrich_failures(results):
+    issues = []
+    for item in results:
+        if item.get("ok"):
+            continue
+        diagnosis = diagnose_failure(item.get("error", "Check failed"), item.get("type"))
+        item.update(diagnosis)
+        issues.append({
+            "name": item.get("name", "Unknown"),
+            "type": item.get("type", "unknown"),
+            "category": diagnosis["failure_category"],
+            "hint": diagnosis["failure_hint"],
+            "error": item.get("error", "Check failed"),
+        })
+    categories = {}
+    for issue in issues:
+        categories[issue["category"]] = categories.get(issue["category"], 0) + 1
+    return {"issues": issues, "failure_categories": categories}
+
 def check_manifest(name, url):
     try:
         # Bypass stale intermediary caches when checking live manifests.
