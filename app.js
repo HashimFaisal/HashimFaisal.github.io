@@ -913,7 +913,7 @@ function renderDownloads(report) {
     banner.dataset.state = releaseHealthy ? 'healthy' : 'warning';
     const version = $('#release-heading');
     if (version) version.insertAdjacentHTML('beforebegin',
-      `<span class="release-health"><i class="download-health-dot ${releaseHealthy ? 'is-healthy' : 'is-warning'}" aria-hidden="true"></i>${releaseHealthy ? t('الإصدار متاح') : t('تعذر تأكيد جميع الملفات')}</span>`);
+      `<span class="release-health"><i class="download-health-dot ${releaseHealthy ? 'is-healthy' : 'is-warning'}" aria-hidden="true"></i>${releaseHealthy ? t('متاح') : t('يحتاج مراجعة')}</span>`);
   }
 
   $('#download-grid').innerHTML = assets.map(asset => {
@@ -923,7 +923,7 @@ function renderDownloads(report) {
     );
     const ready = Boolean(downloadUrl);
     const healthy = ready && asset.ok === true;
-    const versionStatus = healthy ? t('الإصدار سليم') : (ready ? t('تعذر التحقق من الإصدار') : t('ملف غير متاح'));
+    const versionStatus = healthy ? t('سليم') : (ready ? t('يحتاج مراجعة') : t('ملف غير متاح'));
     return `<article class="download-card version-card" data-ready="${ready ? 'true' : 'false'}">
       <div class="version-card-meta"><span>Nuvio · ${escapeHTML(asset.label || 'Download')}</span><span class="version-kind ${healthy ? 'official' : ''}">${healthy ? t('متاح') : t('يحتاج مراجعة')}</span></div>
       <h3 class="download-file"><bdi dir="ltr">${escapeHTML(displayName)}</bdi></h3>
