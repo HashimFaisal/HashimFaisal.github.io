@@ -982,29 +982,32 @@ function renderDownloadFilters(assets) {
 
 function filterDownloads() {
   const term = ($('#downloads-search')?.value || '').trim().toLowerCase();
-  const cards = $$('#download-grid .release-asset-card');
-  let visible = 0;
+  const cards = $$('#download-grid .downloads-device-card');
+  const releaseCards = cards.filter(card => card.classList.contains('release-asset-card'));
+  let visibleAssets = 0;
+  let visibleCards = 0;
 
   cards.forEach(card => {
-    const matchesCategory = activeDownloadsFilter === 'all' ||
+    const isReleaseAsset = card.classList.contains('release-asset-card');
+    const matchesCategory = !isReleaseAsset || activeDownloadsFilter === 'all' ||
       card.dataset.category === activeDownloadsFilter;
     const matchesText = !term || card.textContent.toLowerCase().includes(term);
     card.hidden = !(matchesCategory && matchesText);
-    if (!card.hidden) visible++;
+    if (!card.hidden) {
+      visibleCards++;
+      if (isReleaseAsset) visibleAssets++;
+    }
   });
 
-  const total = cards.length;
   const count = $('#downloads-visible-count');
-  if (count) count.textContent = `${String(visible).padStart(2, '0')} ${t('ملفات')}`;
+  if (count) count.textContent = `${String(visibleAssets).padStart(2, '0')} ${t('ملفات')}`;
 
   const empty = $('#downloads-empty-state');
   if (empty) {
-    empty.hidden = visible !== 0;
-    if (total === 0) {
-      empty.textContent = t('لا توجد ملفات تنزيل منشورة لهذا الإصدار.');
-    } else {
-      empty.textContent = t('ما لقينا ملفات تطابق بحثك.');
-    }
+    empty.hidden = visibleCards !== 0;
+    empty.textContent = releaseCards.length
+      ? t('ما لقينا ملفات تطابق بحثك.')
+      : t('لا توجد ملفات تنزيل منشورة لهذا الإصدار.');
   }
 }
 
@@ -1054,7 +1057,7 @@ function renderDownloads(report) {
     if (fileCount) fileCount.textContent = '0';
     if (healthLabel) healthLabel.textContent = t('غير متاح');
     if (health) health.dataset.state = 'unknown';
-    if (grid) grid.innerHTML = '';
+    if (grid) grid.querySelectorAll('.release-asset-card').forEach(card => card.remove());
     renderDownloadFilters([]);
     filterDownloads();
     if (empty) empty.textContent = t('تعذر جلب معلومات الإصدار الأخير.');
@@ -1082,7 +1085,8 @@ function renderDownloads(report) {
   if (healthLabel) healthLabel.textContent = t(releaseHealthy ? 'متاح' : 'يحتاج مراجعة');
 
   if (grid) {
-    grid.innerHTML = validAssets.map(asset => {
+    grid.querySelectorAll('.release-asset-card').forEach(card => card.remove());
+    const renderedAssets = validAssets.map(asset => {
       const downloadUrl = safeHttpsUrl(asset.download_url);
       const displayName = asset.name || (
         asset.label === 'iOS IPA' ? 'iOS IPA package' : t('ملف غير متاح')
@@ -1106,10 +1110,10 @@ function renderDownloads(report) {
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
         : t('تاريخ الرفع غير متاح');
 
-      return `<article class="release-asset-card plugin-card" data-category="${category}" data-ready="${ready ? 'true' : 'false'}">
-        <div class="release-asset-card__top">
+      return `<article class="downloads-device-card plugin-card release-asset-card" data-category="${category}" data-ready="${ready ? 'true' : 'false'}">
+        <div class="downloads-device-card__meta release-asset-card__top">
           <span class="release-asset-icon" aria-hidden="true">${fileType}</span>
-          <span class="release-asset-kind">${t(categoryLabel)}</span>
+          <span class="downloads-device-kind release-asset-kind">${t(categoryLabel)}</span>
         </div>
         <h3 class="release-asset-name"><bdi dir="ltr">${escapeHTML(displayName)}</bdi></h3>
         <p class="release-asset-description">${t('ملف تثبيت مباشر لـ Nuvio.')}</p>
@@ -1130,6 +1134,7 @@ function renderDownloads(report) {
         </div>
       </article>`;
     }).join('');
+    grid.insertAdjacentHTML('beforeend', renderedAssets);
   }
 
   renderDownloadFilters(validAssets);
@@ -1178,7 +1183,7 @@ async function loadStatus() {
     $('#health-detail').textContent = t('تعذر تحميل تقرير الفحص');
     const healthCard = $('#health-state')?.closest('.stat-card');
     if (healthCard) healthCard.dataset.health = 'unknown';
-    $('#download-grid').innerHTML = '';
+    $('#download-grid')?.querySelectorAll('.release-asset-card').forEach(card => card.remove());
     renderDownloadFilters([]);
     filterDownloads();
     const downloadsEmpty = $('#downloads-empty-state');

@@ -382,7 +382,7 @@
         <div class="downloads-group-heading">
           <div><span class="eyebrow">01 / MOBILE</span><h3 id="versions-mobile-title">الموبايل · Android وiPhone</h3><p>نسخ الهواتف، مع روابط APK وIPA المباشرة عند توفرها.</p></div>
         </div>
-        <div class="downloads-device-grid plugin-grid">
+        <div class="downloads-device-grid plugin-grid" id="download-grid" aria-live="polite">
           <article class="downloads-device-card plugin-card">
             <div class="downloads-device-card__meta"><span>Android · رسمي</span><span class="downloads-device-kind official">رسمي</span></div>
             <h3>Nuvio Mobile</h3>
@@ -422,24 +422,13 @@
           </article>
         </div>
 
-        <div class="downloads-mobile-release-assets">
-          <div class="downloads-group-heading">
-            <div><span class="eyebrow">LATEST OFFICIAL RELEASE</span><h3>ملفات الإصدار الأخير</h3><p>ملفات مباشرة مرتبطة بالإصدار المنشور، مع فحص حالة الروابط.</p></div>
-            <span class="section-count" id="downloads-visible-count">05 FILES</span>
-          </div>
-          <div class="toolbar downloads-toolbar">
-        <label class="search-box downloads-search-box">
-          <span aria-hidden="true">⌕</span>
-          <input id="downloads-search" type="search" placeholder="ابحث عن ملف تنزيل..." aria-label="ابحث عن ملف تنزيل" autocomplete="off">
-        </label>
-        <div class="filters downloads-filters" id="downloads-filters" role="group" aria-label="تصفية ملفات التنزيل"></div>
-      </div>
-
-      <div class="release-assets-grid" id="download-grid" aria-live="polite">
-        <p class="muted">جارٍ تحميل روابط التنزيل...</p>
-      </div>
-      <div class="empty-state downloads-empty-state" id="downloads-empty-state" hidden>ما لقينا ملفات تطابق بحثك.</div>
-    
+        <div class="toolbar downloads-toolbar">
+          <label class="search-box downloads-search-box">
+            <span aria-hidden="true">⌕</span>
+            <input id="downloads-search" type="search" placeholder="ابحث عن ملف تنزيل..." aria-label="ابحث عن ملف تنزيل" autocomplete="off">
+          </label>
+          <div class="filters downloads-filters" id="downloads-filters" role="group" aria-label="تصفية ملفات التنزيل"></div>
+          <span class="section-count downloads-visible-count" id="downloads-visible-count">05 ملفات</span>
         </div>
       </section>
 
