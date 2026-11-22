@@ -148,6 +148,56 @@ def check_download(name, asset):
             }
 
 
+
+RELEASE_CACHE_PATH = "data/release-cache.json"
+REQUIRED_RELEASE_ASSETS = tuple(APK_ASSETS.values()) + ("-enhanced-release.ipa",)
+
+
+def load_release_cache():
+    try:
+        with open(RELEASE_CACHE_PATH, "r", encoding="utf-8") as cache_file:
+            cache = json.load(cache_file)
+        release = cache.get("release") if isinstance(cache, dict) else None
+        assets = release.get("assets") if isinstance(release, dict) else None
+        if not isinstance(release, dict) or not isinstance(assets, list):
+            return None
+        names = [item.get("name", "") for item in assets if isinstance(item, dict)]
+        urls = [item.get("browser_download_url", "") for item in assets if isinstance(item, dict)]
+        if not release.get("tag_name") or not all(
+            any(name.endswith(suffix) for name in names) for suffix in REQUIRED_RELEASE_ASSETS
+        ):
+            return None
+        if not all(url.startswith("https://") for url in urls if url):
+            return None
+        for suffix in REQUIRED_RELEASE_ASSETS:
+            asset = next((item for item in assets if isinstance(item, dict) and item.get("name", "").endswith(suffix)), None)
+            if not asset or not isinstance(asset.get("browser_download_url"), str) or not asset["browser_download_url"].startswith("https://"):
+                return None
+        return cache
+    except (OSError, ValueError, TypeError):
+        return None
+
+
+def save_release_cache(release, stable_release):
+    if not isinstance(release, dict) or not isinstance(release.get("assets"), list):
+        return False
+    cache = {"cached_at": datetime.now(timezone.utc).isoformat(), "release": release, "stable_release": stable_release}
+    # Only replace a good snapshot with a release containing every expected download.
+    try:
+        for suffix in REQUIRED_RELEASE_ASSETS:
+            asset = next((item for item in release["assets"] if isinstance(item, dict) and item.get("name", "").endswith(suffix)), None)
+            if not asset or not isinstance(asset.get("browser_download_url"), str) or not asset["browser_download_url"].startswith("https://"):
+                return False
+        os.makedirs("data", exist_ok=True)
+        temp_path = RELEASE_CACHE_PATH + ".tmp"
+        with open(temp_path, "w", encoding="utf-8") as file:
+            json.dump(cache, file, ensure_ascii=False, indent=2)
+            file.write("\n")
+        os.replace(temp_path, RELEASE_CACHE_PATH)
+        return True
+    except (OSError, TypeError, ValueError):
+        return False
+
 def main():
     with ThreadPoolExecutor(max_workers=4) as executor:
         results = list(executor.map(
@@ -206,12 +256,23 @@ def main():
     except Exception as exc:
         release_error = str(exc)
 
+    release_fetch_succeeded = release is not None
+    release_fallback_used = False
+    release_cache_timestamp = None
+    if release is None:
+        cached = load_release_cache()
+        if cached:
+            release = cached.get("release")
+            stable_release = cached.get("stable_release")
+            release_cache_timestamp = cached.get("cached_at")
+            release_fallback_used = bool(release)
+
     # Add an explicit beta-release health check so a failed release lookup
     # cannot leave the overall report looking fully healthy.
     results.append({
         "name": "Nuvio beta release",
         "type": "release",
-        "ok": release is not None,
+        "ok": release_fetch_succeeded,
         "tag": (release or {}).get("tag_name"),
         "error": release_error,
     })
@@ -323,6 +384,9 @@ def main():
                 "error": release_error or "Release unavailable",
             })
 
+    if release_fetch_succeeded and release_data and len(release_data.get("assets", [])) == 5 and all(asset.get("ok") for asset in release_data["assets"]):
+        save_release_cache(release, stable_release)
+
     passed = sum(1 for item in results if item["ok"])
 
     report = {
@@ -333,6 +397,8 @@ def main():
         "release": release_data,
         "stable_release": stable_release_data,
         "release_error": release_error,
+        "release_fallback_used": release_fallback_used,
+        "release_cache_timestamp": release_cache_timestamp,
         "checks": results,
     }
 

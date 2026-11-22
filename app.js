@@ -66,6 +66,8 @@ const translations = {
   'ما لقينا موارد تطابق بحثك.': 'No resources match your search.',
   'موارد': 'RESOURCES',
   'جارٍ تحميل روابط التنزيل...': 'Loading download links...',
+  'تعذر تأكيد الرابط حالياً؛ الرابط محفوظ ويمكن تجربته.': 'Link verification failed; the saved download link is still available to try.',
+  'بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.': 'Showing the saved release because the latest update could not be fetched.',
   'تحديث': 'Update',
   'نسخ الرابط': 'Copy Link',
   'تثبيت في Nuvio': 'Install in Nuvio',
@@ -679,19 +681,19 @@ function renderDownloads(report) {
   $('#published-at').textContent = formatDate(release.published_at);
 
   const assets = release.assets || [];
-  $('#download-count').textContent = assets.filter(item =>
-    item.ok && safeHttpsUrl(item.download_url)
-  ).length;
+  $('#download-count').textContent = assets.filter(item => safeHttpsUrl(item.download_url)).length;
   $('#download-grid').innerHTML = assets.map(asset => {
     const downloadUrl = safeHttpsUrl(asset.download_url);
     const displayName = asset.name || (
       asset.label === 'iOS IPA' ? 'iOS IPA package' : t('ملف غير متاح')
     );
-    const ready = Boolean(asset.ok && downloadUrl);
+    const ready = Boolean(downloadUrl);
     return `<article class="download-card" data-ready="${ready ? 'true' : 'false'}">
       <strong class="download-file"><bdi dir="ltr">${escapeHTML(displayName)} · ${formatBytes(asset.size_bytes)}</bdi></strong>
       <small class="download-platform">Nuvio · ${escapeHTML(asset.label || 'Download')}</small>
+      ${report.release_fallback_used ? `<small class="download-meta">${t('بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.')}</small>` : ''}
       <small class="download-meta">${t('الإصدار')}: ${escapeHTML(appVersion)}</small>
+      ${ready && !asset.ok ? `<small class="download-meta">${t('تعذر تأكيد الرابط حالياً؛ الرابط محفوظ ويمكن تجربته.')}</small>` : ''}
       <small class="download-meta">${asset.uploaded_at
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
         : t('تاريخ الرفع غير متاح')}</small>
