@@ -9,7 +9,15 @@ from html5lib.html5parser import HTMLParser
 
 ROOT = Path(__file__).resolve().parents[1]
 HTML = ROOT / "index.html"
-CSS_FILES = (ROOT / "style.css", ROOT / "premium-ui.css")
+# Validate every stylesheet loaded by index.html, including the touch and
+# download-center layers, so syntax/palette/duplicate-rule checks cover the
+# complete active visual system.
+CSS_FILES = (
+    ROOT / "style.css",
+    ROOT / "premium-ui.css",
+    ROOT / "touch-effects.css",
+    ROOT / "downloads-redesign.css",
+)
 JSON_FILES = (ROOT / "data/status.json", ROOT / "data/changelog.json", ROOT / "data/updates.json")
 errors = []
 
@@ -100,6 +108,9 @@ def check_duplicate_css_rules(rules, context, css_name, seen):
             )
 
 for css_path in CSS_FILES:
+    if not css_path.exists():
+        fail(f"Missing active stylesheet: {css_path.name}")
+        continue
     css_text = css_path.read_text(encoding="utf-8")
     rules = tinycss2.parse_stylesheet(css_text, skip_comments=True, skip_whitespace=True)
     parse_errors = [rule for rule in rules if rule.type == "error"]
