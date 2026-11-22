@@ -935,7 +935,7 @@ function renderDeviceCardStatuses(report) {
     if (failed) {
       status.textContent = `${versionText} · ${failed} · ${t('رابط تنزيل غير متاح')}`;
     } else {
-      status.innerHTML = `<span class="downloads-device-status-dot" aria-hidden="true"></span><span>${escapeHTML(versionText)}</span>`;
+      status.textContent = versionText;
     }
     status.title = `${t('فحص روابط التنزيل')}: ${cardItems.length}`;
   });
