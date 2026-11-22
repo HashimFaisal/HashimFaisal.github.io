@@ -1,12 +1,84 @@
 {
-  "checked_at": "2026-11-22T06:00:30.526752+00:00",
-  "ok": true,
-  "passed": 26,
-  "total": 26,
+  "checked_at": "2026-11-22T06:10:32.402914+00:00",
+  "ok": false,
+  "passed": 28,
+  "total": 30,
   "manifest_coverage": {
     "configured": 20,
     "healthy": 20,
     "failed": 0
+  },
+  "source_retrieval": {
+    "tested": 3,
+    "streams_found": 1,
+    "inconclusive": 0,
+    "failed": 2,
+    "stream_checks": [
+      {
+        "name": "Torrentio",
+        "type": "stream",
+        "ok": true,
+        "http_status": 200,
+        "test_title": "The Matrix",
+        "probe_status": "streams_found",
+        "stream_count": 500,
+        "error": null,
+        "failure_code": "healthy",
+        "failure_category": "healthy",
+        "severity": "info",
+        "recommended_action": "No action required."
+      },
+      {
+        "name": "CinemaBox",
+        "type": "stream",
+        "ok": false,
+        "http_status": 404,
+        "test_title": "The Matrix",
+        "error": "HTTP 404: Not Found",
+        "failure_code": "not_found",
+        "failure_category": "missing_resource",
+        "severity": "warning",
+        "recommended_action": "Confirm the resource URL, release tag, or asset name."
+      },
+      {
+        "name": "Cinemana",
+        "type": "stream",
+        "ok": false,
+        "test_title": "The Matrix",
+        "probe_status": "upstream_unreachable_internet_ok",
+        "error": "Cinemana health endpoint failed while the independent GitHub control endpoint remained reachable: <urlopen error timed out>",
+        "failure_code": "upstream_host_unreachable",
+        "failure_category": "upstream",
+        "severity": "warning",
+        "recommended_action": "The control endpoint is reachable but this provider host is not; the host may be down or inaccessible from the monitoring region. Confirm from the user's network before calling it a local ISP block."
+      }
+    ],
+    "provider_bundle": {
+      "name": "ALL-IN-ONE provider bundle",
+      "type": "provider_bundle",
+      "ok": true,
+      "http_status": 200,
+      "enabled_provider_count": 66,
+      "sampled_provider_files": [
+        "providers/allanime.js",
+        "providers/4khdhub.js",
+        "providers/1shows.js"
+      ],
+      "available_provider_files": [
+        "providers/allanime.js",
+        "providers/4khdhub.js",
+        "providers/1shows.js"
+      ],
+      "failed_provider_files": [],
+      "probe_status": "bundle_files_available",
+      "note": "Checks registry integrity and sample source-file availability; actual scraper execution requires the Nuvio app runtime.",
+      "error": null,
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    "note": "Stream URLs are counted but never stored. ALL-IN-ONE provider files are integrity-checked; scraper execution requires the Nuvio app runtime."
   },
   "release": {
     "tag": "1.1.0-beta.3",
@@ -69,9 +141,37 @@
   "release_cache_timestamp": null,
   "release_cache_age_seconds": null,
   "release_cache_stale": false,
-  "diagnostic_summary": "All checks are healthy.",
-  "failure_categories": [],
-  "diagnostics": [],
+  "diagnostic_summary": "2 failure(s): categories 1 missing_resource, 1 upstream.",
+  "failure_categories": [
+    "missing_resource",
+    "upstream"
+  ],
+  "diagnostics": [
+    {
+      "name": "CinemaBox",
+      "type": "stream",
+      "ok": false,
+      "http_status": 404,
+      "test_title": "The Matrix",
+      "error": "HTTP 404: Not Found",
+      "failure_code": "not_found",
+      "failure_category": "missing_resource",
+      "severity": "warning",
+      "recommended_action": "Confirm the resource URL, release tag, or asset name."
+    },
+    {
+      "name": "Cinemana",
+      "type": "stream",
+      "ok": false,
+      "test_title": "The Matrix",
+      "probe_status": "upstream_unreachable_internet_ok",
+      "error": "Cinemana health endpoint failed while the independent GitHub control endpoint remained reachable: <urlopen error timed out>",
+      "failure_code": "upstream_host_unreachable",
+      "failure_category": "upstream",
+      "severity": "warning",
+      "recommended_action": "The control endpoint is reachable but this provider host is not; the host may be down or inaccessible from the monitoring region. Confirm from the user's network before calling it a local ISP block."
+    }
+  ],
   "checks": [
     {
       "name": "ALL-IN-ONE",
@@ -334,6 +434,69 @@
       "recommended_action": "No action required."
     },
     {
+      "name": "Torrentio",
+      "type": "stream",
+      "ok": true,
+      "http_status": 200,
+      "test_title": "The Matrix",
+      "probe_status": "streams_found",
+      "stream_count": 500,
+      "error": null,
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
+      "name": "CinemaBox",
+      "type": "stream",
+      "ok": false,
+      "http_status": 404,
+      "test_title": "The Matrix",
+      "error": "HTTP 404: Not Found",
+      "failure_code": "not_found",
+      "failure_category": "missing_resource",
+      "severity": "warning",
+      "recommended_action": "Confirm the resource URL, release tag, or asset name."
+    },
+    {
+      "name": "Cinemana",
+      "type": "stream",
+      "ok": false,
+      "test_title": "The Matrix",
+      "probe_status": "upstream_unreachable_internet_ok",
+      "error": "Cinemana health endpoint failed while the independent GitHub control endpoint remained reachable: <urlopen error timed out>",
+      "failure_code": "upstream_host_unreachable",
+      "failure_category": "upstream",
+      "severity": "warning",
+      "recommended_action": "The control endpoint is reachable but this provider host is not; the host may be down or inaccessible from the monitoring region. Confirm from the user's network before calling it a local ISP block."
+    },
+    {
+      "name": "ALL-IN-ONE provider bundle",
+      "type": "provider_bundle",
+      "ok": true,
+      "http_status": 200,
+      "enabled_provider_count": 66,
+      "sampled_provider_files": [
+        "providers/allanime.js",
+        "providers/4khdhub.js",
+        "providers/1shows.js"
+      ],
+      "available_provider_files": [
+        "providers/allanime.js",
+        "providers/4khdhub.js",
+        "providers/1shows.js"
+      ],
+      "failed_provider_files": [],
+      "probe_status": "bundle_files_available",
+      "note": "Checks registry integrity and sample source-file availability; actual scraper execution requires the Nuvio app runtime.",
+      "error": null,
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
       "name": "Nuvio beta release",
       "type": "release",
       "ok": true,
@@ -406,68 +569,98 @@
     }
   ],
   "change_summary": {
-    "count": 3,
-    "by_type": {
-      "added": 3
-    },
-    "events": [
-      {
-        "date": "2026-11-22T06:00:30.527023+00:00",
-        "type": "added",
-        "title": "إضافة مصدر جديد: Torrentio",
-        "detail": "تم إدراج Manifest والتحقق من استجابته وصحة بنيته.",
-        "source": "Torrentio",
-        "source_url": "https://torrentio.strem.fun/manifest.json",
-        "new_version": "0.0.15"
-      },
-      {
-        "date": "2026-11-22T06:00:30.527023+00:00",
-        "type": "added",
-        "title": "إضافة مصدر جديد: AIOMetadata",
-        "detail": "تم إدراج Manifest والتحقق من استجابته وصحة بنيته.",
-        "source": "AIOMetadata",
-        "source_url": "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
-        "new_version": "4.1.0"
-      },
-      {
-        "date": "2026-11-22T06:00:30.527023+00:00",
-        "type": "added",
-        "title": "إضافة مصدر جديد: TMDB Discover+",
-        "detail": "تم إدراج Manifest والتحقق من استجابته وصحة بنيته.",
-        "source": "TMDB Discover+",
-        "source_url": "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
-        "new_version": "2.14.7+49f99dd0e277"
-      }
-    ]
+    "count": 0,
+    "by_type": {},
+    "events": []
   },
-  "change_count": 3,
+  "change_count": 0,
   "proactive_monitoring": {
-    "status": "healthy",
-    "alert_count": 0,
-    "alerts": [],
-    "summary": "No proactive warnings; all measured checks are healthy."
+    "status": "critical",
+    "alert_count": 2,
+    "alerts": [
+      {
+        "severity": "high",
+        "code": "not_found",
+        "resource": "CinemaBox",
+        "message": "HTTP 404: Not Found",
+        "recommended_action": "Confirm the resource URL, release tag, or asset name."
+      },
+      {
+        "severity": "medium",
+        "code": "upstream_host_unreachable",
+        "resource": "Cinemana",
+        "message": "Cinemana health endpoint failed while the independent GitHub control endpoint remained reachable: <urlopen error timed out>",
+        "recommended_action": "The control endpoint is reachable but this provider host is not; the host may be down or inaccessible from the monitoring region. Confirm from the user's network before calling it a local ISP block."
+      }
+    ],
+    "summary": "2 warning(s) detected; 1 high-priority."
   },
   "risk_forecast": {
-    "status": "healthy",
+    "status": "attention",
     "integrity": {
-      "input_result_count": 26,
-      "evaluated_failure_count": 0,
+      "input_result_count": 30,
+      "evaluated_failure_count": 2,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
       "history_window_size": 33,
       "history_evidence_deduplicated": true
     },
-    "overall_level": "low",
-    "risk_count": 0,
+    "overall_level": "medium",
+    "risk_count": 2,
     "high_risk_count": 0,
-    "medium_risk_count": 0,
-    "risks": [],
+    "medium_risk_count": 2,
+    "risks": [
+      {
+        "resource": "CinemaBox",
+        "score": 45,
+        "level": "medium",
+        "score_breakdown": {
+          "current_failure": 45,
+          "consecutive_failure": 0,
+          "outage_history": 0
+        },
+        "signals": [
+          "current_check_failed"
+        ],
+        "confidence": "low",
+        "confidence_basis": "Number of distinct evidence signals; not predictive accuracy.",
+        "confidence_details": "Low confidence from 1 distinct signal(s): current_check_failed.",
+        "evidence_count": 0,
+        "recommended_action": "Confirm the resource URL, release tag, or asset name.",
+        "previous_score": null,
+        "score_delta": null,
+        "trend": "new",
+        "trend_basis": "No matching risk in the previous forecast; baseline for trend comparison."
+      },
+      {
+        "resource": "Cinemana",
+        "score": 45,
+        "level": "medium",
+        "score_breakdown": {
+          "current_failure": 45,
+          "consecutive_failure": 0,
+          "outage_history": 0
+        },
+        "signals": [
+          "current_check_failed"
+        ],
+        "confidence": "low",
+        "confidence_basis": "Number of distinct evidence signals; not predictive accuracy.",
+        "confidence_details": "Low confidence from 1 distinct signal(s): current_check_failed.",
+        "evidence_count": 0,
+        "recommended_action": "The control endpoint is reachable but this provider host is not; the host may be down or inaccessible from the monitoring region. Confirm from the user's network before calling it a local ISP block.",
+        "previous_score": null,
+        "score_delta": null,
+        "trend": "new",
+        "trend_basis": "No matching risk in the previous forecast; baseline for trend comparison."
+      }
+    ],
     "trend_summary": {
       "status": "baseline",
       "previous_total_score": null,
       "current_total_score": null,
       "total_score_delta": null,
-      "new_count": 0,
+      "new_count": 2,
       "worsening_count": 0,
       "improving_count": 0,
       "stable_count": 0,
