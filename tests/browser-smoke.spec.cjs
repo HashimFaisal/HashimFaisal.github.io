@@ -288,7 +288,8 @@ test('personal metadata cards expose setup links without publishing per-user man
     await expect(card.locator('h3')).toHaveText(item.name);
     await expect(card.locator('.manifest-url')).toHaveCount(0);
     await expect(card.locator('.card-actions a').first()).toHaveAttribute('href', item.setup);
-    await expect(card.locator('.card-status')).toContainText('يتطلب إعداداً شخصياً');
+    await expect(card.locator('.card-actions a').first()).toContainText('إعداد API');
+    await expect(card.locator('.card-status')).toContainText('يتطلب إعداد API');
     await expect(card.locator('.share-btn')).toHaveCount(0);
   }
 });
