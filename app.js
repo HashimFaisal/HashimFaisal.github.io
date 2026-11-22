@@ -680,9 +680,7 @@ function renderDownloads(report) {
   $('#published-at').textContent = formatDate(release.published_at);
 
   const assets = release.assets || [];
-  $('#download-count').textContent = assets.filter(item =>
-    item.ok && safeHttpsUrl(item.download_url)
-  ).length;
+  $('#download-count').textContent = assets.filter(item => safeHttpsUrl(item.download_url)).length;
   $('#download-grid').innerHTML = assets.map(asset => {
     const downloadUrl = safeHttpsUrl(asset.download_url);
     const displayName = asset.name || (
