@@ -93,7 +93,7 @@ jobs:
           marker = '  <script src="app.js'
           if marker not in updated:
               raise SystemExit("Could not locate the main application script.")
-          embedded = f'  <script id="nuvio-site-data" type="application/json">{payload}</script>\\n'
+          embedded = f'  <script id="nuvio-site-data" type="application/json">{payload}</script>\n'
           updated = updated.replace(marker, embedded + marker, 1)
           path.write_text(updated)
           print("Embedded status, changelog, and live-update data in the page.")
