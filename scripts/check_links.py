@@ -309,16 +309,21 @@ def build_risk_forecast(results, previous_report=None, history=None):
     """Score current evidence and compare it with the prior report to show risk trends."""
     previous_report = previous_report if isinstance(previous_report, dict) else {}
     history = history if isinstance(history, list) else []
+    previous_checks_data = previous_report.get("checks")
+    previous_checks_data = previous_checks_data if isinstance(previous_checks_data, list) else []
     previous_checks = {
-        item.get("name"): item for item in previous_report.get("checks", [])
-        if isinstance(item, dict) and item.get("name")
+        item.get("name"): item for item in previous_checks_data
+        if isinstance(item, dict) and isinstance(item.get("name"), str) and item.get("name")
     }
     previous_forecast = previous_report.get("risk_forecast")
+    previous_risks_data = previous_forecast.get("risks") if isinstance(previous_forecast, dict) else []
+    previous_risks_data = previous_risks_data if isinstance(previous_risks_data, list) else []
     previous_risks = {
-        item.get("resource"): item for item in previous_forecast.get("risks", [])
+        item.get("resource"): item for item in previous_risks_data
         if isinstance(item, dict) and isinstance(item.get("resource"), str) and item.get("resource")
-    } if isinstance(previous_forecast, dict) else {}
-    failure_items = [item for item in results if not item.get("ok")]
+    }
+    results = results if isinstance(results, list) else []
+    failure_items = [item for item in results if isinstance(item, dict) and not item.get("ok")]
     risks = []
     for item in failure_items:
         name = item.get("name", "Unknown")
