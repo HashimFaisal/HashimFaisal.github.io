@@ -252,6 +252,17 @@ def update_live_release_news(events, updates_path=UPDATES_PATH, now=None,
             active.append(item)
             known_ids.add(item_id)
 
+    if registry_path is None:
+        registry_path = Path(updates_path).parent / "download-cards-seen.json"
+    try:
+        registry = json.loads(registry_path.read_text(encoding="utf-8"))
+        if not isinstance(registry, dict):
+            registry = {}
+    except (OSError, ValueError):
+        registry = {}
+    seen_card_ids = set(registry.get("seen_card_ids", []))
+    seen_release_ids = set(registry.get("seen_release_ids", []))
+
     added = 0
     for event in events:
         repository, tag = event.get("repository"), event.get("tag")
@@ -262,7 +273,8 @@ def update_live_release_news(events, updates_path=UPDATES_PATH, now=None,
         update_id = ("app:download-release:" + card_id + ":" if card_id else
                      "app:download-release:") + repository + ":" + tag
         legacy_id = "app:download-release:" + repository + ":" + tag
-        if update_id in known_ids or legacy_id in known_ids:
+        if update_id in seen_release_ids or update_id in known_ids or legacy_id in known_ids:
+            seen_release_ids.add(update_id)
             continue
         active.append({
             "id": update_id,
@@ -280,18 +292,10 @@ def update_live_release_news(events, updates_path=UPDATES_PATH, now=None,
             "expiresAt": (now + timedelta(hours=24)).isoformat().replace("+00:00", "Z"),
         })
         known_ids.add(update_id)
+        seen_release_ids.add(update_id)
         added += 1
 
     # Persist card identities independently from the 24-hour ticker items.
-    if registry_path is None:
-        registry_path = Path(updates_path).parent / "download-cards-seen.json"
-    try:
-        registry = json.loads(registry_path.read_text(encoding="utf-8"))
-        if not isinstance(registry, dict):
-            registry = {}
-    except (OSError, ValueError):
-        registry = {}
-    seen_card_ids = set(registry.get("seen_card_ids", []))
     for event in card_events:
         card_id = event.get("card_id")
         card, url = event.get("card"), event.get("url")
@@ -323,8 +327,10 @@ def update_live_release_news(events, updates_path=UPDATES_PATH, now=None,
     updates_path.parent.mkdir(parents=True, exist_ok=True)
     updates_path.write_text(json.dumps(active[:50], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     registry_path.parent.mkdir(parents=True, exist_ok=True)
-    registry_path.write_text(json.dumps({"seen_card_ids": sorted(seen_card_ids)},
-                                         ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    registry_path.write_text(json.dumps({
+        "seen_card_ids": sorted(seen_card_ids),
+        "seen_release_ids": sorted(seen_release_ids),
+    }, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return added
 
 
