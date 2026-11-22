@@ -67,6 +67,7 @@ const translations = {
   'موارد': 'RESOURCES',
   'جارٍ تحميل روابط التنزيل...': 'Loading download links...',
   'تعذر تأكيد الرابط حالياً؛ الرابط محفوظ ويمكن تجربته.': 'Link verification failed; the saved download link is still available to try.',
+  'بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.': 'Showing the saved release because the latest update could not be fetched.',
   'تحديث': 'Update',
   'نسخ الرابط': 'Copy Link',
   'تثبيت في Nuvio': 'Install in Nuvio',
@@ -690,6 +691,7 @@ function renderDownloads(report) {
     return `<article class="download-card" data-ready="${ready ? 'true' : 'false'}">
       <strong class="download-file"><bdi dir="ltr">${escapeHTML(displayName)} · ${formatBytes(asset.size_bytes)}</bdi></strong>
       <small class="download-platform">Nuvio · ${escapeHTML(asset.label || 'Download')}</small>
+      ${report.release_fallback_used ? `<small class="download-meta">${t('بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.')}</small>` : ''}
       <small class="download-meta">${t('الإصدار')}: ${escapeHTML(appVersion)}</small>
       ${ready && !asset.ok ? `<small class="download-meta">${t('تعذر تأكيد الرابط حالياً؛ الرابط محفوظ ويمكن تجربته.')}</small>` : ''}
       <small class="download-meta">${asset.uploaded_at
