@@ -122,7 +122,7 @@ const viewports = [
         const platformCardCounts=groups.map(group=>group.querySelectorAll('.version-card').length);
         return {ids,expectedIds,groupsCount:groups.length,overlaps,siblingOverlaps,cardCount:cards.length,columns,statusVisible:!document.querySelector('#status').hidden,legacyVersionsSection:!!document.querySelector('#versions'),latestReleaseOverlap,cardsWithinGrid,platformCardCounts};
       });
-      const expectedColumns = viewport.width <= 430 ? 1 : viewport.width <= 760 ? 2 : 3;
+      const expectedColumns = viewport.width <= 480 ? 1 : viewport.width <= 1000 ? 2 : 3;
       if (downloadLayout.groupsCount !== 4 || JSON.stringify(downloadLayout.ids) !== JSON.stringify(downloadLayout.expectedIds)) failures.push(viewport.name + ': platform groups missing or out of order ' + JSON.stringify(downloadLayout.ids));
       if (downloadLayout.overlaps.length) failures.push(viewport.name + ': platform groups overlap ' + JSON.stringify(downloadLayout.overlaps));
       if (downloadLayout.siblingOverlaps.length) failures.push(viewport.name + ': downloads children overlap ' + JSON.stringify(downloadLayout.siblingOverlaps));
