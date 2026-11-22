@@ -85,10 +85,10 @@ class ReleaseCacheTests(unittest.TestCase):
 
     def test_discover_version_downloads_extracts_card_and_tag(self):
         html = '''
-        <article class="version-card">
+        <article class="downloads-device-card plugin-card version-card">
           <h3>Nuvio Mobile</h3>
           <div class="version-actions">
-            <a class="version-download" href="https://github.com/example/app/releases/download/v2.4.0/app.apk">Download APK · ARM64</a>
+            <a class="downloads-device-link version-download" href="https://github.com/example/app/releases/download/v2.4.0/app.apk">Download APK · ARM64</a>
           </div>
         </article>
         '''
@@ -104,10 +104,10 @@ class ReleaseCacheTests(unittest.TestCase):
 
     def test_discover_version_downloads_ignores_non_download_source_links(self):
         html = '''
-        <article class="version-card">
+        <article class="downloads-device-card plugin-card version-card">
           <h3>Nuvio TV</h3>
           <a class="version-source" href="https://github.com/example/app/releases">Source</a>
-          <a class="version-download" href="https://github.com/example/app/releases/download/1.0/tv.apk">Download</a>
+          <a class="downloads-device-link version-download" href="https://github.com/example/app/releases/download/1.0/tv.apk">Download</a>
         </article>
         '''
         with tempfile.TemporaryDirectory() as tmp:
