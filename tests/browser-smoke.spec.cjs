@@ -96,7 +96,7 @@ test('all 18 public-manifest cards receive their published health status', async
     nodes.map(node => node.dataset.check).filter(Boolean)
   );
   expect(names).toHaveLength(18);
-  expect(new Set(names).size).toBe(20);
+  expect(new Set(names).size).toBe(18);
 
   const checks = names.map(name => ({
     name,
