@@ -92,7 +92,7 @@ const viewports = [
 
       await page.locator('#nuvio-launch-grid [data-view="downloads"]').click();
       await page.waitForSelector('#downloads.nuvio-view-active', { timeout: 10000 });
-      await page.waitForFunction(() => document.querySelectorAll('#downloads #download-grid .release-enhanced-link').length === 5, null, { timeout: 12000 });
+      await page.waitForFunction(() => document.querySelectorAll('#downloads #versions-mobile .version-card .version-download').length === 5, null, { timeout: 12000 });
       const downloadLayout = await page.evaluate(() => {
         const section = document.querySelector('#downloads');
         const downloadsSectionCount = document.querySelectorAll('main > #downloads').length;
@@ -111,7 +111,7 @@ const viewports = [
           releaseGrid === mobileGrid &&
           releaseGrid.classList.contains('plugin-grid') &&
           !latest &&
-          mobileCard?.querySelectorAll('.release-enhanced-link').length === 5
+          mobileCard?.querySelectorAll('.version-download').length === 5
         );
         const installerLink = section.querySelector('.downloads-device-link');
         const installerStyle = installerLink ? getComputedStyle(installerLink) : null;
