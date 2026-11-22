@@ -92,15 +92,35 @@ test('all five dashboard destinations open and return to the dashboard', async (
 
 
 test('Nuvio edition cards show checked versions and translate status labels', async ({ page }) => {
-  const items = [{
-    name: 'Nuvio Mobile · Download APK · ARM64',
-    type: 'version_download',
-    card: 'Nuvio Mobile',
-    label: 'Download APK · ARM64',
-    tag: '1.0.1',
-    ok: true,
-    url: 'https://example.invalid/app.apk'
-  }];
+  const items = [
+    {
+      name: 'Nuvio Mobile · Download APK · ARM64',
+      type: 'version_download',
+      card: 'Nuvio Mobile',
+      label: 'تنزيل APK · ARM64',
+      tag: '1.0.1',
+      ok: true,
+      url: 'https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-arm64-v8a-release.apk'
+    },
+    {
+      name: 'Nuvio Mobile · Download APK · ARMv7',
+      type: 'version_download',
+      card: 'Nuvio Mobile',
+      label: 'تنزيل APK · ARMv7',
+      tag: '1.0.1',
+      ok: true,
+      url: 'https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-armeabi-v7a-release.apk'
+    },
+    {
+      name: 'Nuvio Mobile · Download APK · x86_64',
+      type: 'version_download',
+      card: 'Nuvio Mobile',
+      label: 'تنزيل APK · x86_64',
+      tag: '1.0.1',
+      ok: true,
+      url: 'https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-x86_64-release.apk'
+    }
+  ];
   await page.route('**/data/status.json', route => route.fulfill({
     status: 200,
     contentType: 'application/json',
