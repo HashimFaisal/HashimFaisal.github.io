@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-11-22T06:32:40.585521+00:00",
-  "ok": false,
-  "passed": 29,
+  "checked_at": "2026-11-22T06:39:43.427748+00:00",
+  "ok": true,
+  "passed": 30,
   "total": 30,
   "manifest_coverage": {
     "configured": 20,
@@ -11,8 +11,8 @@
   "source_retrieval": {
     "tested": 3,
     "streams_found": 1,
-    "inconclusive": 1,
-    "failed": 1,
+    "inconclusive": 2,
+    "failed": 0,
     "stream_checks": [
       {
         "name": "Torrentio",
@@ -31,15 +31,18 @@
       {
         "name": "CinemaBox",
         "type": "stream",
-        "ok": false,
+        "ok": true,
         "http_status": 404,
         "test_title": "The Matrix",
+        "probe_status": "inconclusive",
+        "reason_code": "runtime_or_network_specific",
+        "verification_scope": "Nuvio app runtime / user network",
         "probe_stage": "catalog_search",
-        "error": "HTTP 404: Not Found",
-        "failure_code": "not_found",
-        "failure_category": "missing_resource",
-        "severity": "warning",
-        "recommended_action": "Confirm the resource URL, release tag, or asset name."
+        "error": "CinemaBox works in the Nuvio app, but this API route returned HTTP 404 from the external GitHub monitoring environment. This does not establish an in-app outage; verify from the Nuvio runtime or the user's network.",
+        "failure_code": "test_title_not_indexed",
+        "failure_category": "content_coverage",
+        "severity": "info",
+        "recommended_action": "The provider endpoint responded, but the test title was not indexed; this result is inconclusive about other titles."
       },
       {
         "name": "Cinemana",
@@ -144,25 +147,9 @@
   "release_cache_timestamp": null,
   "release_cache_age_seconds": null,
   "release_cache_stale": false,
-  "diagnostic_summary": "1 failure(s): categories 1 missing_resource.",
-  "failure_categories": [
-    "missing_resource"
-  ],
-  "diagnostics": [
-    {
-      "name": "CinemaBox",
-      "type": "stream",
-      "ok": false,
-      "http_status": 404,
-      "test_title": "The Matrix",
-      "probe_stage": "catalog_search",
-      "error": "HTTP 404: Not Found",
-      "failure_code": "not_found",
-      "failure_category": "missing_resource",
-      "severity": "warning",
-      "recommended_action": "Confirm the resource URL, release tag, or asset name."
-    }
-  ],
+  "diagnostic_summary": "All checks are healthy.",
+  "failure_categories": [],
+  "diagnostics": [],
   "checks": [
     {
       "name": "ALL-IN-ONE",
@@ -441,15 +428,18 @@
     {
       "name": "CinemaBox",
       "type": "stream",
-      "ok": false,
+      "ok": true,
       "http_status": 404,
       "test_title": "The Matrix",
+      "probe_status": "inconclusive",
+      "reason_code": "runtime_or_network_specific",
+      "verification_scope": "Nuvio app runtime / user network",
       "probe_stage": "catalog_search",
-      "error": "HTTP 404: Not Found",
-      "failure_code": "not_found",
-      "failure_category": "missing_resource",
-      "severity": "warning",
-      "recommended_action": "Confirm the resource URL, release tag, or asset name."
+      "error": "CinemaBox works in the Nuvio app, but this API route returned HTTP 404 from the external GitHub monitoring environment. This does not establish an in-app outage; verify from the Nuvio runtime or the user's network.",
+      "failure_code": "test_title_not_indexed",
+      "failure_category": "content_coverage",
+      "severity": "info",
+      "recommended_action": "The provider endpoint responded, but the test title was not indexed; this result is inconclusive about other titles."
     },
     {
       "name": "Cinemana",
@@ -569,69 +559,39 @@
   },
   "change_count": 0,
   "proactive_monitoring": {
-    "status": "critical",
-    "alert_count": 1,
-    "alerts": [
-      {
-        "severity": "high",
-        "code": "not_found",
-        "resource": "CinemaBox",
-        "message": "HTTP 404: Not Found",
-        "recommended_action": "Confirm the resource URL, release tag, or asset name."
-      }
-    ],
-    "summary": "1 warning(s) detected; 1 high-priority."
+    "status": "healthy",
+    "alert_count": 0,
+    "alerts": [],
+    "summary": "No proactive warnings; all measured checks are healthy."
   },
   "risk_forecast": {
-    "status": "attention",
+    "status": "healthy",
     "integrity": {
       "input_result_count": 30,
-      "evaluated_failure_count": 1,
+      "evaluated_failure_count": 0,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
       "history_window_size": 33,
       "history_evidence_deduplicated": true
     },
-    "overall_level": "high",
-    "risk_count": 1,
-    "high_risk_count": 1,
+    "overall_level": "low",
+    "risk_count": 0,
+    "high_risk_count": 0,
     "medium_risk_count": 0,
-    "risks": [
-      {
-        "resource": "CinemaBox",
-        "score": 70,
-        "level": "high",
-        "score_breakdown": {
-          "current_failure": 45,
-          "consecutive_failure": 25,
-          "outage_history": 0
-        },
-        "signals": [
-          "current_check_failed",
-          "consecutive_failure"
-        ],
-        "confidence": "medium",
-        "confidence_basis": "Number of distinct evidence signals; not predictive accuracy.",
-        "confidence_details": "Medium confidence from 2 distinct signal(s): current_check_failed, consecutive_failure.",
-        "evidence_count": 0,
-        "recommended_action": "Confirm the resource URL, release tag, or asset name.",
-        "previous_score": 70,
-        "score_delta": 0,
-        "trend": "stable",
-        "trend_basis": "Score compared with the immediately previous saved risk forecast."
-      }
-    ],
+    "risks": [],
     "trend_summary": {
-      "status": "stable",
-      "previous_total_score": 70,
-      "current_total_score": 70,
-      "total_score_delta": 0,
+      "status": "baseline",
+      "previous_total_score": null,
+      "current_total_score": null,
+      "total_score_delta": null,
       "new_count": 0,
       "worsening_count": 0,
       "improving_count": 0,
-      "stable_count": 1,
+      "stable_count": 0,
       "baseline_count": 0,
-      "resolved_resources": [],
+      "resolved_resources": [
+        "CinemaBox"
+      ],
       "basis": "Comparison of risks with valid numeric prior scores only; resolved and incomparable risks are excluded from trend totals. Not a statistical prediction."
     },
     "note": "Evidence-based risk indicators, not certainty or a statistical prediction."
