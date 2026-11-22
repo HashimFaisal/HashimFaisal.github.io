@@ -31,6 +31,26 @@ test.afterEach(async ({ page }) => {
   expect(runtimeErrors.get(page) || []).toEqual([]);
 });
 
+test('brand name keeps HASHIMFAISAL order in RTL and LTR', async ({ page }) => {
+  const headerName = page.locator('.topbar > .brand > span > bdi');
+  const footerName = page.locator('footer .footer-brand > bdi');
+
+  await expect(headerName).toHaveAttribute('dir', 'ltr');
+  await expect(headerName).toHaveText('HASHIMFAISAL');
+  await expect(footerName).toHaveAttribute('dir', 'ltr');
+  await expect(footerName).toHaveText('HASHIMFAISAL');
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  await expect(headerName).toHaveText('HASHIMFAISAL');
+  await expect(footerName).toHaveText('HASHIMFAISAL');
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+  await expect(headerName).toHaveText('HASHIMFAISAL');
+  await expect(footerName).toHaveText('HASHIMFAISAL');
+});
+
 test('language toggle works in RTL and LTR, including the back label inside a section', async ({ page }) => {
   await expect(page.locator('html')).toHaveAttribute('lang', 'ar');
   await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
