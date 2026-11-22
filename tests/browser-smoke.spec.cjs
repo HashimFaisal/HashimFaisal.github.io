@@ -633,8 +633,8 @@ test('all active UI source colors stay within the unified Nuvio palette', async 
     expect(response.ok(), 'Could not load palette source: ' + name).toBeTruthy();
     return response.text();
   }));
-  const [styleCss, premiumCss, indexHtml, appJs, premiumUiJs, ...artwork] = contents;
-  const css = (styleCss + '\n' + premiumCss).toLowerCase();
+  const [styleCss, premiumCss, downloadsCss, indexHtml, appJs, premiumUiJs, ...artwork] = contents;
+  const css = (styleCss + '\n' + premiumCss + '\n' + downloadsCss).toLowerCase();
   const uiSource = (indexHtml + '\n' + appJs + '\n' + premiumUiJs).toLowerCase();
   const allowedCssRgb = new Set([
     '88,216,232', '163,148,255', '66,200,121', '255,130,146',
