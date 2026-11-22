@@ -70,6 +70,20 @@ test('all five dashboard destinations open and return to the dashboard', async (
   }
 });
 
+test('homepage explains the Nuvio purpose and groups secondary navigation', async ({ page }) => {
+  await expect(page.locator('.hero h1')).toContainText('كل إضافات Nuvio');
+  await expect(page.locator('.hero h1')).toContainText('في مركز واحد');
+  await expect(page.locator('.hero-byline')).toHaveCount(0);
+  await expect(page.locator('nav a')).toHaveCount(4);
+  await expect(page.locator('nav a[href="#changelog"]')).toHaveCount(0);
+  await expect(page.locator('#resources a[href="#changelog"]')).toBeAttached();
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('.hero h1')).toContainText('All Nuvio add-ons');
+  await expect(page.locator('.hero h1')).toContainText('in one place');
+  await expect(page.locator('.hero-byline')).toHaveCount(0);
+});
+
 test('support links are available in Arabic and English without leaving the site unexpectedly', async ({ page }) => {
   await page.locator('#nuvio-launch-grid [data-view="resources"]').click();
   await expect(page.locator('#resources')).toBeVisible();
@@ -82,7 +96,7 @@ test('support links are available in Arabic and English without leaving the site
   await expect(suggest).toHaveAttribute('rel', 'noopener noreferrer');
 
   await page.locator('#language-toggle').click();
-  await expect(page.locator('#resources h2')).toHaveText('Support & Developer Resources');
+  await expect(page.locator('#resources h2')).toHaveText('Support & Contact');
   await expect(page.locator('#resources a').filter({ hasText: 'Report a Problem' })).toBeVisible();
   await expect(page.locator('#resources a').filter({ hasText: 'Suggest an Add-on' })).toBeVisible();
 });

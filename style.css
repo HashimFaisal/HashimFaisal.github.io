@@ -234,6 +234,7 @@ nav a:hover::after { transform: scaleX(1); }
   background: var(--success);
   box-shadow: 0 0 13px rgba(66, 200, 121, 0.6);
 }
+
 .hero h1 {
   margin: 28px 0 20px;
   color: var(--text);
