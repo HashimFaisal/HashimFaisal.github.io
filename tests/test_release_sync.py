@@ -6,7 +6,8 @@ from pathlib import Path
 from scripts.check_links import discover_version_downloads
 
 from scripts.sync_download_releases import (
-    github_release_source,\n    normalize_card_id,
+    github_release_source,
+    normalize_card_id,
     select_asset,
     sync_download_cards,
     update_live_release_news,
@@ -78,12 +79,14 @@ class ReleaseSyncTests(unittest.TestCase):
         self.assertEqual(report["repositories_checked"], ["example/project"])
         self.assertEqual(len(report["release_events"]), 1)
         self.assertEqual(report["release_events"][0]["tag"], "v1.1.0")
+        self.assertEqual(report["release_events"][0]["card_id"], "example-app")
+        self.assertEqual(report["card_events"][0]["card_id"], "example-app")
 
     def test_new_download_app_release_is_published_once_to_live_ticker(self):
         with tempfile.TemporaryDirectory() as directory:
             updates_path = Path(directory) / "updates.json"
             now = datetime(2026, 11, 22, 12, 0, tzinfo=timezone.utc)
-            event = {"repository": "example/project", "tag": "v2.0.0", "card": "Example App", "url": "https://github.com/example/project/releases/tag/v2.0.0"}
+            event = {"card_id": "example-app", "repository": "example/project", "tag": "v2.0.0", "card": "Example App", "url": "https://github.com/example/project/releases/tag/v2.0.0"}
             registry_path = Path(directory) / "download-cards-seen.json"\n            added = update_live_release_news([event], updates_path, now, registry_path=registry_path)
             self.assertEqual(added, 1)
             data = __import__("json").loads(updates_path.read_text(encoding="utf-8"))
@@ -95,6 +98,47 @@ class ReleaseSyncTests(unittest.TestCase):
             self.assertEqual(added_again, 0)
             data_again = __import__("json").loads(updates_path.read_text(encoding="utf-8"))
             self.assertEqual(len(data_again), 1)
+
+    def test_new_download_cards_are_announced_once_and_registry_outlives_news(self):
+        with tempfile.TemporaryDirectory() as directory:
+            updates_path = Path(directory) / "updates.json"
+            registry_path = Path(directory) / "download-cards-seen.json"
+            now = datetime(2026, 11, 22, 12, 0, tzinfo=timezone.utc)
+            cards = [
+                {"card_id": "nuvio-tv", "card": "Nuvio TV", "url": "https://github.com/NuvioMedia/NuvioTV/releases/tag/1.1.1"},
+                {"card_id": "nuvio-native-legacy-tizen", "card": "Nuvio Native Legacy · Tizen", "url": "https://github.com/iqui27/nuvio-native-legacy/releases/tag/v2.0.8"},
+                {"card_id": "nuvio-native-legacy-webos", "card": "Nuvio Native Legacy · webOS", "url": "https://github.com/iqui27/nuvio-native-legacy/releases/tag/v2.0.8"},
+            ]
+            added = update_live_release_news([], updates_path, now, cards, registry_path)
+            self.assertEqual(added, 3)
+            data = __import__("json").loads(updates_path.read_text(encoding="utf-8"))
+            self.assertEqual({item["id"] for item in data}, {
+                "app:download-card-added:nuvio-tv",
+                "app:download-card-added:nuvio-native-legacy-tizen",
+                "app:download-card-added:nuvio-native-legacy-webos",
+            })
+            self.assertEqual(data[0]["title"]["ar"], "إضافة نسخة جديدة إلى مركز التنزيلات: Nuvio TV")
+            later = now.replace(day=24)
+            added_again = update_live_release_news([], updates_path, later, cards, registry_path)
+            self.assertEqual(added_again, 0)
+            self.assertEqual(__import__("json").loads(updates_path.read_text(encoding="utf-8")), [])
+
+    def test_release_news_are_unique_per_card_even_when_cards_share_repository(self):
+        with tempfile.TemporaryDirectory() as directory:
+            updates_path = Path(directory) / "updates.json"
+            events = [
+                {"card_id": "legacy-tizen", "repository": "example/project", "tag": "v3", "card": "Legacy Tizen", "url": "https://github.com/example/project/releases/tag/v3"},
+                {"card_id": "legacy-webos", "repository": "example/project", "tag": "v3", "card": "Legacy webOS", "url": "https://github.com/example/project/releases/tag/v3"},
+            ]
+            added = update_live_release_news(events, updates_path, datetime(2026, 11, 22, 12, 0, tzinfo=timezone.utc))
+            self.assertEqual(added, 2)
+            data = __import__("json").loads(updates_path.read_text(encoding="utf-8"))
+            self.assertEqual(len(data), 2)
+            self.assertNotEqual(data[0]["id"], data[1]["id"])
+
+    def test_card_identity_ignores_version_suffix(self):
+        self.assertEqual(normalize_card_id("Nuvio Enhanced 1.0.0"), "nuvio-enhanced")
+        self.assertEqual(normalize_card_id("Nuvio Enhanced 2.0.0-beta.3"), "nuvio-enhanced")
 
     def test_ambiguous_or_missing_asset_is_left_unchanged(self):
         original = (
