@@ -1,4 +1,5 @@
 import unittest
+from datetime import datetime, timezone
 import tempfile
 from pathlib import Path
 
@@ -8,6 +9,7 @@ from scripts.sync_download_releases import (
     github_release_source,
     select_asset,
     sync_download_cards,
+    update_live_release_news,
 )
 
 
@@ -74,6 +76,25 @@ class ReleaseSyncTests(unittest.TestCase):
         self.assertIn('class="downloads-device-status"', updated)
         self.assertEqual(report["updated_links"], 1)
         self.assertEqual(report["repositories_checked"], ["example/project"])
+        self.assertEqual(len(report["release_events"]), 1)
+        self.assertEqual(report["release_events"][0]["tag"], "v1.1.0")
+
+    def test_new_download_app_release_is_published_once_to_live_ticker(self):
+        with tempfile.TemporaryDirectory() as directory:
+            updates_path = Path(directory) / "updates.json"
+            now = datetime(2026, 11, 22, 12, 0, tzinfo=timezone.utc)
+            event = {"repository": "example/project", "tag": "v2.0.0", "card": "Example App", "url": "https://github.com/example/project/releases/tag/v2.0.0"}
+            added = update_live_release_news([event], updates_path, now)
+            self.assertEqual(added, 1)
+            data = __import__("json").loads(updates_path.read_text(encoding="utf-8"))
+            self.assertEqual(len(data), 1)
+            self.assertEqual(data[0]["id"], "app:download-release:example/project:v2.0.0")
+            self.assertEqual(data[0]["title"]["ar"], "تحديث جديد لتطبيق Example App: v2.0.0")
+            self.assertEqual(data[0]["url"], event["url"])
+            added_again = update_live_release_news([event], updates_path, now)
+            self.assertEqual(added_again, 0)
+            data_again = __import__("json").loads(updates_path.read_text(encoding="utf-8"))
+            self.assertEqual(len(data_again), 1)
 
     def test_ambiguous_or_missing_asset_is_left_unchanged(self):
         original = (

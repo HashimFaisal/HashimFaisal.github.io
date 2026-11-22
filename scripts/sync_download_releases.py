@@ -10,12 +10,14 @@ import json
 import re
 from html import unescape
 from pathlib import Path
+from datetime import datetime, timedelta, timezone
 from urllib.error import HTTPError, URLError
 from urllib.parse import unquote, urlparse
 from urllib.request import Request, urlopen
 
 
 INDEX_PATH = Path("index.html")
+UPDATES_PATH = Path("data/updates.json")
 API_HEADERS = {
     "Accept": "application/vnd.github+json",
     "User-Agent": "Nuvio-Control-Center-release-sync",
@@ -141,6 +143,7 @@ def sync_download_cards(document: str, release_loader=fetch_latest_release):
     updated_links = 0
     skipped_links = []
     updated_cards = []
+    release_events = {}
 
     def update_card(match):
         nonlocal updated_links
@@ -160,6 +163,9 @@ def sync_download_cards(document: str, release_loader=fetch_latest_release):
                 if repository not in releases:
                     releases[repository] = release_loader(repository)
                 release = releases[repository]
+                latest_tag = str(release.get("tag_name") or "").strip()
+                if latest_tag and latest_tag != old_tag:
+                    release_events.setdefault((repository, latest_tag), {"repository": repository, "tag": latest_tag, "card": title, "url": release.get("html_url") or ("https://github.com/" + repository + "/releases/tag/" + latest_tag), "published_at": release.get("published_at")})
                 asset = select_asset(current_name, old_tag, release.get("assets", []))
             except (HTTPError, URLError, TimeoutError, ValueError, OSError) as exc:
                 skipped_links.append(f"{title}: {current_name} ({exc})")
@@ -192,7 +198,65 @@ def sync_download_cards(document: str, release_loader=fetch_latest_release):
         "updated_cards": updated_cards,
         "skipped_links": skipped_links,
         "repositories_checked": sorted(releases),
+        "release_events": list(release_events.values()),
     }
+
+
+
+def update_live_release_news(events, updates_path=UPDATES_PATH, now=None):
+    now = now or datetime.now(timezone.utc)
+    if now.tzinfo is None:
+        now = now.replace(tzinfo=timezone.utc)
+    try:
+        existing = json.loads(updates_path.read_text(encoding="utf-8"))
+        if not isinstance(existing, list):
+            existing = []
+    except (OSError, ValueError):
+        existing = []
+    active, known_ids = [], set()
+    for item in existing:
+        if not isinstance(item, dict):
+            continue
+        item_id = item.get("id")
+        try:
+            expiry = datetime.fromisoformat(str(item.get("expiresAt", "")).replace("Z", "+00:00"))
+            if expiry.tzinfo is None:
+                expiry = expiry.replace(tzinfo=timezone.utc)
+        except (TypeError, ValueError):
+            continue
+        if item_id and expiry > now and item_id not in known_ids:
+            active.append(item)
+            known_ids.add(item_id)
+    added = 0
+    for event in events:
+        repository, tag = event.get("repository"), event.get("tag")
+        card, url = event.get("card") or repository, event.get("url")
+        if not repository or not tag or not isinstance(url, str) or not url.startswith("https://"):
+            continue
+        update_id = "app:download-release:" + repository + ":" + tag
+        if update_id in known_ids:
+            continue
+        active.append({
+            "id": update_id,
+            "type": "app",
+            "title": {
+                "ar": "تحديث جديد لتطبيق " + str(card) + ": " + str(tag),
+                "en": "New " + str(card) + " app release: " + str(tag),
+            },
+            "description": {
+                "ar": "صدر إصدار جديد من " + str(card) + " برقم " + str(tag) + ". اضغط للتفاصيل.",
+                "en": "A new " + str(card) + " release (" + str(tag) + ") is available. Open the release notes for details.",
+            },
+            "url": url,
+            "publishedAt": now.isoformat().replace("+00:00", "Z"),
+            "expiresAt": (now + timedelta(hours=24)).isoformat().replace("+00:00", "Z"),
+        })
+        known_ids.add(update_id)
+        added += 1
+    active.sort(key=lambda item: item.get("publishedAt", ""), reverse=True)
+    updates_path.parent.mkdir(parents=True, exist_ok=True)
+    updates_path.write_text(json.dumps(active[:50], ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return added
 
 
 def main():
@@ -203,7 +267,9 @@ def main():
     if updated != original:
         INDEX_PATH.write_text(updated, encoding="utf-8")
     print(f"Release sync checked {len(report['repositories_checked'])} repositories.")
-    print(f"Updated {report['updated_links']} download links across {len(report['updated_cards'])} cards.")
+    news_added = update_live_release_news(report["release_events"])
+    print("Updated {} download links across {} cards.".format(report["updated_links"], len(report["updated_cards"])))
+    print("Published {} new app release update(s) to the live ticker.".format(news_added))
     for item in report["skipped_links"]:
         print(f"REVIEW REQUIRED: {item}")
     if report["skipped_links"]:
