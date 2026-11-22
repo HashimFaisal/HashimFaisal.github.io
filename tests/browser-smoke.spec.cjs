@@ -747,23 +747,19 @@ test('download URLs remain visible when their health checks fail', async ({ page
 });
 
 
-test('Nuvio downloads library has searchable platform filters and direct release assets', async ({ page }) => {
+test('Nuvio downloads library integrates release assets into mobile cards without a legacy toolbar', async ({ page }) => {
   await page.goto('/#downloads');
   await expect(page.locator('#downloads')).toBeVisible();
   await expect(page.locator('#downloads .nuvio-view-back')).toBeVisible();
   await expect(page.locator('#downloads-title')).toHaveText('مركز التنزيلات');
   // Latest release assets are integrated directly into the mobile device card grid.
   await expect(page.locator('#downloads .downloads-mobile-release-assets')).toHaveCount(0);
-  await expect(page.locator('#versions-mobile #downloads-search')).toBeVisible();
-  await expect(page.locator('#versions-mobile #downloads-filters')).toBeVisible();
+  await expect(page.locator('#downloads .downloads-toolbar, #downloads-search, #downloads-filters, #downloads-visible-count, #downloads .downloads-disclaimer')).toHaveCount(0);
   await expect(page.locator('#downloads .download-card, #downloads .download-library-card, #downloads .download-release-subsection, #downloads .download-grid, #downloads .version-platform, #downloads .version-card')).toHaveCount(0);
   await expect(page.locator('main > #downloads')).toHaveCount(1);
   await expect(page.locator('#downloads #versions-mobile, #downloads #versions-desktop, #downloads #versions-tv, #downloads #versions-smart-tv')).toHaveCount(4);
   await expect(page.locator('#downloads .downloads-release-details')).toHaveCount(0);
-  await expect(page.locator('#downloads-search')).toBeVisible();
-  await expect(page.locator('#downloads-filters [data-download-filter="all"]')).toBeVisible();
-  await expect(page.locator('#downloads-filters [data-download-filter="android"]')).toBeVisible();
-  await expect(page.locator('#downloads-filters [data-download-filter="ios"]')).toBeVisible();
+  await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(5);
   await expect(page.locator('#download-grid .release-asset-card')).toHaveCount(5);
   // Download cards intentionally share the library's plugin-card visual class.
   await expect(page.locator('#download-grid .plugin-card')).toHaveCount(8);
@@ -779,20 +775,8 @@ test('Nuvio downloads library has searchable platform filters and direct release
   expect(downloadColumns).toBe(expectedColumns);
   await expect(page.locator('#download-grid .release-asset-card a.release-asset-action[href*="/releases/download/"]')).toHaveCount(5);
 
-  await page.locator('#downloads-filters [data-download-filter="android"]').click();
-  await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(4);
-  await page.locator('#downloads-filters [data-download-filter="ios"]').click();
-  await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(1);
-  await page.locator('#downloads-filters [data-download-filter="all"]').click();
-
-  await page.locator('#downloads-search').fill('x86_64');
-  await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(1);
-  await page.locator('#downloads-search').fill('');
-  await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(5);
-
   await page.locator('#language-toggle').click();
   await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
-  await expect(page.locator('#downloads-search')).toHaveAttribute('placeholder', 'Search download files...');
   await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(5);
   await page.locator('#language-toggle').click();
   await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
