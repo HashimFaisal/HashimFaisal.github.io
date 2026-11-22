@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - "scripts/check_links.py"
+      - "index.html"
       - "app.js"
       - "tests/browser-smoke.spec.cjs"
       - ".github/workflows/addon-health.yml"
