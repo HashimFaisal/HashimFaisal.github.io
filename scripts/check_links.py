@@ -174,6 +174,99 @@ def release_cache_is_stale(cached_at, now=None):
     return age is None or age > RELEASE_CACHE_MAX_AGE_SECONDS
 
 
+def diagnose_check(item):
+    """Attach a stable failure code and actionable hint to an unsuccessful health check."""
+    if item.get("ok"):
+        return {
+            "failure_code": "healthy",
+            "failure_category": "healthy",
+            "severity": "info",
+            "recommended_action": "No action required.",
+        }
+
+    status = item.get("http_status")
+    error = str(item.get("error") or "").lower()
+    check_type = item.get("type", "unknown")
+    name = item.get("name", "Unknown")
+
+    if status == 429 or "rate limit" in error or "too many requests" in error:
+        code, category, action = (
+            "rate_limited", "rate_limit",
+            "Wait for the API rate limit to reset; avoid repeated retries."
+        )
+    elif status in (401, 403) or "unauthorized" in error or "forbidden" in error:
+        code, category, action = (
+            "access_denied", "access",
+            "Verify access permissions or token configuration."
+        )
+    elif status == 404 or "not found" in error:
+        code, category, action = (
+            "not_found", "missing_resource",
+            "Confirm the resource URL, release tag, or asset name."
+        )
+    elif status is not None and status >= 500:
+        code, category, action = (
+            "upstream_server_error", "upstream",
+            "Retry later and check the upstream service status."
+        )
+    elif any(term in error for term in ("timed out", "timeout")):
+        code, category, action = (
+            "timeout", "network",
+            "Retry after a short delay; check network reachability if persistent."
+        )
+    elif any(term in error for term in ("dns", "name or service", "getaddrinfo")):
+        code, category, action = (
+            "dns_failure", "network",
+            "Check DNS resolution and network connectivity."
+        )
+    elif any(term in error for term in ("ssl", "tls", "certificate")):
+        code, category, action = (
+            "tls_failure", "network",
+            "Check HTTPS/TLS connectivity and certificate validity."
+        )
+    elif any(term in error for term in ("json", "decode", "manifest field", "must be")):
+        code, category, action = (
+            "invalid_response", "data_validation",
+            "Inspect the returned payload for malformed JSON or an unexpected schema."
+        )
+    elif check_type == "release":
+        code, category, action = (
+            "release_lookup_failed", "release",
+            "Check the releases API and confirm a published beta release exists."
+        )
+    elif check_type == "download":
+        code, category, action = (
+            "download_check_failed", "download",
+            "Verify the release asset exists and its download URL responds."
+        )
+    else:
+        code, category, action = (
+            "check_failed", "unknown",
+            "Inspect the check error and retry once the cause is corrected."
+        )
+
+    return {
+        "failure_code": code,
+        "failure_category": category,
+        "severity": "warning",
+        "recommended_action": action,
+    }
+
+
+def build_diagnostic_summary(results):
+    failures = [item for item in results if not item.get("ok")]
+    if not failures:
+        return "All checks are healthy."
+    counts = {}
+    for item in failures:
+        category = item.get("failure_category", "unknown")
+        counts[category] = counts.get(category, 0) + 1
+    categories = ", ".join(
+        f"{count} {category}" for category, count in sorted(counts.items())
+    )
+    return f"{len(failures)} failure(s): categories {categories}."
+
+
 def load_release_cache():
     try:
         with open(RELEASE_CACHE_PATH, "r", encoding="utf-8") as cache_file:
@@ -412,6 +505,10 @@ def main():
     if release_fetch_succeeded and release_data and len(release_data.get("assets", [])) == 5 and all(asset.get("ok") for asset in release_data["assets"]):
         save_release_cache(release, stable_release)
 
+    for item in results:
+        item.update(diagnose_check(item))
+    diagnostic_summary = build_diagnostic_summary(results)
+
     passed = sum(1 for item in results if item["ok"])
 
     report = {
@@ -426,6 +523,11 @@ def main():
         "release_cache_timestamp": release_cache_timestamp,
         "release_cache_age_seconds": release_cache_age,
         "release_cache_stale": release_cache_stale,
+        "diagnostic_summary": diagnostic_summary,
+        "failure_categories": sorted(set(
+            item["failure_category"] for item in results if not item["ok"]
+        )),
+        "diagnostics": [item for item in results if not item["ok"]],
         "checks": results,
     }
 
