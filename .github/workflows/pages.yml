@@ -44,6 +44,7 @@ jobs:
           cp index.html style.css app.js public/
           cp premium-ui.css premium-ui.js public/
           cp touch-effects.css touch-effects.js public/
+          cp downloads-redesign.css public/
           cp data/status.json public/data/
           if [ -f data/changelog.json ]; then cp data/changelog.json public/data/; fi
           if [ -f data/updates.json ]; then cp data/updates.json public/data/; fi
@@ -69,13 +70,15 @@ jobs:
 
           updated, count = re.subn(pattern, replace, html, flags=re.IGNORECASE)
 
-          if count != 6:
+          if count != 7:
               raise SystemExit(
-                  f"Expected 6 local CSS/JS references, found {count}; refusing to deploy."
+                  f"Expected 7 local CSS/JS references, found {count}; refusing to deploy."
               )
 
           path.write_text(updated)
           print(f"Versioned {count} local assets with commit {version}")
+          if not (Path("public/downloads-redesign.css").is_file() and Path("public/downloads-redesign.css").stat().st_size > 0):
+              raise SystemExit("downloads-redesign.css is missing from the deployment artifact.")
           PY
 
       - name: Upload website

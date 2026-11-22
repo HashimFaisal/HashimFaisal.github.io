@@ -487,7 +487,7 @@ function applyLanguage() {
 
   translateStaticText();
   updateShareButtonLabels();
-  if (latestReport) renderVersionCardStatuses(latestReport);
+  if (latestReport) renderDeviceCardStatuses(latestReport);
   loadLiveUpdates();
 
   const changelogList = $('#changelog-list');
@@ -898,18 +898,18 @@ function renderManifestStatuses(report) {
 }
 
 
-function renderVersionCardStatuses(report) {
+function renderDeviceCardStatuses(report) {
   const items = Array.isArray(report?.version_downloads?.items)
     ? report.version_downloads.items
     : (Array.isArray(report?.checks) ? report.checks.filter(item => item.type === 'version_download') : []);
 
-  document.querySelectorAll('.version-card').forEach(card => {
-    const status = card.querySelector('.version-card-status');
+  document.querySelectorAll('.downloads-device-card').forEach(card => {
+    const status = card.querySelector('.downloads-device-status');
     if (!status) return;
     const title = card.querySelector('h3')?.textContent.trim();
     const cardItems = items.filter(item => item.card === title);
     if (!cardItems.length) {
-      const tags = [...new Set([...card.querySelectorAll('a.version-download')].map(link => {
+      const tags = [...new Set([...card.querySelectorAll('a.downloads-device-link')].map(link => {
         try {
           const parts = new URL(link.href).pathname.split('/').filter(Boolean);
           const index = parts.indexOf('download');
@@ -976,7 +976,7 @@ function renderDownloadFilters(assets) {
 
 function filterDownloads() {
   const term = ($('#downloads-search')?.value || '').trim().toLowerCase();
-  const cards = $$('#download-grid .download-card');
+  const cards = $$('#download-grid .release-asset-card');
   let visible = 0;
 
   cards.forEach(card => {
@@ -1083,27 +1083,27 @@ function renderDownloads(report) {
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
         : t('تاريخ الرفع غير متاح');
 
-      return `<article class="download-library-card download-card" data-category="${category}" data-ready="${ready ? 'true' : 'false'}">
-        <div class="plugin-top">
-          <span class="download-file-icon" aria-hidden="true">${fileType}</span>
-          <span class="type-tag external">${t(categoryLabel)}</span>
+      return `<article class="release-asset-card" data-category="${category}" data-ready="${ready ? 'true' : 'false'}">
+        <div class="release-asset-card__top">
+          <span class="release-asset-icon" aria-hidden="true">${fileType}</span>
+          <span class="release-asset-kind">${t(categoryLabel)}</span>
         </div>
-        <h3 class="download-file"><bdi dir="ltr">${escapeHTML(displayName)}</bdi></h3>
-        <p>${t('ملف تثبيت مباشر لـ Nuvio.')}</p>
-        <div class="download-meta-stack">
-          <small class="download-meta">${formatBytes(asset.size_bytes)}</small>
-          <small class="download-meta">${escapeHTML(uploadDate)}</small>
-          ${staleNote}
-          ${verificationNote}
+        <h3 class="release-asset-name"><bdi dir="ltr">${escapeHTML(displayName)}</bdi></h3>
+        <p class="release-asset-description">${t('ملف تثبيت مباشر لـ Nuvio.')}</p>
+        <div class="release-asset-meta">
+          <small>${formatBytes(asset.size_bytes)}</small>
+          <small>${escapeHTML(uploadDate)}</small>
+          ${staleNote ? `<small>${t(report.release_cache_stale ? 'بيانات التنزيل محفوظة لكن الكاش قديم؛ استخدمها بحذر.' : 'بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.')}</small>` : ''}
+          ${verificationNote ? `<small>${t('تعذر تأكيد الرابط حالياً؛ الرابط محفوظ ويمكن تجربته.')}</small>` : ''}
         </div>
-        <div class="card-status download-card-status" data-state="${healthy ? 'healthy' : 'warning'}">
-          <i class="download-health-dot ${healthy ? 'is-healthy' : 'is-warning'}" aria-hidden="true"></i>
+        <div class="release-asset-status" data-state="${healthy ? 'healthy' : 'warning'}">
+          <i class="release-asset-status__dot ${healthy ? 'is-healthy' : 'is-warning'}" aria-hidden="true"></i>
           <span>${versionStatus} · ${t('الإصدار')} <bdi dir="ltr">${escapeHTML(appVersion)}</bdi></span>
         </div>
-        <div class="card-actions">
+        <div class="release-asset-actions">
           ${ready
-            ? `<a class="download-action" href="${escapeHTML(downloadUrl)}" target="_blank" rel="noopener noreferrer">${t('تنزيل مباشر ↗')}</a>`
-            : `<span class="download-unavailable muted">${t('غير متاح حالياً')}</span>`}
+            ? `<a class="release-asset-action" href="${escapeHTML(downloadUrl)}" target="_blank" rel="noopener noreferrer">${t('تنزيل مباشر ↗')}</a>`
+            : `<span class="release-asset-unavailable">${t('غير متاح حالياً')}</span>`}
         </div>
       </article>`;
     }).join('');
@@ -1146,7 +1146,7 @@ async function loadStatus() {
     updateLastChecked();
 
     renderManifestStatuses(report);
-    renderVersionCardStatuses(report);
+    renderDeviceCardStatuses(report);
     renderDownloads(report);
   } catch (error) {
     $('#health-state').textContent = t('غير متاح');
