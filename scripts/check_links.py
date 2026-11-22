@@ -306,13 +306,18 @@ def build_change_summary(events):
 
 
 def build_risk_forecast(results, previous_report=None, history=None):
-    """Score evidence-based operational risk without claiming certainty or fabricating forecasts."""
+    """Score current evidence and compare it with the prior report to show risk trends."""
     previous_report = previous_report if isinstance(previous_report, dict) else {}
     history = history if isinstance(history, list) else []
     previous_checks = {
         item.get("name"): item for item in previous_report.get("checks", [])
         if isinstance(item, dict) and item.get("name")
     }
+    previous_forecast = previous_report.get("risk_forecast")
+    previous_risks = {
+        item.get("resource"): item for item in previous_forecast.get("risks", [])
+        if isinstance(item, dict) and item.get("resource")
+    } if isinstance(previous_forecast, dict) else {}
     failure_items = [item for item in results if not item.get("ok")]
     risks = []
     for item in failure_items:
@@ -358,9 +363,39 @@ def build_risk_forecast(results, previous_report=None, history=None):
             "evidence_count": 0,
             "recommended_action": "Verify release API connectivity and cache freshness.",
         })
+
+    trend_counts = {"new": 0, "worsening": 0, "improving": 0, "stable": 0}
+    matched_previous_total = sum(
+        max(0, int(previous_risks[name].get("score", 0)))
+        for name in ({risk["resource"] for risk in risks} & set(previous_risks))
+        if isinstance(previous_risks[name].get("score", 0), (int, float))
+    )
+    current_total = sum(risk["score"] for risk in risks)
+    for risk in risks:
+        prior_risk = previous_risks.get(risk["resource"])
+        if prior_risk is None:
+            trend, prior_score, delta = "new", None, None
+        else:
+            raw_prior_score = prior_risk.get("score")
+            prior_score = raw_prior_score if isinstance(raw_prior_score, (int, float)) else None
+            delta = risk["score"] - prior_score if prior_score is not None else None
+            trend = "worsening" if delta and delta > 0 else "improving" if delta and delta < 0 else "stable"
+        risk["previous_score"] = prior_score
+        risk["score_delta"] = delta
+        risk["trend"] = trend
+        risk["trend_basis"] = "Score compared with the immediately previous saved risk forecast." if prior_risk is not None else "No matching risk in the previous forecast; baseline for trend comparison."
+        trend_counts[trend] += 1
+
+    current_names = {risk["resource"] for risk in risks}
+    resolved = sorted(name for name in previous_risks if name not in current_names)
     high = sum(1 for risk in risks if risk["level"] == "high")
     medium = sum(1 for risk in risks if risk["level"] == "medium")
     overall = "high" if high else "medium" if medium else "low"
+    has_continuing_risks = any(risk["resource"] in previous_risks for risk in risks)
+    trend_status = "baseline" if not has_continuing_risks else (
+        "worsening" if current_total > matched_previous_total else
+        "improving" if current_total < matched_previous_total else "stable"
+    )
     return {
         "status": "attention" if risks else "healthy",
         "overall_level": overall,
@@ -368,9 +403,20 @@ def build_risk_forecast(results, previous_report=None, history=None):
         "high_risk_count": high,
         "medium_risk_count": medium,
         "risks": risks,
+        "trend_summary": {
+            "status": trend_status,
+            "previous_total_score": matched_previous_total if has_continuing_risks else None,
+            "current_total_score": current_total,
+            "total_score_delta": current_total - matched_previous_total if has_continuing_risks else None,
+            "new_count": trend_counts["new"],
+            "worsening_count": trend_counts["worsening"],
+            "improving_count": trend_counts["improving"],
+            "stable_count": trend_counts["stable"],
+            "resolved_resources": resolved,
+            "basis": "Comparison of continuing risks only; resolved risks are excluded from trend totals. Not a statistical prediction.",
+        },
         "note": "Evidence-based risk indicators, not certainty or a statistical prediction.",
     }
-
 
 def build_proactive_alerts(report):
     """Produce concise early-warning items from measured health data only."""
