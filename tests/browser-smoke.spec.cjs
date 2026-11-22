@@ -732,6 +732,12 @@ test('Nuvio editions are separated by device and link directly to published inst
   await expect(page.locator('#versions-tv a[href$="app-full-universal-release.apk"]')).toBeVisible();
   await expect(page.locator('#versions-smart-tv a[href$=".wgt"]')).toBeVisible();
   await expect(page.locator('#versions-smart-tv a[href$=".ipk"]')).toBeVisible();
+  await expect(page.locator('#versions-mobile a[href$="NuvioRS-1.1.0-beta.2-autosync.5-arm64.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-tv a[href$="NuvioRS-TV-1.2.0-beta.3-tester.2-arm32.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-desktop a[href$="NuvioCodeineXO-v6.1.5.exe"]')).toBeVisible();
+  await expect(page.locator('#versions-mobile a.version-download[href*="/releases"]')).toHaveCount(0);
+  await expect(page.locator('#versions-tv a.version-download[href*="/releases"]')).toHaveCount(0);
+  await expect(page.locator('#versions-desktop a.version-download[href*="/releases"]')).toHaveCount(0);
 
   await page.locator('#language-toggle').click();
   await expect(page.locator('#versions-mobile-title')).toHaveText('Mobile · Android & iPhone');
