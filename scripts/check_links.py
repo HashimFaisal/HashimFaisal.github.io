@@ -245,11 +245,27 @@ def main():
         if item.get("type") != "manifest" or item.get("ok"):
             continue
         previous = previous_checks.get(item.get("name"))
-        if isinstance(previous, dict) and previous.get("ok") and previous.get("version"):
-            item["version"] = previous["version"]
-            item["cached_version"] = previous["version"]
+        cached_version = (
+            previous.get("cached_version")
+            if isinstance(previous, dict)
+            else None
+        )
+        last_good_version = (
+            previous.get("version")
+            if isinstance(previous, dict) and previous.get("ok")
+            else cached_version or (
+                previous.get("version") if isinstance(previous, dict) else None
+            )
+        )
+        if last_good_version:
+            item["version"] = last_good_version
+            item["cached_version"] = last_good_version
             item["stale"] = True
-            item["last_verified_at"] = previous_report.get("checked_at")
+            item["last_verified_at"] = (
+                previous.get("last_verified_at")
+                if isinstance(previous, dict) and previous.get("stale")
+                else previous_report.get("checked_at")
+            )
 
     # Add an explicit beta-release health check so a failed release lookup
     # cannot leave the overall report looking fully healthy.
