@@ -1,0 +1,42 @@
+name: Download Center Browser QA
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'index.html'
+      - 'app.js'
+      - 'style.css'
+      - 'premium-ui.css'
+      - 'premium-ui.js'
+      - 'downloads-redesign.css'
+      - 'tests/**'
+      - 'playwright.config.cjs'
+      - '.github/workflows/download-center-browser-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Playwright test runner
+        run: npm install --no-save @playwright/test
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run desktop and mobile browser tests
+        run: npx playwright test
