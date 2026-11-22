@@ -910,6 +910,7 @@ function renderDownloads(report) {
 
   const banner = $('#downloads .release-banner');
   if (banner) {
+    banner.querySelectorAll('.release-health').forEach(node => node.remove());
     banner.dataset.state = releaseHealthy ? 'healthy' : 'warning';
     const version = $('#release-heading');
     if (version) version.insertAdjacentHTML('beforebegin',
