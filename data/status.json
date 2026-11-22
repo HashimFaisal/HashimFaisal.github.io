@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-22T12:27:28.187767+00:00",
-  "ok": false,
-  "passed": 30,
-  "total": 31,
+  "checked_at": "2026-11-22T12:39:02.813853+00:00",
+  "ok": true,
+  "passed": 35,
+  "total": 35,
   "manifest_coverage": {
     "configured": 20,
     "healthy": 20,
@@ -157,19 +157,84 @@
     ]
   },
   "version_downloads": {
-    "checked": 1,
-    "healthy": 0,
-    "failed": 1,
+    "checked": 5,
+    "healthy": 5,
+    "failed": 0,
     "items": [
       {
-        "name": "Nuvio edition download inventory",
+        "name": "Nuvio Enhanced 1.0.0 · تنزيل APK · ARM64",
         "type": "version_download",
-        "ok": false,
-        "error": "No direct version-download links were found in index.html.",
-        "failure_code": "download_check_failed",
-        "failure_category": "download",
-        "severity": "warning",
-        "recommended_action": "Verify the release asset exists and its direct download URL responds."
+        "ok": true,
+        "http_status": 200,
+        "size_bytes": null,
+        "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.0.0/nuvio-1.0.0-arm64-v8a-release.apk",
+        "card": "Nuvio Enhanced 1.0.0",
+        "label": "تنزيل APK · ARM64",
+        "tag": "1.0.0",
+        "failure_code": "healthy",
+        "failure_category": "healthy",
+        "severity": "info",
+        "recommended_action": "No action required."
+      },
+      {
+        "name": "Nuvio Enhanced 1.0.0 · تنزيل APK · ARMv7",
+        "type": "version_download",
+        "ok": true,
+        "http_status": 200,
+        "size_bytes": null,
+        "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.0.0/nuvio-1.0.0-armeabi-v7a-release.apk",
+        "card": "Nuvio Enhanced 1.0.0",
+        "label": "تنزيل APK · ARMv7",
+        "tag": "1.0.0",
+        "failure_code": "healthy",
+        "failure_category": "healthy",
+        "severity": "info",
+        "recommended_action": "No action required."
+      },
+      {
+        "name": "Nuvio Enhanced 1.0.0 · تنزيل APK · x86",
+        "type": "version_download",
+        "ok": true,
+        "http_status": 200,
+        "size_bytes": null,
+        "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.0.0/nuvio-1.0.0-x86-release.apk",
+        "card": "Nuvio Enhanced 1.0.0",
+        "label": "تنزيل APK · x86",
+        "tag": "1.0.0",
+        "failure_code": "healthy",
+        "failure_category": "healthy",
+        "severity": "info",
+        "recommended_action": "No action required."
+      },
+      {
+        "name": "Nuvio Enhanced 1.0.0 · تنزيل APK · x86_64",
+        "type": "version_download",
+        "ok": true,
+        "http_status": 200,
+        "size_bytes": null,
+        "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.0.0/nuvio-1.0.0-x86_64-release.apk",
+        "card": "Nuvio Enhanced 1.0.0",
+        "label": "تنزيل APK · x86_64",
+        "tag": "1.0.0",
+        "failure_code": "healthy",
+        "failure_category": "healthy",
+        "severity": "info",
+        "recommended_action": "No action required."
+      },
+      {
+        "name": "Nuvio Enhanced 1.0.0 · تنزيل ملف IPA · iOS",
+        "type": "version_download",
+        "ok": true,
+        "http_status": 200,
+        "size_bytes": null,
+        "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.0.0/nuvio-1.0.0-enhanced-release.ipa",
+        "card": "Nuvio Enhanced 1.0.0",
+        "label": "تنزيل ملف IPA · iOS",
+        "tag": "1.0.0",
+        "failure_code": "healthy",
+        "failure_category": "healthy",
+        "severity": "info",
+        "recommended_action": "No action required."
       }
     ]
   },
@@ -185,22 +250,9 @@
   "release_cache_timestamp": null,
   "release_cache_age_seconds": null,
   "release_cache_stale": false,
-  "diagnostic_summary": "1 failure(s): categories 1 download.",
-  "failure_categories": [
-    "download"
-  ],
-  "diagnostics": [
-    {
-      "name": "Nuvio edition download inventory",
-      "type": "version_download",
-      "ok": false,
-      "error": "No direct version-download links were found in index.html.",
-      "failure_code": "download_check_failed",
-      "failure_category": "download",
-      "severity": "warning",
-      "recommended_action": "Verify the release asset exists and its direct download URL responds."
-    }
-  ],
+  "diagnostic_summary": "All checks are healthy.",
+  "failure_categories": [],
+  "diagnostics": [],
   "checks": [
     {
       "name": "ALL-IN-ONE",
@@ -532,14 +584,79 @@
       "recommended_action": "No action required."
     },
     {
-      "name": "Nuvio edition download inventory",
+      "name": "Nuvio Enhanced 1.0.0 · تنزيل APK · ARM64",
       "type": "version_download",
-      "ok": false,
-      "error": "No direct version-download links were found in index.html.",
-      "failure_code": "download_check_failed",
-      "failure_category": "download",
-      "severity": "warning",
-      "recommended_action": "Verify the release asset exists and its direct download URL responds."
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": null,
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.0.0/nuvio-1.0.0-arm64-v8a-release.apk",
+      "card": "Nuvio Enhanced 1.0.0",
+      "label": "تنزيل APK · ARM64",
+      "tag": "1.0.0",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
+      "name": "Nuvio Enhanced 1.0.0 · تنزيل APK · ARMv7",
+      "type": "version_download",
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": null,
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.0.0/nuvio-1.0.0-armeabi-v7a-release.apk",
+      "card": "Nuvio Enhanced 1.0.0",
+      "label": "تنزيل APK · ARMv7",
+      "tag": "1.0.0",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
+      "name": "Nuvio Enhanced 1.0.0 · تنزيل APK · x86",
+      "type": "version_download",
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": null,
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.0.0/nuvio-1.0.0-x86-release.apk",
+      "card": "Nuvio Enhanced 1.0.0",
+      "label": "تنزيل APK · x86",
+      "tag": "1.0.0",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
+      "name": "Nuvio Enhanced 1.0.0 · تنزيل APK · x86_64",
+      "type": "version_download",
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": null,
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.0.0/nuvio-1.0.0-x86_64-release.apk",
+      "card": "Nuvio Enhanced 1.0.0",
+      "label": "تنزيل APK · x86_64",
+      "tag": "1.0.0",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
+      "name": "Nuvio Enhanced 1.0.0 · تنزيل ملف IPA · iOS",
+      "type": "version_download",
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": null,
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.0.0/nuvio-1.0.0-enhanced-release.ipa",
+      "card": "Nuvio Enhanced 1.0.0",
+      "label": "تنزيل ملف IPA · iOS",
+      "tag": "1.0.0",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "Nuvio beta release",
@@ -614,89 +731,44 @@
     }
   ],
   "change_summary": {
-    "count": 1,
-    "by_type": {
-      "status": 1
-    },
-    "events": [
-      {
-        "date": "2026-11-22T12:27:28.188068+00:00",
-        "type": "status",
-        "title": "تغيرت حالة Nuvio Catalog",
-        "detail": "الحالة السابقة: متعطل. الحالة الجديدة: متاح.",
-        "source": "Nuvio Catalog",
-        "source_url": "https://catalog.nuvio.tv/manifest.json",
-        "old_status": "unavailable",
-        "new_status": "available"
-      }
-    ]
+    "count": 0,
+    "by_type": {},
+    "events": []
   },
-  "change_count": 1,
+  "change_count": 0,
   "proactive_monitoring": {
-    "status": "critical",
-    "alert_count": 1,
-    "alerts": [
-      {
-        "severity": "high",
-        "code": "download_check_failed",
-        "resource": "Nuvio edition download inventory",
-        "message": "No direct version-download links were found in index.html.",
-        "recommended_action": "Verify the release asset exists and its direct download URL responds."
-      }
-    ],
-    "summary": "1 warning(s) detected; 1 high-priority."
+    "status": "healthy",
+    "alert_count": 0,
+    "alerts": [],
+    "summary": "No proactive warnings; all measured checks are healthy."
   },
   "risk_forecast": {
-    "status": "attention",
+    "status": "healthy",
     "integrity": {
-      "input_result_count": 31,
-      "evaluated_failure_count": 1,
+      "input_result_count": 35,
+      "evaluated_failure_count": 0,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
       "history_window_size": 36,
       "history_evidence_deduplicated": true
     },
-    "overall_level": "high",
-    "risk_count": 1,
-    "high_risk_count": 1,
+    "overall_level": "low",
+    "risk_count": 0,
+    "high_risk_count": 0,
     "medium_risk_count": 0,
-    "risks": [
-      {
-        "resource": "Nuvio edition download inventory",
-        "score": 70,
-        "level": "high",
-        "score_breakdown": {
-          "current_failure": 45,
-          "consecutive_failure": 25,
-          "outage_history": 0
-        },
-        "signals": [
-          "current_check_failed",
-          "consecutive_failure"
-        ],
-        "confidence": "medium",
-        "confidence_basis": "Number of distinct evidence signals; not predictive accuracy.",
-        "confidence_details": "Medium confidence from 2 distinct signal(s): current_check_failed, consecutive_failure.",
-        "evidence_count": 0,
-        "recommended_action": "Verify the release asset exists and its direct download URL responds.",
-        "previous_score": 70,
-        "score_delta": 0,
-        "trend": "stable",
-        "trend_basis": "Score compared with the immediately previous saved risk forecast."
-      }
-    ],
+    "risks": [],
     "trend_summary": {
-      "status": "stable",
-      "previous_total_score": 70,
-      "current_total_score": 70,
-      "total_score_delta": 0,
+      "status": "baseline",
+      "previous_total_score": null,
+      "current_total_score": null,
+      "total_score_delta": null,
       "new_count": 0,
       "worsening_count": 0,
       "improving_count": 0,
-      "stable_count": 1,
+      "stable_count": 0,
       "baseline_count": 0,
       "resolved_resources": [
-        "Nuvio Catalog"
+        "Nuvio edition download inventory"
       ],
       "basis": "Comparison of risks with valid numeric prior scores only; resolved and incomparable risks are excluded from trend totals. Not a statistical prediction."
     },
