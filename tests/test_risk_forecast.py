@@ -229,5 +229,27 @@ class RiskForecastTests(unittest.TestCase):
         self.assertEqual(risk["evidence_count"], 3)
         self.assertEqual(risk["score_breakdown"]["outage_history"], 15)
 
+    def test_resource_identity_matches_case_and_whitespace_variants(self):
+        item = {"name": "  API   Gateway ", "type": "manifest", "ok": False, "error": "timeout"}
+        previous = {
+            "checks": [{"name": "api gateway", "ok": False}],
+            "risk_forecast": {"risks": [{"resource": "API gateway", "score": 40}]},
+        }
+        history = [{"type": "status", "source": "api  GATEWAY", "new_status": "unavailable"}]
+        result = check_links.build_risk_forecast([item], previous, history)
+        risk = result["risks"][0]
+        self.assertEqual(risk["resource"], "API   Gateway")
+        self.assertEqual(risk["trend"], "worsening")
+        self.assertIn("consecutive_failure", risk["signals"])
+        self.assertEqual(risk["evidence_count"], 1)
+
+    def test_normalized_duplicate_resource_names_count_once(self):
+        failures = [
+            {"name": "API", "ok": False, "error": "timeout"},
+            {"name": " api ", "ok": False, "error": "timeout"},
+        ]
+        result = check_links.build_risk_forecast(failures, {}, [])
+        self.assertEqual(result["risk_count"], 1)
+
 if __name__ == "__main__":
     unittest.main()

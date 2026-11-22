@@ -326,6 +326,13 @@ def build_change_summary(events):
     }
 
 
+def normalize_resource_key(value):
+    """Create a stable comparison key without changing the displayed resource name."""
+    if not isinstance(value, str):
+        return ""
+    return " ".join(value.split()).casefold()
+
+
 def build_risk_forecast(results, previous_report=None, history=None):
     """Score current evidence and compare it with the prior report to show risk trends."""
     previous_report = previous_report if isinstance(previous_report, dict) else {}
@@ -333,15 +340,15 @@ def build_risk_forecast(results, previous_report=None, history=None):
     previous_checks_data = previous_report.get("checks")
     previous_checks_data = previous_checks_data if isinstance(previous_checks_data, list) else []
     previous_checks = {
-        item.get("name"): item for item in previous_checks_data
-        if isinstance(item, dict) and isinstance(item.get("name"), str) and item.get("name")
+        normalize_resource_key(item.get("name")): item for item in previous_checks_data
+        if isinstance(item, dict) and normalize_resource_key(item.get("name"))
     }
     previous_forecast = previous_report.get("risk_forecast")
     previous_risks_data = previous_forecast.get("risks") if isinstance(previous_forecast, dict) else []
     previous_risks_data = previous_risks_data if isinstance(previous_risks_data, list) else []
     previous_risks = {
-        item.get("resource"): item for item in previous_risks_data
-        if isinstance(item, dict) and isinstance(item.get("resource"), str) and item.get("resource")
+        normalize_resource_key(item.get("resource")): item for item in previous_risks_data
+        if isinstance(item, dict) and normalize_resource_key(item.get("resource"))
     }
     results = results if isinstance(results, list) else []
     failure_items = [item for item in results if isinstance(item, dict) and not item.get("ok")]
@@ -351,18 +358,18 @@ def build_risk_forecast(results, previous_report=None, history=None):
     for item in failure_items:
         raw_name = item.get("name")
         name = raw_name.strip() if isinstance(raw_name, str) and raw_name.strip() else "Unknown"
-        resource_key = name
+        resource_key = normalize_resource_key(name)
         if resource_key in seen_failed_resources:
             continue
         seen_failed_resources.add(resource_key)
         diagnostic = diagnose_check(item)
-        prior = previous_checks.get(name, {})
+        prior = previous_checks.get(resource_key, {})
         repeated = not prior.get("ok") and bool(prior)
         matching_events = []
         seen_event_signatures = set()
         for event in history[-100:]:
             if not (
-                isinstance(event, dict) and event.get("source") == name
+                isinstance(event, dict) and normalize_resource_key(event.get("source")) == resource_key
                 and event.get("type") == "status" and event.get("new_status") == "unavailable"
             ):
                 continue
@@ -414,15 +421,15 @@ def build_risk_forecast(results, previous_report=None, history=None):
     def valid_prior_score(value):
         return isinstance(value, (int, float)) and not isinstance(value, bool) and 0 <= value <= 100
     comparable = {
-        risk["resource"]: previous_risks[risk["resource"]]["score"]
+        normalize_resource_key(risk["resource"]): previous_risks[normalize_resource_key(risk["resource"])]["score"]
         for risk in risks
-        if risk["resource"] in previous_risks
-        and valid_prior_score(previous_risks[risk["resource"]].get("score"))
+        if normalize_resource_key(risk["resource"]) in previous_risks
+        and valid_prior_score(previous_risks[normalize_resource_key(risk["resource"])].get("score"))
     }
     matched_previous_total = sum(comparable.values())
-    comparable_current_total = sum(risk["score"] for risk in risks if risk["resource"] in comparable)
+    comparable_current_total = sum(risk["score"] for risk in risks if normalize_resource_key(risk["resource"]) in comparable)
     for risk in risks:
-        prior_risk = previous_risks.get(risk["resource"])
+        prior_risk = previous_risks.get(normalize_resource_key(risk["resource"]))
         raw_prior_score = prior_risk.get("score") if isinstance(prior_risk, dict) else None
         if prior_risk is None:
             trend, prior_score, delta = "new", None, None
@@ -441,8 +448,11 @@ def build_risk_forecast(results, previous_report=None, history=None):
         risk["trend_basis"] = basis
         trend_counts[trend] += 1
 
-    current_names = {risk["resource"] for risk in risks}
-    resolved = sorted(name for name in previous_risks if name not in current_names)
+    current_names = {normalize_resource_key(risk["resource"]) for risk in risks}
+    resolved = sorted(
+        previous_risks[key].get("resource", key)
+        for key in previous_risks if key not in current_names
+    )
     high = sum(1 for risk in risks if risk["level"] == "high")
     medium = sum(1 for risk in risks if risk["level"] == "medium")
     overall = "high" if high else "medium" if medium else "low"
