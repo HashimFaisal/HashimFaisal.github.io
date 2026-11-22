@@ -3,6 +3,7 @@ const $$ = (selector) => [...document.querySelectorAll(selector)];
 
 let activeFilter = 'all';
 let activeDownloadsFilter = 'all';
+let activeDownloadsDevice = 'mobile';
 let currentLang = 'ar';
 try {
   const savedLang = localStorage.getItem('nuvio-language');
@@ -1002,6 +1003,28 @@ function filterDownloads() {
   }
 }
 
+function setDownloadsDevice(device) {
+  const validDevices = ['mobile', 'tv', 'desktop'];
+  if (!validDevices.includes(device)) return;
+
+  activeDownloadsDevice = device;
+  $('#downloads-device-nav [data-download-device]').forEach(button => {
+    const active = button.dataset.downloadDevice === device;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
+
+  $('#downloads .downloads-device-section').forEach(section => {
+    section.hidden = section.dataset.deviceGroup !== device;
+  });
+}
+
+$('#downloads-device-nav')?.addEventListener('click', event => {
+  const button = event.target.closest('[data-download-device]');
+  if (!button) return;
+  setDownloadsDevice(button.dataset.downloadDevice);
+});
+
 $('#downloads-search')?.addEventListener('input', filterDownloads);
 $('#downloads-filters')?.addEventListener('click', event => {
   const button = event.target.closest('[data-download-filter]');
@@ -1406,6 +1429,7 @@ async function loadChangelog() {
 
 $('#year').textContent = new Date().getFullYear();
 
+setDownloadsDevice(activeDownloadsDevice);
 applyLanguage();
 installShareButtons();
 loadStatus();
