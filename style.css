@@ -1267,6 +1267,15 @@ html[dir="ltr"] .changelog-entry:hover { transform: translateX(3px); }
   border-color: var(--cyan);
   background: rgba(99, 217, 233, .15);
 }
+.version-card-status {
+  display: block;
+  margin: 6px 0 10px;
+  color: var(--muted, #8b8b8b);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.version-card-status[data-state="healthy"] { color: var(--success, #2f9e64); }
+.version-card-status[data-state="warning"] { color: var(--warning, #c58a2b); }
 .version-card > small {
   margin-top: 10px;
   color: var(--muted);
