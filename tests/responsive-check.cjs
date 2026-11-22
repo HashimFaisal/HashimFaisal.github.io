@@ -100,6 +100,15 @@ const viewports = [
           '.app-versions, .unified-download-library, .version-platform, .version-grid, .version-card, .version-card-status, .version-download, .version-kind, .version-actions, .version-disclaimer, .download-card, .download-library-card, .download-release-subsection, .downloads-release-panel, .download-grid'
         ).length;
         const releaseAssetsGrid = Boolean(document.querySelector('#download-grid.release-assets-grid'));
+        const installerLink = section.querySelector('.downloads-device-link');
+        const installerStyle = installerLink ? getComputedStyle(installerLink) : null;
+        const installerButtonsStyled = Boolean(
+          installerStyle &&
+          installerStyle.display === 'flex' &&
+          installerStyle.backgroundImage.includes('linear-gradient') &&
+          installerStyle.borderTopWidth === '1px' &&
+          Number(installerStyle.fontWeight) >= 700
+        );
         const groups = [...section.querySelectorAll('.downloads-device-section')];
         const expectedIds = ['versions-mobile','versions-desktop','versions-tv','versions-smart-tv'];
         const ids = groups.map(group => group.id);
@@ -125,12 +134,13 @@ const viewports = [
         const latestReleaseOverlap=Boolean(mobileGridRect&&latestRect&&mobileGridRect.left<latestRect.right-1&&mobileGridRect.right>latestRect.left+1&&mobileGridRect.top<latestRect.bottom-1&&mobileGridRect.bottom>latestRect.top+1);
         const cardsWithinGrid=cards.every(card=>{const r=card.getBoundingClientRect();return r.left>=gridRect.left-1&&r.right<=gridRect.right+1;});
         const platformCardCounts=groups.map(group=>group.querySelectorAll('.downloads-device-card').length);
-        return {downloadsSectionCount,legacyComponents,releaseAssetsGrid,ids,expectedIds,groupsCount:groups.length,overlaps,siblingOverlaps,cardCount:cards.length,columns,statusVisible:!document.querySelector('#status').hidden,legacyVersionsSection:!!document.querySelector('#versions'),latestReleaseOverlap,cardsWithinGrid,platformCardCounts};
+        return {downloadsSectionCount,legacyComponents,releaseAssetsGrid,installerButtonsStyled,ids,expectedIds,groupsCount:groups.length,overlaps,siblingOverlaps,cardCount:cards.length,columns,statusVisible:!document.querySelector('#status').hidden,legacyVersionsSection:!!document.querySelector('#versions'),latestReleaseOverlap,cardsWithinGrid,platformCardCounts};
       });
       const expectedColumns = viewport.width <= 480 ? 1 : viewport.width <= 1000 ? 2 : 3;
       if (downloadLayout.downloadsSectionCount !== 1) failures.push(viewport.name + ': expected exactly one Downloads Center section');
       if (downloadLayout.legacyComponents) failures.push(viewport.name + ': legacy download components remain (' + downloadLayout.legacyComponents + ')');
       if (!downloadLayout.releaseAssetsGrid) failures.push(viewport.name + ': isolated release-assets grid is missing');
+      if (!downloadLayout.installerButtonsStyled) failures.push(viewport.name + ': device installer links are not rendered as styled buttons');
       if (downloadLayout.groupsCount !== 4 || JSON.stringify(downloadLayout.ids) !== JSON.stringify(downloadLayout.expectedIds)) failures.push(viewport.name + ': platform groups missing or out of order ' + JSON.stringify(downloadLayout.ids));
       if (downloadLayout.overlaps.length) failures.push(viewport.name + ': platform groups overlap ' + JSON.stringify(downloadLayout.overlaps));
       if (downloadLayout.siblingOverlaps.length) failures.push(viewport.name + ': downloads children overlap ' + JSON.stringify(downloadLayout.siblingOverlaps));
