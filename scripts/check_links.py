@@ -573,8 +573,8 @@ def discover_version_downloads(path="index.html"):
         return [], str(exc)
 
     cards = []
-    card_pattern = re.compile(r'<article class="version-card">([\s\S]*?)</article>')
-    link_pattern = re.compile(r'<a class="version-download" href="([^"]+)">([\s\S]*?)</a>')
+    card_pattern = re.compile(r'<article class="[^"]*\\bversion-card\\b[^"]*">([\\s\\S]*?)</article>')
+    link_pattern = re.compile(r'<a class="[^"]*\\bversion-download\\b[^"]*" href="([^"]+)">([\\s\\S]*?)</a>')
     for card_html in card_pattern.findall(document):
         title_match = re.search(r'<h3>([\s\S]*?)</h3>', card_html)
         card_name = re.sub(r'<[^>]+>', '', title_match.group(1)).strip() if title_match else "Nuvio edition"
