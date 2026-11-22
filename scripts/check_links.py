@@ -1075,6 +1075,10 @@ def main():
         source_results = list(executor.map(lambda probe: probe(), SOURCE_PROBES))
     results.extend(source_results)
 
+    # Include direct installer links shown in the edition cards in the health report.
+    version_download_results = check_version_downloads()
+    results.extend(version_download_results)
+
     release = None
     stable_release = None
     release_error = None
