@@ -91,6 +91,53 @@ test('all five dashboard destinations open and return to the dashboard', async (
 });
 
 
+test('all 20 add-on cards receive their published manifest health status', async ({ page }) => {
+  const names = await page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
+    nodes.map(node => node.dataset.check).filter(Boolean)
+  );
+  expect(names).toHaveLength(20);
+  expect(new Set(names).size).toBe(20);
+
+  const checks = names.map(name => ({
+    name,
+    type: 'manifest',
+    ok: true,
+    version: '9.9.9'
+  }));
+
+  await page.route('**/data/status.json', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({
+      ok: true,
+      passed: 20,
+      total: 20,
+      checks,
+      release: null,
+      version_downloads: { checked: 0, healthy: 0, failed: 0, items: [] }
+    })
+  }));
+  await page.route('**/data/changelog.json', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify([{
+      type: 'system',
+      date: '2026-11-23T00:00:00Z',
+      title: 'فحص تحميل البيانات',
+      detail: 'تم تحميل سجل التغييرات بنجاح.'
+    }])
+  }));
+
+  await page.reload();
+  await expect(page.locator('#health-state')).toHaveText('سليم');
+  await expect(page.locator('#addon-count')).toHaveText('20');
+  await expect(page.locator('#plugins .plugin-card .card-status')).toHaveCount(20);
+  await expect.poll(() => page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
+    nodes.every(node => !node.textContent.includes('جارٍ التحقق'))
+  )).toBe(true);
+  await expect(page.locator('#changelog-list')).toContainText('تم تحميل سجل التغييرات بنجاح.');
+});
+
 test('Nuvio edition cards show checked versions and translate status labels', async ({ page }) => {
   const items = [
     {
