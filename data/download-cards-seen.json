@@ -1,9 +1,17 @@
 {
   "seen_card_ids": [
+    "nuvio-arc",
+    "nuvio-enhanced",
     "nuvio-mobile",
     "nuvio-mobile-for-ios",
+    "nuvio-native-legacy-android",
+    "nuvio-native-legacy-tizen",
+    "nuvio-native-legacy-webos",
     "nuvio-reshaped-mobile",
-    "nuvio-enhanced"
+    "nuvio-reshaped-tv",
+    "nuvio-tv",
+    "nuviocodeinexo",
+    "nuviotv-lite"
   ],
   "seen_release_ids": [
     "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.0.0-autosync.2"

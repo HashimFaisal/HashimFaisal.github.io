@@ -1,5 +1,125 @@
 [
   {
+    "id": "app:download-card-added:nuviocodeinexo",
+    "type": "app",
+    "title": {
+      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: NuvioCodeineXO",
+      "en": "New download option added: NuvioCodeineXO"
+    },
+    "description": {
+      "ar": "أُضيفت NuvioCodeineXO إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
+      "en": "NuvioCodeineXO has been added to the download center. Open the release page for downloads and release details."
+    },
+    "url": "https://github.com/codeineXO/NuvioCodeineXO/releases/tag/v6.1.5",
+    "publishedAt": "2026-11-22T21:27:49.598126Z",
+    "expiresAt": "2026-11-23T21:27:49.598126Z"
+  },
+  {
+    "id": "app:download-card-added:nuvio-tv",
+    "type": "app",
+    "title": {
+      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: Nuvio TV",
+      "en": "New download option added: Nuvio TV"
+    },
+    "description": {
+      "ar": "أُضيفت Nuvio TV إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
+      "en": "Nuvio TV has been added to the download center. Open the release page for downloads and release details."
+    },
+    "url": "https://github.com/NuvioMedia/NuvioTV/releases/tag/1.1.1",
+    "publishedAt": "2026-11-22T21:27:49.598126Z",
+    "expiresAt": "2026-11-23T21:27:49.598126Z"
+  },
+  {
+    "id": "app:download-card-added:nuvio-arc",
+    "type": "app",
+    "title": {
+      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: Nuvio Arc",
+      "en": "New download option added: Nuvio Arc"
+    },
+    "description": {
+      "ar": "أُضيفت Nuvio Arc إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
+      "en": "Nuvio Arc has been added to the download center. Open the release page for downloads and release details."
+    },
+    "url": "https://github.com/ysosrs123/NuvioTV-Fork/releases/tag/1.1.0-nt.stable",
+    "publishedAt": "2026-11-22T21:27:49.598126Z",
+    "expiresAt": "2026-11-23T21:27:49.598126Z"
+  },
+  {
+    "id": "app:download-card-added:nuviotv-lite",
+    "type": "app",
+    "title": {
+      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: NuvioTV-Lite",
+      "en": "New download option added: NuvioTV-Lite"
+    },
+    "description": {
+      "ar": "أُضيفت NuvioTV-Lite إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
+      "en": "NuvioTV-Lite has been added to the download center. Open the release page for downloads and release details."
+    },
+    "url": "https://github.com/hackerslash/NuvioTV-Lite/releases/tag/v2.4.6-lite",
+    "publishedAt": "2026-11-22T21:27:49.598126Z",
+    "expiresAt": "2026-11-23T21:27:49.598126Z"
+  },
+  {
+    "id": "app:download-card-added:nuvio-reshaped-tv",
+    "type": "app",
+    "title": {
+      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: Nuvio Reshaped TV",
+      "en": "New download option added: Nuvio Reshaped TV"
+    },
+    "description": {
+      "ar": "أُضيفت Nuvio Reshaped TV إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
+      "en": "Nuvio Reshaped TV has been added to the download center. Open the release page for downloads and release details."
+    },
+    "url": "https://github.com/DavidVamaiotu/NuvioTV-Reshaped/releases/tag/1.0.0-autosync.22",
+    "publishedAt": "2026-11-22T21:27:49.598126Z",
+    "expiresAt": "2026-11-23T21:27:49.598126Z"
+  },
+  {
+    "id": "app:download-card-added:nuvio-native-legacy-android",
+    "type": "app",
+    "title": {
+      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: Nuvio Native Legacy · Android",
+      "en": "New download option added: Nuvio Native Legacy · Android"
+    },
+    "description": {
+      "ar": "أُضيفت Nuvio Native Legacy · Android إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
+      "en": "Nuvio Native Legacy · Android has been added to the download center. Open the release page for downloads and release details."
+    },
+    "url": "https://github.com/iqui27/nuvio-native-legacy/releases/tag/v2.0.8",
+    "publishedAt": "2026-11-22T21:27:49.598126Z",
+    "expiresAt": "2026-11-23T21:27:49.598126Z"
+  },
+  {
+    "id": "app:download-card-added:nuvio-native-legacy-tizen",
+    "type": "app",
+    "title": {
+      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: Nuvio Native Legacy · Tizen",
+      "en": "New download option added: Nuvio Native Legacy · Tizen"
+    },
+    "description": {
+      "ar": "أُضيفت Nuvio Native Legacy · Tizen إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
+      "en": "Nuvio Native Legacy · Tizen has been added to the download center. Open the release page for downloads and release details."
+    },
+    "url": "https://github.com/iqui27/nuvio-native-legacy/releases/tag/v2.0.8",
+    "publishedAt": "2026-11-22T21:27:49.598126Z",
+    "expiresAt": "2026-11-23T21:27:49.598126Z"
+  },
+  {
+    "id": "app:download-card-added:nuvio-native-legacy-webos",
+    "type": "app",
+    "title": {
+      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: Nuvio Native Legacy · webOS",
+      "en": "New download option added: Nuvio Native Legacy · webOS"
+    },
+    "description": {
+      "ar": "أُضيفت Nuvio Native Legacy · webOS إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
+      "en": "Nuvio Native Legacy · webOS has been added to the download center. Open the release page for downloads and release details."
+    },
+    "url": "https://github.com/iqui27/nuvio-native-legacy/releases/tag/v2.0.8",
+    "publishedAt": "2026-11-22T21:27:49.598126Z",
+    "expiresAt": "2026-11-23T21:27:49.598126Z"
+  },
+  {
     "id": "app:download-release:DavidVamaiotu/NuvioMobile-Reshaped:1.0.0-autosync.2",
     "type": "app",
     "title": {
