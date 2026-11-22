@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-22T06:19:47.767985+00:00",
+  "checked_at": "2026-11-22T06:32:40.585521+00:00",
   "ok": false,
   "passed": 29,
   "total": 30,
@@ -615,25 +615,23 @@
         "confidence_details": "Medium confidence from 2 distinct signal(s): current_check_failed, consecutive_failure.",
         "evidence_count": 0,
         "recommended_action": "Confirm the resource URL, release tag, or asset name.",
-        "previous_score": 45,
-        "score_delta": 25,
-        "trend": "worsening",
+        "previous_score": 70,
+        "score_delta": 0,
+        "trend": "stable",
         "trend_basis": "Score compared with the immediately previous saved risk forecast."
       }
     ],
     "trend_summary": {
-      "status": "worsening",
-      "previous_total_score": 45,
+      "status": "stable",
+      "previous_total_score": 70,
       "current_total_score": 70,
-      "total_score_delta": 25,
+      "total_score_delta": 0,
       "new_count": 0,
-      "worsening_count": 1,
+      "worsening_count": 0,
       "improving_count": 0,
-      "stable_count": 0,
+      "stable_count": 1,
       "baseline_count": 0,
-      "resolved_resources": [
-        "Cinemana"
-      ],
+      "resolved_resources": [],
       "basis": "Comparison of risks with valid numeric prior scores only; resolved and incomparable risks are excluded from trend totals. Not a statistical prediction."
     },
     "note": "Evidence-based risk indicators, not certainty or a statistical prediction."
