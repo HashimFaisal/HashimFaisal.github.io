@@ -91,6 +91,53 @@ test('all five dashboard destinations open and return to the dashboard', async (
 });
 
 
+test('all 20 add-on cards receive their published manifest health status', async ({ page }) => {
+  const names = await page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
+    nodes.map(node => node.dataset.check).filter(Boolean)
+  );
+  expect(names).toHaveLength(20);
+  expect(new Set(names).size).toBe(20);
+
+  const checks = names.map(name => ({
+    name,
+    type: 'manifest',
+    ok: true,
+    version: '9.9.9'
+  }));
+
+  await page.route('**/data/status.json', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({
+      ok: true,
+      passed: 20,
+      total: 20,
+      checks,
+      release: null,
+      version_downloads: { checked: 0, healthy: 0, failed: 0, items: [] }
+    })
+  }));
+  await page.route('**/data/changelog.json', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify([{
+      type: 'system',
+      date: '2026-11-23T00:00:00Z',
+      title: 'فحص تحميل البيانات',
+      detail: 'تم تحميل سجل التغييرات بنجاح.'
+    }])
+  }));
+
+  await page.reload();
+  await expect(page.locator('#health-state')).toHaveText('سليم');
+  await expect(page.locator('#addon-count')).toHaveText('20');
+  await expect(page.locator('#plugins .plugin-card .card-status')).toHaveCount(20);
+  await expect.poll(() => page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
+    nodes.every(node => !node.textContent.includes('جارٍ التحقق'))
+  )).toBe(true);
+  await expect(page.locator('#changelog-list')).toContainText('تم تحميل سجل التغييرات بنجاح.');
+});
+
 test('Nuvio edition cards show checked versions and translate status labels', async ({ page }) => {
   const items = [
     {
@@ -780,11 +827,11 @@ test('Nuvio Enhanced card keeps one set of stable download buttons when latest r
     body: JSON.stringify({ checked_at: new Date().toISOString(), ok: false, passed: 0, total: 5, release_fallback_used: true, release_cache_stale: true, release: { tag: '1.2.3', app_version: '1.2.3', published_at: new Date().toISOString(), assets }, checks: [] })
   }));
   await page.goto('/');
-  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.0\.0$/ }) });
-  await expect(enhancedCard.locator('a.version-download')).toHaveCount(5);
+  const enhancedCard = page.locator('#download-grid > .downloads-device-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.1\.0-beta\.3$/ }) });
+  await expect(enhancedCard.locator('a.downloads-device-link')).toHaveCount(5);
   await expect(enhancedCard.locator('a.enhanced-latest-release, .enhanced-latest-release')).toHaveCount(0);
   await expect(enhancedCard.locator('a.release-enhanced-link')).toHaveCount(0);
-  await expect(enhancedCard.locator('a.version-download[href*="/releases/download/1.0.0/"]')).toHaveCount(5);
+  await expect(enhancedCard.locator('a.downloads-device-link[href*="/releases/download/1.1.0-beta.3/"]')).toHaveCount(5);
   await expect(page.locator('#download-grid .release-asset-card')).toHaveCount(0);
 });
 
@@ -797,14 +844,14 @@ test('Nuvio downloads library integrates release assets into mobile cards withou
   await expect(page.locator('#downloads .downloads-mobile-release-assets')).toHaveCount(0);
   await expect(page.locator('#downloads .downloads-toolbar, #downloads-search, #downloads-filters, #downloads-visible-count, #downloads .downloads-disclaimer')).toHaveCount(0);
   await expect(page.locator('#downloads .download-card, #downloads .download-library-card, #downloads .download-release-subsection, #downloads .download-grid, #downloads .version-platform')).toHaveCount(0);
-  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.0\.0$/ }) });
+  const enhancedCard = page.locator('#download-grid > .downloads-device-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.1\.0-beta\.3$/ }) });
   await expect(enhancedCard).toHaveCount(1);
-  await expect(enhancedCard.locator('a.version-download')).toHaveCount(5);
-  await expect(enhancedCard.locator('a[href$="nuvio-1.0.0-arm64-v8a-release.apk"]')).toHaveCount(1);
-  await expect(enhancedCard.locator('a[href$="nuvio-1.0.0-armeabi-v7a-release.apk"]')).toHaveCount(1);
-  await expect(enhancedCard.locator('a[href$="nuvio-1.0.0-x86-release.apk"]')).toHaveCount(1);
-  await expect(enhancedCard.locator('a[href$="nuvio-1.0.0-x86_64-release.apk"]')).toHaveCount(1);
-  await expect(enhancedCard.locator('a[href$="nuvio-1.0.0-enhanced-release.ipa"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a.downloads-device-link')).toHaveCount(5);
+  await expect(enhancedCard.locator('a[href$="nuvio-1.1.0-beta.3-arm64-v8a-release.apk"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a[href$="nuvio-1.1.0-beta.3-armeabi-v7a-release.apk"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a[href$="nuvio-1.1.0-beta.3-x86-release.apk"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a[href$="nuvio-1.1.0-beta.3-x86_64-release.apk"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a[href$="nuvio-1.1.0-beta.3-enhanced-release.ipa"]')).toHaveCount(1);
   await expect(page.locator('main > #downloads')).toHaveCount(1);
   await expect(page.locator('#downloads #versions-mobile, #downloads #versions-desktop, #downloads #versions-tv, #downloads #versions-smart-tv')).toHaveCount(4);
   await expect(page.locator('#downloads .downloads-release-details')).toHaveCount(0);
@@ -859,7 +906,7 @@ test('Nuvio editions are separated by device and link directly to published inst
   await expect(page.locator('#versions-tv a[href$="app-full-universal-release.apk"]')).toBeVisible();
   await expect(page.locator('#versions-smart-tv a[href$=".wgt"]')).toBeVisible();
   await expect(page.locator('#versions-smart-tv a[href$=".ipk"]').first()).toBeVisible();
-  await expect(page.locator('#versions-tv a[href$="NuvioRS-TV-1.0.0-autosync.22-arm32.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-tv a[href$="NuvioRS-TV-1.2.0-beta.3-autosync.3-arm32.apk"]')).toBeVisible();
   await expect(page.locator('#versions-tv a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
   await expect(page.locator('#versions-smart-tv a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
 
@@ -884,17 +931,17 @@ test('Nuvio editions are separated by device and link directly to published inst
 
 test('Nuvio Enhanced card never adds a duplicate latest-release button group', async ({ page }) => {
   await page.goto('/');
-  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.0\.0$/ }) });
-  await expect(enhancedCard.locator('a.version-download')).toHaveCount(5);
+  const enhancedCard = page.locator('#download-grid > .downloads-device-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.1\.0-beta\.3$/ }) });
+  await expect(enhancedCard.locator('a.downloads-device-link')).toHaveCount(5);
   await expect(enhancedCard.locator('.enhanced-latest-release')).toHaveCount(0);
 
   await page.evaluate(() => renderDownloads({
     release: { app_version: '1.2.3', assets: [{ name: 'arm64.apk', download_url: 'https://example.com/arm64.apk', ok: true }] }
   }));
-  await expect(enhancedCard.locator('a.version-download')).toHaveCount(5);
+  await expect(enhancedCard.locator('a.downloads-device-link')).toHaveCount(5);
   await expect(enhancedCard.locator('.enhanced-latest-release')).toHaveCount(0);
 
   await page.evaluate(() => renderDownloads({ release: { app_version: '1.2.3', assets: [] } }));
-  await expect(enhancedCard.locator('a.version-download')).toHaveCount(5);
+  await expect(enhancedCard.locator('a.downloads-device-link')).toHaveCount(5);
   await expect(enhancedCard.locator('.enhanced-latest-release')).toHaveCount(0);
 });
