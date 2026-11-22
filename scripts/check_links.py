@@ -365,9 +365,10 @@ def build_risk_forecast(results, previous_report=None, history=None):
         })
 
     trend_counts = {"new": 0, "worsening": 0, "improving": 0, "stable": 0}
-    previous_total = sum(
-        max(0, int(item.get("score", 0))) for item in previous_risks.values()
-        if isinstance(item.get("score", 0), (int, float))
+    matched_previous_total = sum(
+        max(0, int(previous_risks[name].get("score", 0)))
+        for name in ({risk["resource"] for risk in risks} & set(previous_risks))
+        if isinstance(previous_risks[name].get("score", 0), (int, float))
     )
     current_total = sum(risk["score"] for risk in risks)
     for risk in risks:
@@ -390,9 +391,10 @@ def build_risk_forecast(results, previous_report=None, history=None):
     high = sum(1 for risk in risks if risk["level"] == "high")
     medium = sum(1 for risk in risks if risk["level"] == "medium")
     overall = "high" if high else "medium" if medium else "low"
-    trend_status = "baseline" if not previous_risks else (
-        "worsening" if current_total > previous_total else
-        "improving" if current_total < previous_total else "stable"
+    has_continuing_risks = any(risk["resource"] in previous_risks for risk in risks)
+    trend_status = "baseline" if not has_continuing_risks else (
+        "worsening" if current_total > matched_previous_total else
+        "improving" if current_total < matched_previous_total else "stable"
     )
     return {
         "status": "attention" if risks else "healthy",
@@ -403,15 +405,15 @@ def build_risk_forecast(results, previous_report=None, history=None):
         "risks": risks,
         "trend_summary": {
             "status": trend_status,
-            "previous_total_score": previous_total if previous_risks else None,
+            "previous_total_score": matched_previous_total if has_continuing_risks else None,
             "current_total_score": current_total,
-            "total_score_delta": current_total - previous_total if previous_risks else None,
+            "total_score_delta": current_total - matched_previous_total if has_continuing_risks else None,
             "new_count": trend_counts["new"],
             "worsening_count": trend_counts["worsening"],
             "improving_count": trend_counts["improving"],
             "stable_count": trend_counts["stable"],
             "resolved_resources": resolved,
-            "basis": "Comparison with the immediately previous saved forecast; not a statistical prediction.",
+            "basis": "Comparison of continuing risks only; resolved risks are excluded from trend totals. Not a statistical prediction.",
         },
         "note": "Evidence-based risk indicators, not certainty or a statistical prediction.",
     }
