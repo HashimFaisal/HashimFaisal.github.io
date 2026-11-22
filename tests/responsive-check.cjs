@@ -78,7 +78,8 @@ const viewports = [
           topbarOverlaps: overlaps,
           hero: document.querySelector('.hero') ? rect(document.querySelector('.hero')) : null,
           dashboard: document.querySelector('#nuvio-dashboard') ? rect(document.querySelector('#nuvio-dashboard')) : null,
-          dashboardCards: [...document.querySelectorAll('.nuvio-launch-card')].map(el => {
+          downloadLayout,
+        dashboardCards: [...document.querySelectorAll('.nuvio-launch-card')].map(el => {
             const r = el.getBoundingClientRect();
             const childOverflow = [...el.children].some(child => {
               const c = child.getBoundingClientRect();
@@ -116,7 +117,6 @@ const viewports = [
       if (downloadLayout.columns !== expectedColumns) failures.push(viewport.name + ': downloads grid expected ' + expectedColumns + ' columns, found ' + downloadLayout.columns);
       if (downloadLayout.overlaps.length) failures.push(viewport.name + ': downloads section overlap ' + JSON.stringify(downloadLayout.overlaps));
       if (!downloadLayout.cardsWithinGrid) failures.push(viewport.name + ': downloads card exceeds grid bounds');
-      result.downloadLayout = downloadLayout;
       await page.locator('#downloads .nuvio-view-back').click();
       const screenshot = path.join(outputDir, viewport.name + '.png');
       await page.screenshot({ path: screenshot, fullPage: true, animations: 'disabled' });
