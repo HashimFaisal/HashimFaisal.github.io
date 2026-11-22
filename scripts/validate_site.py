@@ -65,13 +65,13 @@ for ref in parser.local_refs:
 ALLOWED_RGB = {
     "88,216,232", "163,148,255", "66,200,121", "255,130,146",
     "162,177,200", "141,234,243", "99,217,233", "170,155,255", "255,255,255", "0,0,0",
-    "7,11,22", "17,29,51", "185,214,235", "205,229,245", "245,250,255", "175,216,242", "205,231,248"
+    "7,11,22", "17,29,51", "185,214,235", "105,226,244", "173,154,255", "205,229,245", "245,250,255", "175,216,242", "205,231,248"
 }
 ALLOWED_CSS_HEX = {
     "#070b16", "#0d1526", "#111d33", "#182744", "#f2f6ff", "#a2b1c8",
     "#a394ff", "#58d8e8", "#42c879", "#a9e8c1", "#ff8292", "#ffb0ba",
     "#8deaf3", "#63d9e9", "#aa9bff", "#080d19", "#101a2d", "#16243a",
-    "#b2bfd4", "#afeac7", "#ffb9c2", "#98edf5", "#071317", "#000", "#fff",
+    "#b2bfd4", "#afeac7", "#ffb9c2", "#98edf5", "#071317", "#07111b", "#000", "#fff",
 }
 # Detect exact duplicate CSS selector/declaration rules within the same at-rule scope.
 # Media-query variants are kept separate; keyframe steps are intentionally excluded.
