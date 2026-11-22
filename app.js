@@ -1046,8 +1046,6 @@ function renderDownloads(report) {
           const link = document.createElement('a');
           link.className = 'downloads-device-link release-enhanced-link';
           link.href = downloadUrl;
-          link.target = '_blank';
-          link.rel = 'noopener noreferrer';
           link.textContent = isIos
             ? 'تنزيل IPA · iOS'
             : `تنزيل APK · ${architecture || 'Android'}`;
