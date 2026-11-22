@@ -25,9 +25,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&amp;family=Inter:wght@400;500;600;700;800;900&amp;display=swap">
-  <link rel="stylesheet" href="style.css?v=20261122-downloads-fullview2">
+  <link rel="stylesheet" href="style.css?v=20261122-downloads-clean3">
   <link rel="stylesheet" href="premium-ui.css?v=20261122-unified-download-sections1">
-  <link rel="stylesheet" href="touch-effects.css?v=20261120-liquid1">
+  <link rel="stylesheet" href="touch-effects.css?v=20261120-liquid1">\n  <link rel="stylesheet" href="downloads-redesign.css?v=20261122-clean3">
 </head>
 <body>
   <div class="ambient ambient-one"></div>
@@ -361,10 +361,26 @@
       </div>
     </section>
 
-    <section class="section app-versions unified-download-library" id="downloads" aria-labelledby="downloads-title">
-      <div class="section-heading downloads-heading"><div class="downloads-heading-copy"><div class="eyebrow">02 / NUVIO DOWNLOAD LIBRARY</div><h2 id="downloads-title">مكتبة تنزيلات Nuvio</h2><p>مكتبة واحدة مرتبة حسب نوع الجهاز، مع روابط تنزيل مباشرة وأحدث ملفات الإصدار.</p></div><span class="section-count">4 أقسام</span></div>
-<section class="version-platform" id="versions-mobile" aria-labelledby="versions-mobile-title">
-        <div class="version-platform-heading">
+    <section class="section app-versions unified-download-library downloads-redesign" id="downloads" aria-labelledby="downloads-title">
+      <header class="downloads-redesign-header">
+  <div class="downloads-redesign-intro">
+    <span class="downloads-redesign-eyebrow">NUVIO · RELEASE LIBRARY</span>
+    <h2 id="downloads-title">مركز التنزيلات</h2>
+    <p>مكتبة مستقلة بالكامل. اختر جهازك ثم حمّل النسخة المناسبة من مصدرها الأصلي.</p>
+  </div>
+  <div class="downloads-redesign-summary" aria-label="Download library overview">
+    <span><strong>04</strong><small>أقسام الأجهزة</small></span>
+    <span><strong>DIRECT</strong><small>روابط أصلية</small></span>
+  </div>
+</header>
+<nav class="downloads-device-nav" aria-label="التنقل داخل مركز التنزيلات">
+  <a href="#versions-mobile"><span class="downloads-nav-index">01</span><span>الموبايل</span><small>Android · iOS</small></a>
+  <a href="#versions-desktop"><span class="downloads-nav-index">02</span><span>الكمبيوتر</span><small>Windows</small></a>
+  <a href="#versions-tv"><span class="downloads-nav-index">03</span><span>Android TV</span><small>TV · Box</small></a>
+  <a href="#versions-smart-tv"><span class="downloads-nav-index">04</span><span>Smart TV</span><small>Samsung · LG</small></a>
+</nav>
+<section class="version-platform downloads-device-section" id="versions-mobile" aria-labelledby="versions-mobile-title">
+        <div class="version-platform-heading downloads-group-heading">
           <div><span class="eyebrow">01 / MOBILE</span><h3 id="versions-mobile-title">الموبايل · Android وiPhone</h3><p>نسخ الهواتف، مع روابط APK وIPA المباشرة عند توفرها.</p></div>
         </div>
         <div class="version-grid">
@@ -407,7 +423,7 @@
           </article>
         </div>
 
-        <div class="download-release-subsection">
+        <div class="download-release-subsection downloads-release-panel">
           <div class="version-platform-heading">
             <div><span class="eyebrow">LATEST OFFICIAL RELEASE</span><h3>ملفات الإصدار الأخير</h3><p>ملفات مباشرة مرتبطة بالإصدار المنشور، مع فحص حالة الروابط.</p></div>
             <span class="section-count" id="downloads-visible-count">05 FILES</span>
@@ -573,7 +589,7 @@
 
   <footer><div class="brand footer-brand">HASHIM<span class="accent">FAISAL</span></div><span>Independent Nuvio Projects · </span><span id="year"></span><a href="https://github.com/HashimFaisal" target="_blank" rel="noopener">GitHub ↗</a></footer>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="app.js?v=20261122-unified-download-sections1"></script>
+  <script src="app.js?v=20261122-downloads-clean3"></script>
   <script src="premium-ui.js?v=20261119-languagefix1"></script>
   <script src="touch-effects.js?v=20261120-liquid1" defer></script>
 </body>
