@@ -864,3 +864,15 @@
   #downloads .release-asset-card:hover,
   #downloads .downloads-device-nav a:hover { transform: none !important; }
 }
+
+
+/* Keep installer controls consistent with the library's gradient-accent treatment. */
+#downloads .downloads-device-actions .downloads-device-link,
+#downloads .release-asset-action {
+  border-top-width: 1px;
+  background-image: linear-gradient(135deg, rgba(88,216,232,.12), rgba(162,140,255,.08));
+}
+#downloads .downloads-device-actions .downloads-device-link:hover,
+#downloads .release-asset-action:hover {
+  background-image: linear-gradient(135deg, rgba(88,216,232,.19), rgba(162,140,255,.13));
+}
