@@ -66,6 +66,7 @@ const translations = {
   'ما لقينا موارد تطابق بحثك.': 'No resources match your search.',
   'موارد': 'RESOURCES',
   'جارٍ تحميل روابط التنزيل...': 'Loading download links...',
+  'تعذر تأكيد الرابط حالياً؛ الرابط محفوظ ويمكن تجربته.': 'Link verification failed; the saved download link is still available to try.',
   'تحديث': 'Update',
   'نسخ الرابط': 'Copy Link',
   'تثبيت في Nuvio': 'Install in Nuvio',
@@ -687,11 +688,12 @@ function renderDownloads(report) {
     const displayName = asset.name || (
       asset.label === 'iOS IPA' ? 'iOS IPA package' : t('ملف غير متاح')
     );
-    const ready = Boolean(asset.ok && downloadUrl);
+    const ready = Boolean(downloadUrl);
     return `<article class="download-card" data-ready="${ready ? 'true' : 'false'}">
       <strong class="download-file"><bdi dir="ltr">${escapeHTML(displayName)} · ${formatBytes(asset.size_bytes)}</bdi></strong>
       <small class="download-platform">Nuvio · ${escapeHTML(asset.label || 'Download')}</small>
       <small class="download-meta">${t('الإصدار')}: ${escapeHTML(appVersion)}</small>
+      ${ready && !asset.ok ? `<small class="download-meta">${t('تعذر تأكيد الرابط حالياً؛ الرابط محفوظ ويمكن تجربته.')}</small>` : ''}
       <small class="download-meta">${asset.uploaded_at
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
         : t('تاريخ الرفع غير متاح')}</small>
