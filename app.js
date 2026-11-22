@@ -898,32 +898,46 @@ function renderDownloads(report) {
     return;
   }
 
-  const appVersion = release.app_version || '—';
-  $('#release-heading').textContent = appVersion;
+  const appVersion = String(release.app_version || release.tag || '—');
+  const assets = Array.isArray(release.assets) ? release.assets : [];
+  const healthyAssets = assets.filter(asset => asset.ok === true && safeHttpsUrl(asset.download_url));
+  const releaseHealthy = assets.length > 0 && healthyAssets.length === assets.length;
+  $('#release-heading').innerHTML = `<bdi dir="ltr">${escapeHTML(appVersion)}</bdi>`;
   $('#release-version').textContent = appVersion;
   $('#release-date').textContent = formatDate(release.published_at);
   $('#published-at').textContent = formatDate(release.published_at);
-
-  const assets = release.assets || [];
   $('#download-count').textContent = assets.filter(item => safeHttpsUrl(item.download_url)).length;
+
+  const banner = $('#downloads .release-banner');
+  if (banner) {
+    banner.dataset.state = releaseHealthy ? 'healthy' : 'warning';
+    const version = $('#release-heading');
+    if (version) version.insertAdjacentHTML('beforebegin',
+      `<span class="release-health"><i class="download-health-dot ${releaseHealthy ? 'is-healthy' : 'is-warning'}" aria-hidden="true"></i>${releaseHealthy ? t('الإصدار متاح') : t('تعذر تأكيد جميع الملفات')}</span>`);
+  }
+
   $('#download-grid').innerHTML = assets.map(asset => {
     const downloadUrl = safeHttpsUrl(asset.download_url);
     const displayName = asset.name || (
       asset.label === 'iOS IPA' ? 'iOS IPA package' : t('ملف غير متاح')
     );
     const ready = Boolean(downloadUrl);
-    return `<article class="download-card" data-ready="${ready ? 'true' : 'false'}">
-      <strong class="download-file"><bdi dir="ltr">${escapeHTML(displayName)} · ${formatBytes(asset.size_bytes)}</bdi></strong>
-      <small class="download-platform">Nuvio · ${escapeHTML(asset.label || 'Download')}</small>
+    const healthy = ready && asset.ok === true;
+    const versionStatus = healthy ? t('الإصدار سليم') : (ready ? t('تعذر التحقق من الإصدار') : t('ملف غير متاح'));
+    return `<article class="download-card version-card" data-ready="${ready ? 'true' : 'false'}">
+      <div class="version-card-meta"><span>Nuvio · ${escapeHTML(asset.label || 'Download')}</span><span class="version-kind ${healthy ? 'official' : ''}">${healthy ? t('متاح') : t('يحتاج مراجعة')}</span></div>
+      <h3 class="download-file"><bdi dir="ltr">${escapeHTML(displayName)}</bdi></h3>
+      <small class="version-card-status" data-state="${healthy ? 'healthy' : 'warning'}"><i class="download-health-dot ${healthy ? 'is-healthy' : 'is-warning'}" aria-hidden="true"></i>${versionStatus} · ${t('الإصدار')} <bdi dir="ltr">${escapeHTML(appVersion)}</bdi></small>
+      <p class="download-meta">${formatBytes(asset.size_bytes)}</p>
       ${report.release_fallback_used ? `<small class="download-meta">${t(report.release_cache_stale ? 'بيانات التنزيل محفوظة لكن الكاش قديم؛ استخدمها بحذر.' : 'بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.')}</small>` : ''}
-      <small class="download-meta">${t('الإصدار')}: ${escapeHTML(appVersion)}</small>
-      ${ready && !asset.ok ? `<small class="download-meta">${t('تعذر تأكيد الرابط حالياً؛ الرابط محفوظ ويمكن تجربته.')}</small>` : ''}
       <small class="download-meta">${asset.uploaded_at
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
         : t('تاريخ الرفع غير متاح')}</small>
-      ${ready
-        ? `<a class="download-action" href="${escapeHTML(downloadUrl)}" target="_blank" rel="noopener noreferrer">${t('تنزيل مباشر ↗')}</a>`
-        : `<span class="download-unavailable muted">${t('غير متاح حالياً')}</span>`}
+      <div class="version-actions">
+        ${ready
+          ? `<a class="download-action version-download" href="${escapeHTML(downloadUrl)}" target="_blank" rel="noopener noreferrer">${t('تنزيل مباشر ↗')}</a>`
+          : `<span class="download-unavailable muted">${t('غير متاح حالياً')}</span>`}
+      </div>
     </article>`;
   }).join('');
 }
