@@ -42,7 +42,7 @@ def fetch_latest_release(repository: str):
     published = [
         item for item in releases
         if isinstance(item, dict) and not item.get("draft")
-        and item.get("tag_name") and isinstance(item.get("assets"), list)
+        and item.get("tag_name") and isinstance(item.get("assets"), list) and item.get("assets")
     ]
     if not published:
         raise ValueError("No published GitHub release with assets was found")
@@ -104,9 +104,9 @@ def select_asset(current_name: str, old_tag: str, assets: list[dict]):
         if not name or not url:
             continue
         features = asset_features(name)
-        if current_features.intersection({f for f in current_features if f.startswith("ext:")}) != features.intersection(
-            {f for f in features if f.startswith("ext:")}
-        ):
+        current_extensions = {feature for feature in current_features if feature.startswith("ext:")}
+        candidate_extensions = {feature for feature in features if feature.startswith("ext:")}
+        if not current_extensions or current_extensions != candidate_extensions:
             continue
         required = current_features.intersection({
             "arm64", "armv7", "x86_64", "x86", "universal",
