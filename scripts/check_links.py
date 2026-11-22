@@ -410,8 +410,8 @@ def build_risk_forecast(results, previous_report=None, history=None):
     comparable = {
         normalize_resource_key(risk["resource"]): previous_risks[normalize_resource_key(risk["resource"])]["score"]
         for risk in risks
-        if risk["resource"] in previous_risks
-        and valid_prior_score(previous_risks[risk["resource"]].get("score"))
+        if normalize_resource_key(risk["resource"]) in previous_risks
+        and valid_prior_score(previous_risks[normalize_resource_key(risk["resource"])].get("score"))
     }
     matched_previous_total = sum(comparable.values())
     comparable_current_total = sum(risk["score"] for risk in risks if normalize_resource_key(risk["resource"]) in comparable)
@@ -435,8 +435,11 @@ def build_risk_forecast(results, previous_report=None, history=None):
         risk["trend_basis"] = basis
         trend_counts[trend] += 1
 
-    current_names = {risk["resource"] for risk in risks}
-    resolved = sorted(name for name in previous_risks if name not in current_names)
+    current_names = {normalize_resource_key(risk["resource"]) for risk in risks}
+    resolved = sorted(
+        previous_risks[key].get("resource", key)
+        for key in previous_risks if key not in current_names
+    )
     high = sum(1 for risk in risks if risk["level"] == "high")
     medium = sum(1 for risk in risks if risk["level"] == "medium")
     overall = "high" if high else "medium" if medium else "low"
