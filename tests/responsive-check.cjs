@@ -78,8 +78,7 @@ const viewports = [
           topbarOverlaps: overlaps,
           hero: document.querySelector('.hero') ? rect(document.querySelector('.hero')) : null,
           dashboard: document.querySelector('#nuvio-dashboard') ? rect(document.querySelector('#nuvio-dashboard')) : null,
-          downloadLayout,
-        dashboardCards: [...document.querySelectorAll('.nuvio-launch-card')].map(el => {
+          dashboardCards: [...document.querySelectorAll('.nuvio-launch-card')].map(el => {
             const r = el.getBoundingClientRect();
             const childOverflow = [...el.children].some(child => {
               const c = child.getBoundingClientRect();
@@ -122,6 +121,7 @@ const viewports = [
       await page.screenshot({ path: screenshot, fullPage: true, animations: 'disabled' });
 
       const result = {
+        downloadLayout,
         name: viewport.name,
         status: response ? response.status() : null,
         ...metrics,
