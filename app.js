@@ -921,8 +921,8 @@ function renderVersionCardStatuses(report) {
 
 function downloadCategory(asset) {
   const name = `${asset?.label || ''} ${asset?.name || ''} ${asset?.download_url || ''}`.toLowerCase();
-  if (/\\.ipa(?:$|[?#])|\\bios\\b|iphone|ipad/.test(name)) return 'ios';
-  if (/\\.apk(?:$|[?#])|\\bandroid\\b|arm64|armv7|x86/.test(name)) return 'android';
+  if (/\.ipa(?:$|[?#])|\bios\b|iphone|ipad/.test(name)) return 'ios';
+  if (/\.apk(?:$|[?#])|\bandroid\b|arm64|armv7|x86/.test(name)) return 'android';
   return 'other';
 }
 
@@ -1052,8 +1052,8 @@ function renderDownloads(report) {
       const categoryLabel = category === 'android'
         ? 'Android APK'
         : category === 'ios' ? 'iOS IPA' : 'ملفات أخرى';
-      const fileType = /\\.ipa(?:$|[?#])/i.test(displayName) ? 'IPA'
-        : /\\.apk(?:$|[?#])/i.test(displayName) ? 'APK' : 'FILE';
+      const fileType = /\.ipa(?:$|[?#])/i.test(displayName) ? 'IPA'
+        : /\.apk(?:$|[?#])/i.test(displayName) ? 'APK' : 'FILE';
       const versionStatus = healthy ? t('سليم') : (ready ? t('يحتاج مراجعة') : t('ملف غير متاح'));
       const staleNote = report.release_fallback_used
         ? `<small class="download-meta">${t(report.release_cache_stale ? 'بيانات التنزيل محفوظة لكن الكاش قديم؛ استخدمها بحذر.' : 'بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.')}</small>`
