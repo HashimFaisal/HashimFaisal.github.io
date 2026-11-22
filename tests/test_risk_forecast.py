@@ -126,5 +126,21 @@ class RiskForecastTests(unittest.TestCase):
         self.assertEqual(result["risks"][0]["trend"], "baseline")
         self.assertEqual(result["trend_summary"]["status"], "baseline")
 
+    def test_malformed_report_inputs_do_not_crash_forecast(self):
+        item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
+        previous = {"checks": "invalid", "risk_forecast": {"risks": "invalid"}}
+        result = check_links.build_risk_forecast([None, "bad", item], previous, [None, "bad"])
+        self.assertEqual(result["risk_count"], 1)
+        self.assertEqual(result["risks"][0]["trend"], "new")
+        self.assertEqual(result["trend_summary"]["status"], "baseline")
+
+    def test_malformed_previous_report_sections_are_tolerated(self):
+        item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
+        for previous in (None, [], "broken", {"checks": None, "risk_forecast": None}):
+            with self.subTest(previous=previous):
+                result = check_links.build_risk_forecast([item], previous, [])
+                self.assertEqual(result["risk_count"], 1)
+                self.assertEqual(result["risks"][0]["trend"], "new")
+
 if __name__ == "__main__":
     unittest.main()
