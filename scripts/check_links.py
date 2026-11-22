@@ -182,11 +182,9 @@ def save_release_cache(release, stable_release):
     if not isinstance(release, dict) or not isinstance(release.get("assets"), list):
         return False
     cache = {"cached_at": datetime.now(timezone.utc).isoformat(), "release": release, "stable_release": stable_release}
-    previous = load_release_cache()
     # Only replace a good snapshot with a release containing every expected download.
     candidate = {"release": release}
     try:
-        names = [item.get("name", "") for item in release["assets"] if isinstance(item, dict)]
         for suffix in REQUIRED_RELEASE_ASSETS:
             asset = next((item for item in release["assets"] if isinstance(item, dict) and item.get("name", "").endswith(suffix)), None)
             if not asset or not isinstance(asset.get("browser_download_url"), str) or not asset["browser_download_url"].startswith("https://"):
@@ -195,7 +193,7 @@ def save_release_cache(release, stable_release):
         temp_path = RELEASE_CACHE_PATH + ".tmp"
         with open(temp_path, "w", encoding="utf-8") as file:
             json.dump(cache, file, ensure_ascii=False, indent=2)
-            file.write("\\n")
+            file.write("\n")
         os.replace(temp_path, RELEASE_CACHE_PATH)
         return True
     except (OSError, TypeError, ValueError):
