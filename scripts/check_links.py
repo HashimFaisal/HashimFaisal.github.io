@@ -325,8 +325,14 @@ def build_risk_forecast(results, previous_report=None, history=None):
     results = results if isinstance(results, list) else []
     failure_items = [item for item in results if isinstance(item, dict) and not item.get("ok")]
     risks = []
+    # Duplicate failed checks for one resource should not inflate risk totals.
+    seen_failed_resources = set()
     for item in failure_items:
         name = item.get("name", "Unknown")
+        resource_key = name if isinstance(name, str) and name else "Unknown"
+        if resource_key in seen_failed_resources:
+            continue
+        seen_failed_resources.add(resource_key)
         diagnostic = diagnose_check(item)
         prior = previous_checks.get(name, {})
         repeated = not prior.get("ok") and bool(prior)

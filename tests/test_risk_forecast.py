@@ -30,6 +30,18 @@ class RiskForecastTests(unittest.TestCase):
         self.assertIn("consecutive_failure", risk["signals"])
         self.assertIn("recurring_outage_history", risk["signals"])
 
+    def test_duplicate_failed_checks_count_one_risk_per_resource(self):
+        failures = [
+            {"name": "API", "type": "manifest", "ok": False, "error": "timeout"},
+            {"name": "API", "type": "manifest", "ok": False, "error": "connection reset"},
+            {"name": "Other", "type": "manifest", "ok": False, "error": "timeout"},
+        ]
+        result = check_links.build_risk_forecast(failures, {}, [])
+        self.assertEqual(result["risk_count"], 2)
+        self.assertEqual([risk["resource"] for risk in result["risks"]], ["API", "Other"])
+        self.assertEqual(result["trend_summary"]["new_count"], 2)
+        self.assertEqual(result["trend_summary"]["baseline_count"], 0)
+
     def test_stale_cache_adds_risk_indicator(self):
         result = check_links.build_risk_forecast([], {"release_cache_stale": True}, [])
         self.assertEqual(result["risk_count"], 1)
