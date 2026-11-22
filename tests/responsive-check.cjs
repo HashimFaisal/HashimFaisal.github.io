@@ -141,12 +141,16 @@ const viewports = [
       if (downloadLayout.latestReleaseOverlap) failures.push(viewport.name + ': latest release overlaps mobile editions');
       if (!downloadLayout.cardsWithinGrid) failures.push(viewport.name + ': latest release card escapes grid');
       if (JSON.stringify(downloadLayout.platformCardCounts) !== JSON.stringify([3,1,5,2])) failures.push(viewport.name + ': unexpected platform card counts ' + JSON.stringify(downloadLayout.platformCardCounts));
+      const downloadsScreenshot = path.join(outputDir, 'downloads-' + viewport.name + '.png');
+      await page.screenshot({ path: downloadsScreenshot, fullPage: true, animations: 'disabled' });
+
       await page.locator('#downloads .nuvio-view-back').click();
-      const screenshot = path.join(outputDir, viewport.name + '.png');
+      const screenshot = path.join(outputDir, 'home-' + viewport.name + '.png');
       await page.screenshot({ path: screenshot, fullPage: true, animations: 'disabled' });
 
       const result = {
         downloadLayout,
+        downloadsScreenshot,
         name: viewport.name,
         status: response ? response.status() : null,
         ...metrics,
