@@ -508,18 +508,6 @@ function applyLanguage() {
     );
   }
 
-  const downloadsFilters = $('#downloads-filters');
-  if (downloadsFilters) downloadsFilters.setAttribute('aria-label', currentLang === 'ar' ? 'تصفية ملفات التنزيل' : 'Filter download files');
-
-  const downloadsSearch = $('#downloads-search');
-  if (downloadsSearch) {
-    downloadsSearch.placeholder = currentLang === 'ar'
-      ? 'ابحث عن ملف تنزيل...'
-      : 'Search download files...';
-    downloadsSearch.setAttribute('aria-label',
-      currentLang === 'ar' ? 'ابحث عن ملف تنزيل' : 'Search download files');
-  }
-
   const toggle = $('#language-toggle');
   if (toggle) {
     toggle.textContent = currentLang === 'ar' ? 'English' : 'العربية';
