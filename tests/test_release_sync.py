@@ -47,6 +47,7 @@ class ReleaseSyncTests(unittest.TestCase):
             {"tag_name": "v2.0.0", "published_at": "2026-10-01T00:00:00Z", "draft": False, "assets": [{"name": "stable.apk"}]},
             {"tag_name": "v2.1.0-beta.2", "published_at": "2026-11-20T00:00:00Z", "draft": False, "prerelease": True, "assets": [{"name": "beta.apk"}]},
             {"tag_name": "v3.0.0", "published_at": "2026-11-21T00:00:00Z", "draft": True, "assets": [{"name": "draft.apk"}]},
+            {"tag_name": "pr-assets", "name": "PR assets", "published_at": "2026-11-22T00:00:00Z", "draft": False, "assets": [{"name": "preview.png"}, {"name": "benchmark.png"}]},
         ]
         self.assertEqual(select_latest_release(releases)["tag_name"], "v2.1.0-beta.2")
 
