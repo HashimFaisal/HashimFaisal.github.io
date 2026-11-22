@@ -602,7 +602,7 @@ def check_version_downloads(path="index.html"):
             "name": "Nuvio edition download inventory",
             "type": "version_download",
             "ok": False,
-            "error": "No direct downloads-device-link links were found in index.html.",
+            "error": "No direct download links were found in the device cards.",
         }]
 
     def probe(entry):
