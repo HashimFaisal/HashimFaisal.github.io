@@ -35,6 +35,19 @@ def github_release_source(url: str):
     return f"{parts[0]}/{parts[1]}", parts[4], parts[5]
 
 
+def select_latest_release(releases: list[dict]):
+    """Select the newest published release, including beta/RC releases with assets."""
+    published = [
+        item for item in releases
+        if isinstance(item, dict) and not item.get("draft")
+        and item.get("tag_name") and isinstance(item.get("assets"), list) and item.get("assets")
+        and item.get("published_at")
+    ]
+    if not published:
+        raise ValueError("No published GitHub release with assets was found")
+    return max(published, key=lambda item: item.get("published_at") or "")
+
+
 def fetch_latest_release(repository: str):
     request = Request(
         f"https://api.github.com/repos/{repository}/releases?per_page=30",
@@ -42,22 +55,7 @@ def fetch_latest_release(repository: str):
     )
     with urlopen(request, timeout=25) as response:
         releases = json.loads(response.read().decode("utf-8"))
-    published = [
-        item for item in releases
-        if isinstance(item, dict) and not item.get("draft")
-        and item.get("tag_name") and isinstance(item.get("assets"), list) and item.get("assets")
-    ]
-    if not published:
-        raise ValueError("No published GitHub release with assets was found")
-
-    def is_prerelease(item):
-        tag = str(item.get("tag_name") or "").lower()
-        marker = re.search(r"(alpha|beta|rc|pre|preview|dev)", tag)
-        return bool(item.get("prerelease")) or bool(marker)
-
-    stable = [item for item in published if not is_prerelease(item)]
-    candidates = stable or published
-    return max(candidates, key=lambda item: item.get("published_at") or "")
+    return select_latest_release(releases)
 
 
 def asset_features(name: str):
@@ -70,7 +68,7 @@ def asset_features(name: str):
         "arm64": ("arm64-v8a", "arm64", "aarch64"),
         "armv7": ("armeabi-v7a", "armv7", "arm32"),
         "x86_64": ("x86_64", "x64"),
-        "x86": ("x86", "x32"),
+        "x86": ("x32",),
         "universal": ("universal",),
         "lite": ("lite",),
         "highcache": ("highcache", "high-cache"),
@@ -83,6 +81,9 @@ def asset_features(name: str):
     for feature, aliases in groups.items():
         if any(alias in value for alias in aliases):
             features.add(feature)
+    # Do not classify x86_64 assets as 32-bit x86 assets.
+    if re.search(r"(?<![a-z0-9])x86(?![_-]?64)(?![a-z0-9])", value):
+        features.add("x86")
     return features
 
 
@@ -91,7 +92,7 @@ def normalized_asset_name(name: str, old_tag: str):
     for token in (old_tag, old_tag.lstrip("vV")):
         if token:
             value = re.sub(re.escape(token.lower()), " ", value)
-    value = re.sub(r"v?\d+(?:\.\d+)+", " ", value)
+    value = re.sub(r"v?\d+(?:\.\d+)+(?:[-+][a-z0-9.-]+)?", " ", value)
     value = re.sub(r"[^a-z0-9]+", " ", value)
     ignored = {"release", "download", "build", "app", "nuvio"}
     return {part for part in value.split() if part and part not in ignored}
