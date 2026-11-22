@@ -92,6 +92,7 @@ const viewports = [
 
       await page.locator('#nuvio-launch-grid [data-view="downloads"]').click();
       await page.waitForSelector('#downloads.nuvio-view-active', { timeout: 10000 });
+      await page.waitForFunction(() => document.querySelectorAll('#download-grid .download-library-card').length === 5, null, { timeout: 12000 });
       const downloadLayout = await page.evaluate(() => {
         const section = document.querySelector('#downloads');
         const grid = document.querySelector('#download-grid');
@@ -114,7 +115,7 @@ const viewports = [
       });
       const expectedColumns = viewport.width <= 480 ? 1 : viewport.width <= 1000 ? 2 : 3;
       if (downloadLayout.cardCount !== 5) failures.push(viewport.name + ': expected 5 download cards, found ' + downloadLayout.cardCount);
-      if (downloadLayout.columns !== expectedColumns failures.push(viewport.name + ': downloads grid expected ' + expectedColumns + ' columns, found ' + downloadLayout.columns);
+      if (downloadLayout.columns !== expectedColumns) failures.push(viewport.name + ': downloads grid expected ' + expectedColumns + ' columns, found ' + downloadLayout.columns);
       if (downloadLayout.overlaps.length) failures.push(viewport.name + ': downloads section overlap ' + JSON.stringify(downloadLayout.overlaps));
       if (!downloadLayout.cardsWithinGrid) failures.push(viewport.name + ': downloads card exceeds grid bounds');
       await page.locator('#downloads .nuvio-view-back').click();
