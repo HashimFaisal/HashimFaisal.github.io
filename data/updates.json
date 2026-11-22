@@ -1,5 +1,20 @@
 [
   {
+    "id": "app:download-release:DavidVamaiotu/NuvioMobile-Reshaped:1.0.0-autosync.2",
+    "type": "app",
+    "title": {
+      "ar": "تحديث جديد لتطبيق Nuvio Reshaped Mobile: 1.0.0-autosync.2",
+      "en": "New Nuvio Reshaped Mobile app release: 1.0.0-autosync.2"
+    },
+    "description": {
+      "ar": "صدر إصدار جديد من Nuvio Reshaped Mobile برقم 1.0.0-autosync.2. اضغط للتفاصيل.",
+      "en": "A new Nuvio Reshaped Mobile release (1.0.0-autosync.2) is available. Open the release notes for details."
+    },
+    "url": "https://github.com/DavidVamaiotu/NuvioMobile-Reshaped/releases/tag/1.0.0-autosync.2",
+    "publishedAt": "2026-11-22T13:38:50.310329Z",
+    "expiresAt": "2026-11-23T13:38:50.310329Z"
+  },
+  {
     "id": "addon:Nuvio Catalog:status:unavailable-to-available:2026-11-22T12:27:28.188068+00:00",
     "type": "addon",
     "title": {
