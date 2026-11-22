@@ -162,6 +162,9 @@ const translations = {
   'فشل الفحص': 'Check Failed',
   'غير متاح': 'Unavailable',
   'تعذر تحميل تقرير الفحص': 'Could not load the health report',
+  'بيانات محفوظة': 'Cached data',
+  'نعرض آخر تقرير محفوظ': 'Showing the last saved report',
+  'هذه روابط محفوظة من آخر تقرير ناجح، لم نتمكن من التحقق منها الآن.': 'These links are from the last successful report and could not be verified right now.',
   'إضافة مصدر جديد: YouTube Channels': 'New source added: YouTube Channels',
   'إضافة مصدر جديد: Cinemeta': 'New source added: Cinemeta',
   'بدء سجل التغييرات': 'Changelog initialized',
@@ -663,7 +666,7 @@ function renderManifestStatuses(report) {
   });
 }
 
-function renderDownloads(report) {
+function renderDownloads(report, cachedReport = false) {
   const release = report.release;
 
   if (!release) {
@@ -682,7 +685,10 @@ function renderDownloads(report) {
   $('#download-count').textContent = assets.filter(item =>
     item.ok && safeHttpsUrl(item.download_url)
   ).length;
-  $('#download-grid').innerHTML = assets.map(asset => {
+  const staleNotice = release.stale || cachedReport
+    ? `<p class="muted download-stale-notice">${t('هذه روابط محفوظة من آخر تقرير ناجح، لم نتمكن من التحقق منها الآن.')}</p>`
+    : '';
+  $('#download-grid').innerHTML = staleNotice + assets.map(asset => {
     const downloadUrl = safeHttpsUrl(asset.download_url);
     const displayName = asset.name || (
       asset.label === 'iOS IPA' ? 'iOS IPA package' : t('ملف غير متاح')
@@ -702,48 +708,80 @@ function renderDownloads(report) {
   }).join('');
 }
 
+const STATUS_CACHE_KEY = 'nuvio-status-cache-v1';
+
+function getCachedStatus() {
+  try {
+    const cached = JSON.parse(localStorage.getItem(STATUS_CACHE_KEY) || 'null');
+    return cached && Array.isArray(cached.checks) && cached.release ? cached : null;
+  } catch {
+    return null;
+  }
+}
+
+function cacheStatus(report) {
+  try {
+    if (report && Array.isArray(report.checks)) {
+      localStorage.setItem(STATUS_CACHE_KEY, JSON.stringify(report));
+    }
+  } catch (error) {
+    console.debug('Status cache could not be saved:', error);
+  }
+}
+
+function renderStatusReport(report, cached = false) {
+  $('#health-state').textContent = t(cached ? 'بيانات محفوظة' : report.ok ? 'سليم' : 'يحتاج مراجعة');
+  $('#health-detail').textContent = cached
+    ? t('نعرض آخر تقرير محفوظ')
+    : `${report.passed}/${report.total} ${t('فحوصات ناجحة')}`;
+
+  $('#addon-count').textContent =
+    (report.checks || []).filter(item => item.type === 'manifest').length;
+
+  const checks = report.checks || [];
+  const manifests = checks.filter(item => item.type === 'manifest');
+  const healthyManifests = manifests.filter(item => item.ok);
+  const unhealthyManifests = manifests.filter(item => !item.ok);
+
+  $('#healthy-count').textContent = healthyManifests.length;
+  $('#unhealthy-count').textContent = unhealthyManifests.length;
+
+  const healthCard = $('#health-state')?.closest('.stat-card');
+  const healthyCard = $('#healthy-count')?.closest('.stat-card');
+  const unhealthyCard = $('#unhealthy-count')?.closest('.stat-card');
+  if (healthCard) healthCard.dataset.health = cached ? 'warning' : report.ok ? 'healthy' : 'warning';
+  if (healthyCard) healthyCard.dataset.health = healthyManifests.length ? 'healthy' : 'unknown';
+  if (unhealthyCard) unhealthyCard.dataset.health = unhealthyManifests.length ? 'warning' : 'healthy';
+
+  latestReport = report;
+  updateLastChecked();
+  renderManifestStatuses(report);
+  renderDownloads(report, cached);
+}
+
 async function loadStatus() {
   try {
     const response = await fetch('data/status.json', { cache: 'no-cache' });
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
     const report = await response.json();
-
-    $('#health-state').textContent = t(report.ok ? 'سليم' : 'يحتاج مراجعة');
-    $('#health-detail').textContent =
-      `${report.passed}/${report.total} ${t('فحوصات ناجحة')}`;
-
-    $('#addon-count').textContent =
-      (report.checks || []).filter(item => item.type === 'manifest').length;
-
-    const checks = report.checks || [];
-    const manifests = checks.filter(item => item.type === 'manifest');
-    const healthyManifests = manifests.filter(item => item.ok);
-    const unhealthyManifests = manifests.filter(item => !item.ok);
-
-    $('#healthy-count').textContent = healthyManifests.length;
-    $('#unhealthy-count').textContent = unhealthyManifests.length;
-
-    const healthCard = $('#health-state')?.closest('.stat-card');
-    const healthyCard = $('#healthy-count')?.closest('.stat-card');
-    const unhealthyCard = $('#unhealthy-count')?.closest('.stat-card');
-    if (healthCard) healthCard.dataset.health = report.ok ? 'healthy' : 'warning';
-    if (healthyCard) healthyCard.dataset.health = healthyManifests.length ? 'healthy' : 'unknown';
-    if (unhealthyCard) unhealthyCard.dataset.health = unhealthyManifests.length ? 'warning' : 'healthy';
-
-    latestReport = report;
-    updateLastChecked();
-
-    renderManifestStatuses(report);
-    renderDownloads(report);
+    if (!report || !Array.isArray(report.checks)) throw new Error('Invalid health report');
+    cacheStatus(report);
+    renderStatusReport(report);
   } catch (error) {
+    const cached = getCachedStatus();
+    if (cached) {
+      renderStatusReport(cached, true);
+      console.warn('Status loading failed; showing cached report:', error);
+      return;
+    }
     $('#health-state').textContent = t('غير متاح');
     $('#health-detail').textContent = t('تعذر تحميل تقرير الفحص');
     const healthCard = $('#health-state')?.closest('.stat-card');
     if (healthCard) healthCard.dataset.health = 'unknown';
     $('#download-grid').innerHTML =
       `<p class="muted">${t('تعذر جلب معلومات الإصدار الأخير.')}</p>`;
-    console.error('Status loading failed:', error);  }
+    console.error('Status loading failed:', error);
+  }
 }
 function escapeHTML(value) {
   return String(value ?? '').replace(/[&<>"']/g, char => ({
