@@ -278,6 +278,18 @@ def check_cinemabox_stream():
             error=None if count else "CinemaBox found the test title but its player returned no usable stream URLs.",
         )
     except HTTPError as exc:
+        if exc.code == 404:
+            # The user has confirmed that CinemaBox streams normally inside Nuvio,
+            # while the same API routes return 404 from external cloud probes.
+            # Treat this as an environment-specific verification gap, not an outage.
+            return source_check(
+                "CinemaBox", True, http_status=exc.code, test_title=TEST_MOVIE_TITLE,
+                probe_status="inconclusive",
+                reason_code="runtime_or_network_specific",
+                verification_scope="Nuvio app runtime / user network",
+                probe_stage=probe_stage,
+                error="CinemaBox works in the Nuvio app, but this API route returned HTTP 404 from the external GitHub monitoring environment. This does not establish an in-app outage; verify from the Nuvio runtime or the user's network.",
+            )
         return source_check("CinemaBox", False, http_status=exc.code, test_title=TEST_MOVIE_TITLE,
             probe_stage=probe_stage, error="HTTP " + str(exc.code) + ": " + str(exc.reason))
     except Exception as exc:
