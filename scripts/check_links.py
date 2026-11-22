@@ -8,7 +8,7 @@ from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urlencode, quote
 
 REPO = "luqmanfadlli/NuvioMobile-Enhanced"
 API = f"https://api.github.com/repos/{REPO}/releases?per_page=100"
@@ -51,9 +51,9 @@ HEADERS = {
 }
 
 
-def fetch(url, method="GET", retries=2, backoff_seconds=0.5):
+def fetch(url, method="GET", retries=2, backoff_seconds=0.5, extra_headers=None):
     """Retry transient network/upstream failures with bounded exponential backoff."""
-    request_headers = dict(HEADERS)
+    request_headers = {**HEADERS, **(extra_headers or {})}
     token = os.environ.get("GITHUB_TOKEN")
     if token and urlparse(url).hostname == "api.github.com":
         request_headers["Authorization"] = f"Bearer {token}"
@@ -145,6 +145,318 @@ def check_manifest(name, url):
         }
 
 
+
+# Active source probes use one well-known movie fixture. Only response counts and
+# classifications are stored; candidate media URLs are deliberately discarded.
+TEST_MOVIE_ID = "tt0133093"
+TEST_MOVIE_TITLE = "The Matrix"
+CINEMETA_BASE = "https://v3-cinemeta.strem.io"
+CINEMABOX_API = "https://cinema.albox.co/api/v4/"
+CINEMANA_API = "https://cinemana.shabakaty.cc/api/android/"
+CINEMANA_HEALTH = CINEMANA_API + "healthCheck"
+ALL_IN_ONE_MANIFEST = MANIFESTS["ALL-IN-ONE"]
+ALL_IN_ONE_REPO = "https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/main/"
+
+SOURCE_HEADERS = {
+    "Accept": "application/json",
+    "User-Agent": "Mozilla/5.0 (Linux; Android 16) AppleWebKit/537.36 Chrome/130.0.0.0 Mobile Safari/537.36",
+    "Accept-Language": "en-US,en;q=0.9",
+}
+
+
+def fetch_text(url, extra_headers=None, max_bytes=2 * 1024 * 1024):
+    with fetch(url, extra_headers=extra_headers) as response:
+        body = response.read(max_bytes + 1)
+        if len(body) > max_bytes:
+            raise ValueError("Response exceeds configured size limit")
+        return body.decode("utf-8-sig"), response.status
+
+
+def fetch_json(url, extra_headers=None):
+    body, status = fetch_text(url, extra_headers=extra_headers)
+    try:
+        payload = json.loads(body)
+    except ValueError as exc:
+        raise ValueError("Invalid JSON response: " + str(exc)) from exc
+    if not isinstance(payload, (dict, list)):
+        raise ValueError("JSON response root must be an object or array")
+    return payload, status
+
+
+def source_check(name, ok, **details):
+    return {"name": name, "type": "stream", "ok": bool(ok), **details}
+
+
+def normalized_source_title(value):
+    value = str(value or "").lower()
+    value = re.sub(r"[أإآ]", "ا", value)
+    value = re.sub(r"ة", "ه", value)
+    value = re.sub(r"ى", "ي", value)
+    return " ".join(re.findall(r"[a-z0-9\u0600-\u06ff]+", value))
+
+
+def source_title_score(left, right):
+    a = set(normalized_source_title(left).split())
+    b = set(normalized_source_title(right).split())
+    if not a or not b:
+        return 0.0
+    if a == b:
+        return 1.0
+    return (2 * len(a & b)) / (len(a) + len(b))
+
+
+def check_torrentio_stream():
+    url = "https://torrentio.strem.fun/stream/movie/" + TEST_MOVIE_ID + ".json"
+    try:
+        payload, status = fetch_json(url)
+        streams = payload.get("streams") if isinstance(payload, dict) else None
+        if not isinstance(streams, list):
+            raise ValueError("Torrentio response does not contain a streams array")
+        count = sum(1 for item in streams if isinstance(item, dict))
+        return source_check(
+            "Torrentio", count > 0, http_status=status, test_title=TEST_MOVIE_TITLE,
+            probe_status="streams_found" if count else "no_streams",
+            stream_count=count,
+            error=None if count else "Torrentio returned no stream candidates for the test movie.",
+        )
+    except HTTPError as exc:
+        return source_check("Torrentio", False, http_status=exc.code, test_title=TEST_MOVIE_TITLE, error="HTTP " + str(exc.code) + ": " + str(exc.reason))
+    except Exception as exc:
+        return source_check("Torrentio", False, test_title=TEST_MOVIE_TITLE, error=str(exc))
+
+
+def check_cinemabox_stream():
+    headers = {**SOURCE_HEADERS, "Referer": "https://cinema.albox.co/", "Origin": "https://cinema.albox.co"}
+    try:
+        meta_payload, _ = fetch_json(CINEMETA_BASE + "/meta/movie/" + TEST_MOVIE_ID + ".json", extra_headers=headers)
+        meta = meta_payload.get("meta") if isinstance(meta_payload, dict) else None
+        if not isinstance(meta, dict) or not meta.get("name"):
+            raise ValueError("Cinemeta did not return movie metadata for the test fixture")
+
+        search_url = CINEMABOX_API + "search?" + urlencode({
+            "page_size": 25, "page_number": 1, "term": meta["name"]
+        })
+        search_payload, search_status = fetch_json(search_url, extra_headers=headers)
+        candidates = search_payload.get("results", []) if isinstance(search_payload, dict) else []
+        candidates = [
+            item for item in candidates
+            if isinstance(item, dict)
+            and str(item.get("type", "")).upper() in {"MOVIE", "FILM"}
+        ]
+        best = max(candidates, key=lambda item: source_title_score(meta["name"], item.get("title")), default=None)
+        if not best or source_title_score(meta["name"], best.get("title")) < 0.70:
+            return source_check(
+                "CinemaBox", True, http_status=search_status, test_title=TEST_MOVIE_TITLE,
+                probe_status="inconclusive", stream_count=0,
+                error="CinemaBox API responded, but the test title was not found in its catalogue.",
+            )
+
+        item_id = best.get("id")
+        if item_id is None:
+            raise ValueError("CinemaBox search result has no item ID")
+        details, _ = fetch_json(CINEMABOX_API + "shows/shows/dynamic/" + quote(str(item_id), safe=""), extra_headers=headers)
+        post = details.get("post_info") if isinstance(details, dict) else None
+        episode_id = post.get("episode_id") if isinstance(post, dict) else None
+        if episode_id is None:
+            raise ValueError("CinemaBox matched the title but returned no playable episode ID")
+
+        player, player_status = fetch_json(CINEMABOX_API + "shows/episodes/player/" + quote(str(episode_id), safe=""), extra_headers=headers)
+        videos = player.get("videos", []) if isinstance(player, dict) else []
+        count = sum(
+            1 for item in videos
+            if isinstance(item, dict) and isinstance(item.get("url"), str)
+            and item["url"].startswith(("https://", "http://"))
+        ) if isinstance(videos, list) else 0
+        return source_check(
+            "CinemaBox", count > 0, http_status=player_status, test_title=TEST_MOVIE_TITLE,
+            probe_status="streams_found" if count else "no_streams", stream_count=count,
+            error=None if count else "CinemaBox found the test title but its player returned no usable stream URLs.",
+        )
+    except HTTPError as exc:
+        return source_check("CinemaBox", False, http_status=exc.code, test_title=TEST_MOVIE_TITLE, error="HTTP " + str(exc.code) + ": " + str(exc.reason))
+    except Exception as exc:
+        return source_check("CinemaBox", False, test_title=TEST_MOVIE_TITLE, error=str(exc))
+
+
+def payload_list(payload, keys=("data", "results", "videos", "items", "list")):
+    if isinstance(payload, list):
+        return payload
+    if not isinstance(payload, dict):
+        return []
+    for key in keys:
+        if isinstance(payload.get(key), list):
+            return payload[key]
+    nested = payload.get("data")
+    if isinstance(nested, dict):
+        for key in keys:
+            if isinstance(nested.get(key), list):
+                return nested[key]
+    return []
+
+
+def payload_object(payload):
+    if not isinstance(payload, dict):
+        return None
+    nested = payload.get("data")
+    return nested if isinstance(nested, dict) else payload
+
+
+def source_video_id(item):
+    if not isinstance(item, dict):
+        return None
+    for key in ("nb", "videoNb", "id"):
+        value = item.get(key)
+        if value is not None and str(value).strip():
+            return str(value)
+    return None
+
+
+def check_cinemana_stream():
+    headers = {
+        **SOURCE_HEADERS,
+        "Referer": "https://cinemana.shabakaty.cc/",
+        "Origin": "https://cinemana.shabakaty.cc",
+    }
+    try:
+        _, health_status = fetch_text(CINEMANA_HEALTH, extra_headers=headers)
+        meta_payload, _ = fetch_json(CINEMETA_BASE + "/meta/movie/" + TEST_MOVIE_ID + ".json", extra_headers=headers)
+        meta = meta_payload.get("meta") if isinstance(meta_payload, dict) else None
+        if not isinstance(meta, dict) or not meta.get("name"):
+            raise ValueError("Cinemeta did not return movie metadata for the test fixture")
+
+        search_url = CINEMANA_API + "AdvancedSearch?" + urlencode({
+            "level": 0, "page": 0, "type": "movies", "videoTitle": meta["name"]
+        })
+        search_payload, search_status = fetch_json(search_url, extra_headers=headers)
+        candidates = payload_list(search_payload)
+        imdb_match = None
+        title_match = None
+        for item in candidates:
+            if not isinstance(item, dict):
+                continue
+            raw_imdb = str(item.get("imdbUrlRef") or item.get("imdb_url_ref") or "")
+            found_id = re.search(r"tt\d+", raw_imdb, re.IGNORECASE)
+            if found_id and found_id.group(0).lower() == TEST_MOVIE_ID.lower():
+                imdb_match = item
+                break
+            titles = [item.get(key) for key in ("enTitle", "arTitle", "title", "name", "englishTitle", "arabicTitle")]
+            if any(source_title_score(meta["name"], title) >= 0.90 for title in titles if title):
+                title_match = item
+        found = imdb_match or title_match
+        if not found:
+            return source_check(
+                "Cinemana", True, http_status=search_status, test_title=TEST_MOVIE_TITLE,
+                probe_status="inconclusive", stream_count=0,
+                error="Cinemana API responded, but the test title was not found in its catalogue.",
+                host_health_status=health_status,
+            )
+
+        found_id = source_video_id(found)
+        if not found_id:
+            raise ValueError("Cinemana search result has no video ID")
+        details_payload, _ = fetch_json(CINEMANA_API + "allVideoInfo/id/" + quote(found_id, safe=""), extra_headers=headers)
+        details = payload_object(details_payload)
+        video_id = source_video_id(details) or found_id
+        files_url = CINEMANA_API + "transcodedFiles/id/" + quote(video_id, safe="")
+        try:
+            files_payload, files_status = fetch_json(files_url, extra_headers=headers)
+        except Exception:
+            # Keep the compatibility fallback used by the add-on itself.
+            files_payload, files_status = fetch_json(CINEMANA_API + "transcoddedFiles/id/" + quote(video_id, safe=""), extra_headers=headers)
+        files = payload_list(files_payload)
+        count = sum(
+            1 for item in files
+            if isinstance(item, dict)
+            and isinstance(item.get("videoUrl") or item.get("url"), str)
+            and str(item.get("videoUrl") or item.get("url")).startswith(("https://", "http://", "//"))
+        )
+        return source_check(
+            "Cinemana", count > 0, http_status=files_status, test_title=TEST_MOVIE_TITLE,
+            probe_status="streams_found" if count else "no_streams", stream_count=count,
+            error=None if count else "Cinemana found the test title but returned no usable transcoded video URLs.",
+            host_health_status=health_status,
+        )
+    except HTTPError as exc:
+        return source_check("Cinemana", False, http_status=exc.code, test_title=TEST_MOVIE_TITLE, error="HTTP " + str(exc.code) + ": " + str(exc.reason))
+    except Exception as exc:
+        return source_check("Cinemana", False, test_title=TEST_MOVIE_TITLE, error=str(exc))
+
+
+def check_allinone_provider_bundle():
+    try:
+        manifest, status = fetch_json(ALL_IN_ONE_MANIFEST)
+        scrapers = manifest.get("scrapers") if isinstance(manifest, dict) else None
+        if not isinstance(scrapers, list):
+            raise ValueError("ALL-IN-ONE manifest has no scrapers array")
+        enabled = [
+            item for item in scrapers
+            if isinstance(item, dict) and item.get("enabled") is True
+            and isinstance(item.get("filename"), str)
+            and item["filename"].startswith("providers/")
+            and item["filename"].endswith(".js")
+            and ".." not in item["filename"].split("/")
+        ]
+        if not enabled:
+            raise ValueError("ALL-IN-ONE manifest has no enabled provider source files")
+
+        samples = enabled[:3]
+        available = []
+        failures = []
+        for item in samples:
+            path = item["filename"]
+            url = ALL_IN_ONE_REPO + path
+            try:
+                with fetch(url, method="HEAD") as response:
+                    if response.status < 400:
+                        available.append(path)
+                    else:
+                        failures.append(path)
+            except HTTPError as exc:
+                if exc.code in (405, 501):
+                    try:
+                        with fetch(url) as response:
+                            response.read(1)
+                            available.append(path)
+                    except Exception:
+                        failures.append(path)
+                else:
+                    failures.append(path)
+            except Exception:
+                failures.append(path)
+
+        ok = len(available) == len(samples)
+        return {
+            "name": "ALL-IN-ONE provider bundle",
+            "type": "provider_bundle",
+            "ok": ok,
+            "http_status": status,
+            "enabled_provider_count": len(enabled),
+            "sampled_provider_files": [item["filename"] for item in samples],
+            "available_provider_files": available,
+            "failed_provider_files": failures,
+            "probe_status": "bundle_files_available" if ok else "provider_files_missing",
+            "note": "Checks registry integrity and sample source-file availability; actual scraper execution requires the Nuvio app runtime.",
+            "error": None if ok else "One or more sampled provider source files could not be fetched.",
+        }
+    except HTTPError as exc:
+        return {
+            "name": "ALL-IN-ONE provider bundle", "type": "provider_bundle",
+            "ok": False, "http_status": exc.code, "error": "HTTP " + str(exc.code) + ": " + str(exc.reason),
+        }
+    except Exception as exc:
+        return {
+            "name": "ALL-IN-ONE provider bundle", "type": "provider_bundle",
+            "ok": False, "error": str(exc),
+        }
+
+
+SOURCE_PROBES = (
+    check_torrentio_stream,
+    check_cinemabox_stream,
+    check_cinemana_stream,
+    check_allinone_provider_bundle,
+)
+
 def check_download(name, asset):
     url = asset["browser_download_url"]
     size = asset.get("size")
@@ -231,6 +543,20 @@ def normalize_http_status(value):
 
 def diagnose_check(item):
     """Attach a stable failure code and actionable hint to an unsuccessful health check."""
+    if item.get("probe_status") == "inconclusive":
+        return {
+            "failure_code": "test_title_not_indexed",
+            "failure_category": "content_coverage",
+            "severity": "info",
+            "recommended_action": "The provider endpoint responded, but the test title was not indexed; this result is inconclusive about other titles.",
+        }
+    if item.get("probe_status") == "no_streams":
+        return {
+            "failure_code": "no_streams_found",
+            "failure_category": "stream_retrieval",
+            "severity": "warning",
+            "recommended_action": "The provider responded but returned no playable candidates for the known test title; verify its catalogue, region restrictions, and player API.",
+        }
     if item.get("ok"):
         return {
             "failure_code": "healthy",
@@ -602,6 +928,8 @@ def main():
             lambda entry: check_manifest(*entry),
             MANIFESTS.items(),
         ))
+        source_results = list(executor.map(lambda probe: probe(), SOURCE_PROBES))
+    results.extend(source_results)
 
     release = None
     stable_release = None
@@ -804,6 +1132,15 @@ def main():
             "configured": len(MANIFESTS),
             "healthy": sum(1 for item in results if item.get("type") == "manifest" and item.get("ok")),
             "failed": sum(1 for item in results if item.get("type") == "manifest" and not item.get("ok")),
+        },
+        "source_retrieval": {
+            "tested": sum(1 for item in results if item.get("type") == "stream"),
+            "streams_found": sum(1 for item in results if item.get("type") == "stream" and item.get("probe_status") == "streams_found"),
+            "inconclusive": sum(1 for item in results if item.get("type") == "stream" and item.get("probe_status") == "inconclusive"),
+            "failed": sum(1 for item in results if item.get("type") == "stream" and not item.get("ok")),
+            "stream_checks": [item for item in results if item.get("type") == "stream"],
+            "provider_bundle": next((item for item in results if item.get("type") == "provider_bundle"), None),
+            "note": "Stream URLs are counted but never stored. ALL-IN-ONE provider files are integrity-checked; scraper execution requires the Nuvio app runtime.",
         },
         "release": release_data,
         "stable_release": stable_release_data,
