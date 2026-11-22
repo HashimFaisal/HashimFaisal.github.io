@@ -5233,3 +5233,7 @@ footer {
   #downloads .download-library-card h3 { font-size: 15px; }
   #downloads .download-library-card > p { min-height: 0; font-size: 10px; }
 }
+
+@media (max-width: 480px) {
+  #downloads .download-grid { grid-template-columns: 1fr; }
+}
