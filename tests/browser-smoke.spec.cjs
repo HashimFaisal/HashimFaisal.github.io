@@ -842,3 +842,27 @@ test('Nuvio editions are separated by device and link directly to published inst
   await page.locator('#language-toggle').click();
   await expect(page.locator('#versions-mobile-title')).toHaveText('الموبايل · Android وiPhone');
 });
+
+test('stale latest Enhanced links are cleared when release data disappears', async ({ page }) => {
+  await page.goto('/');
+  await expect(page.locator('#download-grid > .version-card h3').filter({ hasText: /^Nuvio Enhanced 1\\.0\\.0$/ })).toBeVisible();
+
+  await page.evaluate(() => renderDownloads({
+    release: {
+      app_version: '1.2.3',
+      assets: [{
+        label: 'ARM64',
+        name: 'arm64-v8a-release.apk',
+        download_url: 'https://example.com/arm64-v8a-release.apk',
+        ok: true
+      }]
+    }
+  }));
+  await expect(page.locator('#download-grid .enhanced-latest-release a.release-enhanced-link')).toHaveCount(1);
+
+  await page.evaluate(() => renderDownloads({ release: { app_version: '1.2.3', assets: [] } }));
+  await expect(page.locator('#download-grid .enhanced-latest-release')).toHaveCount(0);
+
+  await page.evaluate(() => renderDownloads({}));
+  await expect(page.locator('#download-grid .enhanced-latest-release')).toHaveCount(0);
+});
