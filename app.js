@@ -2,6 +2,7 @@ const $ = (selector) => document.querySelector(selector);
 const $$ = (selector) => [...document.querySelectorAll(selector)];
 
 let activeFilter = 'all';
+let activeDownloadsFilter = 'all';
 let currentLang = 'ar';
 try {
   const savedLang = localStorage.getItem('nuvio-language');
@@ -363,6 +364,21 @@ const translations = {
   'رابط تنزيل غير متاح': 'A download link is unavailable',
   'لا توجد روابط تنزيل مباشرة': 'No direct download links',
   'فحص روابط التنزيل': 'Download link check',
+  'ابحث عن ملف تنزيل...': 'Search download files...',
+  'ملفات': 'FILES',
+  'Android APK': 'Android APK',
+  'iOS IPA': 'iOS IPA',
+  'ملفات أخرى': 'Other files',
+  'ما لقينا ملفات تطابق بحثك.': 'No files match your search.',
+  'ملف تثبيت مباشر لـ Nuvio.': 'Direct Nuvio installer file.',
+  'لا توجد ملفات تنزيل منشورة لهذا الإصدار.': 'No downloadable files are published for this release.',
+  'ملف Android': 'Android installer',
+  'ملف iOS': 'iOS installer',
+  'ملف آخر': 'Other file',
+  'ملفات متاحة': 'Available files',
+  'إجمالي الملفات': 'Total files',
+  'كل ملفات الإصدار': 'All release files',
+
 
   "ربط نسخ Nuvio بالفحص الذكي والأخبار وأرقام الإصدارات": "Connected Nuvio editions to smart link checks, news, and version numbers",
   "إضافة فحص مباشر لكل روابط APK وIPA وWGT وTPK وIPK وEXE في بطاقات نسخ Nuvio، وإظهار رقم الإصدار وحالة الروابط على كل بطاقة، مع دعم العربية والإنجليزية.": "Added live checks for every APK, IPA, WGT, TPK, IPK, and EXE link in Nuvio edition cards, displaying each version number and link status in Arabic and English.",
@@ -473,6 +489,15 @@ function applyLanguage() {
       'aria-label',
       currentLang === 'ar' ? 'ابحث عن إضافة' : 'Search add-ons'
     );
+  }
+
+  const downloadsSearch = $('#downloads-search');
+  if (downloadsSearch) {
+    downloadsSearch.placeholder = currentLang === 'ar'
+      ? 'ابحث عن ملف تنزيل...'
+      : 'Search download files...';
+    downloadsSearch.setAttribute('aria-label',
+      currentLang === 'ar' ? 'ابحث عن ملف تنزيل' : 'Search download files');
   }
 
   const toggle = $('#language-toggle');
@@ -894,62 +919,180 @@ function renderVersionCardStatuses(report) {
 }
 
 
+function downloadCategory(asset) {
+  const name = `${asset?.label || ''} ${asset?.name || ''} ${asset?.download_url || ''}`.toLowerCase();
+  if (/\\.ipa(?:$|[?#])|\\bios\\b|iphone|ipad/.test(name)) return 'ios';
+  if (/\\.apk(?:$|[?#])|\\bandroid\\b|arm64|armv7|x86/.test(name)) return 'android';
+  return 'other';
+}
+
+function renderDownloadFilters(assets) {
+  const container = $('#downloads-filters');
+  if (!container) return;
+
+  const counts = {
+    all: assets.length,
+    android: assets.filter(asset => downloadCategory(asset) === 'android').length,
+    ios: assets.filter(asset => downloadCategory(asset) === 'ios').length,
+    other: assets.filter(asset => downloadCategory(asset) === 'other').length
+  };
+  const filters = [
+    ['all', 'الكل'],
+    ['android', 'Android APK'],
+    ['ios', 'iOS IPA'],
+    ['other', 'ملفات أخرى']
+  ].filter(([key]) => key === 'all' || counts[key] > 0);
+
+  if (!filters.some(([key]) => key === activeDownloadsFilter)) {
+    activeDownloadsFilter = 'all';
+  }
+
+  container.innerHTML = filters.map(([key, label]) => {
+    const active = key === activeDownloadsFilter;
+    return `<button class="filter${active ? ' active' : ''}" type="button"
+      data-download-filter="${key}" aria-pressed="${active}" >
+      ${t(label)} <span class="download-filter-count">${counts[key]}</span>
+    </button>`;
+  }).join('');
+}
+
+function filterDownloads() {
+  const term = ($('#downloads-search')?.value || '').trim().toLowerCase();
+  const cards = $$('#download-grid .download-card');
+  let visible = 0;
+
+  cards.forEach(card => {
+    const matchesCategory = activeDownloadsFilter === 'all' ||
+      card.dataset.category === activeDownloadsFilter;
+    const matchesText = !term || card.textContent.toLowerCase().includes(term);
+    card.hidden = !(matchesCategory && matchesText);
+    if (!card.hidden) visible++;
+  });
+
+  const total = cards.length;
+  const count = $('#downloads-visible-count');
+  if (count) count.textContent = `${String(visible).padStart(2, '0')} ${t('ملفات')}`;
+
+  const empty = $('#downloads-empty-state');
+  if (empty) {
+    empty.hidden = visible !== 0;
+    if (total === 0) {
+      empty.textContent = t('لا توجد ملفات تنزيل منشورة لهذا الإصدار.');
+    } else {
+      empty.textContent = t('ما لقينا ملفات تطابق بحثك.');
+    }
+  }
+}
+
+$('#downloads-search')?.addEventListener('input', filterDownloads);
+$('#downloads-filters')?.addEventListener('click', event => {
+  const button = event.target.closest('[data-download-filter]');
+  if (!button) return;
+  activeDownloadsFilter = button.dataset.downloadFilter;
+  $('#downloads-filters').querySelectorAll('[data-download-filter]').forEach(item => {
+    const active = item === button;
+    item.classList.toggle('active', active);
+    item.setAttribute('aria-pressed', String(active));
+  });
+  filterDownloads();
+});
+
 function renderDownloads(report) {
-  const release = report.release;
+  const release = report?.release;
+  const grid = $('#download-grid');
+  const heading = $('#release-heading');
+  const published = $('#published-at');
+  const fileCount = $('#downloads-file-count');
+  const health = $('#release-health');
+  const healthLabel = $('#release-health-label');
+  const empty = $('#downloads-empty-state');
 
   if (!release) {
-    $('#release-heading').textContent = t('لا توجد بيانات إصدار');
-    $('#published-at').textContent = '—';
-    $('#downloads-file-count').textContent = '0';
-    $('#download-grid').innerHTML = `<p class="muted">${t('تعذر جلب معلومات الإصدار الأخير.')}</p>`;
+    if (heading) heading.textContent = t('لا توجد بيانات إصدار');
+    if (published) published.textContent = '—';
+    if (fileCount) fileCount.textContent = '0';
+    if (healthLabel) healthLabel.textContent = t('غير متاح');
+    if (health) health.dataset.state = 'unknown';
+    if (grid) grid.innerHTML = '';
+    renderDownloadFilters([]);
+    filterDownloads();
+    if (empty) empty.textContent = t('تعذر جلب معلومات الإصدار الأخير.');
     return;
   }
 
   const appVersion = String(release.app_version || release.tag || '—');
   const assets = Array.isArray(release.assets) ? release.assets : [];
-  const healthyAssets = assets.filter(asset => asset.ok === true && safeHttpsUrl(asset.download_url));
-  const releaseHealthy = assets.length > 0 && healthyAssets.length === assets.length;
-  $('#release-heading').innerHTML = `<bdi dir="ltr">${escapeHTML(appVersion)}</bdi>`;
+  const validAssets = assets.filter(asset => asset && typeof asset === 'object');
+  const healthyAssets = validAssets.filter(asset => asset.ok === true && safeHttpsUrl(asset.download_url));
+  const releaseHealthy = validAssets.length > 0 && healthyAssets.length === validAssets.length;
+
+  if (heading) heading.innerHTML = `<bdi dir="ltr">${escapeHTML(appVersion)}</bdi>`;
   $('#release-version').textContent = appVersion;
   $('#release-date').textContent = formatDate(release.published_at);
-  $('#published-at').textContent = formatDate(release.published_at);
-  $('#downloads-file-count').textContent = assets.length;
-  $('#download-count').textContent = assets.filter(item => safeHttpsUrl(item.download_url)).length;
+  if (published) published.textContent = formatDate(release.published_at);
+  if (fileCount) fileCount.textContent = validAssets.length;
+  $('#download-count').textContent = validAssets.filter(asset => safeHttpsUrl(asset.download_url)).length;
 
-  const banner = $('#downloads .release-banner');
-  if (banner) {
-    banner.querySelectorAll('.release-health').forEach(node => node.remove());
-    banner.dataset.state = releaseHealthy ? 'healthy' : 'warning';
-    const version = $('#release-heading');
-    if (version) version.insertAdjacentHTML('beforebegin',
-      `<span class="release-health"><i class="download-health-dot ${releaseHealthy ? 'is-healthy' : 'is-warning'}" aria-hidden="true"></i>${releaseHealthy ? t('متاح') : t('يحتاج مراجعة')}</span>`);
+  if (health) {
+    health.dataset.state = releaseHealthy ? 'healthy' : 'warning';
+    const dot = health.querySelector('.download-health-dot');
+    if (dot) dot.className = `download-health-dot ${releaseHealthy ? 'is-healthy' : 'is-warning'}`;
+  }
+  if (healthLabel) healthLabel.textContent = t(releaseHealthy ? 'متاح' : 'يحتاج مراجعة');
+
+  if (grid) {
+    grid.innerHTML = validAssets.map(asset => {
+      const downloadUrl = safeHttpsUrl(asset.download_url);
+      const displayName = asset.name || (
+        asset.label === 'iOS IPA' ? 'iOS IPA package' : t('ملف غير متاح')
+      );
+      const ready = Boolean(downloadUrl);
+      const healthy = ready && asset.ok === true;
+      const category = downloadCategory(asset);
+      const categoryLabel = category === 'android'
+        ? 'Android APK'
+        : category === 'ios' ? 'iOS IPA' : 'ملفات أخرى';
+      const fileType = /\\.ipa(?:$|[?#])/i.test(displayName) ? 'IPA'
+        : /\\.apk(?:$|[?#])/i.test(displayName) ? 'APK' : 'FILE';
+      const versionStatus = healthy ? t('سليم') : (ready ? t('يحتاج مراجعة') : t('ملف غير متاح'));
+      const staleNote = report.release_fallback_used
+        ? `<small class="download-meta">${t(report.release_cache_stale ? 'بيانات التنزيل محفوظة لكن الكاش قديم؛ استخدمها بحذر.' : 'بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.')}</small>`
+        : '';
+      const verificationNote = ready && !healthy
+        ? `<small class="download-meta">${t('تعذر تأكيد الرابط حالياً؛ الرابط محفوظ ويمكن تجربته.')}</small>`
+        : '';
+      const uploadDate = asset.uploaded_at
+        ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
+        : t('تاريخ الرفع غير متاح');
+
+      return `<article class="download-card plugin-card" data-category="${category}" data-ready="${ready ? 'true' : 'false'}">
+        <div class="plugin-top">
+          <span class="download-file-icon" aria-hidden="true">${fileType}</span>
+          <span class="type-tag external">${t(categoryLabel)}</span>
+        </div>
+        <h3 class="download-file"><bdi dir="ltr">${escapeHTML(displayName)}</bdi></h3>
+        <p>${t('ملف تثبيت مباشر لـ Nuvio.')}</p>
+        <div class="download-meta-stack">
+          <small class="download-meta">${formatBytes(asset.size_bytes)}</small>
+          <small class="download-meta">${escapeHTML(uploadDate)}</small>
+          ${staleNote}
+          ${verificationNote}
+        </div>
+        <div class="card-status download-card-status" data-state="${healthy ? 'healthy' : 'warning'}">
+          <i class="download-health-dot ${healthy ? 'is-healthy' : 'is-warning'}" aria-hidden="true"></i>
+          <span>${versionStatus} · ${t('الإصدار')} <bdi dir="ltr">${escapeHTML(appVersion)}</bdi></span>
+        </div>
+        <div class="card-actions">
+          ${ready
+            ? `<a class="download-action" href="${escapeHTML(downloadUrl)}" target="_blank" rel="noopener noreferrer">${t('تنزيل مباشر ↗')}</a>`
+            : `<span class="download-unavailable muted">${t('غير متاح حالياً')}</span>`}
+        </div>
+      </article>`;
+    }).join('');
   }
 
-  $('#download-grid').innerHTML = assets.map(asset => {
-    const downloadUrl = safeHttpsUrl(asset.download_url);
-    const displayName = asset.name || (
-      asset.label === 'iOS IPA' ? 'iOS IPA package' : t('ملف غير متاح')
-    );
-    const ready = Boolean(downloadUrl);
-    const healthy = ready && asset.ok === true;
-    const versionStatus = healthy ? t('سليم') : (ready ? t('يحتاج مراجعة') : t('ملف غير متاح'));
-    return `<article class="download-card version-card" data-ready="${ready ? 'true' : 'false'}">
-      <div class="version-card-meta"><span>Nuvio · ${escapeHTML(asset.label || 'Download')}</span><span class="version-kind ${healthy ? 'official' : ''}">${healthy ? t('متاح') : t('يحتاج مراجعة')}</span></div>
-      <h3 class="download-file"><bdi dir="ltr">${escapeHTML(displayName)}</bdi></h3>
-      <small class="version-card-status" data-state="${healthy ? 'healthy' : 'warning'}"><i class="download-health-dot ${healthy ? 'is-healthy' : 'is-warning'}" aria-hidden="true"></i>${versionStatus} · ${t('الإصدار')} <bdi dir="ltr">${escapeHTML(appVersion)}</bdi></small>
-      <p class="download-meta">${formatBytes(asset.size_bytes)}</p>
-      ${report.release_fallback_used ? `<small class="download-meta">${t(report.release_cache_stale ? 'بيانات التنزيل محفوظة لكن الكاش قديم؛ استخدمها بحذر.' : 'بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.')}</small>` : ''}
-      ${ready && !healthy ? `<small class="download-meta">${t('تعذر تأكيد الرابط حالياً؛ الرابط محفوظ ويمكن تجربته.')}</small>` : ''}
-      <small class="download-meta">${asset.uploaded_at
-        ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
-        : t('تاريخ الرفع غير متاح')}</small>
-      <div class="version-actions">
-        ${ready
-          ? `<a class="download-action version-download" href="${escapeHTML(downloadUrl)}" target="_blank" rel="noopener noreferrer">${t('تنزيل مباشر ↗')}</a>`
-          : `<span class="download-unavailable muted">${t('غير متاح حالياً')}</span>`}
-      </div>
-    </article>`;
-  }).join('');
+  renderDownloadFilters(validAssets);
+  filterDownloads();
 }
 
 async function loadStatus() {
