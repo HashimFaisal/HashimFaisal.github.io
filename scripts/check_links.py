@@ -30,8 +30,6 @@ MANIFESTS = {
     "IMDb Popular": "https://imdb-popular-stremio.vercel.app/manifest.json",
     "My Lists": "https://mylistsaddon.com/manifest.json",
     "Ratings Aggregator": "https://rating-aggregator.elfhosted.com/manifest.json",
-    "AIOMetadata": "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
-    "TMDB Discover+": "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
     "Anime Kitsu": "https://anime-kitsu.strem.fun/manifest.json",
     "IMDb Ratings": "https://imdbratings.kgenovz.com/manifest.json",
     "BetterPosters for Nuvio": "https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json",
