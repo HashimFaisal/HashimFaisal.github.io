@@ -120,10 +120,32 @@ class StreamSourceDiagnosticsTests(unittest.TestCase):
         with patch.object(check_links, "fetch_json", side_effect=payloads):
             result = check_links.check_cinemabox_stream()
 
-        self.assertFalse(result["ok"])
+        self.assertTrue(result["ok"])
         self.assertEqual(result["probe_stage"], "catalog_search")
         self.assertEqual(result["http_status"], 404)
+        self.assertEqual(result["probe_status"], "inconclusive")
+        self.assertEqual(result["reason_code"], "runtime_or_network_specific")
+        self.assertEqual(result["verification_scope"], "Nuvio app runtime / user network")
+        self.assertEqual(
+            check_links.diagnose_check(result)["failure_code"],
+            "test_title_not_indexed",
+        )
         self.assertNotIn("url", result)
+
+    def test_cinemabox_non_404_http_errors_remain_failures(self):
+        from urllib.error import HTTPError
+        from io import BytesIO
+
+        payloads = [
+            ({"meta": {"name": "The Matrix", "year": "1999"}}, 200),
+            HTTPError("https://cinema.albox.co/api/v4/search", 503, "Service Unavailable", {}, BytesIO(b"down")),
+        ]
+        with patch.object(check_links, "fetch_json", side_effect=payloads):
+            result = check_links.check_cinemabox_stream()
+
+        self.assertFalse(result["ok"])
+        self.assertEqual(result["http_status"], 503)
+        self.assertEqual(result["probe_stage"], "catalog_search")
 
     def test_all_in_one_checks_registry_and_sample_provider_files(self):
         manifest = {
