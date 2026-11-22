@@ -45,7 +45,18 @@ def select_latest_release(releases: list[dict]):
     ]
     if not published:
         raise ValueError("No published GitHub release with assets was found")
-    return max(published, key=lambda item: item.get("published_at") or "")
+    # Regular download cards must not silently switch to a separate tester build
+    # when the same repository also publishes a normal stable/beta release.
+    regular = [
+        item for item in published
+        if not re.search(
+            r"(^|[-_.\\s])tester($|[-_.\\s])",
+            str(item.get("tag_name") or "") + " " + str(item.get("name") or ""),
+            re.IGNORECASE,
+        )
+    ]
+    candidates = regular or published
+    return max(candidates, key=lambda item: item.get("published_at") or "")
 
 
 def fetch_latest_release(repository: str):
@@ -95,8 +106,8 @@ def normalized_asset_name(name: str, old_tag: str):
     value = re.sub(r"v?\d+(?:\.\d+)+", " ", value)
     value = re.sub(r"\b(?:alpha|beta|rc|pre|preview|dev)(?:[.-]?\d+(?:\.\d+)*)?\b", " ", value)
     value = re.sub(r"[^a-z0-9]+", " ", value)
-    ignored = {"release", "download", "build", "app", "nuvio"}
-    return {part for part in value.split() if part and part not in ignored}
+    ignored = {"release", "download", "build", "app", "nuvio", "autosync"}
+    return {part for part in value.split() if part and part not in ignored and not part.isdigit()}
 
 
 def select_asset(current_name: str, old_tag: str, assets: list[dict]):
