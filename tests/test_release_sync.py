@@ -6,7 +6,7 @@ from pathlib import Path
 from scripts.check_links import discover_version_downloads
 
 from scripts.sync_download_releases import (
-    github_release_source,
+    github_release_source,\n    normalize_card_id,
     select_asset,
     sync_download_cards,
     update_live_release_news,
@@ -84,11 +84,11 @@ class ReleaseSyncTests(unittest.TestCase):
             updates_path = Path(directory) / "updates.json"
             now = datetime(2026, 11, 22, 12, 0, tzinfo=timezone.utc)
             event = {"repository": "example/project", "tag": "v2.0.0", "card": "Example App", "url": "https://github.com/example/project/releases/tag/v2.0.0"}
-            added = update_live_release_news([event], updates_path, now)
+            registry_path = Path(directory) / "download-cards-seen.json"\n            added = update_live_release_news([event], updates_path, now, registry_path=registry_path)
             self.assertEqual(added, 1)
             data = __import__("json").loads(updates_path.read_text(encoding="utf-8"))
             self.assertEqual(len(data), 1)
-            self.assertEqual(data[0]["id"], "app:download-release:example/project:v2.0.0")
+            self.assertEqual(data[0]["id"], "app:download-release:example-app:example/project:v2.0.0")
             self.assertEqual(data[0]["title"]["ar"], "تحديث جديد لتطبيق Example App: v2.0.0")
             self.assertEqual(data[0]["url"], event["url"])
             added_again = update_live_release_news([event], updates_path, now)
