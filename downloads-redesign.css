@@ -6,6 +6,10 @@
   display: block;
   min-width: 0;
   overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 #downloads.downloads-redesign[hidden] { display: none !important; }
 #downloads.downloads-redesign *,
@@ -147,7 +151,7 @@
   font-size: 12px;
   line-height: 1.8;
 }
-#downloads .version-grid {
+#downloads .downloads-device-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   align-items: stretch;
@@ -155,7 +159,7 @@
   width: 100%;
   margin: 0;
 }
-#downloads .version-card {
+#downloads .downloads-device-card {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -171,12 +175,12 @@
   overflow: visible;
   transform: none;
 }
-#downloads .version-card:hover {
+#downloads .downloads-device-card:hover {
   transform: translateY(-2px);
   border-color: var(--line-strong, rgba(88,216,232,.32));
   box-shadow: 0 12px 30px rgba(0,0,0,.14);
 }
-#downloads .version-card-meta {
+#downloads .downloads-device-card__meta {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -184,32 +188,32 @@
   gap: 8px;
   margin: 0 0 13px;
 }
-#downloads .version-card-meta > span:first-child {
+#downloads .downloads-device-card__meta > span:first-child {
   color: var(--muted, #9eacc0);
   font-size: 10px;
 }
-#downloads .version-kind {
+#downloads .downloads-device-kind {
   font-size: 9px;
   line-height: 1;
   padding: 6px 9px;
   border-radius: 8px;
   white-space: nowrap;
 }
-#downloads .version-card h3 {
+#downloads .downloads-device-card h3 {
   margin: 0 0 8px;
   font: 800 17px Inter, sans-serif;
   line-height: 1.4;
   color: var(--text, #fff);
   overflow-wrap: anywhere;
 }
-#downloads .version-card p {
+#downloads .downloads-device-card p {
   margin: 0 0 12px;
   min-height: 0;
   color: var(--muted, #9eacc0);
   font-size: 11px;
   line-height: 1.9;
 }
-#downloads .version-card > small.version-card-status {
+#downloads .downloads-device-card > small.downloads-device-status {
   display: block;
   margin: 0 0 12px;
   padding: 9px 10px;
@@ -221,9 +225,9 @@
   line-height: 1.6;
   overflow-wrap: anywhere;
 }
-#downloads .version-card-status[data-state="healthy"] { color: var(--success, #6de0a1); }
-#downloads .version-card-status[data-state="warning"] { color: var(--danger, #ff9d9d); }
-#downloads .version-actions {
+#downloads .downloads-device-status[data-state="healthy"] { color: var(--success, #6de0a1); }
+#downloads .downloads-device-status[data-state="warning"] { color: var(--danger, #ff9d9d); }
+#downloads .downloads-device-actions {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 9px;
@@ -231,7 +235,7 @@
   margin: auto 0 12px;
   padding: 0;
 }
-#downloads .version-actions .version-download {
+#downloads .downloads-device-actions .downloads-device-link {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -247,7 +251,7 @@
   font-size: 10px;
   line-height: 1.5;
 }
-#downloads .version-card > small:not(.version-card-status) {
+#downloads .downloads-device-card > small:not(.downloads-device-status) {
   display: block;
   margin: 4px 0 0;
   color: var(--muted, #9eacc0);
@@ -417,7 +421,7 @@
   color: var(--muted, #9eacc0);
   background: rgba(255,255,255,.035);
 }
-#downloads .version-disclaimer {
+#downloads .downloads-disclaimer {
   display: block;
   margin: 18px 0 0;
   padding: 14px 16px;
@@ -432,15 +436,15 @@
 #downloads .downloads-redesign-header::after,
 #downloads .downloads-device-section::before,
 #downloads .downloads-device-section::after,
-#downloads .version-card::before,
-#downloads .version-card::after,
+#downloads .downloads-device-card::before,
+#downloads .downloads-device-card::after,
 #downloads .release-asset-card::before,
 #downloads .release-asset-card::after { content: none !important; display: none !important; }
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   #downloads .downloads-device-nav { grid-template-columns: repeat(2, minmax(0,1fr)); }
   #downloads .download-grid { grid-template-columns: repeat(2, minmax(0,1fr)); }
 }
-@media (max-width: 640px) {
+@media (max-width: 680px) {
   #downloads.downloads-redesign { width: 94%; margin-bottom: 42px; }
   #downloads .downloads-redesign-header { flex-direction: column; align-items: stretch; gap: 18px; padding: 20px; border-radius: 19px; }
   #downloads .downloads-redesign-summary { width: 100%; }
@@ -452,10 +456,10 @@
   #downloads .downloads-device-nav a small { font-size: 9px; }
   #downloads .downloads-device-section { padding: 14px; border-radius: 17px; margin-bottom: 16px; }
   #downloads .downloads-group-heading { align-items: flex-start; margin-bottom: 16px; padding-bottom: 14px; }
-  #downloads .version-grid { grid-template-columns: minmax(0,1fr); gap: 10px; }
-  #downloads .version-card { padding: 16px; border-radius: 14px; }
-  #downloads .version-actions { grid-template-columns: minmax(0,1fr); gap: 8px; }
-  #downloads .version-actions .version-download { min-height: 40px; }
+  #downloads .downloads-device-grid { grid-template-columns: minmax(0,1fr); gap: 10px; }
+  #downloads .downloads-device-card { padding: 16px; border-radius: 14px; }
+  #downloads .downloads-device-actions { grid-template-columns: minmax(0,1fr); gap: 8px; }
+  #downloads .downloads-device-actions .downloads-device-link { min-height: 40px; }
   #downloads .downloads-mobile-release-assets { padding: 13px; margin-top: 20px; border-radius: 15px; }
   #downloads .downloads-toolbar { display: grid; grid-template-columns: minmax(0,1fr); }
   #downloads .downloads-search-box { width: 100%; flex-basis: auto; }
@@ -465,5 +469,5 @@
   #downloads .release-asset-card { padding: 15px; border-radius: 13px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  #downloads .downloads-device-nav a, #downloads .version-card, #downloads .release-asset-card { transition: none; }
+  #downloads .downloads-device-nav a, #downloads .downloads-device-card, #downloads .release-asset-card { transition: none; }
 }
