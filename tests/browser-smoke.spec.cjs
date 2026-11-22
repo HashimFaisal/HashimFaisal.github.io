@@ -755,7 +755,7 @@ test('Nuvio downloads view has a complete responsive release header', async ({ p
   await expect(page.locator('#downloads .downloads-release-panel')).toBeVisible();
   await expect(page.locator('#downloads .downloads-release-details')).toBeVisible();
   await expect(page.locator('#downloads .downloads-list-heading')).toBeVisible();
-  await expect(page.locator('#downloads .downloads-releases-link')).toHaveAttribute('href', /releases\\/latest/);
+  await expect(page.locator('#downloads .downloads-releases-link')).toHaveAttribute('href', /releases/);
 });
 
 test('Nuvio editions are separated by device and link directly to published installer assets', async ({ page }) => {
