@@ -359,6 +359,10 @@ def build_risk_forecast(results, previous_report=None, history=None):
             "signals": signals,
             "confidence": confidence,
             "confidence_basis": "Number of distinct evidence signals; not predictive accuracy.",
+            "confidence_details": (
+                f"{confidence.capitalize()} confidence from {len(signals)} distinct signal(s): "
+                + ", ".join(signals) + "."
+            ),
             "evidence_count": len(matching_events),
             "recommended_action": diagnostic.get("recommended_action", "Review current check evidence."),
         })
@@ -372,6 +376,7 @@ def build_risk_forecast(results, previous_report=None, history=None):
             "score_breakdown": {"previous_report_cache_stale": 55},
             "confidence": "low",
             "confidence_basis": "One evidence signal; not predictive accuracy.",
+            "confidence_details": "Low confidence from one signal: previous_report_cache_stale.",
             "evidence_count": 0,
             "recommended_action": "Verify release API connectivity and cache freshness.",
         })

@@ -80,11 +80,16 @@ class RiskForecastTests(unittest.TestCase):
         })
         self.assertEqual(risk["confidence"], "high")
         self.assertIn("distinct evidence signals", risk["confidence_basis"])
+        self.assertIn("High confidence from 3 distinct signal(s)", risk["confidence_details"])
+        self.assertIn("current_check_failed", risk["confidence_details"])
+        self.assertIn("consecutive_failure", risk["confidence_details"])
+        self.assertIn("recurring_outage_history", risk["confidence_details"])
 
     def test_single_failure_has_low_evidence_confidence(self):
         item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
         risk = check_links.build_risk_forecast([item], {}, [])["risks"][0]
         self.assertEqual(risk["confidence"], "low")
+        self.assertEqual(risk["confidence_details"], "Low confidence from 1 distinct signal(s): current_check_failed.")
         self.assertEqual(risk["score_breakdown"]["consecutive_failure"], 0)
         self.assertEqual(risk["score_breakdown"]["outage_history"], 0)
 
@@ -92,6 +97,7 @@ class RiskForecastTests(unittest.TestCase):
         risk = check_links.build_risk_forecast([], {"release_cache_stale": True}, [])["risks"][0]
         self.assertEqual(risk["score_breakdown"], {"previous_report_cache_stale": 55})
         self.assertEqual(risk["confidence"], "low")
+        self.assertEqual(risk["confidence_details"], "Low confidence from one signal: previous_report_cache_stale.")
 
     def test_trend_identifies_new_risk_without_prior_forecast(self):
         item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
