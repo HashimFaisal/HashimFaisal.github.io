@@ -1,4 +1,8 @@
 import unittest
+import tempfile
+from pathlib import Path
+
+from scripts.check_links import discover_version_downloads
 
 from scripts.sync_download_releases import (
     github_release_source,
@@ -8,6 +12,24 @@ from scripts.sync_download_releases import (
 
 
 class ReleaseSyncTests(unittest.TestCase):
+    def test_inventory_includes_links_from_every_download_card(self):
+        html = (
+            '<article class="downloads-device-card"><h3>Phone</h3>'
+            '<a class="downloads-device-link" href="https://github.com/a/b/releases/download/v1/phone.apk">APK</a>'
+            '</article>'
+            '<article class="downloads-device-card"><h3>TV</h3>'
+            '<a class="downloads-device-link" href="https://github.com/c/d/releases/download/v2/tv.apk">APK</a>'
+            '<a class="downloads-device-link" href="https://github.com/c/d/releases/download/v2/tv-arm64.apk">ARM64</a>'
+            '</article>'
+        )
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "index.html"
+            path.write_text(html, encoding="utf-8")
+            entries, error = discover_version_downloads(path)
+        self.assertIsNone(error)
+        self.assertEqual(len(entries), 3)
+        self.assertEqual({entry["card"] for entry in entries}, {"Phone", "TV"})
+
     def test_github_release_source_extracts_repository_tag_and_filename(self):
         self.assertEqual(
             github_release_source(
