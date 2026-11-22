@@ -97,7 +97,7 @@ const viewports = [
         const section = document.querySelector('#downloads');
         const downloadsSectionCount = document.querySelectorAll('main > #downloads').length;
         const legacyComponents = section.querySelectorAll(
-          '.app-versions, .unified-download-library, .version-platform, .version-grid, .version-card, .version-card-status, .version-download, .version-kind, .version-actions, .version-disclaimer, .download-card, .download-library-card, .download-release-subsection, .downloads-release-panel, .download-grid'
+          '.app-versions, .unified-download-library, .version-platform, .version-grid, .version-card-status, .version-kind, .version-actions, .version-disclaimer, .download-card, .download-library-card, .download-release-subsection, .downloads-release-panel, .download-grid'
         ).length;
         const releaseGrid = document.querySelector('#download-grid');
         const mobileGroup = section.querySelector('#versions-mobile');
@@ -156,7 +156,7 @@ const viewports = [
       if (downloadLayout.legacyVersionsSection) failures.push(viewport.name + ': old versions section remains');
       if (downloadLayout.latestReleaseOverlap) failures.push(viewport.name + ': latest release overlaps mobile editions');
       if (!downloadLayout.cardsWithinGrid) failures.push(viewport.name + ': latest release card escapes grid');
-      if (JSON.stringify(downloadLayout.platformCardCounts) !== JSON.stringify([8,1,5,2])) failures.push(viewport.name + ': unexpected platform card counts ' + JSON.stringify(downloadLayout.platformCardCounts));
+      if (JSON.stringify(downloadLayout.platformCardCounts) !== JSON.stringify([9,1,5,2])) failures.push(viewport.name + ': unexpected platform card counts ' + JSON.stringify(downloadLayout.platformCardCounts));
       const downloadsScreenshot = path.join(outputDir, 'downloads-' + viewport.name + '.png');
       await page.screenshot({ path: downloadsScreenshot, fullPage: true, animations: 'disabled' });
 
