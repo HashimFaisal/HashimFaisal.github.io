@@ -369,15 +369,14 @@
     <h2 id="downloads-title">مركز التنزيلات</h2>
     <p>مكتبة مستقلة بالكامل. اختر جهازك ثم حمّل النسخة المناسبة من مصدرها الأصلي.</p>
   </div>
-  <span class="section-count">4 أقسام</span>
+  <span class="section-count">3 أجهزة</span>
 </header>
-<nav class="downloads-device-nav" aria-label="التنقل داخل مركز التنزيلات">
-  <a href="#versions-mobile"><span class="downloads-nav-index">01</span><span>الموبايل</span><small>Android · iOS</small></a>
-  <a href="#versions-desktop"><span class="downloads-nav-index">02</span><span>الكمبيوتر</span><small>Windows</small></a>
-  <a href="#versions-tv"><span class="downloads-nav-index">03</span><span>Android TV</span><small>TV · Box</small></a>
-  <a href="#versions-smart-tv"><span class="downloads-nav-index">04</span><span>Smart TV</span><small>Samsung · LG</small></a>
+<nav class="downloads-device-nav" id="downloads-device-nav" aria-label="التنقل حسب نوع الجهاز" role="group">
+  <button type="button" data-download-device="mobile" aria-pressed="true"><span class="downloads-nav-index">01</span><span>الموبايل</span></button>
+  <button type="button" data-download-device="tv" aria-pressed="false"><span class="downloads-nav-index">02</span><span>التلفاز</span></button>
+  <button type="button" data-download-device="desktop" aria-pressed="false"><span class="downloads-nav-index">03</span><span>الكمبيوتر</span></button>
 </nav>
-<section class="downloads-device-section" id="versions-mobile" aria-labelledby="versions-mobile-title">
+<section class="downloads-device-section" data-device-group="mobile" id="versions-mobile" aria-labelledby="versions-mobile-title">
         <div class="downloads-group-heading">
           <div><span class="eyebrow">01 / MOBILE</span><h3 id="versions-mobile-title">الموبايل · Android وiPhone</h3><p>نسخ الهواتف، مع روابط APK وIPA المباشرة عند توفرها.</p></div>
         </div>
@@ -442,7 +441,7 @@
         </div>
       </section>
 
-<section class="downloads-device-section" id="versions-desktop" aria-labelledby="versions-desktop-title">
+<section class="downloads-device-section" data-device-group="desktop" id="versions-desktop" hidden aria-labelledby="versions-desktop-title">
         <div class="downloads-group-heading">
           <div><span class="eyebrow">02 / DESKTOP</span><h3 id="versions-desktop-title">الكمبيوتر · Windows</h3><p>نسخ سطح المكتب المتاحة وروابط مشاريعها الأصلية.</p></div>
         </div>
@@ -459,7 +458,7 @@
         </div>
       </section>
 
-<section class="downloads-device-section" id="versions-tv" aria-labelledby="versions-tv-title">
+<section class="downloads-device-section" data-device-group="tv" id="versions-tv" hidden aria-labelledby="versions-tv-title">
         <div class="downloads-group-heading">
           <div><span class="eyebrow">03 / ANDROID TV</span><h3 id="versions-tv-title">التلفزيون · Android TV وGoogle TV</h3><p>ملفات APK مباشرة للتلفزيون، مع اختيار المعمارية المناسبة.</p></div>
         </div>
@@ -529,7 +528,7 @@
         </div>
       </section>
 
-<section class="downloads-device-section" id="versions-smart-tv" aria-labelledby="versions-smart-tv-title">
+<section class="downloads-device-section" data-device-group="tv" id="versions-smart-tv" hidden aria-labelledby="versions-smart-tv-title">
         <div class="downloads-group-heading">
           <div><span class="eyebrow">04 / SMART TV</span><h3 id="versions-smart-tv-title">التلفزيونات الذكية · Samsung وLG</h3><p>روابط منفصلة حسب نظام التلفزيون ونوع حزمة التثبيت.</p></div>
         </div>
