@@ -26,8 +26,9 @@ jobs:
         run: |
           node --check app.js
           node --check premium-ui.js
-      - name: Validate Python syntax
-        run: python -m py_compile scripts/check_links.py scripts/sync_download_releases.py
+      - name: Validate Python syntax and release sync tests
+        run: |
+          python -m py_compile scripts/check_links.py scripts/sync_download_releases.py
           python -m unittest discover -s tests -p 'test_release_sync.py' -v
       - name: Validate resource categories and downloads center structure
         run: |
