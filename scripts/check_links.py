@@ -227,6 +227,7 @@ def check_torrentio_stream():
 
 def check_cinemabox_stream():
     headers = {**SOURCE_HEADERS, "Referer": "https://cinema.albox.co/", "Origin": "https://cinema.albox.co"}
+    probe_stage = "metadata"
     try:
         meta_payload, _ = fetch_json(CINEMETA_BASE + "/meta/movie/" + TEST_MOVIE_ID + ".json", extra_headers=headers)
         meta = meta_payload.get("meta") if isinstance(meta_payload, dict) else None
@@ -236,6 +237,7 @@ def check_cinemabox_stream():
         search_url = CINEMABOX_API + "search?" + urlencode({
             "page_size": 25, "page_number": 1, "term": meta["name"]
         })
+        probe_stage = "catalog_search"
         search_payload, search_status = fetch_json(search_url, extra_headers=headers)
         candidates = search_payload.get("results", []) if isinstance(search_payload, dict) else []
         candidates = [
@@ -254,12 +256,14 @@ def check_cinemabox_stream():
         item_id = best.get("id")
         if item_id is None:
             raise ValueError("CinemaBox search result has no item ID")
+        probe_stage = "show_details"
         details, _ = fetch_json(CINEMABOX_API + "shows/shows/dynamic/" + quote(str(item_id), safe=""), extra_headers=headers)
         post = details.get("post_info") if isinstance(details, dict) else None
         episode_id = post.get("episode_id") if isinstance(post, dict) else None
         if episode_id is None:
             raise ValueError("CinemaBox matched the title but returned no playable episode ID")
 
+        probe_stage = "player"
         player, player_status = fetch_json(CINEMABOX_API + "shows/episodes/player/" + quote(str(episode_id), safe=""), extra_headers=headers)
         videos = player.get("videos", []) if isinstance(player, dict) else []
         count = sum(
@@ -270,12 +274,15 @@ def check_cinemabox_stream():
         return source_check(
             "CinemaBox", count > 0, http_status=player_status, test_title=TEST_MOVIE_TITLE,
             probe_status="streams_found" if count else "no_streams", stream_count=count,
+            probe_stage=probe_stage,
             error=None if count else "CinemaBox found the test title but its player returned no usable stream URLs.",
         )
     except HTTPError as exc:
-        return source_check("CinemaBox", False, http_status=exc.code, test_title=TEST_MOVIE_TITLE, error="HTTP " + str(exc.code) + ": " + str(exc.reason))
+        return source_check("CinemaBox", False, http_status=exc.code, test_title=TEST_MOVIE_TITLE,
+            probe_stage=probe_stage, error="HTTP " + str(exc.code) + ": " + str(exc.reason))
     except Exception as exc:
-        return source_check("CinemaBox", False, test_title=TEST_MOVIE_TITLE, error=str(exc))
+        return source_check("CinemaBox", False, test_title=TEST_MOVIE_TITLE,
+            probe_stage=probe_stage, error=str(exc))
 
 
 def payload_list(payload, keys=("data", "results", "videos", "items", "list")):
@@ -326,9 +333,11 @@ def check_cinemana_stream():
             try:
                 fetch_text("https://api.github.com/zen", extra_headers=SOURCE_HEADERS)
                 return source_check(
-                    "Cinemana", False, test_title=TEST_MOVIE_TITLE,
-                    probe_status="upstream_unreachable_internet_ok",
-                    error="Cinemana health endpoint failed while the independent GitHub control endpoint remained reachable: " + str(host_error),
+                    "Cinemana", True, test_title=TEST_MOVIE_TITLE,
+                    probe_status="inconclusive",
+                    reason_code="network_specific_provider",
+                    verification_scope="Earthlink user network",
+                    error="Cinemana could not be verified from the GitHub monitoring region. The user reports that Cinemana is tied to Earthlink; verify it from that network before assigning a health status. Runner error: " + str(host_error),
                 )
             except Exception as control_error:
                 return source_check(
