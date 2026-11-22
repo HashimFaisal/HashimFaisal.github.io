@@ -495,6 +495,32 @@ SOURCE_PROBES = (
     check_allinone_provider_bundle,
 )
 
+
+
+def build_user_reported_runtime_evidence():
+    """Keep user-confirmed in-app behavior separate from automated cloud probes."""
+    return {
+        "evidence_type": "user_report",
+        "reported_at": "2026-11-22",
+        "note": "User-reported runtime evidence is historical context, not an automated or continuous app test.",
+        "items": [
+            {
+                "name": "CinemaBox",
+                "status": "working",
+                "scope": "Nuvio app runtime",
+                "source": "user_confirmation",
+                "detail": "The user confirmed that streams are retrieved and play normally inside Nuvio.",
+            },
+            {
+                "name": "Cinemana",
+                "status": "working",
+                "scope": "Nuvio app runtime / Earthlink network",
+                "source": "user_confirmation",
+                "detail": "The user confirmed that streams are retrieved and play normally inside Nuvio on the relevant network.",
+            },
+        ],
+    }
+
 def check_download(name, asset):
     url = asset["browser_download_url"]
     size = asset.get("size")
@@ -1201,6 +1227,7 @@ def main():
             "provider_bundle": next((item for item in results if item.get("type") == "provider_bundle"), None),
             "note": "Stream URLs are counted but never stored. ALL-IN-ONE provider files are integrity-checked; scraper execution requires the Nuvio app runtime.",
         },
+        "runtime_evidence": build_user_reported_runtime_evidence(),
         "release": release_data,
         "stable_release": stable_release_data,
         "release_error": release_error,
