@@ -11,6 +11,7 @@ on:
       - "index.html"
       - "premium-ui.css"
       - "premium-ui.js"
+      - "downloads-redesign.css"
       - "tests/responsive-check.cjs"
       - ".github/workflows/responsive-browser-qa.yml"
   workflow_dispatch:
