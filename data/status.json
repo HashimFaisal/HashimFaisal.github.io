@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-22T04:46:24.697863+00:00",
+  "checked_at": "2026-11-22T05:47:45.652968+00:00",
   "ok": true,
   "passed": 23,
   "total": 23,
@@ -62,6 +62,11 @@
   "release_error": null,
   "release_fallback_used": false,
   "release_cache_timestamp": null,
+  "release_cache_age_seconds": null,
+  "release_cache_stale": false,
+  "diagnostic_summary": "All checks are healthy.",
+  "failure_categories": [],
+  "diagnostics": [],
   "checks": [
     {
       "name": "ALL-IN-ONE",
@@ -70,7 +75,11 @@
       "http_status": 200,
       "version": "1.0.0",
       "manifest_id": "not specified",
-      "url": "https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/refs/heads/main/manifest.json"
+      "url": "https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/refs/heads/main/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "CinemaBox",
@@ -79,7 +88,11 @@
       "http_status": 200,
       "version": "1.1.2",
       "manifest_id": "cinemabox",
-      "url": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json"
+      "url": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "Cinemana",
@@ -88,7 +101,11 @@
       "http_status": 200,
       "version": "0.3.3",
       "manifest_id": "cinemana",
-      "url": "https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json"
+      "url": "https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "OpenSubtitles",
@@ -97,7 +114,11 @@
       "http_status": 200,
       "version": "1.0.0",
       "manifest_id": "org.stremio.opensubtitlesv3",
-      "url": "https://opensubtitles-v3.strem.io/manifest.json"
+      "url": "https://opensubtitles-v3.strem.io/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "TheSubtitleDB",
@@ -106,7 +127,11 @@
       "http_status": 200,
       "version": "0.2.2",
       "manifest_id": "org.thesubtitledb.stremio",
-      "url": "https://api.thesubtitledb.org/integrations/stremio/manifest.json"
+      "url": "https://api.thesubtitledb.org/integrations/stremio/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "SubtitleVideo",
@@ -115,7 +140,11 @@
       "http_status": 200,
       "version": "1.0.0",
       "manifest_id": "com.subtitlevideo.subtitles.en-ar",
-      "url": "https://subtitlevideo.com/stremio/en,ar/manifest.json"
+      "url": "https://subtitlevideo.com/stremio/en,ar/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "Rodrigo's Catalog",
@@ -124,7 +153,11 @@
       "http_status": 200,
       "version": "1.20261116.0901",
       "manifest_id": "com.digok.nuvio.catalog",
-      "url": "https://digok.github.io/nuvio-catalog/manifest.json"
+      "url": "https://digok.github.io/nuvio-catalog/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "Cinemeta",
@@ -133,7 +166,11 @@
       "http_status": 200,
       "version": "3.0.14",
       "manifest_id": "com.linvo.cinemeta",
-      "url": "https://v3-cinemeta.strem.io/manifest.json"
+      "url": "https://v3-cinemeta.strem.io/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "Nuvio Catalog",
@@ -142,7 +179,11 @@
       "http_status": 200,
       "version": "1.2.0",
       "manifest_id": "com.nuvio.tmdb.catalogs",
-      "url": "https://catalog.nuvio.tv/manifest.json"
+      "url": "https://catalog.nuvio.tv/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "The Movie Database Addon",
@@ -151,7 +192,11 @@
       "http_status": 200,
       "version": "3.1.7",
       "manifest_id": "tmdb-addon",
-      "url": "https://tmdb.elfhosted.com/manifest.json"
+      "url": "https://tmdb.elfhosted.com/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "İzlemeli Catalog",
@@ -160,7 +205,11 @@
       "http_status": 200,
       "version": "1.0.115",
       "manifest_id": "com.izlemeli.nuvio.catalogs.en",
-      "url": "https://izlemeli.github.io/nuvio/en/manifest.json"
+      "url": "https://izlemeli.github.io/nuvio/en/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "IMDb Popular",
@@ -169,7 +218,11 @@
       "http_status": 200,
       "version": "2.1.0",
       "manifest_id": "community.imdb-popular",
-      "url": "https://imdb-popular-stremio.vercel.app/manifest.json"
+      "url": "https://imdb-popular-stremio.vercel.app/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "My Lists",
@@ -178,7 +231,11 @@
       "http_status": 200,
       "version": "1.5.8",
       "manifest_id": "app.my-list",
-      "url": "https://mylistsaddon.com/manifest.json"
+      "url": "https://mylistsaddon.com/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "Ratings Aggregator",
@@ -187,7 +244,11 @@
       "http_status": 200,
       "version": "1.8.1",
       "manifest_id": "community.ratings.aggregator",
-      "url": "https://rating-aggregator.elfhosted.com/manifest.json"
+      "url": "https://rating-aggregator.elfhosted.com/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "Anime Kitsu",
@@ -196,7 +257,11 @@
       "http_status": 200,
       "version": "0.0.10",
       "manifest_id": "community.anime.kitsu",
-      "url": "https://anime-kitsu.strem.fun/manifest.json"
+      "url": "https://anime-kitsu.strem.fun/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "IMDb Ratings",
@@ -205,7 +270,11 @@
       "http_status": 200,
       "version": "1.0.0",
       "manifest_id": "imdb.ratings.local",
-      "url": "https://imdbratings.kgenovz.com/manifest.json"
+      "url": "https://imdbratings.kgenovz.com/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "BetterPosters for Nuvio",
@@ -214,14 +283,22 @@
       "http_status": 200,
       "version": "1.0.0",
       "manifest_id": "cc.btttr.nuvio.proxy.e8483000212d",
-      "url": "https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json"
+      "url": "https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "Nuvio beta release",
       "type": "release",
       "ok": true,
       "tag": "1.1.0-beta.3",
-      "error": null
+      "error": null,
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "ARM64",
@@ -229,7 +306,11 @@
       "ok": true,
       "http_status": 200,
       "size_bytes": 54139882,
-      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-arm64-v8a-release.apk"
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-arm64-v8a-release.apk",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "ARMv7",
@@ -237,7 +318,11 @@
       "ok": true,
       "http_status": 200,
       "size_bytes": 51555330,
-      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-armeabi-v7a-release.apk"
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-armeabi-v7a-release.apk",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "x86",
@@ -245,7 +330,11 @@
       "ok": true,
       "http_status": 200,
       "size_bytes": 55215642,
-      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-x86-release.apk"
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-x86-release.apk",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "x86_64",
@@ -253,7 +342,11 @@
       "ok": true,
       "http_status": 200,
       "size_bytes": 55791004,
-      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-x86_64-release.apk"
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-x86_64-release.apk",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     },
     {
       "name": "iOS IPA",
@@ -261,7 +354,53 @@
       "ok": true,
       "http_status": 200,
       "size_bytes": 77920396,
-      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-enhanced-release.ipa"
+      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-enhanced-release.ipa",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
     }
-  ]
+  ],
+  "change_summary": {
+    "count": 0,
+    "by_type": {},
+    "events": []
+  },
+  "change_count": 0,
+  "proactive_monitoring": {
+    "status": "healthy",
+    "alert_count": 0,
+    "alerts": [],
+    "summary": "No proactive warnings; all measured checks are healthy."
+  },
+  "risk_forecast": {
+    "status": "healthy",
+    "integrity": {
+      "input_result_count": 23,
+      "evaluated_failure_count": 0,
+      "ignored_malformed_result_count": 0,
+      "duplicate_failure_count": 0,
+      "history_window_size": 30,
+      "history_evidence_deduplicated": true
+    },
+    "overall_level": "low",
+    "risk_count": 0,
+    "high_risk_count": 0,
+    "medium_risk_count": 0,
+    "risks": [],
+    "trend_summary": {
+      "status": "baseline",
+      "previous_total_score": null,
+      "current_total_score": null,
+      "total_score_delta": null,
+      "new_count": 0,
+      "worsening_count": 0,
+      "improving_count": 0,
+      "stable_count": 0,
+      "baseline_count": 0,
+      "resolved_resources": [],
+      "basis": "Comparison of risks with valid numeric prior scores only; resolved and incomparable risks are excluded from trend totals. Not a statistical prediction."
+    },
+    "note": "Evidence-based risk indicators, not certainty or a statistical prediction."
+  }
 }
