@@ -80,7 +80,7 @@ class RiskForecastTests(unittest.TestCase):
         })
         self.assertEqual(risk["confidence"], "high")
         self.assertIn("distinct evidence signals", risk["confidence_basis"])
-        self.assertIn("high confidence from 3 distinct signal(s)", risk["confidence_details"])
+        self.assertIn("High confidence from 3 distinct signal(s)", risk["confidence_details"])
         self.assertIn("current_check_failed", risk["confidence_details"])
         self.assertIn("consecutive_failure", risk["confidence_details"])
         self.assertIn("recurring_outage_history", risk["confidence_details"])
