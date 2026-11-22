@@ -76,9 +76,10 @@ class RiskForecastTests(unittest.TestCase):
         self.assertEqual(risk["score_breakdown"], {
             "current_failure": 45,
             "consecutive_failure": 25,
-            "outage_history": 10,
+            "outage_history": 5,
         })
         self.assertEqual(risk["confidence"], "high")
+        self.assertEqual(risk["evidence_count"], 1)
         self.assertIn("distinct evidence signals", risk["confidence_basis"])
         self.assertIn("High confidence from 3 distinct signal(s)", risk["confidence_details"])
         self.assertIn("current_check_failed", risk["confidence_details"])
@@ -209,6 +210,24 @@ class RiskForecastTests(unittest.TestCase):
             {"name": "API", "ok": False, "http_status": 425}
         )
         self.assertEqual(diagnostic["failure_code"], "rate_limited")
+
+    def test_duplicate_outage_history_events_do_not_inflate_risk(self):
+        item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
+        event = {"type": "status", "source": "API", "new_status": "unavailable", "timestamp": "2026-11-22T00:00:00Z"}
+        result = check_links.build_risk_forecast([item], {}, [event, dict(event), dict(event)])
+        risk = result["risks"][0]
+        self.assertEqual(risk["evidence_count"], 1)
+        self.assertEqual(risk["score_breakdown"]["outage_history"], 5)
+
+    def test_distinct_outage_events_remain_distinct(self):
+        item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
+        history = [
+            {"type": "status", "source": "API", "new_status": "unavailable", "timestamp": f"2026-11-22T00:0{i}:00Z"}
+            for i in range(3)
+        ]
+        risk = check_links.build_risk_forecast([item], {}, history)["risks"][0]
+        self.assertEqual(risk["evidence_count"], 3)
+        self.assertEqual(risk["score_breakdown"]["outage_history"], 15)
 
 if __name__ == "__main__":
     unittest.main()
