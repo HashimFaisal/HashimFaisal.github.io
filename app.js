@@ -996,58 +996,46 @@ function renderDownloads(report) {
   if (healthLabel) healthLabel.textContent = t(releaseHealthy ? 'متاح' : 'يحتاج مراجعة');
 
   if (grid) {
-    grid.querySelectorAll('.release-asset-card').forEach(card => card.remove());
-    const renderedAssets = validAssets.map(asset => {
-      const downloadUrl = safeHttpsUrl(asset.download_url);
-      const displayName = asset.name || (
-        asset.label === 'iOS IPA' ? 'iOS IPA package' : t('ملف غير متاح')
-      );
-      const ready = Boolean(downloadUrl);
-      const healthy = ready && asset.ok === true;
-      const category = downloadCategory(asset);
-      const categoryLabel = category === 'android'
-        ? 'Android APK'
-        : category === 'ios' ? 'iOS IPA' : 'ملفات أخرى';
-      const fileType = /\.ipa(?:$|[?#])/i.test(displayName) ? 'IPA'
-        : /\.apk(?:$|[?#])/i.test(displayName) ? 'APK' : 'FILE';
-      const versionStatus = healthy ? t('سليم') : (ready ? t('يحتاج مراجعة') : t('ملف غير متاح'));
-      const staleNote = report.release_fallback_used
-        ? `<small class="download-meta">${t(report.release_cache_stale ? 'بيانات التنزيل محفوظة لكن الكاش قديم؛ استخدمها بحذر.' : 'بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.')}</small>`
-        : '';
-      const verificationNote = ready && !healthy
-        ? `<small class="download-meta">${t('تعذر تأكيد الرابط حالياً؛ الرابط محفوظ ويمكن تجربته.')}</small>`
-        : '';
-      const uploadDate = asset.uploaded_at
-        ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
-        : t('تاريخ الرفع غير متاح');
+    // Keep the latest official release files inside the existing Nuvio Mobile card.
+    // This avoids creating a second set of standalone asset cards below the editions.
+    const mobileCard = [...grid.children].find(card =>
+      !card.classList.contains('release-asset-card') &&
+      card.querySelector('h3')?.textContent.trim() === 'Nuvio Mobile'
+    );
+    const mobileActions = mobileCard?.querySelector('.downloads-device-actions');
+    const mobileStatus = mobileCard?.querySelector('.downloads-device-status');
 
-      return `<article class="downloads-device-card plugin-card release-asset-card" data-category="${category}" data-ready="${ready ? 'true' : 'false'}">
-        <div class="downloads-device-card__meta release-asset-card__top">
-          <span class="release-asset-icon" aria-hidden="true">${fileType}</span>
-          <span class="downloads-device-kind release-asset-kind">${t(categoryLabel)}</span>
-        </div>
-        <h3 class="release-asset-name"><bdi dir="ltr">${escapeHTML(displayName)}</bdi></h3>
-        <p class="release-asset-description">${t('ملف تثبيت مباشر لـ Nuvio.')}</p>
-        <div class="release-asset-meta">
-          <small>${formatBytes(asset.size_bytes)}</small>
-          <small>${escapeHTML(uploadDate)}</small>
-          ${staleNote ? `<small>${t(report.release_cache_stale ? 'بيانات التنزيل محفوظة لكن الكاش قديم؛ استخدمها بحذر.' : 'بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.')}</small>` : ''}
-          ${verificationNote ? `<small>${t('تعذر تأكيد الرابط حالياً؛ الرابط محفوظ ويمكن تجربته.')}</small>` : ''}
-        </div>
-        <div class="release-asset-status" data-state="${healthy ? 'healthy' : 'warning'}">
-          <i class="release-asset-status__dot ${healthy ? 'is-healthy' : 'is-warning'}" aria-hidden="true"></i>
-          <span>${versionStatus} · ${t('الإصدار')} <bdi dir="ltr">${escapeHTML(appVersion)}</bdi></span>
-        </div>
-        <div class="release-asset-actions">
-          ${ready
-            ? `<a class="release-asset-action" href="${escapeHTML(downloadUrl)}" target="_blank" rel="noopener noreferrer">${t('تنزيل مباشر ↗')}</a>`
-            : `<span class="release-asset-unavailable">${t('غير متاح حالياً')}</span>`}
-        </div>
-      </article>`;
-    }).join('');
-    grid.insertAdjacentHTML('beforeend', renderedAssets);
+    if (mobileActions && validAssets.length) {
+      mobileActions.replaceChildren();
+      validAssets.forEach(asset => {
+        const downloadUrl = safeHttpsUrl(asset.download_url);
+        if (!downloadUrl) return;
+        const displayName = asset.name || '';
+        const isIos = downloadCategory(asset) === 'ios';
+        const label = String(asset.label || '').trim();
+        const architecture = label && !/ios|ipa/i.test(label)
+          ? label
+          : (displayName.match(/arm64|armv7|armeabi-v7a|x86_64|x86|universal/i)?.[0] || '');
+        const link = document.createElement('a');
+        link.className = 'downloads-device-link release-mobile-link';
+        link.href = downloadUrl;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = isIos
+          ? 'تنزيل ملف IPA · iOS'
+          : `تنزيل APK · ${architecture || 'Android'}`;
+        mobileActions.appendChild(link);
+      });
+
+      if (mobileStatus) {
+        mobileStatus.textContent = `${t('الإصدار')} ${appVersion} · ${healthyAssets.length}/${validAssets.length} ${t('روابط تنزيل سليمة')}`;
+        mobileStatus.dataset.state = releaseHealthy ? 'healthy' : 'warning';
+        mobileStatus.title = report.release_fallback_used
+          ? t(report.release_cache_stale ? 'بيانات التنزيل محفوظة لكن الكاش قديم؛ استخدمها بحذر.' : 'بيانات إصدار محفوظة مؤقتاً بسبب تعذر التحديث.')
+          : t('حالة روابط ملفات الإصدار الأخير');
+      }
+    }
   }
-
 }
 
 async function loadStatus() {
