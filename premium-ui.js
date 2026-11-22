@@ -295,8 +295,6 @@
   });
 
   window.addEventListener('popstate', event => {
-    backPending = false;
-
     const state = event.state || {};
     const hash = location.hash.slice(1);
     const target = views[state.nuvioView]
