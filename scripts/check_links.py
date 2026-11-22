@@ -7,6 +7,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
+from urllib.parse import urlparse
 
 REPO = "luqmanfadlli/NuvioMobile-Enhanced"
 API = f"https://api.github.com/repos/{REPO}/releases?per_page=100"
@@ -47,7 +48,11 @@ HEADERS = {
 
 
 def fetch(url, method="GET"):
-    request = Request(url, headers=HEADERS, method=method)
+    request_headers = dict(HEADERS)
+    token = os.environ.get("GITHUB_TOKEN")
+    if token and urlparse(url).hostname == "api.github.com":
+        request_headers["Authorization"] = f"Bearer {token}"
+    request = Request(url, headers=request_headers, method=method)
     return urlopen(request, timeout=20)
 
 
