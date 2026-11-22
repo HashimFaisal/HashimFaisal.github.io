@@ -226,7 +226,9 @@ def main():
         if isinstance(cached_release, dict) and cached_release.get("assets"):
             release = dict(cached_release)
             release["stale"] = True
-            release["cache_checked_at"] = previous_report.get("checked_at")
+            release["cache_checked_at"] = (
+                cached_release.get("cache_checked_at") or previous_report.get("checked_at")
+            )
             release["cache_error"] = release_error
             release_is_cached = True
             stable_release = previous_report.get("stable_release")
@@ -234,7 +236,9 @@ def main():
                 if not isinstance(asset, dict):
                     continue
                 asset["stale"] = True
-                asset["last_verified_at"] = previous_report.get("checked_at")
+                asset["last_verified_at"] = (
+                    asset.get("last_verified_at") or previous_report.get("checked_at")
+                )
 
     # Preserve last known manifest versions when a source check fails.
     for item in results:
@@ -253,7 +257,7 @@ def main():
         "name": "Nuvio beta release",
         "type": "release",
         "ok": release is not None and not release_is_cached,
-        "tag": (release or {}).get("tag"),
+        "tag": (release or {}).get("tag") or (release or {}).get("tag_name"),
         "error": release_error,
         "stale": release_is_cached,
     })
