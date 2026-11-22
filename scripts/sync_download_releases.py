@@ -288,6 +288,8 @@ def update_live_release_news(events, updates_path=UPDATES_PATH, now=None,
     for event in events:
         repository, tag = event.get("repository"), event.get("tag")
         card, url = event.get("card") or repository, event.get("url")
+        # Keep the app name separate from the version; the version is shown once below.
+        card = re.sub(r"\s+v?\d+(?:\.\d+)+(?:-[a-z0-9.-]+)?$", "", str(card), flags=re.IGNORECASE).strip()
         if not repository or not tag or not isinstance(url, str) or not url.startswith("https://"):
             continue
         card_id = event.get("card_id")
