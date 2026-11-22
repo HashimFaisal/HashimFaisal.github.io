@@ -1071,7 +1071,7 @@ function renderDownloads(report) {
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
         : t('تاريخ الرفع غير متاح');
 
-      return `<article class="plugin-card download-card" data-category="${category}" data-ready="${ready ? 'true' : 'false'}">
+      return `<article class="download-library-card download-card" data-category="${category}" data-ready="${ready ? 'true' : 'false'}">
         <div class="plugin-top">
           <span class="download-file-icon" aria-hidden="true">${fileType}</span>
           <span class="type-tag external">${t(categoryLabel)}</span>
