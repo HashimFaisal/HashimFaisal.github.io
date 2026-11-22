@@ -759,7 +759,8 @@ test('Nuvio downloads library has searchable platform filters and direct release
   await expect(page.locator('#downloads-filters [data-download-filter="android"]')).toBeVisible();
   await expect(page.locator('#downloads-filters [data-download-filter="ios"]')).toBeVisible();
   await expect(page.locator('#download-grid .download-card')).toHaveCount(5);
-  await expect(page.locator('#download-grid .download-card.plugin-card')).toHaveCount(5);
+  await expect(page.locator('#download-grid .download-library-card')).toHaveCount(5);
+  await expect(page.locator('#download-grid .plugin-card')).toHaveCount(0);
   const downloadColumns = await page.locator('#download-grid').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length);
   const libraryColumns = await page.locator('#plugin-grid').evaluate(el => getComputedStyle(el).gridTemplateColumns.split(' ').length);
   expect(downloadColumns).toBe(libraryColumns);
