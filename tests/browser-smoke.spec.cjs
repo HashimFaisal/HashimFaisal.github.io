@@ -660,3 +660,25 @@ test('Cinemeta artwork uses only the approved Nuvio palette', async ({ page }) =
   const approved = new Set(['#070b16', '#0d1526', '#111d33', '#a394ff', '#58d8e8', '#8deaf3', '#f2f6ff', '#a2b1c8']);
   expect(colors.filter(color => !approved.has(color))).toEqual([]);
 });
+
+
+test('download URLs remain visible when their health checks fail', async ({ page }) => {
+  const suffixes = ['arm64-v8a-release.apk', 'armeabi-v7a-release.apk', 'x86-release.apk', 'x86_64-release.apk', 'enhanced-release.ipa'];
+  const assets = suffixes.map((suffix, index) => ({
+    label: ['ARM64', 'ARMv7', 'x86', 'x86_64', 'iOS IPA'][index],
+    name: `nuvio-1.2.3-${suffix}`,
+    size_bytes: 1000000,
+    download_url: `https://example.invalid/nuvio-${suffix}`,
+    ok: false
+  }));
+  await page.route('**/data/status.json', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ checked_at: new Date().toISOString(), ok: false, passed: 0, total: 5, release: { tag: '1.2.3', app_version: '1.2.3', name: 'Nuvio', published_at: new Date().toISOString(), html_url: 'https://example.invalid/release', assets }, checks: [] })
+  }));
+  await page.goto('/');
+  await expect(page.locator('.download-card')).toHaveCount(5);
+  await expect(page.locator('.download-card[data-ready="true"]')).toHaveCount(5);
+  await expect(page.locator('.download-card a.download-action')).toHaveCount(5);
+  await expect(page.locator('.download-card .download-meta').filter({ hasText: 'تعذر تأكيد الرابط' })).toHaveCount(5);
+});
