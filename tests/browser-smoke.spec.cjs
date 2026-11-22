@@ -96,7 +96,7 @@ test('support links are available in Arabic and English without leaving the site
   await expect(suggest).toHaveAttribute('rel', 'noopener noreferrer');
 
   await page.locator('#language-toggle').click();
-  await expect(page.locator('#resources h2')).toHaveText('Support & Developer Resources');
+  await expect(page.locator('#resources h2')).toHaveText('Support & Contact');
   await expect(page.locator('#resources a').filter({ hasText: 'Report a Problem' })).toBeVisible();
   await expect(page.locator('#resources a').filter({ hasText: 'Suggest an Add-on' })).toBeVisible();
 });
