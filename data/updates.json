@@ -3,12 +3,12 @@
     "id": "app:download-release:nuvio-enhanced:luqmanfadlli/NuvioMobile-Enhanced:1.1.0-beta.3",
     "type": "app",
     "title": {
-      "ar": "تحديث جديد لتطبيق Nuvio Enhanced 1.0.0: 1.1.0-beta.3",
-      "en": "New Nuvio Enhanced 1.0.0 app release: 1.1.0-beta.3"
+      "ar": "تحديث جديد لتطبيق Nuvio Enhanced: 1.1.0-beta.3",
+      "en": "New Nuvio Enhanced app release: 1.1.0-beta.3"
     },
     "description": {
-      "ar": "صدر إصدار جديد من Nuvio Enhanced 1.0.0 برقم 1.1.0-beta.3. اضغط للتفاصيل.",
-      "en": "A new Nuvio Enhanced 1.0.0 release (1.1.0-beta.3) is available. Open the release notes for details."
+      "ar": "صدر إصدار تجريبي جديد من Nuvio Enhanced برقم 1.1.0-beta.3. اضغط للتفاصيل.",
+      "en": "A new Nuvio Enhanced beta release (1.1.0-beta.3) is available. Open the release notes for details."
     },
     "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/tag/1.1.0-beta.3",
     "publishedAt": "2026-11-22T21:43:46.879687Z",
@@ -250,7 +250,7 @@
       "ar": "تمت إضافة AIOMetadata إلى مصادر Nuvio. الإصدار: 4.1.0.",
       "en": "AIOMetadata has been added to Nuvio sources. Version: 4.1.0."
     },
-    "url": "https://aiometadata.elfhosted.com/stremio/c6520fa9-2205-4058-baf9-d9e8e45a4711/manifest.json",
+    "url": "https://aiometadata.elfhosted.com/configure",
     "publishedAt": "2026-11-22T06:00:30.527023Z",
     "expiresAt": "2026-11-23T06:00:30.527023Z"
   },
@@ -265,7 +265,6 @@
       "ar": "تمت إضافة TMDB Discover+ إلى مصادر Nuvio. الإصدار: 2.14.7+49f99dd0e277.",
       "en": "TMDB Discover+ has been added to Nuvio sources. Version: 2.14.7+49f99dd0e277."
     },
-    "url": "https://tmdb-discover-plus.elfhosted.com/yMUI42Fodl/manifest.json",
     "publishedAt": "2026-11-22T06:00:30.527023Z",
     "expiresAt": "2026-11-23T06:00:30.527023Z"
   }
