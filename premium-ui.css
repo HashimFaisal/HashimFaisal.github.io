@@ -567,60 +567,36 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
 
 /* Downloads */
 
-#downloads .release-banner {
-  min-height: 135px;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 18px;
-  padding: 25px 28px;
-  border: 1px solid var(--line-strong);
-  border-radius: 19px;
-  background:
-    radial-gradient(circle at 95% 5%, rgba(88, 216, 232, 0.17), transparent 42%),
-    linear-gradient(120deg, var(--surface-2), var(--surface));
-}
-
-#downloads .release-banner > div > span {
-  color: var(--cyan);
-  font: 800 9px Inter, sans-serif;
-  letter-spacing: 1.5px;
-}
-
-#downloads .release-banner strong {
-  display: block;
-  margin-top: 10px;
-  color: var(--text);
-  font-size: clamp(19px, 2.5vw, 26px);
-  font-weight: 850;
-}
-
+/* Downloads use the same card grid and card surface as the add-on library. */
 #downloads .download-grid {
-  gap: 13px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 17px;
+  margin-top: 0;
 }
 
 #downloads .download-card {
   min-width: 0;
-  padding: 20px;
-  border: 1px solid var(--line);
-  border-radius: 15px;
-  background: var(--surface-2);
-  transition: transform .22s ease, border-color .22s ease;
-}
-
-#downloads .download-card:hover {
-  transform: translateY(-4px);
-  border-color: var(--line-strong);
-}
-
-#downloads .download-card strong {
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 800;
+  min-height: 100%;
 }
 
 #downloads .download-card small {
   color: var(--muted);
   font-size: 10px;
+}
+
+@media (max-width: 760px) {
+  #downloads .download-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 11px;
+  }
+}
+
+@media (max-width: 430px) {
+  #downloads .download-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* Developer resources */
