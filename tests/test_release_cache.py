@@ -21,6 +21,37 @@ def sample_release():
 
 
 class ReleaseCacheTests(unittest.TestCase):
+    def test_cache_age_within_freshness_window(self):
+        now = check_links.datetime(2026, 11, 22, 12, 0, tzinfo=check_links.timezone.utc)
+        cached_at = "2026-11-21T12:00:00Z"
+        self.assertEqual(check_links.release_cache_age_seconds(cached_at, now=now), 86400)
+        self.assertFalse(check_links.release_cache_is_stale(cached_at, now=now))
+
+    def test_cache_is_fresh_at_exact_72_hour_boundary(self):
+        now = check_links.datetime(2026, 11, 22, 12, 0, tzinfo=check_links.timezone.utc)
+        cached_at = "2026-11-19T12:00:00Z"
+        self.assertEqual(check_links.release_cache_age_seconds(cached_at, now=now), 259200)
+        self.assertFalse(check_links.release_cache_is_stale(cached_at, now=now))
+
+    def test_cache_is_stale_after_72_hours(self):
+        now = check_links.datetime(2026, 11, 22, 12, 0, tzinfo=check_links.timezone.utc)
+        cached_at = "2026-11-19T11:59:59Z"
+        self.assertTrue(check_links.release_cache_is_stale(cached_at, now=now))
+        self.assertEqual(check_links.release_cache_age_seconds(cached_at, now=now), 259201)
+
+    def test_missing_or_invalid_cache_timestamp_is_stale(self):
+        now = check_links.datetime(2026, 11, 22, 12, 0, tzinfo=check_links.timezone.utc)
+        for cached_at in (None, "", "not-a-date", "2026-11-22Tbad"):
+            with self.subTest(cached_at=cached_at):
+                self.assertIsNone(check_links.release_cache_age_seconds(cached_at, now=now))
+                self.assertTrue(check_links.release_cache_is_stale(cached_at, now=now))
+
+    def test_future_timestamp_has_zero_age_and_is_not_stale(self):
+        now = check_links.datetime(2026, 11, 22, 12, 0, tzinfo=check_links.timezone.utc)
+        cached_at = "2026-11-22T12:30:00Z"
+        self.assertEqual(check_links.release_cache_age_seconds(cached_at, now=now), 0)
+        self.assertFalse(check_links.release_cache_is_stale(cached_at, now=now))
+
     def test_valid_cache_is_loaded(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "release-cache.json"

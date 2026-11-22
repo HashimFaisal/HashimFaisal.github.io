@@ -674,12 +674,12 @@ test('download URLs remain visible when their health checks fail', async ({ page
   await page.route('**/data/status.json', route => route.fulfill({
     status: 200,
     contentType: 'application/json',
-    body: JSON.stringify({ checked_at: new Date().toISOString(), ok: false, passed: 0, total: 5, release_fallback_used: true, release: { tag: '1.2.3', app_version: '1.2.3', name: 'Nuvio', published_at: new Date().toISOString(), html_url: 'https://example.invalid/release', assets }, checks: [] })
+    body: JSON.stringify({ checked_at: new Date().toISOString(), ok: false, passed: 0, total: 5, release_fallback_used: true, release_cache_stale: true, release: { tag: '1.2.3', app_version: '1.2.3', name: 'Nuvio', published_at: new Date().toISOString(), html_url: 'https://example.invalid/release', assets }, checks: [] })
   }));
   await page.goto('/');
   await expect(page.locator('.download-card')).toHaveCount(5);
   await expect(page.locator('.download-card[data-ready="true"]')).toHaveCount(5);
   await expect(page.locator('.download-card a.download-action')).toHaveCount(5);
   await expect(page.locator('.download-card .download-meta').filter({ hasText: 'تعذر تأكيد الرابط' })).toHaveCount(5);
-  await expect(page.locator('.download-card .download-meta').filter({ hasText: 'بيانات إصدار محفوظة مؤقتاً' })).toHaveCount(5);
+  await expect(page.locator('.download-card .download-meta').filter({ hasText: 'بيانات التنزيل محفوظة لكن الكاش قديم' })).toHaveCount(5);
 });
