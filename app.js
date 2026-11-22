@@ -82,7 +82,7 @@ const translations = {
   'تفرّع مجتمعي لسطح المكتب على Windows مع تعديلات على المشغّل والترجمات.': 'A community Windows desktop fork with player and subtitle changes.',
   'فتح صفحة المشروع والإصدارات ↗': 'Open project & releases ↗',
   'لا توجد حالياً حزمة إصدار مباشرة منشورة في صفحة Releases؛ سنعرض صفحة المشروع بدلاً من رابط تنزيل غير متحقق.': 'There is currently no published direct release asset; we show the project page instead of an unverified download link.',
-  'هذه قائمة مستقلة للوصول إلى المشاريع الأصلية. لا نستضيف ملفات التثبيت. روابط APK وIPA وWGT وTPK وIPK المباشرة مأخوذة من ملفات الإصدارات المنشورة لدى المطوّرين، وقد تتغير عند صدور تحديث جديد. افحص توافق جهازك دائماً؛ المشاريع المجتمعية غير رسمية وقد يختلف دعمها وميزاتها.': 'This independent directory links to original projects. We do not host installers. Direct APK, IPA, WGT, TPK, and IPK links come from developer release assets and may change with new releases. Always check device compatibility; community projects are unofficial and may differ in support and features.'
+  'هذه قائمة مستقلة للوصول إلى المشاريع الأصلية. لا نستضيف ملفات التثبيت. روابط APK وIPA وWGT وTPK وIPK المباشرة مأخوذة من ملفات الإصدارات المنشورة لدى المطوّرين، وقد تتغير عند صدور تحديث جديد. افحص توافق جهازك دائماً؛ المشاريع المجتمعية غير رسمية وقد يختلف دعمها وميزاتها.': 'This independent directory links to original projects. We do not host installers. Direct APK, IPA, WGT, TPK, and IPK links come from developer release assets and may change with new releases. Always check device compatibility; community projects are unofficial and may differ in support and features.',
   'الموبايل': 'Mobile',
   'التلفزيون': 'TV',
   'الكمبيوتر': 'Desktop',
