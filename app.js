@@ -18,6 +18,13 @@ let latestReport = null;
 const translations = {
   'الإضافات': 'Add-ons',
   'نسخ Nuvio': 'Nuvio Editions',
+  'مركز التنزيلات': 'Download Center',
+  'مكتبة مستقلة بالكامل. اختر جهازك ثم حمّل النسخة المناسبة من مصدرها الأصلي.': 'A standalone library. Choose your device and download the matching build from its original source.',
+  'أقسام الأجهزة': 'Device sections',
+  'روابط أصلية': 'Original links',
+  'الموبايل': 'Mobile',
+  'الكمبيوتر': 'Desktop',
+  'Smart TV': 'Smart TV',
   'مكتبة تنزيلات Nuvio': 'Nuvio Download Library',
   'ملفات الإصدار الأخير': 'Latest release files',
   'مكتبة واحدة مرتبة حسب نوع الجهاز، مع روابط تنزيل مباشرة وأحدث ملفات الإصدار.': 'One library organized by device, with direct download links and the latest release files.',
