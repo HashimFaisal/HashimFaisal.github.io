@@ -150,7 +150,7 @@ const translations = {
   'أرسل وصف المشكلة وخطوات تكرارها عبر GitHub ↗': 'Describe the issue and how to reproduce it on GitHub ↗',
   'اقتراح إضافة': 'Suggest an Add-on',
   'شارك اسم الإضافة ورابط Manifest إن توفر ↗': 'Share the add-on name and its Manifest link if available ↗',
-  'يتطلب إرسال البلاغ أو الاقتراح تسجيل الدخول إلى GitHub.': 'You need to sign in to GitHub to submit a report or suggestion.'
+  'يتطلب إرسال البلاغ أو الاقتراح تسجيل الدخول إلى GitHub.': 'You need to sign in to GitHub to submit a report or suggestion.',
   'Independent Nuvio Projects ·': 'Independent Nuvio Projects ·',
   'تم نسخ رابط Manifest بنجاح': 'Manifest link copied successfully',
   'تم نسخ الرابط': 'Link copied',
