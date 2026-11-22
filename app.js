@@ -907,37 +907,45 @@ function renderDeviceCardStatuses(report) {
   document.querySelectorAll('.downloads-device-card').forEach(card => {
     const status = card.querySelector('.downloads-device-status');
     if (!status) return;
-    const title = card.querySelector('h3')?.textContent.trim();
-    const cardItems = items.filter(item => item.card === title);
-    if (!cardItems.length) {
-      const tags = [...new Set([...card.querySelectorAll('a.downloads-device-link')].map(link => {
-        try {
-          const parts = new URL(link.href).pathname.split('/').filter(Boolean);
-          const index = parts.indexOf('download');
-          return index >= 0 ? parts[index + 1] : null;
-        } catch {
-          return null;
-        }
-      }).filter(Boolean))];
-      const versionText = tags.length ? `${t('الإصدار')} ${tags.join(' / ')}` : t('الإصدار غير متاح');
+
+    // The card's download URLs are the source of truth for its displayed version.
+    // Health reports may be older than the release-sync job that just changed those URLs.
+    const links = [...card.querySelectorAll('a.downloads-device-link')].map(link => {
+      try {
+        const url = new URL(link.href);
+        const parts = url.pathname.split('/').filter(Boolean);
+        const index = parts.indexOf('download');
+        return {
+          url: url.href,
+          tag: index >= 0 ? parts[index + 1] : null,
+        };
+      } catch {
+        return null;
+      }
+    }).filter(Boolean);
+    const tags = [...new Set(links.map(link => link.tag).filter(Boolean))];
+    const versionText = tags.length ? `${t('الإصدار')} ${tags.join(' / ')}` : t('الإصدار غير متاح');
+
+    const checkedItems = links.map(link => items.find(item =>
+      item.url === link.url && item.card === card.querySelector('h3')?.textContent.trim()
+    )).filter(Boolean);
+
+    if (!links.length || checkedItems.length !== links.length) {
       status.textContent = `${versionText} · ${t('تعذر التحقق من روابط الإصدار')}`;
       status.dataset.state = 'unknown';
+      status.classList.remove('ok', 'bad');
       return;
     }
 
-    const tags = [...new Set(cardItems.map(item => item.tag).filter(Boolean))];
-    const failed = cardItems.filter(item => !item.ok).length;
-    const versionText = tags.length ? `${t('الإصدار')} ${tags.join(' / ')}` : t('الإصدار غير متاح');
+    const failed = checkedItems.filter(item => !item.ok).length;
     status.dataset.state = failed ? 'warning' : 'healthy';
     status.classList.add('card-status');
     status.classList.toggle('ok', !failed);
     status.classList.toggle('bad', Boolean(failed));
-    if (failed) {
-      status.textContent = `${versionText} · ${failed} · ${t('رابط تنزيل غير متاح')}`;
-    } else {
-      status.textContent = versionText;
-    }
-    status.title = `${t('فحص روابط التنزيل')}: ${cardItems.length}`;
+    status.textContent = failed
+      ? `${versionText} · ${failed} · ${t('رابط تنزيل غير متاح')}`
+      : versionText;
+    status.title = `${t('فحص روابط التنزيل')}: ${checkedItems.length}`;
   });
 }
 

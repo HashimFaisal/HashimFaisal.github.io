@@ -9,6 +9,7 @@ from scripts.sync_download_releases import (
     github_release_source,
     normalize_card_id,
     select_asset,
+    select_latest_release,
     sync_download_cards,
     update_live_release_news,
 )
@@ -40,6 +41,49 @@ class ReleaseSyncTests(unittest.TestCase):
             ),
             ("example/project", "v2.0.0", "app-v2.0.0-arm64.apk"),
         )
+
+    def test_latest_published_release_includes_newer_beta_over_older_stable(self):
+        releases = [
+            {"tag_name": "v2.0.0", "published_at": "2026-10-01T00:00:00Z", "draft": False, "assets": [{"name": "stable.apk"}]},
+            {"tag_name": "v2.1.0-beta.2", "published_at": "2026-11-20T00:00:00Z", "draft": False, "prerelease": True, "assets": [{"name": "beta.apk"}]},
+            {"tag_name": "v3.0.0", "published_at": "2026-11-21T00:00:00Z", "draft": True, "assets": [{"name": "draft.apk"}]},
+            {"tag_name": "pr-assets", "name": "PR assets", "published_at": "2026-11-22T00:00:00Z", "draft": False, "assets": [{"name": "preview.png"}, {"name": "benchmark.png"}]},
+        ]
+        self.assertEqual(select_latest_release(releases)["tag_name"], "v2.1.0-beta.2")
+
+    def test_newer_tester_release_does_not_replace_regular_release(self):
+        releases = [
+            {"tag_name": "1.1.0-beta.10-autosync.1", "name": "Nuvio Reshaped", "published_at": "2026-11-05T07:30:00Z", "draft": False, "assets": [{"name": "regular.apk"}]},
+            {"tag_name": "1.1.0-beta.10-tester.1", "name": "Nuvio Reshaped Tester", "published_at": "2026-11-05T07:52:00Z", "draft": False, "prerelease": True, "assets": [{"name": "tester.apk"}]},
+        ]
+        self.assertEqual(select_latest_release(releases)["tag_name"], "1.1.0-beta.10-autosync.1")
+
+    def test_autosync_prerelease_asset_matches_same_architecture(self):
+        assets = [{
+            "name": "NuvioRS-TV-1.1.0-beta.10-autosync.1-arm32.apk",
+            "browser_download_url": "https://github.com/example/project/releases/download/1.1.0-beta.10-autosync.1/NuvioRS-TV-1.1.0-beta.10-autosync.1-arm32.apk",
+        }]
+        selected = select_asset(
+            "NuvioRS-TV-1.0.0-autosync.22-arm32.apk",
+            "1.0.0-autosync.22",
+            assets,
+        )
+        self.assertEqual(selected["name"], assets[0]["name"])
+
+    def test_prerelease_asset_matching_ignores_version_suffix(self):
+        assets = [{
+            "name": "app-2.1.0-beta.2-arm64.apk",
+            "browser_download_url": "https://github.com/example/project/releases/download/v2.1.0-beta.2/app-2.1.0-beta.2-arm64.apk",
+        }]
+        selected = select_asset("app-2.0.0-arm64.apk", "v2.0.0", assets)
+        self.assertEqual(selected["name"], assets[0]["name"])
+
+    def test_x86_32_bit_does_not_match_x86_64_asset(self):
+        assets = [{
+            "name": "app-2.0.0-x86_64.apk",
+            "browser_download_url": "https://github.com/example/project/releases/download/v2.0.0/app-2.0.0-x86_64.apk",
+        }]
+        self.assertIsNone(select_asset("app-1.0.0-x86.apk", "v1.0.0", assets))
 
     def test_asset_matching_keeps_architecture_and_variant(self):
         assets = [
