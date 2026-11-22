@@ -42,6 +42,18 @@ class RiskForecastTests(unittest.TestCase):
         self.assertEqual(result["trend_summary"]["new_count"], 2)
         self.assertEqual(result["trend_summary"]["baseline_count"], 0)
 
+    def test_malformed_failed_resource_names_are_normalized(self):
+        failures = [
+            {"name": [], "type": "manifest", "ok": False, "error": "timeout"},
+            {"name": {}, "type": "manifest", "ok": False, "error": "timeout"},
+            {"name": "  ", "type": "manifest", "ok": False, "error": "timeout"},
+            {"name": "Named", "type": "manifest", "ok": False, "error": "timeout"},
+        ]
+        result = check_links.build_risk_forecast(failures, {}, [])
+        self.assertEqual(result["risk_count"], 2)
+        self.assertEqual([risk["resource"] for risk in result["risks"]], ["Unknown", "Named"])
+        self.assertEqual(result["trend_summary"]["new_count"], 2)
+
     def test_stale_cache_adds_risk_indicator(self):
         result = check_links.build_risk_forecast([], {"release_cache_stale": True}, [])
         self.assertEqual(result["risk_count"], 1)

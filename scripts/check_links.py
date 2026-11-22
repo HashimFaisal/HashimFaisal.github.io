@@ -328,8 +328,9 @@ def build_risk_forecast(results, previous_report=None, history=None):
     # Duplicate failed checks for one resource should not inflate risk totals.
     seen_failed_resources = set()
     for item in failure_items:
-        name = item.get("name", "Unknown")
-        resource_key = name if isinstance(name, str) and name else "Unknown"
+        raw_name = item.get("name")
+        name = raw_name.strip() if isinstance(raw_name, str) and raw_name.strip() else "Unknown"
+        resource_key = name
         if resource_key in seen_failed_resources:
             continue
         seen_failed_resources.add(resource_key)
