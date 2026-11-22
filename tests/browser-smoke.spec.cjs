@@ -739,12 +739,12 @@ test('latest release download URLs remain inside the Nuvio Mobile card when heal
     body: JSON.stringify({ checked_at: new Date().toISOString(), ok: false, passed: 0, total: 5, release_fallback_used: true, release_cache_stale: true, release: { tag: '1.2.3', app_version: '1.2.3', name: 'Nuvio', published_at: new Date().toISOString(), html_url: 'https://example.invalid/release', assets }, checks: [] })
   }));
   await page.goto('/');
-  const mobileCard = page.locator('#download-grid > .downloads-device-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Mobile$/ }) });
-  await expect(mobileCard.locator('a.release-mobile-link')).toHaveCount(5);
-  await expect(mobileCard.locator('a[href*="arm64-v8a-release.apk"]')).toHaveCount(1);
-  await expect(mobileCard.locator('a[href*="enhanced-release.ipa"]')).toHaveCount(1);
-  await expect(mobileCard.locator('.downloads-device-status')).toContainText('0/5');
-  await expect(mobileCard.locator('.downloads-device-status')).toHaveAttribute('data-state', 'warning');
+  const enhancedCard = page.locator('#download-grid > .version-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\\.0\\.0$/ }) });
+  await expect(enhancedCard.locator('a.release-enhanced-link')).toHaveCount(5);
+  await expect(enhancedCard.locator('a[href*="arm64-v8a-release.apk"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a[href*="enhanced-release.ipa"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('.enhanced-latest-release__status')).toContainText('0/5');
+  await expect(enhancedCard.locator('.enhanced-latest-release__status')).toHaveAttribute('data-state', 'warning');
   await expect(page.locator('#download-grid .release-asset-card')).toHaveCount(0);
 });
 
@@ -782,7 +782,7 @@ test('Nuvio downloads library integrates release assets into mobile cards withou
       : window.matchMedia('(max-width: 1000px)').matches ? 2 : 3
   );
   expect(downloadColumns).toBe(expectedColumns);
-  await expect(page.locator('#download-grid .release-mobile-link[href*="/releases/download/"]')).toHaveCount(5);
+  await expect(page.locator('#download-grid .release-enhanced-link[href*="/releases/download/"]')).toHaveCount(5);
 
   await page.locator('#language-toggle').click();
   await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
