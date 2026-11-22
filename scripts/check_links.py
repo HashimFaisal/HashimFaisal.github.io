@@ -151,6 +151,27 @@ def check_download(name, asset):
 
 RELEASE_CACHE_PATH = "data/release-cache.json"
 REQUIRED_RELEASE_ASSETS = tuple(APK_ASSETS.values()) + ("-enhanced-release.ipa",)
+RELEASE_CACHE_MAX_AGE_SECONDS = 72 * 60 * 60
+
+
+def release_cache_age_seconds(cached_at, now=None):
+    if not isinstance(cached_at, str) or not cached_at.strip():
+        return None
+    try:
+        cached_dt = datetime.fromisoformat(cached_at.replace("Z", "+00:00"))
+        if cached_dt.tzinfo is None:
+            cached_dt = cached_dt.replace(tzinfo=timezone.utc)
+        current_dt = now or datetime.now(timezone.utc)
+        if current_dt.tzinfo is None:
+            current_dt = current_dt.replace(tzinfo=timezone.utc)
+        return max(0, int((current_dt - cached_dt).total_seconds()))
+    except (TypeError, ValueError, OverflowError):
+        return None
+
+
+def release_cache_is_stale(cached_at, now=None):
+    age = release_cache_age_seconds(cached_at, now=now)
+    return age is None or age > RELEASE_CACHE_MAX_AGE_SECONDS
 
 
 def load_release_cache():
@@ -259,12 +280,16 @@ def main():
     release_fetch_succeeded = release is not None
     release_fallback_used = False
     release_cache_timestamp = None
+    release_cache_age = None
+    release_cache_stale = False
     if release is None:
         cached = load_release_cache()
         if cached:
             release = cached.get("release")
             stable_release = cached.get("stable_release")
             release_cache_timestamp = cached.get("cached_at")
+            release_cache_age = release_cache_age_seconds(release_cache_timestamp)
+            release_cache_stale = release_cache_is_stale(release_cache_timestamp)
             release_fallback_used = bool(release)
 
     # Add an explicit beta-release health check so a failed release lookup
@@ -399,6 +424,8 @@ def main():
         "release_error": release_error,
         "release_fallback_used": release_fallback_used,
         "release_cache_timestamp": release_cache_timestamp,
+        "release_cache_age_seconds": release_cache_age,
+        "release_cache_stale": release_cache_stale,
         "checks": results,
     }
 
