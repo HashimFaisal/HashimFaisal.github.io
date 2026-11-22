@@ -751,7 +751,7 @@ test('Nuvio downloads library has searchable platform filters and direct release
   await page.goto('/#downloads');
   await expect(page.locator('#downloads')).toBeVisible();
   await expect(page.locator('#downloads .nuvio-view-back')).toBeVisible();
-  await expect(page.locator('#downloads-title')).toHaveText('تنزيلات Nuvio');
+  await expect(page.locator('#downloads-title')).toHaveText('مكتبة تنزيلات Nuvio');
   await expect(page.locator('#downloads .downloads-release-panel')).toHaveCount(0);
   await expect(page.locator('#downloads .downloads-release-details')).toHaveCount(0);
   await expect(page.locator('#downloads-search')).toBeVisible();
@@ -792,14 +792,16 @@ test('Nuvio downloads library has searchable platform filters and direct release
 });
 
 test('Nuvio editions are separated by device and link directly to published installer assets', async ({ page }) => {
+  await page.goto('/#downloads');
+  await expect(page.locator('#downloads')).toBeVisible();
   await expect(page.locator('#versions-mobile')).toBeVisible();
   await expect(page.locator('#versions-tv')).toBeVisible();
   await expect(page.locator('#versions-smart-tv')).toBeVisible();
   await expect(page.locator('#versions-desktop')).toBeVisible();
 
   await expect(page.locator('#versions-mobile .version-card')).toHaveCount(3);
-  await expect(page.locator('#versions-tv .version-card')).toHaveCount(4);
-  await expect(page.locator('#versions-smart-tv .version-card')).toHaveCount(3);
+  await expect(page.locator('#versions-tv .version-card')).toHaveCount(5);
+  await expect(page.locator('#versions-smart-tv .version-card')).toHaveCount(2);
   await expect(page.locator('#versions-desktop .version-card')).toHaveCount(1);
 
   await expect(page.locator('#versions-mobile a[href$="androidApp-full-arm64-v8a-release.apk"]')).toBeVisible();
