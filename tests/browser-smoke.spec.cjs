@@ -70,6 +70,23 @@ test('all five dashboard destinations open and return to the dashboard', async (
   }
 });
 
+test('support links are available in Arabic and English without leaving the site unexpectedly', async ({ page }) => {
+  await page.locator('#nuvio-launch-grid [data-view="resources"]').click();
+  await expect(page.locator('#resources')).toBeVisible();
+
+  const report = page.locator('#resources a').filter({ hasText: 'الإبلاغ عن مشكلة' });
+  const suggest = page.locator('#resources a').filter({ hasText: 'اقتراح إضافة' });
+  await expect(report).toHaveAttribute('href', /issues\/new\?title=Website%20problem%20report/);
+  await expect(suggest).toHaveAttribute('href', /issues\/new\?title=Add-on%20suggestion/);
+  await expect(report).toHaveAttribute('target', '_blank');
+  await expect(suggest).toHaveAttribute('rel', 'noopener noreferrer');
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('#resources h2')).toHaveText('Support & Developer Resources');
+  await expect(page.locator('#resources a').filter({ hasText: 'Report a Problem' })).toBeVisible();
+  await expect(page.locator('#resources a').filter({ hasText: 'Suggest an Add-on' })).toBeVisible();
+});
+
 test('plugin search and category filters return the expected cards', async ({ page }) => {
   await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
   await expect(page.locator('[data-filter="nuvio"]')).toHaveText('مصادر البث');
