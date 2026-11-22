@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-22T04:35:57.085171+00:00",
+  "checked_at": "2026-11-22T04:46:24.697863+00:00",
   "ok": true,
   "passed": 23,
   "total": 23,
@@ -60,6 +60,8 @@
     "html_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/tag/1.0.0"
   },
   "release_error": null,
+  "release_fallback_used": false,
+  "release_cache_timestamp": null,
   "checks": [
     {
       "name": "ALL-IN-ONE",
