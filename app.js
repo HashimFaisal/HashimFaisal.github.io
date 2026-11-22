@@ -3,6 +3,7 @@ const $$ = (selector) => [...document.querySelectorAll(selector)];
 
 let activeFilter = 'all';
 let activeDownloadsFilter = 'all';
+let activeDownloadsDevice = 'mobile';
 let currentLang = 'ar';
 try {
   const savedLang = localStorage.getItem('nuvio-language');
@@ -23,6 +24,7 @@ const translations = {
   'أقسام الأجهزة': 'Device sections',
   'روابط أصلية': 'Original links',
   'الموبايل': 'Mobile',
+  'التلفاز': 'TV',
   'الكمبيوتر': 'Desktop',
   'Smart TV': 'Smart TV',
   'مكتبة تنزيلات Nuvio': 'Nuvio Download Library',
@@ -30,6 +32,7 @@ const translations = {
   'مكتبة واحدة مرتبة حسب نوع الجهاز، مع روابط تنزيل مباشرة وأحدث ملفات الإصدار.': 'One library organized by device, with direct download links and the latest release files.',
   'ملفات مباشرة مرتبطة بالإصدار المنشور، مع فحص حالة الروابط.': 'Direct files from the published release, with link health checks.',
   '4 أقسام': '4 sections',
+  '3 أجهزة': '3 devices',
   'اختر جهازك للوصول إلى النسخة المناسبة. روابط التنزيل المباشر متاحة عندما ينشر المطوّر ملف تثبيت.': 'Choose your device to find the right edition. Direct downloads are available when the developer publishes an installer.',
   'الموبايل · Android وiPhone': 'Mobile · Android & iPhone',
   'نسخ الهواتف، مع روابط APK وIPA المباشرة عند توفرها.': 'Phone editions, with direct APK and IPA links where available.',
@@ -684,22 +687,25 @@ function filterCards() {
   const term = $('#search').value.trim().toLowerCase();
   let count = 0;
 
-  $$('.plugin-card').forEach(card => {
+  // Keep library filtering scoped to the library: download cards intentionally
+  // reuse the plugin-card class for their shared visual design.
+  $$('#plugins .plugin-card').forEach(card => {
     const type = card.dataset.category || 'nuvio';
     const matchType = activeFilter === 'all' || activeFilter === type;
     const matchText = card.innerText.toLowerCase().includes(term);
     card.hidden = !(matchType && matchText);
     if (!card.hidden) count++;
   });
-  $('#visible-count').textContent =    `${String(count).padStart(2, '0')} ${t('موارد')}`;
-  $('#empty-state').hidden = count !== 0;}
+  $('#visible-count').textContent = String(count).padStart(2, '0') + ' ' + t('موارد');
+  $('#empty-state').hidden = count !== 0;
+}
 
 $('#search').addEventListener('input', filterCards);
 
-$$('.filter').forEach(button => {
+$$('#plugins .filter[data-filter]').forEach(button => {
   button.addEventListener('click', () => {
     activeFilter = button.dataset.filter;
-    $$('.filter').forEach(item => {
+    $$('#plugins .filter[data-filter]').forEach(item => {
       const active = item === button;
       item.classList.toggle('active', active);
       item.setAttribute('aria-pressed', String(active));
@@ -1002,6 +1008,23 @@ function filterDownloads() {
   }
 }
 
+function setDownloadsDevice(device) {
+  const validDevices = ['mobile', 'tv', 'desktop'];
+  if (!validDevices.includes(device)) return;
+  activeDownloadsDevice = device;
+  document.querySelectorAll('#downloads-device-nav [data-download-device]').forEach(button => {
+    const active = button.dataset.downloadDevice === device;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
+  document.querySelectorAll('#downloads .downloads-device-section').forEach(section => {
+    section.hidden = section.dataset.deviceGroup !== device;
+  });
+}$('#downloads-device-nav')?.addEventListener('click', event => {
+  const button = event.target.closest('[data-download-device]');
+  if (button) setDownloadsDevice(button.dataset.downloadDevice);
+});
+
 $('#downloads-search')?.addEventListener('input', filterDownloads);
 $('#downloads-filters')?.addEventListener('click', event => {
   const button = event.target.closest('[data-download-filter]');
@@ -1083,7 +1106,7 @@ function renderDownloads(report) {
         ? `${t('تاريخ الرفع')}: ${formatDate(asset.uploaded_at)} · ${formatRelativeDate(asset.uploaded_at)}`
         : t('تاريخ الرفع غير متاح');
 
-      return `<article class="release-asset-card" data-category="${category}" data-ready="${ready ? 'true' : 'false'}">
+      return `<article class="release-asset-card plugin-card" data-category="${category}" data-ready="${ready ? 'true' : 'false'}">
         <div class="release-asset-card__top">
           <span class="release-asset-icon" aria-hidden="true">${fileType}</span>
           <span class="release-asset-kind">${t(categoryLabel)}</span>
@@ -1145,9 +1168,11 @@ async function loadStatus() {
     latestReport = report;
     updateLastChecked();
 
+    // Render the release grid first so a secondary status-widget error cannot
+    // leave the Download Center stuck on its loading placeholder.
+    renderDownloads(report);
     renderManifestStatuses(report);
     renderDeviceCardStatuses(report);
-    renderDownloads(report);
   } catch (error) {
     $('#health-state').textContent = t('غير متاح');
     $('#health-detail').textContent = t('تعذر تحميل تقرير الفحص');
@@ -1405,6 +1430,7 @@ async function loadChangelog() {
 }
 
 $('#year').textContent = new Date().getFullYear();
+setDownloadsDevice(activeDownloadsDevice);
 
 applyLanguage();
 installShareButtons();

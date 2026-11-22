@@ -369,20 +369,21 @@
     <h2 id="downloads-title">مركز التنزيلات</h2>
     <p>مكتبة مستقلة بالكامل. اختر جهازك ثم حمّل النسخة المناسبة من مصدرها الأصلي.</p>
   </div>
-  <span class="section-count">4 أقسام</span>
+  <span class="section-count">3 أجهزة</span>
 </header>
-<nav class="downloads-device-nav" aria-label="التنقل داخل مركز التنزيلات">
-  <a href="#versions-mobile"><span class="downloads-nav-index">01</span><span>الموبايل</span><small>Android · iOS</small></a>
-  <a href="#versions-desktop"><span class="downloads-nav-index">02</span><span>الكمبيوتر</span><small>Windows</small></a>
-  <a href="#versions-tv"><span class="downloads-nav-index">03</span><span>Android TV</span><small>TV · Box</small></a>
-  <a href="#versions-smart-tv"><span class="downloads-nav-index">04</span><span>Smart TV</span><small>Samsung · LG</small></a>
-</nav>
-<section class="downloads-device-section" id="versions-mobile" aria-labelledby="versions-mobile-title">
+<div class="toolbar downloads-device-toolbar">
+  <div class="filters downloads-device-nav" id="downloads-device-nav" role="group" aria-label="تصفية التنزيلات حسب الجهاز">
+    <button class="filter active" type="button" data-download-device="mobile" aria-pressed="true"><span class="downloads-nav-index">01</span> الموبايل</button>
+    <button class="filter" type="button" data-download-device="tv" aria-pressed="false"><span class="downloads-nav-index">02</span> التلفاز</button>
+    <button class="filter" type="button" data-download-device="desktop" aria-pressed="false"><span class="downloads-nav-index">03</span> الكمبيوتر</button>
+  </div>
+</div>
+<section class="downloads-device-section" data-device-group="mobile" id="versions-mobile" aria-labelledby="versions-mobile-title">
         <div class="downloads-group-heading">
           <div><span class="eyebrow">01 / MOBILE</span><h3 id="versions-mobile-title">الموبايل · Android وiPhone</h3><p>نسخ الهواتف، مع روابط APK وIPA المباشرة عند توفرها.</p></div>
         </div>
-        <div class="downloads-device-grid">
-          <article class="downloads-device-card">
+        <div class="downloads-device-grid plugin-grid">
+          <article class="downloads-device-card plugin-card">
             <div class="downloads-device-card__meta"><span>Android · رسمي</span><span class="downloads-device-kind official">رسمي</span></div>
             <h3>Nuvio Mobile</h3>
             <small class="downloads-device-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
@@ -395,7 +396,7 @@
             <small>إذا لم تعرف معمارية هاتفك، راجع صفحة الإصدار أو استخدم ملف ARM64 للأجهزة الحديثة المتوافقة.</small>
           </article>
 
-          <article class="downloads-device-card">
+          <article class="downloads-device-card plugin-card">
             <div class="downloads-device-card__meta"><span>iPhone · iOS</span><span class="downloads-device-kind official">رسمي</span></div>
             <h3>Nuvio Mobile for iOS</h3>
             <small class="downloads-device-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
@@ -406,7 +407,7 @@
             <small>تثبيت IPA على iPhone قد يتطلب أداة تثبيت جانبي؛ هذا ليس رابط App Store.</small>
           </article>
 
-          <article class="downloads-device-card">
+          <article class="downloads-device-card plugin-card">
             <div class="downloads-device-card__meta"><span>Android · مجتمعي</span><span class="downloads-device-kind community">مجتمعي</span></div>
             <h3>Nuvio Reshaped Mobile</h3>
             <small class="downloads-device-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
@@ -442,12 +443,12 @@
         </div>
       </section>
 
-<section class="downloads-device-section" id="versions-desktop" aria-labelledby="versions-desktop-title">
+<section class="downloads-device-section" data-device-group="desktop" id="versions-desktop" hidden aria-labelledby="versions-desktop-title">
         <div class="downloads-group-heading">
           <div><span class="eyebrow">02 / DESKTOP</span><h3 id="versions-desktop-title">الكمبيوتر · Windows</h3><p>نسخ سطح المكتب المتاحة وروابط مشاريعها الأصلية.</p></div>
         </div>
-        <div class="downloads-device-grid">
-          <article class="downloads-device-card">
+        <div class="downloads-device-grid plugin-grid">
+          <article class="downloads-device-card plugin-card">
             <div class="downloads-device-card__meta"><span>Windows · مجتمعي</span><span class="downloads-device-kind community">مجتمعي</span></div>
             <h3>NuvioCodeineXO</h3>
             <small class="downloads-device-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
@@ -459,12 +460,12 @@
         </div>
       </section>
 
-<section class="downloads-device-section" id="versions-tv" aria-labelledby="versions-tv-title">
+<section class="downloads-device-section" data-device-group="tv" id="versions-tv" hidden aria-labelledby="versions-tv-title">
         <div class="downloads-group-heading">
           <div><span class="eyebrow">03 / ANDROID TV</span><h3 id="versions-tv-title">التلفزيون · Android TV وGoogle TV</h3><p>ملفات APK مباشرة للتلفزيون، مع اختيار المعمارية المناسبة.</p></div>
         </div>
-        <div class="downloads-device-grid">
-          <article class="downloads-device-card">
+        <div class="downloads-device-grid plugin-grid">
+          <article class="downloads-device-card plugin-card">
             <div class="downloads-device-card__meta"><span>Android TV · رسمي</span><span class="downloads-device-kind official">رسمي</span></div>
             <h3>Nuvio TV</h3>
             <small class="downloads-device-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
@@ -476,7 +477,7 @@
             </div>
           </article>
 
-          <article class="downloads-device-card">
+          <article class="downloads-device-card plugin-card">
             <div class="downloads-device-card__meta"><span>Android TV · مجتمعي</span><span class="downloads-device-kind community">مجتمعي</span></div>
             <h3>Nuvio Arc</h3>
             <small class="downloads-device-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
@@ -488,7 +489,7 @@
             <small>مشروع مجتمعي مستقل؛ لا ترسل مشكلاته إلى دعم التطبيق الرسمي.</small>
           </article>
 
-          <article class="downloads-device-card">
+          <article class="downloads-device-card plugin-card">
             <div class="downloads-device-card__meta"><span>Android TV · مجتمعي</span><span class="downloads-device-kind community">مجتمعي</span></div>
             <h3>NuvioTV-Lite</h3>
             <small class="downloads-device-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
@@ -501,7 +502,7 @@
             <small>تعطّل هذه النسخة JavaScript Plugins وبعض الوظائف؛ اقرأ التفاصيل قبل التثبيت.</small>
           </article>
 
-          <article class="downloads-device-card">
+          <article class="downloads-device-card plugin-card">
             <div class="downloads-device-card__meta"><span>Android TV · مجتمعي</span><span class="downloads-device-kind community">مجتمعي</span></div>
             <h3>Nuvio Reshaped TV</h3>
             <small class="downloads-device-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
@@ -515,7 +516,7 @@
 
           
 
-          <article class="downloads-device-card">
+          <article class="downloads-device-card plugin-card">
             <div class="downloads-device-card__meta"><span>Android TV / Android Box</span><span class="downloads-device-kind community">مجتمعي</span></div>
             <h3>Nuvio Native Legacy · Android</h3>
             <small class="downloads-device-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
@@ -529,13 +530,13 @@
         </div>
       </section>
 
-<section class="downloads-device-section" id="versions-smart-tv" aria-labelledby="versions-smart-tv-title">
+<section class="downloads-device-section" data-device-group="tv" id="versions-smart-tv" hidden aria-labelledby="versions-smart-tv-title">
         <div class="downloads-group-heading">
           <div><span class="eyebrow">04 / SMART TV</span><h3 id="versions-smart-tv-title">التلفزيونات الذكية · Samsung وLG</h3><p>روابط منفصلة حسب نظام التلفزيون ونوع حزمة التثبيت.</p></div>
         </div>
-        <div class="downloads-device-grid">
+        <div class="downloads-device-grid plugin-grid">
 
-          <article class="downloads-device-card">
+          <article class="downloads-device-card plugin-card">
             <div class="downloads-device-card__meta"><span>Samsung Tizen</span><span class="downloads-device-kind community">مجتمعي</span></div>
             <h3>Nuvio Native Legacy · Tizen</h3>
             <small class="downloads-device-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>
@@ -550,7 +551,7 @@
             <small>قد تتطلب ملفات TPK/WGT تفعيل وضع المطوّر وطريقة تثبيت خاصة بالتلفزيون.</small>
           </article>
 
-          <article class="downloads-device-card">
+          <article class="downloads-device-card plugin-card">
             <div class="downloads-device-card__meta"><span>LG webOS</span><span class="downloads-device-kind community">مجتمعي</span></div>
             <h3>Nuvio Native Legacy · webOS</h3>
             <small class="downloads-device-status" aria-live="polite">جارٍ فحص روابط الإصدار...</small>

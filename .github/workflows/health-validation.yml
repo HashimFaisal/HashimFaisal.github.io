@@ -89,7 +89,7 @@ jobs:
           if "buildNuvioPluginDeepLink" not in Path("app.js").read_text(encoding="utf-8"):
               raise SystemExit("Nuvio plugin deep-link handler is missing.")
           version_cards = re.findall(
-              r'<article class="downloads-device-card">(.*?)</article>',
+              r'<article class="[^"]*\bdownloads-device-card\b[^"]*">(.*?)</article>',
               html,
               re.S,
           )
@@ -110,11 +110,62 @@ jobs:
           downloads_html = html[downloads_start:downloads_end]
           if html.count('id="downloads"') != 1:
               raise SystemExit("Expected exactly one Downloads Center section.")
-          for device_id in ("versions-mobile", "versions-desktop", "versions-tv", "versions-smart-tv"):
-              if downloads_html.count(f'id="{device_id}"') != 1:
-                  raise SystemExit(f"Missing or duplicated device group: {device_id}")
-              if f'href="#{device_id}"' not in downloads_html:
-                  raise SystemExit(f"Device navigation does not target {device_id}.")
+          nav_match = re.search(
+              r'<div class="[^"]*downloads-device-nav[^"]*" id="downloads-device-nav"[^>]*>(.*?)</div>',
+              downloads_html,
+              re.S,
+          )
+          if not nav_match:
+              raise SystemExit("Downloads device navigation is missing.")
+          nav_buttons = re.findall(r'<button\b[^>]*data-download-device="([^"]+)"', nav_match.group(1))
+          expected_devices = {"mobile", "tv", "desktop"}
+          if len(nav_buttons) != 3 or set(nav_buttons) != expected_devices:
+              raise SystemExit(f"Expected exactly one navigation button per device, found: {nav_buttons}")
+
+          device_sections = re.findall(
+              r'<section class="downloads-device-section"([^>]*)>(.*?)</section>',
+              downloads_html,
+              re.S,
+          )
+          expected_groups = {
+              "versions-mobile": "mobile",
+              "versions-desktop": "desktop",
+              "versions-tv": "tv",
+              "versions-smart-tv": "tv",
+          }
+          found_groups = {}
+          for attributes, body in device_sections:
+              id_match = re.search(r'\bid="([^"]+)"', attributes)
+              group_match = re.search(r'\bdata-device-group="([^"]+)"', attributes)
+              if not id_match or not group_match:
+                  raise SystemExit("A device section is missing its ID or device-group mapping.")
+              section_id, group = id_match.group(1), group_match.group(1)
+              if section_id in found_groups:
+                  raise SystemExit(f"Duplicated device group: {section_id}")
+              found_groups[section_id] = group
+              if 'class="downloads-device-grid plugin-grid"' not in body:
+                  raise SystemExit(f"{section_id} does not use the shared plugin-grid card layout.")
+          if found_groups != expected_groups:
+              raise SystemExit(f"Device sections do not map to the expected devices: {found_groups}")
+
+          app_js = Path("app.js").read_text(encoding="utf-8")
+          handler_match = re.search(
+              r'function setDownloadsDevice\(device\)\s*\{(.*?)\n\}',
+              app_js,
+              re.S,
+          )
+          if not handler_match:
+              raise SystemExit("Downloads device switching handler is missing.")
+          handler = handler_match.group(1)
+          for required in (
+              "['mobile', 'tv', 'desktop']",
+              "button.dataset.downloadDevice === device",
+              "section.hidden = section.dataset.deviceGroup !== device",
+          ):
+              if required not in handler:
+                  raise SystemExit(f"Device switching handler is missing required behavior: {required}")
+          if "setDownloadsDevice(activeDownloadsDevice);" not in app_js:
+              raise SystemExit("Downloads device navigation does not initialize its active section.")
           legacy_classes = (
               'class="version-platform"', 'class="version-grid"', 'class="version-card"',
               'class="version-card-status"', 'class="version-download"',
@@ -125,7 +176,7 @@ jobs:
           if any(token in downloads_html for token in legacy_classes):
               raise SystemExit("Legacy Downloads Center components remain in the new section.")
           app_js = Path("app.js").read_text(encoding="utf-8")
-          if 'class="release-asset-card"' not in app_js:
+          if not re.search(r'class="[^"]*\brelease-asset-card\b[^"]*"', app_js):
               raise SystemExit("Dynamic release assets are not using the isolated component.")
           if "querySelectorAll('.downloads-device-card')" not in app_js:
               raise SystemExit("Device version status checks are not connected to the new cards.")

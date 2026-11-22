@@ -22,9 +22,9 @@ test.beforeEach(async ({ page }) => {
 
   await page.goto('/');
   await expect(page.locator('#nuvio-launch-grid .nuvio-launch-card')).toHaveCount(5);
-  await expect(page.locator('.plugin-card')).toHaveCount(20);
-  await expect(page.locator('.plugin-card h3', { hasText: /^Ratings$/ })).toHaveCount(0);
-  await expect(page.locator('.plugin-card h3', { hasText: /^Age Ratings$/ })).toHaveCount(0);
+  await expect(page.locator('#plugins .plugin-card')).toHaveCount(20);
+  await expect(page.locator('#plugins .plugin-card h3', { hasText: /^Ratings$/ })).toHaveCount(0);
+  await expect(page.locator('#plugins .plugin-card h3', { hasText: /^Age Ratings$/ })).toHaveCount(0);
 });
 
 test.afterEach(async ({ page }) => {
@@ -763,7 +763,8 @@ test('Nuvio downloads library has searchable platform filters and direct release
   await expect(page.locator('#downloads-filters [data-download-filter="android"]')).toBeVisible();
   await expect(page.locator('#downloads-filters [data-download-filter="ios"]')).toBeVisible();
   await expect(page.locator('#download-grid .release-asset-card')).toHaveCount(5);
-  await expect(page.locator('#download-grid .plugin-card')).toHaveCount(0);
+  // Download cards intentionally share the library's plugin-card visual class.
+  await expect(page.locator('#download-grid .plugin-card')).toHaveCount(5);
   const downloadColumns = await page.locator('#download-grid').evaluate(el =>
     getComputedStyle(el).gridTemplateColumns.trim().split(' ').filter(Boolean).length
   );
@@ -797,10 +798,12 @@ test('Nuvio downloads library has searchable platform filters and direct release
 test('Nuvio editions are separated by device and link directly to published installer assets', async ({ page }) => {
   await page.goto('/#downloads');
   await expect(page.locator('#downloads')).toBeVisible();
+
+  // Only the selected device group is visible; Android TV and Smart TV share TV.
   await expect(page.locator('#versions-mobile')).toBeVisible();
-  await expect(page.locator('#versions-tv')).toBeVisible();
-  await expect(page.locator('#versions-smart-tv')).toBeVisible();
-  await expect(page.locator('#versions-desktop')).toBeVisible();
+  await expect(page.locator('#versions-tv')).toBeHidden();
+  await expect(page.locator('#versions-smart-tv')).toBeHidden();
+  await expect(page.locator('#versions-desktop')).toBeHidden();
 
   await expect(page.locator('#versions-mobile .downloads-device-card')).toHaveCount(3);
   await expect(page.locator('#versions-tv .downloads-device-card')).toHaveCount(5);
@@ -809,18 +812,31 @@ test('Nuvio editions are separated by device and link directly to published inst
 
   await expect(page.locator('#versions-mobile a[href$="androidApp-full-arm64-v8a-release.apk"]')).toBeVisible();
   await expect(page.locator('#versions-mobile a[href$="nuvio-1.0.1-full-release.ipa"]')).toBeVisible();
+  await expect(page.locator('#versions-mobile a[href$="NuvioRS-1.1.0-beta.2-autosync.5-arm64.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-mobile a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+
+  await page.locator('#downloads-device-nav [data-download-device="tv"]').click();
+  await expect(page.locator('#versions-mobile')).toBeHidden();
+  await expect(page.locator('#versions-tv')).toBeVisible();
+  await expect(page.locator('#versions-smart-tv')).toBeVisible();
+  await expect(page.locator('#versions-desktop')).toBeHidden();
   await expect(page.locator('#versions-tv a[href$="app-full-universal-release.apk"]')).toBeVisible();
   await expect(page.locator('#versions-smart-tv a[href$=".wgt"]')).toBeVisible();
   await expect(page.locator('#versions-smart-tv a[href$=".ipk"]').first()).toBeVisible();
-  await expect(page.locator('#versions-mobile a[href$="NuvioRS-1.1.0-beta.2-autosync.5-arm64.apk"]')).toBeVisible();
   await expect(page.locator('#versions-tv a[href$="NuvioRS-TV-1.2.0-beta.3-tester.2-arm32.apk"]')).toBeVisible();
-  await expect(page.locator('#versions-desktop a[href$="NuvioCodeineXO-v6.1.5.exe"]')).toBeVisible();
-  await expect(page.locator('#versions-mobile a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
   await expect(page.locator('#versions-tv a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+  await expect(page.locator('#versions-smart-tv a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+
+  await page.locator('#downloads-device-nav [data-download-device="desktop"]').click();
+  await expect(page.locator('#versions-mobile')).toBeHidden();
+  await expect(page.locator('#versions-tv')).toBeHidden();
+  await expect(page.locator('#versions-smart-tv')).toBeHidden();
+  await expect(page.locator('#versions-desktop')).toBeVisible();
+  await expect(page.locator('#versions-desktop a[href$="NuvioCodeineXO-v6.1.5.exe"]')).toBeVisible();
   await expect(page.locator('#versions-desktop a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+
   await expect(page.locator('.downloads-device-section a.downloads-device-link.secondary')).toHaveCount(0);
   await expect(page.locator('.downloads-device-section a.version-source')).toHaveCount(0);
-  await expect(page.locator('#versions-smart-tv a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
   await expect(page.locator('.downloads-device-section a.downloads-device-link')).not.toHaveCount(0);
 
   await page.locator('#language-toggle').click();
