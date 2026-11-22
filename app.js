@@ -357,7 +357,10 @@ const translations = {
   'روابط التنزيل سليمة': 'Download links are healthy',
   'رابط تنزيل غير متاح': 'A download link is unavailable',
   'لا توجد روابط تنزيل مباشرة': 'No direct download links',
-  'فحص روابط التنزيل': 'Download link check',
+  'فحص روابط التنزيل': 'Download link check',,
+
+  "ربط نسخ Nuvio بالفحص الذكي والأخبار وأرقام الإصدارات": "Connected Nuvio editions to smart link checks, news, and version numbers",
+  "إضافة فحص مباشر لكل روابط APK وIPA وWGT وTPK وIPK وEXE في بطاقات نسخ Nuvio، وإظهار رقم الإصدار وحالة الروابط على كل بطاقة، مع دعم العربية والإنجليزية.": "Added live checks for every APK, IPA, WGT, TPK, IPK, and EXE link in Nuvio edition cards, displaying each version number and link status in Arabic and English.",
 };
 
 const reverseTranslations = Object.fromEntries(
