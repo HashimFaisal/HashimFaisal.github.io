@@ -113,7 +113,14 @@ const viewports = [
         const grid=document.querySelector('#download-grid');
         const cards=[...grid.querySelectorAll('.download-library-card')].filter(card=>!card.hidden);
         const columns=getComputedStyle(grid).gridTemplateColumns.split(' ').filter(Boolean).length;
-        return {ids,expectedIds,groupsCount:groups.length,overlaps,siblingOverlaps,cardCount:cards.length,columns,statusVisible:!document.querySelector('#status').hidden,legacyVersionsSection:!!document.querySelector('#versions')};
+        const mobileGroup=section.querySelector('#versions-mobile');
+        const mobileGrid=mobileGroup?.querySelector('.version-grid');
+        const latest=mobileGroup?.querySelector('.download-release-subsection');
+        const mobileGridRect=mobileGrid?.getBoundingClientRect(),latestRect=latest?.getBoundingClientRect(),gridRect=grid.getBoundingClientRect();
+        const latestReleaseOverlap=Boolean(mobileGridRect&&latestRect&&mobileGridRect.left<latestRect.right-1&&mobileGridRect.right>latestRect.left+1&&mobileGridRect.top<latestRect.bottom-1&&mobileGridRect.bottom>latestRect.top+1);
+        const cardsWithinGrid=cards.every(card=>{const r=card.getBoundingClientRect();return r.left>=gridRect.left-1&&r.right<=gridRect.right+1;});
+        const platformCardCounts=groups.map(group=>group.querySelectorAll('.version-card').length);
+        return {ids,expectedIds,groupsCount:groups.length,overlaps,siblingOverlaps,cardCount:cards.length,columns,statusVisible:!document.querySelector('#status').hidden,legacyVersionsSection:!!document.querySelector('#versions'),latestReleaseOverlap,cardsWithinGrid,platformCardCounts};
       });
       const expectedColumns = viewport.width <= 430 ? 1 : viewport.width <= 760 ? 2 : 3;
       if (downloadLayout.groupsCount !== 4 || JSON.stringify(downloadLayout.ids) !== JSON.stringify(downloadLayout.expectedIds)) failures.push(viewport.name + ': platform groups missing or out of order ' + JSON.stringify(downloadLayout.ids));
@@ -123,6 +130,9 @@ const viewports = [
       if (downloadLayout.columns !== expectedColumns) failures.push(viewport.name + ': latest-release grid expected ' + expectedColumns + ' columns, found ' + downloadLayout.columns);
       if (downloadLayout.statusVisible) failures.push(viewport.name + ': System Status appears in Downloads view');
       if (downloadLayout.legacyVersionsSection) failures.push(viewport.name + ': old versions section remains');
+      if (downloadLayout.latestReleaseOverlap) failures.push(viewport.name + ': latest release overlaps mobile editions');
+      if (!downloadLayout.cardsWithinGrid) failures.push(viewport.name + ': latest release card escapes grid');
+      if (JSON.stringify(downloadLayout.platformCardCounts) !== JSON.stringify([3,1,5,2])) failures.push(viewport.name + ': unexpected platform card counts ' + JSON.stringify(downloadLayout.platformCardCounts));
       await page.locator('#downloads .nuvio-view-back').click();
       const screenshot = path.join(outputDir, viewport.name + '.png');
       await page.screenshot({ path: screenshot, fullPage: true, animations: 'disabled' });
