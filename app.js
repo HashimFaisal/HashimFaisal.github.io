@@ -626,6 +626,13 @@ function installShareButtons() {
 
     const name = card.querySelector('h3')?.textContent.trim() || 'Nuvio';
     const manifestUrl = card.querySelector('.manifest-url')?.textContent.trim();
+    const actions = card.querySelector('.card-actions');
+
+    // Setup-only cards have external action links but no public manifest URL.
+    // Do not classify them as installable add-on cards: the shared card CSS
+    // intentionally hides default action links on installable cards.
+    if (!manifestUrl || !actions) return;
+
     const type = card.querySelector('.type-tag')?.classList.contains('external')
       ? 'stremio'
       : 'nuvio';
@@ -636,9 +643,7 @@ function installShareButtons() {
       ? buildNuvioPluginDeepLink(manifestUrl)
       : buildNuvioAddonDeepLink(manifestUrl);
 
-    const actions = card.querySelector('.card-actions');
-
-    if (!deepLink || !actions) return;
+    if (!deepLink) return;
 
     const button = document.createElement('button');
     button.type = 'button';
