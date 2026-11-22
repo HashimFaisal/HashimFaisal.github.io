@@ -321,22 +321,29 @@ def build_change_summary(events):
     }
 
 
-def normalize_resource_key(value):\n    """Create a stable comparison key without changing the displayed resource name."""\n    if not isinstance(value, str):\n        return ""\n    return " ".join(value.split()).casefold()\n\n\ndef build_risk_forecast(results, previous_report=None, history=None):
+def normalize_resource_key(value):
+    """Create a stable comparison key without changing the displayed resource name."""
+    if not isinstance(value, str):
+        return ""
+    return " ".join(value.split()).casefold()
+
+
+def build_risk_forecast(results, previous_report=None, history=None):
     """Score current evidence and compare it with the prior report to show risk trends."""
     previous_report = previous_report if isinstance(previous_report, dict) else {}
     history = history if isinstance(history, list) else []
     previous_checks_data = previous_report.get("checks")
     previous_checks_data = previous_checks_data if isinstance(previous_checks_data, list) else []
     previous_checks = {
-        item.get("name"): item for item in previous_checks_data
-        if isinstance(item, dict) and isinstance(item.get("name"), str) and item.get("name")
+        normalize_resource_key(item.get("name")): item for item in previous_checks_data
+        if isinstance(item, dict) and normalize_resource_key(item.get("name"))
     }
     previous_forecast = previous_report.get("risk_forecast")
     previous_risks_data = previous_forecast.get("risks") if isinstance(previous_forecast, dict) else []
     previous_risks_data = previous_risks_data if isinstance(previous_risks_data, list) else []
     previous_risks = {
-        item.get("resource"): item for item in previous_risks_data
-        if isinstance(item, dict) and isinstance(item.get("resource"), str) and item.get("resource")
+        normalize_resource_key(item.get("resource")): item for item in previous_risks_data
+        if isinstance(item, dict) and normalize_resource_key(item.get("resource"))
     }
     results = results if isinstance(results, list) else []
     failure_items = [item for item in results if isinstance(item, dict) and not item.get("ok")]
@@ -401,13 +408,13 @@ def normalize_resource_key(value):\n    """Create a stable comparison key withou
     def valid_prior_score(value):
         return isinstance(value, (int, float)) and not isinstance(value, bool) and 0 <= value <= 100
     comparable = {
-        risk["resource"]: previous_risks[normalize_resource_key(risk["resource"])]["score"]
+        normalize_resource_key(risk["resource"]): previous_risks[normalize_resource_key(risk["resource"])]["score"]
         for risk in risks
         if risk["resource"] in previous_risks
         and valid_prior_score(previous_risks[risk["resource"]].get("score"))
     }
     matched_previous_total = sum(comparable.values())
-    comparable_current_total = sum(risk["score"] for risk in risks if risk["resource"] in comparable)
+    comparable_current_total = sum(risk["score"] for risk in risks if normalize_resource_key(risk["resource"]) in comparable)
     for risk in risks:
         prior_risk = previous_risks.get(normalize_resource_key(risk["resource"]))
         raw_prior_score = prior_risk.get("score") if isinstance(prior_risk, dict) else None
