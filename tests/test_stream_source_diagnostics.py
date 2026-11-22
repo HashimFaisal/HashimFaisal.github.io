@@ -147,6 +147,23 @@ class StreamSourceDiagnosticsTests(unittest.TestCase):
         self.assertEqual(result["http_status"], 503)
         self.assertEqual(result["probe_stage"], "catalog_search")
 
+    def test_user_reported_runtime_evidence_is_separate_from_automated_checks(self):
+        evidence = check_links.build_user_reported_runtime_evidence()
+
+        self.assertEqual(evidence["evidence_type"], "user_report")
+        self.assertEqual(evidence["reported_at"], "2026-11-22")
+        self.assertIn("not an automated", evidence["note"])
+        by_name = {item["name"]: item for item in evidence["items"]}
+        self.assertEqual(by_name["CinemaBox"]["status"], "working")
+        self.assertEqual(by_name["CinemaBox"]["scope"], "Nuvio app runtime")
+        self.assertEqual(by_name["Cinemana"]["status"], "working")
+        self.assertEqual(
+            by_name["Cinemana"]["scope"],
+            "Nuvio app runtime / Earthlink network",
+        )
+        self.assertEqual(by_name["CinemaBox"]["source"], "user_confirmation")
+        self.assertEqual(by_name["Cinemana"]["source"], "user_confirmation")
+
     def test_all_in_one_checks_registry_and_sample_provider_files(self):
         manifest = {
             "scrapers": [
