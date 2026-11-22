@@ -6,8 +6,8 @@ ambiguous assets keep their existing URL and are reported for manual review.
 """
 from __future__ import annotations
 
+import json
 import re
-import sys
 from html import unescape
 from pathlib import Path
 from urllib.error import HTTPError, URLError
@@ -38,7 +38,7 @@ def fetch_latest_release(repository: str):
         headers=API_HEADERS,
     )
     with urlopen(request, timeout=25) as response:
-        releases = __import__("json").loads(response.read().decode("utf-8"))
+        releases = json.loads(response.read().decode("utf-8"))
     published = [
         item for item in releases
         if isinstance(item, dict) and not item.get("draft")
@@ -122,11 +122,11 @@ def select_asset(current_name: str, old_tag: str, assets: list[dict]):
 
 def sync_download_cards(document: str, release_loader=fetch_latest_release):
     card_pattern = re.compile(
-        r'(<article class="[^"]*\\bdownloads-device-card\\b[^"]*">)'
-        r'([\\s\\S]*?)(</article>)'
+        r'(<article class="[^"]*\bdownloads-device-card\b[^"]*">)'
+        r'([\s\S]*?)(</article>)'
     )
     link_pattern = re.compile(
-        r'(<a class="[^"]*\\bdownloads-device-link\\b[^"]*" href=")'
+        r'(<a class="[^"]*\bdownloads-device-link\b[^"]*" href=")'
         r'([^"]+)(">)'
     )
     releases = {}
@@ -137,7 +137,7 @@ def sync_download_cards(document: str, release_loader=fetch_latest_release):
     def update_card(match):
         nonlocal updated_links
         opening, body, closing = match.groups()
-        title_match = re.search(r"<h3>([\\s\\S]*?)</h3>", body)
+        title_match = re.search(r"<h3>([\s\S]*?)</h3>", body)
         title = unescape(re.sub(r"<[^>]+>", "", title_match.group(1))).strip() if title_match else "Unknown card"
         card_updates = []
 
@@ -169,7 +169,7 @@ def sync_download_cards(document: str, release_loader=fetch_latest_release):
         if title.startswith("Nuvio Enhanced ") and card_updates:
             latest_tag = card_updates[0][1]
             body = re.sub(
-                r"(<h3>)Nuvio Enhanced\\s+[^<]+(</h3>)",
+                r"(<h3>)Nuvio Enhanced\s+[^<]+(</h3>)",
                 lambda m: m.group(1) + "Nuvio Enhanced " + latest_tag + m.group(2),
                 body,
                 count=1,
