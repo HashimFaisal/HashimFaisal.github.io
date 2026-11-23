@@ -22,7 +22,7 @@ test.beforeEach(async ({ page }) => {
 
   await page.goto('/');
   await expect(page.locator('#nuvio-launch-grid .nuvio-launch-card')).toHaveCount(5);
-  await expect(page.locator('#plugins .plugin-card')).toHaveCount(33);
+  await expect(page.locator('#plugins .plugin-card')).toHaveCount(30);
   await expect(page.locator('#plugins .plugin-card h3', { hasText: /^Ratings$/ })).toHaveCount(0);
   await expect(page.locator('#plugins .plugin-card h3', { hasText: /^Age Ratings$/ })).toHaveCount(0);
 });
