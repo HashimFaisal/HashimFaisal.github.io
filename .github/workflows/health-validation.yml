@@ -151,10 +151,10 @@ jobs:
           if categories.count("catalog") != 9:
               raise SystemExit(f"Expected 9 catalog resources, found {categories.count('catalog')}")
           if categories.count("subtitles") != 7:
-              raise SystemExit(f"Expected 8 subtitle resources, found {categories.count('subtitles')}")
+              raise SystemExit(f"Expected 7 subtitle resources, found {categories.count('subtitles')}")
           required_new_resources = (
               "Subtitles: Extended", "RosettaSubs", "SubSense", "SubMaker",
-              "Pictorium", "Posters+", "ExtendedRatings (XRDB)", "TOP Posters",
+              "CouchPilot", "BetterPosters (btttr)", "Pictorium", "Posters+",
               "Reciperr", "StremList",
           )
           for name in required_new_resources:
