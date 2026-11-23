@@ -299,6 +299,7 @@ const translations = {
   'تاريخ النشر غير متاح': 'Publication date unavailable',
   'الإصدار': 'Version',
   'متاح': 'Available',
+  'صفحة الإعداد': 'Setup page',
   'الإصدار غير متاح': 'Version unavailable',
   'رابط Manifest شخصي جاهز للتثبيت': 'Personal Manifest ready to install',
   'متاح · الإصدار 0.0.15 · إعدادات اختيارية': 'Available · Version 0.0.15 · Optional settings',
@@ -822,7 +823,7 @@ function safeHttpsUrl(value) {
 
 function renderManifestStatuses(report) {
   const checks = Array.isArray(report?.checks) ? report.checks : [];
-  const manifests = checks.filter(item => item.type === 'manifest');
+  const manifests = checks.filter(item => ['manifest', 'setup'].includes(item.type));
 
   document.querySelectorAll('.card-status[data-check]').forEach(status => {
     const name = status.dataset.check;
@@ -872,17 +873,25 @@ function renderManifestStatuses(report) {
       }
     };
     const renderVersion = version => {
-      const versionLabel = version
-        ? `${t('الإصدار')} ${version}`
-        : t('الإصدار غير متاح');
-      const label = healthy
-        ? `${t('متاح')} · ${versionLabel}`
-        : `${t('فشل الفحص')} · ${versionLabel}`;
+      const label = item.type === 'setup'
+        ? (healthy
+          ? `${t('متاح')} · ${t('صفحة الإعداد')}`
+          : `${t('فشل الفحص')} · ${t('صفحة الإعداد')}`)
+        : (() => {
+          const versionLabel = version
+            ? `${t('الإصدار')} ${version}`
+            : t('الإصدار غير متاح');
+          return healthy
+            ? `${t('متاح')} · ${versionLabel}`
+            : `${t('فشل الفحص')} · ${versionLabel}`;
+        })();
       status.replaceChildren(indicator, document.createTextNode(label));
       renderSourceDetail();
     };
 
     renderVersion(item.version);
+
+    if (item.type !== 'manifest') return;
 
     const card = status.closest('.plugin-card');
     const manifestNode = card?.querySelector('.manifest-url');
@@ -1065,13 +1074,12 @@ async function loadStatus() {
     $('#health-detail').textContent =
       `${report.passed}/${report.total} ${t('فحوصات ناجحة')}`;
 
-    $('#addon-count').textContent =
-      (report.checks || []).filter(item => item.type === 'manifest').length;
-
     const checks = report.checks || [];
-    const manifests = checks.filter(item => item.type === 'manifest');
-    const healthyManifests = manifests.filter(item => item.ok);
-    const unhealthyManifests = manifests.filter(item => !item.ok);
+    const addonChecks = checks.filter(item => ['manifest', 'setup'].includes(item.type));
+    $('#addon-count').textContent = addonChecks.length;
+
+    const healthyManifests = addonChecks.filter(item => item.ok);
+    const unhealthyManifests = addonChecks.filter(item => !item.ok);
 
     $('#healthy-count').textContent = healthyManifests.length;
     $('#unhealthy-count').textContent = unhealthyManifests.length;
