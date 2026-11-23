@@ -33,8 +33,6 @@ MANIFESTS = {
     "Anime Kitsu": "https://anime-kitsu.strem.fun/manifest.json",
     "IMDb Ratings": "https://imdbratings.kgenovz.com/manifest.json",
     "BetterPosters for Nuvio": "https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json",
-    "StremList": "https://stremlist.com/manifest.json",
-    "Reciperr": "https://reciperr.app/manifest.json",
     "BetterPosters (btttr)": "https://btttr.cc/manifest.json",
     "SubMaker": "https://submaker.elfhosted.com/manifest.json",
     "SubSense": "https://subsense.nepiraw.com/manifest.json",
@@ -49,6 +47,8 @@ SETUP_PAGES = {
     "Posters+": "https://postersplus.slokker.cc/",
     "ExtendedRatings (XRDB)": "https://xrdb.elfhosted.com/configurator",
     "TOP Posters": "https://top-posters.com/addons",
+    "Reciperr": "https://reciperr.app/",
+    "StremList": "https://stremlist.com/",
 }
 
 
