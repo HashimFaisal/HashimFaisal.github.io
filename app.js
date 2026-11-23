@@ -423,6 +423,14 @@ const translations = {
   'الموقع والإعدادات ↗': 'Website & Settings ↗',
   'الإعداد والتخصيص ↗': 'Setup & Customization ↗',
   'الإعداد والخيارات ↗': 'Setup & Options ↗'
+  'تجميع ترجمات مع تنظيف النصوص وإضافة معلومات مرتبطة بالعناوين. رابط Manifest للتثبيت المباشر، ويمكن تعديل اللغات والخيارات من صفحة الإعداد.': 'Aggregates subtitles, cleans text, and adds title-related information. A direct-install Manifest is available, and languages and options can be adjusted on the setup page.',
+  'تجميع ترجمات متعددة اللغات من OpenSubtitles ومصادر أخرى؛ Manifest عام للتثبيت المباشر، والتخصيص اختياري.': 'Aggregates multilingual subtitles from OpenSubtitles and other sources. A public Manifest is available for direct installation, with optional customization.',
+  'يجمع الترجمات من عدة مصادر بالإعداد الافتراضي دون مفاتيح API شخصية؛ يمكن اختيار اللغات وإضافة مصادر اختيارية من صفحة الإعداد.': 'Aggregates subtitles from multiple sources by default without personal API keys. You can select languages and add optional sources on the setup page.',
+  'يجلب الترجمات دون ترجمة ذكية باستخدام مصادر لا تحتاج مفتاح API؛ الترجمة بالذكاء الاصطناعي تحتاج مفتاحاً اختيارياً. يمكن تخصيص الوضع من صفحة الإعداد.': 'Fetches subtitles from sources that do not require an API key, without AI translation. AI translation requires an optional key, and the mode can be customized on the setup page.',
+  'يجمع بيانات الأفلام والمسلسلات والأنمي من TMDB وTVDB وIMDb وAniList وMyAnimeList ومصادر أخرى. أنشئ إعدادك الخاص من صفحة المزود ثم ثبّته في Nuvio.': 'Aggregates movie, TV, and anime metadata from TMDB, TVDB, IMDb, AniList, MyAnimeList, and other sources. Create your own configuration on the provider page, then install it in Nuvio.',
+  'كتالوجات وبيانات اكتشاف إضافية من TMDB. أنشئ إعدادك الخاص من صفحة المزود ثم ثبّته في Nuvio.': 'Additional TMDB catalogs and discovery metadata. Create your own configuration on the provider page, then install it in Nuvio.',
+  'إعداد API ↗': 'Configure API ↗',
+  'يتطلب إعداد API': 'API setup required',
 };
 
 const reverseTranslations = Object.fromEntries(
