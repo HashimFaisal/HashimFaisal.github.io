@@ -132,7 +132,7 @@ test('all 28 monitored cards receive their published health status', async ({ pa
   await page.reload();
   await expect(page.locator('#health-state')).toHaveText('سليم');
   await expect(page.locator('#addon-count')).toHaveText('28');
-  await expect(page.locator('#plugins .plugin-card .card-status[data-check]')).toHaveCount(31);
+  await expect(page.locator('#plugins .plugin-card .card-status[data-check]')).toHaveCount(28);
   await expect.poll(() => page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
     nodes.every(node => !node.textContent.includes('جارٍ التحقق'))
   )).toBe(true);
