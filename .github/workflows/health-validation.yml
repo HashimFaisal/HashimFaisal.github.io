@@ -52,6 +52,32 @@ jobs:
           if failures:
               raise SystemExit(f"{len(failures)} official setup page(s) failed the live availability check.")
           PY
+      - name: Validate new public addon manifests live
+        run: |
+          python - <<'PY'
+          import sys
+          from concurrent.futures import ThreadPoolExecutor
+          sys.path.insert(0, "scripts")
+          import check_links
+
+          manifests = (
+              ("Subtitles: Extended", "https://popcorn-notes.lsoares.workers.dev/manifest.json"),
+              ("RosettaSubs", "https://rosettasubs.onrender.com/manifest.json"),
+              ("SubSense", "https://subsense.nepiraw.com/manifest.json"),
+              ("SubMaker", "https://submaker.elfhosted.com/manifest.json"),
+              ("BetterPosters (btttr)", "https://btttr.cc/manifest.json"),
+          )
+          with ThreadPoolExecutor(max_workers=len(manifests)) as executor:
+              results = list(executor.map(lambda item: check_links.check_manifest(*item), manifests))
+
+          for result in results:
+              state = "PASS" if result["ok"] else "FAIL"
+              print(f"{state}: {result['name']} · HTTP {result.get('http_status', '—')} · {result.get('error', '')}")
+
+          failures = [result for result in results if not result["ok"]]
+          if failures:
+              raise SystemExit(f"{len(failures)} public addon manifest(s) failed validation.")
+          PY
       - name: Validate resource categories and downloads center structure
         run: |
           python - <<'PY'
@@ -80,6 +106,11 @@ jobs:
                   raise SystemExit(f"Missing ratings/metadata resource: {name}")
           required_manifests = (
               "https://torrentio.strem.fun/manifest.json",
+              "https://popcorn-notes.lsoares.workers.dev/manifest.json",
+              "https://rosettasubs.onrender.com/manifest.json",
+              "https://subsense.nepiraw.com/manifest.json",
+              "https://submaker.elfhosted.com/manifest.json",
+              "https://btttr.cc/manifest.json",
           )
           for url in required_manifests:
               if url not in html:
@@ -111,10 +142,6 @@ jobs:
               "https://api.thesubtitledb.org/integrations/stremio/manifest.json",
               "https://subtitlevideo.com/stremio/en,ar/manifest.json",
               "https://www.subtitlevideo.com/stremio-subtitles-addon.php",
-              "https://popcorn-notes.lsoares.workers.dev/",
-              "https://rosettasubs.onrender.com/configure",
-              "https://subsense.nepiraw.com/configure",
-              "https://submaker.elfhosted.com/configure",
               "https://stremio-community-subtitles.top/",
           )
           for url in required_subtitle_urls:
@@ -135,7 +162,6 @@ jobs:
                   raise SystemExit(f"Missing new NuvioHub resource: {name}")
           setup_urls = (
               "https://couchpilot.nl/",
-              "https://btttr.cc/configure",
               "https://pictorium.elfhosted.com/",
               "https://postersplus.slokker.cc/",
               "https://xrdb.elfhosted.com/configurator",

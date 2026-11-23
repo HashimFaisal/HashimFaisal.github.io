@@ -98,7 +98,7 @@ test('all 31 monitored cards receive their published health status', async ({ pa
   expect(names).toHaveLength(31);
   expect(new Set(names).size).toBe(31);
 
-  const setupNames = new Set(["Subtitles: Extended","RosettaSubs","SubSense","SubMaker","Stremio Community Subtitles","CouchPilot","BetterPosters (btttr)","Pictorium","Posters+","ExtendedRatings (XRDB)","TOP Posters","Reciperr","StremList"]);
+  const setupNames = new Set(["Stremio Community Subtitles","CouchPilot","Pictorium","Posters+","ExtendedRatings (XRDB)","TOP Posters","Reciperr","StremList"]);
   const checks = names.map(name => ({
     name,
     type: setupNames.has(name) ? 'setup' : 'manifest',
@@ -273,6 +273,28 @@ test('Torrentio manifest exposes a Nuvio install action and its configuration pa
   await expect(card.locator('.card-actions a').first()).toHaveAttribute('href', 'https://torrentio.strem.fun');
   await expect(card.locator('.card-actions a[href="' + manifest + '"]')).toHaveAttribute('href', manifest);
   await expect(card.locator('.share-btn')).toBeVisible();
+});
+
+test('verified no-key addon manifests expose direct Nuvio install actions', async ({ page }) => {
+  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  await expect(page.locator('#plugins')).toBeVisible();
+
+  const items = [
+    { name: 'Subtitles: Extended', url: 'https://popcorn-notes.lsoares.workers.dev/manifest.json' },
+    { name: 'RosettaSubs', url: 'https://rosettasubs.onrender.com/manifest.json' },
+    { name: 'SubSense', url: 'https://subsense.nepiraw.com/manifest.json' },
+    { name: 'SubMaker', url: 'https://submaker.elfhosted.com/manifest.json' },
+    { name: 'BetterPosters (btttr)', url: 'https://btttr.cc/manifest.json' }
+  ];
+
+  for (const item of items) {
+    const card = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: item.name }) });
+    await expect(card).toHaveCount(1);
+    await expect(card.locator('.manifest-url')).toHaveText(item.url);
+    await expect(card.locator('.share-btn')).toBeVisible();
+    await expect(card.locator('.share-btn')).toHaveText('تثبيت في Nuvio');
+    await expect(card.locator('.card-status')).toHaveAttribute('data-check', item.name);
+  }
 });
 
 test('personal metadata cards expose setup links without publishing per-user manifest URLs', async ({ page }) => {

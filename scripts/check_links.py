@@ -33,16 +33,16 @@ MANIFESTS = {
     "Anime Kitsu": "https://anime-kitsu.strem.fun/manifest.json",
     "IMDb Ratings": "https://imdbratings.kgenovz.com/manifest.json",
     "BetterPosters for Nuvio": "https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json",
+    "BetterPosters (btttr)": "https://btttr.cc/manifest.json",
+    "SubMaker": "https://submaker.elfhosted.com/manifest.json",
+    "SubSense": "https://subsense.nepiraw.com/manifest.json",
+    "RosettaSubs": "https://rosettasubs.onrender.com/manifest.json",
+    "Subtitles: Extended": "https://popcorn-notes.lsoares.workers.dev/manifest.json",
 }
  
 SETUP_PAGES = {
-    "Subtitles: Extended": "https://popcorn-notes.lsoares.workers.dev/",
-    "RosettaSubs": "https://rosettasubs.onrender.com/configure",
-    "SubSense": "https://subsense.nepiraw.com/configure",
-    "SubMaker": "https://submaker.elfhosted.com/configure",
     "Stremio Community Subtitles": "https://stremio-community-subtitles.top/",
     "CouchPilot": "https://couchpilot.nl/",
-    "BetterPosters (btttr)": "https://btttr.cc/configure",
     "Pictorium": "https://pictorium.elfhosted.com/",
     "Posters+": "https://postersplus.slokker.cc/",
     "ExtendedRatings (XRDB)": "https://xrdb.elfhosted.com/configurator",
