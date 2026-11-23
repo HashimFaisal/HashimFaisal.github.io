@@ -213,7 +213,7 @@ if categories.count("ratings") != 10:
 if categories.count("subtitles") != 7:
     fail(f"Expected 7 subtitle cards, found {categories.count('subtitles')}")
 if categories.count("catalog") != 9:
-    fail(f"Expected 10 catalog cards, found {categories.count('catalog')}")
+    fail(f"Expected 9 catalog cards, found {categories.count('catalog')}")
 
 if errors:
     print("\n".join("ERROR: " + item for item in errors))
