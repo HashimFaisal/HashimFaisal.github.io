@@ -68,6 +68,7 @@ jobs:
               ("BetterPosters (btttr)", "https://btttr.cc/manifest.json"),
               ("CouchPilot", "https://couchpilot.nl/manifest.json"),
               ("Pictorium", "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json"),
+              "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
           )
           with ThreadPoolExecutor(max_workers=len(manifests)) as executor:
               results = list(executor.map(lambda item: check_links.check_manifest(*item), manifests))
@@ -93,7 +94,7 @@ jobs:
           )
           filters = set(re.findall(r'data-filter="([^"]+)"', html))
           expected = {"nuvio", "catalog", "subtitles", "ratings"}
-          if len(categories) != 30 or set(categories) != expected:
+          if len(categories) != 31 or set(categories) != expected:
               raise SystemExit(f"Unexpected resource categories: {categories}")
           if filters != expected | {"all"}:
               raise SystemExit(f"Filters do not match categories: {filters}")
@@ -148,8 +149,8 @@ jobs:
           for url in required_subtitle_urls:
               if url not in html:
                   raise SystemExit(f"Missing subtitle setup URL: {url}")
-          if categories.count("catalog") != 9:
-              raise SystemExit(f"Expected 9 catalog resources, found {categories.count('catalog')}")
+          if categories.count("catalog") != 10:
+              raise SystemExit(f"Expected 10 catalog resources, found {categories.count('catalog')}")
           if categories.count("subtitles") != 7:
               raise SystemExit(f"Expected 7 subtitle resources, found {categories.count('subtitles')}")
           required_new_resources = (
@@ -164,7 +165,7 @@ jobs:
               "https://pictorium.elfhosted.com/",
               "https://postersplus.slokker.cc/",
               "https://reciperr.app/",
-              "https://stremlist.com/",
+
           )
           for url in setup_urls:
               if url not in html:
