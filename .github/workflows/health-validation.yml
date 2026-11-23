@@ -150,7 +150,7 @@ jobs:
               if url not in html:
                   raise SystemExit(f"Missing subtitle setup URL: {url}")
           if categories.count("catalog") != 9:
-              raise SystemExit(f"Expected 10 catalog resources, found {categories.count('catalog')}")
+              raise SystemExit(f"Expected 9 catalog resources, found {categories.count('catalog')}")
           if categories.count("subtitles") != 7:
               raise SystemExit(f"Expected 7 subtitle resources, found {categories.count('subtitles')}")
           required_new_resources = (
