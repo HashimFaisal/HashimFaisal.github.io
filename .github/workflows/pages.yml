@@ -45,6 +45,7 @@ jobs:
           cp premium-ui.css premium-ui.js public/
           cp touch-effects.css touch-effects.js public/
           cp downloads-redesign.css public/
+          cp robots.txt sitemap.xml public/
           cp data/status.json public/data/
           if [ -f data/changelog.json ]; then cp data/changelog.json public/data/; fi
           if [ -f data/updates.json ]; then cp data/updates.json public/data/; fi
