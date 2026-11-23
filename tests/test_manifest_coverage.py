@@ -23,7 +23,7 @@ class ManifestCoverageTests(unittest.TestCase):
             name = re.sub(r"<[^>]+>", "", match.group(2)).strip()
             card_names.append("OpenSubtitles" if name == "OpenSubtitles v3" else name)
 
-        self.assertEqual(len(card_names), 20, "Expected all 20 published plugin cards.")
+        self.assertEqual(len(card_names), 21, "Expected all 21 published plugin cards.")
         self.assertEqual(
             set(card_names) - {"AIOMetadata", "TMDB Discover+"},
             set(check_links.MANIFESTS),
