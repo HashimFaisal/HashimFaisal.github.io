@@ -45,8 +45,6 @@ MANIFESTS = {
 SETUP_PAGES = {
     "Stremio Community Subtitles": "https://stremio-community-subtitles.top/",
     "Posters+": "https://postersplus.slokker.cc/",
-    "ExtendedRatings (XRDB)": "https://xrdb.elfhosted.com/configurator",
-    "TOP Posters": "https://top-posters.com/addons",
     "Reciperr": "https://reciperr.app/",
     "StremList": "https://stremlist.com/",
 }
