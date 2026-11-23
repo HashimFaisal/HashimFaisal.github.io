@@ -317,7 +317,7 @@ def build_event_key(event):
     if not isinstance(event, dict):
         return None
     fields = (
-        "type", "channel", "source", "old_version", "new_version",
+        "date", "type", "channel", "source", "old_version", "new_version",
         "old_status", "new_status", "title",
     )
     return tuple(event_key_value(event.get(field)) for field in fields)
