@@ -1,11 +1,11 @@
 {
-  "checked_at": "2026-11-23T02:45:47.639063+00:00",
+  "checked_at": "2026-11-23T02:55:49.986092+00:00",
   "ok": true,
   "passed": 74,
   "total": 74,
   "manifest_coverage": {
-    "configured": 23,
-    "healthy": 23,
+    "configured": 24,
+    "healthy": 24,
     "failed": 0
   },
   "source_retrieval": {
@@ -922,6 +922,19 @@
       "recommended_action": "No action required."
     },
     {
+      "name": "CouchPilot",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "0.5.0",
+      "manifest_id": "community.couchpilot",
+      "url": "https://couchpilot.nl/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
       "name": "SubMaker",
       "type": "manifest",
       "ok": true,
@@ -980,18 +993,6 @@
       "http_status": 200,
       "page_title": "Welcome - Community Subtitles",
       "url": "https://stremio-community-subtitles.top/",
-      "failure_code": "healthy",
-      "failure_category": "healthy",
-      "severity": "info",
-      "recommended_action": "No action required."
-    },
-    {
-      "name": "CouchPilot",
-      "type": "setup",
-      "ok": true,
-      "http_status": 200,
-      "page_title": "Home · Couchpilot",
-      "url": "https://couchpilot.nl/",
       "failure_code": "healthy",
       "failure_category": "healthy",
       "severity": "info",
