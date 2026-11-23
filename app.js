@@ -649,9 +649,9 @@ function installShareButtons() {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'copy-btn share-btn';
-    const buttonLabel = type === 'nuvio'
+    const buttonLabel = card.dataset.shareLabel || (type === 'nuvio'
       ? t('ضغط للنسخ والفتح Nuvio')
-      : t('تثبيت في Nuvio');
+      : t('تثبيت في Nuvio'));
 
     button.textContent = buttonLabel;
     button.setAttribute('aria-label', `${buttonLabel} ${name}`);
