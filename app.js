@@ -422,7 +422,7 @@ const translations = {
   'تخصيص الملصقات وإضافة التقييمات والشارات وكتالوجات Trending؛ رابط Manifest مخصص بإعداداتك وجاهز للتثبيت المباشر في Nuvio.': 'Customize posters with ratings, badges, and Trending catalogs. Your configured Manifest URL is ready for direct installation in Nuvio.',
   'الموقع والإعدادات ↗': 'Website & Settings ↗',
   'الإعداد والتخصيص ↗': 'Setup & Customization ↗',
-  'الإعداد والخيارات ↗': 'Setup & Options ↗'
+  'الإعداد والخيارات ↗': 'Setup & Options ↗',
   'تجميع ترجمات مع تنظيف النصوص وإضافة معلومات مرتبطة بالعناوين. رابط Manifest للتثبيت المباشر، ويمكن تعديل اللغات والخيارات من صفحة الإعداد.': 'Aggregates subtitles, cleans text, and adds title-related information. A direct-install Manifest is available, and languages and options can be adjusted on the setup page.',
   'تجميع ترجمات متعددة اللغات من OpenSubtitles ومصادر أخرى؛ Manifest عام للتثبيت المباشر، والتخصيص اختياري.': 'Aggregates multilingual subtitles from OpenSubtitles and other sources. A public Manifest is available for direct installation, with optional customization.',
   'يجمع الترجمات من عدة مصادر بالإعداد الافتراضي دون مفاتيح API شخصية؛ يمكن اختيار اللغات وإضافة مصادر اختيارية من صفحة الإعداد.': 'Aggregates subtitles from multiple sources by default without personal API keys. You can select languages and add optional sources on the setup page.',
