@@ -43,7 +43,6 @@ MANIFESTS = {
 }
  
 SETUP_PAGES = {
-    "Stremio Community Subtitles": "https://stremio-community-subtitles.top/",
     "Posters+": "https://postersplus.slokker.cc/",
     "Reciperr": "https://reciperr.app/",
     "StremList": "https://stremlist.com/",
