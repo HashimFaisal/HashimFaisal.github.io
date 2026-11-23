@@ -23,15 +23,42 @@ class ManifestCoverageTests(unittest.TestCase):
             name = re.sub(r"<[^>]+>", "", match.group(2)).strip()
             card_names.append("OpenSubtitles" if name == "OpenSubtitles v3" else name)
 
-        self.assertEqual(len(card_names), 20, "Expected all 20 published plugin cards.")
+        self.assertEqual(len(card_names), 33, "Expected all 33 published plugin cards.")
+        setup_names = set(check_links.SETUP_PAGES)
+        manifest_card_names = set(card_names) - {"AIOMetadata", "TMDB Discover+"} - setup_names
         self.assertEqual(
-            set(card_names) - {"AIOMetadata", "TMDB Discover+"},
+            manifest_card_names,
             set(check_links.MANIFESTS),
-            "Every public-manifest card must have exactly one configured health check.",
+            "Every public-manifest card must have exactly one configured manifest health check.",
         )
+        self.assertEqual(
+            setup_names,
+            set(check_links.SETUP_PAGES),
+            "Every setup-only card must have exactly one official setup-page health check.",
+        )
+        for name in setup_names:
+            self.assertIn(f'data-check="{name}"', html, f"Missing visible health status for {name}.")
         self.assertNotIn("AIOMetadata", check_links.MANIFESTS)
         self.assertNotIn("TMDB Discover+", check_links.MANIFESTS)
         self.assertEqual(html.count("يتطلب إعداد API"), 2, "Both personal API cards must clearly require API setup.")
+
+    def test_setup_page_check_reports_page_health_without_claiming_a_manifest(self):
+        class FakeResponse:
+            status = 200
+            def __enter__(self):
+                return self
+            def __exit__(self, *args):
+                return False
+            def read(self, limit):
+                return b"<html><title>Example Setup</title></html>"
+
+        with patch.object(check_links, "fetch", return_value=FakeResponse()):
+            result = check_links.check_setup_page("Example Setup", "https://example.invalid/configure")
+
+        self.assertTrue(result["ok"])
+        self.assertEqual(result["type"], "setup")
+        self.assertEqual(result["page_title"], "Example Setup")
+        self.assertNotIn("version", result)
 
     def test_personal_manifest_urls_are_not_published(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
