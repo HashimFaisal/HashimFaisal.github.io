@@ -325,7 +325,7 @@ def build_event_key(event):
 
 def normalize_event_history(history, limit=100):
     """Discard non-object records and duplicate identities while preserving order."""
-    history = normalize_event_history(history)
+    history = history if isinstance(history, list) else []
     limit = limit if isinstance(limit, int) and not isinstance(limit, bool) and limit > 0 else 100
     seen = set()
     normalized = []
@@ -343,7 +343,7 @@ def normalize_event_history(history, limit=100):
 def build_risk_forecast(results, previous_report=None, history=None):
     """Score current evidence and compare it with the prior report to show risk trends."""
     previous_report = previous_report if isinstance(previous_report, dict) else {}
-    history = history if isinstance(history, list) else []
+    history = normalize_event_history(history)
     previous_checks_data = previous_report.get("checks")
     previous_checks_data = previous_checks_data if isinstance(previous_checks_data, list) else []
     previous_checks = {
