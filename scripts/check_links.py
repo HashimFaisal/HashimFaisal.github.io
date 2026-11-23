@@ -305,6 +305,27 @@ def build_change_summary(events):
     }
 
 
+def normalize_previous_report(report):
+    """Safely normalize persisted report sections before downstream access."""
+    if not isinstance(report, dict):
+        return {}
+    normalized = dict(report)
+    checks = normalized.get("checks")
+    normalized["checks"] = [item for item in checks if isinstance(item, dict)] if isinstance(checks, list) else []
+    for field in ("release", "stable_release"):
+        if not isinstance(normalized.get(field), dict):
+            normalized[field] = {}
+    forecast = normalized.get("risk_forecast")
+    if not isinstance(forecast, dict):
+        normalized["risk_forecast"] = {}
+    else:
+        forecast = dict(forecast)
+        risks = forecast.get("risks")
+        forecast["risks"] = [item for item in risks if isinstance(item, dict)] if isinstance(risks, list) else []
+        normalized["risk_forecast"] = forecast
+    return normalized
+
+
 def event_key_value(value):
     """Convert an event identity value into a stable, hashable representation."""
     if value is None or isinstance(value, (str, int, float, bool)):
@@ -801,7 +822,7 @@ def main():
 
     try:
         with open("data/status.json", "r", encoding="utf-8") as previous_file:
-            previous_report = json.load(previous_file)
+            previous_report = normalize_previous_report(json.load(previous_file))
     except (OSError, ValueError):
         previous_report = {}
 
@@ -816,9 +837,12 @@ def main():
         history = []
 
     old_manifests = {
-        item.get("name"): item
+        item["name"]: item
         for item in previous_report.get("checks", [])
-        if item.get("type") == "manifest"
+        if isinstance(item, dict)
+        and item.get("type") == "manifest"
+        and isinstance(item.get("name"), str)
+        and item.get("name")
     }
 
     now = datetime.now(timezone.utc).isoformat()
