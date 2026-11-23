@@ -284,7 +284,8 @@ test('verified no-key addon manifests expose direct Nuvio install actions', asyn
     { name: 'RosettaSubs', url: 'https://rosettasubs.onrender.com/manifest.json' },
     { name: 'SubSense', url: 'https://subsense.nepiraw.com/manifest.json' },
     { name: 'SubMaker', url: 'https://submaker.elfhosted.com/manifest.json' },
-    { name: 'BetterPosters (btttr)', url: 'https://btttr.cc/manifest.json' }
+    { name: 'BetterPosters (btttr)', url: 'https://btttr.cc/manifest.json' },
+    { name: 'CouchPilot', url: 'https://couchpilot.nl/manifest.json' }
   ];
 
   for (const item of items) {
