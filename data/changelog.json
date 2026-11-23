@@ -302,5 +302,25 @@
     "source_url": "https://digok.github.io/nuvio-catalog/manifest.json",
     "old_version": "1.20261116.0901",
     "new_version": "1.20261123.0901"
+  },
+  {
+    "date": "2026-11-23T22:00:34.357153+00:00",
+    "type": "version",
+    "title": "تحديث إصدار Pictorium",
+    "detail": "من 1.28.1 إلى 1.28.2.",
+    "source": "Pictorium",
+    "source_url": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
+    "old_version": "1.28.1",
+    "new_version": "1.28.2"
+  },
+  {
+    "date": "2026-11-23T22:00:34.357153+00:00",
+    "type": "version",
+    "title": "تحديث إصدار Subtitles: Extended",
+    "detail": "من 0.26.6 إلى 0.27.0.",
+    "source": "Subtitles: Extended",
+    "source_url": "https://popcorn-notes.lsoares.workers.dev/manifest.json",
+    "old_version": "0.26.6",
+    "new_version": "0.27.0"
   }
 ]

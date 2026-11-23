@@ -1,5 +1,35 @@
 [
   {
+    "id": "addon:Pictorium:version:1.28.2",
+    "type": "addon",
+    "title": {
+      "ar": "تحديث Pictorium إلى الإصدار 1.28.2",
+      "en": "Pictorium updated to version 1.28.2"
+    },
+    "description": {
+      "ar": "تم تحديث الإصدار من 1.28.1 إلى 1.28.2.",
+      "en": "Updated from version 1.28.1 to 1.28.2."
+    },
+    "url": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
+    "publishedAt": "2026-11-23T22:00:34.357153Z",
+    "expiresAt": "2026-11-24T22:00:34.357153Z"
+  },
+  {
+    "id": "addon:Subtitles: Extended:version:0.27.0",
+    "type": "addon",
+    "title": {
+      "ar": "تحديث Subtitles: Extended إلى الإصدار 0.27.0",
+      "en": "Subtitles: Extended updated to version 0.27.0"
+    },
+    "description": {
+      "ar": "تم تحديث الإصدار من 0.26.6 إلى 0.27.0.",
+      "en": "Updated from version 0.26.6 to 0.27.0."
+    },
+    "url": "https://popcorn-notes.lsoares.workers.dev/manifest.json",
+    "publishedAt": "2026-11-23T22:00:34.357153Z",
+    "expiresAt": "2026-11-24T22:00:34.357153Z"
+  },
+  {
     "id": "app:download-release:nuviocodeinexo:codeineXO/NuvioCodeineXO:v6.1.6",
     "type": "app",
     "title": {
@@ -28,200 +58,5 @@
     "url": "https://digok.github.io/nuvio-catalog/manifest.json",
     "publishedAt": "2026-11-23T09:54:31.960745Z",
     "expiresAt": "2026-11-24T09:54:31.960745Z"
-  },
-  {
-    "id": "app:download-release:nuvio-enhanced:luqmanfadlli/NuvioMobile-Enhanced:1.1.0-beta.3",
-    "type": "app",
-    "title": {
-      "ar": "تحديث جديد لتطبيق Nuvio Enhanced: 1.1.0-beta.3",
-      "en": "New Nuvio Enhanced app release: 1.1.0-beta.3"
-    },
-    "description": {
-      "ar": "صدر إصدار تجريبي جديد من Nuvio Enhanced برقم 1.1.0-beta.3. اضغط للتفاصيل.",
-      "en": "A new Nuvio Enhanced beta release (1.1.0-beta.3) is available. Open the release notes for details."
-    },
-    "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/tag/1.1.0-beta.3",
-    "publishedAt": "2026-11-22T21:43:46.879687Z",
-    "expiresAt": "2026-11-23T21:43:46.879687Z"
-  },
-  {
-    "id": "app:download-release:nuvio-arc:ysosrs123/NuvioTV-Fork:1.2.0-arc.3",
-    "type": "app",
-    "title": {
-      "ar": "تحديث جديد لتطبيق Nuvio Arc: 1.2.0-arc.3",
-      "en": "New Nuvio Arc app release: 1.2.0-arc.3"
-    },
-    "description": {
-      "ar": "صدر إصدار جديد من Nuvio Arc برقم 1.2.0-arc.3. اضغط للتفاصيل.",
-      "en": "A new Nuvio Arc release (1.2.0-arc.3) is available. Open the release notes for details."
-    },
-    "url": "https://github.com/ysosrs123/NuvioTV-Fork/releases/tag/1.2.0-arc.3",
-    "publishedAt": "2026-11-22T21:43:46.879687Z",
-    "expiresAt": "2026-11-23T21:43:46.879687Z"
-  },
-  {
-    "id": "app:download-release:nuvio-reshaped-tv:DavidVamaiotu/NuvioTV-Reshaped:1.2.0-beta.3-autosync.3",
-    "type": "app",
-    "title": {
-      "ar": "تحديث جديد لتطبيق Nuvio Reshaped TV: 1.2.0-beta.3-autosync.3",
-      "en": "New Nuvio Reshaped TV app release: 1.2.0-beta.3-autosync.3"
-    },
-    "description": {
-      "ar": "صدر إصدار جديد من Nuvio Reshaped TV برقم 1.2.0-beta.3-autosync.3. اضغط للتفاصيل.",
-      "en": "A new Nuvio Reshaped TV release (1.2.0-beta.3-autosync.3) is available. Open the release notes for details."
-    },
-    "url": "https://github.com/DavidVamaiotu/NuvioTV-Reshaped/releases/tag/1.2.0-beta.3-autosync.3",
-    "publishedAt": "2026-11-22T21:43:46.879687Z",
-    "expiresAt": "2026-11-23T21:43:46.879687Z"
-  },
-  {
-    "id": "app:download-card-added:nuviocodeinexo",
-    "type": "app",
-    "title": {
-      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: NuvioCodeineXO",
-      "en": "New download option added: NuvioCodeineXO"
-    },
-    "description": {
-      "ar": "أُضيفت NuvioCodeineXO إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
-      "en": "NuvioCodeineXO has been added to the download center. Open the release page for downloads and release details."
-    },
-    "url": "https://github.com/codeineXO/NuvioCodeineXO/releases/tag/v6.1.5",
-    "publishedAt": "2026-11-22T21:27:49.598126Z",
-    "expiresAt": "2026-11-23T21:27:49.598126Z"
-  },
-  {
-    "id": "app:download-card-added:nuvio-tv",
-    "type": "app",
-    "title": {
-      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: Nuvio TV",
-      "en": "New download option added: Nuvio TV"
-    },
-    "description": {
-      "ar": "أُضيفت Nuvio TV إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
-      "en": "Nuvio TV has been added to the download center. Open the release page for downloads and release details."
-    },
-    "url": "https://github.com/NuvioMedia/NuvioTV/releases/tag/1.1.1",
-    "publishedAt": "2026-11-22T21:27:49.598126Z",
-    "expiresAt": "2026-11-23T21:27:49.598126Z"
-  },
-  {
-    "id": "app:download-card-added:nuvio-arc",
-    "type": "app",
-    "title": {
-      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: Nuvio Arc",
-      "en": "New download option added: Nuvio Arc"
-    },
-    "description": {
-      "ar": "أُضيفت Nuvio Arc إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
-      "en": "Nuvio Arc has been added to the download center. Open the release page for downloads and release details."
-    },
-    "url": "https://github.com/ysosrs123/NuvioTV-Fork/releases/tag/1.1.0-nt.stable",
-    "publishedAt": "2026-11-22T21:27:49.598126Z",
-    "expiresAt": "2026-11-23T21:27:49.598126Z"
-  },
-  {
-    "id": "app:download-card-added:nuviotv-lite",
-    "type": "app",
-    "title": {
-      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: NuvioTV-Lite",
-      "en": "New download option added: NuvioTV-Lite"
-    },
-    "description": {
-      "ar": "أُضيفت NuvioTV-Lite إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
-      "en": "NuvioTV-Lite has been added to the download center. Open the release page for downloads and release details."
-    },
-    "url": "https://github.com/hackerslash/NuvioTV-Lite/releases/tag/v2.4.6-lite",
-    "publishedAt": "2026-11-22T21:27:49.598126Z",
-    "expiresAt": "2026-11-23T21:27:49.598126Z"
-  },
-  {
-    "id": "app:download-card-added:nuvio-reshaped-tv",
-    "type": "app",
-    "title": {
-      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: Nuvio Reshaped TV",
-      "en": "New download option added: Nuvio Reshaped TV"
-    },
-    "description": {
-      "ar": "أُضيفت Nuvio Reshaped TV إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
-      "en": "Nuvio Reshaped TV has been added to the download center. Open the release page for downloads and release details."
-    },
-    "url": "https://github.com/DavidVamaiotu/NuvioTV-Reshaped/releases/tag/1.0.0-autosync.22",
-    "publishedAt": "2026-11-22T21:27:49.598126Z",
-    "expiresAt": "2026-11-23T21:27:49.598126Z"
-  },
-  {
-    "id": "app:download-card-added:nuvio-native-legacy-android",
-    "type": "app",
-    "title": {
-      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: Nuvio Native Legacy · Android",
-      "en": "New download option added: Nuvio Native Legacy · Android"
-    },
-    "description": {
-      "ar": "أُضيفت Nuvio Native Legacy · Android إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
-      "en": "Nuvio Native Legacy · Android has been added to the download center. Open the release page for downloads and release details."
-    },
-    "url": "https://github.com/iqui27/nuvio-native-legacy/releases/tag/v2.0.8",
-    "publishedAt": "2026-11-22T21:27:49.598126Z",
-    "expiresAt": "2026-11-23T21:27:49.598126Z"
-  },
-  {
-    "id": "app:download-card-added:nuvio-native-legacy-tizen",
-    "type": "app",
-    "title": {
-      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: Nuvio Native Legacy · Tizen",
-      "en": "New download option added: Nuvio Native Legacy · Tizen"
-    },
-    "description": {
-      "ar": "أُضيفت Nuvio Native Legacy · Tizen إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
-      "en": "Nuvio Native Legacy · Tizen has been added to the download center. Open the release page for downloads and release details."
-    },
-    "url": "https://github.com/iqui27/nuvio-native-legacy/releases/tag/v2.0.8",
-    "publishedAt": "2026-11-22T21:27:49.598126Z",
-    "expiresAt": "2026-11-23T21:27:49.598126Z"
-  },
-  {
-    "id": "app:download-card-added:nuvio-native-legacy-webos",
-    "type": "app",
-    "title": {
-      "ar": "إضافة نسخة جديدة إلى مركز التنزيلات: Nuvio Native Legacy · webOS",
-      "en": "New download option added: Nuvio Native Legacy · webOS"
-    },
-    "description": {
-      "ar": "أُضيفت Nuvio Native Legacy · webOS إلى مركز التنزيلات. اضغط لعرض ملفات التنزيل وتفاصيل الإصدار.",
-      "en": "Nuvio Native Legacy · webOS has been added to the download center. Open the release page for downloads and release details."
-    },
-    "url": "https://github.com/iqui27/nuvio-native-legacy/releases/tag/v2.0.8",
-    "publishedAt": "2026-11-22T21:27:49.598126Z",
-    "expiresAt": "2026-11-23T21:27:49.598126Z"
-  },
-  {
-    "id": "app:download-release:DavidVamaiotu/NuvioMobile-Reshaped:1.0.0-autosync.2",
-    "type": "app",
-    "title": {
-      "ar": "تحديث جديد لتطبيق Nuvio Reshaped Mobile: 1.0.0-autosync.2",
-      "en": "New Nuvio Reshaped Mobile app release: 1.0.0-autosync.2"
-    },
-    "description": {
-      "ar": "صدر إصدار جديد من Nuvio Reshaped Mobile برقم 1.0.0-autosync.2. اضغط للتفاصيل.",
-      "en": "A new Nuvio Reshaped Mobile release (1.0.0-autosync.2) is available. Open the release notes for details."
-    },
-    "url": "https://github.com/DavidVamaiotu/NuvioMobile-Reshaped/releases/tag/1.0.0-autosync.2",
-    "publishedAt": "2026-11-22T13:38:50.310329Z",
-    "expiresAt": "2026-11-23T13:38:50.310329Z"
-  },
-  {
-    "id": "addon:Nuvio Catalog:status:unavailable-to-available:2026-11-22T12:27:28.188068+00:00",
-    "type": "addon",
-    "title": {
-      "ar": "عاد المصدر للعمل: Nuvio Catalog",
-      "en": "Source is back online: Nuvio Catalog"
-    },
-    "description": {
-      "ar": "عاد Nuvio Catalog للاستجابة بنجاح بعد أن كان متعطلاً.",
-      "en": "Nuvio Catalog is responding successfully again after an outage."
-    },
-    "url": "https://catalog.nuvio.tv/manifest.json",
-    "publishedAt": "2026-11-22T12:27:28.188068Z",
-    "expiresAt": "2026-11-23T12:27:28.188068Z"
   }
 ]
