@@ -26,6 +26,7 @@ class ManifestCoverageTests(unittest.TestCase):
         self.assertEqual(len(card_names), 33, "Expected all 33 published plugin cards.")
         self.assertEqual(len(card_names), len(set(card_names)), "Duplicate addon cards detected.")
         setup_names = set(check_links.SETUP_PAGES)
+        self.assertEqual(len(setup_names), 13, "Expected 13 setup-page health checks.")
         manifest_card_names = set(card_names) - {"AIOMetadata", "TMDB Discover+"} - setup_names
         self.assertEqual(
             manifest_card_names,
@@ -37,8 +38,9 @@ class ManifestCoverageTests(unittest.TestCase):
             set(check_links.SETUP_PAGES),
             "Every setup-only card must have exactly one official setup-page health check.",
         )
-        for name in setup_names:
+        for name, url in check_links.SETUP_PAGES.items():
             self.assertIn(f'data-check="{name}"', html, f"Missing visible health status for {name}.")
+            self.assertIn(f'href="{url}"', html, f"Missing official setup link for {name}.")
         self.assertNotIn("AIOMetadata", check_links.MANIFESTS)
         self.assertNotIn("TMDB Discover+", check_links.MANIFESTS)
         self.assertEqual(html.count("يتطلب إعداد API"), 2, "Both personal API cards must clearly require API setup.")
