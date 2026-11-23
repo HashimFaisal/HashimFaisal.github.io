@@ -297,6 +297,10 @@ test('verified no-key addon manifests expose direct Nuvio install actions', asyn
     await expect(card.locator('.share-btn')).toHaveText('تثبيت في Nuvio');
     await expect(card.locator('.card-status')).toHaveAttribute('data-check', item.name);
   }
+
+  const installLabels = await page.locator('.plugin-card:not(.subdl-card) .share-btn').allTextContents();
+  expect(installLabels.length).toBeGreaterThan(0);
+  expect(installLabels.every(label => label === 'تثبيت في Nuvio')).toBe(true);
 });
 
 test('personal metadata cards expose setup links without publishing per-user manifest URLs', async ({ page }) => {
