@@ -135,7 +135,7 @@ for css_path in CSS_FILES:
 # Every repository SVG must be a reviewed, active Nuvio UI asset. Original
 # third-party raster logos and the NASA video retain their source colors.
 ACTIVE_ARTWORK = (
-    "hero.svg", "hashimfaisal-logo.svg", "all-in-one.svg", "cinemabox.svg", "cinemana.svg",
+    "hero.svg", "all-in-one.svg", "cinemabox.svg", "cinemana.svg",
     "opensubtitles.svg", "cinemeta.svg", "nuvio-catalog.svg", "izlemeli-catalog.svg",
 )
 repository_svg = {path.name for path in (ROOT / "assets").glob("*.svg")}
