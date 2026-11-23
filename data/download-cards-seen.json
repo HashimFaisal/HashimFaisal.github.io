@@ -17,6 +17,7 @@
     "app:download-release:nuvio-arc:ysosrs123/NuvioTV-Fork:1.2.0-arc.3",
     "app:download-release:nuvio-enhanced:luqmanfadlli/NuvioMobile-Enhanced:1.1.0-beta.3",
     "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.0.0-autosync.2",
-    "app:download-release:nuvio-reshaped-tv:DavidVamaiotu/NuvioTV-Reshaped:1.2.0-beta.3-autosync.3"
+    "app:download-release:nuvio-reshaped-tv:DavidVamaiotu/NuvioTV-Reshaped:1.2.0-beta.3-autosync.3",
+    "app:download-release:nuviocodeinexo:codeineXO/NuvioCodeineXO:v6.1.6"
   ]
 }

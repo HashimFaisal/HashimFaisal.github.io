@@ -1,5 +1,20 @@
 [
   {
+    "id": "app:download-release:nuviocodeinexo:codeineXO/NuvioCodeineXO:v6.1.6",
+    "type": "app",
+    "title": {
+      "ar": "تحديث جديد لتطبيق NuvioCodeineXO: v6.1.6",
+      "en": "New NuvioCodeineXO app release: v6.1.6"
+    },
+    "description": {
+      "ar": "صدر إصدار جديد من NuvioCodeineXO برقم v6.1.6. اضغط للتفاصيل.",
+      "en": "A new NuvioCodeineXO release (v6.1.6) is available. Open the release notes for details."
+    },
+    "url": "https://github.com/codeineXO/NuvioCodeineXO/releases/tag/v6.1.6",
+    "publishedAt": "2026-11-23T10:50:19.291101Z",
+    "expiresAt": "2026-11-24T10:50:19.291101Z"
+  },
+  {
     "id": "addon:Rodrigo's Catalog:version:1.20261123.0901",
     "type": "addon",
     "title": {
