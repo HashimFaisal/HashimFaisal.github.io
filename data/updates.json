@@ -1,5 +1,20 @@
 [
   {
+    "id": "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.2-autosync.6",
+    "type": "app",
+    "title": {
+      "ar": "تحديث جديد لتطبيق Nuvio Reshaped Mobile: 1.1.0-beta.2-autosync.6",
+      "en": "New Nuvio Reshaped Mobile app release: 1.1.0-beta.2-autosync.6"
+    },
+    "description": {
+      "ar": "صدر إصدار جديد من Nuvio Reshaped Mobile برقم 1.1.0-beta.2-autosync.6. اضغط للتفاصيل.",
+      "en": "A new Nuvio Reshaped Mobile release (1.1.0-beta.2-autosync.6) is available. Open the release notes for details."
+    },
+    "url": "https://github.com/DavidVamaiotu/NuvioMobile-Reshaped/releases/tag/1.1.0-beta.2-autosync.6",
+    "publishedAt": "2026-11-23T22:40:41.923409Z",
+    "expiresAt": "2026-11-24T22:40:41.923409Z"
+  },
+  {
     "id": "addon:Pictorium:version:1.28.2",
     "type": "addon",
     "title": {
