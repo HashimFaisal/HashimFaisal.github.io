@@ -22,6 +22,7 @@ MANIFESTS = {
     "OpenSubtitles": "https://opensubtitles-v3.strem.io/manifest.json",
     "TheSubtitleDB": "https://api.thesubtitledb.org/integrations/stremio/manifest.json",
     "SubtitleVideo": "https://subtitlevideo.com/stremio/en,ar/manifest.json",
+    "SubSense": "https://subsense.nepiraw.com/manifest.json",
     "Rodrigo's Catalog": "https://digok.github.io/nuvio-catalog/manifest.json",
     "Cinemeta": "https://v3-cinemeta.strem.io/manifest.json",
     "Nuvio Catalog": "https://catalog.nuvio.tv/manifest.json",
