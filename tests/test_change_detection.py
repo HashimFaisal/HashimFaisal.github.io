@@ -75,5 +75,37 @@ class ChangeSummaryTests(unittest.TestCase):
         self.assertEqual(summary["records_retained"], 0)
         self.assertEqual(summary["duplicate_records_discarded"], 0)
 
+    def test_previous_report_root_and_sections_are_normalized(self):
+        self.assertEqual(check_links.normalize_previous_report([]), {})
+        normalized = check_links.normalize_previous_report({
+            "checks": "not an array",
+            "release": "bad section",
+            "stable_release": None,
+            "risk_forecast": {"risks": "bad risks", "trend_summary": {"status": "baseline"}},
+        })
+        self.assertEqual(normalized["checks"], [])
+        self.assertEqual(normalized["release"], {})
+        self.assertEqual(normalized["stable_release"], {})
+        self.assertEqual(normalized["risk_forecast"]["risks"], [])
+        self.assertEqual(normalized["risk_forecast"]["trend_summary"]["status"], "baseline")
+
+    def test_previous_report_filters_non_objects_and_bad_names(self):
+        normalized = check_links.normalize_previous_report({
+            "checks": [
+                None,
+                {"type": "manifest", "name": ["unhashable"], "ok": False},
+                {"type": "manifest", "name": "Valid source", "ok": True},
+                {"type": "download", "name": "APK", "ok": True},
+            ],
+            "release": {},
+            "stable_release": {},
+        })
+        self.assertEqual(len(normalized["checks"]), 3)
+        safe_sources = {
+            item["name"]: item for item in normalized["checks
+            if item.get("type") == "manifest" and isinstance(item.get("name"), str) and item.get("name")
+        }
+        self.assertEqual(list(safe_sources), ["Valid source"])
+
 if __name__ == "__main__":
     unittest.main()
