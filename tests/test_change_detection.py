@@ -102,7 +102,7 @@ class ChangeSummaryTests(unittest.TestCase):
         })
         self.assertEqual(len(normalized["checks"]), 3)
         safe_sources = {
-            item["name"]: item for item in normalized["checks
+            item["name"]: item for item in normalized["checks"]
             if item.get("type") == "manifest" and isinstance(item.get("name"), str) and item.get("name")
         }
         self.assertEqual(list(safe_sources), ["Valid source"])
