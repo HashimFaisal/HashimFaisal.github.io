@@ -305,6 +305,41 @@ def build_change_summary(events):
     }
 
 
+def event_key_value(value):
+    """Convert an event identity value into a stable, hashable representation."""
+    if value is None or isinstance(value, (str, int, float, bool)):
+        return (type(value).__name__, json.dumps(value, ensure_ascii=False, sort_keys=True))
+    return (type(value).__name__, json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
+
+
+def build_event_key(event):
+    """Build a hash-safe identity for a change-history event."""
+    if not isinstance(event, dict):
+        return None
+    fields = (
+        "type", "channel", "source", "old_version", "new_version",
+        "old_status", "new_status", "title",
+    )
+    return tuple(event_key_value(event.get(field)) for field in fields)
+
+
+def normalize_event_history(history, limit=100):
+    """Discard non-object records and duplicate identities while preserving order."""
+    history = normalize_event_history(history)
+    limit = limit if isinstance(limit, int) and not isinstance(limit, bool) and limit > 0 else 100
+    seen = set()
+    normalized = []
+    for event in history:
+        if not isinstance(event, dict):
+            continue
+        key = build_event_key(event)
+        if key in seen:
+            continue
+        seen.add(key)
+        normalized.append(event)
+    return normalized[-limit:]
+
+
 def build_risk_forecast(results, previous_report=None, history=None):
     """Score current evidence and compare it with the prior report to show risk trends."""
     previous_report = previous_report if isinstance(previous_report, dict) else {}
@@ -751,7 +786,7 @@ def main():
         with open(history_path, "r", encoding="utf-8") as history_file:
             loaded = json.load(history_file)
             if isinstance(loaded, list):
-                history = loaded
+                history = normalize_event_history(loaded)
     except (OSError, ValueError):
         history = []
 
@@ -1020,30 +1055,18 @@ def main():
         json.dump(updates, updates_file, ensure_ascii=False, indent=2)
         updates_file.write("\n")
 
-    # Deduplicate repeated transitions by their stable event identity.
-    def event_key(event):
-        return (
-            event.get("type"),
-            event.get("channel"),
-            event.get("source"),
-            event.get("old_version"),
-            event.get("new_version"),
-            event.get("old_status"),
-            event.get("new_status"),
-            event.get("title"),
-        )
-
-    seen_events = {event_key(item) for item in history if isinstance(item, dict)}
+    # Deduplicate repeated transitions by their stable, hash-safe event identity.
+    seen_events = {build_event_key(item) for item in history if isinstance(item, dict)}
     unique_events = []
     for event in events:
-        key = event_key(event)
+        key = build_event_key(event)
         if key in seen_events:
             continue
         seen_events.add(key)
         unique_events.append(event)
 
     history.extend(unique_events)
-    history = history[-100:]
+    history = normalize_event_history(history)
     report["change_summary"] = build_change_summary(unique_events)
     report["change_count"] = len(unique_events)
     report["proactive_monitoring"] = build_proactive_alerts(report)
