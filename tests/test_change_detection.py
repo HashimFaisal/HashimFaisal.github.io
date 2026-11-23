@@ -57,5 +57,23 @@ class ChangeSummaryTests(unittest.TestCase):
         self.assertEqual(normalized[0]["source"], "5")
         self.assertEqual(normalized[-1]["source"], "104")
 
+    def test_history_quality_summary_reports_corruption_and_trimming(self):
+        events = [{"type": "status", "source": str(i), "new_status": "unavailable"} for i in range(105)]
+        events.extend([events[0], events[1], None, "invalid"])
+        summary = check_links.build_history_quality_summary(events, limit=100)
+        self.assertEqual(summary["status"], "normalized")
+        self.assertEqual(summary["records_read"], 109)
+        self.assertEqual(summary["invalid_records_discarded"], 2)
+        self.assertEqual(summary["duplicate_records_discarded"], 2)
+        self.assertEqual(summary["older_records_trimmed"], 5)
+        self.assertEqual(summary["records_retained"], 100)
+
+    def test_clean_history_quality_summary(self):
+        summary = check_links.build_history_quality_summary([])
+        self.assertEqual(summary["status"], "clean")
+        self.assertEqual(summary["records_read"], 0)
+        self.assertEqual(summary["records_retained"], 0)
+        self.assertEqual(summary["duplicate_records_discarded"], 0)
+
 if __name__ == "__main__":
     unittest.main()

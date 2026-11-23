@@ -340,6 +340,27 @@ def normalize_event_history(history, limit=100):
     return normalized[-limit:]
 
 
+def build_history_quality_summary(history, limit=100):
+    """Report how much persisted history was rejected, deduplicated, or trimmed."""
+    history = history if isinstance(history, list) else []
+    limit = limit if isinstance(limit, int) and not isinstance(limit, bool) and limit > 0 else 100
+    valid = [event for event in history if isinstance(event, dict)]
+    unique = normalize_event_history(valid, limit=max(1, len(valid)))
+    duplicates = len(valid) - len(unique)
+    trimmed = max(0, len(unique) - limit)
+    retained = min(len(unique), limit)
+    invalid = len(history) - len(valid)
+    return {
+        "status": "normalized" if invalid or duplicates or trimmed else "clean",
+        "records_read": len(history),
+        "invalid_records_discarded": invalid,
+        "duplicate_records_discarded": duplicates,
+        "older_records_trimmed": trimmed,
+        "records_retained": retained,
+        "limit": limit,
+    }
+
+
 def build_risk_forecast(results, previous_report=None, history=None):
     """Score current evidence and compare it with the prior report to show risk trends."""
     previous_report = previous_report if isinstance(previous_report, dict) else {}
@@ -775,6 +796,8 @@ def main():
     history_path = "data/changelog.json"
     previous_report = {}
     history = []
+    raw_history = []
+    history_quality = build_history_quality_summary(raw_history)
 
     try:
         with open("data/status.json", "r", encoding="utf-8") as previous_file:
@@ -786,7 +809,9 @@ def main():
         with open(history_path, "r", encoding="utf-8") as history_file:
             loaded = json.load(history_file)
             if isinstance(loaded, list):
-                history = normalize_event_history(loaded)
+                raw_history = loaded
+                history = normalize_event_history(raw_history)
+                history_quality = build_history_quality_summary(raw_history)
     except (OSError, ValueError):
         history = []
 
@@ -1065,8 +1090,13 @@ def main():
         seen_events.add(key)
         unique_events.append(event)
 
+    retained_before_additions = len(history)
     history.extend(unique_events)
     history = normalize_event_history(history)
+    history_quality["new_events_added"] = len(unique_events)
+    history_quality["final_retained_count"] = len(history)
+    history_quality["trimmed_during_current_run"] = max(0, retained_before_additions + len(unique_events) - 100)
+    report["history_quality"] = history_quality
     report["change_summary"] = build_change_summary(unique_events)
     report["change_count"] = len(unique_events)
     report["proactive_monitoring"] = build_proactive_alerts(report)
