@@ -40,12 +40,13 @@ MANIFESTS = {
     "SubSense": "https://subsense.nepiraw.com/manifest.json",
     "RosettaSubs": "https://rosettasubs.onrender.com/manifest.json",
     "Subtitles: Extended": "https://popcorn-notes.lsoares.workers.dev/manifest.json",
+    "StremList": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
 }
  
 SETUP_PAGES = {
     "Posters+": "https://postersplus.slokker.cc/",
     "Reciperr": "https://reciperr.app/",
-    "StremList": "https://stremlist.com/",
+
 }
 
 
