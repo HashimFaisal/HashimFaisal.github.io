@@ -26,7 +26,7 @@ class ManifestCoverageTests(unittest.TestCase):
         self.assertEqual(len(card_names), 33, "Expected all 33 published plugin cards.")
         self.assertEqual(len(card_names), len(set(card_names)), "Duplicate addon cards detected.")
         setup_names = set(check_links.SETUP_PAGES)
-        self.assertEqual(len(setup_names), 7, "Expected 7 setup-page health checks after promoting public manifests.")
+        self.assertEqual(len(setup_names), 6, "Expected 6 setup-page health checks after promoting configured Pictorium.")
         manifest_card_names = set(card_names) - {"AIOMetadata", "TMDB Discover+"} - setup_names
         self.assertEqual(
             manifest_card_names,
@@ -43,7 +43,7 @@ class ManifestCoverageTests(unittest.TestCase):
             self.assertIn(f'href="{url}"', html, f"Missing official setup link for {name}.")
         self.assertNotIn("AIOMetadata", check_links.MANIFESTS)
         self.assertNotIn("TMDB Discover+", check_links.MANIFESTS)
-        for name in ("Subtitles: Extended", "RosettaSubs", "SubSense", "SubMaker", "BetterPosters (btttr)", "CouchPilot"):
+        for name in ("Subtitles: Extended", "RosettaSubs", "SubSense", "SubMaker", "BetterPosters (btttr)", "CouchPilot", "Pictorium"):
             url = check_links.MANIFESTS[name]
             heading = html.index(f"<h3>{name}</h3>")
             card_start = html.rfind("<article", 0, heading)
@@ -52,8 +52,8 @@ class ManifestCoverageTests(unittest.TestCase):
             self.assertIn(f'<code class="manifest-url">{url}</code>', card)
             self.assertIn(f'data-copy="{url}"', card)
             self.assertIn(f'href="{url}"', card)
-        self.assertEqual(html.count("يتطلب إعداد API"), 4, "All required personal API cards must clearly require API setup.")
-        for name in ("Pictorium", "TOP Posters"):
+        self.assertEqual(html.count("يتطلب إعداد API"), 3, "All remaining personal API cards must clearly require API setup.")
+        for name in ("TOP Posters",):
             heading = html.index(f"<h3>{name}</h3>")
             card_start = html.rfind("<article", 0, heading)
             card_end = html.index("</article>", heading)
@@ -81,7 +81,7 @@ class ManifestCoverageTests(unittest.TestCase):
 
     def test_personal_manifest_urls_are_not_published(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
-        for name in ("AIOMetadata", "TMDB Discover+", "Pictorium", "TOP Posters"):
+        for name in ("AIOMetadata", "TMDB Discover+", "TOP Posters"):
             heading = html.index(f"<h3>{name}</h3>")
             card_start = html.rfind("<article", 0, heading)
             card_end = html.index("</article>", heading)
