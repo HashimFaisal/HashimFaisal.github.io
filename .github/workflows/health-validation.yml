@@ -30,6 +30,28 @@ jobs:
         run: |
           python -m py_compile scripts/check_links.py scripts/sync_download_releases.py
           python -m unittest discover -s tests -p 'test_release_sync.py' -v
+      - name: Check all official addon setup pages live
+        run: |
+          python - <<'PY'
+          import sys
+          from concurrent.futures import ThreadPoolExecutor
+          sys.path.insert(0, "scripts")
+          import check_links
+
+          with ThreadPoolExecutor(max_workers=4) as executor:
+              results = list(executor.map(
+                  lambda entry: check_links.check_setup_page(*entry),
+                  check_links.SETUP_PAGES.items(),
+              ))
+
+          for item in results:
+              state = "PASS" if item["ok"] else "FAIL"
+              print(f"{state}: {item['name']} · HTTP {item.get('http_status', '—')} · {item.get('error', '')}")
+
+          failures = [item for item in results if not item["ok"]]
+          if failures:
+              raise SystemExit(f"{len(failures)} official setup page(s) failed the live availability check.")
+          PY
       - name: Validate resource categories and downloads center structure
         run: |
           python - <<'PY'
