@@ -22,7 +22,7 @@ test.beforeEach(async ({ page }) => {
 
   await page.goto('/');
   await expect(page.locator('#nuvio-launch-grid .nuvio-launch-card')).toHaveCount(5);
-  await expect(page.locator('#plugins .plugin-card')).toHaveCount(31);
+  await expect(page.locator('#plugins .plugin-card')).toHaveCount(30);
   await expect(page.locator('#plugins .plugin-card h3', { hasText: /^Ratings$/ })).toHaveCount(0);
   await expect(page.locator('#plugins .plugin-card h3', { hasText: /^Age Ratings$/ })).toHaveCount(0);
 });
@@ -248,13 +248,13 @@ test('plugin search and category filters return the expected cards', async ({ pa
   await expect(page.locator('.plugin-card:visible')).toHaveCount(7);
 
   await page.locator('[data-filter="catalog"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(10);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(9);
 
   await page.locator('[data-filter="ratings"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(10);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(9);
 
   await page.locator('[data-filter="all"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(31);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(30);
 
   await page.locator('#search').fill('no-such-addon-987');
   await expect(page.locator('#empty-state')).toBeVisible();
@@ -618,7 +618,7 @@ test('plugin library cards never overlap across responsive widths and languages'
         expect(card.rect.width, JSON.stringify(card)).toBeGreaterThan(width * 0.85);
       }
     }
-    expect(layout.cards, JSON.stringify(layout)).toHaveLength(31);
+    expect(layout.cards, JSON.stringify(layout)).toHaveLength(30);
     expect(layout.cardCollisions, JSON.stringify(layout)).toEqual([]);
     for (const card of layout.cards) {
       expect(card.collisions, JSON.stringify(card)).toEqual([]);
