@@ -100,6 +100,8 @@ jobs:
                   raise SystemExit(f"Missing subtitle setup URL: {url}")
           if categories.count("catalog") != 9:
               raise SystemExit(f"Expected 9 catalog resources, found {categories.count('catalog')}")
+          if categories.count("subtitles") != 8:
+              raise SystemExit(f"Expected 8 subtitle resources, found {categories.count('subtitles')}")
           required_new_resources = (
               "Subtitles: Extended", "RosettaSubs", "SubSense", "SubMaker",
               "Stremio Community Subtitles", "CouchPilot", "BetterPosters (btttr)",
