@@ -291,6 +291,30 @@
     }
   });
 
+  document.addEventListener('nuvio:open-plugin', event => {
+    const name = String(event.detail?.name || '').trim();
+    if (!name) return;
+
+    const normalizeName = value => String(value || '').trim().toLocaleLowerCase();
+    const card = [...plugins.querySelectorAll('.plugin-card')].find(item =>
+      normalizeName(item.querySelector('h3')?.textContent) === normalizeName(name)
+    );
+    if (!card) return;
+
+    navigate('plugins');
+    requestAnimationFrame(() => {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.classList.add('changelog-target-highlight');
+      card.setAttribute('tabindex', '-1');
+      try {
+        card.focus({ preventScroll: true });
+      } catch {
+        card.focus();
+      }
+      window.setTimeout(() => card.classList.remove('changelog-target-highlight'), 2200);
+    });
+  });
+
   window.addEventListener('popstate', event => {
     const state = event.state || {};
     const hash = location.hash.slice(1);
