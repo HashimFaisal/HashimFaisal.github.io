@@ -98,7 +98,7 @@ test('all 31 monitored cards receive their published health status', async ({ pa
   expect(names).toHaveLength(31);
   expect(new Set(names).size).toBe(31);
 
-  const setupNames = new Set(["Stremio Community Subtitles","CouchPilot","Pictorium","Posters+","ExtendedRatings (XRDB)","TOP Posters","Reciperr","StremList"]);
+  const setupNames = new Set(["Stremio Community Subtitles","Pictorium","Posters+","ExtendedRatings (XRDB)","TOP Posters","Reciperr","StremList"]);
   const checks = names.map(name => ({
     name,
     type: setupNames.has(name) ? 'setup' : 'manifest',
@@ -284,7 +284,8 @@ test('verified no-key addon manifests expose direct Nuvio install actions', asyn
     { name: 'RosettaSubs', url: 'https://rosettasubs.onrender.com/manifest.json' },
     { name: 'SubSense', url: 'https://subsense.nepiraw.com/manifest.json' },
     { name: 'SubMaker', url: 'https://submaker.elfhosted.com/manifest.json' },
-    { name: 'BetterPosters (btttr)', url: 'https://btttr.cc/manifest.json' }
+    { name: 'BetterPosters (btttr)', url: 'https://btttr.cc/manifest.json' },
+    { name: 'CouchPilot', url: 'https://couchpilot.nl/manifest.json' }
   ];
 
   for (const item of items) {

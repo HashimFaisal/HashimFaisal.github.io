@@ -66,6 +66,7 @@ jobs:
               ("SubSense", "https://subsense.nepiraw.com/manifest.json"),
               ("SubMaker", "https://submaker.elfhosted.com/manifest.json"),
               ("BetterPosters (btttr)", "https://btttr.cc/manifest.json"),
+              ("CouchPilot", "https://couchpilot.nl/manifest.json"),
           )
           with ThreadPoolExecutor(max_workers=len(manifests)) as executor:
               results = list(executor.map(lambda item: check_links.check_manifest(*item), manifests))
@@ -161,7 +162,6 @@ jobs:
               if f"<h3>{name}</h3>" not in html:
                   raise SystemExit(f"Missing new NuvioHub resource: {name}")
           setup_urls = (
-              "https://couchpilot.nl/",
               "https://pictorium.elfhosted.com/",
               "https://postersplus.slokker.cc/",
               "https://xrdb.elfhosted.com/configurator",

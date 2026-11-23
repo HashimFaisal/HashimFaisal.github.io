@@ -34,6 +34,7 @@ MANIFESTS = {
     "IMDb Ratings": "https://imdbratings.kgenovz.com/manifest.json",
     "BetterPosters for Nuvio": "https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json",
     "BetterPosters (btttr)": "https://btttr.cc/manifest.json",
+    "CouchPilot": "https://couchpilot.nl/manifest.json",
     "SubMaker": "https://submaker.elfhosted.com/manifest.json",
     "SubSense": "https://subsense.nepiraw.com/manifest.json",
     "RosettaSubs": "https://rosettasubs.onrender.com/manifest.json",
@@ -42,7 +43,6 @@ MANIFESTS = {
  
 SETUP_PAGES = {
     "Stremio Community Subtitles": "https://stremio-community-subtitles.top/",
-    "CouchPilot": "https://couchpilot.nl/",
     "Pictorium": "https://pictorium.elfhosted.com/",
     "Posters+": "https://postersplus.slokker.cc/",
     "ExtendedRatings (XRDB)": "https://xrdb.elfhosted.com/configurator",
