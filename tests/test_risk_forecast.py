@@ -59,7 +59,10 @@ class RiskForecastTests(unittest.TestCase):
     def test_score_breakdown_and_confidence_are_explained(self):
         item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
         previous = {"checks": [{"name": "API", "ok": False}]}
-        history = [{"type": "status", "source": "API", "new_status": "unavailable"}] * 2
+        history = [
+            {"date": "2026-11-20T00:00:00Z", "type": "status", "source": "API", "old_status": "available", "new_status": "unavailable"},
+            {"date": "2026-11-21T00:00:00Z", "type": "status", "source": "API", "old_status": "available", "new_status": "unavailable"},
+        ]
         risk = check_links.build_risk_forecast([item], previous, history)["risks"][0]
         self.assertEqual(risk["score_breakdown"], {
             "current_failure": 45,
@@ -153,6 +156,30 @@ class RiskForecastTests(unittest.TestCase):
                 result = check_links.build_risk_forecast([item], previous, [])
                 self.assertEqual(result["risk_count"], 1)
                 self.assertEqual(result["risks"][0]["trend"], "new")
+
+    def test_duplicate_history_events_do_not_inflate_risk(self):
+        item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
+        event = {"type": "status", "source": "API", "new_status": "unavailable"}
+        result = check_links.build_risk_forecast([item], {}, [event, event, event])
+        risk = result["risks"][0]
+        self.assertEqual(risk["evidence_count"], 1)
+        self.assertEqual(risk["score_breakdown"]["outage_history"], 5)
+        self.assertEqual(risk["score"], 50)
+
+    def test_malformed_history_is_ignored_without_crashing(self):
+        item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
+        malformed = {"source": ["API"], "type": {"status": True}, "new_status": ["unavailable"]}
+        result = check_links.build_risk_forecast([item], {}, [None, "broken", malformed])
+        self.assertEqual(result["risk_count"], 1)
+        self.assertEqual(result["risks"][0]["evidence_count"], 0)
+        self.assertEqual(result["risks"][0]["score"], 45)
+
+    def test_distinct_dated_outages_are_preserved(self):
+        base = {"type": "status", "source": "API", "old_status": "available", "new_status": "unavailable"}
+        first = dict(base, date="2026-11-20T00:00:00Z")
+        second = dict(base, date="2026-11-21T00:00:00Z")
+        normalized = check_links.normalize_event_history([first, second])
+        self.assertEqual(len(normalized), 2)
 
 if __name__ == "__main__":
     unittest.main()
