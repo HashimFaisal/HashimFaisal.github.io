@@ -43,7 +43,14 @@ class ManifestCoverageTests(unittest.TestCase):
             self.assertIn(f'href="{url}"', html, f"Missing official setup link for {name}.")
         self.assertNotIn("AIOMetadata", check_links.MANIFESTS)
         self.assertNotIn("TMDB Discover+", check_links.MANIFESTS)
-        self.assertEqual(html.count("يتطلب إعداد API"), 2, "Both personal API cards must clearly require API setup.")
+        self.assertEqual(html.count("يتطلب إعداد API"), 4, "All required personal API cards must clearly require API setup.")
+        for name in ("CouchPilot", "Pictorium", "TOP Posters"):
+            heading = html.index(f"<h3>{name}</h3>")
+            card_start = html.rfind("<article", 0, heading)
+            card_end = html.index("</article>", heading)
+            card = html[card_start:card_end]
+            self.assertIn("setup-api-card", card, f"{name} must use the personal API setup card style.")
+            self.assertIn("إعداد API", card, f"{name} must link directly to its setup page.")
 
     def test_setup_page_check_reports_page_health_without_claiming_a_manifest(self):
         class FakeResponse:
@@ -65,7 +72,7 @@ class ManifestCoverageTests(unittest.TestCase):
 
     def test_personal_manifest_urls_are_not_published(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
-        for name in ("AIOMetadata", "TMDB Discover+"):
+        for name in ("AIOMetadata", "TMDB Discover+", "CouchPilot", "Pictorium", "TOP Posters"):
             heading = html.index(f"<h3>{name}</h3>")
             card_start = html.rfind("<article", 0, heading)
             card_end = html.index("</article>", heading)
