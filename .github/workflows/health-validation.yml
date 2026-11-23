@@ -80,6 +80,13 @@ jobs:
                   raise SystemExit(f"Missing ratings/metadata resource: {name}")
           required_manifests = (
               "https://torrentio.strem.fun/manifest.json",
+              "https://popcorn-notes.lsoares.workers.dev/manifest.json",
+              "https://rosettasubs.onrender.com/manifest.json",
+              "https://subsense.nepiraw.com/manifest.json",
+              "https://submaker.elfhosted.com/manifest.json",
+              "https://btttr.cc/manifest.json",
+              "https://reciperr.app/manifest.json",
+              "https://stremlist.com/manifest.json",
           )
           for url in required_manifests:
               if url not in html:
@@ -111,10 +118,6 @@ jobs:
               "https://api.thesubtitledb.org/integrations/stremio/manifest.json",
               "https://subtitlevideo.com/stremio/en,ar/manifest.json",
               "https://www.subtitlevideo.com/stremio-subtitles-addon.php",
-              "https://popcorn-notes.lsoares.workers.dev/",
-              "https://rosettasubs.onrender.com/configure",
-              "https://subsense.nepiraw.com/configure",
-              "https://submaker.elfhosted.com/configure",
               "https://stremio-community-subtitles.top/",
           )
           for url in required_subtitle_urls:
@@ -135,13 +138,10 @@ jobs:
                   raise SystemExit(f"Missing new NuvioHub resource: {name}")
           setup_urls = (
               "https://couchpilot.nl/",
-              "https://btttr.cc/configure",
               "https://pictorium.elfhosted.com/",
               "https://postersplus.slokker.cc/",
               "https://xrdb.elfhosted.com/configurator",
               "https://top-posters.com/addons",
-              "https://reciperr.app/",
-              "https://stremlist.com/",
           )
           for url in setup_urls:
               if url not in html:
