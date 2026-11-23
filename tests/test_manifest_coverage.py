@@ -52,7 +52,7 @@ class ManifestCoverageTests(unittest.TestCase):
             self.assertIn(f'<code class="manifest-url">{url}</code>', card)
             self.assertIn(f'data-copy="{url}"', card)
             self.assertIn(f'href="{url}"', card)
-        self.assertEqual(html.count("يتطلب إعداد API"), 3, "All remaining personal API cards must clearly require API setup.")
+        self.assertEqual(html.count("يتطلب إعداد API"), 2, "Both remaining personal API cards must clearly require API setup.")
 
     def test_setup_page_check_reports_page_health_without_claiming_a_manifest(self):
         class FakeResponse:
