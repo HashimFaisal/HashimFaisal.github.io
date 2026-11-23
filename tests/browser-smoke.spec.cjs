@@ -98,7 +98,7 @@ test('all 31 monitored cards receive their published health status', async ({ pa
   expect(names).toHaveLength(31);
   expect(new Set(names).size).toBe(31);
 
-  const setupNames = new Set(["Stremio Community Subtitles","CouchPilot","Pictorium","Posters+","ExtendedRatings (XRDB)","TOP Posters","Reciperr","StremList"]);
+  const setupNames = new Set(["Stremio Community Subtitles","Pictorium","Posters+","ExtendedRatings (XRDB)","TOP Posters","Reciperr","StremList"]);
   const checks = names.map(name => ({
     name,
     type: setupNames.has(name) ? 'setup' : 'manifest',
