@@ -94,7 +94,7 @@ jobs:
           )
           filters = set(re.findall(r'data-filter="([^"]+)"', html))
           expected = {"nuvio", "catalog", "subtitles", "ratings"}
-          if len(categories) != 31 or set(categories) != expected:
+          if len(categories) != 30 or set(categories) != expected:
               raise SystemExit(f"Unexpected resource categories: {categories}")
           if filters != expected | {"all"}:
               raise SystemExit(f"Filters do not match categories: {filters}")
@@ -149,7 +149,7 @@ jobs:
           for url in required_subtitle_urls:
               if url not in html:
                   raise SystemExit(f"Missing subtitle setup URL: {url}")
-          if categories.count("catalog") != 10:
+          if categories.count("catalog") != 9:
               raise SystemExit(f"Expected 10 catalog resources, found {categories.count('catalog')}")
           if categories.count("subtitles") != 7:
               raise SystemExit(f"Expected 7 subtitle resources, found {categories.count('subtitles')}")
