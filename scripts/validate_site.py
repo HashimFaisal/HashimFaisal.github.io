@@ -204,7 +204,7 @@ categories = []
 for match in __import__("re").finditer(r'<article class="plugin-card[^"]*" data-category="([^"]+)"', source):
     categories.append(match.group(1))
 filters = set(__import__("re").findall(r'data-filter="([^"]+)"', source))
-if len(categories) != 20 or set(categories) != expected:
+if len(categories) != 21 or set(categories) != expected:
     fail(f"Unexpected resource list/categories: {len(categories)} cards, {set(categories)}")
 if filters != expected | {"all"}:
     fail(f"Filter/category mismatch: {filters}")
