@@ -22,7 +22,7 @@ test.beforeEach(async ({ page }) => {
 
   await page.goto('/');
   await expect(page.locator('#nuvio-launch-grid .nuvio-launch-card')).toHaveCount(5);
-  await expect(page.locator('#plugins .plugin-card')).toHaveCount(20);
+  await expect(page.locator('#plugins .plugin-card')).toHaveCount(21);
   await expect(page.locator('#plugins .plugin-card h3', { hasText: /^Ratings$/ })).toHaveCount(0);
   await expect(page.locator('#plugins .plugin-card h3', { hasText: /^Age Ratings$/ })).toHaveCount(0);
 });
@@ -585,7 +585,7 @@ test('plugin library cards never overlap across responsive widths and languages'
         expect(card.rect.width, JSON.stringify(card)).toBeGreaterThan(width * 0.85);
       }
     }
-    expect(layout.cards, JSON.stringify(layout)).toHaveLength(20);
+    expect(layout.cards, JSON.stringify(layout)).toHaveLength(21);
     expect(layout.cardCollisions, JSON.stringify(layout)).toEqual([]);
     for (const card of layout.cards) {
       expect(card.collisions, JSON.stringify(card)).toEqual([]);
