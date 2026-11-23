@@ -1090,11 +1090,12 @@ def main():
         seen_events.add(key)
         unique_events.append(event)
 
+    retained_before_additions = len(history)
     history.extend(unique_events)
     history = normalize_event_history(history)
     history_quality["new_events_added"] = len(unique_events)
     history_quality["final_retained_count"] = len(history)
-    history_quality["trimmed_during_current_run"] = max(0, len(history) + len(unique_events) - 100)
+    history_quality["trimmed_during_current_run"] = max(0, retained_before_additions + len(unique_events) - 100)
     report["history_quality"] = history_quality
     report["change_summary"] = build_change_summary(unique_events)
     report["change_count"] = len(unique_events)
