@@ -52,6 +52,34 @@ jobs:
           if failures:
               raise SystemExit(f"{len(failures)} official setup page(s) failed the live availability check.")
           PY
+      - name: Validate new public addon manifests live
+        run: |
+          python - <<'PY'
+          import sys
+          from concurrent.futures import ThreadPoolExecutor
+          sys.path.insert(0, "scripts")
+          import check_links
+
+          manifests = (
+              ("Subtitles: Extended", "https://popcorn-notes.lsoares.workers.dev/manifest.json"),
+              ("RosettaSubs", "https://rosettasubs.onrender.com/manifest.json"),
+              ("SubSense", "https://subsense.nepiraw.com/manifest.json"),
+              ("SubMaker", "https://submaker.elfhosted.com/manifest.json"),
+              ("BetterPosters (btttr)", "https://btttr.cc/manifest.json"),
+              ("Reciperr", "https://reciperr.app/manifest.json"),
+              ("StremList", "https://stremlist.com/manifest.json"),
+          )
+          with ThreadPoolExecutor(max_workers=len(manifests)) as executor:
+              results = list(executor.map(lambda item: check_links.check_manifest(*item), manifests))
+
+          for result in results:
+              state = "PASS" if result["ok"] else "FAIL"
+              print(f"{state}: {result['name']} · HTTP {result.get('http_status', '—')} · {result.get('error', '')}")
+
+          failures = [result for result in results if not result["ok"]]
+          if failures:
+              raise SystemExit(f"{len(failures)} public addon manifest(s) failed validation.")
+          PY
       - name: Validate resource categories and downloads center structure
         run: |
           python - <<'PY'
