@@ -41,12 +41,11 @@ MANIFESTS = {
     "RosettaSubs": "https://rosettasubs.onrender.com/manifest.json",
     "Subtitles: Extended": "https://popcorn-notes.lsoares.workers.dev/manifest.json",
     "StremList": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
+    "Reciperr": "https://reciperr.app/api/nuvio/NBRjPd1RrZNpbNF5c7FMe0E8Ply5OkrG/manifest.json",
 }
  
 SETUP_PAGES = {
     "Posters+": "https://postersplus.slokker.cc/",
-    "Reciperr": "https://reciperr.app/",
-
 }
 
 
