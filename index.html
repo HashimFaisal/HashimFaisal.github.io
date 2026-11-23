@@ -111,6 +111,333 @@
     </section>
 
     <section class="stats-grid" id="status">
+      <article class="stat-card"><span>حالة الفحص</span><strong id="health-state" aria-live="polite" aria-atomic="true">—</strong><small id="health-detail"></small></article>
+      <article class="stat-card"><span>الإضافات المفحوصة</span><strong id="addon-count">—</strong><small>Manifest + setup pages</small></article>
+      <article class="stat-card"><span>أحدث إصدار</span><strong id="release-version">—</strong><small id="release-date">Nuvio Mobile</small></article>
+      <article class="stat-card"><span>ملفات التنزيل</span><strong id="download-count">—</strong><small>APK & IPA assets</small></article>
+
+      <article class="stat-card"><span>مصادر سليمة</span><strong id="healthy-count">—</strong><small>Manifest / setup page</small></article>
+      <article class="stat-card"><span>مصادر متعطلة</span><strong id="unhealthy-count">—</strong><small>تحتاج مراجعة</small></article>
+      <article class="stat-card">
+        <span>آخر فحص</span>
+        <strong id="last-checked">—</strong>
+        <small id="report-freshness" class="report-freshness" data-state="unknown"></small>
+      </article>
+
+    </section>
+
+    <section class="section" id="plugins">
+      <div class="section-heading">
+        <div><div class="eyebrow">01 / PLUGIN LIBRARY</div><h2>مكتبة الإضافات</h2><p>روابط Manifest واضحة، مع نسخ مباشر من نفس الصفحة.</p></div>
+        <span class="section-count" id="visible-count">20 RESOURCES</span>
+      </div>
+
+      <div class="toolbar">
+        <label class="search-box"><span>⌕</span><input id="search" type="search" placeholder="ابحث عن إضافة..." aria-label="ابحث عن إضافة" autocomplete="off"></label>
+        <div class="filters" id="filters">
+          <button class="filter active" data-filter="all" aria-pressed="true">الكل</button>
+          <button class="filter" data-filter="nuvio" aria-pressed="false">مصادر البث</button>
+          <button class="filter" data-filter="catalog" aria-pressed="false">الكتالوجات</button>
+          <button class="filter" data-filter="subtitles" aria-pressed="false">الترجمات</button>
+          <button class="filter" data-filter="ratings" aria-pressed="false">التقييمات والبيانات</button>
+        </div>
+      </div>
+
+      <div class="plugin-grid" id="plugin-grid">
+        <article class="plugin-card" data-category="nuvio">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="assets/cinemabox.png" alt="CinemaBox"><span class="type-tag">NUVIO</span></div>
+          <h3>CinemaBox</h3><p>إضافة مستقلة لمشاريع Nuvio.</p>
+          <p class="plugin-help">طريقة التثبيت: اضغط على زر «تثبيت في Nuvio»، ثم أكمل إضافة Manifest داخل التطبيق إذا طُلب منك ذلك.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json">نسخ الرابط</button><a href="https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="CinemaBox"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+
+        <article class="plugin-card" data-category="nuvio">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="assets/cinemana.png" alt="Cinemana"><span class="type-tag">NUVIO</span></div>
+          <h3>Cinemana</h3><p>مشروع إضافة مستقل ضمن مكتبة Nuvio.</p>
+          <p class="plugin-help">طريقة التثبيت: اضغط على زر «تثبيت في Nuvio»، ثم أكمل إضافة Manifest داخل التطبيق إذا طُلب منك ذلك.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json">نسخ الرابط</button><a href="https://raw.githubusercontent.com/HashimFaisal/Cinemana_NuvioPlugin/main/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="Cinemana"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+
+        <article class="plugin-card" data-category="nuvio">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="assets/all-in-one.svg" alt="ALL-IN-ONE"><span class="type-tag">NUVIO</span></div>
+          <h3>ALL-IN-ONE</h3>
+          <p>إضافة All-in-One لمشروع Nuvio من المستودع الأصلي.</p>
+          <p class="plugin-help">طريقة التثبيت: اضغط على زر «تثبيت في Nuvio»، ثم أكمل إضافة Manifest داخل التطبيق إذا طُلب منك ذلك.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/refs/heads/main/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/refs/heads/main/manifest.json">نسخ الرابط</button><a href="https://raw.githubusercontent.com/NuvioPlugin/All-in-One-Nuvio/refs/heads/main/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="ALL-IN-ONE"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="assets/opensubtitles.svg" alt="OpenSubtitles"><span class="type-tag external">الترجمات</span></div>
+          <h3>OpenSubtitles v3</h3><p>إضافة رسمية للبحث عن ترجمات الأفلام والمسلسلات عبر Manifest عام مباشر، بدون إعداد رابط شخصي.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://opensubtitles-v3.strem.io/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://opensubtitles-v3.strem.io/manifest.json">نسخ الرابط</button><a href="https://opensubtitles-v3.strem.io/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="OpenSubtitles"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%93%9A?style=google" alt="TheSubtitleDB"><span class="type-tag external">الترجمات</span></div>
+          <h3>TheSubtitleDB</h3><p>إضافة ترجمات للأفلام والمسلسلات. رابط Manifest عام مباشر؛ إعداد اللغات والخيارات الإضافية متاح من صفحة المزود.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://api.thesubtitledb.org/integrations/stremio/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://api.thesubtitledb.org/integrations/stremio/manifest.json">نسخ الرابط</button><a href="https://api.thesubtitledb.org/integrations/stremio/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="TheSubtitleDB"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%8C%90?style=google" alt="SubtitleVideo"><span class="type-tag external">الترجمات</span></div>
+          <h3>SubtitleVideo</h3>
+          <p>إضافة ترجمات متوافقة مع Nuvio، مضبوطة على اللغتين العربية والإنجليزية، وتجمع نتائج من عدة مزودين.</p>
+          <div class="manifest-label">MANIFEST URL · ENGLISH + ARABIC</div>
+          <code class="manifest-url">https://subtitlevideo.com/stremio/en,ar/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://subtitlevideo.com/stremio/en,ar/manifest.json">نسخ الرابط</button><a href="https://subtitlevideo.com/stremio/en,ar/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a><a href="https://www.subtitlevideo.com/stremio-subtitles-addon.php" target="_blank" rel="noopener">تعديل اللغات ↗</a></div>
+          <div class="card-status" data-check="SubtitleVideo"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%8C%90?style=google" alt="Subtitles: Extended"><span class="type-tag external">الترجمات</span></div>
+          <h3>Subtitles: Extended</h3>
+          <p>تجميع ترجمات مع تنظيف النصوص وإضافة معلومات مرتبطة بالعناوين. رابط Manifest للتثبيت المباشر، ويمكن تعديل اللغات والخيارات من صفحة الإعداد.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://popcorn-notes.lsoares.workers.dev/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://popcorn-notes.lsoares.workers.dev/manifest.json">نسخ الرابط</button><a href="https://popcorn-notes.lsoares.workers.dev/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a><a href="https://popcorn-notes.lsoares.workers.dev/" target="_blank" rel="noopener noreferrer">الإعداد والخيارات ↗</a></div>
+          <div class="card-status" data-check="Subtitles: Extended"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%93%9A?style=google" alt="RosettaSubs"><span class="type-tag external">الترجمات</span></div>
+          <h3>RosettaSubs</h3>
+          <p>تجميع ترجمات متعددة اللغات من OpenSubtitles ومصادر أخرى؛ Manifest عام للتثبيت المباشر، والتخصيص اختياري.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://rosettasubs.onrender.com/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://rosettasubs.onrender.com/manifest.json">نسخ الرابط</button><a href="https://rosettasubs.onrender.com/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a><a href="https://rosettasubs.onrender.com/configure" target="_blank" rel="noopener noreferrer">الإعداد والخيارات ↗</a></div>
+          <div class="card-status" data-check="RosettaSubs"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%92%AC?style=google" alt="SubSense"><span class="type-tag external">الترجمات</span></div>
+          <h3>SubSense</h3>
+          <p>يجمع الترجمات من عدة مصادر بالإعداد الافتراضي دون مفاتيح API شخصية؛ يمكن اختيار اللغات وإضافة مصادر اختيارية من صفحة الإعداد.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://subsense.nepiraw.com/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://subsense.nepiraw.com/manifest.json">نسخ الرابط</button><a href="https://subsense.nepiraw.com/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a><a href="https://subsense.nepiraw.com/configure" target="_blank" rel="noopener noreferrer">الإعداد والخيارات ↗</a></div>
+          <div class="card-status" data-check="SubSense"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%93%9D?style=google" alt="SubMaker"><span class="type-tag external">الترجمات</span></div>
+          <h3>SubMaker</h3>
+          <p>يجلب الترجمات دون ترجمة ذكية باستخدام مصادر لا تحتاج مفتاح API؛ الترجمة بالذكاء الاصطناعي تحتاج مفتاحاً اختيارياً. يمكن تخصيص الوضع من صفحة الإعداد.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://submaker.elfhosted.com/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://submaker.elfhosted.com/manifest.json">نسخ الرابط</button><a href="https://submaker.elfhosted.com/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a><a href="https://submaker.elfhosted.com/configure" target="_blank" rel="noopener noreferrer">الإعداد والخيارات ↗</a></div>
+          <div class="card-status" data-check="SubMaker"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%8C%8D?style=google" alt="Stremio Community Subtitles"><span class="type-tag external">الترجمات</span></div>
+          <h3>Stremio Community Subtitles</h3>
+          <p>ترجمات يشاركها المجتمع؛ يتطلب إنشاء حساب للحصول على رابط تثبيت شخصي.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://stremio-community-subtitles.top/" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="Stremio Community Subtitles"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://github.com/Digok.png" alt="Rodrigo Catalog"><span class="type-tag external">كتالوج</span></div>
+          <h3>Rodrigo's Catalog</h3><p>كتالوج لاكتشاف العناوين وبيانات الأفلام والمسلسلات، وليس مشغّل فيديو.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://digok.github.io/nuvio-catalog/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://digok.github.io/nuvio-catalog/manifest.json">نسخ الرابط</button><a href="https://digok.github.io/nuvio-catalog/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="Rodrigo's Catalog"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+
+
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="assets/cinemeta.svg" alt="Cinemeta"><span class="type-tag external">كتالوج</span></div>
+          <h3>Cinemeta</h3>
+          <p>مصدر بيانات الأفلام والمسلسلات. توافقه مع Nuvio يحتاج اختباراً.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://v3-cinemeta.strem.io/manifest.json</code>
+          <div class="card-actions">
+            <button class="copy-btn" data-copy="https://v3-cinemeta.strem.io/manifest.json">نسخ الرابط</button>
+            <a href="https://v3-cinemeta.strem.io/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a>
+          </div>
+          <div class="card-status" data-check="Cinemeta"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+
+
+
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="assets/nuvio-catalog.svg" alt="Nuvio Catalog"><span class="type-tag external">كتالوج</span></div>
+          <h3>Nuvio Catalog</h3>
+          <p>كتالوج لاكتشاف الأفلام والمسلسلات ضمن إضافة Nuvio Catalog.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://catalog.nuvio.tv/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://catalog.nuvio.tv/manifest.json">نسخ الرابط</button><a href="https://catalog.nuvio.tv/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="Nuvio Catalog"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://tmdb.elfhosted.com/logo.png" alt="The Movie Database Addon"><span class="type-tag external">كتالوج</span></div>
+          <h3>The Movie Database Addon</h3>
+          <p>كتالوج وبيانات للأفلام والمسلسلات من TMDB، مع خيارات للبحث والتصنيفات واللغات.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://tmdb.elfhosted.com/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://tmdb.elfhosted.com/manifest.json">نسخ الرابط</button><a href="https://tmdb.elfhosted.com/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="The Movie Database Addon"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="assets/izlemeli-catalog.svg" alt="İzlemeli Catalog"><span class="type-tag external">كتالوج</span></div>
+          <h3>İzlemeli Catalog</h3>
+          <p>كتالوج للأفلام والمسلسلات مع بيانات ومصادر إضافية.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://izlemeli.github.io/nuvio/en/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://izlemeli.github.io/nuvio/en/manifest.json">نسخ الرابط</button><a href="https://izlemeli.github.io/nuvio/en/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="İzlemeli Catalog"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://imdb-popular-stremio.vercel.app/logo.png" alt="IMDb Popular"><span class="type-tag external">كتالوج</span></div>
+          <h3>IMDb Popular</h3>
+          <p>كتالوج لاكتشاف العناوين الشعبية اعتماداً على IMDb.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://imdb-popular-stremio.vercel.app/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://imdb-popular-stremio.vercel.app/manifest.json">نسخ الرابط</button><a href="https://imdb-popular-stremio.vercel.app/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="IMDb Popular"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://mylistsaddon.com/icon.png" alt="My Lists"><span class="type-tag external">كتالوج</span></div>
+          <h3>My Lists</h3>
+          <p>كتالوجات لقوائمك الشخصية من TMDB وTrakt وMDBList، مع دعم الأفلام والمسلسلات.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://mylistsaddon.com/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://mylistsaddon.com/manifest.json">نسخ الرابط</button><a href="https://mylistsaddon.com/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="My Lists"><i></i> <span data-i18n="الإصدار">الإصدار</span> 1.5.8</div>
+        </article>
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%8E%AC?style=google" alt="Reciperr"><span class="type-tag external">قوائم وكتالوجات</span></div>
+          <h3>Reciperr</h3>
+          <p>قوائم أفلام ومسلسلات تساعدك على اكتشاف عناوين جديدة؛ افتح الموقع لمعرفة طريقة إنشاء رابط التثبيت الخاص بك.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://reciperr.app/" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="Reciperr"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%93%8B?style=google" alt="StremList"><span class="type-tag external">قوائم وكتالوجات</span></div>
+          <h3>StremList</h3>
+          <p>استيراد قوائم IMDb وTrakt وSimkl وMDBList؛ رابط Manifest العام لم يستجب بصيغة JSON في الفحص، لذلك افتح الموقع للحصول على رابط تثبيت صالح.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://stremlist.com/" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="StremList"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+
+        <article class="plugin-card" data-category="nuvio">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://torrentio.strem.fun/images/logo_v1.png" alt="Torrentio"><span class="type-tag" aria-label="Torrentio version 0.0.15">v0.0.15</span></div>
+          <h3>Torrentio</h3>
+          <p>يوفّر مصادر تشغيل للأفلام والمسلسلات والأنمي عبر مزودي تورنت متعددين. يمكن تخصيص مزودي المصادر وخدمات Debrid من صفحة الإعداد.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://torrentio.strem.fun/manifest.json</code>
+          <div class="card-actions"><a href="https://torrentio.strem.fun" target="_blank" rel="noopener noreferrer">إعداد Torrentio ↗</a><button class="copy-btn" data-copy="https://torrentio.strem.fun/manifest.json" type="button">نسخ الرابط</button><a href="https://torrentio.strem.fun/manifest.json" target="_blank" rel="noopener noreferrer">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="Torrentio"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%8E%AF?style=google" alt="Ratings Aggregator"><span class="type-tag external">التقييمات</span></div>
+          <h3>Ratings Aggregator</h3>
+          <p>يجمع تقييمات من IMDb وTMDB وMetacritic ومصادر أخرى. طريقة ظهور التقييمات داخل Nuvio تحتاج اختباراً.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://rating-aggregator.elfhosted.com/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://rating-aggregator.elfhosted.com/manifest.json">نسخ الرابط</button><a href="https://rating-aggregator.elfhosted.com/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="Ratings Aggregator"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+
+
+        <article class="plugin-card setup-api-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%A7%A0?style=google" alt="AIOMetadata"><span class="type-tag external">METADATA</span></div>
+          <h3>AIOMetadata</h3>
+          <p>يجمع بيانات الأفلام والمسلسلات والأنمي من TMDB وTVDB وIMDb وAniList وMyAnimeList ومصادر أخرى. أنشئ إعدادك الخاص من صفحة المزود ثم ثبّته في Nuvio.</p>
+          <div class="manifest-label">PERSONAL SETUP</div>
+          <div class="card-actions"><a class="copy-btn" href="https://aiometadata.elfhosted.com/configure" target="_blank" rel="noopener noreferrer">إعداد API ↗</a></div>
+          <div class="card-status" data-state="setup-required"><i></i> يتطلب إعداد API</div>
+        </article>
+        <article class="plugin-card setup-api-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://tmdb.elfhosted.com/logo.png" alt="TMDB Discover+"><span class="type-tag external">METADATA</span></div>
+          <h3>TMDB Discover+</h3>
+          <p>كتالوجات وبيانات اكتشاف إضافية من TMDB. أنشئ إعدادك الخاص من صفحة المزود ثم ثبّته في Nuvio.</p>
+          <div class="manifest-label">PERSONAL SETUP</div>
+          <div class="card-actions"><a class="copy-btn" href="https://tmdb-discover-plus.elfhosted.com/" target="_blank" rel="noopener noreferrer">إعداد API ↗</a></div>
+          <div class="card-status" data-state="setup-required"><i></i> يتطلب إعداد API</div>
+        </article>
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://i.imgur.com/7N6XGoO.png" alt="Anime Kitsu"><span class="type-tag external">ANIME DATA</span></div>
+          <h3>Anime Kitsu</h3>
+          <p>كتالوج وبيانات أنمي من Kitsu، مع قوائم الشائع والأعلى تقييماً والأنمي الجاري عرضه.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://anime-kitsu.strem.fun/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://anime-kitsu.strem.fun/manifest.json">نسخ الرابط</button><a href="https://anime-kitsu.strem.fun/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="Anime Kitsu"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://raw.githubusercontent.com/kgenovz/stremio-ratings-v3/main/logo.png" alt="IMDb Ratings"><span class="type-tag external">RATINGS</span></div>
+          <h3>IMDb Ratings</h3>
+          <p>يعرض تقييم IMDb للأفلام والمسلسلات والحلقات ضمن نتائج المصادر. لا يوفر كتالوجات مستقلة؛ يعتمد ظهوره على دعم Nuvio لمورد stream.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://imdbratings.kgenovz.com/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://imdbratings.kgenovz.com/manifest.json">نسخ الرابط</button><a href="https://imdbratings.kgenovz.com/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
+          <div class="card-status" data-check="IMDb Ratings"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://github.com/StrayBer.png" alt="BetterPosters for Nuvio"><span class="type-tag external">NUVIO METADATA</span></div>
+          <h3>BetterPosters for Nuvio</h3>
+          <p>يحسّن ملصقات Cinemeta ويضيف شارات التقييم والأنواع والاتجاهات والجودة والتصنيف العمري. الرابط الجاهز يغلّف Cinemeta فقط؛ عطّل Cinemeta الأصلي لتجنب تكرار الكتالوجات.</p>
+          <div class="manifest-label">MANIFEST URL · CINEMETA WRAPPER</div>
+          <code class="manifest-url">https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json">نسخ الرابط</button><a href="https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/configure" target="_blank" rel="noopener noreferrer">إعداد كتالوج آخر ↗</a></div>
+          <div class="card-status" data-check="BetterPosters for Nuvio"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%9B%8B%EF%B8%8F?style=google" alt="CouchPilot"><span class="type-tag external">بيانات وتوصيات</span></div>
+          <h3>CouchPilot</h3>
+          <p>كتالوجات وبيانات وصفية وتوصيات لـ Nuvio. يتوفر تثبيت سريع عام دون حساب أو مفتاح؛ مفتاح TMDB المجاني والذكاء الاصطناعي اختياريان للميزات الشخصية.</p>
+          <div class="manifest-label">MANIFEST URL · QUICK INSTALL</div>
+          <code class="manifest-url">https://couchpilot.nl/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://couchpilot.nl/manifest.json">نسخ الرابط</button><a href="https://couchpilot.nl/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a><a href="https://couchpilot.nl/" target="_blank" rel="noopener noreferrer">الإعداد والتخصيص ↗</a></div>
+          <div class="card-status" data-check="CouchPilot"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%96%BC%EF%B8%8F?style=google" alt="BetterPosters (btttr)"><span class="type-tag external">الملصقات</span></div>
+          <h3>BetterPosters (btttr)</h3>
+          <p>ملصقات ذكية وكتالوجات عامة؛ Manifest للتثبيت المباشر، ويمكن تخصيص القوائم وربط الحسابات من صفحة الإعداد.</p>
+          <div class="manifest-label">MANIFEST URL</div>
+          <code class="manifest-url">https://btttr.cc/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://btttr.cc/manifest.json">نسخ الرابط</button><a href="https://btttr.cc/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a><a href="https://btttr.cc/configure" target="_blank" rel="noopener noreferrer">الإعداد والخيارات ↗</a></div>
+          <div class="card-status" data-check="BetterPosters (btttr)"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="ratings" >
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%8E%A8?style=google" alt="Pictorium"><span class="type-tag external">الملصقات</span></div>
+          <h3>Pictorium</h3>
+          <p>إضافة ملصقات وكتالوجات Pictorium بإعدادات الشارات والتقييمات التي اخترتها؛ رابط Manifest مخصص وجاهز للتثبيت المباشر في Nuvio.</p>
+          <div class="manifest-label">MANIFEST URL · CUSTOM CONFIGURATION</div>
+          <code class="manifest-url">https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json">نسخ الرابط</button><a href="https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a><a href="https://pictorium.elfhosted.com/" target="_blank" rel="noopener noreferrer">الإعداد والخيارات ↗</a></div>
+          <div class="card-status" data-check="Pictorium"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%AA%84?style=google" alt="Posters+"><span class="type-tag external">الملصقات</span></div>
+          <h3>Posters+</h3>
+          <p>تخصيص الملصقات وإضافة التقييمات والشارات وكتالوجات Trending؛ رابط Manifest مخصص بإعداداتك وجاهز للتثبيت المباشر في Nuvio.</p>
+          <div class="manifest-label">MANIFEST URL · CUSTOM CONFIGURATION</div>
+          <code class="manifest-url">https://postersplus.slokker.cc/trending/cfg-cGM9c3RyZW1pb190dl9udXZpbyZ0Zz1tZWRpdW0mYnA9dG9wX2xlZnQmZnRpPTEmbXc9bGIlM0EuOTklMkN0ayUzQS4wMSZ0dz10ayUzQS44JTJDcnQlM0EuMiZmYnM9cGhvdG9yZWFsJnNscj0xLjIwJnNocj0wLjEzNSZiZG09NyZibXM9NSZzcD10cmVuZGluZyUyQ3RyZW5kaW5nX2Jyb2FkJl9zcD10cmVuZGluZyUyQ3RyZW5kaW5nX2Jyb2FkJmNnd3M9MQ/manifest.json</code>
+          <div class="card-actions"><button class="copy-btn" data-copy="https://postersplus.slokker.cc/trending/cfg-cGM9c3RyZW1pb190dl9udXZpbyZ0Zz1tZWRpdW0mYnA9dG9wX2xlZnQmZnRpPTEmbXc9bGIlM0EuOTklMkN0ayUzQS4wMSZ0dz10ayUzQS44JTJDcnQlM0EuMiZmYnM9cGhvdG9yZWFsJnNscj0xLjIwJnNocj0wLjEzNSZiZG09NyZibXM9NSZzcD10cmVuZGluZyUyQ3RyZW5kaW5nX2Jyb2FkJl9zcD10cmVuZGluZyUyQ3RyZW5kaW5nX2Jyb2FkJmNnd3M9MQ/manifest.json">نسخ الرابط</button><a href="https://postersplus.slokker.cc/trending/cfg-cGM9c3RyZW1pb190dl9udXZpbyZ0Zz1tZWRpdW0mYnA9dG9wX2xlZnQmZnRpPTEmbXc9bGIlM0EuOTklMkN0ayUzQS4wMSZ0dz10ayUzQS44JTJDcnQlM0EuMiZmYnM9cGhvdG9yZWFsJnNscj0xLjIwJnNocj0wLjEzNSZiZG09NyZibXM9NSZzcD10cmVuZGluZyUyQ3RyZW5kaW5nX2Jyb2FkJl9zcD10cmVuZGluZyUyQ3RyZW5kaW5nX2Jyb2FkJmNnd3M9MQ/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a><a href="https://postersplus.slokker.cc/" target="_blank" rel="noopener noreferrer">الإعداد والخيارات ↗</a></div>
+          <div class="card-status" data-check="Posters+"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        
+        
+
 </div>
       <div class="empty-state" id="empty-state" hidden>ما لقينا موارد تطابق بحثك.</div>
     </section>
