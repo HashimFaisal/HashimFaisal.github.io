@@ -251,7 +251,7 @@ test('plugin search and category filters return the expected cards', async ({ pa
   await expect(page.locator('.plugin-card:visible')).toHaveCount(9);
 
   await page.locator('[data-filter="ratings"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(9);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(10);
 
   await page.locator('[data-filter="all"]').click();
   await expect(page.locator('.plugin-card:visible')).toHaveCount(30);
