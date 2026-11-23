@@ -206,7 +206,7 @@ const translations = {
   'تحديث': 'Update',
   'نسخ الرابط': 'Copy Link',
   'تثبيت في Nuvio': 'Install in Nuvio',
-  'ضغط للنسخ والفتح Nuvio': 'Tap to copy and open Nuvio',
+  'ضغط للنسخ والفتح Nuvio': 'Install in Nuvio',
   'تم نسخ رابط المشاركة': 'Share link copied',
   'فتح Manifest ↗': 'Open Manifest ↗',
   'جارٍ التحقق': 'Checking',
@@ -455,9 +455,7 @@ function updateShareButtonLabels() {
     const isExternal = card.querySelector('.type-tag')?.classList.contains('external');
     const label = card.classList.contains('subdl-card')
       ? (currentLang === 'en' ? 'Click to get API' : 'اضغط للحصول على API')
-      : isExternal
-        ? t('تثبيت في Nuvio')
-        : t('ضغط للنسخ والفتح Nuvio');
+      : t('تثبيت في Nuvio');
 
     button.textContent = label;
     button.setAttribute('aria-label', `${label} ${name}`);
@@ -649,9 +647,7 @@ function installShareButtons() {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'copy-btn share-btn';
-    const buttonLabel = card.dataset.shareLabel || (type === 'nuvio'
-      ? t('ضغط للنسخ والفتح Nuvio')
-      : t('تثبيت في Nuvio'));
+    const buttonLabel = t('تثبيت في Nuvio');
 
     button.textContent = buttonLabel;
     button.setAttribute('aria-label', `${buttonLabel} ${name}`);
