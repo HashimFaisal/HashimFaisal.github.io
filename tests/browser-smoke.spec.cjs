@@ -131,7 +131,7 @@ test('all 28 monitored cards receive their published health status', async ({ pa
 
   await page.reload();
   await expect(page.locator('#health-state')).toHaveText('سليم');
-  await expect(page.locator('#addon-count')).toHaveText('31');
+  await expect(page.locator('#addon-count')).toHaveText('28');
   await expect(page.locator('#plugins .plugin-card .card-status[data-check]')).toHaveCount(31);
   await expect.poll(() => page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
     nodes.every(node => !node.textContent.includes('جارٍ التحقق'))
@@ -618,7 +618,7 @@ test('plugin library cards never overlap across responsive widths and languages'
         expect(card.rect.width, JSON.stringify(card)).toBeGreaterThan(width * 0.85);
       }
     }
-    expect(layout.cards, JSON.stringify(layout)).toHaveLength(33);
+    expect(layout.cards, JSON.stringify(layout)).toHaveLength(30);
     expect(layout.cardCollisions, JSON.stringify(layout)).toEqual([]);
     for (const card of layout.cards) {
       expect(card.collisions, JSON.stringify(card)).toEqual([]);
