@@ -91,12 +91,12 @@ test('all five dashboard destinations open and return to the dashboard', async (
 });
 
 
-test('all 30 monitored cards receive their published health status', async ({ page }) => {
+test('all 28 monitored cards receive their published health status', async ({ page }) => {
   const names = await page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
     nodes.map(node => node.dataset.check).filter(Boolean)
   );
-  expect(names).toHaveLength(30);
-  expect(new Set(names).size).toBe(30);
+  expect(names).toHaveLength(28);
+  expect(new Set(names).size).toBe(28);
 
   const setupNames = new Set(["Pictorium","Posters+","Reciperr","StremList"]);
   const checks = names.map(name => ({
@@ -245,16 +245,16 @@ test('plugin search and category filters return the expected cards', async ({ pa
   await expect(page.locator('.plugin-card:visible h3')).toContainText(['CinemaBox', 'Cinemana', 'ALL-IN-ONE', 'Torrentio']);
 
   await page.locator('[data-filter="subtitles"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(8);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(7);
 
   await page.locator('[data-filter="catalog"]').click();
   await expect(page.locator('.plugin-card:visible')).toHaveCount(9);
 
   await page.locator('[data-filter="ratings"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(12);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(10);
 
   await page.locator('[data-filter="all"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(33);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(30);
 
   await page.locator('#search').fill('no-such-addon-987');
   await expect(page.locator('#empty-state')).toBeVisible();
