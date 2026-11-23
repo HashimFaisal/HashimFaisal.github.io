@@ -1,11 +1,11 @@
 {
-  "checked_at": "2026-11-23T02:55:49.986092+00:00",
+  "checked_at": "2026-11-23T03:12:10.701780+00:00",
   "ok": true,
   "passed": 74,
   "total": 74,
   "manifest_coverage": {
-    "configured": 24,
-    "healthy": 24,
+    "configured": 25,
+    "healthy": 25,
     "failed": 0
   },
   "source_retrieval": {
@@ -935,6 +935,19 @@
       "recommended_action": "No action required."
     },
     {
+      "name": "Pictorium",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "1.28.1",
+      "manifest_id": "org.pictorium.3JC6nzYt",
+      "url": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
       "name": "SubMaker",
       "type": "manifest",
       "ok": true,
@@ -993,18 +1006,6 @@
       "http_status": 200,
       "page_title": "Welcome - Community Subtitles",
       "url": "https://stremio-community-subtitles.top/",
-      "failure_code": "healthy",
-      "failure_category": "healthy",
-      "severity": "info",
-      "recommended_action": "No action required."
-    },
-    {
-      "name": "Pictorium",
-      "type": "setup",
-      "ok": true,
-      "http_status": 200,
-      "page_title": "Pictorium — Generatore di poster per Stremio",
-      "url": "https://pictorium.elfhosted.com/",
       "failure_code": "healthy",
       "failure_category": "healthy",
       "severity": "info",
