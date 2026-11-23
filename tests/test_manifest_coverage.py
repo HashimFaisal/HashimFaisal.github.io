@@ -24,6 +24,7 @@ class ManifestCoverageTests(unittest.TestCase):
             card_names.append("OpenSubtitles" if name == "OpenSubtitles v3" else name)
 
         self.assertEqual(len(card_names), 33, "Expected all 33 published plugin cards.")
+        self.assertEqual(len(card_names), len(set(card_names)), "Duplicate addon cards detected.")
         setup_names = set(check_links.SETUP_PAGES)
         manifest_card_names = set(card_names) - {"AIOMetadata", "TMDB Discover+"} - setup_names
         self.assertEqual(
