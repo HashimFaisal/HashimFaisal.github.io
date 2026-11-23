@@ -305,6 +305,20 @@ def build_change_summary(events):
     }
 
 
+def parse_event_date(value, fallback=None):
+    """Parse event timestamps safely and return an aware UTC-compatible fallback."""
+    fallback = fallback if isinstance(fallback, datetime) else datetime.now(timezone.utc)
+    if not isinstance(value, str) or not value.strip():
+        return fallback
+    try:
+        parsed = datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
+    except (TypeError, ValueError, OverflowError):
+        return fallback
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=timezone.utc)
+    return parsed
+
+
 def normalize_previous_report(report):
     """Safely normalize persisted report sections before downstream access."""
     if not isinstance(report, dict):
@@ -1073,14 +1087,7 @@ def main():
         if update_id in known_ids:
             continue
 
-        try:
-            published = datetime.fromisoformat(
-                event.get("date", now).replace("Z", "+00:00")
-            )
-            if published.tzinfo is None:
-                published = published.replace(tzinfo=timezone.utc)
-        except (TypeError, ValueError):
-            published = now_dt
+        published = parse_event_date(event.get("date"), fallback=now_dt)
 
         expires = published + timedelta(hours=24)
         if expires <= now_dt:
