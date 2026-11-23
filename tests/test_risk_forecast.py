@@ -154,5 +154,22 @@ class RiskForecastTests(unittest.TestCase):
                 self.assertEqual(result["risk_count"], 1)
                 self.assertEqual(result["risks"][0]["trend"], "new")
 
+    def test_duplicate_history_events_do_not_inflate_risk(self):
+        item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
+        event = {"type": "status", "source": "API", "new_status": "unavailable"}
+        result = check_links.build_risk_forecast([item], {}, [event, event, event])
+        risk = result["risks"][0]
+        self.assertEqual(risk["evidence_count"], 1)
+        self.assertEqual(risk["score_breakdown"]["outage_history"], 5)
+        self.assertEqual(risk["score"], 50)
+
+    def test_malformed_history_is_ignored_without_crashing(self):
+        item = {"name": "API", "type": "manifest", "ok": False, "error": "timeout"}
+        malformed = {"source": ["API"], "type": {"status": True}, "new_status": ["unavailable"]}
+        result = check_links.build_risk_forecast([item], {}, [None, "broken", malformed])
+        self.assertEqual(result["risk_count"], 1)
+        self.assertEqual(result["risks"][0]["evidence_count"], 0)
+        self.assertEqual(result["risks"][0]["score"], 45)
+
 if __name__ == "__main__":
     unittest.main()
