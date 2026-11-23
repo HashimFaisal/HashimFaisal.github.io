@@ -29,5 +29,33 @@ class ChangeSummaryTests(unittest.TestCase):
         self.assertEqual(summary["by_type"], {"other": 1})
 
 
+    def test_history_discards_non_object_records_and_duplicates(self):
+        events = [
+            {"type": "status", "source": "A", "old_status": "available", "new_status": "unavailable"},
+            None,
+            "broken record",
+            {"type": "status", "source": "A", "old_status": "available", "new_status": "unavailable"},
+            {"type": "status", "source": "A", "old_status": "unavailable", "new_status": "available"},
+        ]
+        normalized = check_links.normalize_event_history(events)
+        self.assertEqual(len(normalized), 2)
+        self.assertEqual(normalized[0]["new_status"], "unavailable")
+        self.assertEqual(normalized[1]["new_status"], "available")
+
+    def test_history_event_identity_handles_unhashable_values(self):
+        malformed = {"type": ["status"], "source": {"name": "A"}, "new_status": ["unavailable"]}
+        key = check_links.build_event_key(malformed)
+        self.assertIsNotNone(key)
+        self.assertEqual(len({key}), 1)
+        normalized = check_links.normalize_event_history([malformed, malformed, {"bad": ["shape"]}, []])
+        self.assertEqual(len(normalized), 2)
+
+    def test_history_normalization_respects_limit(self):
+        events = [{"type": "status", "source": str(i), "new_status": "unavailable"} for i in range(105)]
+        normalized = check_links.normalize_event_history(events, limit=100)
+        self.assertEqual(len(normalized), 100)
+        self.assertEqual(normalized[0]["source"], "5")
+        self.assertEqual(normalized[-1]["source"], "104")
+
 if __name__ == "__main__":
     unittest.main()
