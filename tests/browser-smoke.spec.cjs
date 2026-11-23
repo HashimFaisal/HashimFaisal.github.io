@@ -1,268 +1,941 @@
-name: Health report validation
+const { test, expect } = require('@playwright/test');
 
-on:
-  pull_request:
+const runtimeErrors = new WeakMap();
 
-permissions:
-  contents: read
+test.beforeEach(async ({ page }) => {
+  runtimeErrors.set(page, []);
+  page.on('pageerror', error => runtimeErrors.get(page).push(error.message));
 
-jobs:
-  validate:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.x"
-      - name: Run unit regression suite
-        run: python -m unittest discover -s tests -v
-      - name: Install validation libraries
-        run: python -m pip install --disable-pip-version-check html5lib tinycss2
-      - name: Validate HTML, CSS, assets, and project data
-        run: python scripts/validate_site.py
-      - name: Validate JavaScript syntax
-        run: |
-          node --check app.js
-          node --check premium-ui.js
-      - name: Validate Python syntax and release sync tests
-        run: |
-          python -m py_compile scripts/check_links.py scripts/sync_download_releases.py
-          python -m unittest discover -s tests -p 'test_release_sync.py' -v
-      - name: Validate resource categories and downloads center structure
-        run: |
-          python - <<'PY'
-          import re
-          from pathlib import Path
+  await page.addInitScript(() => {
+    localStorage.setItem('nuvio-language', 'ar');
+  });
 
-          html = Path("index.html").read_text(encoding="utf-8")
-          categories = re.findall(
-              r'<article class="plugin-card[^"]*" data-category="([^"]+)"',
-              html,
-          )
-          filters = set(re.findall(r'data-filter="([^"]+)"', html))
-          expected = {"nuvio", "catalog", "subtitles", "ratings"}
-          if len(categories) != 21 or set(categories) != expected:
-              raise SystemExit(f"Unexpected resource categories: {categories}")
-          if filters != expected | {"all"}:
-              raise SystemExit(f"Filters do not match categories: {filters}")
-          if categories.count("ratings") != 6:
-              raise SystemExit(f"Expected 6 ratings/metadata resources, found {categories.count('ratings')}")
-          required_resources = (
-              "Torrentio", "AIOMetadata", "TMDB Discover+", "Anime Kitsu", "IMDb Ratings",
-              "BetterPosters for Nuvio",
-          )
-          for name in required_resources:
-              if f"<h3>{name}</h3>" not in html:
-                  raise SystemExit(f"Missing ratings/metadata resource: {name}")
-          required_manifests = (
-              "https://torrentio.strem.fun/manifest.json",
-          )
-          for url in required_manifests:
-              if url not in html:
-                  raise SystemExit(f"Missing public Manifest URL: {url}")
-          if "PERSONAL MANIFEST URL" in html:
-              raise SystemExit("A per-user metadata Manifest URL is still published.")
-          for setup_url in ("https://aiometadata.elfhosted.com/configure", "https://tmdb-discover-plus.elfhosted.com/"):
-              if setup_url not in html:
-                  raise SystemExit(f"Missing metadata provider setup page: {setup_url}")
-          if 'data-category="subtitles"' not in html:
-              raise SystemExit("Subtitle resources are missing.")
-          subtitle_resources = (
-              "OpenSubtitles v3", "TheSubtitleDB", "SubSense", "SubtitleVideo",
-          )
-          subtitle_cards = re.findall(
-              r'<article class="plugin-card[^"]*" data-category="subtitles">(.*?)</article>',
-              html,
-              re.S,
-          )
-          if len(subtitle_cards) != 4:
-              raise SystemExit(f"Expected 4 subtitle resources, found {len(subtitle_cards)}")
-          for name in subtitle_resources:
-              if f"<h3>{name}</h3>" not in html:
-                  raise SystemExit(f"Missing subtitle resource: {name}")
-          required_subtitle_urls = (
-              "https://opensubtitles-v3.strem.io/manifest.json",
-              "https://api.thesubtitledb.org/integrations/stremio/manifest.json",
-              "https://subtitlevideo.com/stremio/en,ar/manifest.json",
-              "https://subsense.nepiraw.com/configure",
-              "https://www.subtitlevideo.com/stremio-subtitles-addon.php",
-          )
-          for url in required_subtitle_urls:
-              if url not in html:
-                  raise SystemExit(f"Missing subtitle setup URL: {url}")
-          if "buildNuvioPluginDeepLink" not in Path("app.js").read_text(encoding="utf-8"):
-              raise SystemExit("Nuvio plugin deep-link handler is missing.")
-          version_cards = re.findall(
-              r'<article class="[^"]*\bdownloads-device-card\b[^"]*">(.*?)</article>',
-              html,
-              re.S,
-          )
-          if len(version_cards) != 12:
-              raise SystemExit(f"Expected 12 Nuvio device cards, found {len(version_cards)}")
-          if 'class="version-source"' in html:
-              raise SystemExit("Nuvio device cards must not contain separate source links.")
-          if html.count('class="downloads-device-status"') != len(version_cards):
-              raise SystemExit("Every Nuvio device card must show its live version/link-check status.")
-          for card in version_cards:
-              if not re.search(r'class="[^"]*\bdownloads-device-link\b[^"]*"', card):
-                  raise SystemExit("A Nuvio device card has no direct download button.")
+  // Keep the smoke suite deterministic and independent of third-party uptime.
+  await page.route('**/*', async route => {
+    const url = new URL(route.request().url());
+    if (url.hostname === '127.0.0.1' || url.hostname === 'localhost') {
+      await route.continue();
+    } else {
+      await route.abort();
+    }
+  });
 
-          downloads_start = html.find('<section class="section downloads-center downloads-redesign" id="downloads"')
-          downloads_end = html.find('<section class="section about"', downloads_start)
-          if downloads_start < 0 or downloads_end < 0:
-              raise SystemExit("The standalone Downloads Center section is missing or unbounded.")
-          downloads_html = html[downloads_start:downloads_end]
-          if html.count('id="downloads"') != 1:
-              raise SystemExit("Expected exactly one Downloads Center section.")
-          nav_match = re.search(
-              r'<div class="[^"]*downloads-device-nav[^"]*" id="downloads-device-nav"[^>]*>(.*?)</div>',
-              downloads_html,
-              re.S,
-          )
-          if not nav_match:
-              raise SystemExit("Downloads device navigation is missing.")
-          nav_buttons = re.findall(r'<button\b[^>]*data-download-device="([^"]+)"', nav_match.group(1))
-          expected_devices = {"mobile", "tv", "desktop"}
-          if len(nav_buttons) != 3 or set(nav_buttons) != expected_devices:
-              raise SystemExit(f"Expected exactly one navigation button per device, found: {nav_buttons}")
+  await page.goto('/');
+  await expect(page.locator('#nuvio-launch-grid .nuvio-launch-card')).toHaveCount(5);
+  await expect(page.locator('#plugins .plugin-card')).toHaveCount(21);
+  await expect(page.locator('#plugins .plugin-card h3', { hasText: /^Ratings$/ })).toHaveCount(0);
+  await expect(page.locator('#plugins .plugin-card h3', { hasText: /^Age Ratings$/ })).toHaveCount(0);
+});
 
-          device_sections = re.findall(
-              r'<section class="downloads-device-section"([^>]*)>(.*?)</section>',
-              downloads_html,
-              re.S,
-          )
-          expected_groups = {
-              "versions-mobile": "mobile",
-              "versions-desktop": "desktop",
-              "versions-tv": "tv",
-              "versions-smart-tv": "tv",
+test.afterEach(async ({ page }) => {
+  expect(runtimeErrors.get(page) || []).toEqual([]);
+});
+
+test('brand name keeps HASHIMFAISAL order in RTL and LTR', async ({ page }) => {
+  const headerName = page.locator('.topbar > .brand > span > bdi');
+  const footerName = page.locator('footer .footer-brand > bdi');
+
+  await expect(headerName).toHaveAttribute('dir', 'ltr');
+  await expect(headerName).toHaveText('HASHIMFAISAL');
+  await expect(footerName).toHaveAttribute('dir', 'ltr');
+  await expect(footerName).toHaveText('HASHIMFAISAL');
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  await expect(headerName).toHaveText('HASHIMFAISAL');
+  await expect(footerName).toHaveText('HASHIMFAISAL');
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+  await expect(headerName).toHaveText('HASHIMFAISAL');
+  await expect(footerName).toHaveText('HASHIMFAISAL');
+});
+
+test('language toggle works in RTL and LTR, including the back label inside a section', async ({ page }) => {
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ar');
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  await expect(page.locator('#search')).toHaveAttribute('placeholder', 'Search add-ons...');
+
+  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  await expect(page.locator('#plugins')).toBeVisible();
+  await expect(page.locator('#plugins .nuvio-back-label')).toHaveText('Back to dashboard');
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('lang', 'ar');
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+  await expect(page.locator('#plugins .nuvio-back-label')).toHaveText('العودة إلى الرئيسية');
+
+  await page.locator('#plugins .nuvio-view-back').click();
+  await expect(page.locator('#nuvio-dashboard')).toBeVisible();
+});
+
+test('all five dashboard destinations open and return to the dashboard', async ({ page }) => {
+  const destinations = [
+    ['plugins', '#plugins'],
+    ['downloads', '#downloads'],
+    ['status', '#status'],
+    ['changelog', '#changelog'],
+    ['resources', '#resources']
+  ];
+
+  for (const [view, selector] of destinations) {
+    await page.locator(`#nuvio-launch-grid [data-view="${view}"]`).click();
+    await expect(page.locator(selector)).toBeVisible();
+    await page.locator(`${selector} .nuvio-view-back`).click();
+    await expect(page.locator('#nuvio-dashboard')).toBeVisible();
+  }
+});
+
+
+test('all 18 public-manifest cards receive their published health status', async ({ page }) => {
+  const names = await page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
+    nodes.map(node => node.dataset.check).filter(Boolean)
+  );
+  expect(names).toHaveLength(18);
+  expect(new Set(names).size).toBe(18);
+
+  const checks = names.map(name => ({
+    name,
+    type: 'manifest',
+    ok: true,
+    version: '9.9.9'
+  }));
+
+  await page.route('**/data/status.json', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({
+      ok: true,
+      passed: 18,
+      total: 18,
+      checks,
+      release: null,
+      version_downloads: { checked: 0, healthy: 0, failed: 0, items: [] }
+    })
+  }));
+  await page.route('**/data/changelog.json', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify([{
+      type: 'system',
+      date: '2026-11-23T00:00:00Z',
+      title: 'فحص تحميل البيانات',
+      detail: 'تم تحميل سجل التغييرات بنجاح.'
+    }])
+  }));
+
+  await page.reload();
+  await expect(page.locator('#health-state')).toHaveText('سليم');
+  await expect(page.locator('#addon-count')).toHaveText('18');
+  await expect(page.locator('#plugins .plugin-card .card-status[data-check]')).toHaveCount(18);
+  await expect.poll(() => page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
+    nodes.every(node => !node.textContent.includes('جارٍ التحقق'))
+  )).toBe(true);
+  await expect(page.locator('#changelog-list')).toContainText('تم تحميل سجل التغييرات بنجاح.');
+});
+
+test('Nuvio edition cards show checked versions and translate status labels', async ({ page }) => {
+  const items = [
+    {
+      name: 'Nuvio Mobile · Download APK · ARM64',
+      type: 'version_download',
+      card: 'Nuvio Mobile',
+      label: 'تنزيل APK · ARM64',
+      tag: '1.0.1',
+      ok: true,
+      url: 'https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-arm64-v8a-release.apk'
+    },
+    {
+      name: 'Nuvio Mobile · Download APK · ARMv7',
+      type: 'version_download',
+      card: 'Nuvio Mobile',
+      label: 'تنزيل APK · ARMv7',
+      tag: '1.0.1',
+      ok: true,
+      url: 'https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-armeabi-v7a-release.apk'
+    },
+    {
+      name: 'Nuvio Mobile · Download APK · x86_64',
+      type: 'version_download',
+      card: 'Nuvio Mobile',
+      label: 'تنزيل APK · x86_64',
+      tag: '1.0.1',
+      ok: true,
+      url: 'https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-x86_64-release.apk'
+    }
+  ];
+  await page.route('**/data/status.json', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({
+      ok: true, passed: 1, total: 1, checks: items,
+      version_downloads: { checked: 1, healthy: 1, failed: 0, items },
+      release: null
+    })
+  }));
+  await page.reload();
+  await page.locator('.nuvio-launch-card[data-view="downloads"]').click();
+  await expect(page.locator('#downloads')).toBeVisible();
+  const status = page.locator('.downloads-device-card').filter({ has: page.locator('h3', { hasText: 'Nuvio Mobile' }) }).locator('.downloads-device-status').first();
+  await expect(status).toContainText('الإصدار 1.0.1');
+  await expect(status).toHaveClass(/healthy|ok/);
+  await expect(status).toBeVisible();
+  await expect.poll(() => status.evaluate(el => getComputedStyle(el, '::before').content)).toBe('""');
+  await expect(status).not.toContainText('روابط التنزيل سليمة');
+  await page.locator('#language-toggle').click();
+  await expect(status).toContainText('Version 1.0.1');
+  await expect(status).toBeVisible();
+  await expect.poll(() => status.evaluate(el => getComputedStyle(el, '::before').content)).toBe('""');
+  await expect(status).not.toContainText('Download links are healthy');
+  await expect(page.locator('.downloads-device-card')).toHaveCount(12);
+});
+
+
+test('homepage explains the Nuvio purpose and groups secondary navigation', async ({ page }) => {
+  await expect(page.locator('.hero h1')).toContainText('كل إضافات Nuvio');
+  await expect(page.locator('.hero h1')).toContainText('في مركز واحد');
+  await expect(page.locator('.hero-byline')).toHaveCount(0);
+  await expect(page.locator('.topbar nav a')).toHaveCount(5);
+  await expect(page.locator('nav a[href="#changelog"]')).toHaveCount(0);
+  await expect(page.locator('#resources a[href="#changelog"]')).toBeAttached();
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('.hero h1')).toContainText('All Nuvio add-ons');
+  await expect(page.locator('.hero h1')).toContainText('in one place');
+  await expect(page.locator('.hero-byline')).toHaveCount(0);
+});
+
+test('support links are available in Arabic and English without leaving the site unexpectedly', async ({ page }) => {
+  await page.locator('#nuvio-launch-grid [data-view="resources"]').click({ force: true });
+  await expect(page.locator('#resources')).toBeVisible();
+
+  const report = page.locator('#resources a').filter({ hasText: 'الإبلاغ عن مشكلة' });
+  const suggest = page.locator('#resources a').filter({ hasText: 'اقتراح إضافة' });
+  await expect(report).toHaveAttribute('href', /issues\/new\?title=Website%20problem%20report/);
+  await expect(suggest).toHaveAttribute('href', /issues\/new\?title=Add-on%20suggestion/);
+  await expect(report).toHaveAttribute('target', '_blank');
+  await expect(suggest).toHaveAttribute('rel', 'noopener noreferrer');
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('#resources h2')).toHaveText('Support & Contact');
+  await expect(page.locator('#resources a').filter({ hasText: 'Report a Problem' })).toBeVisible();
+  await expect(page.locator('#resources a').filter({ hasText: 'Suggest an Add-on' })).toBeVisible();
+});
+
+test('plugin search and category filters return the expected cards', async ({ page }) => {
+  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  await expect(page.locator('[data-filter="nuvio"]')).toHaveText('مصادر البث');
+
+  await page.locator('#search').fill('CinemaBox');
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(1);
+  await expect(page.locator('.plugin-card:visible h3')).toHaveText('CinemaBox');
+
+  await page.locator('#search').fill('');
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('[data-filter="nuvio"]')).toHaveText('Streaming Sources');
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('[data-filter="nuvio"]')).toHaveText('مصادر البث');
+  await page.locator('[data-filter="nuvio"]').click();
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(4);
+  await expect(page.locator('.plugin-card:visible h3')).toContainText(['CinemaBox', 'Cinemana', 'ALL-IN-ONE', 'Torrentio']);
+
+  await page.locator('[data-filter="subtitles"]').click();
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(4);
+
+  await page.locator('[data-filter="ratings"]').click();
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(6);
+
+  await page.locator('[data-filter="all"]').click();
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(20);
+
+  await page.locator('#search').fill('no-such-addon-987');
+  await expect(page.locator('#empty-state')).toBeVisible();
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(0);
+});
+
+test('Torrentio manifest exposes a Nuvio install action and its configuration page', async ({ page }) => {
+  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  await expect(page.locator('#plugins')).toBeVisible();
+
+  const card = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: /^Torrentio$/ }) });
+  const manifest = 'https://torrentio.strem.fun/manifest.json';
+  await expect(card).toHaveCount(1);
+  await expect(card).toHaveAttribute('data-category', 'nuvio');
+  await expect(card.locator('.manifest-url')).toHaveText(manifest);
+  await expect(card.locator('.card-actions a').first()).toHaveAttribute('href', 'https://torrentio.strem.fun');
+  await expect(card.locator('.card-actions a[href="' + manifest + '"]')).toHaveAttribute('href', manifest);
+  await expect(card.locator('.share-btn')).toBeVisible();
+});
+
+test('personal metadata cards expose setup links without publishing per-user manifest URLs', async ({ page }) => {
+  // The plugin library is hidden while the dashboard is active; open it before
+  // asserting that the generated install controls are visible to users.
+  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  await expect(page.locator('#plugins')).toBeVisible();
+
+  const expected = [
+    { name: 'AIOMetadata', setup: 'https://aiometadata.elfhosted.com/configure' },
+    { name: 'TMDB Discover+', setup: 'https://tmdb-discover-plus.elfhosted.com/' }
+  ];
+
+  for (const item of expected) {
+    const card = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: item.name }) });
+    await expect(card).toHaveCount(1);
+    await expect(card.locator('h3')).toHaveText(item.name);
+    await expect(card.locator('.manifest-url')).toHaveCount(0);
+    await expect(card.locator('.card-actions a').first()).toHaveAttribute('href', item.setup);
+    await expect(card.locator('.card-actions a').first()).toContainText('إعداد API');
+    await expect(card.locator('.card-status')).toContainText('يتطلب إعداد API');
+    await expect(card.locator('.share-btn')).toHaveCount(0);
+  }
+});
+
+test('Manifest share action is visible and the copy handler writes its URL', async ({ page, context }) => {
+  await page.goto('/#plugins');
+  await expect(page.locator('#plugins')).toBeVisible();
+  await context.grantPermissions(['clipboard-read', 'clipboard-write']);
+
+  // The original copy controls are intentionally replaced visually by the
+  // Nuvio share/install action; verify that visible action, then exercise the
+  // original copy listener directly without clicking a hidden control.
+  await expect(page.locator('#plugins .plugin-card .share-btn').first()).toBeVisible();
+
+  const copyButton = page.locator('#plugins .plugin-card .copy-btn[data-copy]').first();
+  const expected = await copyButton.getAttribute('data-copy');
+  await page.evaluate(() => {
+    const button = document.querySelector('#plugins .plugin-card .copy-btn[data-copy]');
+    button.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+  });
+
+  await expect.poll(() => page.evaluate(() => navigator.clipboard.readText())).toBe(expected);
+});
+
+test('five dashboard cards keep their text in order without overlap', async ({ page }) => {
+  const cards = await page.locator('#nuvio-launch-grid .nuvio-launch-card').evaluateAll(nodes =>
+    nodes.map(card => {
+      const cardRect = card.getBoundingClientRect();
+      const selectors = [
+        '.nuvio-launch-icon',
+        '.nuvio-launch-code',
+        'strong',
+        '.nuvio-launch-description',
+        '.nuvio-launch-open'
+      ];
+      const items = selectors.map(selector => {
+        const node = card.querySelector(selector);
+        if (!node) return { selector, missing: true };
+        const rect = node.getBoundingClientRect();
+        return {
+          selector,
+          text: (node.textContent || '').trim().slice(0, 70),
+          top: Math.round(rect.top * 10) / 10,
+          bottom: Math.round(rect.bottom * 10) / 10,
+          left: Math.round(rect.left * 10) / 10,
+          right: Math.round(rect.right * 10) / 10,
+          height: Math.round(rect.height * 10) / 10
+        };
+      });
+      return {
+        title: card.querySelector('strong')?.textContent?.trim(),
+        card: {
+          top: Math.round(cardRect.top * 10) / 10,
+          bottom: Math.round(cardRect.bottom * 10) / 10,
+          left: Math.round(cardRect.left * 10) / 10,
+          right: Math.round(cardRect.right * 10) / 10,
+          height: Math.round(cardRect.height * 10) / 10
+        },
+        items
+      };
+    })
+  );
+  const viewportWidth = await page.evaluate(() => window.innerWidth);
+  console.log('DASHBOARD_CARD_GEOMETRY', JSON.stringify({ viewportWidth, cards }));
+  expect(cards).toHaveLength(5);
+  for (const card of cards) {
+    expect(card.items.every(item => !item.missing), JSON.stringify(card)).toBe(true);
+    for (let i = 1; i < card.items.length; i++) {
+      expect(card.items[i].top, JSON.stringify(card)).toBeGreaterThanOrEqual(card.items[i - 1].bottom - 1);
+    }
+    expect(card.items.every(item =>
+      item.left >= card.card.left - 1 && item.right <= card.card.right + 1
+    ), JSON.stringify(card)).toBe(true);
+    expect(card.card.left, JSON.stringify(card)).toBeGreaterThanOrEqual(-1);
+    expect(card.card.right, JSON.stringify(card)).toBeLessThanOrEqual(viewportWidth + 1);
+  }
+});
+
+test('page cannot be horizontally scrolled at the selected viewport', async ({ page }) => {
+  const diagnostics = await page.evaluate(() => {
+    const width = document.documentElement.clientWidth;
+    const offenders = [...document.querySelectorAll('body *')].map(element => {
+      const rect = element.getBoundingClientRect();
+      const style = getComputedStyle(element);
+      return {
+        tag: element.tagName.toLowerCase(),
+        id: element.id || '',
+        className: typeof element.className === 'string' ? element.className : '',
+        left: Math.round(rect.left * 100) / 100,
+        right: Math.round(rect.right * 100) / 100,
+        width: Math.round(rect.width * 100) / 100,
+        position: style.position,
+        transform: style.transform,
+        overflowX: style.overflowX
+      };
+    }).filter(item => item.width > 0 && (item.left < -1 || item.right > width + 1))
+      .sort((a, b) => (b.right - width) - (a.right - width));
+    return {
+      viewport: width,
+      document: document.documentElement.scrollWidth,
+      body: document.body.scrollWidth,
+      bodyOverflowX: getComputedStyle(document.body).overflowX,
+      htmlOverflowX: getComputedStyle(document.documentElement).overflowX,
+      offenders: offenders.slice(0, 30)
+    };
+  });
+
+  await page.evaluate(() => window.scrollTo({ left: 1000, top: 0, behavior: 'instant' }));
+  const horizontalScroll = await page.evaluate(() => window.scrollX);
+  console.log('HORIZONTAL_OVERFLOW_DIAGNOSTICS', JSON.stringify({ ...diagnostics, horizontalScroll }));
+  expect(horizontalScroll, JSON.stringify({ ...diagnostics, horizontalScroll })).toBe(0);
+});
+
+test('home hero title and supporting text stay aligned without overlap', async ({ page }) => {
+  const layout = await page.locator('.hero').evaluate(hero => {
+    const copy = hero.querySelector('.hero-copy');
+    const copyRect = copy.getBoundingClientRect();
+    const heroRect = hero.getBoundingClientRect();
+    const selectors = ['h1', ':scope > p', '.hero-actions', '.hero-meta'];
+    const items = selectors.map(selector => {
+      const node = copy.querySelector(selector);
+      const rect = node.getBoundingClientRect();
+      return {
+        selector,
+        top: rect.top,
+        bottom: rect.bottom,
+        left: rect.left,
+        right: rect.right
+      };
+    });
+    return {
+      hero: { top: heroRect.top, bottom: heroRect.bottom, left: heroRect.left, right: heroRect.right },
+      copy: { top: copyRect.top, bottom: copyRect.bottom, left: copyRect.left, right: copyRect.right },
+      headingPosition: getComputedStyle(copy.querySelector('h1')).position,
+      badgePosition: getComputedStyle(copy, '::before').position,
+      items
+    };
+  });
+
+  expect(layout.headingPosition).not.toBe('absolute');
+  expect(layout.badgePosition).toBe('static');
+  for (let i = 1; i < layout.items.length; i++) {
+    expect(layout.items[i].top, JSON.stringify(layout)).toBeGreaterThanOrEqual(layout.items[i - 1].bottom - 1);
+  }
+  for (const item of layout.items) {
+    expect(item.left, JSON.stringify(layout)).toBeGreaterThanOrEqual(layout.copy.left - 1);
+    expect(item.right, JSON.stringify(layout)).toBeLessThanOrEqual(layout.copy.right + 1);
+    expect(item.top, JSON.stringify(layout)).toBeGreaterThanOrEqual(layout.hero.top - 1);
+    expect(item.bottom, JSON.stringify(layout)).toBeLessThanOrEqual(layout.hero.bottom + 1);
+  }
+});
+
+
+test('home dashboard cards stack vertically on compact screens in both languages', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+
+  const assertStacked = async () => {
+    const layout = await page.locator('#nuvio-launch-grid').evaluate(grid => {
+      const gridStyle = getComputedStyle(grid);
+      const cards = [...grid.querySelectorAll('.nuvio-launch-card')].map(card => {
+        const rect = card.getBoundingClientRect();
+        return {
+          top: rect.top,
+          bottom: rect.bottom,
+          left: rect.left,
+          right: rect.right,
+          column: getComputedStyle(card).gridColumn
+        };
+      });
+      return {
+        columns: gridStyle.gridTemplateColumns.trim().split(' ').filter(Boolean).length,
+        cards
+      };
+    });
+
+    expect(layout.columns, JSON.stringify(layout)).toBe(1);
+    expect(layout.cards).toHaveLength(5);
+    for (let i = 0; i < layout.cards.length; i++) {
+      const card = layout.cards[i];
+      expect(card.column, JSON.stringify(layout)).toBe('1 / -1');
+      expect(card.right - card.left, JSON.stringify(layout)).toBeGreaterThan(300);
+      if (i > 0) {
+        expect(card.top, JSON.stringify(layout)).toBeGreaterThanOrEqual(layout.cards[i - 1].bottom);
+      }
+    }
+  };
+
+  await assertStacked();
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  await assertStacked();
+});
+
+test('plugin library cards never overlap across responsive widths and languages', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  await expect(page.locator('#plugins')).toBeVisible();
+
+  const widths = [320, 360, 390, 408, 430, 480, 560, 600, 640, 680, 681, 760, 761, 900, 1000, 1001, 1280, 1440];
+
+  const assertLibraryLayout = async width => {
+    await page.setViewportSize({ width, height: 900 });
+    const layout = await page.locator('#plugins').evaluate(section => {
+      const rectOf = element => {
+        const rect = element.getBoundingClientRect();
+        return {
+          top: rect.top, bottom: rect.bottom,
+          left: rect.left, right: rect.right,
+          width: rect.width, height: rect.height
+        };
+      };
+      const overlaps = (a, b) =>
+        Math.min(a.right, b.right) - Math.max(a.left, b.left) > 1 &&
+        Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 1;
+      const grid = section.querySelector('.plugin-grid');
+      const cards = [...grid.querySelectorAll('.plugin-card:not([hidden])')].map(card => {
+        const cardRect = rectOf(card);
+        const children = [...card.children]
+          .filter(node => {
+            const style = getComputedStyle(node);
+            const rect = node.getBoundingClientRect();
+            return style.display !== 'none' && style.visibility !== 'hidden' &&
+              rect.width > 0 && rect.height > 0;
+          })
+          .map(node => ({ name: node.className || node.tagName, rect: rectOf(node) }));
+        const nested = ['.plugin-top', '.card-actions'].flatMap(selector => {
+          const parent = card.querySelector(selector);
+          if (!parent) return [];
+          const items = [...parent.children]
+            .filter(node => getComputedStyle(node).display !== 'none')
+            .map(node => ({ name: node.className || node.tagName, rect: rectOf(node) }));
+          const collisions = [];
+          for (let i = 0; i < items.length; i++) {
+            for (let j = i + 1; j < items.length; j++) {
+              if (overlaps(items[i].rect, items[j].rect)) {
+                collisions.push([items[i].name, items[j].name]);
+              }
+            }
           }
-          found_groups = {}
-          for attributes, body in device_sections:
-              id_match = re.search(r'\bid="([^"]+)"', attributes)
-              group_match = re.search(r'\bdata-device-group="([^"]+)"', attributes)
-              if not id_match or not group_match:
-                  raise SystemExit("A device section is missing its ID or device-group mapping.")
-              section_id, group = id_match.group(1), group_match.group(1)
-              if section_id in found_groups:
-                  raise SystemExit(f"Duplicated device group: {section_id}")
-              found_groups[section_id] = group
-              if 'class="downloads-device-grid plugin-grid"' not in body:
-                  raise SystemExit(f"{section_id} does not use the shared plugin-grid card layout.")
-          if found_groups != expected_groups:
-              raise SystemExit(f"Device sections do not map to the expected devices: {found_groups}")
-
-          app_js = Path("app.js").read_text(encoding="utf-8")
-          handler_match = re.search(
-              r'function setDownloadsDevice\(device\)\s*\{(.*?)\n\}',
-              app_js,
-              re.S,
-          )
-          if not handler_match:
-              raise SystemExit("Downloads device switching handler is missing.")
-          handler = handler_match.group(1)
-          for required in (
-              "['mobile', 'tv', 'desktop']",
-              "button.dataset.downloadDevice === device",
-              "section.hidden = section.dataset.deviceGroup !== device",
-          ):
-              if required not in handler:
-                  raise SystemExit(f"Device switching handler is missing required behavior: {required}")
-          if "setDownloadsDevice(activeDownloadsDevice);" not in app_js:
-              raise SystemExit("Downloads device navigation does not initialize its active section.")
-          legacy_classes = (
-              'class="version-platform"', 'class="version-grid"', 'class="version-card"',
-              'class="version-card-status"', 'class="version-download"',
-              'class="download-card"', 'class="download-library-card"',
-              'class="download-release-subsection"', 'class="downloads-release-panel"',
-              'class="download-grid"',
-          )
-          if any(token in downloads_html for token in legacy_classes):
-              raise SystemExit("Legacy Downloads Center components remain in the new section.")
-          app_js = Path("app.js").read_text(encoding="utf-8")
-          if "release-enhanced-link" in app_js or "className = 'enhanced-latest-release'" in app_js or 'className = "enhanced-latest-release"' in app_js:
-              raise SystemExit("Duplicate latest-release buttons must not be injected into the Nuvio Enhanced card.")
-          if "querySelectorAll('.downloads-device-card')" not in app_js:
-              raise SystemExit("Device version status checks are not connected to the new cards.")
-          print("Resource categories, standalone device groups, and direct download actions are present.")
-          PY
-      - name: Validate JSON data and event history
-        run: |
-          python - <<'PY'
-          import json
-          from pathlib import Path
-
-          paths = ("data/status.json", "data/changelog.json", "data/updates.json")
-          data = {
-              path: json.loads(Path(path).read_text(encoding="utf-8"))
-              for path in paths
+          return collisions.map(pair => ({ parent: selector, pair }));
+        });
+        const collisions = [];
+        for (let i = 0; i < children.length; i++) {
+          for (let j = i + 1; j < children.length; j++) {
+            if (overlaps(children[i].rect, children[j].rect)) {
+              collisions.push([children[i].name, children[j].name]);
+            }
           }
+        }
+        return {
+          title: card.querySelector('h3')?.textContent?.trim(),
+          rect: cardRect,
+          children,
+          collisions,
+          nestedCollisions: nested,
+          outside: children.filter(item =>
+            item.rect.left < cardRect.left - 1 ||
+            item.rect.right > cardRect.right + 1 ||
+            item.rect.top < cardRect.top - 1 ||
+            item.rect.bottom > cardRect.bottom + 1
+          ).map(item => item.name)
+        };
+      });
+      const cardCollisions = [];
+      for (let i = 0; i < cards.length; i++) {
+        for (let j = i + 1; j < cards.length; j++) {
+          if (overlaps(cards[i].rect, cards[j].rect)) {
+            cardCollisions.push([cards[i].title, cards[j].title]);
+          }
+        }
+      }
+      const gridStyle = getComputedStyle(grid);
+      return {
+        columns: gridStyle.gridTemplateColumns.trim().split(' ').filter(Boolean).length,
+        cards,
+        cardCollisions,
+        sectionWidth: rectOf(section).width,
+        viewportWidth: document.documentElement.clientWidth
+      };
+    });
 
-          status = data["data/status.json"]
-          if not isinstance(status, dict):
-              raise SystemExit("Health report must be a JSON object.")
-          if not isinstance(status.get("checks"), list):
-              raise SystemExit("Health report checks must be an array.")
-          if status.get("passed", 0) > status.get("total", 0):
-              raise SystemExit("Health report passed count exceeds total.")
+    const expectedColumns = await page.evaluate(() =>
+      window.matchMedia('(max-width: 680px)').matches
+        ? 1
+        : window.matchMedia('(max-width: 1000px)').matches ? 2 : 3
+    );
+    expect(layout.columns, JSON.stringify(layout)).toBe(expectedColumns);
+    if (width <= 680) {
+      expect(layout.sectionWidth, JSON.stringify(layout)).toBeGreaterThanOrEqual(width * 0.97);
+      for (const card of layout.cards) {
+        expect(card.rect.width, JSON.stringify(card)).toBeGreaterThan(width * 0.85);
+      }
+    }
+    expect(layout.cards, JSON.stringify(layout)).toHaveLength(21);
+    expect(layout.cardCollisions, JSON.stringify(layout)).toEqual([]);
+    for (const card of layout.cards) {
+      expect(card.collisions, JSON.stringify(card)).toEqual([]);
+      expect(card.nestedCollisions, JSON.stringify(card)).toEqual([]);
+      expect(card.outside, JSON.stringify(card)).toEqual([]);
+      expect(card.rect.left, JSON.stringify(card)).toBeGreaterThanOrEqual(-1);
+      expect(card.rect.right, JSON.stringify(card)).toBeLessThanOrEqual(layout.viewportWidth + 1);
+    }
+  };
 
-          history = data["data/changelog.json"]
-          if not isinstance(history, list):
-              raise SystemExit("Changelog must be a JSON array.")
+  for (const width of widths) await assertLibraryLayout(width);
 
-          release_keys = set()
-          for item in history:
-              if not isinstance(item, dict):
-                  raise SystemExit(f"Invalid changelog entry: {item!r}")
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  for (const width of widths) await assertLibraryLayout(width);
+});
 
-              if item.get("type") == "release":
-                  version = item.get("new_version")
-                  channel = item.get("channel")
-                  if not version or channel not in {"stable", "beta"}:
-                      raise SystemExit(f"Invalid release record: {item}")
-                  key = (channel, version)
-                  if key in release_keys:
-                      raise SystemExit(f"Duplicate release event: {key}")
-                  release_keys.add(key)
-                  prerelease = any(
-                      marker in version.lower()
-                      for marker in ("beta", "alpha", "rc", "preview", "dev")
-                  )
-                  if prerelease and channel != "beta":
-                      raise SystemExit(
-                          f"Prerelease incorrectly marked stable: {version}"
-                      )
+test('status and developer-resource cards keep separate layout boxes on phone, tablet, and desktop', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const widths = [320, 390, 560, 760, 900, 1280];
 
-              if item.get("type") == "status":
-                  if item.get("old_status") not in {"available", "unavailable"}:
-                      raise SystemExit(f"Invalid previous status: {item}")
-                  if item.get("new_status") not in {"available", "unavailable"}:
-                      raise SystemExit(f"Invalid new status: {item}")
-                  if not item.get("source") or not item.get("source_url"):
-                      raise SystemExit(f"Status event is missing its source: {item}")
+  const assertNoCardCollisions = async selector => {
+    const result = await page.locator(selector).evaluate(container => {
+      const nodes = [...container.children].filter(node => {
+        const rect = node.getBoundingClientRect();
+        return getComputedStyle(node).display !== 'none' && rect.width > 0 && rect.height > 0;
+      });
+      const boxes = nodes.map(node => {
+        const rect = node.getBoundingClientRect();
+        return {
+          name: node.querySelector('strong, span')?.textContent?.trim() || node.className,
+          left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom
+        };
+      });
+      const collisions = [];
+      for (let i = 0; i < boxes.length; i++) {
+        for (let j = i + 1; j < boxes.length; j++) {
+          const horizontal = Math.min(boxes[i].right, boxes[j].right) - Math.max(boxes[i].left, boxes[j].left);
+          const vertical = Math.min(boxes[i].bottom, boxes[j].bottom) - Math.max(boxes[i].top, boxes[j].top);
+          if (horizontal > 1 && vertical > 1) collisions.push([boxes[i].name, boxes[j].name]);
+        }
+      }
+      return { boxes, collisions };
+    });
+    expect(result.collisions, JSON.stringify(result)).toEqual([]);
+  };
 
-          updates = data["data/updates.json"]
-          if not isinstance(updates, list):
-              raise SystemExit("Live updates must be a JSON array.")
-          for item in updates:
-              if not isinstance(item, dict):
-                  raise SystemExit(f"Invalid live update: {item!r}")
-              if not isinstance(item.get("title"), dict) or not isinstance(item.get("description"), dict):
-                  raise SystemExit(f"Live update is missing localized text: {item}")
+  for (const width of widths) {
+    await page.setViewportSize({ width, height: 900 });
+    await page.locator('#nuvio-launch-grid [data-view="status"]').click({ force: true });
+    await expect(page.locator('#status')).toBeVisible();
+    await assertNoCardCollisions('#status');
+    await page.locator('#status .nuvio-view-back').click();
 
-          print("Health report, changelog, and live update data are valid.")
-          PY
+    await page.locator('#nuvio-launch-grid [data-view="resources"]').click();
+    await expect(page.locator('#resources')).toBeVisible();
+    await assertNoCardCollisions('#resources .resource-links');
+    await page.locator('#resources .nuvio-view-back').click();
+  }
+});
 
-  browser-smoke:
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.56.1-noble
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install Playwright test runner
-        run: npm install --no-save --package-lock=false @playwright/test@1.56.1
-      - name: Run desktop and mobile browser tests
-        run: npx playwright test
+
+test('changelog and downloads sections keep content boxes separate across viewport widths and languages', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  const widths = [320, 390, 560, 760, 900, 1280];
+
+  const assertNoOverlaps = async selector => {
+    const result = await page.locator(selector).evaluate(container => {
+      const rectOf = node => {
+        const rect = node.getBoundingClientRect();
+        return { left: rect.left, right: rect.right, top: rect.top, bottom: rect.bottom };
+      };
+      const nodes = [...container.children].filter(node => {
+        const rect = node.getBoundingClientRect();
+        const style = getComputedStyle(node);
+        return style.display !== 'none' && style.visibility !== 'hidden' &&
+          rect.width > 0 && rect.height > 0;
+      });
+      const boxes = nodes.map(node => ({
+        name: node.className || node.tagName,
+        rect: rectOf(node)
+      }));
+      const collisions = [];
+      for (let i = 0; i < boxes.length; i++) {
+        for (let j = i + 1; j < boxes.length; j++) {
+          const a = boxes[i].rect, b = boxes[j].rect;
+          if (Math.min(a.right, b.right) - Math.max(a.left, b.left) > 1 &&
+              Math.min(a.bottom, b.bottom) - Math.max(a.top, b.top) > 1) {
+            collisions.push([boxes[i].name, boxes[j].name]);
+          }
+        }
+      }
+      return { boxes, collisions };
+    });
+    expect(result.collisions, JSON.stringify(result)).toEqual([]);
+  };
+
+  const assertSections = async width => {    await page.setViewportSize({ width, height: 900 });
+    await page.locator('#nuvio-launch-grid [data-view="changelog"]').click();
+    await expect(page.locator('#changelog')).toBeVisible();
+    await assertNoOverlaps('#changelog');
+    await assertNoOverlaps('#changelog-list');
+    await page.locator('#changelog .nuvio-view-back').click();
+
+    await page.locator('#nuvio-launch-grid [data-view="downloads"]').click();
+    await expect(page.locator('#downloads')).toBeVisible();
+    await assertNoOverlaps('#downloads');
+    await assertNoOverlaps('#downloads-device-nav');
+    await assertNoOverlaps('#download-grid');
+    await page.locator('#downloads .nuvio-view-back').click();
+  };
+
+  for (const width of widths) await assertSections(width);
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  for (const width of widths) await assertSections(width);
+});
+
+
+test('all active UI source colors stay within the unified Nuvio palette', async ({ page }) => {
+  const names = [
+    'style.css', 'premium-ui.css', 'downloads-redesign.css', 'index.html', 'app.js', 'premium-ui.js',
+    'assets/hero.svg', 'assets/all-in-one.svg', 'assets/cinemabox.svg',
+    'assets/cinemana.svg', 'assets/opensubtitles.svg', 'assets/cinemeta.svg',
+    'assets/nuvio-catalog.svg', 'assets/izlemeli-catalog.svg'
+  ];
+  const contents = await Promise.all(names.map(async name => {
+    const response = await page.request.get('/' + name);
+    expect(response.ok(), 'Could not load palette source: ' + name).toBeTruthy();
+    return response.text();
+  }));
+  const [styleCss, premiumCss, downloadsCss, indexHtml, appJs, premiumUiJs, ...artwork] = contents;
+  const css = (styleCss + '\n' + premiumCss + '\n' + downloadsCss).toLowerCase();
+  const uiSource = (indexHtml + '\n' + appJs + '\n' + premiumUiJs).toLowerCase();
+  const allowedCssRgb = new Set([
+    '88,216,232', '163,148,255', '66,200,121', '255,130,146',
+    '162,177,200', '141,234,243', '99,217,233', '170,155,255', '255,255,255', '0,0,0',
+    '7,11,22', '17,29,51', '185,214,235', '205,229,245', '245,250,255', '175,216,242', '205,231,248', '4,10,20'
+  ]);
+  const allowedCssHex = new Set([
+    '#070b16', '#0d1526', '#111d33', '#182744', '#f2f6ff', '#a2b1c8',
+    '#a394ff', '#58d8e8', '#42c879', '#a9e8c1', '#ff8292', '#ffb0ba',
+    '#8deaf3', '#080d19', '#101a2d', '#16243a', '#b2bfd4', '#aa9bff',
+    '#63d9e9', '#afeac7', '#ffb9c2', '#98edf5', '#071317', '#000', '#fff', '#101827', '#6de0a1', '#ff9d9d'
+  ]);
+  for (const source of [css, uiSource]) {
+    for (const match of source.matchAll(/(?:color|background(?:Color)?|border(?:Top|Right|Bottom|Left)?Color|outlineColor|fill|stroke)\s*(?::|=)\s*['"]?(#[0-9a-f]{8}|#[0-9a-f]{6}|#[0-9a-f]{4}|#[0-9a-f]{3})(?![a-z0-9_-])/gi)) {
+      expect(allowedCssHex.has(match[1]), 'Unexpected UI hex color: ' + match[1]).toBeTruthy();
+    }
+    for (const match of source.matchAll(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/gi)) {
+      const rgb = match.slice(1, 4).join(',');
+      expect(allowedCssRgb.has(rgb), 'Unexpected UI RGB color: ' + rgb).toBeTruthy();
+    }
+    expect(source).not.toMatch(/hsla?\s*\(/i);
+  }
+
+  const allowedArtworkHex = new Set([
+    '#070b16', '#0d1526', '#111d33', '#a394ff', '#58d8e8',
+    '#8deaf3', '#f2f6ff', '#a2b1c8'
+  ]);
+  const visualPalette = artwork.join('\n').toLowerCase();
+  for (const match of visualPalette.matchAll(/#[0-9a-f]{3,8}\b/gi)) {
+    expect(allowedArtworkHex.has(match[0]), 'Unexpected artwork color: ' + match[0]).toBeTruthy();
+  }
+
+  const computedPaletteViolations = await page.evaluate(() => {
+    const approved = new Set([
+      '7,11,22', '13,21,38', '17,29,51', '24,39,68',
+      '8,13,25', '16,26,45', '22,36,58', '178,191,212', '170,155,255', '99,217,233',
+      '175,234,199', '255,185,194', '152,237,245',
+      '242,246,255', '162,177,200', '163,148,255', '88,216,232',
+      '66,200,121', '169,232,193', '255,130,146', '255,176,186',
+      '141,234,243', '7,19,23', '255,255,255', '0,0,0', '185,214,235', '205,229,245', '245,250,255', '175,216,242', '205,231,248', '4,10,20'
+    ]);
+    const properties = [
+      'color', 'backgroundColor', 'backgroundImage',
+      'borderTopColor', 'borderRightColor', 'borderBottomColor', 'borderLeftColor',
+      'outlineColor', 'textDecorationColor', 'fill', 'stroke',
+      'boxShadow', 'textShadow', 'filter', 'caretColor', 'accentColor'
+    ];
+    const violations = [];
+    for (const element of document.querySelectorAll('*')) {
+      for (const pseudo of [null, '::before', '::after']) {
+        const style = getComputedStyle(element, pseudo);
+        for (const property of properties) {
+          const value = style[property];
+          if (!value) continue;
+          for (const match of value.matchAll(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/gi)) {
+            const rgb = match.slice(1, 4).join(',');
+            if (!approved.has(rgb)) violations.push({ element: element.tagName, pseudo, property, rgb });
+          }
+        }
+      }
+    }
+    return violations.slice(0, 30);
+  });
+  expect(computedPaletteViolations).toEqual([]);
+
+  for (const token of ['--cyan-light:', '--on-accent:', '--success: #42c879;', '--danger: #ff8292;']) {
+    expect(styleCss).toContain(token);
+  }
+  const video = page.locator('.globe-video source');
+  await expect(video).toHaveAttribute('src', 'assets/black-marble-2016-night-1080p.mp4');
+  await expect(page.locator('.globe-video')).toHaveCSS('filter', 'none');
+});
+
+test('Cinemeta artwork uses only the approved Nuvio palette', async ({ page }) => {
+  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  const logo = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: /^Cinemeta$/ }) }).locator('img');
+  await expect(logo).toBeVisible();
+  await expect(logo).toHaveAttribute('src', 'assets/cinemeta.svg');
+
+  const response = await page.request.get('/assets/cinemeta.svg');
+  expect(response.ok()).toBeTruthy();
+  const svg = await response.text();
+  const colors = [...svg.matchAll(/#[0-9a-fA-F]{3,8}(?![0-9a-fA-F])/g)].map(match => match[0].toLowerCase());
+  expect(colors.length).toBeGreaterThan(0);
+  const approved = new Set(['#070b16', '#0d1526', '#111d33', '#a394ff', '#58d8e8', '#8deaf3', '#f2f6ff', '#a2b1c8']);
+  expect(colors.filter(color => !approved.has(color))).toEqual([]);
+});
+
+
+test('Nuvio Enhanced card keeps one set of stable download buttons when latest release checks fail', async ({ page }) => {
+  const assets = ['arm64-v8a-release.apk', 'armeabi-v7a-release.apk', 'x86-release.apk', 'x86_64-release.apk', 'enhanced-release.ipa'].map(name => ({
+    name,
+    download_url: `https://example.invalid/${name}`,
+    ok: false
+  }));
+  await page.route('**/data/status.json', route => route.fulfill({
+    status: 200,
+    contentType: 'application/json',
+    body: JSON.stringify({ checked_at: new Date().toISOString(), ok: false, passed: 0, total: 5, release_fallback_used: true, release_cache_stale: true, release: { tag: '1.2.3', app_version: '1.2.3', published_at: new Date().toISOString(), assets }, checks: [] })
+  }));
+  await page.goto('/');
+  const enhancedCard = page.locator('#download-grid > .downloads-device-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.1\.0-beta\.3$/ }) });
+  await expect(enhancedCard.locator('a.downloads-device-link')).toHaveCount(5);
+  await expect(enhancedCard.locator('a.enhanced-latest-release, .enhanced-latest-release')).toHaveCount(0);
+  await expect(enhancedCard.locator('a.release-enhanced-link')).toHaveCount(0);
+  await expect(enhancedCard.locator('a.downloads-device-link[href*="/releases/download/1.1.0-beta.3/"]')).toHaveCount(5);
+  await expect(page.locator('#download-grid .release-asset-card')).toHaveCount(0);
+});
+
+test('Nuvio downloads library integrates release assets into mobile cards without a legacy toolbar', async ({ page }) => {
+  await page.goto('/#downloads');
+  await expect(page.locator('#downloads')).toBeVisible();
+  await expect(page.locator('#downloads .nuvio-view-back')).toBeVisible();
+  await expect(page.locator('#downloads-title')).toHaveText('مركز التنزيلات');
+  // Latest release assets are integrated directly into the mobile device card grid.
+  await expect(page.locator('#downloads .downloads-mobile-release-assets')).toHaveCount(0);
+  await expect(page.locator('#downloads .downloads-toolbar, #downloads-search, #downloads-filters, #downloads-visible-count, #downloads .downloads-disclaimer')).toHaveCount(0);
+  await expect(page.locator('#downloads .download-card, #downloads .download-library-card, #downloads .download-release-subsection, #downloads .download-grid, #downloads .version-platform')).toHaveCount(0);
+  const enhancedCard = page.locator('#download-grid > .downloads-device-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.1\.0-beta\.3$/ }) });
+  await expect(enhancedCard).toHaveCount(1);
+  await expect(enhancedCard.locator('a.downloads-device-link')).toHaveCount(5);
+  await expect(enhancedCard.locator('a[href$="nuvio-1.1.0-beta.3-arm64-v8a-release.apk"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a[href$="nuvio-1.1.0-beta.3-armeabi-v7a-release.apk"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a[href$="nuvio-1.1.0-beta.3-x86-release.apk"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a[href$="nuvio-1.1.0-beta.3-x86_64-release.apk"]')).toHaveCount(1);
+  await expect(enhancedCard.locator('a[href$="nuvio-1.1.0-beta.3-enhanced-release.ipa"]')).toHaveCount(1);
+  await expect(page.locator('main > #downloads')).toHaveCount(1);
+  await expect(page.locator('#downloads #versions-mobile, #downloads #versions-desktop, #downloads #versions-tv, #downloads #versions-smart-tv')).toHaveCount(4);
+  await expect(page.locator('#downloads .downloads-release-details')).toHaveCount(0);
+  await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(0);
+  await expect(page.locator('#download-grid .release-asset-card')).toHaveCount(0);
+  // Download cards intentionally share the library's plugin-card visual class.
+  await expect(page.locator('#download-grid .plugin-card')).toHaveCount(4);
+  await expect(page.locator('#download-grid > .downloads-device-card:not(.release-asset-card)')).toHaveCount(4);
+  const downloadColumns = await page.locator('#download-grid').evaluate(el =>
+    getComputedStyle(el).gridTemplateColumns.trim().split(' ').filter(Boolean).length
+  );
+  const expectedColumns = await page.evaluate(() =>
+    window.matchMedia('(max-width: 680px)').matches
+      ? 1
+      : window.matchMedia('(max-width: 1000px)').matches ? 2 : 3
+  );
+  expect(downloadColumns).toBe(expectedColumns);
+  await expect(page.locator('#download-grid .release-enhanced-link')).toHaveCount(0);
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'ltr');
+  await expect(page.locator('#download-grid .release-asset-card:visible')).toHaveCount(0);
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('html')).toHaveAttribute('dir', 'rtl');
+});
+
+test('Nuvio editions are separated by device and link directly to published installer assets', async ({ page }) => {
+  await page.goto('/#downloads');
+  await expect(page.locator('#downloads')).toBeVisible();
+
+  // Only the selected device group is visible; Android TV and Smart TV share TV.
+  await expect(page.locator('#versions-mobile')).toBeVisible();
+  await expect(page.locator('#versions-tv')).toBeHidden();
+  await expect(page.locator('#versions-smart-tv')).toBeHidden();
+  await expect(page.locator('#versions-desktop')).toBeHidden();
+
+  await expect(page.locator('#versions-mobile .downloads-device-card')).toHaveCount(4);
+  await expect(page.locator('#versions-tv .downloads-device-card')).toHaveCount(5);
+  await expect(page.locator('#versions-smart-tv .downloads-device-card')).toHaveCount(2);
+  await expect(page.locator('#versions-desktop .downloads-device-card')).toHaveCount(1);
+
+  await expect(page.locator('#versions-mobile a[href$="androidApp-full-arm64-v8a-release.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-mobile a[href$="nuvio-1.0.1-full-release.ipa"]')).toBeVisible();
+  await expect(page.locator('#versions-mobile a[href$="NuvioRS-1.1.0-beta.2-autosync.5-arm64.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-mobile a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+
+  await page.locator('#downloads-device-nav [data-download-device="tv"]').click();
+  await expect(page.locator('#versions-mobile')).toBeHidden();
+  await expect(page.locator('#versions-tv')).toBeVisible();
+  await expect(page.locator('#versions-smart-tv')).toBeVisible();
+  await expect(page.locator('#versions-desktop')).toBeHidden();
+  await expect(page.locator('#versions-tv a[href$="app-full-universal-release.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-smart-tv a[href$=".wgt"]')).toBeVisible();
+  await expect(page.locator('#versions-smart-tv a[href$=".ipk"]').first()).toBeVisible();
+  await expect(page.locator('#versions-tv a[href$="NuvioRS-TV-1.2.0-beta.3-autosync.3-arm32.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-tv a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+  await expect(page.locator('#versions-smart-tv a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+
+  await page.locator('#downloads-device-nav [data-download-device="desktop"]').click();
+  await expect(page.locator('#versions-mobile')).toBeHidden();
+  await expect(page.locator('#versions-tv')).toBeHidden();
+  await expect(page.locator('#versions-smart-tv')).toBeHidden();
+  await expect(page.locator('#versions-desktop')).toBeVisible();
+  await expect(page.locator('#versions-desktop a[href$="NuvioCodeineXO-v6.1.5.exe"]')).toBeVisible();
+  await expect(page.locator('#versions-desktop a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
+
+  await expect(page.locator('.downloads-device-section a.downloads-device-link.secondary')).toHaveCount(0);
+  await expect(page.locator('.downloads-device-section a.version-source')).toHaveCount(0);
+  await expect(page.locator('.downloads-device-section a.downloads-device-link')).not.toHaveCount(0);
+
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('#versions-mobile-title')).toHaveText('Mobile · Android & iPhone');
+  await expect(page.locator('#versions-tv-title')).toHaveText('TV · Android TV & Google TV');
+  await page.locator('#language-toggle').click();
+  await expect(page.locator('#versions-mobile-title')).toHaveText('الموبايل · Android وiPhone');
+});
+
+test('Nuvio Enhanced card never adds a duplicate latest-release button group', async ({ page }) => {
+  await page.goto('/');
+  const enhancedCard = page.locator('#download-grid > .downloads-device-card').filter({ has: page.locator('h3', { hasText: /^Nuvio Enhanced 1\.1\.0-beta\.3$/ }) });
+  await expect(enhancedCard.locator('a.downloads-device-link')).toHaveCount(5);
+  await expect(enhancedCard.locator('.enhanced-latest-release')).toHaveCount(0);
+
+  await page.evaluate(() => renderDownloads({
+    release: { app_version: '1.2.3', assets: [{ name: 'arm64.apk', download_url: 'https://example.com/arm64.apk', ok: true }] }
+  }));
+  await expect(enhancedCard.locator('a.downloads-device-link')).toHaveCount(5);
+  await expect(enhancedCard.locator('.enhanced-latest-release')).toHaveCount(0);
+
+  await page.evaluate(() => renderDownloads({ release: { app_version: '1.2.3', assets: [] } }));
+  await expect(enhancedCard.locator('a.downloads-device-link')).toHaveCount(5);
+  await expect(enhancedCard.locator('.enhanced-latest-release')).toHaveCount(0);
+});
