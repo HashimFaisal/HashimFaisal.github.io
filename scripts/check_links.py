@@ -166,9 +166,9 @@ def check_setup_page(name, url):
     """Check that an add-on's official configuration page responds with content."""
     try:
         with fetch(url, retries=1, backoff_seconds=0.5) as response:
-            body = response.read(256 * 1024 + 1)
-            if len(body) > 256 * 1024:
-                raise ValueError("Setup page exceeds 256 KiB")
+            # Read only a bounded prefix: large configuration UIs may embed
+            # substantial client-side data, but page reachability needs no full download.
+            body = response.read(64 * 1024)
             if not body.strip():
                 raise ValueError("Setup page returned an empty response")
             title_match = re.search(
