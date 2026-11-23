@@ -275,6 +275,28 @@ test('Torrentio manifest exposes a Nuvio install action and its configuration pa
   await expect(card.locator('.share-btn')).toBeVisible();
 });
 
+test('verified no-key addon manifests expose direct Nuvio install actions', async ({ page }) => {
+  await page.locator('#nuvio-launch-grid [data-view="plugins"]').click();
+  await expect(page.locator('#plugins')).toBeVisible();
+
+  const items = [
+    { name: 'Subtitles: Extended', url: 'https://popcorn-notes.lsoares.workers.dev/manifest.json' },
+    { name: 'RosettaSubs', url: 'https://rosettasubs.onrender.com/manifest.json' },
+    { name: 'SubSense', url: 'https://subsense.nepiraw.com/manifest.json' },
+    { name: 'SubMaker', url: 'https://submaker.elfhosted.com/manifest.json' },
+    { name: 'BetterPosters (btttr)', url: 'https://btttr.cc/manifest.json' }
+  ];
+
+  for (const item of items) {
+    const card = page.locator('.plugin-card').filter({ has: page.locator('h3', { hasText: item.name }) });
+    await expect(card).toHaveCount(1);
+    await expect(card.locator('.manifest-url')).toHaveText(item.url);
+    await expect(card.locator('.share-btn')).toBeVisible();
+    await expect(card.locator('.share-btn')).toHaveText('تثبيت في Nuvio');
+    await expect(card.locator('.card-status')).toHaveAttribute('data-check', item.name);
+  }
+});
+
 test('personal metadata cards expose setup links without publishing per-user manifest URLs', async ({ page }) => {
   // The plugin library is hidden while the dashboard is active; open it before
   // asserting that the generated install controls are visible to users.
