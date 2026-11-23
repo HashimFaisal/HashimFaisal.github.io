@@ -1,11 +1,11 @@
 {
-  "checked_at": "2026-11-23T04:15:41.529450+00:00",
+  "checked_at": "2026-11-23T04:26:59.426486+00:00",
   "ok": true,
   "passed": 71,
   "total": 71,
   "manifest_coverage": {
-    "configured": 26,
-    "healthy": 26,
+    "configured": 27,
+    "healthy": 27,
     "failed": 0
   },
   "source_retrieval": {
@@ -1013,24 +1013,25 @@
       "recommended_action": "No action required."
     },
     {
-      "name": "Posters+",
-      "type": "setup",
+      "name": "Reciperr",
+      "type": "manifest",
       "ok": true,
       "http_status": 200,
-      "page_title": "Posters+ // Web",
-      "url": "https://postersplus.slokker.cc/",
+      "version": "1.0.0",
+      "manifest_id": "app.reciperr.nuvio",
+      "url": "https://reciperr.app/api/nuvio/NBRjPd1RrZNpbNF5c7FMe0E8Ply5OkrG/manifest.json",
       "failure_code": "healthy",
       "failure_category": "healthy",
       "severity": "info",
       "recommended_action": "No action required."
     },
     {
-      "name": "Reciperr",
+      "name": "Posters+",
       "type": "setup",
       "ok": true,
       "http_status": 200,
-      "page_title": "Reciperr · What’s trending in movies and series",
-      "url": "https://reciperr.app/",
+      "page_title": "Posters+ // Web",
+      "url": "https://postersplus.slokker.cc/",
       "failure_code": "healthy",
       "failure_category": "healthy",
       "severity": "info",
