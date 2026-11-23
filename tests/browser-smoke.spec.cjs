@@ -22,7 +22,7 @@ test.beforeEach(async ({ page }) => {
 
   await page.goto('/');
   await expect(page.locator('#nuvio-launch-grid .nuvio-launch-card')).toHaveCount(5);
-  await expect(page.locator('#plugins .plugin-card')).toHaveCount(33);
+  await expect(page.locator('#plugins .plugin-card')).toHaveCount(30);
   await expect(page.locator('#plugins .plugin-card h3', { hasText: /^Ratings$/ })).toHaveCount(0);
   await expect(page.locator('#plugins .plugin-card h3', { hasText: /^Age Ratings$/ })).toHaveCount(0);
 });
@@ -91,14 +91,14 @@ test('all five dashboard destinations open and return to the dashboard', async (
 });
 
 
-test('all 31 monitored cards receive their published health status', async ({ page }) => {
+test('all 28 monitored cards receive their published health status', async ({ page }) => {
   const names = await page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
     nodes.map(node => node.dataset.check).filter(Boolean)
   );
-  expect(names).toHaveLength(31);
-  expect(new Set(names).size).toBe(31);
+  expect(names).toHaveLength(28);
+  expect(new Set(names).size).toBe(28);
 
-  const setupNames = new Set(["Stremio Community Subtitles","Pictorium","Posters+","ExtendedRatings (XRDB)","TOP Posters","Reciperr","StremList"]);
+  const setupNames = new Set(["Pictorium","Posters+","Reciperr","StremList"]);
   const checks = names.map(name => ({
     name,
     type: setupNames.has(name) ? 'setup' : 'manifest',
@@ -131,8 +131,8 @@ test('all 31 monitored cards receive their published health status', async ({ pa
 
   await page.reload();
   await expect(page.locator('#health-state')).toHaveText('سليم');
-  await expect(page.locator('#addon-count')).toHaveText('31');
-  await expect(page.locator('#plugins .plugin-card .card-status[data-check]')).toHaveCount(31);
+  await expect(page.locator('#addon-count')).toHaveText('28');
+  await expect(page.locator('#plugins .plugin-card .card-status[data-check]')).toHaveCount(28);
   await expect.poll(() => page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
     nodes.every(node => !node.textContent.includes('جارٍ التحقق'))
   )).toBe(true);
@@ -245,16 +245,16 @@ test('plugin search and category filters return the expected cards', async ({ pa
   await expect(page.locator('.plugin-card:visible h3')).toContainText(['CinemaBox', 'Cinemana', 'ALL-IN-ONE', 'Torrentio']);
 
   await page.locator('[data-filter="subtitles"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(8);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(7);
 
   await page.locator('[data-filter="catalog"]').click();
   await expect(page.locator('.plugin-card:visible')).toHaveCount(9);
 
   await page.locator('[data-filter="ratings"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(12);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(10);
 
   await page.locator('[data-filter="all"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(33);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(30);
 
   await page.locator('#search').fill('no-such-addon-987');
   await expect(page.locator('#empty-state')).toBeVisible();
@@ -618,7 +618,7 @@ test('plugin library cards never overlap across responsive widths and languages'
         expect(card.rect.width, JSON.stringify(card)).toBeGreaterThan(width * 0.85);
       }
     }
-    expect(layout.cards, JSON.stringify(layout)).toHaveLength(33);
+    expect(layout.cards, JSON.stringify(layout)).toHaveLength(30);
     expect(layout.cardCollisions, JSON.stringify(layout)).toEqual([]);
     for (const card of layout.cards) {
       expect(card.collisions, JSON.stringify(card)).toEqual([]);

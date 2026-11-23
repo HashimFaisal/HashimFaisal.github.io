@@ -23,10 +23,10 @@ class ManifestCoverageTests(unittest.TestCase):
             name = re.sub(r"<[^>]+>", "", match.group(2)).strip()
             card_names.append("OpenSubtitles" if name == "OpenSubtitles v3" else name)
 
-        self.assertEqual(len(card_names), 33, "Expected all 33 published plugin cards.")
+        self.assertEqual(len(card_names), 30, "Expected all 30 published plugin cards after removing XRDB, TOP Posters, and Stremio Community Subtitles.")
         self.assertEqual(len(card_names), len(set(card_names)), "Duplicate addon cards detected.")
         setup_names = set(check_links.SETUP_PAGES)
-        self.assertEqual(len(setup_names), 6, "Expected 6 setup-page health checks after promoting configured Pictorium.")
+        self.assertEqual(len(setup_names), 3, "Expected 3 remaining setup-page health checks after removing XRDB, TOP Posters, and Stremio Community Subtitles.")
         manifest_card_names = set(card_names) - {"AIOMetadata", "TMDB Discover+"} - setup_names
         self.assertEqual(
             manifest_card_names,
@@ -52,14 +52,7 @@ class ManifestCoverageTests(unittest.TestCase):
             self.assertIn(f'<code class="manifest-url">{url}</code>', card)
             self.assertIn(f'data-copy="{url}"', card)
             self.assertIn(f'href="{url}"', card)
-        self.assertEqual(html.count("يتطلب إعداد API"), 3, "All remaining personal API cards must clearly require API setup.")
-        for name in ("TOP Posters",):
-            heading = html.index(f"<h3>{name}</h3>")
-            card_start = html.rfind("<article", 0, heading)
-            card_end = html.index("</article>", heading)
-            card = html[card_start:card_end]
-            self.assertIn("setup-api-card", card, f"{name} must use the personal API setup card style.")
-            self.assertIn("إعداد API", card, f"{name} must link directly to its setup page.")
+        self.assertEqual(html.count("يتطلب إعداد API"), 2, "Both remaining personal API cards must clearly require API setup.")
 
     def test_setup_page_check_reports_page_health_without_claiming_a_manifest(self):
         class FakeResponse:
@@ -81,7 +74,7 @@ class ManifestCoverageTests(unittest.TestCase):
 
     def test_personal_manifest_urls_are_not_published(self):
         html = (ROOT / "index.html").read_text(encoding="utf-8")
-        for name in ("AIOMetadata", "TMDB Discover+", "TOP Posters"):
+        for name in ("AIOMetadata", "TMDB Discover+"):
             heading = html.index(f"<h3>{name}</h3>")
             card_start = html.rfind("<article", 0, heading)
             card_end = html.index("</article>", heading)
@@ -90,6 +83,9 @@ class ManifestCoverageTests(unittest.TestCase):
             self.assertNotIn("PERSONAL MANIFEST URL", card)
         self.assertNotIn("AIOMetadata", check_links.MANIFESTS)
         self.assertNotIn("TMDB Discover+", check_links.MANIFESTS)
+        self.assertNotIn("ExtendedRatings (XRDB)", html)
+        self.assertNotIn("TOP Posters", html)
+        self.assertNotIn("Stremio Community Subtitles", html)
 
     def test_manifest_http_errors_keep_the_status_code(self):
         error = HTTPError(
