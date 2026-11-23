@@ -66,8 +66,6 @@ jobs:
               ("SubSense", "https://subsense.nepiraw.com/manifest.json"),
               ("SubMaker", "https://submaker.elfhosted.com/manifest.json"),
               ("BetterPosters (btttr)", "https://btttr.cc/manifest.json"),
-              ("Reciperr", "https://reciperr.app/manifest.json"),
-              ("StremList", "https://stremlist.com/manifest.json"),
           )
           with ThreadPoolExecutor(max_workers=len(manifests)) as executor:
               results = list(executor.map(lambda item: check_links.check_manifest(*item), manifests))
@@ -113,8 +111,6 @@ jobs:
               "https://subsense.nepiraw.com/manifest.json",
               "https://submaker.elfhosted.com/manifest.json",
               "https://btttr.cc/manifest.json",
-              "https://reciperr.app/manifest.json",
-              "https://stremlist.com/manifest.json",
           )
           for url in required_manifests:
               if url not in html:
@@ -170,6 +166,8 @@ jobs:
               "https://postersplus.slokker.cc/",
               "https://xrdb.elfhosted.com/configurator",
               "https://top-posters.com/addons",
+              "https://reciperr.app/",
+              "https://stremlist.com/",
           )
           for url in setup_urls:
               if url not in html:
