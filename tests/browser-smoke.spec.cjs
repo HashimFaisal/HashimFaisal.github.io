@@ -250,7 +250,7 @@ test('plugin search and category filters return the expected cards', async ({ pa
   await expect(page.locator('.plugin-card:visible')).toHaveCount(6);
 
   await page.locator('[data-filter="all"]').click();
-  await expect(page.locator('.plugin-card:visible')).toHaveCount(20);
+  await expect(page.locator('.plugin-card:visible')).toHaveCount(21);
 
   await page.locator('#search').fill('no-such-addon-987');
   await expect(page.locator('#empty-state')).toBeVisible();
