@@ -34,6 +34,23 @@ MANIFESTS = {
     "IMDb Ratings": "https://imdbratings.kgenovz.com/manifest.json",
     "BetterPosters for Nuvio": "https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json",
 }
+ 
+SETUP_PAGES = {
+    "Subtitles: Extended": "https://popcorn-notes.lsoares.workers.dev/",
+    "RosettaSubs": "https://rosettasubs.onrender.com/configure",
+    "SubSense": "https://subsense.nepiraw.com/configure",
+    "SubMaker": "https://submaker.elfhosted.com/configure",
+    "Stremio Community Subtitles": "https://stremio-community-subtitles.top/",
+    "CouchPilot": "https://couchpilot.nl/",
+    "BetterPosters (btttr)": "https://btttr.cc/configure",
+    "Pictorium": "https://pictorium.elfhosted.com/",
+    "Posters+": "https://postersplus.slokker.cc/",
+    "ExtendedRatings (XRDB)": "https://xrdb.elfhosted.com/configurator",
+    "TOP Posters": "https://top-posters.com/addons",
+    "Reciperr": "https://reciperr.app/",
+    "StremList": "https://stremlist.com/",
+}
+
 
 APK_ASSETS = {
     "ARM64": "-arm64-v8a-release.apk",
@@ -138,6 +155,52 @@ def check_manifest(name, url):
         return {
             "name": name,
             "type": "manifest",
+            "ok": False,
+            "error": str(exc),
+            "url": url,
+        }
+
+
+
+def check_setup_page(name, url):
+    """Check that an add-on's official configuration page responds with content."""
+    try:
+        with fetch(url, retries=1, backoff_seconds=0.5) as response:
+            # Read only a bounded prefix: large configuration UIs may embed
+            # substantial client-side data, but page reachability needs no full download.
+            body = response.read(64 * 1024)
+            if not body.strip():
+                raise ValueError("Setup page returned an empty response")
+            title_match = re.search(
+                rb"<title[^>]*>(.*?)</title>",
+                body,
+                re.IGNORECASE | re.DOTALL,
+            )
+            title = (
+                re.sub(r"\s+", " ", title_match.group(1).decode("utf-8", "replace")).strip()
+                if title_match else None
+            )
+            return {
+                "name": name,
+                "type": "setup",
+                "ok": True,
+                "http_status": response.status,
+                "page_title": title,
+                "url": url,
+            }
+    except HTTPError as exc:
+        return {
+            "name": name,
+            "type": "setup",
+            "ok": False,
+            "http_status": exc.code,
+            "error": f"HTTP {exc.code}: {exc.reason}",
+            "url": url,
+        }
+    except Exception as exc:
+        return {
+            "name": name,
+            "type": "setup",
             "ok": False,
             "error": str(exc),
             "url": url,
@@ -1070,7 +1133,12 @@ def main():
             lambda entry: check_manifest(*entry),
             MANIFESTS.items(),
         ))
+        setup_results = list(executor.map(
+            lambda entry: check_setup_page(*entry),
+            SETUP_PAGES.items(),
+        ))
         source_results = list(executor.map(lambda probe: probe(), SOURCE_PROBES))
+    results.extend(setup_results)
     results.extend(source_results)
 
     # Include direct installer links shown in the edition cards in the health report.
@@ -1329,25 +1397,25 @@ def main():
     except (OSError, ValueError):
         history = []
 
-    old_manifests = {
+    old_endpoints = {
         item.get("name"): item
         for item in previous_report.get("checks", [])
-        if item.get("type") == "manifest"
+        if item.get("type") in {"manifest", "setup"}
     }
 
     now = datetime.now(timezone.utc).isoformat()
     events = []
 
     for item in results:
-        if item.get("type") != "manifest":
+        if item.get("type") not in {"manifest", "setup"}:
             continue
 
         name = item.get("name", "Unknown")
-        previous = old_manifests.get(name)
+        previous = old_endpoints.get(name)
 
         if previous is None:
-            # Report newly discovered sources only when the manifest is validated.
-            if item.get("ok"):
+            # Announce new public manifests only after their schema is validated.
+            if item.get("type") == "manifest" and item.get("ok"):
                 events.append({
                     "date": now,
                     "type": "added",
@@ -1377,6 +1445,9 @@ def main():
 
         old_version = previous.get("version")
         new_version = item.get("version")
+        # Setup-page checks have no manifest version to compare.
+        if item.get("type") != "manifest":
+            continue
         # Do not record version changes from failed/incomplete checks.
         if previous.get("ok") and item.get("ok") and old_version and new_version and old_version != new_version:
             events.append({
