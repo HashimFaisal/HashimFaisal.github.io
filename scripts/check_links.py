@@ -35,6 +35,7 @@ MANIFESTS = {
     "BetterPosters for Nuvio": "https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json",
     "BetterPosters (btttr)": "https://btttr.cc/manifest.json",
     "CouchPilot": "https://couchpilot.nl/manifest.json",
+    "Pictorium": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
     "SubMaker": "https://submaker.elfhosted.com/manifest.json",
     "SubSense": "https://subsense.nepiraw.com/manifest.json",
     "RosettaSubs": "https://rosettasubs.onrender.com/manifest.json",
@@ -43,7 +44,6 @@ MANIFESTS = {
  
 SETUP_PAGES = {
     "Stremio Community Subtitles": "https://stremio-community-subtitles.top/",
-    "Pictorium": "https://pictorium.elfhosted.com/",
     "Posters+": "https://postersplus.slokker.cc/",
     "ExtendedRatings (XRDB)": "https://xrdb.elfhosted.com/configurator",
     "TOP Posters": "https://top-posters.com/addons",
