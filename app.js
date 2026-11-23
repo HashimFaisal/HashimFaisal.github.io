@@ -1356,9 +1356,22 @@ async function loadChangelog() {
       const dateText = validDate
         ? `${formatDate(entry.date)} · ${formatRelativeDate(entry.date)}`
         : formatDate(entry?.date);
+      const title = typeof entry?.title === 'string' ? entry.title : '';
+      const sourceName = typeof entry?.source === 'string' && entry.source.trim()
+        ? entry.source.trim()
+        : (title.match(/^إضافة مصدر جديد:\s*(.+)$/)?.[1]
+          || title.match(/^(?:تحديث إصدار|تغيرت حالة)\s+(.+)$/)?.[1]
+          || '');
+      const normalizeName = value => String(value || '').trim().toLocaleLowerCase();
+      const matchingPlugin = sourceName && $('#plugins .plugin-card').some(card =>
+        normalizeName(card.querySelector('h3')?.textContent) === normalizeName(sourceName)
+      );
+      const targetAttributes = matchingPlugin
+        ? ` data-plugin-target="${escapeHTML(sourceName)}" tabindex="0" role="link" aria-label="${escapeHTML(`فتح إضافة ${sourceName} في المكتبة`)}"`
+        : '';
 
       return `
-        <article class="changelog-entry changelog-entry--${type.className}">
+        <article class="changelog-entry changelog-entry--${type.className}"${targetAttributes}>
           <span class="changelog-dot"></span>
           <div class="changelog-content">
             <div class="changelog-meta">
@@ -1371,6 +1384,20 @@ async function loadChangelog() {
         </article>
       `;
     }).join('');
+
+    container.querySelectorAll('[data-plugin-target]').forEach(entryCard => {
+      const openPlugin = () => {
+        document.dispatchEvent(new CustomEvent('nuvio:open-plugin', {
+          detail: { name: entryCard.dataset.pluginTarget }
+        }));
+      };
+      entryCard.addEventListener('click', openPlugin);
+      entryCard.addEventListener('keydown', event => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        openPlugin();
+      });
+    });
   } catch (error) {
     if (requestId !== changelogRequestId) return;
     container.innerHTML = `<p class="muted">${t('تعذر تحميل سجل التغييرات حالياً.')}</p>`;
