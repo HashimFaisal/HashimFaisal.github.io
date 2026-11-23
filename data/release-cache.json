@@ -1,5 +1,5 @@
 {
-  "cached_at": "2026-11-23T04:26:59.425181+00:00",
+  "cached_at": "2026-11-23T04:32:01.032621+00:00",
   "release": {
     "url": "https://api.github.com/repos/luqmanfadlli/NuvioMobile-Enhanced/releases/454068184",
     "assets_url": "https://api.github.com/repos/luqmanfadlli/NuvioMobile-Enhanced/releases/454068184/assets",
@@ -69,7 +69,7 @@
         "state": "uploaded",
         "size": 54139882,
         "digest": "sha256:120653fb09456ca54f19a21eac8c556df6b19b22dab5396988f855e3176ab410",
-        "download_count": 1068,
+        "download_count": 1071,
         "created_at": "2026-11-21T23:51:50Z",
         "updated_at": "2026-11-21T23:52:00Z",
         "browser_download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-arm64-v8a-release.apk"
