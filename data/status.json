@@ -1,11 +1,11 @@
 {
-  "checked_at": "2026-11-23T04:03:19.430934+00:00",
+  "checked_at": "2026-11-23T04:15:41.529450+00:00",
   "ok": true,
   "passed": 71,
   "total": 71,
   "manifest_coverage": {
-    "configured": 25,
-    "healthy": 25,
+    "configured": 26,
+    "healthy": 26,
     "failed": 0
   },
   "source_retrieval": {
@@ -1000,6 +1000,19 @@
       "recommended_action": "No action required."
     },
     {
+      "name": "StremList",
+      "type": "manifest",
+      "ok": true,
+      "http_status": 200,
+      "version": "2.17.2",
+      "manifest_id": "com.stremlist.fc69e82a393cea05",
+      "url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
       "name": "Posters+",
       "type": "setup",
       "ok": true,
@@ -1018,18 +1031,6 @@
       "http_status": 200,
       "page_title": "Reciperr · What’s trending in movies and series",
       "url": "https://reciperr.app/",
-      "failure_code": "healthy",
-      "failure_category": "healthy",
-      "severity": "info",
-      "recommended_action": "No action required."
-    },
-    {
-      "name": "StremList",
-      "type": "setup",
-      "ok": true,
-      "http_status": 200,
-      "page_title": "Stremlist - Your watchlists and lists, all in Stremio",
-      "url": "https://stremlist.com/",
       "failure_code": "healthy",
       "failure_category": "healthy",
       "severity": "info",
