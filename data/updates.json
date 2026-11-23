@@ -223,50 +223,5 @@
     "url": "https://catalog.nuvio.tv/manifest.json",
     "publishedAt": "2026-11-22T07:52:40.260834Z",
     "expiresAt": "2026-11-23T07:52:40.260834Z"
-  },
-  {
-    "id": "addon:Torrentio:added:0.0.15",
-    "type": "addon",
-    "title": {
-      "ar": "مصدر جديد: Torrentio",
-      "en": "New source: Torrentio"
-    },
-    "description": {
-      "ar": "تمت إضافة Torrentio إلى مصادر Nuvio. الإصدار: 0.0.15.",
-      "en": "Torrentio has been added to Nuvio sources. Version: 0.0.15."
-    },
-    "url": "https://torrentio.strem.fun/manifest.json",
-    "publishedAt": "2026-11-22T06:00:30.527023Z",
-    "expiresAt": "2026-11-23T06:00:30.527023Z"
-  },
-  {
-    "id": "addon:AIOMetadata:added:4.1.0",
-    "type": "addon",
-    "title": {
-      "ar": "مصدر جديد: AIOMetadata",
-      "en": "New source: AIOMetadata"
-    },
-    "description": {
-      "ar": "تمت إضافة AIOMetadata إلى مصادر Nuvio. الإصدار: 4.1.0.",
-      "en": "AIOMetadata has been added to Nuvio sources. Version: 4.1.0."
-    },
-    "url": "https://aiometadata.elfhosted.com/configure",
-    "publishedAt": "2026-11-22T06:00:30.527023Z",
-    "expiresAt": "2026-11-23T06:00:30.527023Z"
-  },
-  {
-    "id": "addon:TMDB Discover+:added:2.14.7+49f99dd0e277",
-    "type": "addon",
-    "title": {
-      "ar": "مصدر جديد: TMDB Discover+",
-      "en": "New source: TMDB Discover+"
-    },
-    "description": {
-      "ar": "تمت إضافة TMDB Discover+ إلى مصادر Nuvio. الإصدار: 2.14.7+49f99dd0e277.",
-      "en": "TMDB Discover+ has been added to Nuvio sources. Version: 2.14.7+49f99dd0e277."
-    },
-    "publishedAt": "2026-11-22T06:00:30.527023Z",
-    "expiresAt": "2026-11-23T06:00:30.527023Z",
-    "url": "https://tmdb-discover-plus.elfhosted.com/"
   }
 ]
