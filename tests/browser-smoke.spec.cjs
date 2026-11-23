@@ -286,7 +286,7 @@ test('verified no-key addon manifests expose direct Nuvio install actions', asyn
     { name: 'SubMaker', url: 'https://submaker.elfhosted.com/manifest.json' },
     { name: 'BetterPosters (btttr)', url: 'https://btttr.cc/manifest.json' },
     { name: 'CouchPilot', url: 'https://couchpilot.nl/manifest.json' },
-    { name: 'Pictorium', url: 'https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json', label: 'فتح في Nuvio' }
+    { name: 'Pictorium', url: 'https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json' }
   ];
 
   for (const item of items) {
@@ -294,9 +294,13 @@ test('verified no-key addon manifests expose direct Nuvio install actions', asyn
     await expect(card).toHaveCount(1);
     await expect(card.locator('.manifest-url')).toHaveText(item.url);
     await expect(card.locator('.share-btn')).toBeVisible();
-    await expect(card.locator('.share-btn')).toHaveText(item.label || 'تثبيت في Nuvio');
+    await expect(card.locator('.share-btn')).toHaveText('تثبيت في Nuvio');
     await expect(card.locator('.card-status')).toHaveAttribute('data-check', item.name);
   }
+
+  const installLabels = await page.locator('.plugin-card:not(.subdl-card) .share-btn').allTextContents();
+  expect(installLabels.length).toBeGreaterThan(0);
+  expect(installLabels.every(label => label === 'تثبيت في Nuvio')).toBe(true);
 });
 
 test('personal metadata cards expose setup links without publishing per-user manifest URLs', async ({ page }) => {

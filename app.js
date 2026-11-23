@@ -206,7 +206,7 @@ const translations = {
   'تحديث': 'Update',
   'نسخ الرابط': 'Copy Link',
   'تثبيت في Nuvio': 'Install in Nuvio',
-  'ضغط للنسخ والفتح Nuvio': 'Tap to copy and open Nuvio',
+  'ضغط للنسخ والفتح Nuvio': 'Install in Nuvio',
   'تم نسخ رابط المشاركة': 'Share link copied',
   'فتح Manifest ↗': 'Open Manifest ↗',
   'جارٍ التحقق': 'Checking',
@@ -326,7 +326,7 @@ const translations = {
   'بدء سجل التغييرات': 'Changelog initialized',
   'تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.': 'The manifest was added to the list of sources monitored by the system.',
   'تم تفعيل سجل التغييرات الآلي في لوحة التحكم.': 'The automated changelog was enabled in the control panel.',
-  'طريقة التثبيت: اضغط للفتح في Nuvio، وانتقل إلى الإعدادات، ثم المحتوى والاكتشاف، ثم الملحقات، والصق الرابط في خانة Manifest.': 'Installation method: Tap to open in Nuvio, then go to Settings → Content & Discovery → Plugins and paste the link into the Manifest field.',
+  'طريقة التثبيت: اضغط على زر «تثبيت في Nuvio»، ثم أكمل إضافة Manifest داخل التطبيق إذا طُلب منك ذلك.': 'Installation method: Tap “Install in Nuvio”, then finish adding the Manifest in the app if prompted.',
   'كتالوج لاكتشاف الأفلام والمسلسلات ضمن إضافة Nuvio Catalog.': 'A catalog for discovering movies and series through the Nuvio Catalog add-on.',
   'كتالوج وبيانات للأفلام والمسلسلات من TMDB، مع خيارات للبحث والتصنيفات واللغات.': 'A movie and series catalog powered by TMDB, with search, categories, and language options.',
   'كتالوج للأفلام والمسلسلات مع بيانات ومصادر إضافية.': 'A movie and series catalog with additional metadata and sources.',
@@ -452,12 +452,9 @@ function updateShareButtonLabels() {
     if (!button) return;
 
     const name = card.querySelector('h3')?.textContent.trim() || 'Nuvio';
-    const isExternal = card.querySelector('.type-tag')?.classList.contains('external');
     const label = card.classList.contains('subdl-card')
       ? (currentLang === 'en' ? 'Click to get API' : 'اضغط للحصول على API')
-      : isExternal
-        ? t('تثبيت في Nuvio')
-        : t('ضغط للنسخ والفتح Nuvio');
+      : t('تثبيت في Nuvio');
 
     button.textContent = label;
     button.setAttribute('aria-label', `${label} ${name}`);
@@ -649,9 +646,7 @@ function installShareButtons() {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'copy-btn share-btn';
-    const buttonLabel = card.dataset.shareLabel || (type === 'nuvio'
-      ? t('ضغط للنسخ والفتح Nuvio')
-      : t('تثبيت في Nuvio'));
+    const buttonLabel = t('تثبيت في Nuvio');
 
     button.textContent = buttonLabel;
     button.setAttribute('aria-label', `${buttonLabel} ${name}`);
