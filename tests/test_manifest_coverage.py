@@ -26,7 +26,7 @@ class ManifestCoverageTests(unittest.TestCase):
         self.assertEqual(len(card_names), 30, "Expected all 30 published plugin cards after removing XRDB, TOP Posters, and Stremio Community Subtitles.")
         self.assertEqual(len(card_names), len(set(card_names)), "Duplicate addon cards detected.")
         setup_names = set(check_links.SETUP_PAGES)
-        self.assertEqual(len(setup_names), 3, "Expected 3 remaining setup-page health checks after removing XRDB, TOP Posters, and Stremio Community Subtitles.")
+        self.assertEqual(len(setup_names), 2, "Expected 2 remaining setup-page health checks after removing XRDB, TOP Posters, and Stremio Community Subtitles.")
         manifest_card_names = set(card_names) - {"AIOMetadata", "TMDB Discover+"} - setup_names
         self.assertEqual(
             manifest_card_names,
@@ -43,7 +43,7 @@ class ManifestCoverageTests(unittest.TestCase):
             self.assertIn(f'href="{url}"', html, f"Missing official setup link for {name}.")
         self.assertNotIn("AIOMetadata", check_links.MANIFESTS)
         self.assertNotIn("TMDB Discover+", check_links.MANIFESTS)
-        for name in ("Subtitles: Extended", "RosettaSubs", "SubSense", "SubMaker", "BetterPosters (btttr)", "CouchPilot", "Pictorium"):
+        for name in ("Subtitles: Extended", "RosettaSubs", "SubSense", "SubMaker", "BetterPosters (btttr)", "CouchPilot", "Pictorium", "StremList"):
             url = check_links.MANIFESTS[name]
             heading = html.index(f"<h3>{name}</h3>")
             card_start = html.rfind("<article", 0, heading)
