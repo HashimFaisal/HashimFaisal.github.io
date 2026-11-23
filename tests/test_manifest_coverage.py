@@ -43,7 +43,7 @@ class ManifestCoverageTests(unittest.TestCase):
             self.assertIn(f'href="{url}"', html, f"Missing official setup link for {name}.")
         self.assertNotIn("AIOMetadata", check_links.MANIFESTS)
         self.assertNotIn("TMDB Discover+", check_links.MANIFESTS)
-        for name in ("Subtitles: Extended", "RosettaSubs", "SubSense", "SubMaker", "BetterPosters (btttr)", "CouchPilot", "Pictorium", "StremList", "Reciperr":
+        for name in ("Subtitles: Extended", "RosettaSubs", "SubSense", "SubMaker", "BetterPosters (btttr)", "CouchPilot", "Pictorium", "StremList", "Reciperr"):
             url = check_links.MANIFESTS[name]
             heading = html.index(f"<h3>{name}</h3>")
             card_start = html.rfind("<article", 0, heading)
