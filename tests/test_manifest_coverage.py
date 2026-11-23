@@ -23,10 +23,10 @@ class ManifestCoverageTests(unittest.TestCase):
             name = re.sub(r"<[^>]+>", "", match.group(2)).strip()
             card_names.append("OpenSubtitles" if name == "OpenSubtitles v3" else name)
 
-        self.assertEqual(len(card_names), 31, "Expected all 31 published plugin cards after removing XRDB and TOP Posters.")
+        self.assertEqual(len(card_names), 30, "Expected all 30 published plugin cards after removing XRDB, TOP Posters, and Stremio Community Subtitles.")
         self.assertEqual(len(card_names), len(set(card_names)), "Duplicate addon cards detected.")
         setup_names = set(check_links.SETUP_PAGES)
-        self.assertEqual(len(setup_names), 4, "Expected 4 remaining setup-page health checks after removing XRDB and TOP Posters.")
+        self.assertEqual(len(setup_names), 3, "Expected 3 remaining setup-page health checks after removing XRDB, TOP Posters, and Stremio Community Subtitles.")
         manifest_card_names = set(card_names) - {"AIOMetadata", "TMDB Discover+"} - setup_names
         self.assertEqual(
             manifest_card_names,
@@ -85,6 +85,7 @@ class ManifestCoverageTests(unittest.TestCase):
         self.assertNotIn("TMDB Discover+", check_links.MANIFESTS)
         self.assertNotIn("ExtendedRatings (XRDB)", html)
         self.assertNotIn("TOP Posters", html)
+        self.assertNotIn("Stremio Community Subtitles", html)
 
     def test_manifest_http_errors_keep_the_status_code(self):
         error = HTTPError(
