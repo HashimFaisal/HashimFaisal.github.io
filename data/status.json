@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-23T03:27:57.200700+00:00",
+  "checked_at": "2026-11-23T04:03:19.430934+00:00",
   "ok": true,
-  "passed": 74,
-  "total": 74,
+  "passed": 71,
+  "total": 71,
   "manifest_coverage": {
     "configured": 25,
     "healthy": 25,
@@ -1000,48 +1000,12 @@
       "recommended_action": "No action required."
     },
     {
-      "name": "Stremio Community Subtitles",
-      "type": "setup",
-      "ok": true,
-      "http_status": 200,
-      "page_title": "Welcome - Community Subtitles",
-      "url": "https://stremio-community-subtitles.top/",
-      "failure_code": "healthy",
-      "failure_category": "healthy",
-      "severity": "info",
-      "recommended_action": "No action required."
-    },
-    {
       "name": "Posters+",
       "type": "setup",
       "ok": true,
       "http_status": 200,
       "page_title": "Posters+ // Web",
       "url": "https://postersplus.slokker.cc/",
-      "failure_code": "healthy",
-      "failure_category": "healthy",
-      "severity": "info",
-      "recommended_action": "No action required."
-    },
-    {
-      "name": "ExtendedRatings (XRDB)",
-      "type": "setup",
-      "ok": true,
-      "http_status": 200,
-      "page_title": "Configurator — XRDB",
-      "url": "https://xrdb.elfhosted.com/configurator",
-      "failure_code": "healthy",
-      "failure_category": "healthy",
-      "severity": "info",
-      "recommended_action": "No action required."
-    },
-    {
-      "name": "TOP Posters",
-      "type": "setup",
-      "ok": true,
-      "http_status": 200,
-      "page_title": "Stremio &amp; Nuvio addons — TOP Posters",
-      "url": "https://top-posters.com/addons",
       "failure_code": "healthy",
       "failure_category": "healthy",
       "severity": "info",
@@ -1722,7 +1686,7 @@
   "risk_forecast": {
     "status": "healthy",
     "integrity": {
-      "input_result_count": 74,
+      "input_result_count": 71,
       "evaluated_failure_count": 0,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
