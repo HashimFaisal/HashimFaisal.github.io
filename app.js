@@ -327,6 +327,7 @@ const translations = {
   'تم إدراج Manifest ضمن قائمة المصادر التي يفحصها النظام.': 'The manifest was added to the list of sources monitored by the system.',
   'تم تفعيل سجل التغييرات الآلي في لوحة التحكم.': 'The automated changelog was enabled in the control panel.',
   'طريقة التثبيت: اضغط على زر «تثبيت في Nuvio»، ثم أكمل إضافة Manifest داخل التطبيق إذا طُلب منك ذلك.': 'Installation method: Tap “Install in Nuvio”, then finish adding the Manifest in the app if prompted.',
+  'طريقة التثبيت: اضغط للفتح في Nuvio، وانتقل إلى الإعدادات، ثم المحتوى والاكتشاف، ثم الملحقات، والصق الرابط في خانة Manifest.': 'Installation: Tap to open in Nuvio, then go to Settings → Content & Discovery → Add-ons and paste the link into the Manifest field.',
   'كتالوج لاكتشاف الأفلام والمسلسلات ضمن إضافة Nuvio Catalog.': 'A catalog for discovering movies and series through the Nuvio Catalog add-on.',
   'كتالوج وبيانات للأفلام والمسلسلات من TMDB، مع خيارات للبحث والتصنيفات واللغات.': 'A movie and series catalog powered by TMDB, with search, categories, and language options.',
   'كتالوج للأفلام والمسلسلات مع بيانات ومصادر إضافية.': 'A movie and series catalog with additional metadata and sources.',
