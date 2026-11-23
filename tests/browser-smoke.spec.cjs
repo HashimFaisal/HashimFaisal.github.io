@@ -91,14 +91,14 @@ test('all five dashboard destinations open and return to the dashboard', async (
 });
 
 
-test('all 31 monitored cards receive their published health status', async ({ page }) => {
+test('all 30 monitored cards receive their published health status', async ({ page }) => {
   const names = await page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
     nodes.map(node => node.dataset.check).filter(Boolean)
   );
-  expect(names).toHaveLength(31);
-  expect(new Set(names).size).toBe(31);
+  expect(names).toHaveLength(30);
+  expect(new Set(names).size).toBe(30);
 
-  const setupNames = new Set(["Stremio Community Subtitles","Pictorium","Posters+","ExtendedRatings (XRDB)","TOP Posters","Reciperr","StremList"]);
+  const setupNames = new Set(["Pictorium","Posters+","Reciperr","StremList"]);
   const checks = names.map(name => ({
     name,
     type: setupNames.has(name) ? 'setup' : 'manifest',
