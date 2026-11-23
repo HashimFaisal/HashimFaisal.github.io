@@ -410,6 +410,19 @@ const translations = {
 
   "ربط نسخ Nuvio بالفحص الذكي والأخبار وأرقام الإصدارات": "Connected Nuvio editions to smart link checks, news, and version numbers",
   "إضافة فحص مباشر لكل روابط APK وIPA وWGT وTPK وIPK وEXE في بطاقات نسخ Nuvio، وإظهار رقم الإصدار وحالة الروابط على كل بطاقة، مع دعم العربية والإنجليزية.": "Added live checks for every APK, IPA, WGT, TPK, IPK, and EXE link in Nuvio edition cards, displaying each version number and link status in Arabic and English.",
+
+  'قوائم وكتالوجات': 'Lists & Catalogs',
+  'بيانات وتوصيات': 'Metadata & Recommendations',
+  'الملصقات': 'Posters',
+  'استكشف قوائم متنوعة من الأفلام والمسلسلات، واكتشف عناوين جديدة لمشاهدتها عبر Nuvio.': 'Explore a variety of movie and TV show lists and discover new titles to watch on Nuvio.',
+  'استورد قوائمك من IMDb وTrakt وSimkl وMDBList واجمع أفلامك ومسلسلاتك المفضلة في مكان واحد؛ مع تثبيت مباشر في Nuvio عبر رابط Manifest المُجهّز.': 'Import your lists from IMDb, Trakt, Simkl, and MDBList to bring your favorite movies and shows together in one place. Install directly in Nuvio using the configured Manifest URL.',
+  'كتالوجات وبيانات وصفية وتوصيات لـ Nuvio. يتوفر تثبيت سريع عام دون حساب أو مفتاح؛ مفتاح TMDB المجاني والذكاء الاصطناعي اختياريان للميزات الشخصية.': 'Catalogs, metadata, and recommendations for Nuvio. A public quick-install option is available without an account or API key; a free TMDB key and AI are optional for personalized features.',
+  'ملصقات ذكية وكتالوجات عامة؛ Manifest للتثبيت المباشر، ويمكن تخصيص القوائم وربط الحسابات من صفحة الإعداد.': 'Smart posters and public catalogs with a direct-install Manifest. Customize lists and connect accounts from the configuration page.',
+  'إضافة ملصقات وكتالوجات Pictorium بإعدادات الشارات والتقييمات التي اخترتها؛ رابط Manifest مخصص وجاهز للتثبيت المباشر في Nuvio.': 'Pictorium posters and catalogs with your selected badge and rating settings. A custom Manifest URL is ready for direct installation in Nuvio.',
+  'تخصيص الملصقات وإضافة التقييمات والشارات وكتالوجات Trending؛ رابط Manifest مخصص بإعداداتك وجاهز للتثبيت المباشر في Nuvio.': 'Customize posters with ratings, badges, and Trending catalogs. Your configured Manifest URL is ready for direct installation in Nuvio.',
+  'الموقع والإعدادات ↗': 'Website & Settings ↗',
+  'الإعداد والتخصيص ↗': 'Setup & Customization ↗',
+  'الإعداد والخيارات ↗': 'Setup & Options ↗'
 };
 
 const reverseTranslations = Object.fromEntries(
