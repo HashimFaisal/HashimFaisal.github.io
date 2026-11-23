@@ -112,11 +112,11 @@
 
     <section class="stats-grid" id="status">
       <article class="stat-card"><span>حالة الفحص</span><strong id="health-state" aria-live="polite" aria-atomic="true">—</strong><small id="health-detail"></small></article>
-      <article class="stat-card"><span>الإضافات المفحوصة</span><strong id="addon-count">—</strong><small>Manifest endpoints</small></article>
+      <article class="stat-card"><span>الإضافات المفحوصة</span><strong id="addon-count">—</strong><small>Manifest + setup pages</small></article>
       <article class="stat-card"><span>أحدث إصدار</span><strong id="release-version">—</strong><small id="release-date">Nuvio Mobile</small></article>
       <article class="stat-card"><span>ملفات التنزيل</span><strong id="download-count">—</strong><small>APK & IPA assets</small></article>
 
-      <article class="stat-card"><span>مصادر سليمة</span><strong id="healthy-count">—</strong><small>Manifest متاح</small></article>
+      <article class="stat-card"><span>مصادر سليمة</span><strong id="healthy-count">—</strong><small>Manifest / setup page</small></article>
       <article class="stat-card"><span>مصادر متعطلة</span><strong id="unhealthy-count">—</strong><small>تحتاج مراجعة</small></article>
       <article class="stat-card">
         <span>آخر فحص</span>
@@ -200,6 +200,46 @@
           <div class="card-actions"><button class="copy-btn" data-copy="https://subtitlevideo.com/stremio/en,ar/manifest.json">نسخ الرابط</button><a href="https://subtitlevideo.com/stremio/en,ar/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a><a href="https://www.subtitlevideo.com/stremio-subtitles-addon.php" target="_blank" rel="noopener">تعديل اللغات ↗</a></div>
           <div class="card-status" data-check="SubtitleVideo"><i></i> تظهر الحالة بعد تحميل التقرير</div>
         </article>
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%8C%90?style=google" alt="Subtitles: Extended"><span class="type-tag external">الترجمات</span></div>
+          <h3>Subtitles: Extended</h3>
+          <p>يجمع الترجمات ويضيف معلومات وحقائق مرتبطة بالعناوين من خلال صفحة الإعداد الرسمية.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://popcorn-notes.lsoares.workers.dev/" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="Subtitles: Extended"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%93%9A?style=google" alt="RosettaSubs"><span class="type-tag external">الترجمات</span></div>
+          <h3>RosettaSubs</h3>
+          <p>إضافة تجميع ترجمات للأفلام والمسلسلات؛ افتح صفحة الإعداد للحصول على رابط التثبيت الخاص بك.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://rosettasubs.onrender.com/configure" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="RosettaSubs"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%92%AC?style=google" alt="SubSense"><span class="type-tag external">الترجمات</span></div>
+          <h3>SubSense</h3>
+          <p>يجمع الترجمات من مصادر متعددة للغات التي تختارها؛ بعض المصادر الاختيارية تحتاج مفاتيح API.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://subsense.nepiraw.com/configure" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="SubSense"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%93%9D?style=google" alt="SubMaker"><span class="type-tag external">الترجمات</span></div>
+          <h3>SubMaker</h3>
+          <p>يجمع الترجمات ويرتبها ويدعم ترجمتها بالذكاء الاصطناعي؛ بعض مزودي الترجمة يحتاجون مفاتيح API.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://submaker.elfhosted.com/configure" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="SubMaker"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="subtitles">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%8C%8D?style=google" alt="Stremio Community Subtitles"><span class="type-tag external">الترجمات</span></div>
+          <h3>Stremio Community Subtitles</h3>
+          <p>ترجمات يشاركها المجتمع؛ يتطلب إنشاء حساب للحصول على رابط تثبيت شخصي.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://stremio-community-subtitles.top/" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="Stremio Community Subtitles"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
         <article class="plugin-card" data-category="catalog">
           <div class="plugin-top"><img loading="lazy" decoding="async" src="https://github.com/Digok.png" alt="Rodrigo Catalog"><span class="type-tag external">كتالوج</span></div>
           <h3>Rodrigo's Catalog</h3><p>كتالوج لاكتشاف العناوين وبيانات الأفلام والمسلسلات، وليس مشغّل فيديو.</p>
@@ -274,6 +314,22 @@
           <div class="card-actions"><button class="copy-btn" data-copy="https://mylistsaddon.com/manifest.json">نسخ الرابط</button><a href="https://mylistsaddon.com/manifest.json" target="_blank" rel="noopener">فتح Manifest ↗</a></div>
           <div class="card-status" data-check="My Lists"><i></i> <span data-i18n="الإصدار">الإصدار</span> 1.5.8</div>
         </article>
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%8E%AC?style=google" alt="Reciperr"><span class="type-tag external">قوائم وكتالوجات</span></div>
+          <h3>Reciperr</h3>
+          <p>قوائم أفلام ومسلسلات تتعلم من تقييماتك وتساعدك على اكتشاف عناوين جديدة.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://reciperr.app/" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="Reciperr"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="catalog">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%93%8B?style=google" alt="StremList"><span class="type-tag external">قوائم وكتالوجات</span></div>
+          <h3>StremList</h3>
+          <p>استيراد قوائم IMDb وTrakt وSimkl وMDBList ومواقع أخرى وعرض كل قائمة كصف كتالوج مستقل.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://stremlist.com/" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="StremList"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
 
         <article class="plugin-card" data-category="nuvio">
           <div class="plugin-top"><img loading="lazy" decoding="async" src="https://torrentio.strem.fun/images/logo_v1.png" alt="Torrentio"><span class="type-tag" aria-label="Torrentio version 0.0.15">v0.0.15</span></div>
@@ -338,6 +394,54 @@
           <code class="manifest-url">https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json</code>
           <div class="card-actions"><button class="copy-btn" data-copy="https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/eyJ2ZXJzaW9uIjoxLCJ1cHN0cmVhbXMiOlsiaHR0cHM6Ly92My1jaW5lbWV0YS5zdHJlbS5pby9tYW5pZmVzdC5qc29uIl19/manifest.json">نسخ الرابط</button><a href="https://nuvio-better-posters.nuvio-better-posters-addon.workers.dev/configure" target="_blank" rel="noopener noreferrer">إعداد كتالوج آخر ↗</a></div>
           <div class="card-status" data-check="BetterPosters for Nuvio"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%9B%8B%EF%B8%8F?style=google" alt="CouchPilot"><span class="type-tag external">بيانات وتوصيات</span></div>
+          <h3>CouchPilot</h3>
+          <p>كتالوجات وتوصيات شخصية وبيانات محسّنة؛ يحتاج مفتاح TMDB مجاني، والذكاء الاصطناعي اختياري.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://couchpilot.nl/" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="CouchPilot"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%96%BC%EF%B8%8F?style=google" alt="BetterPosters (btttr)"><span class="type-tag external">الملصقات</span></div>
+          <h3>BetterPosters (btttr)</h3>
+          <p>ملصقات ذكية مع شارات للتقييم والنوع والجودة؛ يدعم كتالوجات مستقلة أو رابط ملصقات لإضافة أخرى.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://btttr.cc/configure" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="BetterPosters (btttr)"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%8E%A8?style=google" alt="Pictorium"><span class="type-tag external">الملصقات</span></div>
+          <h3>Pictorium</h3>
+          <p>إنشاء ملصقات مخصصة عالية الدقة مع شارات تقييم ومعلومات؛ الإعداد العام يطلب مفتاح TMDB.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://pictorium.elfhosted.com/" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="Pictorium"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%AA%84?style=google" alt="Posters+"><span class="type-tag external">الملصقات</span></div>
+          <h3>Posters+</h3>
+          <p>تخصيص الملصقات وإضافة التقييمات والشارات، مع إمكانية إنشاء كتالوجات Trending.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://postersplus.slokker.cc/" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="Posters+"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%E2%AD%90?style=google" alt="ExtendedRatings (XRDB)"><span class="type-tag external">الملصقات</span></div>
+          <h3>ExtendedRatings (XRDB)</h3>
+          <p>ملصقات بتقييمات وشارات ومعلومات إضافية؛ أنشئ إعدادك واحصل على رابطك من صفحة Configurator.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://xrdb.elfhosted.com/configurator" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="ExtendedRatings (XRDB)"><i></i> تظهر الحالة بعد تحميل التقرير</div>
+        </article>
+        <article class="plugin-card" data-category="ratings">
+          <div class="plugin-top"><img loading="lazy" decoding="async" src="https://emojicdn.elk.sh/%F0%9F%8F%86?style=google" alt="TOP Posters"><span class="type-tag external">الملصقات</span></div>
+          <h3>TOP Posters</h3>
+          <p>تكامل ملصقات وتقييمات عبر Addon Wrapper أو إضافات متوافقة؛ يحتاج API key وتتوفر خطة مجانية بحدود استخدام.</p>
+          <div class="manifest-label">صفحة الإعداد · SETUP</div>
+          <div class="card-actions"><a href="https://top-posters.com/addons" target="_blank" rel="noopener noreferrer">فتح الإعداد ↗</a></div>
+          <div class="card-status" data-check="TOP Posters"><i></i> تظهر الحالة بعد تحميل التقرير</div>
         </article>
 
 </div>
