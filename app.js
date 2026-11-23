@@ -1363,7 +1363,7 @@ async function loadChangelog() {
           || title.match(/^(?:تحديث إصدار|تغيرت حالة)\s+(.+)$/)?.[1]
           || '');
       const normalizeName = value => String(value || '').trim().toLocaleLowerCase();
-      const matchingPlugin = sourceName && $('#plugins .plugin-card').some(card =>
+      const matchingPlugin = sourceName && $$('#plugins .plugin-card').some(card =>
         normalizeName(card.querySelector('h3')?.textContent) === normalizeName(sourceName)
       );
       const targetAttributes = matchingPlugin
