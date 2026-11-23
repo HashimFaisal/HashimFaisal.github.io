@@ -107,5 +107,20 @@ class ChangeSummaryTests(unittest.TestCase):
         }
         self.assertEqual(list(safe_sources), ["Valid source"])
 
+    def test_event_date_parses_utc_and_naive_values(self):
+        utc = check_links.parse_event_date("2026-11-23T10:00:00Z")
+        naive = check_links.parse_event_date("2026-11-23T10:00:00")
+        self.assertEqual(utc.utcoffset().total_seconds(), 0)
+        self.assertEqual(naive.utcoffset().total_seconds(), 0)
+        self.assertEqual(utc, naive)
+
+    def test_event_date_invalid_types_use_aware_fallback(self):
+        fallback = check_links.datetime(2026, 11, 23, tzinfo=check_links.timezone.utc)
+        for value in (None, 123, [], {}, "not a date", ""):
+            with self.subTest(value=value):
+                parsed = check_links.parse_event_date(value, fallback=fallback)
+                self.assertEqual(parsed, fallback)
+                self.assertEqual(parsed.utcoffset().total_seconds(), 0)
+
 if __name__ == "__main__":
     unittest.main()
