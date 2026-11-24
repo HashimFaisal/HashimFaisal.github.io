@@ -72,13 +72,21 @@ jobs:
 
           updated, count = re.subn(pattern, replace, html, flags=re.IGNORECASE)
 
-          if count != 7:
+          # Validate every referenced local asset against the actual deployment
+          # artifact instead of assuming a fixed number of CSS/JS files.
+          local_assets = sorted({match.group(2) for match in re.finditer(pattern, updated, flags=re.IGNORECASE)})
+          missing_assets = [
+              asset for asset in local_assets
+              if not (Path("public") / asset).is_file()
+          ]
+          if missing_assets:
               raise SystemExit(
-                  f"Expected 7 local CSS/JS references, found {count}; refusing to deploy."
+                  "Referenced local assets are missing from the deployment artifact: "
+                  + ", ".join(missing_assets)
               )
 
           path.write_text(updated)
-          print(f"Versioned {count} local assets with commit {version}")
+          print(f"Validated and versioned {len(local_assets)} local assets with commit {version}")
 
           # Embed the public JSON data in the page so stalled secondary
           # requests cannot leave dashboard widgets on their loading labels.
