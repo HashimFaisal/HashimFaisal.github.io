@@ -374,7 +374,6 @@ test('five dashboard cards keep their text in order without overlap', async ({ p
     nodes.map(card => {
       const cardRect = card.getBoundingClientRect();
       const selectors = [
-        '.nuvio-launch-icon',
         '.nuvio-launch-code',
         'strong',
         '.nuvio-launch-description',
@@ -410,6 +409,7 @@ test('five dashboard cards keep their text in order without overlap', async ({ p
   const viewportWidth = await page.evaluate(() => window.innerWidth);
   console.log('DASHBOARD_CARD_GEOMETRY', JSON.stringify({ viewportWidth, cards }));
   expect(cards).toHaveLength(5);
+  await expect(page.locator('#nuvio-launch-grid .nuvio-launch-icon')).toHaveCount(0);
   for (const card of cards) {
     expect(card.items.every(item => !item.missing), JSON.stringify(card)).toBe(true);
     for (let i = 1; i < card.items.length; i++) {
