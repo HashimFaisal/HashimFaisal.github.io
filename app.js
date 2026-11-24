@@ -1359,11 +1359,11 @@ async function loadChangelog() {
       const title = typeof entry?.title === 'string' ? entry.title : '';
       const sourceName = typeof entry?.source === 'string' && entry.source.trim()
         ? entry.source.trim()
-        : (title.match(/^إضافة مصدر جديد:\\s*(.+)$/)?.[1]
-          || title.match(/^(?:تحديث إصدار|تغيرت حالة)\\s+(.+)$/)?.[1]
-          || title.match(/^صدور (?:تحديث|إصدار مستقر) من Nuvio:\\s*(.+)$/)?.[1]
+        : (title.match(/^إضافة مصدر جديد:\s*(.+)$/)?.[1]
+          || title.match(/^(?:تحديث إصدار|تغيرت حالة)\s+(.+)$/)?.[1]
+          || title.match(/^صدور (?:تحديث|إصدار مستقر) من Nuvio:\s*(.+)$/)?.[1]
           || '');
-      const normalizeName = value => String(value || '').replace(/\\s+/g, ' ').trim().toLocaleLowerCase();
+      const normalizeName = value => String(value || '').replace(/\s+/g, ' ').trim().toLocaleLowerCase();
       const sourceUrl = safeHttpsUrl(entry?.source_url);
       const sourceProject = (() => {
         if (!sourceUrl) return '';
@@ -1375,8 +1375,8 @@ async function loadChangelog() {
         } catch { return ''; }
       })();
       const candidates = [
-        ...$('#plugins .plugin-card').map(card => ({ card, section: 'plugins' })),
-        ...$('#downloads .downloads-device-card, #downloads .release-asset-card, #downloads .enhanced-latest-release')
+        ...$( '#plugins .plugin-card').map(card => ({ card, section: 'plugins' })),
+        ...$( '#downloads .downloads-device-card, #downloads .release-asset-card, #downloads .enhanced-latest-release')
           .map(card => ({ card, section: 'downloads' }))
       ];
       const matchingTarget = candidates.find(({ card }) =>
