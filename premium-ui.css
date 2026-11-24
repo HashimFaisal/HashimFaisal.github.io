@@ -1753,7 +1753,7 @@ html[dir="rtl"] .live-updates__shell::before {
 
   .nuvio-launch-card {
     min-width: 0;
-    min-height: 260px;
+    min-height: 200px;
     padding: 18px;
   }
 
@@ -5337,7 +5337,7 @@ html[dir="ltr"] .nuvio-launch-card::before {
   .nuvio-launch-card,
   .nuvio-launch-card:nth-child(4),
   .nuvio-launch-card:nth-child(5) {
-    min-height: 260px;
+    min-height: 200px;
     height: auto;
   }
   .nuvio-launch-card strong { margin-top: 0; }
