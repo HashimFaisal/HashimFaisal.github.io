@@ -5330,3 +5330,8 @@ html[dir="ltr"] .nuvio-launch-card::before {
     background: linear-gradient(270deg, rgba(7,11,22,.08) 0%, rgba(7,11,22,.28) 40%, rgba(7,11,22,.9) 100%);
   }
 }
+
+
+/* Remove the five legacy icon tiles now that each dashboard card has its own artwork. */
+.nuvio-launch-icon { display: none; }
+.nuvio-launch-card strong { margin-top: 0; }
