@@ -301,7 +301,7 @@
     const cards = sectionName === 'plugins'
       ? [...section.querySelectorAll('.plugin-card')]
       : [...section.querySelectorAll('.downloads-device-card, .release-asset-card, .enhanced-latest-release')];
-    const normalizeName = value => String(value || '').replace(/\\s+/g, ' ').trim().toLocaleLowerCase();
+    const normalizeName = value => String(value || '').replace(/\s+/g, ' ').trim().toLocaleLowerCase();
     let card = cards.find(item =>
       normalizeName(item.querySelector('h3')?.textContent) === normalizeName(name)
     );
