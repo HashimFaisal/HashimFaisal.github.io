@@ -191,13 +191,28 @@
     }, '', location.href);
   }
 
-  function navigate(target) {
+  function navigate(target, options = {}) {
     if (target !== 'home' && !views[target]) return;
     if (target === currentView()) return;
 
     saveCurrentEntry();
 
-    const index = Number(history.state?.nuvioIndex) || 0;
+    let index = Number(history.state?.nuvioIndex) || 0;
+
+    // Changelog destinations get an explicit return entry. This guarantees
+    // Back restores the exact originating list and its scroll position,
+    // even when the changelog was opened from a direct URL or an older entry.
+    if (options.preserveOrigin) {
+      const originView = currentView();
+      history.pushState({
+        ...(history.state || {}),
+        nuvioApp: true,
+        nuvioView: originView,
+        nuvioScrollY: window.scrollY,
+        nuvioIndex: index + 1
+      }, '', `#${originView}`);
+      index += 1;
+    }
 
     history.pushState({
       nuvioApp: true,
@@ -333,7 +348,7 @@
     }
     if (!card) return;
 
-    navigate(sectionName);
+    navigate(sectionName, { preserveOrigin: true });
     requestAnimationFrame(() => {
       if (sectionName === 'downloads') {
         const deviceGroup = card.closest('.downloads-device-section');
