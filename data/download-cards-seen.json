@@ -22,7 +22,9 @@
     "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.2-autosync.6",
     "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.2-autosync.7",
     "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.3-autosync.1",
+    "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.3-autosync.2",
     "app:download-release:nuvio-reshaped-tv:DavidVamaiotu/NuvioTV-Reshaped:1.2.0-beta.3-autosync.3",
+    "app:download-release:nuvio-tv:NuvioMedia/NuvioTV:1.2.0-beta.4",
     "app:download-release:nuviocodeinexo:codeineXO/NuvioCodeineXO:v6.1.6"
   ]
 }

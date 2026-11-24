@@ -1,5 +1,35 @@
 [
   {
+    "id": "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.3-autosync.2",
+    "type": "app",
+    "title": {
+      "ar": "تحديث جديد لتطبيق Nuvio Reshaped Mobile: 1.1.0-beta.3-autosync.2",
+      "en": "New Nuvio Reshaped Mobile app release: 1.1.0-beta.3-autosync.2"
+    },
+    "description": {
+      "ar": "صدر إصدار جديد من Nuvio Reshaped Mobile برقم 1.1.0-beta.3-autosync.2. اضغط للتفاصيل.",
+      "en": "A new Nuvio Reshaped Mobile release (1.1.0-beta.3-autosync.2) is available. Open the release notes for details."
+    },
+    "url": "https://github.com/DavidVamaiotu/NuvioMobile-Reshaped/releases/tag/1.1.0-beta.3-autosync.2",
+    "publishedAt": "2026-11-24T18:55:09.807560Z",
+    "expiresAt": "2026-11-25T18:55:09.807560Z"
+  },
+  {
+    "id": "app:download-release:nuvio-tv:NuvioMedia/NuvioTV:1.2.0-beta.4",
+    "type": "app",
+    "title": {
+      "ar": "تحديث جديد لتطبيق Nuvio TV: 1.2.0-beta.4",
+      "en": "New Nuvio TV app release: 1.2.0-beta.4"
+    },
+    "description": {
+      "ar": "صدر إصدار جديد من Nuvio TV برقم 1.2.0-beta.4. اضغط للتفاصيل.",
+      "en": "A new Nuvio TV release (1.2.0-beta.4) is available. Open the release notes for details."
+    },
+    "url": "https://github.com/NuvioMedia/NuvioTV/releases/tag/1.2.0-beta.4",
+    "publishedAt": "2026-11-24T18:55:09.807560Z",
+    "expiresAt": "2026-11-25T18:55:09.807560Z"
+  },
+  {
     "id": "addon:Pictorium:version:1.28.3",
     "type": "addon",
     "title": {
