@@ -5332,6 +5332,8 @@ html[dir="ltr"] .nuvio-launch-card::before {
 }
 
 
-/* Remove the five legacy icon tiles now that each dashboard card has its own artwork. */
-.nuvio-launch-icon { display: none; }
-.nuvio-launch-card strong { margin-top: 0; }
+/* Keep dashboard launch cards comfortably sized on mobile after removing legacy icon elements. */
+@media screen and (max-width: 760px) {
+  .nuvio-launch-card { min-height: 260px; }
+  .nuvio-launch-card strong { margin-top: 0; }
+}
