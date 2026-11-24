@@ -5296,3 +5296,37 @@ footer {
   .nuvio-launch-card::before { background: linear-gradient(90deg, rgba(7,11,22,.08) 0%, rgba(7,11,22,.28) 40%, rgba(7,11,22,.9) 100%); }
 }
 @media (prefers-reduced-motion: reduce) { .nuvio-launch-art { transition: none; } }
+
+
+/* Keep dashboard artwork on the visual side opposite the text in both languages. */
+html[dir="rtl"] .nuvio-launch-art {
+  left: 0;
+  right: auto;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, rgba(0,0,0,.9) 38%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0%, rgba(0,0,0,.9) 38%, transparent 100%);
+}
+
+html[dir="rtl"] .nuvio-launch-card::before {
+  background: linear-gradient(90deg, rgba(7,11,22,.04) 0%, rgba(7,11,22,.22) 42%, rgba(7,11,22,.88) 100%);
+}
+
+html[dir="ltr"] .nuvio-launch-art {
+  left: auto;
+  right: 0;
+  -webkit-mask-image: linear-gradient(270deg, #000 0%, rgba(0,0,0,.9) 38%, transparent 100%);
+  mask-image: linear-gradient(270deg, #000 0%, rgba(0,0,0,.9) 38%, transparent 100%);
+}
+
+html[dir="ltr"] .nuvio-launch-card::before {
+  background: linear-gradient(270deg, rgba(7,11,22,.04) 0%, rgba(7,11,22,.22) 42%, rgba(7,11,22,.88) 100%);
+}
+
+@media (max-width: 560px) {
+  html[dir="rtl"] .nuvio-launch-card::before {
+    background: linear-gradient(90deg, rgba(7,11,22,.08) 0%, rgba(7,11,22,.28) 40%, rgba(7,11,22,.9) 100%);
+  }
+
+  html[dir="ltr"] .nuvio-launch-card::before {
+    background: linear-gradient(270deg, rgba(7,11,22,.08) 0%, rgba(7,11,22,.28) 40%, rgba(7,11,22,.9) 100%);
+  }
+}
