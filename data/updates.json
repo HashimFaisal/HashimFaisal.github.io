@@ -1,5 +1,35 @@
 [
   {
+    "id": "app:download-release:nuvio-mobile:NuvioMedia/NuvioMobile:1.1.0-beta.3",
+    "type": "app",
+    "title": {
+      "ar": "تحديث جديد لتطبيق Nuvio Mobile: 1.1.0-beta.3",
+      "en": "New Nuvio Mobile app release: 1.1.0-beta.3"
+    },
+    "description": {
+      "ar": "صدر إصدار جديد من Nuvio Mobile برقم 1.1.0-beta.3. اضغط للتفاصيل.",
+      "en": "A new Nuvio Mobile release (1.1.0-beta.3) is available. Open the release notes for details."
+    },
+    "url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.1.0-beta.3",
+    "publishedAt": "2026-11-24T06:53:19.091932Z",
+    "expiresAt": "2026-11-25T06:53:19.091932Z"
+  },
+  {
+    "id": "app:download-release:nuvio-mobile-for-ios:NuvioMedia/NuvioMobile:1.1.0-beta.3",
+    "type": "app",
+    "title": {
+      "ar": "تحديث جديد لتطبيق Nuvio Mobile for iOS: 1.1.0-beta.3",
+      "en": "New Nuvio Mobile for iOS app release: 1.1.0-beta.3"
+    },
+    "description": {
+      "ar": "صدر إصدار جديد من Nuvio Mobile for iOS برقم 1.1.0-beta.3. اضغط للتفاصيل.",
+      "en": "A new Nuvio Mobile for iOS release (1.1.0-beta.3) is available. Open the release notes for details."
+    },
+    "url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.1.0-beta.3",
+    "publishedAt": "2026-11-24T06:53:19.091932Z",
+    "expiresAt": "2026-11-25T06:53:19.091932Z"
+  },
+  {
     "id": "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.2-autosync.7",
     "type": "app",
     "title": {

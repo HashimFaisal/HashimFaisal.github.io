@@ -16,6 +16,8 @@
   "seen_release_ids": [
     "app:download-release:nuvio-arc:ysosrs123/NuvioTV-Fork:1.2.0-arc.3",
     "app:download-release:nuvio-enhanced:luqmanfadlli/NuvioMobile-Enhanced:1.1.0-beta.3",
+    "app:download-release:nuvio-mobile-for-ios:NuvioMedia/NuvioMobile:1.1.0-beta.3",
+    "app:download-release:nuvio-mobile:NuvioMedia/NuvioMobile:1.1.0-beta.3",
     "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.0.0-autosync.2",
     "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.2-autosync.6",
     "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.2-autosync.7",
