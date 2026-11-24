@@ -942,7 +942,7 @@ test('Nuvio editions are separated by device and link directly to published inst
   await expect(page.locator('#versions-tv')).toBeHidden();
   await expect(page.locator('#versions-smart-tv')).toBeHidden();
   await expect(page.locator('#versions-desktop')).toBeVisible();
-  await expect(page.locator('#versions-desktop a[href$="NuvioCodeineXO-v6.1.5.exe"]')).toBeVisible();
+  await expect(page.locator('#versions-desktop a[href$="NuvioCodeineXO-v6.1.6.exe"]')).toBeVisible();
   await expect(page.locator('#versions-desktop a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
 
   await expect(page.locator('.downloads-device-section a.downloads-device-link.secondary')).toHaveCount(0);
