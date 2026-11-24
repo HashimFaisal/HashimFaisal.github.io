@@ -317,18 +317,76 @@ def normalize_datetime_utc(value):
         return None
 
 
+def parse_iso_datetime_utc(value):
+    """Parse an ISO timestamp strictly and return an aware UTC datetime."""
+    if not isinstance(value, str) or not value.strip():
+        return None
+    try:
+        parsed = datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
+    except (TypeError, ValueError, OverflowError):
+        return None
+    return normalize_datetime_utc(parsed)
+
+
 def parse_event_date(value, fallback=None):
     """Parse event timestamps safely and return an aware UTC-compatible fallback."""
     fallback_utc = normalize_datetime_utc(fallback)
     if fallback_utc is None:
         fallback_utc = datetime.now(timezone.utc)
-    if not isinstance(value, str) or not value.strip():
-        return fallback_utc
-    try:
-        parsed = datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
-    except (TypeError, ValueError, OverflowError):
-        return fallback_utc
-    return normalize_datetime_utc(parsed) or fallback_utc
+    return parse_iso_datetime_utc(value) or fallback_utc
+
+
+def normalize_live_updates(updates, now=None, limit=50):
+    """Keep only unique, current live updates that the browser can safely render."""
+    if not isinstance(updates, list):
+        return []
+    current_dt = normalize_datetime_utc(now) or datetime.now(timezone.utc)
+    limit = limit if isinstance(limit, int) and not isinstance(limit, bool) and limit > 0 else 50
+    retained = []
+    seen_ids = set()
+
+    for update in updates:
+        if not isinstance(update, dict):
+            continue
+        update_id = update.get("id")
+        if not isinstance(update_id, str) or not update_id.strip():
+            continue
+        update_id = update_id.strip()
+        if update_id in seen_ids or update.get("type") not in {"app", "addon"}:
+            continue
+
+        title = update.get("title")
+        description = update.get("description")
+        if not isinstance(title, dict) or not isinstance(description, dict):
+            continue
+        if any(
+            not isinstance(section.get(language), str) or not section[language].strip()
+            for section in (title, description)
+            for language in ("ar", "en")
+        ):
+            continue
+
+        url = update.get("url")
+        if not isinstance(url, str):
+            continue
+        parsed_url = urlparse(url)
+        if parsed_url.scheme.lower() != "https" or not parsed_url.hostname:
+            continue
+
+        published = parse_iso_datetime_utc(update.get("publishedAt"))
+        expires = parse_iso_datetime_utc(update.get("expiresAt"))
+        if published is None or expires is None:
+            continue
+        if published > current_dt or expires <= current_dt or expires <= published:
+            continue
+
+        normalized = dict(update)
+        normalized["id"] = update_id
+        retained.append((published, normalized))
+        seen_ids.add(update_id)
+
+    retained.sort(key=lambda item: item[0], reverse=True)
+    return [item for _, item in retained[:limit]]
 
 
 def normalize_previous_report(report):
@@ -977,32 +1035,7 @@ def main():
         updates = []
 
     now_dt = datetime.now(timezone.utc)
-    active_updates = []
-    active_update_ids = set()
-
-    for update in updates:
-        if not isinstance(update, dict):
-            continue
-        update_id = update.get("id")
-        if not isinstance(update_id, str) or not update_id.strip() or update_id in active_update_ids:
-            continue
-        raw_expiry = update.get("expiresAt")
-        if not isinstance(raw_expiry, str) or not raw_expiry.strip():
-            continue
-
-        try:
-            expiry = datetime.fromisoformat(
-                raw_expiry.replace("Z", "+00:00")
-            )
-            if expiry.tzinfo is None:
-                expiry = expiry.replace(tzinfo=timezone.utc)
-            if expiry > now_dt:
-                active_updates.append(update)
-                active_update_ids.add(update_id)
-        except (TypeError, ValueError):
-            continue
-
-    updates = active_updates
+    updates = normalize_live_updates(updates, now=now_dt)
 
     # Convert real source changes into bilingual live news.
     known_ids = {item.get("id") for item in updates if isinstance(item, dict)}
@@ -1115,8 +1148,7 @@ def main():
         })
         known_ids.add(update_id)
 
-    updates.sort(key=lambda item: item.get("publishedAt", ""), reverse=True)
-    updates = updates[:50]
+    updates = normalize_live_updates(updates, now=now_dt, limit=50)
 
     os.makedirs("data", exist_ok=True)
     with open(updates_path, "w", encoding="utf-8") as updates_file:
