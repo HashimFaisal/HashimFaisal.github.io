@@ -2136,6 +2136,10 @@ footer a:hover,
   background: rgba(88, 216, 232, 0.08);
 }
 .type-tag {
+  color: var(--violet);
+  border-color: rgba(163, 148, 255, 0.3);
+  background: rgba(163, 148, 255, 0.09);
+}
 
 .filter.active {
   background: linear-gradient(110deg, var(--cyan-light), var(--cyan));
