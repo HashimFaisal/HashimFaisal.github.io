@@ -5298,3 +5298,15 @@ html[dir="ltr"] .nuvio-launch-card::before {
     height: 390px !important;
   }
 }
+
+
+/* Mobile layout correction: close the hero-to-live gap without resizing either component. */
+@media (max-width: 760px) {
+  .hero {
+    margin-bottom: 18px !important;
+  }
+
+  .live-updates {
+    margin: 0 auto 22px !important;
+  }
+}
