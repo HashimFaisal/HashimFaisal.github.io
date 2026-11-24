@@ -1369,7 +1369,7 @@ async function loadChangelog() {
         if (!sourceUrl) return '';
         try {
           const url = new URL(sourceUrl);
-          if (!/github\\.com$/i.test(url.hostname)) return '';
+          if (!/github\.com$/i.test(url.hostname)) return '';
           const parts = url.pathname.split('/').filter(Boolean);
           return parts.length >= 2 ? `${parts[0].toLowerCase()}/${parts[1].toLowerCase()}` : '';
         } catch { return ''; }
