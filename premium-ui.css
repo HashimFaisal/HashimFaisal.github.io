@@ -5259,15 +5259,15 @@ footer {
 #downloads.unified-download-library .download-grid { margin-top: 0; }
 
 
-/* Changelog entries that point to an add-on in the library */
-#changelog .changelog-entry[data-plugin-target] {
+/* Changelog entries that point to any matching library or app card */
+#changelog .changelog-entry[data-changelog-section] {
   cursor: pointer;
 }
-#changelog .changelog-entry[data-plugin-target]:focus-visible {
+#changelog .changelog-entry[data-changelog-section]:focus-visible {
   outline: 2px solid var(--cyan);
   outline-offset: 3px;
 }
-#plugins .plugin-card.changelog-target-highlight {
+#plugins .plugin-card.changelog-target-highlight,\n#downloads .plugin-card.changelog-target-highlight {
   border-color: var(--cyan);
   box-shadow: 0 0 0 2px rgba(88, 216, 232, 0.22), 0 0 28px rgba(88, 216, 232, 0.22);
 }
