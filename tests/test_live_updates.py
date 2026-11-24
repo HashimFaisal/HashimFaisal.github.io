@@ -34,6 +34,10 @@ class LiveUpdateNormalizationTests(unittest.TestCase):
             "unsafe", "2026-11-24T11:00:00Z", "2026-11-24T13:00:00Z",
             url="http://example.com/details",
         )
+        hostless_url = self.update(
+            "hostless", "2026-11-24T11:00:00Z", "2026-11-24T13:00:00Z",
+            url="https://",
+        )
         expired = self.update("expired", "2026-11-24T09:00:00Z", "2026-11-24T10:00:00Z")
         future = self.update("future", "2026-11-24T13:00:00Z", "2026-11-24T14:00:00Z")
         malformed_date = self.update("bad-date", "not-a-date", "2026-11-24T14:00:00Z")
@@ -43,7 +47,7 @@ class LiveUpdateNormalizationTests(unittest.TestCase):
         )
 
         result = check_links.normalize_live_updates(
-            [None, "broken", valid, malformed_locale, unsafe_url, expired, future, malformed_date, wrong_type],
+            [None, "broken", valid, malformed_locale, unsafe_url, hostless_url, expired, future, malformed_date, wrong_type],
             now=self.now,
         )
         self.assertEqual([item["id"] for item in result], ["valid"])
