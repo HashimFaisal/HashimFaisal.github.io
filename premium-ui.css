@@ -5280,3 +5280,14 @@ html[dir="ltr"] .nuvio-launch-card::before {
   }
 }
 
+
+
+/* NUVIO — remove the redundant dashboard heading and close the vertical gap. */
+.nuvio-dashboard-heading {
+  display: none !important;
+}
+
+.nuvio-dashboard {
+  margin-top: 0 !important;
+  margin-bottom: 24px;
+}
