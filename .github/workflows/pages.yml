@@ -74,8 +74,7 @@ jobs:
 
           # Validate every referenced local asset against the actual deployment
           # artifact instead of assuming a fixed number of CSS/JS files.
-          asset_pattern = r'(?:href|src)=[\"\\']((?!https?:|//)[^\"\\'?#]+\\.(?:css|js))(?:\\?[^\\'\"]*)?[\"\\']'
-          local_assets = sorted(set(re.findall(asset_pattern, updated, flags=re.IGNORECASE)))
+          local_assets = sorted({match.group(2) for match in re.finditer(pattern, updated, flags=re.IGNORECASE)})
           missing_assets = [
               asset for asset in local_assets
               if not (Path("public") / asset).is_file()
