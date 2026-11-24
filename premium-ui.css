@@ -5280,3 +5280,21 @@ html[dir="ltr"] .nuvio-launch-card::before {
   }
 }
 
+
+
+
+/* Hide the dashboard intro; extend the globe frame to balance the home layout. */
+.nuvio-dashboard-heading {
+  display: none !important;
+}
+
+@media (max-width: 760px) {
+  .hero {
+    min-height: 340px !important;
+    margin-bottom: 65px !important;
+  }
+
+  .hero-visual {
+    height: 390px !important;
+  }
+}
