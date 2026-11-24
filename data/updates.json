@@ -1,5 +1,20 @@
 [
   {
+    "id": "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.3-autosync.1",
+    "type": "app",
+    "title": {
+      "ar": "تحديث جديد لتطبيق Nuvio Reshaped Mobile: 1.1.0-beta.3-autosync.1",
+      "en": "New Nuvio Reshaped Mobile app release: 1.1.0-beta.3-autosync.1"
+    },
+    "description": {
+      "ar": "صدر إصدار جديد من Nuvio Reshaped Mobile برقم 1.1.0-beta.3-autosync.1. اضغط للتفاصيل.",
+      "en": "A new Nuvio Reshaped Mobile release (1.1.0-beta.3-autosync.1) is available. Open the release notes for details."
+    },
+    "url": "https://github.com/DavidVamaiotu/NuvioMobile-Reshaped/releases/tag/1.1.0-beta.3-autosync.1",
+    "publishedAt": "2026-11-24T06:57:59.513796Z",
+    "expiresAt": "2026-11-25T06:57:59.513796Z"
+  },
+  {
     "id": "app:download-release:nuvio-mobile:NuvioMedia/NuvioMobile:1.1.0-beta.3",
     "type": "app",
     "title": {
