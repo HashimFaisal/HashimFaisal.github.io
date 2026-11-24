@@ -1,5 +1,20 @@
 [
   {
+    "id": "addon:Pictorium:version:1.28.3",
+    "type": "addon",
+    "title": {
+      "ar": "تحديث Pictorium إلى الإصدار 1.28.3",
+      "en": "Pictorium updated to version 1.28.3"
+    },
+    "description": {
+      "ar": "تم تحديث الإصدار من 1.28.2 إلى 1.28.3.",
+      "en": "Updated from version 1.28.2 to 1.28.3."
+    },
+    "url": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
+    "publishedAt": "2026-11-24T17:22:36.326755Z",
+    "expiresAt": "2026-11-25T17:22:36.326755Z"
+  },
+  {
     "id": "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.3-autosync.1",
     "type": "app",
     "title": {
@@ -103,35 +118,5 @@
     "url": "https://popcorn-notes.lsoares.workers.dev/manifest.json",
     "publishedAt": "2026-11-23T22:00:34.357153Z",
     "expiresAt": "2026-11-24T22:00:34.357153Z"
-  },
-  {
-    "id": "app:download-release:nuviocodeinexo:codeineXO/NuvioCodeineXO:v6.1.6",
-    "type": "app",
-    "title": {
-      "ar": "تحديث جديد لتطبيق NuvioCodeineXO: v6.1.6",
-      "en": "New NuvioCodeineXO app release: v6.1.6"
-    },
-    "description": {
-      "ar": "صدر إصدار جديد من NuvioCodeineXO برقم v6.1.6. اضغط للتفاصيل.",
-      "en": "A new NuvioCodeineXO release (v6.1.6) is available. Open the release notes for details."
-    },
-    "url": "https://github.com/codeineXO/NuvioCodeineXO/releases/tag/v6.1.6",
-    "publishedAt": "2026-11-23T10:50:19.291101Z",
-    "expiresAt": "2026-11-24T10:50:19.291101Z"
-  },
-  {
-    "id": "addon:Rodrigo's Catalog:version:1.20261123.0901",
-    "type": "addon",
-    "title": {
-      "ar": "تحديث Rodrigo's Catalog إلى الإصدار 1.20261123.0901",
-      "en": "Rodrigo's Catalog updated to version 1.20261123.0901"
-    },
-    "description": {
-      "ar": "تم تحديث الإصدار من 1.20261116.0901 إلى 1.20261123.0901.",
-      "en": "Updated from version 1.20261116.0901 to 1.20261123.0901."
-    },
-    "url": "https://digok.github.io/nuvio-catalog/manifest.json",
-    "publishedAt": "2026-11-23T09:54:31.960745Z",
-    "expiresAt": "2026-11-24T09:54:31.960745Z"
   }
 ]
