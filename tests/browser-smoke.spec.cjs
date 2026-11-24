@@ -922,7 +922,7 @@ test('Nuvio editions are separated by device and link directly to published inst
 
   await expect(page.locator('#versions-mobile a[href$="androidApp-full-arm64-v8a-release.apk"]')).toBeVisible();
   await expect(page.locator('#versions-mobile a[href$="nuvio-1.0.1-full-release.ipa"]')).toBeVisible();
-  await expect(page.locator('#versions-mobile a[href$="NuvioRS-1.1.0-beta.2-autosync.5-arm64.apk"]')).toBeVisible();
+  await expect(page.locator('#versions-mobile a[href$="NuvioRS-1.1.0-beta.2-autosync.6-arm64.apk"]')).toBeVisible();
   await expect(page.locator('#versions-mobile a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
 
   await page.locator('#downloads-device-nav [data-download-device="tv"]').click();
