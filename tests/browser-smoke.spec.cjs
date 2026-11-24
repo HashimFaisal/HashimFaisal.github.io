@@ -91,6 +91,28 @@ test('all five dashboard destinations open and return to the dashboard', async (
 });
 
 
+
+test('changelog target navigation returns to the originating changelog list', async ({ page }) => {
+  await page.goto('/#changelog');
+  await expect(page.locator('#changelog')).toBeVisible();
+
+  const addonName = await page.locator('#plugins .plugin-card h3').first().textContent();
+  expect(addonName?.trim()).toBeTruthy();
+
+  await page.evaluate(name => {
+    document.dispatchEvent(new CustomEvent('nuvio:open-changelog-target', {
+      detail: { section: 'plugins', name: name.trim(), url: '' }
+    }));
+  }, addonName);
+
+  await expect(page.locator('#plugins')).toBeVisible();
+  await expect(page).toHaveURL(/#plugins$/);
+
+  await page.locator('#plugins .nuvio-view-back').click();
+  await expect(page.locator('#changelog')).toBeVisible();
+  await expect(page).toHaveURL(/#changelog$/);
+});
+
 test('all 28 monitored cards receive their published health status', async ({ page }) => {
   const names = await page.locator('#plugins .plugin-card .card-status').evaluateAll(nodes =>
     nodes.map(node => node.dataset.check).filter(Boolean)
