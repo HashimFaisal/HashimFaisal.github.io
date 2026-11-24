@@ -137,6 +137,8 @@ for css_path in CSS_FILES:
 ACTIVE_ARTWORK = (
     "hero.svg", "all-in-one.svg", "cinemabox.svg", "cinemana.svg",
     "opensubtitles.svg", "cinemeta.svg", "nuvio-catalog.svg", "izlemeli-catalog.svg",
+    "dashboard-plugins.svg", "dashboard-downloads.svg", "dashboard-status.svg",
+    "dashboard-changelog.svg", "dashboard-resources.svg",
 )
 repository_svg = {path.name for path in (ROOT / "assets").glob("*.svg")}
 if repository_svg != set(ACTIVE_ARTWORK):

@@ -5272,3 +5272,27 @@ footer {
   border-color: var(--cyan);
   box-shadow: 0 0 0 2px rgba(88, 216, 232, 0.22), 0 0 28px rgba(88, 216, 232, 0.22);
 }
+
+
+/* Category-specific artwork for the dashboard launch cards */
+.nuvio-launch-card { isolation: isolate; }
+.nuvio-launch-art {
+  position: absolute; z-index: 0; top: 0; bottom: 0; left: 0;
+  width: 68%; height: 100%; object-fit: cover; object-position: center;
+  opacity: .42; pointer-events: none;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, rgba(0,0,0,.9) 38%, transparent 100%);
+  mask-image: linear-gradient(90deg, #000 0%, rgba(0,0,0,.9) 38%, transparent 100%);
+  transition: opacity .3s ease, transform .45s ease;
+}
+.nuvio-launch-card::before {
+  position: absolute; z-index: 1; inset: 0;
+  background: linear-gradient(90deg, rgba(7,11,22,.04) 0%, rgba(7,11,22,.22) 42%, rgba(7,11,22,.88) 100%);
+  content: ""; pointer-events: none;
+}
+.nuvio-launch-card > :not(.nuvio-launch-art) { position: relative; z-index: 2; }
+.nuvio-launch-card:hover .nuvio-launch-art { opacity: .58; transform: scale(1.045); }
+@media (max-width: 560px) {
+  .nuvio-launch-art { width: 72%; opacity: .38; }
+  .nuvio-launch-card::before { background: linear-gradient(90deg, rgba(7,11,22,.08) 0%, rgba(7,11,22,.28) 40%, rgba(7,11,22,.9) 100%); }
+}
+@media (prefers-reduced-motion: reduce) { .nuvio-launch-art { transition: none; } }

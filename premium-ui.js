@@ -101,6 +101,7 @@
       const item = copy[id];
       return `
         <a class="nuvio-launch-card" href="#${id}" data-view="${id}">
+          <img class="nuvio-launch-art" src="assets/dashboard-${id}.svg" alt="" aria-hidden="true" loading="lazy" decoding="async">
           <span class="nuvio-launch-icon" aria-hidden="true">${icon[id]}</span>
           <span class="nuvio-launch-code">${item[2]}</span>
           <strong>${item[0]}</strong>
