@@ -122,5 +122,30 @@ class ChangeSummaryTests(unittest.TestCase):
                 self.assertEqual(parsed, fallback)
                 self.assertEqual(parsed.utcoffset().total_seconds(), 0)
 
+    def test_event_date_normalizes_naive_and_offset_fallbacks_to_utc(self):
+        naive_fallback = check_links.datetime(2026, 11, 23, 10, 0)
+        parsed_naive = check_links.parse_event_date("not a date", fallback=naive_fallback)
+        self.assertEqual(
+            parsed_naive,
+            check_links.datetime(2026, 11, 23, 10, 0, tzinfo=check_links.timezone.utc),
+        )
+        self.assertEqual(parsed_naive.utcoffset().total_seconds(), 0)
+
+        offset = check_links.timezone(check_links.timedelta(hours=3))
+        offset_fallback = check_links.datetime(2026, 11, 23, 10, 0, tzinfo=offset)
+        parsed_offset = check_links.parse_event_date(None, fallback=offset_fallback)
+        self.assertEqual(
+            parsed_offset,
+            check_links.datetime(2026, 11, 23, 7, 0, tzinfo=check_links.timezone.utc),
+        )
+
+    def test_event_date_normalizes_offset_timestamps_to_utc(self):
+        parsed = check_links.parse_event_date("2026-11-23T10:00:00+03:00")
+        self.assertEqual(
+            parsed,
+            check_links.datetime(2026, 11, 23, 7, 0, tzinfo=check_links.timezone.utc),
+        )
+        self.assertEqual(parsed.utcoffset().total_seconds(), 0)
+
 if __name__ == "__main__":
     unittest.main()

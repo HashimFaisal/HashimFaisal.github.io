@@ -305,18 +305,30 @@ def build_change_summary(events):
     }
 
 
+def normalize_datetime_utc(value):
+    """Return a datetime as UTC, treating timezone-naive values as UTC."""
+    if not isinstance(value, datetime):
+        return None
+    try:
+        if value.tzinfo is None or value.utcoffset() is None:
+            value = value.replace(tzinfo=timezone.utc)
+        return value.astimezone(timezone.utc)
+    except (TypeError, ValueError, OverflowError):
+        return None
+
+
 def parse_event_date(value, fallback=None):
     """Parse event timestamps safely and return an aware UTC-compatible fallback."""
-    fallback = fallback if isinstance(fallback, datetime) else datetime.now(timezone.utc)
+    fallback_utc = normalize_datetime_utc(fallback)
+    if fallback_utc is None:
+        fallback_utc = datetime.now(timezone.utc)
     if not isinstance(value, str) or not value.strip():
-        return fallback
+        return fallback_utc
     try:
         parsed = datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
     except (TypeError, ValueError, OverflowError):
-        return fallback
-    if parsed.tzinfo is None:
-        parsed = parsed.replace(tzinfo=timezone.utc)
-    return parsed
+        return fallback_utc
+    return normalize_datetime_utc(parsed) or fallback_utc
 
 
 def normalize_previous_report(report):
