@@ -3,6 +3,7 @@ import json
 import os
 import re
 import sys
+import tempfile
 import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
@@ -658,6 +659,35 @@ def load_release_cache():
         return None
 
 
+def write_json_atomic(path, payload):
+    """Write UTF-8 JSON through a same-directory temporary file and atomic replace."""
+    directory = os.path.dirname(os.fspath(path)) or "."
+    filename = os.path.basename(os.fspath(path))
+    os.makedirs(directory, exist_ok=True)
+    temp_path = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode="w",
+            encoding="utf-8",
+            dir=directory,
+            prefix=f".{filename}.",
+            suffix=".tmp",
+            delete=False,
+        ) as temp_file:
+            temp_path = temp_file.name
+            json.dump(payload, temp_file, ensure_ascii=False, indent=2)
+            temp_file.write("\n")
+            temp_file.flush()
+            os.fsync(temp_file.fileno())
+        os.replace(temp_path, path)
+    finally:
+        if temp_path is not None:
+            try:
+                os.unlink(temp_path)
+            except FileNotFoundError:
+                pass
+
+
 def save_release_cache(release, stable_release):
     if not isinstance(release, dict) or not isinstance(release.get("assets"), list):
         return False
@@ -668,12 +698,7 @@ def save_release_cache(release, stable_release):
             asset = next((item for item in release["assets"] if isinstance(item, dict) and item.get("name", "").endswith(suffix)), None)
             if not asset or not isinstance(asset.get("browser_download_url"), str) or not asset["browser_download_url"].startswith("https://"):
                 return False
-        os.makedirs("data", exist_ok=True)
-        temp_path = RELEASE_CACHE_PATH + ".tmp"
-        with open(temp_path, "w", encoding="utf-8") as file:
-            json.dump(cache, file, ensure_ascii=False, indent=2)
-            file.write("\n")
-        os.replace(temp_path, RELEASE_CACHE_PATH)
+        write_json_atomic(RELEASE_CACHE_PATH, cache)
         return True
     except (OSError, TypeError, ValueError):
         return False
@@ -1150,10 +1175,7 @@ def main():
 
     updates = normalize_live_updates(updates, now=now_dt, limit=50)
 
-    os.makedirs("data", exist_ok=True)
-    with open(updates_path, "w", encoding="utf-8") as updates_file:
-        json.dump(updates, updates_file, ensure_ascii=False, indent=2)
-        updates_file.write("\n")
+    write_json_atomic(updates_path, updates)
 
     # Deduplicate repeated transitions by their stable, hash-safe event identity.
     seen_events = {build_event_key(item) for item in history if isinstance(item, dict)}
@@ -1177,15 +1199,8 @@ def main():
     report["proactive_monitoring"] = build_proactive_alerts(report)
     report["risk_forecast"] = build_risk_forecast(results, previous_report, history)
 
-    os.makedirs("data", exist_ok=True)
-
-    with open("data/status.json", "w", encoding="utf-8") as file:
-        json.dump(report, file, ensure_ascii=False, indent=2)
-        file.write("\n")
-
-    with open(history_path, "w", encoding="utf-8") as history_file:
-        json.dump(history, history_file, ensure_ascii=False, indent=2)
-        history_file.write("\n")
+    write_json_atomic("data/status.json", report)
+    write_json_atomic(history_path, history)
 
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
