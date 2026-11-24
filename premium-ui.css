@@ -5267,7 +5267,8 @@ footer {
   outline: 2px solid var(--cyan);
   outline-offset: 3px;
 }
-#plugins .plugin-card.changelog-target-highlight,\n#downloads .plugin-card.changelog-target-highlight {
+#plugins .plugin-card.changelog-target-highlight,
+#downloads .plugin-card.changelog-target-highlight {
   border-color: var(--cyan);
   box-shadow: 0 0 0 2px rgba(88, 216, 232, 0.22), 0 0 28px rgba(88, 216, 232, 0.22);
 }
