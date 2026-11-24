@@ -5282,12 +5282,19 @@ html[dir="ltr"] .nuvio-launch-card::before {
 
 
 
-/* NUVIO — remove the redundant dashboard heading and close the vertical gap. */
+
+/* Hide the dashboard intro; extend the globe frame to balance the home layout. */
 .nuvio-dashboard-heading {
   display: none !important;
 }
 
-.nuvio-dashboard {
-  margin-top: 0 !important;
-  margin-bottom: 24px;
+@media (max-width: 760px) {
+  .hero {
+    min-height: 340px !important;
+    margin-bottom: 65px !important;
+  }
+
+  .hero-visual {
+    height: 390px !important;
+  }
 }
