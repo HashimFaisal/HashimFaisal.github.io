@@ -370,7 +370,7 @@ def normalize_live_updates(updates, now=None, limit=50):
         if not isinstance(url, str):
             continue
         parsed_url = urlparse(url)
-        if parsed_url.scheme.lower() != "https" or not parsed_url.netloc:
+        if parsed_url.scheme.lower() != "https" or not parsed_url.hostname:
             continue
 
         published = parse_iso_datetime_utc(update.get("publishedAt"))
