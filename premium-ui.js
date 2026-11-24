@@ -291,6 +291,75 @@
     }
   });
 
+  document.addEventListener('nuvio:open-changelog-target', event => {
+    const sectionName = event.detail?.section;
+    const name = String(event.detail?.name || '').trim();
+    const targetUrl = String(event.detail?.url || '').trim();
+    if (!['plugins', 'downloads'].includes(sectionName)) return;
+
+    const section = views[sectionName];
+    const cards = sectionName === 'plugins'
+      ? [...section.querySelectorAll('.plugin-card')]
+      : [...section.querySelectorAll('.downloads-device-card, .release-asset-card, .enhanced-latest-release')];
+    const normalizeName = value => String(value || '').replace(/\s+/g, ' ').trim().toLocaleLowerCase();
+    let card = cards.find(item =>
+      normalizeName(item.querySelector('h3')?.textContent) === normalizeName(name)
+    );
+
+    if (!card && targetUrl) {
+      const project = (() => {
+        try {
+          const url = new URL(targetUrl);
+          if (url.hostname.toLowerCase() !== 'github.com') return '';
+          const parts = url.pathname.split('/').filter(Boolean);
+          return parts.length >= 2 ? `${parts[0].toLowerCase()}/${parts[1].toLowerCase()}` : '';
+        } catch { return ''; }
+      })();
+      card = cards.find(item => {
+        const manifest = item.querySelector('.manifest-url')?.textContent.trim();
+        if (manifest === targetUrl) return true;
+        return [...item.querySelectorAll('a[href]')].some(link => {
+          if (link.href === targetUrl) return true;
+          if (!project) return false;
+          try {
+            const url = new URL(link.href);
+            const parts = url.pathname.split('/').filter(Boolean);
+            return url.hostname.toLowerCase() === 'github.com' &&
+              parts.length >= 2 &&
+              `${parts[0].toLowerCase()}/${parts[1].toLowerCase()}` === project;
+          } catch { return false; }
+        });
+      });
+    }
+    if (!card) return;
+
+    navigate(sectionName);
+    requestAnimationFrame(() => {
+      if (sectionName === 'downloads') {
+        const deviceGroup = card.closest('.downloads-device-section');
+        if (deviceGroup?.dataset.deviceGroup) {
+          document.querySelectorAll('#downloads .downloads-device-section').forEach(group => {
+            group.hidden = group !== deviceGroup;
+          });
+          document.querySelectorAll('#downloads-device-nav [data-download-device]').forEach(button => {
+            const active = button.dataset.downloadDevice === deviceGroup.dataset.deviceGroup;
+            button.classList.toggle('active', active);
+            button.setAttribute('aria-pressed', String(active));
+          });
+        }
+      }
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      card.classList.add('changelog-target-highlight');
+      card.setAttribute('tabindex', '-1');
+      try {
+        card.focus({ preventScroll: true });
+      } catch {
+        card.focus();
+      }
+      window.setTimeout(() => card.classList.remove('changelog-target-highlight'), 2400);
+    });
+  });
+
   window.addEventListener('popstate', event => {
     const state = event.state || {};
     const hash = location.hash.slice(1);

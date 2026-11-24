@@ -5257,3 +5257,18 @@ footer {
 #downloads.unified-download-library .download-release-subsection .version-platform-heading { margin-bottom: 12px; }
 #downloads.unified-download-library .downloads-toolbar { margin-bottom: 13px; }
 #downloads.unified-download-library .download-grid { margin-top: 0; }
+
+
+/* Changelog entries that point to any matching library or app card */
+#changelog .changelog-entry[data-changelog-section] {
+  cursor: pointer;
+}
+#changelog .changelog-entry[data-changelog-section]:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 3px;
+}
+#plugins .plugin-card.changelog-target-highlight,
+#downloads .plugin-card.changelog-target-highlight {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 2px rgba(88, 216, 232, 0.22), 0 0 28px rgba(88, 216, 232, 0.22);
+}

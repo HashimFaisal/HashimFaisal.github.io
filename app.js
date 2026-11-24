@@ -1356,9 +1356,54 @@ async function loadChangelog() {
       const dateText = validDate
         ? `${formatDate(entry.date)} · ${formatRelativeDate(entry.date)}`
         : formatDate(entry?.date);
+      const title = typeof entry?.title === 'string' ? entry.title : '';
+      const sourceName = typeof entry?.source === 'string' && entry.source.trim()
+        ? entry.source.trim()
+        : (title.match(/^إضافة مصدر جديد:\s*(.+)$/)?.[1]
+          || title.match(/^(?:تحديث إصدار|تغيرت حالة)\s+(.+)$/)?.[1]
+          || title.match(/^صدور (?:تحديث|إصدار مستقر) من Nuvio:\s*(.+)$/)?.[1]
+          || '');
+      const normalizeName = value => String(value || '').replace(/\s+/g, ' ').trim().toLocaleLowerCase();
+      const sourceUrl = safeHttpsUrl(entry?.source_url);
+      const sourceProject = (() => {
+        if (!sourceUrl) return '';
+        try {
+          const url = new URL(sourceUrl);
+          if (!/github\.com$/i.test(url.hostname)) return '';
+          const parts = url.pathname.split('/').filter(Boolean);
+          return parts.length >= 2 ? `${parts[0].toLowerCase()}/${parts[1].toLowerCase()}` : '';
+        } catch { return ''; }
+      })();
+      const candidates = [
+        ...$$( '#plugins .plugin-card').map(card => ({ card, section: 'plugins' })),
+        ...$$( '#downloads .downloads-device-card, #downloads .release-asset-card, #downloads .enhanced-latest-release')
+          .map(card => ({ card, section: 'downloads' }))
+      ];
+      const matchingTarget = candidates.find(({ card }) =>
+        normalizeName(card.querySelector('h3')?.textContent) === normalizeName(sourceName)
+      ) || candidates.find(({ card }) => {
+        if (!sourceUrl) return false;
+        const links = [...card.querySelectorAll('a[href]')].map(link => link.href);
+        const manifest = card.querySelector('.manifest-url')?.textContent.trim();
+        if (manifest && safeHttpsUrl(manifest) === sourceUrl) return true;
+        return links.some(link => {
+          if (link === sourceUrl) return true;
+          if (!sourceProject) return false;
+          try {
+            const url = new URL(link);
+            const parts = url.pathname.split('/').filter(Boolean);
+            return url.hostname.toLowerCase() === 'github.com' &&
+              parts.length >= 2 &&
+              `${parts[0].toLowerCase()}/${parts[1].toLowerCase()}` === sourceProject;
+          } catch { return false; }
+        });
+      });
+      const targetAttributes = matchingTarget
+        ? ` data-changelog-section="${matchingTarget.section}" data-changelog-name="${escapeHTML(sourceName)}" data-changelog-url="${escapeHTML(sourceUrl || '')}" tabindex="0" role="link" aria-label="${escapeHTML(`فتح ${sourceName || title} في الموقع`)}"`
+        : '';
 
       return `
-        <article class="changelog-entry changelog-entry--${type.className}">
+        <article class="changelog-entry changelog-entry--${type.className}"${targetAttributes}>
           <span class="changelog-dot"></span>
           <div class="changelog-content">
             <div class="changelog-meta">
@@ -1371,6 +1416,24 @@ async function loadChangelog() {
         </article>
       `;
     }).join('');
+
+    container.querySelectorAll('[data-changelog-section]').forEach(entryCard => {
+      const openTarget = () => {
+        document.dispatchEvent(new CustomEvent('nuvio:open-changelog-target', {
+          detail: {
+            section: entryCard.dataset.changelogSection,
+            name: entryCard.dataset.changelogName,
+            url: entryCard.dataset.changelogUrl
+          }
+        }));
+      };
+      entryCard.addEventListener('click', openTarget);
+      entryCard.addEventListener('keydown', event => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        openTarget();
+      });
+    });
   } catch (error) {
     if (requestId !== changelogRequestId) return;
     container.innerHTML = `<p class="muted">${t('تعذر تحميل سجل التغييرات حالياً.')}</p>`;
