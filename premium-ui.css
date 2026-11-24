@@ -4237,7 +4237,7 @@ footer {
     min-height: 0;
     gap: 0;
     margin: 13px auto 21px;
-    padding: 23px clamp(15px, 4.5vw, 21px) 12px;
+    padding: 11px clamp(15px, 4.5vw, 21px) 12px;
     border-radius: 21px;
   }
 
