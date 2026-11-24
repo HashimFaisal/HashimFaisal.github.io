@@ -5332,13 +5332,14 @@ html[dir="ltr"] .nuvio-launch-card::before {
 }
 
 
-/* Keep all five dashboard launch cards consistently sized on mobile after removing legacy icon elements. */
+/* Preserve the original dashboard card proportions while keeping legacy icon tiles hidden. */
+.nuvio-launch-icon { display: none; }
+.nuvio-launch-card strong { margin-top: 0; }
 @media screen and (max-width: 760px) {
   .nuvio-launch-card,
   .nuvio-launch-card:nth-child(4),
   .nuvio-launch-card:nth-child(5) {
-    min-height: 200px;
+    min-height: 204px;
     height: auto;
   }
-  .nuvio-launch-card strong { margin-top: 0; }
 }
