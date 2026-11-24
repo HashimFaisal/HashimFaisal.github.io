@@ -96,19 +96,6 @@
 
 .nuvio-launch-card:hover::after { transform: scale(1.35); }
 
-.nuvio-launch-icon {
-  display: grid;
-  width: 47px;
-  height: 47px;
-  place-items: center;
-  margin-bottom: 20px;
-  border: 1px solid rgba(88, 216, 232, 0.25);
-  border-radius: 14px;
-  color: var(--cyan);
-  background: rgba(88, 216, 232, 0.09);
-  font: 700 24px Inter, sans-serif;
-}
-
 .nuvio-launch-card strong {
   margin-top: 10px;
   color: var(--text);
@@ -948,12 +935,6 @@ html[dir="ltr"] #changelog .changelog-list > *:hover {
   box-shadow: 0 20px 42px rgba(0, 0, 0, 0.36), 0 0 25px rgba(88, 216, 232, 0.075);
 }
 
-.nuvio-launch-icon {
-  border-color: rgba(88, 216, 232, 0.28);
-  background: linear-gradient(145deg, rgba(88, 216, 232, 0.15), rgba(88, 216, 232, 0.035));
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.045), 0 5px 18px rgba(0, 0, 0, 0.18);
-}
-
 .nuvio-launch-open {
   color: var(--nuvio-accent-light);
 }
@@ -1757,10 +1738,6 @@ html[dir="rtl"] .live-updates__shell::before {
     padding: 18px;
   }
 
-  .nuvio-launch-icon {
-    margin-bottom: 12px;
-  }
-
   .nuvio-launch-card strong {
     font-size: 17px;
     line-height: 1.6;
@@ -2153,18 +2130,12 @@ footer a:hover,
 .type-tag.external,
 .copy-btn,
 #plugins .type-tag,
-.nuvio-launch-icon,
 .nuvio-dashboard-mark {
   color: var(--cyan-light);
   border-color: rgba(88, 216, 232, 0.27);
   background: rgba(88, 216, 232, 0.08);
 }
 .type-tag,
-.nuvio-launch-icon {
-  color: var(--violet);
-  border-color: rgba(163, 148, 255, 0.3);
-  background: rgba(163, 148, 255, 0.09);
-}
 
 .filter.active {
   background: linear-gradient(110deg, var(--cyan-light), var(--cyan));
@@ -2667,15 +2638,6 @@ button:active,
   border-color: rgba(88, 216, 232, 0.38);
   box-shadow: 0 22px 42px rgba(0, 0, 0, 0.23), 0 0 26px rgba(88, 216, 232, 0.055);
 }
-.nuvio-launch-icon {
-  width: 45px;
-  height: 45px;
-  margin-bottom: 17px;
-  border-color: rgba(88, 216, 232, 0.24);
-  border-radius: 13px;
-  background: linear-gradient(145deg, rgba(88, 216, 232, 0.13), rgba(163, 148, 255, 0.09));
-  box-shadow: inset 0 1px rgba(255, 255, 255, 0.06);
-}
 .nuvio-launch-code {
   font-size: 8px;
   letter-spacing: 1.35px;
@@ -2727,7 +2689,6 @@ html[dir="ltr"] .nuvio-launch-open b { transform: rotate(180deg); }
   .nuvio-dashboard-mark { display: inline-flex; padding: 7px 9px; font-size: 8px; }
   .nuvio-launch-grid { gap: 10px; }
   .nuvio-launch-card { min-height: 178px; padding: 18px; }
-  .nuvio-launch-icon { width: 40px; height: 40px; margin-bottom: 13px; }
 }
 @media (max-width: 380px) {
   .nuvio-dashboard-heading { align-items: flex-start; flex-direction: column; }
@@ -3909,14 +3870,6 @@ html[dir="ltr"] .nuvio-dashboard.nuvio-language-switching .nuvio-dashboard-headi
     border-radius: 17px;
   }
 
-  .nuvio-launch-icon {
-    width: 39px;
-    height: 39px;
-    margin-bottom: 12px;
-    border-radius: 12px;
-    font-size: 21px;
-  }
-
   .nuvio-launch-card strong {
     margin-top: 7px;
     font-size: 17px;
@@ -4554,14 +4507,6 @@ footer {
     height: auto;
     padding: 13px 15px;
     box-sizing: border-box;
-  }
-
-  .nuvio-launch-icon {
-    width: 34px;
-    height: 34px;
-    margin-bottom: 7px;
-    border-radius: 11px;
-    font-size: 18px;
   }
 
   .nuvio-launch-card strong {
@@ -5332,14 +5277,10 @@ html[dir="ltr"] .nuvio-launch-card::before {
 }
 
 
-/* Preserve the original dashboard card proportions while keeping legacy icon tiles hidden. */
-.nuvio-launch-icon { display: none; }
-.nuvio-launch-card strong { margin-top: 0; }
-@media screen and (max-width: 760px) {
-  .nuvio-launch-card,
-  .nuvio-launch-card:nth-child(4),
-  .nuvio-launch-card:nth-child(5) {
-    min-height: 204px;
+/* Preserve the former dashboard card footprint after removing the legacy icon elements. */
+@media (max-width: 760px) {
+  .nuvio-launch-card {
+    min-height: 200px;
     height: auto;
   }
 }
