@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-25T07:31:36.221406+00:00",
+  "checked_at": "2026-11-25T10:34:11.007668+00:00",
   "ok": true,
   "passed": 73,
   "total": 73,
@@ -1010,7 +1010,7 @@
       "type": "manifest",
       "ok": true,
       "http_status": 200,
-      "version": "0.27.0",
+      "version": "0.28.0",
       "manifest_id": "community.popcorn-notes",
       "url": "https://popcorn-notes.lsoares.workers.dev/manifest.json",
       "failure_code": "healthy",
@@ -1723,19 +1723,18 @@
   "change_summary": {
     "count": 1,
     "by_type": {
-      "release": 1
+      "version": 1
     },
     "events": [
       {
-        "date": "2026-11-25T07:31:36.221947+00:00",
-        "type": "release",
-        "channel": "stable",
-        "title": "صدور إصدار مستقر من Nuvio: 1.0.1",
-        "detail": "الإصدار المستقر السابق كان 1.0.0.",
-        "source": "Nuvio App",
-        "source_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.0.1",
-        "old_version": "1.0.0",
-        "new_version": "1.0.1"
+        "date": "2026-11-25T10:34:11.008391+00:00",
+        "type": "version",
+        "title": "تحديث إصدار Subtitles: Extended",
+        "detail": "من 0.27.0 إلى 0.28.0.",
+        "source": "Subtitles: Extended",
+        "source_url": "https://popcorn-notes.lsoares.workers.dev/manifest.json",
+        "old_version": "0.27.0",
+        "new_version": "0.28.0"
       }
     ]
   },
@@ -1753,7 +1752,7 @@
       "evaluated_failure_count": 0,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
-      "history_window_size": 42,
+      "history_window_size": 43,
       "history_evidence_deduplicated": true
     },
     "overall_level": "low",

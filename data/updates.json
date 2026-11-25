@@ -1,5 +1,20 @@
 [
   {
+    "id": "addon:Subtitles: Extended:version:0.28.0",
+    "type": "addon",
+    "title": {
+      "ar": "تحديث Subtitles: Extended إلى الإصدار 0.28.0",
+      "en": "Subtitles: Extended updated to version 0.28.0"
+    },
+    "description": {
+      "ar": "تم تحديث الإصدار من 0.27.0 إلى 0.28.0.",
+      "en": "Updated from version 0.27.0 to 0.28.0."
+    },
+    "url": "https://popcorn-notes.lsoares.workers.dev/manifest.json",
+    "publishedAt": "2026-11-25T10:34:11.008391Z",
+    "expiresAt": "2026-11-26T10:34:11.008391Z"
+  },
+  {
     "id": "app:release:stable:1.0.1",
     "type": "app",
     "title": {

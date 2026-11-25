@@ -353,5 +353,15 @@
     "source_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.0.1",
     "old_version": "1.0.0",
     "new_version": "1.0.1"
+  },
+  {
+    "date": "2026-11-25T10:34:11.008391+00:00",
+    "type": "version",
+    "title": "تحديث إصدار Subtitles: Extended",
+    "detail": "من 0.27.0 إلى 0.28.0.",
+    "source": "Subtitles: Extended",
+    "source_url": "https://popcorn-notes.lsoares.workers.dev/manifest.json",
+    "old_version": "0.27.0",
+    "new_version": "0.28.0"
   }
 ]
