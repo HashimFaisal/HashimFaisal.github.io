@@ -1,5 +1,20 @@
 [
   {
+    "id": "app:release:stable:1.0.1",
+    "type": "app",
+    "title": {
+      "ar": "إصدار مستقر جديد من Nuvio: 1.0.1",
+      "en": "New Nuvio stable release: 1.0.1"
+    },
+    "description": {
+      "ar": "أصبح الإصدار المستقر من Nuvio 1.0.1 متاحاً.",
+      "en": "Nuvio stable version 1.0.1 is now available."
+    },
+    "url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.0.1",
+    "publishedAt": "2026-11-25T07:31:36.221947Z",
+    "expiresAt": "2026-11-26T07:31:36.221947Z"
+  },
+  {
     "id": "addon:StremList:version:2.19.0",
     "type": "addon",
     "title": {

@@ -342,5 +342,16 @@
     "source_url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
     "old_version": "2.17.2",
     "new_version": "2.19.0"
+  },
+  {
+    "date": "2026-11-25T07:31:36.221947+00:00",
+    "type": "release",
+    "channel": "stable",
+    "title": "صدور إصدار مستقر من Nuvio: 1.0.1",
+    "detail": "الإصدار المستقر السابق كان 1.0.0.",
+    "source": "Nuvio App",
+    "source_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.0.1",
+    "old_version": "1.0.0",
+    "new_version": "1.0.1"
   }
 ]

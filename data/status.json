@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-25T07:17:14.509511+00:00",
+  "checked_at": "2026-11-25T07:31:36.221406+00:00",
   "ok": true,
-  "passed": 72,
-  "total": 72,
+  "passed": 73,
+  "total": 73,
   "manifest_coverage": {
     "configured": 27,
     "healthy": 27,
@@ -110,48 +110,50 @@
   "release": {
     "tag": "1.1.0-beta.3",
     "app_version": "1.1.0-beta.3",
-    "name": "1.1.0-beta.3",
-    "published_at": "2026-11-22T02:19:21Z",
-    "html_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/tag/1.1.0-beta.3",
+    "channel": "beta",
+    "repository": "NuvioMedia/NuvioMobile",
+    "name": "Beta 1.1.0 (3)",
+    "published_at": "2026-11-24T04:39:03Z",
+    "html_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.1.0-beta.3",
     "assets": [
       {
         "label": "ARM64",
-        "name": "nuvio-1.1.0-beta.3-arm64-v8a-release.apk",
-        "size_bytes": 54139882,
-        "uploaded_at": "2026-11-21T23:51:50Z",
-        "download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-arm64-v8a-release.apk",
+        "name": "androidApp-full-arm64-v8a-release.apk",
+        "size_bytes": 52450689,
+        "uploaded_at": "2026-11-24T02:22:44Z",
+        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-arm64-v8a-release.apk",
         "ok": true
       },
       {
         "label": "ARMv7",
-        "name": "nuvio-1.1.0-beta.3-armeabi-v7a-release.apk",
-        "size_bytes": 51555330,
-        "uploaded_at": "2026-11-21T23:52:00Z",
-        "download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-armeabi-v7a-release.apk",
+        "name": "androidApp-full-armeabi-v7a-release.apk",
+        "size_bytes": 50103829,
+        "uploaded_at": "2026-11-24T02:22:44Z",
+        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-armeabi-v7a-release.apk",
         "ok": true
       },
       {
         "label": "x86",
-        "name": "nuvio-1.1.0-beta.3-x86-release.apk",
-        "size_bytes": 55215642,
-        "uploaded_at": "2026-11-21T23:52:15Z",
-        "download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-x86-release.apk",
+        "name": "androidApp-full-x86-release.apk",
+        "size_bytes": 53505717,
+        "uploaded_at": "2026-11-24T02:22:44Z",
+        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-x86-release.apk",
         "ok": true
       },
       {
         "label": "x86_64",
-        "name": "nuvio-1.1.0-beta.3-x86_64-release.apk",
-        "size_bytes": 55791004,
-        "uploaded_at": "2026-11-21T23:52:07Z",
-        "download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-x86_64-release.apk",
+        "name": "androidApp-full-x86_64-release.apk",
+        "size_bytes": 53976629,
+        "uploaded_at": "2026-11-24T02:22:44Z",
+        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-x86_64-release.apk",
         "ok": true
       },
       {
         "label": "iOS IPA",
-        "name": "nuvio-1.1.0-beta.3-enhanced-release.ipa",
-        "size_bytes": 77920396,
-        "uploaded_at": "2026-11-22T02:18:39Z",
-        "download_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-enhanced-release.ipa",
+        "name": "nuvio-1.1.0-beta.3-full-release.ipa",
+        "size_bytes": 71740515,
+        "uploaded_at": "2026-11-24T02:22:44Z",
+        "download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-full-release.ipa",
         "ok": true
       }
     ]
@@ -674,11 +676,13 @@
     ]
   },
   "stable_release": {
-    "tag": "1.0.0",
-    "app_version": "1.0.0",
-    "name": "1.0.0",
-    "published_at": "2026-11-16T06:50:50Z",
-    "html_url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/tag/1.0.0"
+    "tag": "1.0.1",
+    "app_version": "1.0.1",
+    "channel": "stable",
+    "repository": "NuvioMedia/NuvioMobile",
+    "name": "1.0.1",
+    "published_at": "2026-11-21T14:50:47Z",
+    "html_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.0.1"
   },
   "release_error": null,
   "release_fallback_used": false,
@@ -1632,8 +1636,21 @@
       "recommended_action": "No action required."
     },
     {
-      "name": "Nuvio beta release",
+      "name": "Official Nuvio stable release",
       "type": "release",
+      "channel": "stable",
+      "ok": true,
+      "tag": "1.0.1",
+      "error": null,
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
+      "name": "Official Nuvio beta release",
+      "type": "release",
+      "channel": "beta",
       "ok": true,
       "tag": "1.1.0-beta.3",
       "error": null,
@@ -1647,8 +1664,8 @@
       "type": "download",
       "ok": true,
       "http_status": 200,
-      "size_bytes": 54139882,
-      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-arm64-v8a-release.apk",
+      "size_bytes": 52450689,
+      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-arm64-v8a-release.apk",
       "failure_code": "healthy",
       "failure_category": "healthy",
       "severity": "info",
@@ -1659,8 +1676,8 @@
       "type": "download",
       "ok": true,
       "http_status": 200,
-      "size_bytes": 51555330,
-      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-armeabi-v7a-release.apk",
+      "size_bytes": 50103829,
+      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-armeabi-v7a-release.apk",
       "failure_code": "healthy",
       "failure_category": "healthy",
       "severity": "info",
@@ -1671,8 +1688,8 @@
       "type": "download",
       "ok": true,
       "http_status": 200,
-      "size_bytes": 55215642,
-      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-x86-release.apk",
+      "size_bytes": 53505717,
+      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-x86-release.apk",
       "failure_code": "healthy",
       "failure_category": "healthy",
       "severity": "info",
@@ -1683,8 +1700,8 @@
       "type": "download",
       "ok": true,
       "http_status": 200,
-      "size_bytes": 55791004,
-      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-x86_64-release.apk",
+      "size_bytes": 53976629,
+      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-x86_64-release.apk",
       "failure_code": "healthy",
       "failure_category": "healthy",
       "severity": "info",
@@ -1695,8 +1712,8 @@
       "type": "download",
       "ok": true,
       "http_status": 200,
-      "size_bytes": 77920396,
-      "url": "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-enhanced-release.ipa",
+      "size_bytes": 71740515,
+      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-full-release.ipa",
       "failure_code": "healthy",
       "failure_category": "healthy",
       "severity": "info",
@@ -1704,11 +1721,25 @@
     }
   ],
   "change_summary": {
-    "count": 0,
-    "by_type": {},
-    "events": []
+    "count": 1,
+    "by_type": {
+      "release": 1
+    },
+    "events": [
+      {
+        "date": "2026-11-25T07:31:36.221947+00:00",
+        "type": "release",
+        "channel": "stable",
+        "title": "صدور إصدار مستقر من Nuvio: 1.0.1",
+        "detail": "الإصدار المستقر السابق كان 1.0.0.",
+        "source": "Nuvio App",
+        "source_url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.0.1",
+        "old_version": "1.0.0",
+        "new_version": "1.0.1"
+      }
+    ]
   },
-  "change_count": 0,
+  "change_count": 1,
   "proactive_monitoring": {
     "status": "healthy",
     "alert_count": 0,
@@ -1718,11 +1749,11 @@
   "risk_forecast": {
     "status": "healthy",
     "integrity": {
-      "input_result_count": 72,
+      "input_result_count": 73,
       "evaluated_failure_count": 0,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
-      "history_window_size": 41,
+      "history_window_size": 42,
       "history_evidence_deduplicated": true
     },
     "overall_level": "low",
