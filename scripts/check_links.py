@@ -11,7 +11,7 @@ from urllib.error import HTTPError, URLError
 from urllib.parse import urlparse, urlencode, quote
 from html import unescape
 
-REPO = "luqmanfadlli/NuvioMobile-Enhanced"
+REPO = "NuvioMedia/NuvioMobile"
 API = f"https://api.github.com/repos/{REPO}/releases?per_page=100"
 
 MANIFESTS = {
@@ -682,7 +682,7 @@ def check_version_downloads(path="index.html"):
 
 
 RELEASE_CACHE_PATH = "data/release-cache.json"
-REQUIRED_RELEASE_ASSETS = tuple(APK_ASSETS.values()) + ("-enhanced-release.ipa",)
+REQUIRED_RELEASE_ASSETS = tuple(APK_ASSETS.values()) + ("-full-release.ipa",)
 RELEASE_CACHE_MAX_AGE_SECONDS = 72 * 60 * 60
 
 
@@ -1079,6 +1079,16 @@ def build_proactive_alerts(report):
     }
 
 
+def is_official_release(release):
+    """Accept release metadata and cache entries only from the official NuvioMobile repository."""
+    if not isinstance(release, dict):
+        return False
+    html_url = release.get("html_url")
+    return isinstance(html_url, str) and html_url.startswith(
+        f"https://github.com/{REPO}/releases/tag/"
+    )
+
+
 def load_release_cache():
     try:
         with open(RELEASE_CACHE_PATH, "r", encoding="utf-8") as cache_file:
@@ -1086,6 +1096,8 @@ def load_release_cache():
         release = cache.get("release") if isinstance(cache, dict) else None
         assets = release.get("assets") if isinstance(release, dict) else None
         if not isinstance(release, dict) or not isinstance(assets, list):
+            return None
+        if not is_official_release(release):
             return None
         names = [item.get("name", "") for item in assets if isinstance(item, dict)]
         urls = [item.get("browser_download_url", "") for item in assets if isinstance(item, dict)]
@@ -1106,6 +1118,8 @@ def load_release_cache():
 
 def save_release_cache(release, stable_release):
     if not isinstance(release, dict) or not isinstance(release.get("assets"), list):
+        return False
+    if not is_official_release(release):
         return False
     cache = {"cached_at": datetime.now(timezone.utc).isoformat(), "release": release, "stable_release": stable_release}
     # Only replace a good snapshot with a release containing every expected download.
@@ -1208,11 +1222,20 @@ def main():
             release_cache_stale = release_cache_is_stale(release_cache_timestamp)
             release_fallback_used = bool(release)
 
-    # Add an explicit beta-release health check so a failed release lookup
-    # cannot leave the overall report looking fully healthy.
+    # Keep official Stable and Beta release discovery separate in the health report.
+    stable_release_available = isinstance(stable_release, dict) and bool(stable_release.get("tag_name"))
     results.append({
-        "name": "Nuvio beta release",
+        "name": "Official Nuvio stable release",
         "type": "release",
+        "channel": "stable",
+        "ok": stable_release_available,
+        "tag": (stable_release or {}).get("tag_name"),
+        "error": None if stable_release_available else "No published official stable release was found",
+    })
+    results.append({
+        "name": "Official Nuvio beta release",
+        "type": "release",
+        "channel": "beta",
         "ok": release_fetch_succeeded,
         "tag": (release or {}).get("tag_name"),
         "error": release_error,
@@ -1225,6 +1248,8 @@ def main():
         stable_release_data = {
             "tag": stable_tag,
             "app_version": stable_tag,
+            "channel": "stable",
+            "repository": REPO,
             "name": stable_release.get("name") or stable_tag,
             "published_at": stable_release.get("published_at"),
             "html_url": stable_release.get("html_url"),
@@ -1242,6 +1267,8 @@ def main():
         release_data = {
             "tag": tag,
             "app_version": tag[:-5] if tag.endswith("-beta") else tag,
+            "channel": "beta",
+            "repository": REPO,
             "name": release.get("name") or tag,
             "published_at": release.get("published_at"),
             "html_url": release.get("html_url"),
@@ -1259,7 +1286,7 @@ def main():
         ipa_names = sorted(
             name for name in assets
             if name and name.startswith("nuvio-")
-            and name.endswith("-enhanced-release.ipa")
+            and name.endswith("-full-release.ipa")
         )
 
         expected["iOS IPA"] = ipa_names[0] if ipa_names else None
@@ -1305,13 +1332,13 @@ def main():
                     "label": label,
                     "name": filename or "IPA asset not found",
                     "ok": False,
-                    "error": "Asset not found in selected Beta release",
+                    "error": "Asset not found in selected official Beta release",
                 }
                 results.append({
                     "name": label,
                     "type": "download",
                     "ok": False,
-                    "error": "Asset not found in selected Beta release",
+                    "error": "Asset not found in selected official Beta release",
                 })
 
             release_data["assets"].append(entry)
