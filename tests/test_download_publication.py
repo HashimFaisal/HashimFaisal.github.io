@@ -8,13 +8,13 @@ class DownloadPublicationTests(unittest.TestCase):
     def setUpClass(cls):
         cls.html = Path("index.html").read_text(encoding="utf-8")
         cls.cards = re.findall(
-            r'<article class="[^"]*\\bdownloads-device-card\\b[^"]*">[\\s\\S]*?</article>',
+            r'<article class="[^"]*\bdownloads-device-card\b[^"]*">[\s\S]*?</article>',
             cls.html,
         )
 
     def card(self, title):
         for card in self.cards:
-            if re.search(r"<h3>\\s*" + re.escape(title) + r"\\s*</h3>", card):
+            if re.search(r"<h3>\s*" + re.escape(title) + r"\s*</h3>", card):
                 return card
         self.fail(f"Download card not found: {title}")
 
@@ -48,7 +48,7 @@ class DownloadPublicationTests(unittest.TestCase):
 
     def test_pages_deploys_after_successful_release_sync_and_health_runs(self):
         workflow = Path(".github/workflows/pages.yml").read_text(encoding="utf-8")
-        workflow_run = re.search(r"workflow_run:\\s*\\n(?P<body>(?:[ \\t]+.*\\n)+)", workflow)
+        workflow_run = re.search(r"workflow_run:\s*\n(?P<body>(?:[ \t]+.*\n)+)", workflow)
         self.assertIsNotNone(workflow_run, "Pages workflow_run trigger is missing")
         body = workflow_run.group("body")
         self.assertIn("Nuvio Control Center - Health", body)
