@@ -58,20 +58,5 @@
     "url": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
     "publishedAt": "2026-11-24T17:22:36.326755Z",
     "expiresAt": "2026-11-25T17:22:36.326755Z"
-  },
-  {
-    "id": "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.3-autosync.1",
-    "type": "app",
-    "title": {
-      "ar": "تحديث جديد لتطبيق Nuvio Reshaped Mobile: 1.1.0-beta.3-autosync.1",
-      "en": "New Nuvio Reshaped Mobile app release: 1.1.0-beta.3-autosync.1"
-    },
-    "description": {
-      "ar": "صدر إصدار جديد من Nuvio Reshaped Mobile برقم 1.1.0-beta.3-autosync.1. اضغط للتفاصيل.",
-      "en": "A new Nuvio Reshaped Mobile release (1.1.0-beta.3-autosync.1) is available. Open the release notes for details."
-    },
-    "url": "https://github.com/DavidVamaiotu/NuvioMobile-Reshaped/releases/tag/1.1.0-beta.3-autosync.1",
-    "publishedAt": "2026-11-24T06:57:59.513796Z",
-    "expiresAt": "2026-11-25T06:57:59.513796Z"
   }
 ]

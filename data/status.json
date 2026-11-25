@@ -1,8 +1,8 @@
 {
-  "checked_at": "2026-11-25T01:34:31.408634+00:00",
+  "checked_at": "2026-11-25T07:17:14.509511+00:00",
   "ok": true,
-  "passed": 71,
-  "total": 71,
+  "passed": 72,
+  "total": 72,
   "manifest_coverage": {
     "configured": 27,
     "healthy": 27,
@@ -157,8 +157,8 @@
     ]
   },
   "version_downloads": {
-    "checked": 33,
-    "healthy": 33,
+    "checked": 34,
+    "healthy": 34,
     "failed": 0,
     "items": [
       {
@@ -185,6 +185,21 @@
         "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-armeabi-v7a-release.apk",
         "card": "Nuvio Mobile",
         "label": "تنزيل APK · ARMv7",
+        "tag": "1.1.0-beta.3",
+        "failure_code": "healthy",
+        "failure_category": "healthy",
+        "severity": "info",
+        "recommended_action": "No action required."
+      },
+      {
+        "name": "Nuvio Mobile · تنزيل APK · x86",
+        "type": "version_download",
+        "ok": true,
+        "http_status": 200,
+        "size_bytes": null,
+        "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-x86-release.apk",
+        "card": "Nuvio Mobile",
+        "label": "تنزيل APK · x86",
         "tag": "1.1.0-beta.3",
         "failure_code": "healthy",
         "failure_category": "healthy",
@@ -1137,6 +1152,21 @@
       "recommended_action": "No action required."
     },
     {
+      "name": "Nuvio Mobile · تنزيل APK · x86",
+      "type": "version_download",
+      "ok": true,
+      "http_status": 200,
+      "size_bytes": null,
+      "url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-x86-release.apk",
+      "card": "Nuvio Mobile",
+      "label": "تنزيل APK · x86",
+      "tag": "1.1.0-beta.3",
+      "failure_code": "healthy",
+      "failure_category": "healthy",
+      "severity": "info",
+      "recommended_action": "No action required."
+    },
+    {
       "name": "Nuvio Mobile · تنزيل APK · x86_64",
       "type": "version_download",
       "ok": true,
@@ -1674,24 +1704,11 @@
     }
   ],
   "change_summary": {
-    "count": 1,
-    "by_type": {
-      "version": 1
-    },
-    "events": [
-      {
-        "date": "2026-11-25T01:34:31.409365+00:00",
-        "type": "version",
-        "title": "تحديث إصدار StremList",
-        "detail": "من 2.17.2 إلى 2.19.0.",
-        "source": "StremList",
-        "source_url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
-        "old_version": "2.17.2",
-        "new_version": "2.19.0"
-      }
-    ]
+    "count": 0,
+    "by_type": {},
+    "events": []
   },
-  "change_count": 1,
+  "change_count": 0,
   "proactive_monitoring": {
     "status": "healthy",
     "alert_count": 0,
@@ -1701,7 +1718,7 @@
   "risk_forecast": {
     "status": "healthy",
     "integrity": {
-      "input_result_count": 71,
+      "input_result_count": 72,
       "evaluated_failure_count": 0,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
