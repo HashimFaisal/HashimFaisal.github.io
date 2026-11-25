@@ -1099,6 +1099,9 @@ def load_release_cache():
             return None
         if not is_official_release(release):
             return None
+        stable_release = cache.get("stable_release")
+        if stable_release is not None and not is_official_release(stable_release):
+            return None
         names = [item.get("name", "") for item in assets if isinstance(item, dict)]
         urls = [item.get("browser_download_url", "") for item in assets if isinstance(item, dict)]
         if not release.get("tag_name") or not all(
@@ -1120,6 +1123,8 @@ def save_release_cache(release, stable_release):
     if not isinstance(release, dict) or not isinstance(release.get("assets"), list):
         return False
     if not is_official_release(release):
+        return False
+    if stable_release is not None and not is_official_release(stable_release):
         return False
     cache = {"cached_at": datetime.now(timezone.utc).isoformat(), "release": release, "stable_release": stable_release}
     # Only replace a good snapshot with a release containing every expected download.
