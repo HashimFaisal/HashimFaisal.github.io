@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-25T22:34:02.499232+00:00",
+  "checked_at": "2026-11-25T22:50:08.405676+00:00",
   "ok": true,
   "passed": 73,
   "total": 73,
@@ -1721,24 +1721,11 @@
     }
   ],
   "change_summary": {
-    "count": 1,
-    "by_type": {
-      "version": 1
-    },
-    "events": [
-      {
-        "date": "2026-11-25T22:34:02.500106+00:00",
-        "type": "version",
-        "title": "تحديث إصدار StremList",
-        "detail": "من 2.19.1 إلى 2.19.3.",
-        "source": "StremList",
-        "source_url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
-        "old_version": "2.19.1",
-        "new_version": "2.19.3"
-      }
-    ]
+    "count": 0,
+    "by_type": {},
+    "events": []
   },
-  "change_count": 1,
+  "change_count": 0,
   "proactive_monitoring": {
     "status": "healthy",
     "alert_count": 0,
