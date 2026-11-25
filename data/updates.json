@@ -1,5 +1,20 @@
 [
   {
+    "id": "addon:StremList:version:2.19.0",
+    "type": "addon",
+    "title": {
+      "ar": "تحديث StremList إلى الإصدار 2.19.0",
+      "en": "StremList updated to version 2.19.0"
+    },
+    "description": {
+      "ar": "تم تحديث الإصدار من 2.17.2 إلى 2.19.0.",
+      "en": "Updated from version 2.17.2 to 2.19.0."
+    },
+    "url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
+    "publishedAt": "2026-11-25T01:34:31.409365Z",
+    "expiresAt": "2026-11-26T01:34:31.409365Z"
+  },
+  {
     "id": "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.3-autosync.2",
     "type": "app",
     "title": {
@@ -103,50 +118,5 @@
     "url": "https://github.com/DavidVamaiotu/NuvioMobile-Reshaped/releases/tag/1.1.0-beta.2-autosync.7",
     "publishedAt": "2026-11-24T01:44:53.374940Z",
     "expiresAt": "2026-11-25T01:44:53.374940Z"
-  },
-  {
-    "id": "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.2-autosync.6",
-    "type": "app",
-    "title": {
-      "ar": "تحديث جديد لتطبيق Nuvio Reshaped Mobile: 1.1.0-beta.2-autosync.6",
-      "en": "New Nuvio Reshaped Mobile app release: 1.1.0-beta.2-autosync.6"
-    },
-    "description": {
-      "ar": "صدر إصدار جديد من Nuvio Reshaped Mobile برقم 1.1.0-beta.2-autosync.6. اضغط للتفاصيل.",
-      "en": "A new Nuvio Reshaped Mobile release (1.1.0-beta.2-autosync.6) is available. Open the release notes for details."
-    },
-    "url": "https://github.com/DavidVamaiotu/NuvioMobile-Reshaped/releases/tag/1.1.0-beta.2-autosync.6",
-    "publishedAt": "2026-11-23T22:40:41.923409Z",
-    "expiresAt": "2026-11-24T22:40:41.923409Z"
-  },
-  {
-    "id": "addon:Pictorium:version:1.28.2",
-    "type": "addon",
-    "title": {
-      "ar": "تحديث Pictorium إلى الإصدار 1.28.2",
-      "en": "Pictorium updated to version 1.28.2"
-    },
-    "description": {
-      "ar": "تم تحديث الإصدار من 1.28.1 إلى 1.28.2.",
-      "en": "Updated from version 1.28.1 to 1.28.2."
-    },
-    "url": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
-    "publishedAt": "2026-11-23T22:00:34.357153Z",
-    "expiresAt": "2026-11-24T22:00:34.357153Z"
-  },
-  {
-    "id": "addon:Subtitles: Extended:version:0.27.0",
-    "type": "addon",
-    "title": {
-      "ar": "تحديث Subtitles: Extended إلى الإصدار 0.27.0",
-      "en": "Subtitles: Extended updated to version 0.27.0"
-    },
-    "description": {
-      "ar": "تم تحديث الإصدار من 0.26.6 إلى 0.27.0.",
-      "en": "Updated from version 0.26.6 to 0.27.0."
-    },
-    "url": "https://popcorn-notes.lsoares.workers.dev/manifest.json",
-    "publishedAt": "2026-11-23T22:00:34.357153Z",
-    "expiresAt": "2026-11-24T22:00:34.357153Z"
   }
 ]
