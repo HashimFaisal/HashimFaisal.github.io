@@ -1,5 +1,35 @@
 [
   {
+    "id": "addon:Pictorium:version:1.28.4",
+    "type": "addon",
+    "title": {
+      "ar": "تحديث Pictorium إلى الإصدار 1.28.4",
+      "en": "Pictorium updated to version 1.28.4"
+    },
+    "description": {
+      "ar": "تم تحديث الإصدار من 1.28.3 إلى 1.28.4.",
+      "en": "Updated from version 1.28.3 to 1.28.4."
+    },
+    "url": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
+    "publishedAt": "2026-11-25T20:17:14.490027Z",
+    "expiresAt": "2026-11-26T20:17:14.490027Z"
+  },
+  {
+    "id": "addon:StremList:version:2.19.1",
+    "type": "addon",
+    "title": {
+      "ar": "تحديث StremList إلى الإصدار 2.19.1",
+      "en": "StremList updated to version 2.19.1"
+    },
+    "description": {
+      "ar": "تم تحديث الإصدار من 2.19.0 إلى 2.19.1.",
+      "en": "Updated from version 2.19.0 to 2.19.1."
+    },
+    "url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
+    "publishedAt": "2026-11-25T20:17:14.490027Z",
+    "expiresAt": "2026-11-26T20:17:14.490027Z"
+  },
+  {
     "id": "addon:Subtitles: Extended:version:0.28.0",
     "type": "addon",
     "title": {
@@ -43,50 +73,5 @@
     "url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
     "publishedAt": "2026-11-25T01:34:31.409365Z",
     "expiresAt": "2026-11-26T01:34:31.409365Z"
-  },
-  {
-    "id": "app:download-release:nuvio-reshaped-mobile:DavidVamaiotu/NuvioMobile-Reshaped:1.1.0-beta.3-autosync.2",
-    "type": "app",
-    "title": {
-      "ar": "تحديث جديد لتطبيق Nuvio Reshaped Mobile: 1.1.0-beta.3-autosync.2",
-      "en": "New Nuvio Reshaped Mobile app release: 1.1.0-beta.3-autosync.2"
-    },
-    "description": {
-      "ar": "صدر إصدار جديد من Nuvio Reshaped Mobile برقم 1.1.0-beta.3-autosync.2. اضغط للتفاصيل.",
-      "en": "A new Nuvio Reshaped Mobile release (1.1.0-beta.3-autosync.2) is available. Open the release notes for details."
-    },
-    "url": "https://github.com/DavidVamaiotu/NuvioMobile-Reshaped/releases/tag/1.1.0-beta.3-autosync.2",
-    "publishedAt": "2026-11-24T18:55:09.807560Z",
-    "expiresAt": "2026-11-25T18:55:09.807560Z"
-  },
-  {
-    "id": "app:download-release:nuvio-tv:NuvioMedia/NuvioTV:1.2.0-beta.4",
-    "type": "app",
-    "title": {
-      "ar": "تحديث جديد لتطبيق Nuvio TV: 1.2.0-beta.4",
-      "en": "New Nuvio TV app release: 1.2.0-beta.4"
-    },
-    "description": {
-      "ar": "صدر إصدار جديد من Nuvio TV برقم 1.2.0-beta.4. اضغط للتفاصيل.",
-      "en": "A new Nuvio TV release (1.2.0-beta.4) is available. Open the release notes for details."
-    },
-    "url": "https://github.com/NuvioMedia/NuvioTV/releases/tag/1.2.0-beta.4",
-    "publishedAt": "2026-11-24T18:55:09.807560Z",
-    "expiresAt": "2026-11-25T18:55:09.807560Z"
-  },
-  {
-    "id": "addon:Pictorium:version:1.28.3",
-    "type": "addon",
-    "title": {
-      "ar": "تحديث Pictorium إلى الإصدار 1.28.3",
-      "en": "Pictorium updated to version 1.28.3"
-    },
-    "description": {
-      "ar": "تم تحديث الإصدار من 1.28.2 إلى 1.28.3.",
-      "en": "Updated from version 1.28.2 to 1.28.3."
-    },
-    "url": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
-    "publishedAt": "2026-11-24T17:22:36.326755Z",
-    "expiresAt": "2026-11-25T17:22:36.326755Z"
   }
 ]

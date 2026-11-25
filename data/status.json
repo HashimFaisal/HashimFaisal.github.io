@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-25T10:34:11.007668+00:00",
+  "checked_at": "2026-11-25T20:17:14.489445+00:00",
   "ok": true,
   "passed": 73,
   "total": 73,
@@ -958,7 +958,7 @@
       "type": "manifest",
       "ok": true,
       "http_status": 200,
-      "version": "1.28.3",
+      "version": "1.28.4",
       "manifest_id": "org.pictorium.3JC6nzYt",
       "url": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
       "failure_code": "healthy",
@@ -1023,7 +1023,7 @@
       "type": "manifest",
       "ok": true,
       "http_status": 200,
-      "version": "2.19.0",
+      "version": "2.19.1",
       "manifest_id": "com.stremlist.fc69e82a393cea05",
       "url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
       "failure_code": "healthy",
@@ -1721,24 +1721,34 @@
     }
   ],
   "change_summary": {
-    "count": 1,
+    "count": 2,
     "by_type": {
-      "version": 1
+      "version": 2
     },
     "events": [
       {
-        "date": "2026-11-25T10:34:11.008391+00:00",
+        "date": "2026-11-25T20:17:14.490027+00:00",
         "type": "version",
-        "title": "تحديث إصدار Subtitles: Extended",
-        "detail": "من 0.27.0 إلى 0.28.0.",
-        "source": "Subtitles: Extended",
-        "source_url": "https://popcorn-notes.lsoares.workers.dev/manifest.json",
-        "old_version": "0.27.0",
-        "new_version": "0.28.0"
+        "title": "تحديث إصدار Pictorium",
+        "detail": "من 1.28.3 إلى 1.28.4.",
+        "source": "Pictorium",
+        "source_url": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
+        "old_version": "1.28.3",
+        "new_version": "1.28.4"
+      },
+      {
+        "date": "2026-11-25T20:17:14.490027+00:00",
+        "type": "version",
+        "title": "تحديث إصدار StremList",
+        "detail": "من 2.19.0 إلى 2.19.1.",
+        "source": "StremList",
+        "source_url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
+        "old_version": "2.19.0",
+        "new_version": "2.19.1"
       }
     ]
   },
-  "change_count": 1,
+  "change_count": 2,
   "proactive_monitoring": {
     "status": "healthy",
     "alert_count": 0,
@@ -1752,7 +1762,7 @@
       "evaluated_failure_count": 0,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
-      "history_window_size": 43,
+      "history_window_size": 45,
       "history_evidence_deduplicated": true
     },
     "overall_level": "low",
