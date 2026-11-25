@@ -162,55 +162,51 @@ test('all 28 monitored cards receive their published health status', async ({ pa
 });
 
 test('Nuvio edition cards show checked versions and translate status labels', async ({ page }) => {
-  const items = [
-    {
-      name: 'Nuvio Mobile · Download APK · ARM64',
+  const mobileCard = page.locator('.downloads-device-card').filter({
+    has: page.locator('h3', { hasText: /^Nuvio Mobile$/ })
+  });
+  const links = await mobileCard.locator('a.downloads-device-link').evaluateAll(anchors =>
+    anchors.map(anchor => ({ url: anchor.href, label: anchor.textContent.trim() }))
+  );
+  const items = links.map(({ url, label }) => {
+    const parts = new URL(url).pathname.split('/').filter(Boolean);
+    const downloadIndex = parts.indexOf('download');
+    return {
+      name: 'Nuvio Mobile · Download ' + label,
       type: 'version_download',
       card: 'Nuvio Mobile',
-      label: 'تنزيل APK · ARM64',
-      tag: '1.0.1',
+      label,
+      tag: parts[downloadIndex + 1],
       ok: true,
-      url: 'https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-arm64-v8a-release.apk'
-    },
-    {
-      name: 'Nuvio Mobile · Download APK · ARMv7',
-      type: 'version_download',
-      card: 'Nuvio Mobile',
-      label: 'تنزيل APK · ARMv7',
-      tag: '1.0.1',
-      ok: true,
-      url: 'https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-armeabi-v7a-release.apk'
-    },
-    {
-      name: 'Nuvio Mobile · Download APK · x86_64',
-      type: 'version_download',
-      card: 'Nuvio Mobile',
-      label: 'تنزيل APK · x86_64',
-      tag: '1.0.1',
-      ok: true,
-      url: 'https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-x86_64-release.apk'
-    }
-  ];
+      url
+    };
+  });
+  const expectedVersion = items[0]?.tag;
+  expect(items).toHaveLength(4);
+  expect(new Set(items.map(item => item.tag)).size).toBe(1);
+
   await page.route('**/data/status.json', route => route.fulfill({
     status: 200,
     contentType: 'application/json',
     body: JSON.stringify({
-      ok: true, passed: 1, total: 1, checks: items,
-      version_downloads: { checked: 1, healthy: 1, failed: 0, items },
+      ok: true, passed: items.length, total: items.length, checks: items,
+      version_downloads: { checked: items.length, healthy: items.length, failed: 0, items },
       release: null
     })
   }));
   await page.reload();
   await page.locator('.nuvio-launch-card[data-view="downloads"]').click();
   await expect(page.locator('#downloads')).toBeVisible();
-  const status = page.locator('.downloads-device-card').filter({ has: page.locator('h3', { hasText: 'Nuvio Mobile' }) }).locator('.downloads-device-status').first();
-  await expect(status).toContainText('الإصدار 1.0.1');
+  const status = page.locator('.downloads-device-card').filter({
+    has: page.locator('h3', { hasText: /^Nuvio Mobile$/ })
+  }).locator('.downloads-device-status').first();
+  await expect(status).toContainText('الإصدار ' + expectedVersion);
   await expect(status).toHaveClass(/healthy|ok/);
   await expect(status).toBeVisible();
   await expect.poll(() => status.evaluate(el => getComputedStyle(el, '::before').content)).toBe('""');
   await expect(status).not.toContainText('روابط التنزيل سليمة');
   await page.locator('#language-toggle').click();
-  await expect(status).toContainText('Version 1.0.1');
+  await expect(status).toContainText('Version ' + expectedVersion);
   await expect(status).toBeVisible();
   await expect.poll(() => status.evaluate(el => getComputedStyle(el, '::before').content)).toBe('""');
   await expect(status).not.toContainText('Download links are healthy');
@@ -942,9 +938,33 @@ test('Nuvio editions are separated by device and link directly to published inst
   await expect(page.locator('#versions-smart-tv .downloads-device-card')).toHaveCount(2);
   await expect(page.locator('#versions-desktop .downloads-device-card')).toHaveCount(1);
 
-  await expect(page.locator('#versions-mobile a[href$="androidApp-full-arm64-v8a-release.apk"]')).toBeVisible();
-  await expect(page.locator('#versions-mobile a[href$="nuvio-1.0.1-full-release.ipa"]')).toBeVisible();
-  await expect(page.locator('#versions-mobile a[href$="NuvioRS-1.1.0-beta.2-autosync.7-arm64.apk"]')).toBeVisible();
+  const officialAndroidCard = page.locator('#versions-mobile .downloads-device-card').filter({
+    has: page.locator('h3', { hasText: /^Nuvio Mobile$/ })
+  });
+  const officialIosCard = page.locator('#versions-mobile .downloads-device-card').filter({
+    has: page.locator('h3', { hasText: /^Nuvio Mobile for iOS$/ })
+  });
+  const officialAndroidUrls = await officialAndroidCard.locator('a.downloads-device-link').evaluateAll(anchors =>
+    anchors.map(anchor => anchor.href)
+  );
+  const releaseTag = url => {
+    const parts = new URL(url).pathname.split('/').filter(Boolean);
+    return parts[parts.indexOf('download') + 1];
+  };
+  for (const asset of [
+    'androidApp-full-arm64-v8a-release.apk',
+    'androidApp-full-armeabi-v7a-release.apk',
+    'androidApp-full-x86-release.apk',
+    'androidApp-full-x86_64-release.apk'
+  ]) {
+    await expect(officialAndroidCard.locator('a[href$="' + asset + '"]')).toBeVisible();
+  }
+  const officialIosUrl = await officialIosCard.locator('a.downloads-device-link').first().getAttribute('href');
+  expect(releaseTag(officialIosUrl)).toBe(releaseTag(officialAndroidUrls[0]));
+  const reshapedCard = page.locator('#versions-mobile .downloads-device-card').filter({
+    has: page.locator('h3', { hasText: /^Nuvio Reshaped Mobile$/ })
+  });
+  await expect(reshapedCard.locator('a[href*="NuvioRS-"][href$="-arm64.apk"]')).toBeVisible();
   await expect(page.locator('#versions-mobile a.downloads-device-link[href*="/releases"]:not([href*="/releases/download/"])')).toHaveCount(0);
 
   await page.locator('#downloads-device-nav [data-download-device="tv"]').click();
