@@ -56,5 +56,18 @@ class DownloadPublicationTests(unittest.TestCase):
         self.assertIn("conclusion == 'success'", workflow)
 
 
+    def test_health_and_release_sync_serialize_shared_data_writes(self):
+        health = Path(".github/workflows/addon-health.yml").read_text(encoding="utf-8")
+        sync = Path(".github/workflows/release-sync.yml").read_text(encoding="utf-8")
+        group_pattern = r"concurrency:\s*\n\s+group:\s*([^\s#]+)"
+        health_group = re.search(group_pattern, health)
+        sync_group = re.search(group_pattern, sync)
+        self.assertIsNotNone(health_group)
+        self.assertIsNotNone(sync_group)
+        self.assertEqual(health_group.group(1), sync_group.group(1))
+        self.assertIn("cancel-in-progress: false", health)
+        self.assertIn("cancel-in-progress: false", sync)
+
+
 if __name__ == "__main__":
     unittest.main()

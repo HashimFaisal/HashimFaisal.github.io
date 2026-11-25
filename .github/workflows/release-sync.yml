@@ -24,7 +24,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: sync-nuvio-download-releases
+  group: nuvio-control-center-data-writers
   cancel-in-progress: false
 
 jobs:
