@@ -90,6 +90,25 @@ class ReleaseCacheTests(unittest.TestCase):
             with patch.object(check_links, "RELEASE_CACHE_PATH", str(path)):
                 self.assertFalse(check_links.save_release_cache(release, None))
 
+    def test_community_stable_release_is_rejected_from_cache(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "release-cache.json"
+            stable = sample_release()
+            stable["tag_name"] = "1.0.1"
+            stable["html_url"] = "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/tag/1.0.1"
+            path.write_text(json.dumps({"release": sample_release(), "stable_release": stable}), encoding="utf-8")
+            with patch.object(check_links, "RELEASE_CACHE_PATH", str(path)):
+                self.assertIsNone(check_links.load_release_cache())
+
+    def test_save_rejects_community_stable_release(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "release-cache.json"
+            stable = sample_release()
+            stable["tag_name"] = "1.0.1"
+            stable["html_url"] = "https://github.com/luqmanfadlli/NuvioMobile-Enhanced/releases/tag/1.0.1"
+            with patch.object(check_links, "RELEASE_CACHE_PATH", str(path)):
+                self.assertFalse(check_links.save_release_cache(sample_release(), stable))
+
     def test_missing_asset_rejects_cache(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "release-cache.json"
