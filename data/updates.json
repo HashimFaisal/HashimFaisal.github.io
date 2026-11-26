@@ -1,5 +1,20 @@
 [
   {
+    "id": "addon:StremList:version:2.19.5",
+    "type": "addon",
+    "title": {
+      "ar": "تحديث StremList إلى الإصدار 2.19.5",
+      "en": "StremList updated to version 2.19.5"
+    },
+    "description": {
+      "ar": "تم تحديث الإصدار من 2.19.3 إلى 2.19.5.",
+      "en": "Updated from version 2.19.3 to 2.19.5."
+    },
+    "url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
+    "publishedAt": "2026-11-26T21:40:24.034837Z",
+    "expiresAt": "2026-11-27T21:40:24.034837Z"
+  },
+  {
     "id": "addon:CinemaBox:version:2.1.7",
     "type": "addon",
     "title": {
@@ -43,35 +58,5 @@
     "url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
     "publishedAt": "2026-11-25T22:34:02.500106Z",
     "expiresAt": "2026-11-26T22:34:02.500106Z"
-  },
-  {
-    "id": "addon:Pictorium:version:1.28.4",
-    "type": "addon",
-    "title": {
-      "ar": "تحديث Pictorium إلى الإصدار 1.28.4",
-      "en": "Pictorium updated to version 1.28.4"
-    },
-    "description": {
-      "ar": "تم تحديث الإصدار من 1.28.3 إلى 1.28.4.",
-      "en": "Updated from version 1.28.3 to 1.28.4."
-    },
-    "url": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
-    "publishedAt": "2026-11-25T20:17:14.490027Z",
-    "expiresAt": "2026-11-26T20:17:14.490027Z"
-  },
-  {
-    "id": "addon:StremList:version:2.19.1",
-    "type": "addon",
-    "title": {
-      "ar": "تحديث StremList إلى الإصدار 2.19.1",
-      "en": "StremList updated to version 2.19.1"
-    },
-    "description": {
-      "ar": "تم تحديث الإصدار من 2.19.0 إلى 2.19.1.",
-      "en": "Updated from version 2.19.0 to 2.19.1."
-    },
-    "url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
-    "publishedAt": "2026-11-25T20:17:14.490027Z",
-    "expiresAt": "2026-11-26T20:17:14.490027Z"
   }
 ]
