@@ -1,5 +1,20 @@
 [
   {
+    "id": "addon:CinemaBox:version:1.1.3",
+    "type": "addon",
+    "title": {
+      "ar": "تحديث CinemaBox إلى الإصدار 1.1.3",
+      "en": "CinemaBox updated to version 1.1.3"
+    },
+    "description": {
+      "ar": "تم تحديث الإصدار من 1.1.2 إلى 1.1.3.",
+      "en": "Updated from version 1.1.2 to 1.1.3."
+    },
+    "url": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json",
+    "publishedAt": "2026-11-26T02:57:45.545102Z",
+    "expiresAt": "2026-11-27T02:57:45.545102Z"
+  },
+  {
     "id": "addon:StremList:version:2.19.3",
     "type": "addon",
     "title": {
@@ -73,20 +88,5 @@
     "url": "https://github.com/NuvioMedia/NuvioMobile/releases/tag/1.0.1",
     "publishedAt": "2026-11-25T07:31:36.221947Z",
     "expiresAt": "2026-11-26T07:31:36.221947Z"
-  },
-  {
-    "id": "addon:StremList:version:2.19.0",
-    "type": "addon",
-    "title": {
-      "ar": "تحديث StremList إلى الإصدار 2.19.0",
-      "en": "StremList updated to version 2.19.0"
-    },
-    "description": {
-      "ar": "تم تحديث الإصدار من 2.17.2 إلى 2.19.0.",
-      "en": "Updated from version 2.17.2 to 2.19.0."
-    },
-    "url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
-    "publishedAt": "2026-11-25T01:34:31.409365Z",
-    "expiresAt": "2026-11-26T01:34:31.409365Z"
   }
 ]
