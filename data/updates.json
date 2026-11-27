@@ -1,5 +1,35 @@
 [
   {
+    "id": "app:download-release:nuviocodeinexo:codeineXO/NuvioCodeineXO:v6.1.7",
+    "type": "app",
+    "title": {
+      "ar": "تحديث جديد لتطبيق NuvioCodeineXO: v6.1.7",
+      "en": "New NuvioCodeineXO app release: v6.1.7"
+    },
+    "description": {
+      "ar": "صدر إصدار جديد من NuvioCodeineXO برقم v6.1.7. اضغط للتفاصيل.",
+      "en": "A new NuvioCodeineXO release (v6.1.7) is available. Open the release notes for details."
+    },
+    "url": "https://github.com/codeineXO/NuvioCodeineXO/releases/tag/v6.1.7",
+    "publishedAt": "2026-11-27T00:37:24.369167Z",
+    "expiresAt": "2026-11-28T00:37:24.369167Z"
+  },
+  {
+    "id": "app:download-release:nuviotv-lite:hackerslash/NuvioTV-Lite:v2.4.7-lite",
+    "type": "app",
+    "title": {
+      "ar": "تحديث جديد لتطبيق NuvioTV-Lite: v2.4.7-lite",
+      "en": "New NuvioTV-Lite app release: v2.4.7-lite"
+    },
+    "description": {
+      "ar": "صدر إصدار جديد من NuvioTV-Lite برقم v2.4.7-lite. اضغط للتفاصيل.",
+      "en": "A new NuvioTV-Lite release (v2.4.7-lite) is available. Open the release notes for details."
+    },
+    "url": "https://github.com/hackerslash/NuvioTV-Lite/releases/tag/v2.4.7-lite",
+    "publishedAt": "2026-11-27T00:37:24.369167Z",
+    "expiresAt": "2026-11-28T00:37:24.369167Z"
+  },
+  {
     "id": "addon:StremList:version:2.19.5",
     "type": "addon",
     "title": {
@@ -43,20 +73,5 @@
     "url": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json",
     "publishedAt": "2026-11-26T02:57:45.545102Z",
     "expiresAt": "2026-11-27T02:57:45.545102Z"
-  },
-  {
-    "id": "addon:StremList:version:2.19.3",
-    "type": "addon",
-    "title": {
-      "ar": "تحديث StremList إلى الإصدار 2.19.3",
-      "en": "StremList updated to version 2.19.3"
-    },
-    "description": {
-      "ar": "تم تحديث الإصدار من 2.19.1 إلى 2.19.3.",
-      "en": "Updated from version 2.19.1 to 2.19.3."
-    },
-    "url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
-    "publishedAt": "2026-11-25T22:34:02.500106Z",
-    "expiresAt": "2026-11-26T22:34:02.500106Z"
   }
 ]
