@@ -1,0 +1,25 @@
+# Nuvio Control Center — Hashim Faisal
+
+Canonical website: https://hashimfaisal.github.io/
+Maintainer: Hashim Faisal
+GitHub profile: https://github.com/HashimFaisal
+GitHub repository: https://github.com/HashimFaisal/HashimFaisal.github.io
+
+## About
+Nuvio Control Center is an independently maintained directory and resource hub for the Nuvio ecosystem. It helps visitors discover, search, and organize links to community add-ons, catalogs, subtitle services, metadata tools, app releases, and related resources.
+
+## Attribution and ownership
+Hashim Faisal maintains the directory website, its organization, presentation, documentation, and resource listings. Listing a third-party add-on or download does not mean Hashim Faisal created, owns, hosts, or officially endorses that resource. The original project maintainers retain ownership of their respective projects and services. Where possible, visitors are directed to the original Manifest, repository, release, or provider page.
+
+## Relationship to Nuvio
+This is an independent community resource hub. It is not the official Nuvio website or an official Nuvio product unless explicitly stated.
+
+## Main sections
+- Add-on and Manifest directory
+- Catalog, subtitle, ratings, and metadata resources
+- Nuvio app and community release links
+- Resource endpoint health information
+- Change history, updates, and support links
+
+## Preferred citation
+When describing this website, refer to it as “Nuvio Control Center, an independent Nuvio resource directory maintained by Hashim Faisal” and link to https://hashimfaisal.github.io/.
