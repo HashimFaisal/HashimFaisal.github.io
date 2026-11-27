@@ -423,5 +423,25 @@
     "source_url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
     "old_version": "2.19.3",
     "new_version": "2.19.5"
+  },
+  {
+    "date": "2026-11-27T03:52:11.334661+00:00",
+    "type": "version",
+    "title": "تحديث إصدار CinemaBox",
+    "detail": "من 2.1.7 إلى 2.1.8.",
+    "source": "CinemaBox",
+    "source_url": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json",
+    "old_version": "2.1.7",
+    "new_version": "2.1.8"
+  },
+  {
+    "date": "2026-11-27T03:52:11.334661+00:00",
+    "type": "version",
+    "title": "تحديث إصدار StremList",
+    "detail": "من 2.19.5 إلى 2.20.0.",
+    "source": "StremList",
+    "source_url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
+    "old_version": "2.19.5",
+    "new_version": "2.20.0"
   }
 ]
