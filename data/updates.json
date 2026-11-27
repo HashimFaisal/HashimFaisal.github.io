@@ -1,5 +1,20 @@
 [
   {
+    "id": "addon:Pictorium:version:1.28.5",
+    "type": "addon",
+    "title": {
+      "ar": "تحديث Pictorium إلى الإصدار 1.28.5",
+      "en": "Pictorium updated to version 1.28.5"
+    },
+    "description": {
+      "ar": "تم تحديث الإصدار من 1.28.4 إلى 1.28.5.",
+      "en": "Updated from version 1.28.4 to 1.28.5."
+    },
+    "url": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
+    "publishedAt": "2026-11-27T13:26:41.232727Z",
+    "expiresAt": "2026-11-28T13:26:41.232727Z"
+  },
+  {
     "id": "addon:CinemaBox:version:2.1.8",
     "type": "addon",
     "title": {
@@ -73,20 +88,5 @@
     "url": "https://api.stremlist.com/sl_pBMWqhwNW09oljTtzD3Abn/manifest.json",
     "publishedAt": "2026-11-26T21:40:24.034837Z",
     "expiresAt": "2026-11-27T21:40:24.034837Z"
-  },
-  {
-    "id": "addon:CinemaBox:version:2.1.7",
-    "type": "addon",
-    "title": {
-      "ar": "تحديث CinemaBox إلى الإصدار 2.1.7",
-      "en": "CinemaBox updated to version 2.1.7"
-    },
-    "description": {
-      "ar": "تم تحديث الإصدار من 1.1.3 إلى 2.1.7.",
-      "en": "Updated from version 1.1.3 to 2.1.7."
-    },
-    "url": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json",
-    "publishedAt": "2026-11-26T12:09:17.904554Z",
-    "expiresAt": "2026-11-27T12:09:17.904554Z"
   }
 ]
