@@ -1,0 +1,25 @@
+{
+  "id": "com.hashimfaisal.dabbour-metadata",
+  "name": "الدبور — Metadata",
+  "version": "1.0.0",
+  "description": "بيانات مواسم وحلقات مسلسل الدبور (TMDB 134362) لـ Nuvio.",
+  "logo": "https://hashimfaisal.github.io/assets/cinemabox.svg",
+  "types": [
+    "series"
+  ],
+  "idPrefixes": [
+    "tmdb:"
+  ],
+  "resources": [
+    {
+      "name": "meta",
+      "types": [
+        "series"
+      ],
+      "idPrefixes": [
+        "tmdb:"
+      ]
+    }
+  ],
+  "catalogs": []
+}
