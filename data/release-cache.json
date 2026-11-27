@@ -1,5 +1,5 @@
 {
-  "cached_at": "2026-11-27T13:41:40.155800+00:00",
+  "cached_at": "2026-11-27T22:25:06.880871+00:00",
   "release": {
     "url": "https://api.github.com/repos/NuvioMedia/NuvioMobile/releases/456231141",
     "assets_url": "https://api.github.com/repos/NuvioMedia/NuvioMobile/releases/456231141/assets",
@@ -69,7 +69,7 @@
         "state": "uploaded",
         "size": 50103829,
         "digest": "sha256:109df18920ac62266e7b819f61d46c0a6d3e28fe18ca617fbea04c00d4b1187b",
-        "download_count": 418,
+        "download_count": 462,
         "created_at": "2026-11-24T02:22:44Z",
         "updated_at": "2026-11-24T02:22:46Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-armeabi-v7a-release.apk"
@@ -105,7 +105,7 @@
         "state": "uploaded",
         "size": 71740515,
         "digest": "sha256:686e0f6e3496cb893be79799bfbd1b327e2aed296210bdf17d4ed2ac1b813309",
-        "download_count": 404,
+        "download_count": 439,
         "created_at": "2026-11-24T02:22:44Z",
         "updated_at": "2026-11-24T02:22:48Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-full-release.ipa"
@@ -141,7 +141,7 @@
         "state": "uploaded",
         "size": 53976629,
         "digest": "sha256:08f7a343d7a0cb9827b8efc74b87cd7a191297084cf2c4bb226fc2e7d82e13c8",
-        "download_count": 115,
+        "download_count": 129,
         "created_at": "2026-11-24T02:22:44Z",
         "updated_at": "2026-11-24T02:22:46Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-x86_64-release.apk"
@@ -177,7 +177,7 @@
         "state": "uploaded",
         "size": 52450689,
         "digest": "sha256:a418a60c726f158898bd372fc6e0a25412a862190fa9c377168c7b3f5b79ab17",
-        "download_count": 23165,
+        "download_count": 25050,
         "created_at": "2026-11-24T02:22:44Z",
         "updated_at": "2026-11-24T02:22:46Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-arm64-v8a-release.apk"
@@ -213,7 +213,7 @@
         "state": "uploaded",
         "size": 53505717,
         "digest": "sha256:fb7840759869a30132b9281510139fcbbef4d8536e26428175f1df77b156c0a5",
-        "download_count": 35,
+        "download_count": 38,
         "created_at": "2026-11-24T02:22:44Z",
         "updated_at": "2026-11-24T02:22:46Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-x86-release.apk"
@@ -224,11 +224,11 @@
     "body": "> [!IMPORTANT]\r\n> **Beta builds are for testing purposes and may contain bugs, regressions, or unexpected issues.** If you prefer a reliable experience, we recommend staying on the **Stable** channel.\r\n\r\n- 4f11b15f fix(i18n): add missing traditional chinese import @tapframe  \r\n- [feat(player): show a format badge for styled subtitles instead of the codec (#2750)](https://github.com/NuvioMedia/NuvioMobile/pull/2750) @skoruppa  \r\n- [Update Media3 common and extractor AARs with NuvioTV MKV, DTS, and AV M2TS fixes (#2747)](https://github.com/NuvioMedia/NuvioMobile/pull/2747) @halibiram  \r\n- [i18n: use lowercase mpv in French strings (#2737)](https://github.com/NuvioMedia/NuvioMobile/pull/2737) @SK-Gits  \r\n- [fix(ui): prevent Arabic title wrapping in the details hero (#2735)](https://github.com/NuvioMedia/NuvioMobile/pull/2735) @i7xre  \r\n- c5a73772 fix(android): mark wifi as optional @tapframe  \r\n- c31c30e1 fix(player): ignore gesture insets for bottom controls on android @skoruppa  \r\n- 4baf886e fix(ios): keep downloads out of iCloud and computer backups @claude  \r\n- f81edc65 fix(debrid): match TorBox alternative-hash cache answers @WhiteGiso  \r\n- 103c5e07 fix(trakt): prevent unbounded library refresh queue @enricopro  \r\n- [Update Hungarian translations- #2341 (#2689)](https://github.com/NuvioMedia/NuvioMobile/pull/2689) @emgeje  \r\n- [i18n(he): add values-iw so the Hebrew translation loads on Android (#2720)](https://github.com/NuvioMedia/NuvioMobile/pull/2720) @Yosi-Brown  \r\n- [i18n(vi): update translations for strings.xml and strings_servers.xml (#2683)](https://github.com/NuvioMedia/NuvioMobile/pull/2683) @blueocean2308  \r\n- [feat(player): show addon's subtitle label in the subtitle list (#2714)](https://github.com/NuvioMedia/NuvioMobile/pull/2714) @skoruppa  \r\n- [i18n: add missing French strings for downloads, servers and tracking (#2687)](https://github.com/NuvioMedia/NuvioMobile/pull/2687) @SK-Gits  \r\n- [fix(android): raise subtitle font size maximum to 60sp (#2709)](https://github.com/NuvioMedia/NuvioMobile/pull/2709) @Joe00011  \r\n- [Translation improvements and adjustments for Slovak language (#2707)](https://github.com/NuvioMedia/NuvioMobile/pull/2707) @mmsw91  \r\n- [feat(i18n): sync Turkish localization with latest additions (#2706)](https://github.com/NuvioMedia/NuvioMobile/pull/2706) @stuntsnakee  \r\n- [fix(servers): keep Jellyfin and Emby sign-ins separate per profile (#2705)](https://github.com/NuvioMedia/NuvioMobile/pull/2705) @skoruppa  \r\n- [i18n(zh): Add chinese translation (#1973)](https://github.com/NuvioMedia/NuvioMobile/pull/1973) @raymondlo88  \r\n- [Update strings to Title Case for consistency with Discovery Page (#2696)](https://github.com/NuvioMedia/NuvioMobile/pull/2696) @ZXXII  \r\n- [fix(addons): cap android addon text responses (#2490)](https://github.com/NuvioMedia/NuvioMobile/pull/2490) @Hemanth-Yarlagadda  \r\n- [fix: restore declared series type at JS plugin invocation (#2080)](https://github.com/NuvioMedia/NuvioMobile/pull/2080) @WhiteGiso  \r\n- [i18n(es): fix mistranslated brand names and terminology, translate missing strings (#2033)](https://github.com/NuvioMedia/NuvioMobile/pull/2033) @Mangel-CC  \r\n- [fix(addons): skip cloud sync for guest sessions (#1846)](https://github.com/NuvioMedia/NuvioMobile/pull/1846) @ofers  \r\n",
     "reactions": {
       "url": "https://api.github.com/repos/NuvioMedia/NuvioMobile/releases/456231141/reactions",
-      "total_count": 45,
-      "+1": 13,
+      "total_count": 47,
+      "+1": 14,
       "-1": 0,
       "laugh": 4,
-      "hooray": 7,
+      "hooray": 8,
       "confused": 0,
       "heart": 10,
       "rocket": 9,
@@ -305,7 +305,7 @@
         "state": "uploaded",
         "size": 69936384,
         "digest": "sha256:3218eb0d6d30729014aba4e4f4db6edef7116504c297bc3533cc775aba06ed90",
-        "download_count": 6006,
+        "download_count": 6359,
         "created_at": "2026-11-21T01:34:33Z",
         "updated_at": "2026-11-21T01:34:36Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/nuvio-1.0.1-full-release.ipa"
@@ -341,7 +341,7 @@
         "state": "uploaded",
         "size": 47968582,
         "digest": "sha256:0b4efac7c74ad80ace6fbafaa19680cd1f63dea76252ebbb60677ec4a0bbb1d2",
-        "download_count": 1032,
+        "download_count": 1118,
         "created_at": "2026-11-21T01:34:33Z",
         "updated_at": "2026-11-21T01:34:35Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-x86-release.apk"
@@ -377,7 +377,7 @@
         "state": "uploaded",
         "size": 47551232,
         "digest": "sha256:17b40a124b8b238e25c6e5831e66dca49772f35bea145e5e6ec5499668848957",
-        "download_count": 28098,
+        "download_count": 29356,
         "created_at": "2026-11-21T01:34:33Z",
         "updated_at": "2026-11-21T01:34:35Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-arm64-v8a-release.apk"
@@ -413,7 +413,7 @@
         "state": "uploaded",
         "size": 48941469,
         "digest": "sha256:944ca7cda8ee2ee4c51b8f7071a87c3f00f9538f7da03415ba23ad07a7f54620",
-        "download_count": 1335,
+        "download_count": 1430,
         "created_at": "2026-11-21T01:34:33Z",
         "updated_at": "2026-11-21T01:34:35Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-x86_64-release.apk"
@@ -449,7 +449,7 @@
         "state": "uploaded",
         "size": 45901778,
         "digest": "sha256:c711efdf2de6b85eab7509a8e587105698fa3f3557cab302f7410dac420cf238",
-        "download_count": 2253,
+        "download_count": 2403,
         "created_at": "2026-11-21T01:34:33Z",
         "updated_at": "2026-11-21T01:34:35Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-armeabi-v7a-release.apk"
