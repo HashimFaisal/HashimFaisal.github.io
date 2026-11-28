@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-11-28T04:11:36.778240+00:00",
+  "checked_at": "2026-11-28T13:06:48.716635+00:00",
   "ok": true,
   "passed": 73,
   "total": 73,
@@ -711,7 +711,7 @@
       "type": "manifest",
       "ok": true,
       "http_status": 200,
-      "version": "2.1.8",
+      "version": "2.1.9",
       "manifest_id": "cinemabox",
       "url": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json",
       "failure_code": "healthy",
@@ -1721,11 +1721,24 @@
     }
   ],
   "change_summary": {
-    "count": 0,
-    "by_type": {},
-    "events": []
+    "count": 1,
+    "by_type": {
+      "version": 1
+    },
+    "events": [
+      {
+        "date": "2026-11-28T13:06:48.717198+00:00",
+        "type": "version",
+        "title": "تحديث إصدار CinemaBox",
+        "detail": "من 2.1.8 إلى 2.1.9.",
+        "source": "CinemaBox",
+        "source_url": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json",
+        "old_version": "2.1.8",
+        "new_version": "2.1.9"
+      }
+    ]
   },
-  "change_count": 0,
+  "change_count": 1,
   "proactive_monitoring": {
     "status": "healthy",
     "alert_count": 0,
@@ -1739,7 +1752,7 @@
       "evaluated_failure_count": 0,
       "ignored_malformed_result_count": 0,
       "duplicate_failure_count": 0,
-      "history_window_size": 52,
+      "history_window_size": 53,
       "history_evidence_deduplicated": true
     },
     "overall_level": "low",

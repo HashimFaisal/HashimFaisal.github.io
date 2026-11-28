@@ -453,5 +453,15 @@
     "source_url": "https://pictorium.elfhosted.com/c/eyJnbG9iYWxCYWRnZXMiOnRydWUsInJhbmtpbmdCYWRnZXMiOnRydWUsImJhZGdlU3R5bGUiOiJzaGFkb3ciLCJyYW5raW5nQmFkZ2VTdHlsZSI6ImRlZmF1bHQiLCJibHVyRW5hYmxlZCI6dHJ1ZSwiYmx1ckludGVuc2l0eSI6MjAsImJsdXJGYWRlIjo1MCwiYmx1ckRhcmtuZXNzIjozMCwiZ3JhZGllbnRIZWlnaHQiOjMwLCJuZXR3b3JrTG9nbyI6dHJ1ZSwiYXV0b1JvdGF0ZUNsZWFuIjpmYWxzZSwiY3VzdG9tQ2F0YWxvZ3MiOltdLCJzdHJlYW1pbmdTZWxlY3Rpb25zIjpbXSwicmFua2luZ1NvdXJjZU1vdmllIjoiIiwicmFua2luZ1NvdXJjZVNlcmllcyI6IiIsImRpc2FibGVkQ29udGVudFRhZ3MiOltdLCJkaXNhYmxlZE5ldHdvcmtzIjpbXX0.3vwp6MkTYSzNqyRgzkNTqwXZ_XxVgn2KpzTLIhMEsyk/manifest.json",
     "old_version": "1.28.4",
     "new_version": "1.28.5"
+  },
+  {
+    "date": "2026-11-28T13:06:48.717198+00:00",
+    "type": "version",
+    "title": "تحديث إصدار CinemaBox",
+    "detail": "من 2.1.8 إلى 2.1.9.",
+    "source": "CinemaBox",
+    "source_url": "https://raw.githubusercontent.com/HashimFaisal/CinemaBox2/main/manifest.json",
+    "old_version": "2.1.8",
+    "new_version": "2.1.9"
   }
 ]
