@@ -1,5 +1,5 @@
 {
-  "cached_at": "2026-11-27T22:25:06.880871+00:00",
+  "cached_at": "2026-11-28T04:11:36.777201+00:00",
   "release": {
     "url": "https://api.github.com/repos/NuvioMedia/NuvioMobile/releases/456231141",
     "assets_url": "https://api.github.com/repos/NuvioMedia/NuvioMobile/releases/456231141/assets",
@@ -69,7 +69,7 @@
         "state": "uploaded",
         "size": 50103829,
         "digest": "sha256:109df18920ac62266e7b819f61d46c0a6d3e28fe18ca617fbea04c00d4b1187b",
-        "download_count": 462,
+        "download_count": 487,
         "created_at": "2026-11-24T02:22:44Z",
         "updated_at": "2026-11-24T02:22:46Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-armeabi-v7a-release.apk"
@@ -105,7 +105,7 @@
         "state": "uploaded",
         "size": 71740515,
         "digest": "sha256:686e0f6e3496cb893be79799bfbd1b327e2aed296210bdf17d4ed2ac1b813309",
-        "download_count": 439,
+        "download_count": 460,
         "created_at": "2026-11-24T02:22:44Z",
         "updated_at": "2026-11-24T02:22:48Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/nuvio-1.1.0-beta.3-full-release.ipa"
@@ -141,7 +141,7 @@
         "state": "uploaded",
         "size": 53976629,
         "digest": "sha256:08f7a343d7a0cb9827b8efc74b87cd7a191297084cf2c4bb226fc2e7d82e13c8",
-        "download_count": 129,
+        "download_count": 134,
         "created_at": "2026-11-24T02:22:44Z",
         "updated_at": "2026-11-24T02:22:46Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-x86_64-release.apk"
@@ -177,7 +177,7 @@
         "state": "uploaded",
         "size": 52450689,
         "digest": "sha256:a418a60c726f158898bd372fc6e0a25412a862190fa9c377168c7b3f5b79ab17",
-        "download_count": 25050,
+        "download_count": 25990,
         "created_at": "2026-11-24T02:22:44Z",
         "updated_at": "2026-11-24T02:22:46Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-arm64-v8a-release.apk"
@@ -213,7 +213,7 @@
         "state": "uploaded",
         "size": 53505717,
         "digest": "sha256:fb7840759869a30132b9281510139fcbbef4d8536e26428175f1df77b156c0a5",
-        "download_count": 38,
+        "download_count": 39,
         "created_at": "2026-11-24T02:22:44Z",
         "updated_at": "2026-11-24T02:22:46Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.1.0-beta.3/androidApp-full-x86-release.apk"
@@ -305,7 +305,7 @@
         "state": "uploaded",
         "size": 69936384,
         "digest": "sha256:3218eb0d6d30729014aba4e4f4db6edef7116504c297bc3533cc775aba06ed90",
-        "download_count": 6359,
+        "download_count": 6565,
         "created_at": "2026-11-21T01:34:33Z",
         "updated_at": "2026-11-21T01:34:36Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/nuvio-1.0.1-full-release.ipa"
@@ -341,7 +341,7 @@
         "state": "uploaded",
         "size": 47968582,
         "digest": "sha256:0b4efac7c74ad80ace6fbafaa19680cd1f63dea76252ebbb60677ec4a0bbb1d2",
-        "download_count": 1118,
+        "download_count": 1157,
         "created_at": "2026-11-21T01:34:33Z",
         "updated_at": "2026-11-21T01:34:35Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-x86-release.apk"
@@ -377,7 +377,7 @@
         "state": "uploaded",
         "size": 47551232,
         "digest": "sha256:17b40a124b8b238e25c6e5831e66dca49772f35bea145e5e6ec5499668848957",
-        "download_count": 29356,
+        "download_count": 29939,
         "created_at": "2026-11-21T01:34:33Z",
         "updated_at": "2026-11-21T01:34:35Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-arm64-v8a-release.apk"
@@ -413,7 +413,7 @@
         "state": "uploaded",
         "size": 48941469,
         "digest": "sha256:944ca7cda8ee2ee4c51b8f7071a87c3f00f9538f7da03415ba23ad07a7f54620",
-        "download_count": 1430,
+        "download_count": 1473,
         "created_at": "2026-11-21T01:34:33Z",
         "updated_at": "2026-11-21T01:34:35Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-x86_64-release.apk"
@@ -449,7 +449,7 @@
         "state": "uploaded",
         "size": 45901778,
         "digest": "sha256:c711efdf2de6b85eab7509a8e587105698fa3f3557cab302f7410dac420cf238",
-        "download_count": 2403,
+        "download_count": 2490,
         "created_at": "2026-11-21T01:34:33Z",
         "updated_at": "2026-11-21T01:34:35Z",
         "browser_download_url": "https://github.com/NuvioMedia/NuvioMobile/releases/download/1.0.1/androidApp-full-armeabi-v7a-release.apk"
